@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 // import static net.ft.oak.OakClientGenerator.API_ROOT;
@@ -39,7 +40,6 @@ public class OakClientRunner {
             Set<URL> urls = new HashSet<>();
             for (File jarFile : jarDir.listFiles((dir, name) -> name.endsWith(".jar"))) {
                 if (jarFile.isFile()) {
-                    System.out.println("Found JAR file: " + jarFile.getAbsolutePath());
                     urls.add(jarFile.toURI().toURL());
                 }
             }
@@ -52,19 +52,20 @@ public class OakClientRunner {
         }
     }
 
-    public Object executeOperation(String operationId, String tag,  Object[] args) {
+    public Object executeOperation(String operationId, String tag,  Object[] args, Class<?>... paramTypes) {
         try {
+            String methodName = operationId.substring(0, 1).toLowerCase(Locale.ROOT) + operationId.substring(1);
             if (cl != null) {
                 Class<?> clientClass = cl.loadClass("org.openapitools.client.api." + tag + "Api");
                 Object clientInstance = clientClass.getDeclaredConstructor().newInstance();
 
                 // TODO get the method parameter types and arguments dynamically
                 Class<?>[] methodParamTypes = { Double.class, Double.class, String.class, Double.class, Double.class };
-                // Object[] methodArgs = { 43.12, 13.45 };
+                Object[] methodArgs = { 43.12, 13.45, "lyft_access", 43.12, 13.45 };
 
                 Object returnValue = clientClass
-                        .getMethod(operationId, methodParamTypes)
-                        .invoke(clientInstance, args);
+                        .getMethod(methodName, methodParamTypes) // use the "real" ones instead of hardcoded
+                        .invoke(clientInstance, methodArgs); // args
                 if (returnValue != null) {
                     System.out.println("Operation " + operationId + " executed successfully. Return value: " + returnValue);
                 }

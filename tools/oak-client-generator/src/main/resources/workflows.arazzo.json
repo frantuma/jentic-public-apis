@@ -1,0 +1,173 @@
+{
+  "arazzo": "1.0.1",
+  "info": {
+    "title": "Jentic Generated Arazzo Specification",
+    "version": "1.0.0",
+    "description": "Automatically generated Arazzo specification from OpenAPI"
+  },
+  "sourceDescriptions": [
+    {
+      "name": "openapi_source",
+      "url": "./openapi.json",
+      "type": "openapi"
+    }
+  ],
+  "workflows": [
+    {
+      "workflowId": "pre-ride-planning-and-estimation",
+      "summary": "Allows a user to gather all necessary information, such as available ride types, estimated pickup times, and cost estimates, before deciding to request a ride.",
+      "description": "Allows a user to gather all necessary information, such as available ride types, estimated pickup times, and cost estimates, before deciding to request a ride.",
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "lat": {
+            "type": "string"
+          },
+          "lng": {
+            "type": "string"
+          },
+          "ride_type": {
+            "type": "string"
+          },
+          "destination_lat": {
+            "type": "string"
+          },
+          "destination_lng": {
+            "type": "string"
+          },
+          "start_lat": {
+            "type": "string"
+          },
+          "start_lng": {
+            "type": "string"
+          },
+          "end_lat": {
+            "type": "string"
+          },
+          "end_lng": {
+            "type": "string"
+          }
+        }
+      },
+      "steps": [
+        {
+          "stepId": "get-cost-estimates",
+          "description": "Estimates the cost of a Lyft ride between two points, considering different ride types and potential Prime Time pricing.",
+          "operationId": "GetCost",
+          "parameters": [
+            {
+              "name": "ride_type",
+              "in": "query",
+              "value": "$steps.get-available-ride-types.outputs.ride_types.ride_type"
+            },
+            {
+              "name": "start_lat",
+              "in": "query",
+              "value": "$inputs.start_lat"
+            },
+            {
+              "name": "start_lng",
+              "in": "query",
+              "value": "$inputs.start_lng"
+            },
+            {
+              "name": "end_lat",
+              "in": "query",
+              "value": "$inputs.end_lat"
+            },
+            {
+              "name": "end_lng",
+              "in": "query",
+              "value": "$inputs.end_lng"
+            }
+          ],
+          "successCriteria": [
+            {
+              "condition": "$statusCode == 200"
+            }
+          ],
+          "outputs": {
+            "cost_estimates": "$response.body#/cost_estimates"
+          }
+        }
+      ],
+      "outputs": {
+        "ride_types": "$steps.get-available-ride-types.outputs.ride_types",
+        "eta_estimates": "$steps.get-pickup-etas.outputs.eta_estimates",
+        "cost_estimates": "$steps.get-cost-estimates.outputs.cost_estimates"
+      },
+      "failureActions": [
+        {
+          "reference": "$components.failureActions.auth_failure"
+        },
+        {
+          "reference": "$components.failureActions.permission_denied"
+        },
+        {
+          "reference": "$components.failureActions.not_found"
+        },
+        {
+          "reference": "$components.failureActions.server_error"
+        }
+      ]
+    }
+  ],
+  "components": {
+    "successActions": {
+      "default_success": {
+        "name": "default_success",
+        "type": "end"
+      }
+    },
+    "failureActions": {
+      "auth_failure": {
+        "name": "auth_failure",
+        "type": "end",
+        "criteria": [
+          {
+            "condition": "$statusCode == 401"
+          }
+        ]
+      },
+      "permission_denied": {
+        "name": "permission_denied",
+        "type": "end",
+        "criteria": [
+          {
+            "condition": "$statusCode == 403"
+          }
+        ]
+      },
+      "not_found": {
+        "name": "not_found",
+        "type": "end",
+        "criteria": [
+          {
+            "condition": "$statusCode == 404"
+          }
+        ]
+      },
+      "server_error": {
+        "name": "server_error",
+        "type": "retry",
+        "retryAfter": 2,
+        "retryLimit": 3,
+        "criteria": [
+          {
+            "condition": "$statusCode >= 500"
+          }
+        ]
+      },
+      "default_retry": {
+        "name": "default_retry",
+        "type": "retry",
+        "retryAfter": 1,
+        "retryLimit": 3
+      },
+      "default_failure": {
+        "name": "default_failure",
+        "type": "end"
+      }
+    }
+  }
+}
