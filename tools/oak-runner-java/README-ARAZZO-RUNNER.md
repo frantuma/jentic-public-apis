@@ -31,14 +31,14 @@ This Java port uses Swagger Core and Swagger Parser to read OpenAPI specs and th
 To build the project:
 
 ```bash
-cd /dati/dev/progetti/jentic/projects/oak/tools/oak-client-generator
+cd oak/tools/oak-runner-java
 mvn clean package
 ```
 
 To run the project:
 
 ```bash
-java -jar target/oak-client-generator-1.0-SNAPSHOT.jar
+java -jar target/oak-runner-java-1.0-SNAPSHOT.jar
 ```
 
 ## Example

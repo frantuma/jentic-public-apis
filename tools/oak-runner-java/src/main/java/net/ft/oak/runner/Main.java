@@ -1,5 +1,7 @@
 package net.ft.oak.runner;
 
+import net.ft.oak.OakClientRunner;
+
 import java.util.HashMap;
 
 /**
@@ -17,9 +19,10 @@ public class Main {
         // Run the demo
         // ArazzoRunnerDemo.main(args);
 
+        String rootDir = OakClientRunner.getApiRoot().getParent().resolve("tools/oak-runner-java").toString();
         ArazzoWorkflowRunner runner = ArazzoWorkflowRunner.fromArazzoPath(
-            "/dati/dev/progetti/jentic/projects/oak/tools/oak-client-generator/src/main/resources/workflows.arazzo.json",
-            "/dati/dev/progetti/jentic/projects/oak/tools/oak-client-generator/src/main/resources"
+            rootDir + "/src/main/resources/workflows.arazzo.json",
+                rootDir + "/src/main/resources"
         );
         runner.executeWorkflow("pre-ride-planning-and-estimation", new HashMap<>());
     }

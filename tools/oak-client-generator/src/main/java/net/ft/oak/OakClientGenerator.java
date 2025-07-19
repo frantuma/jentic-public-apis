@@ -248,4 +248,17 @@ public class OakClientGenerator {
         String id;
         String version;
     }
+
+    private static String getApiRoot() {
+        String userDir = System.getProperty("user.dir");
+        File dir = new File(userDir);
+        // Check if running from module directory
+        if (dir.getName().equals("oak-client-generator")) {
+            // repo root is two levels up
+            return dir.getParentFile().getParentFile().toPath().resolve("apis").toString();
+        } else {
+            // Assume running from repo root
+            return dir.toPath().resolve("apis").toString();
+        }
+    }
 }

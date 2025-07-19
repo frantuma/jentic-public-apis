@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -11,11 +12,11 @@ import java.util.Set;
 // import static net.ft.oak.OakClientGenerator.API_ROOT;
 
 public class OakClientRunner {
-    final static String API_ROOT = "/dati/dev/progetti/jentic/projects/oak/apis";
+    final static String API_ROOT = getApiRoot().toString();
     final ClassLoader cl;
 
     public static void main(String[] args) throws IOException {
-        System.out.println("OakClientRunner is running...");
+        System.out.println("OakClientRunner is running..." + System.getProperty("user.dir"));
 
         File root = new File(args.length > 0 && args[0] != null ? args[0] : API_ROOT);
         if (!root.exists() || !root.isDirectory()) {
@@ -75,5 +76,18 @@ public class OakClientRunner {
             System.err.println("Error executing operation: " + e.getMessage());
         }
         return null;
+    }
+
+    public static Path getApiRoot() {
+        String userDir = System.getProperty("user.dir");
+        File dir = new File(userDir);
+        // Check if running from module directory
+        if (dir.getName().equals("oak-runner-java")) {
+            // repo root is two levels up
+            return dir.getParentFile().getParentFile().toPath().resolve("apis");
+        } else {
+            // Assume running from repo root
+            return dir.toPath().resolve("apis");
+        }
     }
 }

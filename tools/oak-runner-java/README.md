@@ -23,7 +23,7 @@ This Java port uses Swagger Core and Swagger Parser to read OpenAPI specs and th
 
 - **Runner Classes**:
   - `WorkflowRunner`: Interface for a workflow runner that executes Arazzo workflows
-  - `ArazzoRunnerDemoRealWorkflow`: A simple demonstration of executing Arazzo workflows using the OakClientRunner
+  - `ArazzoRunnerDemo`: A simple demonstration of executing Arazzo workflows using the OakClientRunner
   - `Main`: Main entry point for the Java port of the Arazzo workflow runner
 
 ## Building and Running
@@ -31,14 +31,14 @@ This Java port uses Swagger Core and Swagger Parser to read OpenAPI specs and th
 To build the project:
 
 ```bash
-cd /dati/dev/progetti/jentic/projects/oak/tools/oak-client-generator
+cd oak/tools/oak-runner-java
 mvn clean package
 ```
 
 To run the project:
 
 ```bash
-java -jar target/oak-client-generator-1.0-SNAPSHOT.jar
+java -jar target/oak-runner-java-1.0-SNAPSHOT.jar
 ```
 
 ## Example
