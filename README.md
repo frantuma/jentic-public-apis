@@ -1,4 +1,4 @@
-# The Open Agentic Knowledge (OAK) repository
+# Jentic Public APIs
 
 [![Discord](https://img.shields.io/badge/JOIN%20OUR%20DISCORD-COMMUNITY-7289DA?style=plastic&logo=discord&logoColor=white)](https://discord.gg/yrxmDZWMqB)
 
@@ -49,7 +49,7 @@ The repository focuses on:
 
 ## Repository Structure
 
-The OAK Repository organizes API specifications and workflows using a standardized directory structure:
+The Jentic Public APIs organize API specifications and workflows using a standardized directory structure:
 
 - API specifications are organized by vendor and version
 - Workflows are organized to clearly show which APIs they reference
@@ -60,7 +60,7 @@ For detailed information on the directory structure, please refer to [STRUCTURE.
 
 ## Acknowledgments
 
-The OAK Repository would like to express our sincere gratitude to [APIs.guru](https://apis.guru/) for providing the initial collection of OpenAPI specifications that helped bootstrap this repository. Their dedication to cataloging public APIs has been instrumental in our mission to create an open knowledge layer for AI agents.
+The Jentic Public APIs would like to express our sincere gratitude to [APIs.guru](https://apis.guru/) for providing the initial collection of OpenAPI specifications that helped bootstrap this repository. Their dedication to cataloging public APIs has been instrumental in our mission to create an open knowledge layer for AI agents.
 
 OpenAPI etc.
 
