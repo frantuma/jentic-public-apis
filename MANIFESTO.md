@@ -1,8 +1,8 @@
-# Manifesto: The Open Agentic Knowledge (OAK) repository
+# Manifesto: The Jentic Public APIs repository
 
 [![Discord](https://img.shields.io/badge/JOIN%20OUR%20DISCORD-COMMUNITY-7289DA?style=plastic&logo=discord&logoColor=white)](https://discord.gg/yrxmDZWMqB)
 
-> **Join our community!** Connect with contributors and users on [Discord](https://discord.gg/yrxmDZWMqB) to discuss ideas, ask questions, and collaborate on the OAK repository.
+> **Join our community!** Connect with contributors and users on [Discord](https://discord.gg/yrxmDZWMqB) to discuss ideas, ask questions, and collaborate on the Jentic Public APIs repository.
 
 Agents depend on APIs as much as AI. Chatbots chat, but agents act, and they act through APIs: checking calendars, booking flights, analyzing data, reconciling accounts, and controlling smart buildings. To realize this potential, we must build a common knowledge foundation that empowers AI to interact with the world's APIs reliably and without artificial barriers or unnecessary intermediaries.
 
