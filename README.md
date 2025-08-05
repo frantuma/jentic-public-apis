@@ -15,13 +15,13 @@ AI agents depend on APIs. Their capabilities are defined by the APIs they know a
 
 ### Open source and open standards
 
-This communal effort requires a stable but extensible representation format that can describe all salient aspects of APIs and associated workflows in full detail. The [OpenAPI specifications](https://www.openapis.org/) provide the de-facto standard for formal API descriptions, are widely adopted, supported by a vast ecosystem of associated tooling, and governed by the Linux Foundation. Importantly, the OpenAPI Initiative's most recent specification, [Arazzo](https://www.openapis.org/arazzo), allows complex multi-API workflows to be described in a declarative format. 
+This communal effort requires a stable but extensible representation format that can describe all salient aspects of APIs and associated workflows in full detail. The [OpenAPI specifications](https://www.openapis.org/) provide the de-facto standard for formal API descriptions, are widely adopted, supported by a vast ecosystem of associated tooling, and governed by the Linux Foundation. Importantly, the OpenAPI Initiative's most recent specification, [Arazzo](https://www.openapis.org/arazzo), allows complex multi-API workflows to be described in a declarative format.
 
-This repository follows the OAK (Open Agentic Knowledge) standard, which builds upon these open formats to represent API and workflow knowledge. We will coordinate with the OpenAPI community, and propose an RFC containing various extensions to capture additional knowledge that is especially relevant in the context of AI agents (for example concerning authentication, rate limiting, pricing, governance and safety).
+We previously launched the *OAK (Open Agentic Knowledge) initiative*, proposing a type of open-source catalog of API and workflow descriptions that builds upon these open standards to contribute API and workflow knowledge to AI agents. This repository is the first such OAK repository, and we welcome others to create their own. We will coordinate with the OpenAPI community, and propose an RFC containing various extensions to capture additional knowledge that is especially relevant in the context of AI agents (for example concerning authentication, rate limiting, pricing, governance and safety).  See [OAK.md](OAK.md) for more information about this initiative, and how to create your own OAK repository linked to this initiative. If you have suggestions to improve the OAK initiative, we welcome discussion on our Discord and PRs on the OAK.md file in this repository.
 
 ### AI-scale
 
-Documenting all the world's API knowledge is made achievable by generative AI. Our starting point was OpenAPI documents provided by various vendors online (with special credit to the [APIs.guru](https://apis.guru/) repository). On top of this, we have generated many Arazzo workflows using AI. We will grow this repository using a research agent approach to pre-generate OpenAPI specifications where no structured documentation previously existed, and continue to discover new Arazzo workflows on top of that API knowledge.  We will propose a scorecard evaluation to measure the quality of the generated documentation, allowing us to ensure that both the quantity and the quality of documentation increases as we progress.
+Documenting all the world's API knowledge is made achievable by generative AI. Our starting point was OpenAPI documents provided by various vendors online (with special credit to the [APIs.guru](https://apis.guru/) repository). On top of this, we have generated thousands Arazzo workflows using AI. We are growing this repository using AI agents to import (and improve) existing OpenAPI documents and to generate new OpenAPI specifications where no structured documentation previously existed. Our AI agents are also discovering novel Arazzo workflows that can be performed on top of that API knowledge.  We will propose a scorecard evaluation to measure the quality of the generated documentation, allowing us to ensure that both the quantity and the quality of documentation increases as we progress.
 
 We welcome all contributions from the community and from partners who want to accelerate this effort with their own resources and ingenuity. We will ensure that all contributions help the knowledge about each API and workflow in the repository to converge on the best canonical version.
 
@@ -40,7 +40,7 @@ The repository focuses on:
 
 ## Documentation
 
-* [**MANIFESTO.md**](MANIFESTO.md) - The principles and vision behind the Open Agentic Knowledge (OAK) movement
+* [**OAK.md**](OAK.md) - The OAK manifesto: principles and vision behind the Open Agentic Knowledge (OAK) initiative.
 * [**STRUCTURE.md**](STRUCTURE.md) - The OAK (Open Agentic Knowledge) Standard for repository structure
 * [**FEEDBACK-FILES.md**](FEEDBACK-FILES.md) - Documentation of feedback.json files that track API specification repairs
 * [**CONTRIBUTING.md**](CONTRIBUTING.md) - Guidelines for contributing to the repository
@@ -60,9 +60,17 @@ For detailed information, please refer to the [OAK Standard documentation](STRUC
 
 ## Acknowledgments
 
-The Jentic Public APIs would like to express our sincere gratitude to [APIs.guru](https://apis.guru/) for providing the initial collection of OpenAPI specifications that helped bootstrap this repository. Their dedication to cataloging public APIs has been instrumental in our mission to create an open knowledge layer for AI agents.
+## Acknowledgments
 
-OpenAPI etc.
+The Jentic Public APIs project is built upon the foundation of open standards and community contributions. We extend our sincere gratitude to:
+
+**The OpenAPI Initiative and Linux Foundation** - For creating, maintaining, and governing the OpenAPI Specification and Arazzo standards that form the backbone of this project. The OpenAPI Initiative's commitment to open standards, extensive ecosystem of tooling, and collaborative governance model directly enable our vision of a communal API knowledge layer. Special recognition goes to the technical steering committee and contributors who have developed these specifications to serve as the de-facto standard for API documentation, making structured, machine-readable API descriptions possible at scale.
+
+**APIs.guru** - For providing the initial collection of OpenAPI specifications that helped bootstrap this repository. Their dedication to cataloging public APIs has been instrumental in our mission to create an open knowledge foundation for AI agents, and their pioneering work in API discovery laid important groundwork for projects like ours.
+
+**The broader API community** - Including all the API providers, documentation authors, and open source contributors whose work makes comprehensive API knowledge possible. This project represents a continuation of the collaborative spirit that has driven API standardization and tooling development.
+
+We are committed to contributing back to these communities through our proposed RFCs, quality improvements to existing specifications, and by demonstrating new applications of these open standards in the context of AI agents.
 
 ## Contributing
 
