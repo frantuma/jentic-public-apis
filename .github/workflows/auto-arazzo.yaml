@@ -11,7 +11,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-      issues: read
+      issues: write
 
     steps:
       - name: Check out the repository
@@ -76,13 +76,10 @@ jobs:
           fi
           RESPONSE=$(jq -n --arg url "${{ steps.extract_info.outputs.openapi_url }}" \
                         --arg format "json" \
-                        --argjson validate true \
-                        --argjson enable_llm true \
-                        --argjson enable_rules false \
+                        --argjson validate_spec true \
                         --argjson direct_llm false \
-                        --arg llm_provider "gemini" \
                         --rawfile wf_desc <(echo "$WF_DESCRIPTIONS") \
-                        '{url: $url, format: $format, validate: $validate, enable_llm: $enable_llm, enable_rules: $enable_rules, direct_llm: $direct_llm, llm_provider: $llm_provider, workflow_descriptions: ($wf_desc | fromjson? // null)}' | \
+                        '{url: $url, format: $format, validate_spec: $validate_spec, direct_llm: $direct_llm, workflow_descriptions: ($wf_desc | fromjson? // null)}' | \
             curl -s -f -X POST https://arazzo-runner.main.us-east-1.jenticprod.net/generate \
               -H "Content-Type: application/json" \
               -d @-)
@@ -109,6 +106,8 @@ jobs:
              echo "::error::API call failed or API response did not contain expected '.arazzo_spec' field."
              echo "Response was:"
              echo "$RESPONSE"
+             echo "api_failed=true" >> $GITHUB_OUTPUT
+             echo "error_response=$RESPONSE" >> $GITHUB_OUTPUT
              exit 1
           fi
           echo "API call successful, $SPEC_FILE created in workspace."
@@ -164,3 +163,42 @@ jobs:
           base: main # Or your target branch in jentic-arazzo-generator
           # Optional: Add labels, assignees etc.
           # labels: automated-pr, arazzo-spec
+
+      - name: Comment on Issue if API Failed
+        if: failure() && steps.call_api_and_create_file.outputs.api_failed == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+              const errorResponse = `${{ steps.call_api_and_create_file.outputs.error_response }}`;
+              let errorMessage = "❌ **Failed to generate Arazzo specification**\n\n";
+              
+              try {
+                const response = JSON.parse(errorResponse);
+                if (response.error) {
+                  errorMessage += `**Error:** ${response.error}\n\n`;
+                }
+                if (response.message) {
+                  errorMessage += `**Details:** ${response.message}\n\n`;
+                }
+                if (response.validation_errors && response.validation_errors.length > 0) {
+                  errorMessage += `**Validation Errors:**\n`;
+                  response.validation_errors.forEach(error => {
+                    errorMessage += `- ${error}\n`;
+                  });
+                  errorMessage += "\n";
+                }
+              } catch (e) {
+                errorMessage += `**Raw Response:** \`\`\`\n${errorResponse}\n\`\`\`\n\n`;
+              }
+              
+              errorMessage += "There was an error generating the Arazzo spec from the provided OpenAPI specification URL.\n\n";
+              errorMessage += "If you believe this is a bug with the Arazzo generator or need additional support, please contact the development team at Jentic Community Discord (https://discord.gg/yrxmDZWMqB).\n\n";
+              errorMessage += "Alternatively create a new issue reporting the bug (https://github.com/jentic/jentic-public-apis/issues/new?template=BLANK_ISSUE).";
+              
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: errorMessage
+              });
