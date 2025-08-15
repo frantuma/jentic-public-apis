@@ -15344,7 +15344,143 @@
         }
       }
     },
-    "/files.upload": {
+    "/files.getUploadURLExternal": {
+      "post": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "ok": true,
+                    "upload_url": "https://files.slack.com/upload/v1/ABC123...",
+                    "file_id": "F123ABC456"
+                  }
+                },
+                "schema": {
+                  "additionalProperties": false,
+                  "description": "Schema for successful response files.upload method",
+                  "properties": {
+                    "upload_url": {
+                      "type": "string"
+                    },
+                    "file_id": {
+                      "type": "string"
+                    },
+                    "ok": {
+                      "$ref": "#/components/schemas/defs_ok_true"
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "upload_url",
+                    "file_id"
+                  ],
+                  "title": "files.upload schema",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success response after getting upload URL"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": {
+                      "error": "invalid_auth",
+                      "ok": false
+                    }
+                  }
+                },
+                "schema": {
+                  "additionalProperties": false,
+                  "description": "Schema for error response files.upload method",
+                  "properties": {
+                    "callstack": {
+                      "description": "Note: PHP callstack is only visible in dev/qa",
+                      "type": "string"
+                    },
+                    "error": {
+                      "enum": [
+                        "posting_to_general_channel_denied",
+                        "invalid_channel",
+                        "file_uploads_disabled",
+                        "file_uploads_except_images_disabled",
+                        "storage_limit_reached",
+                        "not_authed",
+                        "invalid_auth",
+                        "account_inactive",
+                        "no_permission",
+                        "invalid_arg_name",
+                        "invalid_array_arg",
+                        "invalid_charset",
+                        "invalid_form_data",
+                        "invalid_post_type",
+                        "missing_post_type",
+                        "team_added_to_org",
+                        "invalid_json",
+                        "json_not_object",
+                        "request_timeout",
+                        "upgrade_required"
+                      ],
+                      "type": "string"
+                    },
+                    "ok": {
+                      "$ref": "#/components/schemas/defs_ok_false"
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "error"
+                  ],
+                  "title": "files.upload error schema",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Typical error response"
+          }
+        },
+        "security": [
+          {
+            "slackAuth": [
+              "files:write", "files:write:user"
+            ]
+          }
+        ],
+        "tags": [
+          "files"
+        ],
+        "externalDocs": {
+          "description": "API method documentation",
+          "url": "https://api.slack.com/methods/files.getUploadURLExternal"
+        },
+        "description": "Begins file upload process, precedes upload/v1/{upload_location} and files_completeUploadExternal.",
+        "operationId": "files_getUploadURLExternal",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "properties": {
+                  "filename": {
+                    "description": "Filename of file.",
+                    "type": "string"
+                  },
+                  "length": {
+                    "description": "Length of file.",
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/files.completeUploadExternal": {
       "post": {
         "responses": {
           "200": {
@@ -15415,7 +15551,7 @@
                 },
                 "schema": {
                   "additionalProperties": false,
-                  "description": "Schema for successful response files.upload method",
+                  "description": "Schema for successful response completing a file upload",
                   "properties": {
                     "file": {
                       "$ref": "#/components/schemas/objs_file"
@@ -15433,7 +15569,7 @@
                 }
               }
             },
-            "description": "Success response after uploading a file to a channel with an initial message"
+            "description": "Success response after completing a file upload"
           },
           "default": {
             "content": {
@@ -15498,7 +15634,7 @@
         "security": [
           {
             "slackAuth": [
-              "files:write:user"
+              "files:write", "files:write:user"
             ]
           }
         ],
@@ -15507,49 +15643,72 @@
         ],
         "externalDocs": {
           "description": "API method documentation",
-          "url": "https://api.slack.com/methods/files.upload"
+          "url": "https://api.slack.com/methods/files.getUploadURLExternal"
         },
-        "description": "Uploads or creates a file.",
-        "operationId": "files_upload",
+        "description": "Completes a file upload initiated by files.getUploadURLExternal and upload/v1/{upload_location}.",
+        "operationId": "files_completeUploadExternal",
         "requestBody": {
           "content": {
             "application/x-www-form-urlencoded": {
               "schema": {
                 "properties": {
-                  "channels": {
-                    "description": "Comma-separated list of channel names or IDs where the file will be shared.",
-                    "type": "string"
+                  "files": {
+                    "description": "Array of {\"id\": \"<file-id>\", \"title\": \"<file-title>\"} objects",
+                    "type": "array"
                   },
-                  "content": {
-                    "description": "File contents via a POST variable. If omitting this parameter, you must provide a `file`.",
-                    "type": "string"
-                  },
-                  "file": {
-                    "description": "File contents via `multipart/form-data`. If omitting this parameter, you must submit `content`.",
-                    "type": "string"
-                  },
-                  "filename": {
-                    "description": "Filename of file.",
-                    "type": "string"
-                  },
-                  "filetype": {
-                    "description": "A [file type](/types/file#file_types) identifier.",
-                    "type": "string"
-                  },
-                  "initial_comment": {
-                    "description": "The message text introducing the file in specified `channels`.",
-                    "type": "string"
-                  },
-                  "thread_ts": {
-                    "description": "Provide another message's `ts` value to upload this file as a reply. Never use a reply's `ts` value; use its parent instead.",
-                    "type": "number"
-                  },
-                  "title": {
-                    "description": "Title of file.",
+                  "channel_id": {
+                    "description": "Channel ID to upload the file to.",
                     "type": "string"
                   }
                 },
                 "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/upload/v1/{upload_location}": {
+      "post": {
+        "parameters": [
+          {
+            "name": "upload_location",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "description": "Schema for successful response from posting file contents to upload URL",
+                  "properties": {
+                    "body": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "body"
+                  ],
+                  "title": "upload/v1/{upload_location} schema",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success response after posting file contents to upload URL"
+          }
+        },
+        "description": "*Auxiliary operation - not officially defined in the Slack OpenAPI spec* - used to post file contents to upload URL created by files.getUploadURLExternal.",
+        "operationId": "files_postRawFileContent",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "file"
               }
             }
           }
