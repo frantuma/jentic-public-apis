@@ -14,16 +14,13 @@
   ],
   "workflows": [
     {
-      "workflowId": "find-business-by-phone-and-get-details",
-      "summary": "Find a business by phone number and then retrieve detailed information about that business.",
-      "description": "Find a business by phone number and then retrieve detailed information about that business.",
+      "workflowId": "find-business-details-by-phone",
+      "summary": "Search for a business by phone number and then retrieve detailed information about it.",
+      "description": "Search for a business by phone number and then retrieve detailed information about it.",
       "inputs": {
         "type": "object",
         "properties": {
           "phone": {
-            "type": "string"
-          },
-          "id": {
             "type": "string"
           }
         }
@@ -31,7 +28,7 @@
       "steps": [
         {
           "stepId": "search-business-by-phone",
-          "description": "Search for a business using a phone number.",
+          "description": "Search for a business using its phone number.",
           "operationId": "getBusinessesSearchPhone",
           "parameters": [
             {
@@ -57,7 +54,7 @@
             {
               "name": "id",
               "in": "path",
-              "value": "$steps.search-business-by-phone.outputs.businesses.id"
+              "value": "$steps.search-business-by-phone.outputs.businesses#/0/id"
             }
           ],
           "successCriteria": [
@@ -118,9 +115,9 @@
       ]
     },
     {
-      "workflowId": "find-delivery-businesses-and-get-details",
-      "summary": "Find businesses that offer delivery in a specific location and then retrieve detailed information about the first business found.",
-      "description": "Find businesses that offer delivery in a specific location and then retrieve detailed information about the first business found.",
+      "workflowId": "find-food-delivery-businesses-by-location",
+      "summary": "Search for businesses that offer food delivery in a specific location and then retrieve detailed information about one of them.",
+      "description": "Search for businesses that offer food delivery in a specific location and then retrieve detailed information about one of them.",
       "inputs": {
         "type": "object",
         "properties": {
@@ -132,16 +129,13 @@
           },
           "longitude": {
             "type": "string"
-          },
-          "id": {
-            "type": "string"
           }
         }
       },
       "steps": [
         {
           "stepId": "search-delivery-businesses",
-          "description": "Search for businesses that offer delivery in a specific location.",
+          "description": "Search for businesses that support food delivery in a given location.",
           "operationId": "getDeliverySearch",
           "parameters": [
             {
@@ -171,13 +165,13 @@
         },
         {
           "stepId": "get-business-details",
-          "description": "Retrieve detailed information about the delivery business.",
+          "description": "Retrieve detailed information about a specific food delivery business.",
           "operationId": "getBusinessDetails",
           "parameters": [
             {
               "name": "id",
               "in": "path",
-              "value": "$steps.search-delivery-businesses.outputs.businesses.id"
+              "value": "$steps.search-delivery-businesses.outputs.businesses#/0/id"
             }
           ],
           "successCriteria": [
@@ -285,9 +279,6 @@
           },
           "attributes": {
             "type": "string"
-          },
-          "business_id_or_alias": {
-            "type": "string"
           }
         }
       },
@@ -385,7 +376,7 @@
             {
               "name": "business_id_or_alias",
               "in": "path",
-              "value": "$steps.search-businesses.outputs.businesses.id"
+              "value": "$steps.search-businesses.outputs.businesses#/0/id"
             }
           ],
           "successCriteria": [
@@ -400,6 +391,7 @@
       ],
       "outputs": {
         "businesses": "$steps.search-businesses.outputs.businesses",
+        "matched_business": "$steps.search-businesses.outputs.businesses#/0",
         "insights_data": "$steps.get-food-and-drinks-insights.outputs.insights_data"
       },
       "failureActions": [
