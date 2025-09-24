@@ -1,0 +1,85 @@
+{
+    "overlay": "1.0.0",
+    "info": {
+      "title": "Overlay for Alpaca Broker API Fixes",
+      "version": "1.0.0"
+    },
+    "actions": [
+      {
+        "target": "$.components.schemas.OrderLeg.properties.legs",
+        "update": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/OrderLeg"
+          }
+        }
+      },
+      {
+        "target": "$.components.examples.EquityOrderResponse.value.order_class",
+        "update": "simple"
+      },
+      {
+        "target": "$.components.examples.CryptoOrderResponse.value.order_class",
+        "update": "simple"
+      },
+      {
+        "target": "$.components.examples.MultilegOptionsOrderResponse.value.asset_id",
+        "update": "550e8400-e29b-41d4-a716-446655440000"
+      },
+      {
+        "target": "$.components.examples.TradeUpdateEventV2New.value",
+        "update": {
+          "event_type": "trade_updates",
+          "data": {
+            "event": "new",
+            "order": {
+              "id": "550e8400-e29b-41d4-a716-446655440000",
+              "symbol": "AAPL",
+              "side": "buy",
+              "order_type": "market",
+              "qty": "100"
+            }
+          }
+        }
+      },
+      {
+        "target": "$.components.examples.TradeUpdateEventV2MultilegOptionsFill.value",
+        "update": {
+          "event_type": "trade_updates",
+          "data": {
+            "event": "fill",
+            "order": {
+              "id": "550e8400-e29b-41d4-a716-446655440000",
+              "symbol": "AAPL",
+              "side": "buy",
+              "order_type": "limit",
+              "qty": "100"
+            }
+          }
+        }
+      },
+      {
+        "target": "$.paths['/v1/trading/accounts/{account_id}/positions'].delete.responses['207'].content['application/json'].examples['example-1'].value[0].body.order_class",
+        "update": "simple"
+      },
+      {
+        "target": "$.paths['/v1/options/contracts'].get.parameters[13].example",
+        "update": true
+      },
+      {
+        "target": "$.servers[0]",
+        "update": {
+          "url": "https://broker-api.alpaca.markets",
+          "description": "Production endpoint"
+        }
+      },
+      {
+        "target": "$.servers[1]",
+        "update": {
+          "url": "https://broker-api.sandbox.alpaca.markets",
+          "description": "Sandbox endpoint"
+        }
+      }
+    ]
+  }
+  

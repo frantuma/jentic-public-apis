@@ -14,12 +14,12 @@
   },
   "servers": [
     {
-      "url": "https://broker-api.sandbox.alpaca.markets",
-      "description": "Sandbox endpoint"
-    },
-    {
       "url": "https://broker-api.alpaca.markets",
       "description": "Production endpoint"
+    },
+    {
+      "url": "https://broker-api.sandbox.alpaca.markets",
+      "description": "Sandbox endpoint"
     }
   ],
   "paths": {
@@ -1753,7 +1753,7 @@
                           "qty": "4",
                           "filled_qty": "0",
                           "filled_avg_price": null,
-                          "order_class": "",
+                          "order_class": "simple",
                           "order_type": "market",
                           "type": "market",
                           "side": "sell",
@@ -2626,7 +2626,7 @@
             "schema": {
               "type": "boolean"
             },
-            "example": "true",
+            "example": true,
             "description": "The ppind(Penny Program Indicator) field indicates whether an option contract is eligible for penny price increments,\nwith `true` meaning it is part of the Penny Program and `false` meaning it is not."
           }
         ],
@@ -10050,7 +10050,10 @@
           "legs": {
             "type": "array",
             "description": "When querying non-simple order_class orders in a nested style, an array of Order entities associated with this order. Otherwise, null.",
-            "nullable": true
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/OrderLeg"
+            }
           },
           "trail_price": {
             "type": "string",
@@ -17279,7 +17282,7 @@
           "qty": "2",
           "filled_qty": "0",
           "filled_avg_price": null,
-          "order_class": "",
+          "order_class": "simple",
           "order_type": "limit",
           "type": "limit",
           "side": "buy",
@@ -17355,7 +17358,7 @@
           "qty": "0.02",
           "filled_qty": "0",
           "filled_avg_price": null,
-          "order_class": "",
+          "order_class": "simple",
           "order_type": "limit",
           "type": "limit",
           "side": "buy",
@@ -17386,7 +17389,7 @@
           "replaced_at": null,
           "replaced_by": null,
           "replaces": null,
-          "asset_id": "",
+          "asset_id": "550e8400-e29b-41d4-a716-446655440000",
           "symbol": "",
           "asset_class": "",
           "notional": null,
@@ -17532,7 +17535,18 @@
             "type": "limit",
             "updated_at": "2022-04-19T10:12:30.609783218-04:00"
           },
-          "timestamp": "2022-04-19T14:12:30.602193534Z"
+          "timestamp": "2022-04-19T14:12:30.602193534Z",
+          "event_type": "trade_updates",
+          "data": {
+            "event": "new",
+            "order": {
+              "id": "550e8400-e29b-41d4-a716-446655440000",
+              "symbol": "AAPL",
+              "side": "buy",
+              "order_type": "market",
+              "qty": "100"
+            }
+          }
         }
       },
       "TradeUpdateEventV2MultilegOptionsFill": {
@@ -17673,6 +17687,17 @@
           "position_qtys": {
             "AAPL250117C00250000": "1",
             "AAPL250117P00200000": "1"
+          },
+          "event_type": "trade_updates",
+          "data": {
+            "event": "fill",
+            "order": {
+              "id": "550e8400-e29b-41d4-a716-446655440000",
+              "symbol": "AAPL",
+              "side": "buy",
+              "order_type": "limit",
+              "qty": "100"
+            }
           }
         }
       }
