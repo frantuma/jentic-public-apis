@@ -1,85 +1,70 @@
 {
-    "overlay": "1.0.0",
-    "info": {
-      "title": "Overlay for Alpaca Broker API Fixes",
-      "version": "1.0.0"
-    },
-    "actions": [
-      {
-        "target": "$.components.schemas.OrderLeg.properties.legs",
-        "update": {
-          "type": "array",
-          "items": {
-            "$ref": "#/components/schemas/OrderLeg"
-          }
-        }
-      },
-      {
-        "target": "$.components.examples.EquityOrderResponse.value.order_class",
-        "update": "simple"
-      },
-      {
-        "target": "$.components.examples.CryptoOrderResponse.value.order_class",
-        "update": "simple"
-      },
-      {
-        "target": "$.components.examples.MultilegOptionsOrderResponse.value.asset_id",
-        "update": "550e8400-e29b-41d4-a716-446655440000"
-      },
-      {
-        "target": "$.components.examples.TradeUpdateEventV2New.value",
-        "update": {
-          "event_type": "trade_updates",
-          "data": {
-            "event": "new",
-            "order": {
-              "id": "550e8400-e29b-41d4-a716-446655440000",
-              "symbol": "AAPL",
-              "side": "buy",
-              "order_type": "market",
-              "qty": "100"
-            }
-          }
-        }
-      },
-      {
-        "target": "$.components.examples.TradeUpdateEventV2MultilegOptionsFill.value",
-        "update": {
-          "event_type": "trade_updates",
-          "data": {
-            "event": "fill",
-            "order": {
-              "id": "550e8400-e29b-41d4-a716-446655440000",
-              "symbol": "AAPL",
-              "side": "buy",
-              "order_type": "limit",
-              "qty": "100"
-            }
-          }
-        }
-      },
-      {
-        "target": "$.paths['/v1/trading/accounts/{account_id}/positions'].delete.responses['207'].content['application/json'].examples['example-1'].value[0].body.order_class",
-        "update": "simple"
-      },
-      {
-        "target": "$.paths['/v1/options/contracts'].get.parameters[13].example",
-        "update": true
-      },
-      {
-        "target": "$.servers[0]",
-        "update": {
-          "url": "https://broker-api.alpaca.markets",
-          "description": "Production endpoint"
-        }
-      },
-      {
-        "target": "$.servers[1]",
-        "update": {
-          "url": "https://broker-api.sandbox.alpaca.markets",
-          "description": "Sandbox endpoint"
+  "overlay": "1.0.0",
+  "info": {
+    "title": "Overlay for Alpaca Broker API Fixes",
+    "version": "1.0.0"
+  },
+  "actions": [
+    {
+      "target": "$.components.schemas.OrderLeg.properties.legs",
+      "description": "Fixing schema definition of array to be an array of OrderLeg objects",
+      "update": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/OrderLeg"
         }
       }
-    ]
-  }
-  
+    },
+    {
+      "target": "$.components.examples.EquityOrderResponse.value",
+      "description": "Fixing order_class example value in EquityOrderResponse schema to be an accepted value",
+      "update": {
+        "order_class": "simple"
+      }
+    },
+    {
+      "target": "$.components.examples.CryptoOrderResponse.value",
+      "description": "Fixing order_class example value in CryptoOrderResponse schema to be an accepted value",
+      "update": {
+        "order_class": "simple"
+      }
+    },
+    {
+      "target": "$.components.examples.MultilegOptionsOrderResponse.value",
+      "description": "Fixing asset_id example in MultilegOptionsOrderResponse schema to be an accepted UUID value",
+      "update": {
+        "asset_id": "550e8400-e29b-41d4-a716-446655440000"
+      }
+    },
+    {
+      "target": "$.paths['/v2/events/trades'].get.responses['200'].content['text/event-stream'].schema",
+      "description": "Changing schema type from array to object to match the actual examples",
+      "update": {
+        "type": "object"
+      }
+    },
+    {
+      "target": "$.paths['/v1/options/contracts'].get.parameters[13]",
+      "description": "Fixing example in options/contracts parameter to be a boolean value",
+      "update": {
+        "example": true
+      }
+    },
+    {
+      "target": "$.servers[0]",
+      "description": "Fixing servers to have the production server URL first",
+      "update": {
+        "url": "https://broker-api.alpaca.markets",
+        "description": "Production endpoint"
+      }
+    },
+    {
+      "target": "$.servers[1]",
+      "description": "Fixing servers to have the sandbox server URL second",
+      "update": {
+        "url": "https://broker-api.sandbox.alpaca.markets",
+        "description": "Sandbox endpoint"
+      }
+    }
+  ]
+}
