@@ -1,0 +1,1023 @@
+Repair Log
+Processed Timestamp: 2025-09-30T13:47:28.310760
+
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.137055
+Issue: oneOf | N/A
+Message: {'content': {'application/json': {'schema': {'type': 'object', 'required': ['assets'], 'properties': {'assets': {'type': 'array', 'minItems': 1, 'items': {'type': 'object', 'required': ['assetPrices'], 'properties': {'assetPrices': {'description': 'assetPrices[t] contains price information for the asset at the date t', 'type': 'array', 'minItems': 3, 'items': {'type': 'object', 'required': ['date'], 'properties': {'date': {'type': 'string', 'description': 'The date corresponding to the date t in format YYYY-MM-DD; all dates must be distinct'}, 'open': {'type': 'number', 'description': 'The open price of the asset at the date t; must be higher than or equal to the low price and lower than or equal to the high price; required if varianceProxy is jumpAdjustedParkinsonRange', 'minimum': 0, 'exclusiveMinimum': True}, 'high': {'type': 'number', 'description': 'The high price of the asset at the date t; must be lower than or equal to the high price; required if varianceProxy is parkinsonRange or jumpAdjustedParkinsonRange', 'minimum': 0, 'exclusiveMinimum': True}, 'low': {'type': 'number', 'description': 'The low price of the asset at the date t; must be higher than or equal to the low price; required if varianceProxy is parkinsonRange or jumpAdjustedParkinsonRange', 'minimum': 0, 'exclusiveMinimum': True}, 'close': {'type': 'number', 'description': 'The close price of the asset at the date t; must be higher than or equal to the low price and lower than or equal to the high price; required if varianceProxyDecayFactor is undefined or if varianceProxy is squaredCloseToCloseReturns, demeanedSquaredCloseToCloseReturns or jumpAdjustedParkinsonRange', 'minimum': 0, 'exclusiveMinimum': True}}}}, 'varianceProxy': {'type': 'string', 'description': 'The variance proxy to use', 'enum': ['squaredCloseToCloseReturns', 'demeanedSquaredCloseToCloseReturns', 'parkinsonRange', 'jumpAdjustedParkinsonRange'], 'default': 'squaredCloseToCloseReturns'}, 'varianceProxyDecayFactor': {'description': 'The decay factor of the exponentially weighted moving average; by default, the value of the best decay factor is automatically computed'}, 'oneOf': [{'type': 'number', 'minimum': 0, 'exclusiveMinimum': True, 'maximum': 1, 'exclusiveMaximum': True}, {'type': 'string', 'enum': ['auto'], 'default': 'auto'}], 'volatilityForecastHorizon': {'description': 'The forecast horizon, corresponding to the number of multi-steps ahead volatility forecasts to compute', 'type': 'integer', 'minimum': 1, 'default': 1}}}}}}, 'examples': {'Fixed decay factor': {'description': 'Compute volatility forecasts over an horizon of 20 days using a decay factor of 0.94 and squared close-to-close returns as variance proxy', 'value': {'assets': [{'assetPrices': [{'date': '2020-01-01', 'close': 3.08}, {'date': '2020-01-02', 'close': 3.11}, {'date': '2020-01-03', 'close': 3.09}, {'date': '2020-01-04', 'close': 3.1}, {'date': '2020-01-05', 'close': 3.11}, {'date': '2020-01-06', 'close': 3.16}, {'date': '2020-01-07', 'close': 3.22}, {'date': '2020-01-08', 'close': 3.23}, {'date': '2020-01-09', 'close': 3.32}, {'date': '2020-01-10', 'close': 3.3}], 'varianceProxyDecayFactor': 0.94, 'volatilityForecastHorizon': 20}]}}, 'Optimal decay factor': {'description': 'Compute volatility forecasts over an horizon of 5 days, using the best decay factor and the Parkinson range as variance proxy', 'value': {'assets': [{'assetPrices': [{'date': '2020-01-01', 'high': 3.18, 'low': 3.08, 'close': 3.08}, {'date': '2020-01-02', 'high': 3.15, 'low': 3.09, 'close': 3.11}, {'date': '2020-01-03', 'high': 3.12, 'low': 3.08, 'close': 3.09}, {'date': '2020-01-04', 'high': 3.12, 'low': 3.07, 'close': 3.1}, {'date': '2020-01-05', 'high': 3.12, 'low': 3.08, 'close': 3.11}, {'date': '2020-01-06', 'high': 3.17, 'low': 3.1, 'close': 3.16}, {'date': '2020-01-07', 'high': 3.23, 'low': 3.14, 'close': 3.22}, {'date': '2020-01-08', 'high': 3.29, 'low': 3.2, 'close': 3.23}, {'date': '2020-01-09', 'high': 3.33, 'low': 3.22, 'close': 3.32}, {'date': '2020-01-10', 'high': 3.33, 'low': 3.28, 'close': 3.3}], 'varianceProxy': 'parkinsonRange', 'volatilityForecastHorizon': 5}]}}}}}, 'required': True} is not valid under any of the given schemas
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oneOf' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.139235
+Issue: oneOf | N/A
+Message: {'content': {'application/json': {'schema': {'oneOf': [{'type': 'object', 'required': ['assets'], 'properties': {'assets': {'type': 'array', 'minItems': 1, 'items': {'type': 'object', 'required': ['assetReturns'], 'properties': {'assetReturns': {'description': 'assetReturns[t] is the return of the asset at the time t', 'type': 'array', 'minItems': 2, 'items': {'type': 'number'}}}}}}}, {'type': 'object', 'required': ['assets', 'assetsCovarianceMatrix'], 'properties': {'assets': {'type': 'integer', 'description': 'The number of assets', 'minimum': 2}, 'assetsCovarianceMatrix': {'type': 'array', 'description': 'assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j', 'minItems': 2, 'items': {'type': 'array', 'minItems': 2, 'items': {'type': 'number'}}}}}, {'type': 'object', 'required': ['assets'], 'properties': {'assets': {'type': 'array', 'minItems': 1, 'items': {'type': 'object', 'required': ['assetStandardDeviation'], 'properties': {'assetVolatility': {'assetStandardDeviation': 'The asset standard deviation', 'type': 'number', 'minimum': 0}}}}}}]}, 'examples': {'From asset returns': {'description': 'Compute the variance of two assets based on 4 returns per asset', 'value': {'assets': [{'assetReturns': [0.01, 0, 0.02, -0.03]}, {'assetReturns': [0.01, 0, 0.02, -0.03]}]}}, 'From asset covariance matrix': {'description': 'Compute the variance of two assets based on their covariance matrix', 'value': {'assets': 2, 'assetsCovarianceMatrix': [[0.01, -0.0025], [-0.0025, 0.0025]]}}, 'From asset standard deviations': {'description': 'Compute the variance of two assets based on their standard deviation', 'value': {'assets': [{'assetStandardDeviation': 1}, {'assetStandardDeviation': 0.05}]}}}}}, 'required': True} is not valid under any of the given schemas
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oneOf' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.141624
+Issue: struct | N/A
+Message: Expected type `Schema` (object) but got `array` [path: paths./assets/volatility/forecast/ewma.post.requestBody.content.application/json.schema.properties.assets.items.properties.oneOf]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'struct' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.144133
+Issue: struct | N/A
+Message: Property `assetStandardDeviation` is not expected here. [path: paths./assets/returns/variance.post.requestBody.content.application/json.schema.oneOf.2.properties.assets.items.properties.assetVolatility.assetStandardDeviation]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'struct' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.146296
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./markets/indicators/aiae/us.get.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.169729
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `aiaeForecasts` property must NOT have fewer than 41 items. [path: paths./markets/indicators/aiae/us.get.responses.200.content.application/json.examples.Example.value.aiaeIndicator.aiaeForecasts]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.174907
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./markets/capital-assumptions/usd.get.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.177397
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./markets/capital-assumptions/usd.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.181599
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./markets/capital-assumptions/eur.get.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.186390
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./markets/capital-assumptions/eur.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.189054
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `1` property type must be number. [path: paths./markets/capital-assumptions/eur.get.responses.200.content.application/json.examples.Example.value.capitalMarketAssumptions.cmaAssetsCorrelationMatrix.0.1]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.193269
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `0` property type must be number. [path: paths./markets/capital-assumptions/eur.get.responses.200.content.application/json.examples.Example.value.capitalMarketAssumptions.cmaAssetsCorrelationMatrix.1.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.196067
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `1` property type must be number. [path: paths./markets/capital-assumptions/eur.get.responses.200.content.application/json.examples.Example.value.capitalMarketAssumptions.cmaAssetsCorrelationMatrixLowerBounds.0.1]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.198215
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `0` property type must be number. [path: paths./markets/capital-assumptions/eur.get.responses.200.content.application/json.examples.Example.value.capitalMarketAssumptions.cmaAssetsCorrelationMatrixLowerBounds.1.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.199967
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `1` property type must be number. [path: paths./markets/capital-assumptions/eur.get.responses.200.content.application/json.examples.Example.value.capitalMarketAssumptions.cmaAssetsCorrelationMatrixUpperBounds.0.1]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.202127
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `0` property type must be number. [path: paths./markets/capital-assumptions/eur.get.responses.200.content.application/json.examples.Example.value.capitalMarketAssumptions.cmaAssetsCorrelationMatrixUpperBounds.1.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.203885
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./markets/indicators/bsrmb/us.get.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.205394
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `bsrmbForecasts` property must NOT have fewer than 121 items. [path: paths./markets/indicators/bsrmb/us.get.responses.200.content.application/json.examples.Example.value.bsrmbIndicator.bsrmbForecasts]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.207809
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./factors/models/fama-french/us.get.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.210762
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `factorReturn` property type must be array. [path: paths./factors/models/fama-french/us.get.responses.200.content.application/json.examples.Example.value.famaFrenchFactors.factors.0.factorReturns.0.factorReturn]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.212956
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./factors/models/fama-french/developed-markets.get.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.215780
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `factorReturn` property type must be array. [path: paths./factors/models/fama-french/developed-markets.get.responses.200.content.application/json.examples.Example.value.famaFrenchFactors.factors.0.factorReturns.0.factorReturn]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.221525
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./factors/models/fama-french/emerging-markets.get.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.225045
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `factorReturn` property type must be array. [path: paths./factors/models/fama-french/emerging-markets.get.responses.200.content.application/json.examples.Example.value.famaFrenchFactors.factors.0.factorReturns.0.factorReturn]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.229998
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./factors/residualization.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.234893
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./factors/residualization.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.240559
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/clustering/hierarchical.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.244126
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/clustering/hierarchical.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.246038
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/clustering/ftca.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.320230
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/clustering/ftca.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.399216
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/prices/adjusted.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.435700
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMinimum value must be ["number"]. [path: paths./assets/prices/adjusted.post.requestBody.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.443394
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/prices/adjusted.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.446401
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMinimum value must be ["number"]. [path: paths./assets/prices/adjusted.post.responses.200.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.448566
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/prices/adjusted/forward.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.450167
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMinimum value must be ["number"]. [path: paths./assets/prices/adjusted/forward.post.requestBody.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.453861
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/prices/adjusted/forward.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.456733
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMinimum value must be ["number"]. [path: paths./assets/prices/adjusted/forward.post.responses.200.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.460919
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/returns.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.463958
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMinimum value must be ["number"]. [path: paths./assets/returns.post.requestBody.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.469255
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/returns.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.473717
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/returns/logarithmic.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.477429
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMinimum value must be ["number"]. [path: paths./assets/returns/logarithmic.post.requestBody.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.480789
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/returns/logarithmic.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.486445
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/returns/mean.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.488546
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/returns/mean.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.516827
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/returns/backfilled.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.550305
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/returns/backfilled.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.614500
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/returns/transformation/turbulence-partitioned.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.689727
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMaximum value must be ["number"]. [path: paths./assets/returns/transformation/turbulence-partitioned.post.requestBody.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.701519
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMaximum value must be ["number"]. [path: paths./assets/returns/transformation/turbulence-partitioned.post.requestBody.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.703906
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/returns/transformation/turbulence-partitioned.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.706058
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/returns/simulation/bootstrap.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.707973
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/returns/simulation/bootstrap.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.709268
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/returns/simulation/monte-carlo/gaussian.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.711343
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMinimum value must be ["number"]. [path: paths./assets/returns/simulation/monte-carlo/gaussian.post.requestBody.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.712565
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/returns/simulation/monte-carlo/gaussian.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.714108
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/returns/fitting/gaussian.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.718140
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/returns/fitting/gaussian.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.720477
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMinimum value must be ["number"]. [path: paths./assets/returns/fitting/gaussian.post.responses.200.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.722520
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/returns/simulation/monte-carlo/gaussian/mixture.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.724997
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMinimum value must be ["number"]. [path: paths./assets/returns/simulation/monte-carlo/gaussian/mixture.post.requestBody.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.727455
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/returns/simulation/monte-carlo/gaussian/mixture.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.730088
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/returns/fitting/gaussian/mixture.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.734096
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMaximum value must be ["number"]. [path: paths./assets/returns/fitting/gaussian/mixture.post.requestBody.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.740755
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/returns/fitting/gaussian/mixture.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.745712
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMinimum value must be ["number"]. [path: paths./assets/returns/fitting/gaussian/mixture.post.responses.200.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.750461
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/returns/simulation/monte-carlo/gaussian/multivariate.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.755280
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/returns/simulation/monte-carlo/gaussian/multivariate.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.767919
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/returns/fitting/gaussian/multivariate.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.776632
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/returns/fitting/gaussian/multivariate.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.778359
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/returns/simulation/monte-carlo/gaussian/multivariate/mixture.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.780647
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: must NOT have unevaluated properties `assets`. [path: paths./assets/returns/simulation/monte-carlo/gaussian/multivariate/mixture.post.requestBody.content.application/json.examples.Example.value.assets]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.784325
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/returns/simulation/monte-carlo/gaussian/multivariate/mixture.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.788443
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/returns/simulation/monte-carlo/cornish-fisher.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.795625
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMinimum value must be ["number"]. [path: paths./assets/returns/simulation/monte-carlo/cornish-fisher.post.requestBody.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.800543
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/returns/simulation/monte-carlo/cornish-fisher.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.804527
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/returns/fitting/cornish-fisher.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.809611
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/returns/fitting/cornish-fisher.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.813251
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMinimum value must be ["number"]. [path: paths./assets/returns/fitting/cornish-fisher.post.responses.200.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.818190
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/returns/simulation/monte-carlo/cornish-fisher/corrected.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.821440
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMinimum value must be ["number"]. [path: paths./assets/returns/simulation/monte-carlo/cornish-fisher/corrected.post.requestBody.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.825683
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/returns/simulation/monte-carlo/cornish-fisher/corrected.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.827456
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/returns/fitting/cornish-fisher/corrected.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.854498
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/returns/fitting/cornish-fisher/corrected.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.928098
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMinimum value must be ["number"]. [path: paths./assets/returns/fitting/cornish-fisher/corrected.post.responses.200.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:16.988426
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/covariance/matrix.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:17.025439
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/covariance/matrix.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:17.033610
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/covariance/matrix/estimation/empirical.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:17.036808
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMinimum value must be ["number"]. [path: paths./assets/covariance/matrix/estimation/empirical.post.requestBody.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:17.040095
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMinimum value must be ["number"]. [path: paths./assets/covariance/matrix/estimation/empirical.post.requestBody.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:17.045534
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/covariance/matrix/estimation/empirical.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:17.049065
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/covariance/matrix/estimation/empirical/shrunk.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:17.054351
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMinimum value must be ["number"]. [path: paths./assets/covariance/matrix/estimation/empirical/shrunk.post.requestBody.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:17.059050
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/covariance/matrix/estimation/empirical/shrunk.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:17.063987
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/covariance/matrix/estimation/empirical/shrunk/clustering-based.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:17.066984
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMinimum value must be ["number"]. [path: paths./assets/covariance/matrix/estimation/empirical/shrunk/clustering-based.post.requestBody.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:17.069405
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/covariance/matrix/estimation/empirical/shrunk/clustering-based.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:17.074175
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/covariance/matrix/estimation/gerber.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:17.089143
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./assets/covariance/matrix/estimation/gerber.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:17.130371
+Issue: operation-operationId | N/A
+Message: Operation object should contain `operationId` field. [path: paths./assets/covariance/matrix/estimation/exponentially-weighted.post.operationId]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-operationId' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:47:17.180146
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: exclusiveMinimum value must be ["number"]. [path: paths./assets/covariance/matrix/estimation/exponentially-weighted.post.requestBody.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_bundled-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.

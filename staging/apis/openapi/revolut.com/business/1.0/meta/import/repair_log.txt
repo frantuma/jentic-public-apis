@@ -1,0 +1,1003 @@
+Repair Log
+Processed Timestamp: 2025-09-30T13:25:46.066077
+
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.054593
+Issue: oneOf | N/A
+Message: {'name': 'state', 'in': 'query', 'description': "Retrieves links in the specified state(s). Possible states are:\n - `created`: The payout link has been created, but the amount has not yet been [blocked](https://developer.revolut.com/docs/guides/manage-accounts/transfers/payout-links#sender-link-generation).\n - `failed`: The payout link couldn't be generated due to a failure during transaction booking.\n- `awaiting`: The payout link is awaiting approval.\n - `active`: The payout link can be redeemed.\n- `expired`: The payout link cannot be redeemed because it wasn't claimed before its expiry date.\n- `cancelled`: The payout link cannot be redeemed because it was cancelled.\n - `processing`: The payout link has been redeemed and is being processed.\n - `processed`: The payout link has been redeemed and the money has been transferred to the recipient.\n\nUse for filtering to retrieve only links in specified states.\nTo specify multiple values, follow this pattern: `state={VALUE1}&state={VALUE2}`.", 'schema': {'type': 'array', 'items': {'$ref': '#/components/schemas/PayoutLinkState'}}, 'explode': True, 'uniqueItems': True} is not valid under any of the given schemas
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oneOf' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.081027
+Issue: oneOf | N/A
+Message: {'name': 'created_before', 'in': 'query', 'description': 'Retrieves events with `created_at` < `created_before`. \nCannot be older than the current date minus 21 days. \nThe default value is the current date and time at which you are calling the endpoint.\n\nProvided in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.', 'schema': {'type': 'string', 'format': 'date-time or date', 'minimum': "'created_at' - 21 days", 'default': 'the date-time at which the request is made'}} is not valid under any of the given schemas
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oneOf' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.117549
+Issue: oneOf | N/A
+Message: {'type': 'object', 'required': ['counterparty_name', 'request_id', 'account_id', 'amount', 'currency', 'reference'], 'properties': {'counterparty_name': {'$ref': '#/components/schemas/PayoutLinkCounterpartyName'}, 'save_counterparty': {'type': 'boolean', 'description': "Indicates whether to save the recipient as your counterparty upon link claim.\nIf `false` then the counterparty will not show up on your counterparties list, for example, when you retrieve your counterparties. \nHowever, you will still be able to retrieve this counterparty by its ID.\n\nIf you don't choose to save the counterparty on link creation, you can do it later from your transactions list in the Business app.", 'default': False}, 'request_id': {'schema': {'$ref': '#/components/schemas/PayoutLinkRequestId'}, 'description': 'The ID of the request, provided by the sender.\n\n:::caution\n To ensure that a link payment is not processed multiple times if there are network or system errors, the same `request_id` should be used for requests related to the same link.\n:::', 'example': '5a7fcb46-4be4-47d4-a56f-27a2e5b78dd1'}, 'account_id': {'$ref': '#/components/schemas/PayoutLinkAccountId'}, 'amount': {'$ref': '#/components/schemas/PayoutLinkAmount'}, 'currency': {'$ref': '#/components/schemas/Currency', 'example': 'GBP'}, 'reference': {'$ref': '#/components/schemas/PayoutLinkReference'}, 'payout_methods': {'$ref': '#/components/schemas/PayoutLinkPayoutMethods', 'default': ['revolut', 'bank_account']}, 'expiry_period': {'$ref': '#/components/schemas/PayoutLinkExpiryPeriod'}, 'transfer_reason_code': {'$ref': '#/components/schemas/TransferReasonCode'}}} is not valid under any of the given schemas
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oneOf' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.138838
+Issue: oneOf | N/A
+Message: {'type': 'string', 'format': 'date-time', 'description': "The date and time after which the payout link expires in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601).\nIf the recipient doesn't claim the money before then, the payout link expires and is no longer available.\n \nThe default and maximum value is the date and time of creating the link + 7 days.", 'default': 'now + 7 days', 'maximum': 'now + 7 days', 'minimum': 'now + 1 day', 'example': '2023‐07‐20T15:09:24Z'} is not valid under any of the given schemas
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oneOf' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.170464
+Issue: oneOf | N/A
+Message: {'type': 'string', 'format': 'duration', 'description': 'The period after which the payout link expires if not claimed before, provided in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601).\n \nThe default and maximum value is 7 days from the link creation.', 'default': 'P7D', 'maximum': 'P7D', 'minimum': 'P1D', 'example': 'P3D'} is not valid under any of the given schemas
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oneOf' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.212388
+Issue: oneOf | N/A
+Message: {'type': 'array', 'items': {'$ref': '#/components/schemas/PayoutMethod'}, 'explode': True, 'description': 'The list of payout methods that the recipient can use to claim the payout, where:\n- `revolut`: Revolut peer-to-peer (P2P) transfer\n- `bank_account`: External bank transfer\n- `card`: Card transfer', 'example': ['revolut', 'bank_account', 'card']} is not valid under any of the given schemas
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oneOf' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.238938
+Issue: oneOf | N/A
+Message: {'type': 'object', 'properties': {'url': {'ref': '#/components/schemas/Url', 'description': 'A valid webhook URL to which to send event notifications. The supported protocol is `https`.'}, 'events': {'description': 'A list of event types to subscribe to.', 'type': 'array', 'items': {'$ref': '#/components/schemas/WebhookEventType'}}}} is not valid under any of the given schemas
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oneOf' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.270821
+Issue: oneOf | N/A
+Message: {'type': 'object', 'properties': {'expiration_period': {'type': 'string', 'format': 'duration', 'description': 'The expiration period for the signing secret in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601#Durations). If set, when you rotate the secret, it continues to be valid until the expiration period has passed. Otherwise, on rotation, the secret is invalidated immediately. The maximum value is 7 days.', 'maximum': 'P7D', 'example': 'PT5H30M', 'default': 'P0D'}}} is not valid under any of the given schemas
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oneOf' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.292437
+Issue: format | N/A
+Message: 'the date-time at which the request is made' is not a 'date-time'
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'format' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.319027
+Issue: format | N/A
+Message: 'the date-time at which the request is made' is not a 'date-time'
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'format' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.340554
+Issue: type | N/A
+Message: '1.00' is not of type 'number'
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'type' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.352248
+Issue: format | N/A
+Message: 'now + 7 days' is not a 'date-time'
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'format' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.373700
+Issue: format | N/A
+Message: 'the date-time at which the request is made' is not a 'date-time'
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'format' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.415947
+Issue: format | N/A
+Message: 'the date-time at which the request is made' is not a 'date-time'
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'format' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.442591
+Issue: format | N/A
+Message: 'the date-time at which the request is made' is not a 'date-time'
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'format' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.474217
+Issue: struct | N/A
+Message: Property `uniqueItems` is not expected here. [path: paths./payout-links.get.parameters.0.uniqueItems]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'struct' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.495546
+Issue: struct | N/A
+Message: Expected type `number` but got `string`. [path: components.schemas.PayoutLinkExpiryDate.maximum]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'struct' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.532421
+Issue: struct | N/A
+Message: Expected type `number` but got `string`. [path: components.schemas.PayoutLinkExpiryDate.minimum]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'struct' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.570869
+Issue: struct | N/A
+Message: Property `explode` is not expected here. [path: components.schemas.PayoutLinkPayoutMethods.explode]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'struct' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.603279
+Issue: struct | N/A
+Message: Property `schema` is not expected here. [path: components.schemas.CreatePayoutLinkRequest.properties.request_id.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'struct' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.625624
+Issue: struct | N/A
+Message: Expected type `number` but got `string`. [path: components.schemas.PayoutLinkExpiryPeriod.maximum]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'struct' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.658658
+Issue: struct | N/A
+Message: Expected type `number` but got `string`. [path: components.schemas.PayoutLinkExpiryPeriod.minimum]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'struct' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.685564
+Issue: no-server-trailing-slash | N/A
+Message: Server `url` should not have a trailing slash. [path: paths./webhook.servers.0.url]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-server-trailing-slash' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.696619
+Issue: no-server-trailing-slash | N/A
+Message: Server `url` should not have a trailing slash. [path: paths./webhook.servers.1.url]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-server-trailing-slash' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.734693
+Issue: struct | N/A
+Message: Property `ref` is not expected here. [path: components.schemas.UpdateWebhookRequest.properties.url.ref]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'struct' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.746472
+Issue: struct | N/A
+Message: Expected type `number` but got `string`. [path: components.schemas.WebhookSigningSecretRotateRequest.properties.expiration_period.maximum]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'struct' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.783188
+Issue: struct | N/A
+Message: Expected type `number` but got `string`. [path: paths./webhooks/{webhook_id}/failed-events.get.parameters.2.schema.minimum]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'struct' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.805349
+Issue: info-license | N/A
+Message: Info object should contain `license` field. [path: info]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'info-license' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.816388
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./accounts.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.843002
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `id` property must match format "uuid". [path: paths./accounts.get.responses.200.content.application/json.example.0.id]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.864034
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `id` property must match format "uuid". [path: paths./accounts.get.responses.200.content.application/json.example.1.id]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.896659
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./accounts/{account_id}.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.908697
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `id` property must match format "uuid". [path: paths./accounts/{account_id}.get.responses.200.content.application/json.example.id]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.946910
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./accounts/{account_id}/bank-details.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:42.968209
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `id` property must match format "uuid". [path: paths./cards.get.responses.200.content.application/json.example.0.id]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.004858
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `product` property must have required property 'code'. [path: paths./cards.get.responses.200.content.application/json.example.0.product]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.021768
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `product` property must NOT have unevaluated properties `$ref`. [path: paths./cards.get.responses.200.content.application/json.example.0.product.$ref]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.023343
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `1` property must have required property 'accounts'. [path: paths./cards.get.responses.200.content.application/json.example.1]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.024843
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `id` property must match format "uuid". [path: paths./cards.post.responses.200.content.application/json.example.id]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.026068
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `product` property must have required property 'code'. [path: paths./cards.post.responses.200.content.application/json.example.product]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.027165
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `product` property must NOT have unevaluated properties `$ref`. [path: paths./cards.post.responses.200.content.application/json.example.product.$ref]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.028456
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `id` property must match format "uuid". [path: paths./cards/{card_id}.get.responses.200.content.application/json.example.id]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.029295
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `product` property must have required property 'code'. [path: paths./cards/{card_id}.get.responses.200.content.application/json.example.product]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.029836
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `product` property must NOT have unevaluated properties `$ref`. [path: paths./cards/{card_id}.get.responses.200.content.application/json.example.product.$ref]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.031025
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `spending_limits` property type must be object. [path: paths./cards/{card_id}.patch.requestBody.content.application/json.examples.erase_all_spending_limits.value.spending_limits]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.032465
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `spending_limits` property type must be object. [path: paths./cards/{card_id}.patch.requestBody.content.application/json.examples.erase_all_spending_limits.value.spending_limits]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.034599
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `single` property type must be object. [path: paths./cards/{card_id}.patch.requestBody.content.application/json.examples.erase_single_transaction_limit.value.spending_limits.single]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.036804
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `id` property must match format "uuid". [path: paths./cards/{card_id}.patch.responses.200.content.application/json.examples.update_all_properties.value.id]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.038385
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `product` property must have required property 'code'. [path: paths./cards/{card_id}.patch.responses.200.content.application/json.examples.update_all_properties.value.product]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.041281
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `product` property must NOT have unevaluated properties `$ref`. [path: paths./cards/{card_id}.patch.responses.200.content.application/json.examples.update_all_properties.value.product.$ref]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.043704
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `id` property must match format "uuid". [path: paths./cards/{card_id}.patch.responses.200.content.application/json.examples.erase_all_spending_limits.value.id]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.046100
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `product` property must have required property 'code'. [path: paths./cards/{card_id}.patch.responses.200.content.application/json.examples.erase_all_spending_limits.value.product]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.047859
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `product` property must NOT have unevaluated properties `$ref`. [path: paths./cards/{card_id}.patch.responses.200.content.application/json.examples.erase_all_spending_limits.value.product.$ref]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.049016
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `id` property must match format "uuid". [path: paths./cards/{card_id}.patch.responses.200.content.application/json.examples.erase_single_transaction_limit.value.id]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.051136
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `product` property must have required property 'code'. [path: paths./cards/{card_id}.patch.responses.200.content.application/json.examples.erase_single_transaction_limit.value.product]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.053161
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `product` property must NOT have unevaluated properties `$ref`. [path: paths./cards/{card_id}.patch.responses.200.content.application/json.examples.erase_single_transaction_limit.value.product.$ref]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.054404
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `id` property must match format "uuid". [path: paths./counterparties.get.responses.200.content.application/json.examples.all_counterparties.value.0.accounts.0.id]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.056571
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `id` property must match format "uuid". [path: paths./counterparties.get.responses.200.content.application/json.examples.all_counterparties.value.3.accounts.0.id]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.058211
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `last_digits` property type must be string. [path: paths./counterparties.get.responses.200.content.application/json.examples.all_counterparties.value.5.cards.0.last_digits]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.060106
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `last_digits` property type must be string. [path: paths./counterparties.get.responses.200.content.application/json.examples.all_counterparties.value.5.cards.1.last_digits]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.062159
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: must have required property 'code'. [path: paths./counterparties.get.responses.401.content.application/json.example]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.064252
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `id` property must match format "uuid". [path: paths./counterparty.post.responses.200.content.application/json.examples.international_business_eurozone.value.accounts.0.id]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.066777
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./counterparty/{counterparty_id}.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.069475
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `id` property must match format "uuid". [path: paths./counterparty/{counterparty_id}.get.responses.200.content.application/json.examples.international_business_eurozone.value.accounts.0.id]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.071694
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `last_digits` property type must be string. [path: paths./counterparty/{counterparty_id}.get.responses.200.content.application/json.examples.card_counterparty.value.cards.0.last_digits]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.072688
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `last_digits` property type must be string. [path: paths./counterparty/{counterparty_id}.get.responses.200.content.application/json.examples.card_counterparty.value.cards.1.last_digits]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.073667
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./counterparty/{counterparty_id}.delete.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.076206
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `id` property must match format "uuid". [path: paths./exchange.post.responses.200.content.application/json.example.id]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.077314
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./exchange-reasons.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.078117
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `0` property must have required property 'category'. [path: paths./expenses/{expense_id}.get.responses.200.content.application/json.examples.expense_reverted.value.splits.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.082541
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `0` property must have required property 'tax_rate'. [path: paths./expenses/{expense_id}.get.responses.200.content.application/json.examples.expense_reverted.value.splits.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.084093
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./payment-drafts.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.086065
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./payment-drafts.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.087371
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./payment-drafts/{payment_draft_id}.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.088480
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./payment-drafts/{payment_draft_id}.delete.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.089765
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: maximum value must be ["number"]. [path: paths./payout-links.get.responses.200.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.091965
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: maximum value must be ["number"]. [path: paths./payout-links.post.responses.201.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.093493
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: maximum value must be ["number"]. [path: paths./payout-links/{payout_link_id}.get.responses.200.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.095204
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: maximum value must be ["number"]. [path: paths./payout-links/{payout_link_id}.get.responses.200.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.097681
+Issue: no-invalid-media-type-examples | N/A
+Message: Example validation errored: maximum value must be ["number"]. [path: paths./payout-links/{payout_link_id}.get.responses.200.content.application/json.schema]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.099475
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./sandbox/transactions/{id}/{action}.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.101603
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./sandbox/topup.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.102540
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `code` property type must be integer. [path: paths./roles.get.responses.400.content.application/json.example.code]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.104256
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./transactions.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.106427
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./transaction/{id}.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.107910
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./transfer.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.108872
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./transfer-reasons.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.109834
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./webhook.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.110582
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./webhook.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.111396
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./webhook.delete.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.112435
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./webhooks.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.113091
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `0` property must have required property 'id'. [path: paths./webhooks.get.responses.200.content.application/json.example.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.113649
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `0` property must have required property 'url'. [path: paths./webhooks.get.responses.200.content.application/json.example.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.114490
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `0` property must have required property 'events'. [path: paths./webhooks.get.responses.200.content.application/json.example.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.115228
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `0` property must NOT have unevaluated properties `$ref`. [path: paths./webhooks.get.responses.200.content.application/json.example.0.$ref]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.116065
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `1` property must have required property 'id'. [path: paths./webhooks.get.responses.200.content.application/json.example.1]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.116958
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `1` property must have required property 'url'. [path: paths./webhooks.get.responses.200.content.application/json.example.1]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.117951
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `1` property must have required property 'events'. [path: paths./webhooks.get.responses.200.content.application/json.example.1]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.118914
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `1` property must NOT have unevaluated properties `$ref`. [path: paths./webhooks.get.responses.200.content.application/json.example.1.$ref]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T13:25:43.119971
+Issue: no-invalid-media-type-examples | N/A
+Message: Example value must conform to the schema: `url` property type must be object. [path: paths./webhooks.post.requestBody.content.application/json.example.url]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-invalid-media-type-examples' not found in registry.

@@ -1,0 +1,1903 @@
+Repair Log
+Processed Timestamp: 2025-09-30T15:05:47.587835
+
+--------------------------------------------------
+Time: 2025-09-30T15:05:42.608541
+Issue: oneOf | N/A
+Message: {'description': "Defines the contact information associated with a `Registration`. [ICANN](https://icann.org/) requires all domain names to have associated contact information. The `registrant_contact` is considered the domain's legal owner, and often the other contacts are identical.", 'properties': {'adminContact': {'$ref': '#/components/schemas/Contact', 'description': 'Required. The administrative contact for the `Registration`.'}, 'privacy': {'description': 'Required. Privacy setting for the contacts associated with the `Registration`.', 'enum': ['CONTACT_PRIVACY_UNSPECIFIED', 'PUBLIC_CONTACT_DATA', 'PRIVATE_CONTACT_DATA', 'REDACTED_CONTACT_DATA'], 'enumDeprecated': [False, False, True, False], 'type': 'string'}, 'registrantContact': {'$ref': '#/components/schemas/Contact', 'description': 'Required. The registrant contact for the `Registration`. *Caution: Anyone with access to this email address, phone number, and/or postal address can take control of the domain.* *Warning: For new `Registration`s, the registrant receives an email confirmation that they must complete within 15 days to avoid domain suspension.*'}, 'technicalContact': {'$ref': '#/components/schemas/Contact', 'description': 'Required. The technical contact for the `Registration`.'}}, 'type': 'object'} is not valid under any of the given schemas
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oneOf' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:42.718096
+Issue: oneOf | N/A
+Message: {'description': 'Defines renewal, billing, and transfer settings for a `Registration`.', 'properties': {'effectiveTransferLockState': {'description': 'Output only. The actual transfer lock state for this `Registration`.', 'enum': ['TRANSFER_LOCK_STATE_UNSPECIFIED', 'UNLOCKED', 'LOCKED'], 'readOnly': True, 'type': 'string'}, 'preferredRenewalMethod': {'description': 'Optional. The desired renewal method for this `Registration`. The actual `renewal_method` is automatically updated to reflect this choice. If unset or equal to `RENEWAL_METHOD_UNSPECIFIED`, the actual `renewalMethod` is treated as if it were set to `AUTOMATIC_RENEWAL`. You cannot use `RENEWAL_DISABLED` during resource creation, and you can update the renewal status only when the `Registration` resource has state `ACTIVE` or `SUSPENDED`. When `preferred_renewal_method` is set to `AUTOMATIC_RENEWAL`, the actual `renewal_method` can be set to `RENEWAL_DISABLED` in case of problems with the billing account or reported domain abuse. In such cases, check the `issues` field on the `Registration`. After the problem is resolved, the `renewal_method` is automatically updated to `preferred_renewal_method` in a few hours.', 'enum': ['RENEWAL_METHOD_UNSPECIFIED', 'AUTOMATIC_RENEWAL', 'MANUAL_RENEWAL', 'RENEWAL_DISABLED'], 'enumDeprecated': [False, False, True, False], 'type': 'string'}, 'renewalMethod': {'description': 'Output only. The actual renewal method for this `Registration`. When `preferred_renewal_method` is set to `AUTOMATIC_RENEWAL`, the actual `renewal_method` can be equal to `RENEWAL_DISABLED`—for example, when there are problems with the billing account or reported domain abuse. In such cases, check the `issues` field on the `Registration`. After the problem is resolved, the `renewal_method` is automatically updated to `preferred_renewal_method` in a few hours.', 'enum': ['RENEWAL_METHOD_UNSPECIFIED', 'AUTOMATIC_RENEWAL', 'MANUAL_RENEWAL', 'RENEWAL_DISABLED'], 'enumDeprecated': [False, False, True, False], 'readOnly': True, 'type': 'string'}, 'transferLockState': {'description': 'This is the desired transfer lock state for this `Registration`. A transfer lock controls whether the domain can be transferred to another registrar. The transfer lock state of the domain is returned in the `effective_transfer_lock_state` property. The transfer lock state values might be different for the following reasons: * `transfer_lock_state` was updated only a short time ago. * Domains with the `TRANSFER_LOCK_UNSUPPORTED_BY_REGISTRY` state are in the list of `domain_properties`. These domains are always in the `UNLOCKED` state.', 'enum': ['TRANSFER_LOCK_STATE_UNSPECIFIED', 'UNLOCKED', 'LOCKED'], 'type': 'string'}}, 'type': 'object'} is not valid under any of the given schemas
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oneOf' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:42.831944
+Issue: oneOf | N/A
+Message: {'description': 'Parameters required to register a new domain.', 'properties': {'availability': {'description': 'Indicates whether the domain is available for registration. This value is accurate when obtained by calling `RetrieveRegisterParameters`, but is approximate when obtained by calling `SearchDomains`.', 'enum': ['AVAILABILITY_UNSPECIFIED', 'AVAILABLE', 'UNAVAILABLE', 'UNSUPPORTED', 'UNKNOWN'], 'type': 'string'}, 'domainName': {'description': 'The domain name. Unicode domain names are expressed in Punycode format.', 'type': 'string'}, 'domainNotices': {'description': 'Notices about special properties of the domain.', 'items': {'enum': ['DOMAIN_NOTICE_UNSPECIFIED', 'HSTS_PRELOADED'], 'type': 'string'}, 'type': 'array'}, 'supportedPrivacy': {'description': 'Contact privacy options that the domain supports.', 'items': {'enum': ['CONTACT_PRIVACY_UNSPECIFIED', 'PUBLIC_CONTACT_DATA', 'PRIVATE_CONTACT_DATA', 'REDACTED_CONTACT_DATA'], 'enumDeprecated': [False, False, True, False], 'type': 'string'}, 'type': 'array'}, 'yearlyPrice': {'$ref': '#/components/schemas/Money', 'description': 'Price to register or renew the domain for one year.'}}, 'type': 'object'} is not valid under any of the given schemas
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oneOf' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:42.883088
+Issue: oneOf | N/A
+Message: {'description': "The `Registration` resource facilitates managing and configuring domain name registrations. There are several ways to create a new `Registration` resource: To create a new `Registration` resource, find a suitable domain name by calling the `SearchDomains` method with a query to see available domain name options. After choosing a name, call `RetrieveRegisterParameters` to ensure availability and obtain information like pricing, which is needed to build a call to `RegisterDomain`. Another way to create a new `Registration` is to transfer an existing domain from another registrar (Deprecated: For more information, see [Cloud Domains feature deprecation](https://cloud.google.com/domains/docs/deprecations/feature-deprecations)). First, go to the current registrar to unlock the domain for transfer and retrieve the domain's transfer authorization code. Then call `RetrieveTransferParameters` to confirm that the domain is unlocked and to get values needed to build a call to `TransferDomain`. Finally, you can create a new `Registration` by importing an existing domain managed with [Google Domains](https://domains.google/) (Deprecated: For more information, see [Cloud Domains feature deprecation](https://cloud.google.com/domains/docs/deprecations/feature-deprecations)). First, call `RetrieveImportableDomains` to list domains to which the calling user has sufficient access. Then call `ImportDomain` on any domain names you want to use with Cloud Domains.", 'properties': {'contactSettings': {'$ref': '#/components/schemas/ContactSettings', 'description': 'Required. Settings for contact information linked to the `Registration`. You cannot update these with the `UpdateRegistration` method. To update these settings, use the `ConfigureContactSettings` method.'}, 'createTime': {'description': 'Output only. The creation timestamp of the `Registration` resource.', 'format': 'google-datetime', 'readOnly': True, 'type': 'string'}, 'dnsSettings': {'$ref': '#/components/schemas/DnsSettings', 'description': 'Settings controlling the DNS configuration of the `Registration`. You cannot update these with the `UpdateRegistration` method. To update these settings, use the `ConfigureDnsSettings` method.'}, 'domainName': {'description': 'Required. Immutable. The domain name. Unicode domain names must be expressed in Punycode format.', 'type': 'string'}, 'domainProperties': {'description': 'Output only. Special properties of the domain.', 'items': {'enum': ['DOMAIN_PROPERTY_UNSPECIFIED', 'TRANSFER_LOCK_UNSUPPORTED_BY_REGISTRY', 'REQUIRE_PUSH_TRANSFER'], 'type': 'string'}, 'readOnly': True, 'type': 'array'}, 'expireTime': {'description': 'Output only. The expiration timestamp of the `Registration`.', 'format': 'google-datetime', 'readOnly': True, 'type': 'string'}, 'issues': {'description': 'Output only. The set of issues with the `Registration` that require attention.', 'items': {'enum': ['ISSUE_UNSPECIFIED', 'CONTACT_SUPPORT', 'UNVERIFIED_EMAIL', 'PROBLEM_WITH_BILLING', 'DNS_NOT_ACTIVATED'], 'type': 'string'}, 'readOnly': True, 'type': 'array'}, 'labels': {'additionalProperties': {'type': 'string'}, 'description': 'Set of labels associated with the `Registration`.', 'type': 'object'}, 'managementSettings': {'$ref': '#/components/schemas/ManagementSettings', 'description': 'Settings for management of the `Registration`, including renewal, billing, and transfer. You cannot update these with the `UpdateRegistration` method. To update these settings, use the `ConfigureManagementSettings` method.'}, 'name': {'description': 'Output only. Name of the `Registration` resource, in the format `projects/*/locations/*/registrations/`.', 'readOnly': True, 'type': 'string'}, 'pendingContactSettings': {'$ref': '#/components/schemas/ContactSettings', 'description': 'Output only. Pending contact settings for the `Registration`. Updates to the `contact_settings` field that change its `registrant_contact` or `privacy` fields require email confirmation by the `registrant_contact` before taking effect. This field is set only if there are pending updates to the `contact_settings` that have not been confirmed. To confirm the changes, the `registrant_contact` must follow the instructions in the email they receive.', 'readOnly': True}, 'registerFailureReason': {'description': 'Output only. The reason the domain registration failed. Only set for domains in REGISTRATION_FAILED state.', 'enum': ['REGISTER_FAILURE_REASON_UNSPECIFIED', 'REGISTER_FAILURE_REASON_UNKNOWN', 'DOMAIN_NOT_AVAILABLE', 'INVALID_CONTACTS'], 'readOnly': True, 'type': 'string'}, 'state': {'description': 'Output only. The state of the `Registration`', 'enum': ['STATE_UNSPECIFIED', 'REGISTRATION_PENDING', 'REGISTRATION_FAILED', 'TRANSFER_PENDING', 'TRANSFER_FAILED', 'IMPORT_PENDING', 'ACTIVE', 'SUSPENDED', 'EXPORTED', 'EXPIRED'], 'enumDeprecated': [False, False, False, True, True, True, False, False, False, False], 'readOnly': True, 'type': 'string'}, 'supportedPrivacy': {'description': 'Output only. Set of options for the `contact_settings.privacy` field that this `Registration` supports.', 'items': {'enum': ['CONTACT_PRIVACY_UNSPECIFIED', 'PUBLIC_CONTACT_DATA', 'PRIVATE_CONTACT_DATA', 'REDACTED_CONTACT_DATA'], 'enumDeprecated': [False, False, True, False], 'type': 'string'}, 'readOnly': True, 'type': 'array'}, 'transferFailureReason': {'deprecated': True, 'description': 'Output only. Deprecated: For more information, see [Cloud Domains feature deprecation](https://cloud.google.com/domains/docs/deprecations/feature-deprecations). The reason the domain transfer failed. Only set for domains in TRANSFER_FAILED state.', 'enum': ['TRANSFER_FAILURE_REASON_UNSPECIFIED', 'TRANSFER_FAILURE_REASON_UNKNOWN', 'EMAIL_CONFIRMATION_FAILURE', 'DOMAIN_NOT_REGISTERED', 'DOMAIN_HAS_TRANSFER_LOCK', 'INVALID_AUTHORIZATION_CODE', 'TRANSFER_CANCELLED', 'TRANSFER_REJECTED', 'INVALID_REGISTRANT_EMAIL_ADDRESS', 'DOMAIN_NOT_ELIGIBLE_FOR_TRANSFER', 'TRANSFER_ALREADY_PENDING'], 'readOnly': True, 'type': 'string'}}, 'type': 'object'} is not valid under any of the given schemas
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oneOf' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:42.926523
+Issue: oneOf | N/A
+Message: {'deprecated': True, 'description': 'Deprecated: For more information, see [Cloud Domains feature deprecation](https://cloud.google.com/domains/docs/deprecations/feature-deprecations). Parameters required to transfer a domain from another registrar.', 'properties': {'currentRegistrar': {'description': 'The registrar that currently manages the domain.', 'type': 'string'}, 'currentRegistrarUri': {'description': 'The URL of the registrar that currently manages the domain.', 'type': 'string'}, 'domainName': {'description': 'The domain name. Unicode domain names are expressed in Punycode format.', 'type': 'string'}, 'nameServers': {'description': 'The name servers that currently store the configuration of the domain.', 'items': {'type': 'string'}, 'type': 'array'}, 'supportedPrivacy': {'description': 'Contact privacy options that the domain supports.', 'items': {'enum': ['CONTACT_PRIVACY_UNSPECIFIED', 'PUBLIC_CONTACT_DATA', 'PRIVATE_CONTACT_DATA', 'REDACTED_CONTACT_DATA'], 'enumDeprecated': [False, False, True, False], 'type': 'string'}, 'type': 'array'}, 'transferLockState': {'description': 'Indicates whether the domain is protected by a transfer lock. For a transfer to succeed, this must show `UNLOCKED`. To unlock a domain, go to its current registrar.', 'enum': ['TRANSFER_LOCK_STATE_UNSPECIFIED', 'UNLOCKED', 'LOCKED'], 'type': 'string'}, 'yearlyPrice': {'$ref': '#/components/schemas/Money', 'description': 'Price to transfer or renew the domain for one year.'}}, 'type': 'object'} is not valid under any of the given schemas
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oneOf' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:42.972683
+Issue: <unset> | N/A
+Message: Path parameter '+location' for 'get' operation in '/v1beta1/{+location}/registrations:retrieveImportableDomains' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.018585
+Issue: <unset> | N/A
+Message: Path parameter '+location' for 'get' operation in '/v1beta1/{+location}/registrations:retrieveRegisterParameters' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.074795
+Issue: <unset> | N/A
+Message: Path parameter '+location' for 'get' operation in '/v1beta1/{+location}/registrations:retrieveTransferParameters' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.111411
+Issue: <unset> | N/A
+Message: Path parameter '+location' for 'get' operation in '/v1beta1/{+location}/registrations:searchDomains' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.212096
+Issue: <unset> | N/A
+Message: Path parameter '+name' for 'delete' operation in '/v1beta1/{+name}' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.218914
+Issue: <unset> | N/A
+Message: Path parameter '+name' for 'get' operation in '/v1beta1/{+name}' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.225374
+Issue: <unset> | N/A
+Message: Path parameter '+name' for 'patch' operation in '/v1beta1/{+name}' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.230373
+Issue: <unset> | N/A
+Message: Path parameter '+name' for 'get' operation in '/v1beta1/{+name}/locations' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.237119
+Issue: <unset> | N/A
+Message: Path parameter '+name' for 'get' operation in '/v1beta1/{+name}/operations' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.241050
+Issue: <unset> | N/A
+Message: Path parameter '+name' for 'post' operation in '/v1beta1/{+name}:export' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.246026
+Issue: <unset> | N/A
+Message: Path parameter '+parent' for 'get' operation in '/v1beta1/{+parent}/registrations' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.249817
+Issue: <unset> | N/A
+Message: Path parameter '+parent' for 'post' operation in '/v1beta1/{+parent}/registrations:import' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.253182
+Issue: <unset> | N/A
+Message: Path parameter '+parent' for 'post' operation in '/v1beta1/{+parent}/registrations:register' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.257858
+Issue: <unset> | N/A
+Message: Path parameter '+parent' for 'post' operation in '/v1beta1/{+parent}/registrations:transfer' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.262006
+Issue: <unset> | N/A
+Message: Path parameter '+registration' for 'post' operation in '/v1beta1/{+registration}:configureContactSettings' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.267025
+Issue: <unset> | N/A
+Message: Path parameter '+registration' for 'post' operation in '/v1beta1/{+registration}:configureDnsSettings' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.269597
+Issue: <unset> | N/A
+Message: Path parameter '+registration' for 'post' operation in '/v1beta1/{+registration}:configureManagementSettings' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.271614
+Issue: <unset> | N/A
+Message: Path parameter '+registration' for 'post' operation in '/v1beta1/{+registration}:initiatePushTransfer' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.272690
+Issue: <unset> | N/A
+Message: Path parameter '+registration' for 'post' operation in '/v1beta1/{+registration}:renewDomain' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.274163
+Issue: <unset> | N/A
+Message: Path parameter '+registration' for 'post' operation in '/v1beta1/{+registration}:resetAuthorizationCode' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.275818
+Issue: <unset> | N/A
+Message: Path parameter '+registration' for 'get' operation in '/v1beta1/{+registration}:retrieveAuthorizationCode' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.277603
+Issue: <unset> | N/A
+Message: Path parameter '+registration' for 'get' operation in '/v1beta1/{+registration}:retrieveGoogleDomainsDnsRecords' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.279473
+Issue: <unset> | N/A
+Message: Path parameter '+registration' for 'get' operation in '/v1beta1/{+registration}:retrieveGoogleDomainsForwardingConfig' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.281269
+Issue: <unset> | N/A
+Message: Path parameter '+resource' for 'get' operation in '/v1beta1/{+resource}:getIamPolicy' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.282346
+Issue: <unset> | N/A
+Message: Path parameter '+resource' for 'post' operation in '/v1beta1/{+resource}:setIamPolicy' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.283744
+Issue: <unset> | N/A
+Message: Path parameter '+resource' for 'post' operation in '/v1beta1/{+resource}:testIamPermissions' was not resolved
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: openapi-spec-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code '<unset>' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.285277
+Issue: no-server-trailing-slash | N/A
+Message: Server `url` should not have a trailing slash. [path: servers.0.url]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-server-trailing-slash' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.287456
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+location}/registrations:retrieveImportableDomains.get.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.288798
+Issue: path-parameters-defined | N/A
+Message: Path parameter `location` is not used in the path `/v1beta1/{+location}/registrations:retrieveImportableDomains`. [path: paths./v1beta1/{+location}/registrations:retrieveImportableDomains.get.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.290150
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+location}/registrations:retrieveRegisterParameters.get.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.292828
+Issue: path-parameters-defined | N/A
+Message: Path parameter `location` is not used in the path `/v1beta1/{+location}/registrations:retrieveRegisterParameters`. [path: paths./v1beta1/{+location}/registrations:retrieveRegisterParameters.get.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.294397
+Issue: struct | N/A
+Message: Property `enumDeprecated` is not expected here. [path: components.schemas.RegisterParameters.properties.supportedPrivacy.items.enumDeprecated]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'struct' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.296129
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+location}/registrations:retrieveTransferParameters.get.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.297535
+Issue: path-parameters-defined | N/A
+Message: Path parameter `location` is not used in the path `/v1beta1/{+location}/registrations:retrieveTransferParameters`. [path: paths./v1beta1/{+location}/registrations:retrieveTransferParameters.get.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.298788
+Issue: struct | N/A
+Message: Property `enumDeprecated` is not expected here. [path: components.schemas.TransferParameters.properties.supportedPrivacy.items.enumDeprecated]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'struct' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.300450
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+location}/registrations:searchDomains.get.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.303920
+Issue: path-parameters-defined | N/A
+Message: Path parameter `location` is not used in the path `/v1beta1/{+location}/registrations:searchDomains`. [path: paths./v1beta1/{+location}/registrations:searchDomains.get.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.305475
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+name}.get.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.306975
+Issue: path-parameters-defined | N/A
+Message: Path parameter `name` is not used in the path `/v1beta1/{+name}`. [path: paths./v1beta1/{+name}.get.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.309129
+Issue: struct | N/A
+Message: Property `enumDeprecated` is not expected here. [path: components.schemas.ContactSettings.properties.privacy.enumDeprecated]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'struct' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.311440
+Issue: struct | N/A
+Message: Property `enumDeprecated` is not expected here. [path: components.schemas.ManagementSettings.properties.preferredRenewalMethod.enumDeprecated]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'struct' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.313005
+Issue: struct | N/A
+Message: Property `enumDeprecated` is not expected here. [path: components.schemas.ManagementSettings.properties.renewalMethod.enumDeprecated]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'struct' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.314219
+Issue: struct | N/A
+Message: Property `enumDeprecated` is not expected here. [path: components.schemas.Registration.properties.state.enumDeprecated]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'struct' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.315791
+Issue: struct | N/A
+Message: Property `enumDeprecated` is not expected here. [path: components.schemas.Registration.properties.supportedPrivacy.items.enumDeprecated]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'struct' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.317053
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+name}.delete.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.319065
+Issue: path-parameters-defined | N/A
+Message: Path parameter `name` is not used in the path `/v1beta1/{+name}`. [path: paths./v1beta1/{+name}.delete.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.320863
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+name}.patch.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.322907
+Issue: path-parameters-defined | N/A
+Message: Path parameter `name` is not used in the path `/v1beta1/{+name}`. [path: paths./v1beta1/{+name}.patch.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.324917
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+name}/locations.get.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.326296
+Issue: path-parameters-defined | N/A
+Message: Path parameter `name` is not used in the path `/v1beta1/{+name}/locations`. [path: paths./v1beta1/{+name}/locations.get.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.328009
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+name}/operations.get.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.330255
+Issue: path-parameters-defined | N/A
+Message: Path parameter `name` is not used in the path `/v1beta1/{+name}/operations`. [path: paths./v1beta1/{+name}/operations.get.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.331722
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+name}:export.post.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.333612
+Issue: path-parameters-defined | N/A
+Message: Path parameter `name` is not used in the path `/v1beta1/{+name}:export`. [path: paths./v1beta1/{+name}:export.post.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.335321
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+parent}/registrations.get.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.337123
+Issue: path-parameters-defined | N/A
+Message: Path parameter `parent` is not used in the path `/v1beta1/{+parent}/registrations`. [path: paths./v1beta1/{+parent}/registrations.get.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.341425
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+parent}/registrations:import.post.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.343262
+Issue: path-parameters-defined | N/A
+Message: Path parameter `parent` is not used in the path `/v1beta1/{+parent}/registrations:import`. [path: paths./v1beta1/{+parent}/registrations:import.post.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.344807
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+parent}/registrations:register.post.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.346608
+Issue: path-parameters-defined | N/A
+Message: Path parameter `parent` is not used in the path `/v1beta1/{+parent}/registrations:register`. [path: paths./v1beta1/{+parent}/registrations:register.post.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.348609
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+parent}/registrations:transfer.post.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.350598
+Issue: path-parameters-defined | N/A
+Message: Path parameter `parent` is not used in the path `/v1beta1/{+parent}/registrations:transfer`. [path: paths./v1beta1/{+parent}/registrations:transfer.post.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.352264
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+registration}:configureContactSettings.post.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.354085
+Issue: path-parameters-defined | N/A
+Message: Path parameter `registration` is not used in the path `/v1beta1/{+registration}:configureContactSettings`. [path: paths./v1beta1/{+registration}:configureContactSettings.post.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.355828
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+registration}:configureDnsSettings.post.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.357675
+Issue: path-parameters-defined | N/A
+Message: Path parameter `registration` is not used in the path `/v1beta1/{+registration}:configureDnsSettings`. [path: paths./v1beta1/{+registration}:configureDnsSettings.post.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.359691
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+registration}:configureManagementSettings.post.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.361896
+Issue: path-parameters-defined | N/A
+Message: Path parameter `registration` is not used in the path `/v1beta1/{+registration}:configureManagementSettings`. [path: paths./v1beta1/{+registration}:configureManagementSettings.post.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.363708
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+registration}:initiatePushTransfer.post.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.365791
+Issue: path-parameters-defined | N/A
+Message: Path parameter `registration` is not used in the path `/v1beta1/{+registration}:initiatePushTransfer`. [path: paths./v1beta1/{+registration}:initiatePushTransfer.post.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.367806
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+registration}:renewDomain.post.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.369414
+Issue: path-parameters-defined | N/A
+Message: Path parameter `registration` is not used in the path `/v1beta1/{+registration}:renewDomain`. [path: paths./v1beta1/{+registration}:renewDomain.post.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.370794
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+registration}:resetAuthorizationCode.post.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.372297
+Issue: path-parameters-defined | N/A
+Message: Path parameter `registration` is not used in the path `/v1beta1/{+registration}:resetAuthorizationCode`. [path: paths./v1beta1/{+registration}:resetAuthorizationCode.post.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.374368
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+registration}:retrieveAuthorizationCode.get.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.376005
+Issue: path-parameters-defined | N/A
+Message: Path parameter `registration` is not used in the path `/v1beta1/{+registration}:retrieveAuthorizationCode`. [path: paths./v1beta1/{+registration}:retrieveAuthorizationCode.get.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.377102
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+registration}:retrieveGoogleDomainsDnsRecords.get.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.378212
+Issue: path-parameters-defined | N/A
+Message: Path parameter `registration` is not used in the path `/v1beta1/{+registration}:retrieveGoogleDomainsDnsRecords`. [path: paths./v1beta1/{+registration}:retrieveGoogleDomainsDnsRecords.get.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.379581
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+registration}:retrieveGoogleDomainsForwardingConfig.get.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.380684
+Issue: path-parameters-defined | N/A
+Message: Path parameter `registration` is not used in the path `/v1beta1/{+registration}:retrieveGoogleDomainsForwardingConfig`. [path: paths./v1beta1/{+registration}:retrieveGoogleDomainsForwardingConfig.get.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.382040
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+resource}:getIamPolicy.get.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.383614
+Issue: path-parameters-defined | N/A
+Message: Path parameter `resource` is not used in the path `/v1beta1/{+resource}:getIamPolicy`. [path: paths./v1beta1/{+resource}:getIamPolicy.get.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.385613
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+resource}:setIamPolicy.post.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.387194
+Issue: path-parameters-defined | N/A
+Message: Path parameter `resource` is not used in the path `/v1beta1/{+resource}:setIamPolicy`. [path: paths./v1beta1/{+resource}:setIamPolicy.post.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.388988
+Issue: operation-summary | N/A
+Message: Operation object should contain `summary` field. [path: paths./v1beta1/{+resource}:testIamPermissions.post.summary]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-summary' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.391010
+Issue: path-parameters-defined | N/A
+Message: Path parameter `resource` is not used in the path `/v1beta1/{+resource}:testIamPermissions`. [path: paths./v1beta1/{+resource}:testIamPermissions.post.parameters.0.name]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-parameters-defined' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.393097
+Issue: tag-description | N/A
+Message: Tag object should contain `description` field. [path: tags.0.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'tag-description' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.395097
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+location}/registrations:retrieveImportableDomains.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.397404
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+location}/registrations:retrieveRegisterParameters.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.398461
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+location}/registrations:retrieveTransferParameters.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.399555
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+location}/registrations:searchDomains.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.400575
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+name}.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.401611
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+name}.delete.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.403240
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+name}.patch.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.405259
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+name}/locations.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.407510
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+name}/operations.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.409932
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+name}:export.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.414516
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+parent}/registrations.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.418306
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+parent}/registrations:import.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.420404
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+parent}/registrations:register.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.424077
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+parent}/registrations:transfer.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.429651
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+registration}:configureContactSettings.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.433860
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+registration}:configureDnsSettings.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.437422
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+registration}:configureManagementSettings.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.440693
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+registration}:initiatePushTransfer.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.443439
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+registration}:renewDomain.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.448176
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+registration}:resetAuthorizationCode.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.450788
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+registration}:retrieveAuthorizationCode.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.453759
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+registration}:retrieveGoogleDomainsDnsRecords.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.457082
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+registration}:retrieveGoogleDomainsForwardingConfig.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.463084
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+resource}:getIamPolicy.get.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.468383
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+resource}:setIamPolicy.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.473011
+Issue: operation-4xx-response | N/A
+Message: Operation must have at least one `4XX` response. [path: paths./v1beta1/{+resource}:testIamPermissions.post.responses]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'operation-4xx-response' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.476657
+Issue: no-unused-components | N/A
+Message: Component: "OperationMetadata" is never used. [path: components.schemas.OperationMetadata]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: redocly-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-unused-components' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.479259
+Issue: oas3-server-trailing-slash | N/A
+Message: Server URL must not have trailing slash. [path: servers.0.url]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oas3-server-trailing-slash' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.481034
+Issue: path-params | N/A
+Message: Parameter "location" must be used in path "/v1beta1/{+location}/registrations:retrieveImportableDomains". [path: paths./v1beta1/{+location}/registrations:retrieveImportableDomains.get.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.482487
+Issue: path-params | N/A
+Message: Parameter "location" must be used in path "/v1beta1/{+location}/registrations:retrieveRegisterParameters". [path: paths./v1beta1/{+location}/registrations:retrieveRegisterParameters.get.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.485964
+Issue: path-params | N/A
+Message: Parameter "location" must be used in path "/v1beta1/{+location}/registrations:retrieveTransferParameters". [path: paths./v1beta1/{+location}/registrations:retrieveTransferParameters.get.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.489451
+Issue: path-params | N/A
+Message: Parameter "location" must be used in path "/v1beta1/{+location}/registrations:searchDomains". [path: paths./v1beta1/{+location}/registrations:searchDomains.get.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.493505
+Issue: path-params | N/A
+Message: Parameter "name" must be used in path "/v1beta1/{+name}". [path: paths./v1beta1/{+name}.delete.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.499490
+Issue: path-params | N/A
+Message: Parameter "name" must be used in path "/v1beta1/{+name}". [path: paths./v1beta1/{+name}.get.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.503584
+Issue: path-params | N/A
+Message: Parameter "name" must be used in path "/v1beta1/{+name}". [path: paths./v1beta1/{+name}.patch.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.508905
+Issue: path-params | N/A
+Message: Parameter "name" must be used in path "/v1beta1/{+name}/locations". [path: paths./v1beta1/{+name}/locations.get.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.512512
+Issue: path-params | N/A
+Message: Parameter "name" must be used in path "/v1beta1/{+name}/operations". [path: paths./v1beta1/{+name}/operations.get.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.516817
+Issue: path-params | N/A
+Message: Parameter "name" must be used in path "/v1beta1/{+name}:export". [path: paths./v1beta1/{+name}:export.post.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.521051
+Issue: path-params | N/A
+Message: Parameter "parent" must be used in path "/v1beta1/{+parent}/registrations". [path: paths./v1beta1/{+parent}/registrations.get.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.526204
+Issue: path-params | N/A
+Message: Parameter "parent" must be used in path "/v1beta1/{+parent}/registrations:import". [path: paths./v1beta1/{+parent}/registrations:import.post.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.529228
+Issue: path-params | N/A
+Message: Parameter "parent" must be used in path "/v1beta1/{+parent}/registrations:register". [path: paths./v1beta1/{+parent}/registrations:register.post.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.533497
+Issue: path-params | N/A
+Message: Parameter "parent" must be used in path "/v1beta1/{+parent}/registrations:transfer". [path: paths./v1beta1/{+parent}/registrations:transfer.post.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.534850
+Issue: path-params | N/A
+Message: Parameter "registration" must be used in path "/v1beta1/{+registration}:configureContactSettings". [path: paths./v1beta1/{+registration}:configureContactSettings.post.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.536693
+Issue: path-params | N/A
+Message: Parameter "registration" must be used in path "/v1beta1/{+registration}:configureDnsSettings". [path: paths./v1beta1/{+registration}:configureDnsSettings.post.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.538524
+Issue: path-params | N/A
+Message: Parameter "registration" must be used in path "/v1beta1/{+registration}:configureManagementSettings". [path: paths./v1beta1/{+registration}:configureManagementSettings.post.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.539896
+Issue: path-params | N/A
+Message: Parameter "registration" must be used in path "/v1beta1/{+registration}:initiatePushTransfer". [path: paths./v1beta1/{+registration}:initiatePushTransfer.post.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.541867
+Issue: path-params | N/A
+Message: Parameter "registration" must be used in path "/v1beta1/{+registration}:renewDomain". [path: paths./v1beta1/{+registration}:renewDomain.post.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.543823
+Issue: path-params | N/A
+Message: Parameter "registration" must be used in path "/v1beta1/{+registration}:resetAuthorizationCode". [path: paths./v1beta1/{+registration}:resetAuthorizationCode.post.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.546030
+Issue: path-params | N/A
+Message: Parameter "registration" must be used in path "/v1beta1/{+registration}:retrieveAuthorizationCode". [path: paths./v1beta1/{+registration}:retrieveAuthorizationCode.get.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.547544
+Issue: path-params | N/A
+Message: Parameter "registration" must be used in path "/v1beta1/{+registration}:retrieveGoogleDomainsDnsRecords". [path: paths./v1beta1/{+registration}:retrieveGoogleDomainsDnsRecords.get.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.549390
+Issue: path-params | N/A
+Message: Parameter "registration" must be used in path "/v1beta1/{+registration}:retrieveGoogleDomainsForwardingConfig". [path: paths./v1beta1/{+registration}:retrieveGoogleDomainsForwardingConfig.get.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.550932
+Issue: path-params | N/A
+Message: Parameter "resource" must be used in path "/v1beta1/{+resource}:getIamPolicy". [path: paths./v1beta1/{+resource}:getIamPolicy.get.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.551968
+Issue: path-params | N/A
+Message: Parameter "resource" must be used in path "/v1beta1/{+resource}:setIamPolicy". [path: paths./v1beta1/{+resource}:setIamPolicy.post.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.553002
+Issue: path-params | N/A
+Message: Parameter "resource" must be used in path "/v1beta1/{+resource}:testIamPermissions". [path: paths./v1beta1/{+resource}:testIamPermissions.post.parameters.0]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'path-params' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.554241
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.Binding.properties.condition.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.556567
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.ConfigureContactSettingsRequest.properties.contactSettings.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.559334
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.ConfigureDnsSettingsRequest.properties.dnsSettings.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.562723
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.ConfigureManagementSettingsRequest.properties.managementSettings.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.564659
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.Contact.properties.postalAddress.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.566226
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.ContactSettings.properties.adminContact.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.567307
+Issue: oas3-schema | N/A
+Message: Property "enumDeprecated" is not expected to be here. [path: components.schemas.ContactSettings.properties.privacy.enumDeprecated]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oas3-schema' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.568958
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.ContactSettings.properties.registrantContact.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.570177
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.ContactSettings.properties.technicalContact.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.572145
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.DnsSettings.properties.customDns.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.574099
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.DnsSettings.properties.googleDomainsDns.deprecated]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.575974
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.DnsSettings.properties.googleDomainsDns.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.578122
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.Domain.properties.yearlyPrice.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.580236
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.GeoPolicyItem.properties.healthCheckedTargets.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.582296
+Issue: oas3-schema | N/A
+Message: Property "enumDeprecated" is not expected to be here. [path: components.schemas.ManagementSettings.properties.preferredRenewalMethod.enumDeprecated]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oas3-schema' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.583805
+Issue: oas3-schema | N/A
+Message: Property "enumDeprecated" is not expected to be here. [path: components.schemas.ManagementSettings.properties.renewalMethod.enumDeprecated]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oas3-schema' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.585490
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.Operation.properties.error.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.587457
+Issue: oas3-unused-component | N/A
+Message: Potentially unused component has been detected. [path: components.schemas.OperationMetadata]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oas3-unused-component' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.589008
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.PrimaryBackupPolicy.properties.backupGeoTargets.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.590797
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.PrimaryBackupPolicy.properties.primaryTargets.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.593162
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.RRSetRoutingPolicy.properties.geoPolicy.deprecated]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.594917
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.RRSetRoutingPolicy.properties.wrrPolicy.deprecated]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.597235
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.RegisterDomainRequest.properties.registration.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.599049
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.RegisterDomainRequest.properties.yearlyPrice.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.600762
+Issue: oas3-schema | N/A
+Message: Property "enumDeprecated" is not expected to be here. [path: components.schemas.RegisterParameters.properties.supportedPrivacy.items.enumDeprecated]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oas3-schema' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.602712
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.RegisterParameters.properties.yearlyPrice.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.603991
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.Registration.properties.contactSettings.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.605396
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.Registration.properties.dnsSettings.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.607041
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.Registration.properties.managementSettings.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.608687
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.Registration.properties.pendingContactSettings.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.611225
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.Registration.properties.pendingContactSettings.readOnly]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.613224
+Issue: oas3-schema | N/A
+Message: Property "enumDeprecated" is not expected to be here. [path: components.schemas.Registration.properties.state.enumDeprecated]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oas3-schema' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.614887
+Issue: oas3-schema | N/A
+Message: Property "enumDeprecated" is not expected to be here. [path: components.schemas.Registration.properties.supportedPrivacy.items.enumDeprecated]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oas3-schema' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.616821
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.RenewDomainRequest.properties.yearlyPrice.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.618331
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.ResourceRecordSet.properties.routingPolicy.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.619436
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.RetrieveRegisterParametersResponse.properties.registerParameters.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.621107
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.RetrieveTransferParametersResponse.properties.transferParameters.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.623296
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.SetIamPolicyRequest.properties.policy.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.624780
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.TransferDomainRequest.properties.authorizationCode.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.627199
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.TransferDomainRequest.properties.registration.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.629621
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.TransferDomainRequest.properties.yearlyPrice.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.631545
+Issue: oas3-schema | N/A
+Message: Property "enumDeprecated" is not expected to be here. [path: components.schemas.TransferParameters.properties.supportedPrivacy.items.enumDeprecated]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'oas3-schema' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.634348
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.TransferParameters.properties.yearlyPrice.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
+--------------------------------------------------
+Time: 2025-09-30T15:05:43.636462
+Issue: no-$ref-siblings | N/A
+Message: $ref must not be placed next to any other properties [path: components.schemas.WrrPolicyItem.properties.healthCheckedTargets.description]
+Location: N/A
+Fixed: False
+Source: System
+Issue Source: spectral-validator
+Issue Target: import-url_root-spec
+Action: COULD NOT PROCESS: Issue definition for code 'no-$ref-siblings' not found in registry.
