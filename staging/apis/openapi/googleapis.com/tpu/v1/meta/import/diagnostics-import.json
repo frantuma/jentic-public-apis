@@ -4039,7 +4039,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'tpu.projects.locations.nodes.stop' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing. Added a concise summary and expanded the description to include side effects of the operation.",
+    "message": "Operation 'tpu.projects.locations.nodes.stop' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description lacks clarity on inputs (node name parameter), outputs (Operation response), and side effects (state transition, billing implications). Added these details for AI agent clarity on when and how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4054,13 +4054,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Stops a node, this operation is only available with single TPU nodes.",
-      "summary_suggestion": "Stop a single TPU node.",
-      "description_suggestion": "Stops a single TPU node. This operation is only available with single TPU nodes. The node will be marked as stopped and will no longer be available for use.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include side effects of the operation.",
+      "summary_suggestion": "Stop a TPU node instance",
+      "description_suggestion": "Stops a running TPU node instance. This operation is only available for single TPU nodes. Requires the node resource name as input. Returns a long-running Operation that tracks the stop process. The node transitions to a stopped state and will not incur compute charges while stopped.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on inputs (node name parameter), outputs (Operation response), and side effects (state transition, billing implications). Added these details for AI agent clarity on when and how to use this operation.",
       "batch_index": 1
     }
   },
@@ -4075,7 +4077,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'tpu.projects.locations.nodes.list' has semantic quality issues: vague_summary, missing_context. The current summary is missing. Added a concise summary and expanded the description to include more context about the response.",
+    "message": "Operation 'tpu.projects.locations.acceleratorTypes.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too generic and doesn't explain inputs (parent location, pagination parameters) or outputs (ListAcceleratorTypesResponse). Enhanced to clarify scope (location-specific), input parameters, and response structure for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "tpu.projects.locations.acceleratorTypes.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists accelerator types supported by this API.",
+      "summary_suggestion": "List available TPU accelerator types",
+      "description_suggestion": "Lists all accelerator types supported by the Cloud TPU API in a specified location. Accepts parent location path and optional filtering/pagination parameters. Returns a ListAcceleratorTypesResponse containing available accelerator types with their specifications and capabilities.",
+      "reasoning": "Missing summary. Description is too generic and doesn't explain inputs (parent location, pagination parameters) or outputs (ListAcceleratorTypesResponse). Enhanced to clarify scope (location-specific), input parameters, and response structure for better AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'tpu.projects.locations.nodes.list' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Missing summary and extremely vague description. 'Lists nodes' provides no context about what nodes, scope, or what information is returned. Added location context, input parameters, and response details (ListNodesResponse with Node properties) to enable AI agents to understand this operation's purpose and usage.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4090,13 +4129,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists nodes.",
-      "summary_suggestion": "List all nodes in a specified location.",
-      "description_suggestion": "Lists all nodes in the specified location. The response includes details about each node, such as its name, state, and configuration.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include more context about the response.",
+      "summary_suggestion": "List TPU node instances in a location",
+      "description_suggestion": "Lists all TPU node instances in a specified location. Accepts parent location path and optional filtering/pagination parameters. Returns a ListNodesResponse containing Node resources with their current status, configuration, and network endpoints.",
+      "reasoning": "Missing summary and extremely vague description. 'Lists nodes' provides no context about what nodes, scope, or what information is returned. Added location context, input parameters, and response details (ListNodesResponse with Node properties) to enable AI agents to understand this operation's purpose and usage.",
       "batch_index": 1
     }
   },
@@ -4111,7 +4152,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'tpu.projects.locations.nodes.create' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing. Added a concise summary and expanded the description to include details about the input schema and response.",
+    "message": "Operation 'tpu.projects.locations.nodes.create' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Missing summary and overly vague description. 'Creates a node' lacks context about what configuration is needed, what the operation returns, and the asynchronous nature. Added details about Node configuration inputs, Operation response, and provisioning side effects to help AI agents understand when and how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4126,13 +4167,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Creates a node.",
-      "summary_suggestion": "Create a new TPU node.",
-      "description_suggestion": "Creates a new TPU node with the specified configuration. Requires a Node schema in the request body. The response includes details about the newly created node.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include details about the input schema and response.",
+      "summary_suggestion": "Create a new TPU node instance",
+      "description_suggestion": "Creates a new TPU node instance in a specified location. Accepts parent location path and a Node resource configuration specifying accelerator type, TensorFlow version, and other parameters. Returns a long-running Operation that tracks the node provisioning process. The operation completes when the node is fully initialized and ready for workloads.",
+      "reasoning": "Missing summary and overly vague description. 'Creates a node' lacks context about what configuration is needed, what the operation returns, and the asynchronous nature. Added details about Node configuration inputs, Operation response, and provisioning side effects to help AI agents understand when and how to use this operation.",
       "batch_index": 1
     }
   },
@@ -4147,7 +4191,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'tpu.projects.locations.nodes.delete' has semantic quality issues: vague_summary, vague_description, missing_side_effects. The current summary and description are vague. The suggestion provides a clearer action-oriented summary and a more detailed description including the side effects of the operation.",
+    "message": "Operation 'tpu.projects.locations.tensorflowVersions.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks specificity about scope (location-based), inputs (parent location, pagination parameters), and outputs (ListTensorFlowVersionsResponse structure). Enhanced to clarify location context, input parameters, and response format for improved AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "tpu.projects.locations.tensorflowVersions.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "List TensorFlow versions supported by this API.",
+      "summary_suggestion": "List supported TensorFlow versions for TPU",
+      "description_suggestion": "Lists all TensorFlow versions supported by the Cloud TPU API in a specified location. Accepts parent location path and optional filtering/pagination parameters. Returns a ListTensorFlowVersionsResponse containing available TensorFlow versions with their compatibility information and release details.",
+      "reasoning": "Missing summary. Description lacks specificity about scope (location-based), inputs (parent location, pagination parameters), and outputs (ListTensorFlowVersionsResponse structure). Enhanced to clarify location context, input parameters, and response format for improved AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'tpu.projects.locations.nodes.delete' has semantic quality issues: vague_summary, vague_description, missing_context, missing_side_effects. Original description is too minimal. Added context about node state requirements, resource implications, return type (Operation), and permanent nature of deletion. This helps AI agents understand the destructive nature and prerequisites of this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4163,13 +4244,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "missing_context",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes a node.",
-      "summary_suggestion": "Delete a TPU node",
-      "description_suggestion": "Deletes a specified TPU node. The node will be removed from the system. This operation is irreversible.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clearer action-oriented summary and a more detailed description including the side effects of the operation.",
+      "summary_suggestion": "Delete a TPU node instance",
+      "description_suggestion": "Deletes a TPU node instance. This operation permanently removes the specified node and its associated resources. The node must be in a stopped state before deletion. Returns an Operation object representing the long-running deletion process. Once completed, the node will no longer be accessible.",
+      "reasoning": "Original description is too minimal. Added context about node state requirements, resource implications, return type (Operation), and permanent nature of deletion. This helps AI agents understand the destructive nature and prerequisites of this operation.",
       "batch_index": 0
     }
   },
@@ -4184,7 +4266,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'tpu.projects.locations.acceleratorTypes.get' has semantic quality issues: vague_summary, vague_description. The current summary and description are too vague. The suggestions provide a clearer action-oriented summary and a more detailed description of the operation's purpose and output.",
+    "message": "Operation 'tpu.projects.locations.acceleratorTypes.get' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description lacks context about what an AcceleratorType represents and what information is returned. Enhanced to clarify the domain context (accelerator types for TPU configuration) and the response structure, improving AI agent understanding of when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4199,13 +4281,163 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets AcceleratorType.",
-      "summary_suggestion": "Get details of an AcceleratorType",
-      "description_suggestion": "Retrieves the details of a specified AcceleratorType, including its configuration and capabilities.",
-      "reasoning": "The current summary and description are too vague. The suggestions provide a clearer action-oriented summary and a more detailed description of the operation's purpose and output.",
+      "summary_suggestion": "Retrieve accelerator type configuration details",
+      "description_suggestion": "Retrieves detailed information about a specific accelerator type that TPU nodes can be configured with. Returns an AcceleratorType object containing the accelerator's specifications, supported TensorFlow versions, and availability information.",
+      "reasoning": "Original description lacks context about what an AcceleratorType represents and what information is returned. Enhanced to clarify the domain context (accelerator types for TPU configuration) and the response structure, improving AI agent understanding of when to use this operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'tpu.projects.locations.operations.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Original description mentions error handling but lacks context about what operations are being listed (long-running TPU operations), filtering capabilities, and response structure. Enhanced to clarify the domain context and help AI agents understand filtering options and response format.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "tpu.projects.locations.operations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
+      "summary_suggestion": "List long-running operations with filtering",
+      "description_suggestion": "Lists long-running operations that match the specified filter criteria. Supports filtering by operation status, name patterns, and other criteria via request parameters. Returns a ListOperationsResponse containing matching Operation objects and pagination information. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
+      "reasoning": "Original description mentions error handling but lacks context about what operations are being listed (long-running TPU operations), filtering capabilities, and response structure. Enhanced to clarify the domain context and help AI agents understand filtering options and response format.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'tpu.projects.locations.operations.cancel' has semantic quality issues: vague_summary, missing_context. Description is comprehensive and detailed, explaining the asynchronous nature, best-effort semantics, error handling, and final state of cancelled operations. However, summary is missing. Added a concise action-oriented summary to improve AI agent interpretability of the operation's purpose.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "tpu.projects.locations.operations.cancel",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of `1`, corresponding to `Code.CANCELLED`.",
+      "summary_suggestion": "Request cancellation of a long-running operation",
+      "reasoning": "Description is comprehensive and detailed, explaining the asynchronous nature, best-effort semantics, error handling, and final state of cancelled operations. However, summary is missing. Added a concise action-oriented summary to improve AI agent interpretability of the operation's purpose.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'tpu.projects.locations.nodes.reimage' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description is too terse and lacks important context. Enhanced to clarify that this is a TPU-specific operation, explain the node state requirement, describe the request structure, and specify the return type (Operation). This helps AI agents understand prerequisites and expected outcomes.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "tpu.projects.locations.nodes.reimage",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Reimages a node's OS.",
+      "summary_suggestion": "Reimage TPU node operating system",
+      "description_suggestion": "Reimages the operating system on a TPU node instance. This operation reinstalls the node's OS and resets it to a clean state. The node must be in a stopped state before reimaging. Accepts a ReimageNodeRequest specifying the desired OS version or image. Returns an Operation object representing the long-running reimaging process.",
+      "reasoning": "Original description is too terse and lacks important context. Enhanced to clarify that this is a TPU-specific operation, explain the node state requirement, describe the request structure, and specify the return type (Operation). This helps AI agents understand prerequisites and expected outcomes.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'tpu.projects.locations.nodes.start' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description lacks domain context and operational details. Enhanced to clarify this is a TPU node operation, explain the prerequisite state, describe the request structure, specify the return type (Operation), and explain the resulting state. This improves AI agent understanding of when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "tpu.projects.locations.nodes.start",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Starts a node.",
+      "summary_suggestion": "Start a stopped TPU node instance",
+      "description_suggestion": "Starts a stopped TPU node instance, making it available for workloads. The node must be in a stopped state. Accepts a StartNodeRequest. Returns an Operation object representing the long-running startup process. Once the operation completes, the node will be in a running state and ready to accept TPU workloads.",
+      "reasoning": "Original description lacks domain context and operational details. Enhanced to clarify this is a TPU node operation, explain the prerequisite state, describe the request structure, specify the return type (Operation), and explain the resulting state. This improves AI agent understanding of when and how to use this operation.",
       "batch_index": 0
     }
   },
@@ -4220,7 +4452,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 12 operations analyzed, 5 quality issues found",
+    "message": "Semantic analysis completed: 12 operations analyzed, 11 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -4232,7 +4464,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 12,
-      "total_issues_found": 5,
+      "total_issues_found": 11,
       "batches_processed": 2
     }
   }

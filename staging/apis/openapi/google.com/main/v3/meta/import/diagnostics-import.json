@@ -10094,7 +10094,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'travelpartner.accounts.reconciliationReports.create' has semantic quality issues: vague_summary, missing_context. The current summary is missing. Added a concise action-oriented summary. The description was vague and lacked context about the input and return value.",
+    "message": "Operation 'travelpartner.accounts.reconciliationReports.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Original description lacks critical details for AI agent interpretation. Missing: (1) what the operation creates and where, (2) input schema details (ReconciliationReport structure), (3) output details (what fields are returned), (4) side effects (report becomes available for processing), (5) required parameters. Added context about Hotel Ads domain, input/output specifics, and operational effects to improve AI agent usability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10109,13 +10109,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Creates a reconciliation report and uploads it to Google.",
-      "summary_suggestion": "Create a reconciliation report",
-      "description_suggestion": "Creates a reconciliation report and uploads it to Google. Requires a valid ReconciliationReport object as input. Returns a success status upon successful creation and upload.",
-      "reasoning": "The current summary is missing. Added a concise action-oriented summary. The description was vague and lacked context about the input and return value.",
+      "summary_suggestion": "Create and upload reconciliation report to Google",
+      "description_suggestion": "Creates a new reconciliation report for the specified Hotel Ads account and uploads it to Google. Accepts a ReconciliationReport object containing reconciliation data. Returns the created ReconciliationReport with a unique identifier and status. The report becomes available for validation and processing in the Hotel Ads system. Requires valid parent account path parameter.",
+      "reasoning": "Original description lacks critical details for AI agent interpretation. Missing: (1) what the operation creates and where, (2) input schema details (ReconciliationReport structure), (3) output details (what fields are returned), (4) side effects (report becomes available for processing), (5) required parameters. Added context about Hotel Ads domain, input/output specifics, and operational effects to improve AI agent usability.",
       "batch_index": 3
     }
   },
@@ -10130,7 +10133,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'travelpartner.accounts.reconciliationReports.validate' has semantic quality issues: vague_summary, missing_context. The current summary is missing. Added a concise action-oriented summary. The description was vague and lacked context about the input and return value.",
+    "message": "Operation 'travelpartner.accounts.reconciliationReports.validate' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_context, poor_ai_interpretability. Original description is too generic and lacks actionable context. Missing: (1) what validation checks are performed, (2) input details (ReconciliationReport structure), (3) output details (returns validation issues), (4) clarification that this is non-destructive, (5) when/why to use this operation. Enhanced with domain context about Hotel Ads validation requirements, output schema reference (ReconciliationReportValidationIssue), and guidance on operation sequencing to improve AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10145,13 +10148,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Validates a reconciliation report.",
-      "summary_suggestion": "Validate a reconciliation report",
-      "description_suggestion": "Validates a reconciliation report. Requires a valid ReconciliationReport object as input. Returns a validation result indicating whether the report is valid or contains issues.",
-      "reasoning": "The current summary is missing. Added a concise action-oriented summary. The description was vague and lacked context about the input and return value.",
+      "summary_suggestion": "Validate reconciliation report for errors",
+      "description_suggestion": "Validates a reconciliation report for the specified Hotel Ads account to identify data issues and inconsistencies. Accepts a ReconciliationReport object for validation. Returns validation results including any ReconciliationReportValidationIssue objects found. Does not modify the report; only performs validation checks. Use this operation before uploading reports to ensure data quality and compliance with Hotel Ads requirements.",
+      "reasoning": "Original description is too generic and lacks actionable context. Missing: (1) what validation checks are performed, (2) input details (ReconciliationReport structure), (3) output details (returns validation issues), (4) clarification that this is non-destructive, (5) when/why to use this operation. Enhanced with domain context about Hotel Ads validation requirements, output schema reference (ReconciliationReportValidationIssue), and guidance on operation sequencing to improve AI agent decision-making.",
       "batch_index": 3
     }
   },
@@ -10166,7 +10172,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'travelpartner.accounts.listings.verify' has semantic quality issues: vague_summary. Original summary is missing. Added a concise summary and clarified the description for better AI agent understanding.",
+    "message": "Operation 'travelpartner.accounts.icons.create' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description is detailed but lacks clarity on what is returned and could better organize validation requirements. Added explicit summary, clarified return value, and reorganized validation conditions for better AI agent understanding of success/failure scenarios.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10177,16 +10183,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "travelpartner.accounts.listings.verify",
+      "operation_id": "travelpartner.accounts.icons.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Returns verified listings with data issues and serving eligibilities for VR partners only.",
-      "summary_suggestion": "Verify listings for VR partners",
-      "description_suggestion": "Returns verified listings with data issues and serving eligibilities specifically for VR partners.",
-      "reasoning": "Original summary is missing. Added a concise summary and clarified the description for better AI agent understanding.",
+      "current_description": "Uploads a new icon and starts its review process. Generates an `icon_id` and includes it in the icon's resource name, which is the format `accounts/{account_id}/icons/{icon_id}` Returns HTTP status 400 and doesn't trigger the review process if the icon has any of these conditions: * Image is not in PNG format, or not convertible to PNG format. * Size less than 72 pixels * Size greater than 1200 pixels * Aspect ratio other than 1:1",
+      "summary_suggestion": "Upload icon and initiate review process",
+      "description_suggestion": "Uploads a new icon image and initiates its review process. The operation generates a unique `icon_id` and returns the icon resource with the name format `accounts/{account_id}/icons/{icon_id}`. The review process is triggered upon successful upload. Returns HTTP 400 if validation fails for any of these conditions: image is not PNG format or not convertible to PNG, dimensions are less than 72 pixels or greater than 1200 pixels, or aspect ratio is not 1:1. Returns the created Icon object on success.",
+      "reasoning": "Missing summary entirely. Description is detailed but lacks clarity on what is returned and could better organize validation requirements. Added explicit summary, clarified return value, and reorganized validation conditions for better AI agent understanding of success/failure scenarios.",
       "batch_index": 2
     }
   },
@@ -10201,7 +10209,234 @@
         "character": 0
       }
     },
-    "message": "Operation 'travelpartner.accounts.accountLinks.list' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestions provide a clearer purpose and context.",
+    "message": "Operation 'travelpartner.accounts.listings.verify' has semantic quality issues: vague_summary, vague_description, missing_context, unclear_purpose. Missing summary entirely. Description is vague about the operation's purpose and doesn't explain what inputs are expected or what the output contains. Added explicit summary, clarified the verification process, explained the VR partner restriction, and provided context about when to use this operation for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "travelpartner.accounts.listings.verify",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "unclear_purpose"
+      ],
+      "current_summary": "",
+      "current_description": "Returns verified listings with data issues and serving eligibilities for VR partners only.",
+      "summary_suggestion": "Verify listings and retrieve data issues",
+      "description_suggestion": "Verifies listings and returns their validation status including data issues and serving eligibilities. This operation is available for VR (Vacation Rental) partners only. Accepts a VerifyListingsRequest containing the listings to verify and returns detailed information about any data quality issues found and whether each listing is eligible to serve on Google. Use this operation to validate listing data before publishing.",
+      "reasoning": "Missing summary entirely. Description is vague about the operation's purpose and doesn't explain what inputs are expected or what the output contains. Added explicit summary, clarified the verification process, explained the VR partner restriction, and provided context about when to use this operation for better AI agent interpretability.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'travelpartner.accounts.priceAccuracyViews.list' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Missing summary entirely. Description is too generic and doesn't explain what price accuracy views are or what data they contain. Added explicit summary, provided context about what price accuracy views represent, clarified the return format, and explained the use case for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "travelpartner.accounts.priceAccuracyViews.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the available price accuracy views.",
+      "summary_suggestion": "List price accuracy views",
+      "description_suggestion": "Retrieves a list of all available price accuracy views for the account. Price accuracy views provide metrics on pricing data quality and accuracy. Returns a paginated list of PriceAccuracyView objects containing performance metrics and statistics. Use this operation to monitor pricing accuracy across your hotel listings.",
+      "reasoning": "Missing summary entirely. Description is too generic and doesn't explain what price accuracy views are or what data they contain. Added explicit summary, provided context about what price accuracy views represent, clarified the return format, and explained the use case for better AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'travelpartner.accounts.priceAccuracyViews.summarize' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Missing summary entirely. Description lacks specificity about what the summary contains and its purpose. Added explicit summary, explained that this is an aggregated view, clarified the return value, and provided context about when to use this operation versus listing individual views.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "travelpartner.accounts.priceAccuracyViews.summarize",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns the price accuracy summary.",
+      "summary_suggestion": "Get price accuracy summary",
+      "description_suggestion": "Retrieves an aggregated summary of price accuracy metrics for the account. This operation provides a consolidated view of pricing data quality across all listings, including accuracy statistics and key performance indicators. Returns a summary object containing overall price accuracy metrics. Use this operation to quickly assess the overall health of your pricing data.",
+      "reasoning": "Missing summary entirely. Description lacks specificity about what the summary contains and its purpose. Added explicit summary, explained that this is an aggregated view, clarified the return value, and provided context about when to use this operation versus listing individual views.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'travelpartner.accounts.priceCoverageViews.list' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Missing summary entirely. Description is vague about what 'entire history' means and doesn't explain what price coverage represents. Added explicit summary, clarified that price coverage tracks pricing data availability, explained the return format, and provided context about the operation's purpose for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "travelpartner.accounts.priceCoverageViews.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns the entire price coverage history.",
+      "summary_suggestion": "List price coverage history",
+      "description_suggestion": "Retrieves the complete price coverage history for the account. Price coverage views track the availability and completeness of pricing data across listings and time periods. Returns a paginated list of PriceCoverageView objects showing historical coverage metrics. Use this operation to analyze pricing data availability trends and identify gaps in price coverage.",
+      "reasoning": "Missing summary entirely. Description is vague about what 'entire history' means and doesn't explain what price coverage represents. Added explicit summary, clarified that price coverage tracks pricing data availability, explained the return format, and provided context about the operation's purpose for better AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'travelpartner.accounts.priceCoverageViews.getLatest' has semantic quality issues: vague_summary, vague_description, missing_context. Missing summary entirely. Description lacks context about what 'full detail' includes and when to use this versus the list operation. Added explicit summary, clarified the return value, and explained the use case distinction from the list operation for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "travelpartner.accounts.priceCoverageViews.getLatest",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Returns the latest price coverage view in full detail.",
+      "summary_suggestion": "Get latest price coverage view",
+      "description_suggestion": "Retrieves the most recent price coverage view with complete details. This operation returns the latest PriceCoverageView object containing current pricing data availability metrics and coverage statistics. Use this operation to quickly check the current state of price coverage without retrieving the entire history.",
+      "reasoning": "Missing summary entirely. Description lacks context about what 'full detail' includes and when to use this versus the list operation. Added explicit summary, clarified the return value, and explained the use case distinction from the list operation for better AI agent decision-making.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'travelpartner.accounts.reconciliationReports.list' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Missing summary entirely. Description only mentions 'names' and doesn't explain what reconciliation reports are or what metadata is returned. Added explicit summary, provided domain context about reconciliation reports being Hotel Ads specific, clarified the return format includes metadata, mentioned pagination support, and explained the operation's purpose for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "travelpartner.accounts.reconciliationReports.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns a list of the names of created reconciliation reports.",
+      "summary_suggestion": "List reconciliation reports",
+      "description_suggestion": "Retrieves a list of reconciliation reports that have been created for the account. Reconciliation reports (Hotel Ads only) help validate and reconcile booking data. Returns a paginated list of reconciliation report names and metadata. Supports filtering and pagination through query parameters. Use this operation to view available reports and their status.",
+      "reasoning": "Missing summary entirely. Description only mentions 'names' and doesn't explain what reconciliation reports are or what metadata is returned. Added explicit summary, provided domain context about reconciliation reports being Hotel Ads specific, clarified the return format includes metadata, mentioned pagination support, and explained the operation's purpose for better AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'travelpartner.accounts.accountLinks.list' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is too brief and lacks context about what account links represent and their purpose. Added explanation of account link semantics and clarified return value for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10216,13 +10451,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Returns the account links for a Hotel Center account.",
-      "summary_suggestion": "List all account links for a Hotel Center account",
-      "description_suggestion": "Retrieves the list of account links associated with a specific Hotel Center account. Each account link represents a connection between a Google Ads account and a Hotel Center account.",
-      "reasoning": "The current summary and description are vague. The suggestions provide a clearer purpose and context.",
+      "summary_suggestion": "List account links for Hotel Center account",
+      "description_suggestion": "Retrieves all account links associated with a Hotel Center account. Account links represent connections between a Hotel Center account and Google Ads customer accounts, defining which hotels are managed through each linked Ads account. Returns a list of AccountLink objects.",
+      "reasoning": "Missing summary entirely. Description is too brief and lacks context about what account links represent and their purpose. Added explanation of account link semantics and clarified return value for better AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -10237,7 +10472,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'travelpartner.accounts.accountLinks.create' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing and the description lacks details about the required input schema.",
+    "message": "Operation 'travelpartner.accounts.accountLinks.create' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks details about what the request body should contain, what is returned, and the side effect of establishing the advertising relationship. Enhanced with input/output details and operational context.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10252,13 +10487,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Creates a new account link between a Hotel Center account and a Google Ads account.",
-      "summary_suggestion": "Create a new account link for a Hotel Center account",
-      "description_suggestion": "Creates a new account link between a specified Hotel Center account and a Google Ads account. Requires the `AccountLink` schema to be provided in the request body.",
-      "reasoning": "The current summary is missing and the description lacks details about the required input schema.",
+      "summary_suggestion": "Create account link between Hotel Center and Ads",
+      "description_suggestion": "Creates a new account link establishing a connection between a Hotel Center account and a Google Ads customer account. The account link defines which hotels from the Hotel Center account will be managed through the specified Ads account. Requires an AccountLink object in the request body. Returns the newly created AccountLink object with assigned identifiers. This operation establishes the relationship needed for hotel advertising through Google Ads.",
+      "reasoning": "Missing summary. Description lacks details about what the request body should contain, what is returned, and the side effect of establishing the advertising relationship. Enhanced with input/output details and operational context.",
       "batch_index": 1
     }
   },
@@ -10273,7 +10509,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'travelpartner.accounts.brands.list' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestions provide a clearer purpose and context.",
+    "message": "Operation 'travelpartner.accounts.brands.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is minimal and doesn't explain what brands are or their purpose in the Hotel Center context. Added domain context about brand functionality and clarified return value.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10288,13 +10524,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Returns the brands for a partner account.",
-      "summary_suggestion": "List all brands for a partner account",
-      "description_suggestion": "Retrieves the list of brands associated with a specific partner account. Brands are used to categorize properties in the Hotel Center.",
-      "reasoning": "The current summary and description are vague. The suggestions provide a clearer purpose and context.",
+      "summary_suggestion": "List brands for partner account",
+      "description_suggestion": "Retrieves all brands configured for a partner account. Brands represent brand-level icon and display name configurations that appear in search results for associated properties. Returns a list of Brand objects with their display names, icons, and configuration details.",
+      "reasoning": "Missing summary. Description is minimal and doesn't explain what brands are or their purpose in the Hotel Center context. Added domain context about brand functionality and clarified return value.",
       "batch_index": 1
     }
   },
@@ -10309,7 +10545,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'travelpartner.accounts.hotelViews.list' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestions provide a clearer purpose and context.",
+    "message": "Operation 'travelpartner.accounts.brands.create' has semantic quality issues: vague_summary, missing_input_details. Missing summary. While description contains useful context about brand detection timing, it lacks clarity about what inputs are required and what is returned. Reorganized for better structure and added explicit input/output details.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "travelpartner.accounts.brands.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new brand. Because Google detects brands from your existing properties, you only need this operation when you want to configure a brand before you send its properties to Google. Note that it might take a couple of days after your listing feed first provides a brand for the brand to appear.",
+      "summary_suggestion": "Create brand configuration for properties",
+      "description_suggestion": "Creates a new brand configuration for a partner account. Use this operation to configure brand-level icon and display name settings before sending properties to Google. Requires a Brand object in the request body with display name and icon information. Returns the newly created Brand object. Note: Google automatically detects brands from property feeds, so this operation is primarily for pre-configuring brand appearance. Brand configurations may take up to two days to appear in search results after properties are submitted.",
+      "reasoning": "Missing summary. While description contains useful context about brand detection timing, it lacks clarity about what inputs are required and what is returned. Reorganized for better structure and added explicit input/output details.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'travelpartner.accounts.hotelViews.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is too generic and doesn't explain what hotel views represent or their purpose. Added context about hotel view content and mentioned support for filtering/pagination based on parameter count.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10324,13 +10596,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Returns the list of hotel views.",
-      "summary_suggestion": "List all hotel views for a partner account",
-      "description_suggestion": "Retrieves the list of hotel views associated with a specific partner account. Hotel views are used to display properties in the Hotel Center.",
-      "reasoning": "The current summary and description are vague. The suggestions provide a clearer purpose and context.",
+      "summary_suggestion": "List hotel views for account",
+      "description_suggestion": "Retrieves a list of hotel views for the specified account. Hotel views provide detailed information about hotels including their properties, performance data, and configuration status. Supports filtering and pagination through query parameters. Returns a list of hotel view objects with associated metadata.",
+      "reasoning": "Missing summary. Description is too generic and doesn't explain what hotel views represent or their purpose. Added context about hotel view content and mentioned support for filtering/pagination based on parameter count.",
       "batch_index": 1
     }
   },
@@ -10345,7 +10617,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'travelpartner.accounts.hotelViews.summarize' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestions provide a clearer purpose and context.",
+    "message": "Operation 'travelpartner.accounts.hotelViews.summarize' has semantic quality issues: vague_summary, unclear_purpose, missing_output_details. Missing summary. Description is vague about what 'summarized' means and what specific data is returned. Added clarification that this is aggregated data versus individual records, and indicated it's useful for overview/metrics purposes.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10360,13 +10632,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "unclear_purpose",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Returns summarized information about hotels.",
-      "summary_suggestion": "Get summarized information about hotels",
-      "description_suggestion": "Retrieves summarized information about hotels associated with a specific partner account. This includes key metrics and statistics.",
-      "reasoning": "The current summary and description are vague. The suggestions provide a clearer purpose and context.",
+      "summary_suggestion": "Get summarized hotel information",
+      "description_suggestion": "Retrieves aggregated summary information about hotels in the account. This operation provides high-level metrics and statistics across all hotels rather than detailed individual hotel records. Useful for obtaining overview data such as total hotel count, performance summaries, or status aggregations. Returns a summary object containing aggregated hotel metrics and statistics.",
+      "reasoning": "Missing summary. Description is vague about what 'summarized' means and what specific data is returned. Added clarification that this is aggregated data versus individual records, and indicated it's useful for overview/metrics purposes.",
       "batch_index": 1
     }
   },
@@ -10381,7 +10654,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'travelpartner.accounts.icons.list' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestions provide a clearer purpose and context.",
+    "message": "Operation 'travelpartner.accounts.icons.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description uses backticks around 'Icon' which is inconsistent formatting. Lacks context about what icons are used for and what information they contain. Added domain context about icon usage and clarified return value structure.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10396,13 +10669,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Returns the `Icon`s for a partner account.",
-      "summary_suggestion": "List all icons for a partner account",
-      "description_suggestion": "Retrieves the list of icons associated with a specific partner account. Icons are used to represent the partner in the Hotel Center.",
-      "reasoning": "The current summary and description are vague. The suggestions provide a clearer purpose and context.",
+      "summary_suggestion": "List icons for partner account",
+      "description_suggestion": "Retrieves all icons configured for a partner account. Icons are visual assets used in brand and property display configurations that appear in search results and partner listings. Returns a list of Icon objects containing icon URLs, dimensions, and associated metadata.",
+      "reasoning": "Missing summary. Description uses backticks around 'Icon' which is inconsistent formatting. Lacks context about what icons are used for and what information they contain. Added domain context about icon usage and clarified return value structure.",
       "batch_index": 1
     }
   },
@@ -10417,7 +10690,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'travelpartner.accounts.hotels.setLiveOnGoogle' has semantic quality issues: vague_summary, missing_side_effects. Added a summary to clarify the operation's purpose. Enhanced the description to include the return value and clarify the process for updating different hotels.",
+    "message": "Operation 'travelpartner.accounts.hotels.setLiveOnGoogle' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary entirely. Description lacks clarity on what the operation returns and the constraint about mixed operations. Added explicit mention of return value and clarified the limitation about needing separate calls for mixed enable/disable operations to improve AI agent understanding of when this operation is appropriate.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10432,13 +10705,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_output_details",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Collection-level custom method to update the Live on Google status for multiple properties. Each call can turn on or off multiple hotels. To turn some hotels on and turn some hotels off, you will have to make multiple calls.",
       "summary_suggestion": "Update Live on Google status for multiple hotels",
-      "description_suggestion": "Updates the Live on Google status for multiple properties in a single call. Each call can turn on or off multiple hotels. To turn some hotels on and turn some hotels off, you will have to make multiple calls. Returns the updated status of the hotels.",
-      "reasoning": "Added a summary to clarify the operation's purpose. Enhanced the description to include the return value and clarify the process for updating different hotels.",
+      "description_suggestion": "Updates the Live on Google status for multiple properties in a single operation. Allows enabling or disabling hotel visibility on Google. Note: To both enable and disable different hotels in one request, multiple calls are required as each call can only perform one action type. Returns a SetLiveOnGoogleResponse confirming the status updates applied.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on what the operation returns and the constraint about mixed operations. Added explicit mention of return value and clarified the limitation about needing separate calls for mixed enable/disable operations to improve AI agent understanding of when this operation is appropriate.",
       "batch_index": 0
     }
   },
@@ -10453,7 +10727,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'travelpartner.accounts.accountLinks.delete' has semantic quality issues: vague_summary, missing_side_effects. Added a summary to clarify the operation's purpose. Enhanced the description to include the return value and clarify the side effects of the deletion.",
+    "message": "Operation 'travelpartner.accounts.accountLinks.delete' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary. Description is too minimal and lacks domain context about what an account link represents and the implications of deletion. Added context about the relationship between Google Ads and Hotel Center accounts, and clarified the irreversible nature of the operation for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10468,13 +10742,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_context",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes an account link.",
       "summary_suggestion": "Delete an account link",
-      "description_suggestion": "Deletes an account link between a Google Ads customer and a Hotel Ads account. Returns a success message if the deletion is successful.",
-      "reasoning": "Added a summary to clarify the operation's purpose. Enhanced the description to include the return value and clarify the side effects of the deletion.",
+      "description_suggestion": "Deletes an account link, which removes the connection between a Google Ads customer and a Hotel Ads (Hotel Center) account. This operation severs the link and affects which hotels are managed under that account relationship. The deleted link cannot be recovered.",
+      "reasoning": "Missing summary. Description is too minimal and lacks domain context about what an account link represents and the implications of deletion. Added context about the relationship between Google Ads and Hotel Center accounts, and clarified the irreversible nature of the operation for better AI agent decision-making.",
       "batch_index": 0
     }
   },
@@ -10489,7 +10764,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'travelpartner.accounts.reconciliationReports.get' has semantic quality issues: vague_summary, missing_output_details. Added a summary to clarify the operation's purpose. Enhanced the description to include details about the output of the reconciliation report.",
+    "message": "Operation 'travelpartner.accounts.reconciliationReports.get' has semantic quality issues: vague_summary, vague_description, missing_context. Missing summary. Description is overly generic and lacks domain context about reconciliation reports' purpose and use cases. Added clarification that this is Hotel Ads specific, explained what reconciliation reports contain, and provided context for when an AI agent should use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10504,13 +10779,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
+        "vague_description",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Returns a reconciliation report.",
       "summary_suggestion": "Retrieve a reconciliation report",
-      "description_suggestion": "Retrieves a reconciliation report for a specific account. The report includes details on the reconciliation process and status.",
-      "reasoning": "Added a summary to clarify the operation's purpose. Enhanced the description to include details about the output of the reconciliation report.",
+      "description_suggestion": "Retrieves a specific reconciliation report by name. Reconciliation reports (Hotel Ads only) provide status information and validation details for hotel data. Use this operation to access reconciliation data for auditing, validation, and status tracking purposes.",
+      "reasoning": "Missing summary. Description is overly generic and lacks domain context about reconciliation reports' purpose and use cases. Added clarification that this is Hotel Ads specific, explained what reconciliation reports contain, and provided context for when an AI agent should use this operation.",
       "batch_index": 0
     }
   },
@@ -10525,7 +10801,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'travelpartner.accounts.brands.patch' has semantic quality issues: vague_summary, missing_output_details. Added a summary to clarify the operation's purpose. Enhanced the description to include the authentication requirement and return value.",
+    "message": "Operation 'travelpartner.accounts.brands.patch' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Missing summary. Description lacks specificity about what aspects of a brand can be updated and what the operation returns. Added context about icon and display name configuration, approval process, and explicit mention of request/response schemas to improve AI agent understanding of the operation's scope and effects.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10540,13 +10816,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
+        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Updates a brand.",
-      "summary_suggestion": "Update a brand",
-      "description_suggestion": "Updates a brand's icon and display name configuration for a specific account. Requires authentication. Returns the updated brand details.",
-      "reasoning": "Added a summary to clarify the operation's purpose. Enhanced the description to include the authentication requirement and return value.",
+      "summary_suggestion": "Update brand configuration and display settings",
+      "description_suggestion": "Updates a brand's configuration including icon and display name settings. Changes are applied to the specified brand resource and will appear in search results for associated properties once approved. Accepts a Brand object with fields to be updated. Returns the updated Brand resource.",
+      "reasoning": "Missing summary. Description lacks specificity about what aspects of a brand can be updated and what the operation returns. Added context about icon and display name configuration, approval process, and explicit mention of request/response schemas to improve AI agent understanding of the operation's scope and effects.",
       "batch_index": 0
     }
   },
@@ -10561,7 +10839,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'travelpartner.accounts.participationReportViews.query' has semantic quality issues: vague_summary, missing_output_details. Added a summary to clarify the operation's purpose. Enhanced the description to include the return value.",
+    "message": "Operation 'travelpartner.accounts.freeBookingLinksReportViews.query' has semantic quality issues: vague_summary, missing_context, missing_input_details. Missing summary. Description buries deprecation notice and lacks clarity on query parameters and return format. Restructured to emphasize deprecation upfront, clarified the recommended alternative, and added guidance for AI agents to avoid this operation in favor of the newer service.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "travelpartner.accounts.freeBookingLinksReportViews.query",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "**DEPRECATED:** Use PropertyPerformanceReportService.QueryPropertyPerformanceReport, which also has impression reporting, instead. Provides the ability to query (get, filter, and segment) a free booking links report for a specific account.",
+      "summary_suggestion": "Query free booking links report (deprecated)",
+      "description_suggestion": "**DEPRECATED:** Use PropertyPerformanceReportService.QueryPropertyPerformanceReport instead, which provides impression reporting in addition to booking links data. This operation queries free booking links reports for a specific account, supporting filtering and segmentation of report data. Avoid using this operation for new implementations.",
+      "reasoning": "Missing summary. Description buries deprecation notice and lacks clarity on query parameters and return format. Restructured to emphasize deprecation upfront, clarified the recommended alternative, and added guidance for AI agents to avoid this operation in favor of the newer service.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'travelpartner.accounts.participationReportViews.query' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description uses vague phrasing ('provides the ability') and lacks specificity about inputs and outputs. Restructured to be more action-oriented, added explicit mention of return type, and clarified that query parameters are accepted to improve AI agent understanding of how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10576,13 +10891,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Provides the ability to query (get, filter, and segment) a participation report for a particular account.",
-      "summary_suggestion": "Query participation report",
-      "description_suggestion": "Provides the ability to query (get, filter, and segment) a participation report for a particular account. Returns the queried participation report data.",
-      "reasoning": "Added a summary to clarify the operation's purpose. Enhanced the description to include the return value.",
+      "summary_suggestion": "Query participation report with filtering and segmentation",
+      "description_suggestion": "Queries a participation report for a specific account, supporting filtering and segmentation of report data. Accepts query parameters to customize the report results. Returns a QueryParticipationReportResponse containing the requested participation metrics and data.",
+      "reasoning": "Missing summary. Description uses vague phrasing ('provides the ability') and lacks specificity about inputs and outputs. Restructured to be more action-oriented, added explicit mention of return type, and clarified that query parameters are accepted to improve AI agent understanding of how to use this operation.",
       "batch_index": 0
     }
   },
@@ -10597,7 +10913,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'travelpartner.accounts.propertyPerformanceReportViews.query' has semantic quality issues: vague_summary, missing_output_details. Added a summary to clarify the operation's purpose. Enhanced the description to include the return value.",
+    "message": "Operation 'travelpartner.accounts.propertyPerformanceReportViews.query' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description uses vague phrasing and lacks specificity about what data is returned. Restructured to be action-oriented, clarified that this is the recommended operation for property performance queries (including impressions), and specified the types of metrics returned to help AI agents understand the operation's value and when to use it.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10612,13 +10928,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Provides the ability to query (get, filter, and segment) a property performance links report for a specific account.",
-      "summary_suggestion": "Query property performance report",
-      "description_suggestion": "Provides the ability to query (get, filter, and segment) a property performance links report for a specific account. Returns the queried property performance report data.",
-      "reasoning": "Added a summary to clarify the operation's purpose. Enhanced the description to include the return value.",
+      "summary_suggestion": "Query property performance report with filtering and segmentation",
+      "description_suggestion": "Queries a property performance report for a specific account, supporting filtering and segmentation of report data. Accepts query parameters to customize the report results. Returns performance metrics including booking links and impression data for properties in the account.",
+      "reasoning": "Missing summary. Description uses vague phrasing and lacks specificity about what data is returned. Restructured to be action-oriented, clarified that this is the recommended operation for property performance queries (including impressions), and specified the types of metrics returned to help AI agents understand the operation's value and when to use it.",
       "batch_index": 0
     }
   },
@@ -10633,7 +10950,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 23 operations analyzed, 15 quality issues found",
+    "message": "Semantic analysis completed: 23 operations analyzed, 23 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -10645,7 +10962,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 23,
-      "total_issues_found": 15,
+      "total_issues_found": 23,
       "batches_processed": 4
     }
   }

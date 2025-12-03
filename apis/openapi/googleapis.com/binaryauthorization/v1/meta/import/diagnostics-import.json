@@ -4602,7 +4602,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'binaryauthorization.projects.platforms.policies.list' has semantic quality issues: vague_summary, missing_context. The current summary is missing. Added a concise action-oriented summary. The description is mostly clear but adding more context about the response details improves clarity.",
+    "message": "Operation 'binaryauthorization.projects.platforms.policies.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity about return type (response schema) and pagination support. Added explicit mention of PlatformPolicy return type and pagination to improve AI agent understanding of what data will be returned.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4617,13 +4617,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists platform policies owned by a project in the specified platform. Returns `INVALID_ARGUMENT` if the project or the platform doesn't exist.",
       "summary_suggestion": "List platform policies for a project",
-      "description_suggestion": "Lists platform policies owned by a project in the specified platform. Returns `INVALID_ARGUMENT` if the project or the platform doesn't exist. The response includes details of each policy.",
-      "reasoning": "The current summary is missing. Added a concise action-oriented summary. The description is mostly clear but adding more context about the response details improves clarity.",
+      "description_suggestion": "Lists all platform policies owned by a project in the specified platform. Returns a collection of PlatformPolicy objects. Returns `INVALID_ARGUMENT` if the project or the platform doesn't exist. Supports pagination through optional parameters.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about return type (response schema) and pagination support. Added explicit mention of PlatformPolicy return type and pagination to improve AI agent understanding of what data will be returned.",
       "batch_index": 1
     }
   },
@@ -4638,7 +4638,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'binaryauthorization.projects.policy.getIamPolicy' has semantic quality issues: vague_summary, missing_context. The current summary is missing. Added a concise action-oriented summary. The description is mostly clear but adding more context about the response details improves clarity.",
+    "message": "Operation 'binaryauthorization.projects.platforms.policies.create' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description is verbose but lacks clarity about input requirements (PlatformPolicy request body) and doesn't clearly explain the platform-specific validation constraint. Reorganized for better AI agent understanding of inputs, outputs, and validation rules.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "binaryauthorization.projects.platforms.policies.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a platform policy, and returns a copy of it. Returns `NOT_FOUND` if the project or platform doesn't exist, `INVALID_ARGUMENT` if the request is malformed, `ALREADY_EXISTS` if the policy already exists, and `INVALID_ARGUMENT` if the policy contains a platform-specific policy that does not match the platform value specified in the URL.",
+      "summary_suggestion": "Create a new platform policy",
+      "description_suggestion": "Creates a new platform policy for the specified project and platform. Accepts a PlatformPolicy object in the request body and returns the created policy. Returns `NOT_FOUND` if the project or platform doesn't exist, `INVALID_ARGUMENT` if the request is malformed or if the policy's platform-specific configuration doesn't match the URL platform parameter, and `ALREADY_EXISTS` if a policy with the same identifier already exists.",
+      "reasoning": "Missing summary. Description is verbose but lacks clarity about input requirements (PlatformPolicy request body) and doesn't clearly explain the platform-specific validation constraint. Reorganized for better AI agent understanding of inputs, outputs, and validation rules.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'binaryauthorization.projects.policy.getIamPolicy' has semantic quality issues: vague_summary, missing_context. Missing summary. Description lacks domain context (IAM terminology) and doesn't specify return type (IamPolicy). Added explicit mention of IamPolicy schema and clarified that empty policies are valid responses, improving AI agent's ability to handle different response scenarios.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4657,9 +4693,9 @@
       ],
       "current_summary": "",
       "current_description": "Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.",
-      "summary_suggestion": "Get IAM policy for a resource",
-      "description_suggestion": "Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set. The response includes the IAM policy details.",
-      "reasoning": "The current summary is missing. Added a concise action-oriented summary. The description is mostly clear but adding more context about the response details improves clarity.",
+      "summary_suggestion": "Retrieve IAM policy for a resource",
+      "description_suggestion": "Retrieves the Identity and Access Management (IAM) policy for the specified Binary Authorization resource. Returns an IamPolicy object containing role bindings and permissions. Returns an empty policy if the resource exists but has no policy set. Requires appropriate IAM permissions to view the policy.",
+      "reasoning": "Missing summary. Description lacks domain context (IAM terminology) and doesn't specify return type (IamPolicy). Added explicit mention of IamPolicy schema and clarified that empty policies are valid responses, improving AI agent's ability to handle different response scenarios.",
       "batch_index": 1
     }
   },
@@ -4674,7 +4710,81 @@
         "character": 0
       }
     },
-    "message": "Operation 'binaryauthorization.projects.attestors.validateAttestationOccurrence' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'binaryauthorization.projects.policy.setIamPolicy' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Missing summary. Description lacks input details (SetIamPolicyRequest) and doesn't clearly explain the replacement behavior (important side effect). Added explicit mention of request schema, return type, and clarified that this is a full replacement operation, not a merge, which is critical for AI agents to understand the operation's impact.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "binaryauthorization.projects.policy.setIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.",
+      "summary_suggestion": "Set IAM policy for a resource",
+      "description_suggestion": "Sets the Identity and Access Management (IAM) policy on the specified Binary Authorization resource, replacing any existing policy. Accepts a SetIamPolicyRequest containing the desired IamPolicy. Returns the updated IamPolicy object. This operation replaces the entire policy - partial updates are not supported. Can return `NOT_FOUND` if the resource doesn't exist, `INVALID_ARGUMENT` if the policy is malformed, and `PERMISSION_DENIED` if the caller lacks permission to modify the policy.",
+      "reasoning": "Missing summary. Description lacks input details (SetIamPolicyRequest) and doesn't clearly explain the replacement behavior (important side effect). Added explicit mention of request schema, return type, and clarified that this is a full replacement operation, not a merge, which is critical for AI agents to understand the operation's impact.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'binaryauthorization.projects.policy.testIamPermissions' has semantic quality issues: vague_summary, missing_output_details, missing_context. Missing summary. Description lacks clarity about input/output schemas and doesn't explain the return value structure. Added explicit mention of TestIamPermissionsRequest and TestIamPermissionsResponse schemas, clarified the return value (subset of permissions), and preserved the important caveat about fail-open behavior for AI agent awareness of operation limitations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "binaryauthorization.projects.policy.testIamPermissions",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.",
+      "summary_suggestion": "Test IAM permissions on a resource",
+      "description_suggestion": "Tests which Identity and Access Management (IAM) permissions the authenticated caller has on the specified Binary Authorization resource. Accepts a TestIamPermissionsRequest containing a list of permissions to check. Returns a TestIamPermissionsResponse with the subset of requested permissions that the caller possesses. If the resource does not exist, returns an empty permission set rather than a `NOT_FOUND` error. This operation is designed for building permission-aware UIs and tools, not for authorization enforcement. Note: This operation may fail open without warning.",
+      "reasoning": "Missing summary. Description lacks clarity about input/output schemas and doesn't explain the return value structure. Added explicit mention of TestIamPermissionsRequest and TestIamPermissionsResponse schemas, clarified the return value (subset of permissions), and preserved the important caveat about fail-open behavior for AI agent awareness of operation limitations.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'binaryauthorization.projects.attestors.validateAttestationOccurrence' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description lacks context about what validation means in this domain (cryptographic verification), doesn't explain inputs clearly, and doesn't specify the response format. Added domain-specific terminology (cryptographically signed, authenticity, integrity) and clarified request/response schemas for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4688,13 +4798,15 @@
       "operation_id": "binaryauthorization.projects.attestors.validateAttestationOccurrence",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Returns whether the given `Attestation` for the given image URI was signed by the given `Attestor`",
-      "summary_suggestion": "Validate attestation occurrence for an attestor",
-      "description_suggestion": "Validates whether the given `Attestation` for the given image URI was signed by the specified `Attestor`. Returns a boolean indicating the validity of the attestation.",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
+      "summary_suggestion": "Validate attestation signature for image",
+      "description_suggestion": "Validates whether the provided attestation for a given image URI was cryptographically signed by the specified attestor. This operation verifies attestation authenticity and integrity. Accepts a ValidateAttestationOccurrenceRequest containing the attestation, image URI, and attestor reference. Returns a ValidateAttestationOccurrenceResponse indicating whether the attestation is valid and signed by the attestor.",
+      "reasoning": "Missing summary entirely. Description lacks context about what validation means in this domain (cryptographic verification), doesn't explain inputs clearly, and doesn't specify the response format. Added domain-specific terminology (cryptographically signed, authenticity, integrity) and clarified request/response schemas for AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -4709,7 +4821,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'binaryauthorization.projects.attestors.delete' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'binaryauthorization.projects.attestors.delete' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is minimal and doesn't explain the consequence of deletion (attestor unavailability for policy evaluation) or that it's irreversible. Added context about side effects and domain impact for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4723,13 +4835,14 @@
       "operation_id": "binaryauthorization.projects.attestors.delete",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Deletes an attestor. Returns `NOT_FOUND` if the attestor does not exist.",
       "summary_suggestion": "Delete an attestor",
-      "description_suggestion": "Deletes the specified attestor. Returns `NOT_FOUND` if the attestor does not exist.",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
+      "description_suggestion": "Deletes the specified attestor resource. The attestor will no longer be available for policy evaluation. Returns `NOT_FOUND` if the attestor does not exist. This operation is irreversible.",
+      "reasoning": "Missing summary. Description is minimal and doesn't explain the consequence of deletion (attestor unavailability for policy evaluation) or that it's irreversible. Added context about side effects and domain impact for better AI agent decision-making.",
       "batch_index": 0
     }
   },
@@ -4744,7 +4857,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'binaryauthorization.projects.attestors.update' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'binaryauthorization.systempolicy.getPolicy' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks domain context about what a system policy is and what it contains. Doesn't specify the response schema. Added terminology consistency (PlatformPolicy, admission rules, enforcement) and clarified return value for AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "binaryauthorization.systempolicy.getPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the current system policy in the specified location.",
+      "summary_suggestion": "Retrieve system policy for location",
+      "description_suggestion": "Retrieves the current Binary Authorization system policy for the specified location. System policies define platform-wide admission rules and enforcement requirements. Returns a PlatformPolicy object containing the policy configuration, admission rules, and enforcement settings for the requested location.",
+      "reasoning": "Missing summary. Description lacks domain context about what a system policy is and what it contains. Doesn't specify the response schema. Added terminology consistency (PlatformPolicy, admission rules, enforcement) and clarified return value for AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'binaryauthorization.projects.attestors.update' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary. Description is too brief and doesn't explain what can be updated or the side effects (immediate policy evaluation impact). Added context about updatable fields and operational consequences for AI agents to understand when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4758,13 +4908,15 @@
       "operation_id": "binaryauthorization.projects.attestors.update",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Updates an attestor. Returns `NOT_FOUND` if the attestor does not exist.",
-      "summary_suggestion": "Update an attestor",
-      "description_suggestion": "Updates the specified attestor with the provided details. Returns `NOT_FOUND` if the attestor does not exist.",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
+      "summary_suggestion": "Update attestor configuration",
+      "description_suggestion": "Updates the specified attestor resource with new configuration. Modifies attestor properties such as public keys, user-managed identities, or other attestation parameters. Returns the updated Attestor object. Returns `NOT_FOUND` if the attestor does not exist. Changes take effect immediately for subsequent policy evaluations.",
+      "reasoning": "Missing summary. Description is too brief and doesn't explain what can be updated or the side effects (immediate policy evaluation impact). Added context about updatable fields and operational consequences for AI agents to understand when to use this operation.",
       "batch_index": 0
     }
   },
@@ -4779,7 +4931,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'binaryauthorization.projects.platforms.gke.policies.evaluate' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'binaryauthorization.projects.platforms.gke.policies.evaluate' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description covers error cases well but lacks information about what the response contains (evaluation result, violations). Added summary and clarified request/response schemas and what evaluation determines for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4793,13 +4945,14 @@
       "operation_id": "binaryauthorization.projects.platforms.gke.policies.evaluate",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Evaluates a Kubernetes object versus a GKE platform policy. Returns `NOT_FOUND` if the policy doesn't exist, `INVALID_ARGUMENT` if the policy or request is malformed and `PERMISSION_DENIED` if the client does not have sufficient permissions.",
       "summary_suggestion": "Evaluate Kubernetes object against GKE policy",
-      "description_suggestion": "Evaluates a Kubernetes object against a specified GKE platform policy. Returns the evaluation result, which may include `NOT_FOUND`, `INVALID_ARGUMENT`, or `PERMISSION_DENIED` based on the conditions.",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
+      "description_suggestion": "Evaluates a Kubernetes object against the specified GKE platform policy to determine if it complies with policy admission rules. Accepts an EvaluateGkePolicyRequest containing the Kubernetes object and policy reference. Returns an EvaluateGkePolicyResponse with the evaluation result and any policy violations. Returns `NOT_FOUND` if the policy doesn't exist, `INVALID_ARGUMENT` if the policy or request is malformed, and `PERMISSION_DENIED` if the client lacks sufficient permissions.",
+      "reasoning": "Missing summary. Description covers error cases well but lacks information about what the response contains (evaluation result, violations). Added summary and clarified request/response schemas and what evaluation determines for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -4814,7 +4967,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'binaryauthorization.projects.attestors.list' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'binaryauthorization.projects.attestors.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks information about response format (ListAttestorsResponse, array of attestors) and pagination support. Added clarity about return value structure and pagination capabilities for AI agent understanding of how to process results.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4828,13 +4981,14 @@
       "operation_id": "binaryauthorization.projects.attestors.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists attestors. Returns `INVALID_ARGUMENT` if the project does not exist.",
-      "summary_suggestion": "List attestors in a project",
-      "description_suggestion": "Lists all attestors in the specified project. Returns `INVALID_ARGUMENT` if the project does not exist.",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
+      "summary_suggestion": "List attestors in project",
+      "description_suggestion": "Lists all attestors in the specified project. Returns a ListAttestorsResponse containing an array of Attestor objects and pagination information. Supports filtering and pagination through query parameters. Returns `INVALID_ARGUMENT` if the project does not exist.",
+      "reasoning": "Missing summary. Description lacks information about response format (ListAttestorsResponse, array of attestors) and pagination support. Added clarity about return value structure and pagination capabilities for AI agent understanding of how to process results.",
       "batch_index": 0
     }
   },
@@ -4849,7 +5003,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'binaryauthorization.projects.attestors.create' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'binaryauthorization.projects.attestors.create' has semantic quality issues: vague_summary, missing_context. Missing summary. Description lacks context about what attestors are used for and what configuration is required. Added domain context (attestation validation, policies) and clarified what the Attestor object should contain for better AI agent understanding of prerequisites and side effects.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4863,13 +5017,14 @@
       "operation_id": "binaryauthorization.projects.attestors.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Creates an attestor, and returns a copy of the new attestor. Returns `NOT_FOUND` if the project does not exist, `INVALID_ARGUMENT` if the request is malformed, `ALREADY_EXISTS` if the attestor already exists.",
-      "summary_suggestion": "Create a new attestor",
-      "description_suggestion": "Creates a new attestor with the specified details and returns a copy of the new attestor. Returns `NOT_FOUND`, `INVALID_ARGUMENT`, or `ALREADY_EXISTS` based on the conditions.",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
+      "summary_suggestion": "Create new attestor in project",
+      "description_suggestion": "Creates a new attestor resource in the specified project. The attestor will be available for use in Binary Authorization policies for image attestation validation. Accepts an Attestor object with configuration including public keys and user-managed identities. Returns the created Attestor object with system-generated fields. Returns `NOT_FOUND` if the project does not exist, `INVALID_ARGUMENT` if the request is malformed, and `ALREADY_EXISTS` if an attestor with the same name already exists.",
+      "reasoning": "Missing summary. Description lacks context about what attestors are used for and what configuration is required. Added domain context (attestation validation, policies) and clarified what the Attestor object should contain for better AI agent understanding of prerequisites and side effects.",
       "batch_index": 0
     }
   },
@@ -4884,7 +5039,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 12 operations analyzed, 8 quality issues found",
+    "message": "Semantic analysis completed: 12 operations analyzed, 12 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -4896,7 +5051,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 12,
-      "total_issues_found": 8,
+      "total_issues_found": 12,
       "batches_processed": 2
     }
   }

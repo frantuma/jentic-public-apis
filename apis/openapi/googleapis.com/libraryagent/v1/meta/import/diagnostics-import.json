@@ -1919,7 +1919,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'libraryagent.shelves.books.get' has semantic quality issues: vague_summary, missing_context. The original description is missing context about the required parameters and the specific identifier needed to fetch the book. The summary was also too vague.",
+    "message": "Operation 'libraryagent.shelves.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks clarity about pagination support and return type. Added explicit mention of pagination parameters and response schema to improve AI agent understanding of inputs and outputs.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "libraryagent.shelves.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists shelves. The order is unspecified but deterministic. Newly created shelves will not necessarily be added to the end of this list.",
+      "summary_suggestion": "List all library shelves",
+      "description_suggestion": "Retrieves a list of all shelves in the library. The returned shelves are ordered deterministically but not necessarily by creation time. Accepts optional pagination parameters. Returns a ListShelvesResponse containing the shelf collection.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about pagination support and return type. Added explicit mention of pagination parameters and response schema to improve AI agent understanding of inputs and outputs.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'libraryagent.shelves.books.get' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too brief and lacks input parameter format guidance. Added explicit parameter format and clarified the resource hierarchy to help AI agents construct correct requests.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1934,13 +1971,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets a book. Returns NOT_FOUND if the book does not exist.",
-      "summary_suggestion": "Get details of a specific book",
-      "description_suggestion": "Retrieves the details of a specific book from the library. Returns NOT_FOUND if the book does not exist. Requires the book's unique identifier as a parameter.",
-      "reasoning": "The original description is missing context about the required parameters and the specific identifier needed to fetch the book. The summary was also too vague.",
+      "summary_suggestion": "Retrieve a specific book",
+      "description_suggestion": "Retrieves a single book by its resource name. The book resource name must be provided as a path parameter in the format 'shelves/{shelf}/books/{book}'. Returns the Book object if found. Returns NOT_FOUND error if the book does not exist in the specified shelf.",
+      "reasoning": "Missing summary. Description is too brief and lacks input parameter format guidance. Added explicit parameter format and clarified the resource hierarchy to help AI agents construct correct requests.",
       "batch_index": 0
     }
   },
@@ -1955,7 +1993,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'libraryagent.shelves.books.return' has semantic quality issues: vague_summary, missing_context. The original description was missing context about the required parameters and specific conditions under which errors are returned. The summary was also too vague.",
+    "message": "Operation 'libraryagent.shelves.books.borrow' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description lacks clarity about authentication requirement and parameter format. Reorganized error conditions for better readability and added explicit authentication requirement for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "libraryagent.shelves.books.borrow",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Borrow a book from the library. Returns the book if it is borrowed successfully. Returns NOT_FOUND if the book does not exist in the library. Returns quota exceeded error if the amount of books borrowed exceeds allocation quota in any dimensions.",
+      "summary_suggestion": "Borrow a book from the library",
+      "description_suggestion": "Borrows a book from the library for the authenticated user. Requires the book resource name as a path parameter. Returns the Book object with updated borrow status if successful. Returns NOT_FOUND if the book does not exist. Returns RESOURCE_EXHAUSTED error if the user has exceeded their borrowing quota. Requires authentication.",
+      "reasoning": "Missing summary. Description lacks clarity about authentication requirement and parameter format. Reorganized error conditions for better readability and added explicit authentication requirement for AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'libraryagent.shelves.books.return' has semantic quality issues: vague_summary, missing_input_details, unclear_purpose. Missing summary. Description uses unclear phrasing ('users didn't borrow before'). Added explicit authentication requirement, clarified preconditions, and improved error condition descriptions for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1970,13 +2044,51 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "unclear_purpose"
       ],
       "current_summary": "",
       "current_description": "Return a book to the library. Returns the book if it is returned to the library successfully. Returns error if the book does not belong to the library or the users didn't borrow before.",
-      "summary_suggestion": "Return a book to the library",
-      "description_suggestion": "Returns a book to the library. Returns the book if it is successfully returned. Returns an error if the book does not belong to the library or if it was not borrowed by the user. Requires the book's unique identifier as a parameter.",
-      "reasoning": "The original description was missing context about the required parameters and specific conditions under which errors are returned. The summary was also too vague.",
+      "summary_suggestion": "Return a borrowed book to the library",
+      "description_suggestion": "Returns a previously borrowed book to the library. Requires the book resource name as a path parameter and authentication. Returns the Book object with updated status if the return is successful. Returns INVALID_ARGUMENT error if the book does not belong to the library or was not borrowed by the authenticated user. Only users who have borrowed the book can return it.",
+      "reasoning": "Missing summary. Description uses unclear phrasing ('users didn't borrow before'). Added explicit authentication requirement, clarified preconditions, and improved error condition descriptions for better AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'libraryagent.shelves.books.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks input parameter format guidance and explicit mention of pagination support. Added parameter format specification and clarified return type to improve AI agent understanding of how to construct requests and interpret responses.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "libraryagent.shelves.books.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists books in a shelf. The order is unspecified but deterministic. Newly created books will not necessarily be added to the end of this list. Returns NOT_FOUND if the shelf does not exist.",
+      "summary_suggestion": "List books in a shelf",
+      "description_suggestion": "Retrieves a list of all books in a specified shelf. Requires the shelf resource name as a path parameter in the format 'shelves/{shelf}'. Accepts optional pagination parameters. Books are returned in deterministic but unspecified order. Returns ListBooksResponse containing the book collection. Returns NOT_FOUND if the shelf does not exist.",
+      "reasoning": "Missing summary. Description lacks input parameter format guidance and explicit mention of pagination support. Added parameter format specification and clarified return type to improve AI agent understanding of how to construct requests and interpret responses.",
       "batch_index": 0
     }
   },
@@ -1991,7 +2103,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 5 operations analyzed, 2 quality issues found",
+    "message": "Semantic analysis completed: 5 operations analyzed, 5 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -2003,7 +2115,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 5,
-      "total_issues_found": 2,
+      "total_issues_found": 5,
       "batches_processed": 1
     }
   }

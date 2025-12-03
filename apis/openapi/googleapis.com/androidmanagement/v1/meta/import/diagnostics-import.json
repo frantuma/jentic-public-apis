@@ -10834,7 +10834,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'androidmanagement.enterprises.policies.list' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'androidmanagement.enterprises.policies.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description is too minimal - lacks clarity about required inputs (parent parameter), output structure (paginated list), and available query options. AI agents need to understand pagination support and filtering capabilities for proper usage.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10848,12 +10848,15 @@
       "operation_id": "androidmanagement.enterprises.policies.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists policies for a given enterprise.",
-      "summary_suggestion": "List all policies for a specific enterprise.",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
+      "summary_suggestion": "List enterprise policies",
+      "description_suggestion": "Retrieves a list of all policies configured for a specified enterprise. Requires the enterprise parent resource identifier as input. Returns a paginated list of Policy objects associated with the enterprise. Supports filtering and pagination parameters.",
+      "reasoning": "Missing summary entirely. Description is too minimal - lacks clarity about required inputs (parent parameter), output structure (paginated list), and available query options. AI agents need to understand pagination support and filtering capabilities for proper usage.",
       "batch_index": 2
     }
   },
@@ -10868,7 +10871,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'androidmanagement.enterprises.webApps.list' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'androidmanagement.enterprises.webApps.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks specificity about required inputs, output format, and pagination support. AI agents need clearer guidance on what parameters are available and how results are structured.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10882,12 +10885,15 @@
       "operation_id": "androidmanagement.enterprises.webApps.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists web apps for a given enterprise.",
-      "summary_suggestion": "List all web apps for a specific enterprise.",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
+      "summary_suggestion": "List enterprise web applications",
+      "description_suggestion": "Retrieves a list of all web apps deployed to a specified enterprise. Requires the enterprise parent resource identifier as input. Returns a paginated list of WebApp objects. Supports filtering and pagination parameters for managing large app collections.",
+      "reasoning": "Missing summary entirely. Description lacks specificity about required inputs, output format, and pagination support. AI agents need clearer guidance on what parameters are available and how results are structured.",
       "batch_index": 2
     }
   },
@@ -10902,7 +10908,83 @@
         "character": 0
       }
     },
-    "message": "Operation 'androidmanagement.enterprises.generateEnterpriseUpgradeUrl' has semantic quality issues: vague_summary, missing_context. The current summary is missing. Added a concise summary and clarified the context of the generated URL.",
+    "message": "Operation 'androidmanagement.enterprises.webApps.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description is too vague - doesn't specify required inputs (parent parameter and WebApp schema), doesn't clarify what fields are needed, doesn't explain the return value, and omits side effects (app availability). AI agents need to understand the request structure and resulting state changes.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "androidmanagement.enterprises.webApps.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a web app.",
+      "summary_suggestion": "Create a new enterprise web application",
+      "description_suggestion": "Creates a new web app for a specified enterprise. Requires the enterprise parent resource identifier and a WebApp object containing app configuration (name, URL, display mode, etc.). Returns the created WebApp object with a generated resource identifier. The web app becomes immediately available for deployment to managed devices.",
+      "reasoning": "Missing summary entirely. Description is too vague - doesn't specify required inputs (parent parameter and WebApp schema), doesn't clarify what fields are needed, doesn't explain the return value, and omits side effects (app availability). AI agents need to understand the request structure and resulting state changes.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'androidmanagement.enterprises.webTokens.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. While description explains the purpose well, it lacks clarity about required inputs (parent parameter and WebToken schema structure), doesn't specify the return value details (token format, expiration), and omits usage context. AI agents need to understand what configuration is required and how the returned token should be used.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "androidmanagement.enterprises.webTokens.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a web token to access an embeddable managed Google Play web UI for a given enterprise.",
+      "summary_suggestion": "Create managed Google Play access token",
+      "description_suggestion": "Generates a web token that enables access to the embeddable managed Google Play web UI for a specified enterprise. Requires the enterprise parent resource identifier and a WebToken configuration object. Returns a WebToken object containing the access token and expiration details. The token can be used to embed the managed Google Play interface in enterprise applications.",
+      "reasoning": "Missing summary entirely. While description explains the purpose well, it lacks clarity about required inputs (parent parameter and WebToken schema structure), doesn't specify the return value details (token format, expiration), and omits usage context. AI agents need to understand what configuration is required and how the returned token should be used.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'androidmanagement.enterprises.generateEnterpriseUpgradeUrl' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary entirely. Description lacks clarity on return value and side effects. Added summary describing the action. Enhanced description to specify the Operation return type, clarify the limited availability, and note the operational implications for AI agents deciding when to invoke this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10917,13 +10999,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Generates an enterprise upgrade URL to upgrade an existing managed Google Play Accounts enterprise to a managed Google domain.Note: This feature is not generally available.",
-      "summary_suggestion": "Generate enterprise upgrade URL",
-      "description_suggestion": "Generates an enterprise upgrade URL to upgrade an existing managed Google Play Accounts enterprise to a managed Google domain. This feature is not generally available. Note: The generated URL is used for the upgrade process.",
-      "reasoning": "The current summary is missing. Added a concise summary and clarified the context of the generated URL.",
+      "summary_suggestion": "Generate enterprise upgrade URL for domain migration",
+      "description_suggestion": "Generates an enterprise upgrade URL to migrate an existing managed Google Play Accounts enterprise to a managed Google domain. Returns an Operation resource containing the generated upgrade URL. This feature is not generally available. Note: This operation initiates the upgrade process and should only be called when ready to migrate the enterprise.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on return value and side effects. Added summary describing the action. Enhanced description to specify the Operation return type, clarify the limited availability, and note the operational implications for AI agents deciding when to invoke this operation.",
       "batch_index": 1
     }
   },
@@ -10938,7 +11021,153 @@
         "character": 0
       }
     },
-    "message": "Operation 'androidmanagement.enterprises.migrationTokens.list' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary that is clear and actionable.",
+    "message": "Operation 'androidmanagement.enterprises.devices.issueCommand' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description mentions return value but lacks clarity on input requirements. Added concise action-oriented summary. Enhanced description to explicitly state that the request body contains a Command object and clarify how to monitor command execution, improving AI agent understanding of required inputs and workflow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "androidmanagement.enterprises.devices.issueCommand",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Issues a command to a device. The Operation resource returned contains a Command in its metadata field. Use the get operation method to get the status of the command.",
+      "summary_suggestion": "Issue command to managed device",
+      "description_suggestion": "Issues a command to a device. The request body should contain a Command object specifying the command type and parameters. Returns an Operation resource with the Command in its metadata field. Use the get operation method to poll for command execution status and results.",
+      "reasoning": "Missing summary. Description mentions return value but lacks clarity on input requirements. Added concise action-oriented summary. Enhanced description to explicitly state that the request body contains a Command object and clarify how to monitor command execution, improving AI agent understanding of required inputs and workflow.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'androidmanagement.enterprises.devices.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is minimal and lacks input/output details. Added clear action-oriented summary. Enhanced description to explain pagination support, clarify the filtering behavior, and specify the response structure, enabling AI agents to understand how to retrieve device lists and handle pagination.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "androidmanagement.enterprises.devices.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists devices for a given enterprise. Deleted devices are not returned in the response.",
+      "summary_suggestion": "List managed devices for enterprise",
+      "description_suggestion": "Lists all active devices managed by a given enterprise. Supports pagination via pageSize and pageToken parameters. Deleted devices are excluded from results. Returns a ListDevicesResponse containing an array of Device objects and pagination tokens for retrieving additional results.",
+      "reasoning": "Missing summary. Description is minimal and lacks input/output details. Added clear action-oriented summary. Enhanced description to explain pagination support, clarify the filtering behavior, and specify the response structure, enabling AI agents to understand how to retrieve device lists and handle pagination.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'androidmanagement.enterprises.enrollmentTokens.list' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description lacks pagination details. Added concise action-oriented summary. Enhanced description to include pagination parameter information and clarify the response structure, helping AI agents understand how to retrieve and manage enrollment tokens effectively.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "androidmanagement.enterprises.enrollmentTokens.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists active, unexpired enrollment tokens for a given enterprise. The list items contain only a partial view of EnrollmentToken object. Only the following fields are populated: name, expirationTimestamp, allowPersonalUsage, value, qrCode. This method is meant to help manage active enrollment tokens lifecycle. For security reasons, it's recommended to delete active enrollment tokens as soon as they're not intended to be used anymore.",
+      "summary_suggestion": "List active enrollment tokens for enterprise",
+      "description_suggestion": "Lists all active, unexpired enrollment tokens for a given enterprise. Supports pagination via pageSize and pageToken parameters. Returns partial EnrollmentToken objects containing only: name, expirationTimestamp, allowPersonalUsage, value, and qrCode. This operation is designed for enrollment token lifecycle management. For security, delete tokens promptly when no longer needed.",
+      "reasoning": "Missing summary. Description lacks pagination details. Added concise action-oriented summary. Enhanced description to include pagination parameter information and clarify the response structure, helping AI agents understand how to retrieve and manage enrollment tokens effectively.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'androidmanagement.enterprises.enrollmentTokens.create' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks clarity on input/output and side effects. Added action-oriented summary. Enhanced description to specify the request body structure, clarify the return value including token and QR code, and emphasize the lifecycle management responsibility, improving AI agent understanding of the operation's purpose and effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "androidmanagement.enterprises.enrollmentTokens.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates an enrollment token for a given enterprise. It's up to the caller's responsibility to manage the lifecycle of newly created tokens and deleting them when they're not intended to be used anymore.",
+      "summary_suggestion": "Create enrollment token for device enrollment",
+      "description_suggestion": "Creates a new enrollment token for a given enterprise. The request body should contain an EnrollmentToken object with desired configuration. Returns the created EnrollmentToken object containing the token value and QR code for device enrollment. The caller is responsible for managing the token lifecycle and deleting tokens when no longer needed for security purposes.",
+      "reasoning": "Missing summary. Description lacks clarity on input/output and side effects. Added action-oriented summary. Enhanced description to specify the request body structure, clarify the return value including token and QR code, and emphasize the lifecycle management responsibility, improving AI agent understanding of the operation's purpose and effects.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'androidmanagement.enterprises.migrationTokens.list' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Missing summary and extremely vague description. Description provides no context about purpose, inputs, or outputs. Added clear action-oriented summary. Significantly enhanced description to explain the purpose (DPC migration), include pagination support, specify the response structure, and provide domain context about migration tokens, enabling AI agents to understand when and how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10952,12 +11181,16 @@
       "operation_id": "androidmanagement.enterprises.migrationTokens.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists migration tokens.",
-      "summary_suggestion": "List migration tokens for an enterprise",
-      "reasoning": "The current summary is missing. Added a concise summary that is clear and actionable.",
+      "summary_suggestion": "List device migration tokens for enterprise",
+      "description_suggestion": "Lists all migration tokens for a given enterprise. Supports pagination via pageSize and pageToken parameters. Returns a list of MigrationToken objects that can be used to migrate devices from third-party DPC management to Android Management API. Each token contains migration configuration and status information.",
+      "reasoning": "Missing summary and extremely vague description. Description provides no context about purpose, inputs, or outputs. Added clear action-oriented summary. Significantly enhanced description to explain the purpose (DPC migration), include pagination support, specify the response structure, and provide domain context about migration tokens, enabling AI agents to understand when and how to use this operation.",
       "batch_index": 1
     }
   },
@@ -10972,7 +11205,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'androidmanagement.enterprises.list' has semantic quality issues: vague_summary, missing_context. The current summary is missing. Added a concise summary and expanded the description to include context about the returned fields.",
+    "message": "Operation 'androidmanagement.enterprises.migrationTokens.create' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description lacks input/output details. Added clear action-oriented summary specifying DPC context. Enhanced description to clarify the request body structure, specify the return value, and maintain the reference to migration guide, helping AI agents understand the operation's role in device management transitions.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "androidmanagement.enterprises.migrationTokens.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a migration token, to migrate an existing device from being managed by the EMM's Device Policy Controller (DPC) to being managed by the Android Management API. See the guide (https://developers.google.com/android/management/dpc-migration) for more details.",
+      "summary_suggestion": "Create migration token for DPC device transfer",
+      "description_suggestion": "Creates a migration token to transfer device management from a third-party Device Policy Controller (DPC) to Android Management API. The request body should contain a MigrationToken object with the source DPC and device information. Returns the created MigrationToken object containing the token value for device migration. See https://developers.google.com/android/management/dpc-migration for detailed migration procedures.",
+      "reasoning": "Missing summary. Description lacks input/output details. Added clear action-oriented summary specifying DPC context. Enhanced description to clarify the request body structure, specify the return value, and maintain the reference to migration guide, helping AI agents understand the operation's role in device management transitions.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'androidmanagement.enterprises.list' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description lacks context about pagination support, authentication requirements, and use cases. Added summary and expanded description to clarify what BASIC fields means and how AI agents might use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10991,9 +11260,9 @@
       ],
       "current_summary": "",
       "current_description": "Lists EMM-managed enterprises. Only BASIC fields are returned.",
-      "summary_suggestion": "List EMM-managed enterprises",
-      "description_suggestion": "Lists all EMM-managed enterprises with only BASIC fields returned. This includes essential details necessary for managing the enterprises.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include context about the returned fields.",
+      "summary_suggestion": "List all EMM-managed enterprises",
+      "description_suggestion": "Retrieves a list of all enterprises managed by the authenticated EMM. Returns enterprises with BASIC fields only (limited metadata). Supports pagination through optional parameters. Useful for discovering enrolled enterprises and their identifiers.",
+      "reasoning": "Missing summary entirely. Description lacks context about pagination support, authentication requirements, and use cases. Added summary and expanded description to clarify what BASIC fields means and how AI agents might use this operation.",
       "batch_index": 0
     }
   },
@@ -11008,7 +11277,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'androidmanagement.enterprises.create' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing. Added a concise summary and clarified the input details required for the operation.",
+    "message": "Operation 'androidmanagement.enterprises.create' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description references SigninDetail but lacks clarity on inputs, outputs, and relationship to signup flow. Added summary and expanded description to explain the Enterprise request schema, return value, and workflow context for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11023,13 +11292,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Creates an enterprise. This is the last step in the enterprise signup flow. See also: SigninDetail",
       "summary_suggestion": "Create a new enterprise",
-      "description_suggestion": "Creates a new enterprise as the final step in the enterprise signup flow. Requires the Enterprise schema for input. See also: SigninDetail for additional details.",
-      "reasoning": "The current summary is missing. Added a concise summary and clarified the input details required for the operation.",
+      "description_suggestion": "Creates a new enterprise as the final step in the enterprise signup flow. Requires an Enterprise object with required configuration fields. Returns the created Enterprise object with assigned enterprise ID and initial settings. This operation completes the enrollment process initiated by signupUrls.create.",
+      "reasoning": "Missing summary. Description references SigninDetail but lacks clarity on inputs, outputs, and relationship to signup flow. Added summary and expanded description to explain the Enterprise request schema, return value, and workflow context for AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -11044,7 +11314,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'androidmanagement.signupUrls.create' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary and the description is already clear.",
+    "message": "Operation 'androidmanagement.signupUrls.create' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description is too minimal and lacks context about what the URL is used for, what it returns, and its role in the signup workflow. Added summary and expanded description to clarify the purpose, return value, and workflow sequence for AI agents.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11058,12 +11328,15 @@
       "operation_id": "androidmanagement.signupUrls.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Creates an enterprise signup URL.",
-      "summary_suggestion": "Create an enterprise signup URL",
-      "reasoning": "The current summary is missing. Added a concise summary and the description is already clear.",
+      "summary_suggestion": "Generate enterprise signup URL",
+      "description_suggestion": "Generates a unique enterprise signup URL that initiates the enterprise enrollment process. Returns a signup URL that can be shared with enterprise administrators to begin onboarding. This URL is the first step in the enterprise signup flow, followed by enterprises.create to finalize enrollment.",
+      "reasoning": "Missing summary. Description is too minimal and lacks context about what the URL is used for, what it returns, and its role in the signup workflow. Added summary and expanded description to clarify the purpose, return value, and workflow sequence for AI agents.",
       "batch_index": 0
     }
   },
@@ -11078,7 +11351,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'androidmanagement.enterprises.webApps.delete' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary and expanded the description to include parameter details.",
+    "message": "Operation 'androidmanagement.enterprises.webApps.delete' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary. Description lacks context about what resource name format is required, side effects (unavailability to devices), and return value. Added summary and expanded description to clarify the destructive nature of the operation and its impact on managed devices.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11092,13 +11365,15 @@
       "operation_id": "androidmanagement.enterprises.webApps.delete",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes a web app.",
-      "summary_suggestion": "Delete a web app",
-      "description_suggestion": "Deletes a specified web app. Requires the web app name as a parameter.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include parameter details.",
+      "summary_suggestion": "Delete a managed web app",
+      "description_suggestion": "Deletes a web app from enterprise management. Requires the full resource name of the web app to delete. After deletion, the web app is no longer available to managed devices and cannot be recovered. Returns an empty response on successful deletion.",
+      "reasoning": "Missing summary. Description lacks context about what resource name format is required, side effects (unavailability to devices), and return value. Added summary and expanded description to clarify the destructive nature of the operation and its impact on managed devices.",
       "batch_index": 0
     }
   },
@@ -11113,7 +11388,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'androidmanagement.enterprises.webApps.patch' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary and expanded the description to include parameter details and the required schema.",
+    "message": "Operation 'androidmanagement.provisioningInfo.get' has semantic quality issues: vague_summary, missing_context, missing_input_details. Missing summary. Description is unclear about what 'identifier provided in the sign-in url' means and lacks context about the provisioning workflow. Added summary and expanded description to clarify the enrollment context, input requirements, and what provisioning information is returned.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "androidmanagement.provisioningInfo.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Get the device provisioning information by the identifier provided in the sign-in url.",
+      "summary_suggestion": "Retrieve device provisioning information",
+      "description_suggestion": "Retrieves device provisioning information using the identifier from the device sign-in URL. This operation is used during device enrollment to obtain configuration details needed for provisioning. Requires the provisioning identifier from the enrollment sign-in URL. Returns provisioning configuration including enterprise settings and enrollment parameters.",
+      "reasoning": "Missing summary. Description is unclear about what 'identifier provided in the sign-in url' means and lacks context about the provisioning workflow. Added summary and expanded description to clarify the enrollment context, input requirements, and what provisioning information is returned.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'androidmanagement.enterprises.webApps.patch' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks context about partial update support, input requirements, and return value. Added summary and expanded description to clarify that this is a PATCH operation supporting partial updates and what the response contains.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11127,13 +11439,52 @@
       "operation_id": "androidmanagement.enterprises.webApps.patch",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Updates a web app.",
-      "summary_suggestion": "Update a web app",
-      "description_suggestion": "Updates a specified web app using the WebApp schema. Requires the web app name and updated WebApp details as parameters.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include parameter details and the required schema.",
+      "summary_suggestion": "Update web app configuration",
+      "description_suggestion": "Updates an existing web app's configuration. Requires the full resource name and a WebApp object with fields to update. Supports partial updates - only provided fields are modified. Returns the updated WebApp object with all current configuration.",
+      "reasoning": "Missing summary. Description lacks context about partial update support, input requirements, and return value. Added summary and expanded description to clarify that this is a PATCH operation supporting partial updates and what the response contains.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'androidmanagement.enterprises.devices.operations.cancel' has semantic quality issues: vague_summary, missing_context, not_actionable. Missing summary. Description is overly technical and verbose with implementation details that obscure the core action. Reorganized to clarify the operation's purpose, expected behavior, how to verify cancellation, and error handling in a more concise manner suitable for AI agent interpretation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "androidmanagement.enterprises.devices.operations.cancel",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "not_actionable"
+      ],
+      "current_summary": "",
+      "current_description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns google.rpc.Code.UNIMPLEMENTED. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to Code.CANCELLED.",
+      "summary_suggestion": "Request cancellation of long-running operation",
+      "description_suggestion": "Requests asynchronous cancellation of a long-running device operation. Cancellation is best-effort and not guaranteed to succeed. After requesting cancellation, use Operations.GetOperation to check the operation status. On successful cancellation, the operation transitions to a CANCELLED state with an error status. If the server doesn't support cancellation, returns UNIMPLEMENTED error.",
+      "reasoning": "Missing summary. Description is overly technical and verbose with implementation details that obscure the core action. Reorganized to clarify the operation's purpose, expected behavior, how to verify cancellation, and error handling in a more concise manner suitable for AI agent interpretation.",
       "batch_index": 0
     }
   },
@@ -11148,7 +11499,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 18 operations analyzed, 9 quality issues found",
+    "message": "Semantic analysis completed: 18 operations analyzed, 18 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -11160,7 +11511,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 18,
-      "total_issues_found": 9,
+      "total_issues_found": 18,
       "batches_processed": 3
     }
   }

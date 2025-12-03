@@ -1430,7 +1430,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get_/media/math/formula/{hash}' has semantic quality issues: vague_description, missing_context. The current description is vague and lacks context about how the hash is obtained and what the response contains. The suggested description provides more detail and context.",
+    "message": "Operation 'get_/media/math/formula/{hash}' has semantic quality issues: vague_description, missing_context, missing_output_details. Current description is too brief and lacks context about the hash origin and what data is returned. Added clarification about the hash source (x-resource-location header from check endpoint), explicit return value details (TeX formula string and metadata), and use cases (caching, source retrieval). This helps AI agents understand the operation's role in the formula workflow and when to invoke it.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1445,49 +1445,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "Get a previously-stored formula",
       "current_description": "Returns the previously-stored formula via `/media/math/check/{type}` for the given hash.\n\nStability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable).",
-      "summary_suggestion": "Retrieve a stored formula by its hash.",
-      "description_suggestion": "Retrieves the previously-stored TeX formula for the given hash. This formula was likely stored after a successful check via the `/media/math/check/{type}` endpoint. The hash is a unique identifier for the stored formula.",
-      "reasoning": "The current description is vague and lacks context about how the hash is obtained and what the response contains. The suggested description provides more detail and context.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'get_/media/math/render/{format}/{hash}' has semantic quality issues: vague_description, missing_context. The current description is vague and lacks context about the process and the response format. The suggested description provides more detail and context.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "get_/media/math/render/{format}/{hash}",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Get rendered formula in the given format.",
-      "current_description": "Given a request hash, renders a TeX formula into its mathematic representation in the given format. When a request is issued to the `/media/math/check/{format}` POST endpoint, the response contains the `x-resource-location` header denoting the hash ID of the POST data. Once obtained, this endpoint has to be used to obtain the actual render.\n\nStability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable).",
-      "summary_suggestion": "Get the rendered formula in a specified format.",
-      "description_suggestion": "Renders the previously-checked TeX formula into its mathematical representation in the specified format. The hash is obtained from the `x-resource-location` header after a successful POST request to the `/media/math/check/{format}` endpoint. The response will contain the rendered formula in the requested format.",
-      "reasoning": "The current description is vague and lacks context about the process and the response format. The suggested description provides more detail and context.",
+      "description_suggestion": "Retrieves a previously-stored TeX formula by its hash identifier. The hash is obtained from the `x-resource-location` header returned by the `/media/math/check/{type}` POST endpoint. Returns the original TeX formula string and associated metadata including identifier information. This endpoint is useful for retrieving the source formula after validation or for caching purposes.",
+      "reasoning": "Current description is too brief and lacks context about the hash origin and what data is returned. Added clarification about the hash source (x-resource-location header from check endpoint), explicit return value details (TeX formula string and metadata), and use cases (caching, source retrieval). This helps AI agents understand the operation's role in the formula workflow and when to invoke it.",
       "batch_index": 0
     }
   },
@@ -1502,7 +1466,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 3 operations analyzed, 2 quality issues found",
+    "message": "Semantic analysis completed: 3 operations analyzed, 1 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -1514,7 +1478,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 3,
-      "total_issues_found": 2,
+      "total_issues_found": 1,
       "batches_processed": 1
     }
   }

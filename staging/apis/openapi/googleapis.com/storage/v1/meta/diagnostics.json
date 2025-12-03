@@ -20435,7 +20435,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'storage.projects.hmacKeys.delete' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing, and the description lacks details about the side effects and authentication requirement.",
+    "message": "Operation 'storage.projects.hmacKeys.delete' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Original description lacks context about what parameters are required (projectId, accessId), what happens to the key, and the permanence of the action. Added details about parameter requirements, the irreversible nature of deletion, and that the key must be in a valid state for deletion. Summary was missing entirely.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -20450,13 +20450,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_context",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes an HMAC key.",
       "summary_suggestion": "Delete an HMAC key by access ID",
-      "description_suggestion": "Deletes an HMAC key by its access ID. This action cannot be undone and will result in the loss of the key. Requires authentication.",
-      "reasoning": "The current summary is missing, and the description lacks details about the side effects and authentication requirement.",
+      "description_suggestion": "Deletes an HMAC key identified by the specified accessId within the given project. This operation permanently removes the HMAC key and prevents it from being used for authentication. The key must exist and be in a deletable state. This action cannot be undone.",
+      "reasoning": "Original description lacks context about what parameters are required (projectId, accessId), what happens to the key, and the permanence of the action. Added details about parameter requirements, the irreversible nature of deletion, and that the key must be in a valid state for deletion. Summary was missing entirely.",
       "batch_index": 11
     }
   },
@@ -20471,7 +20472,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'storage.projects.hmacKeys.get' has semantic quality issues: vague_summary. The current summary is missing. The description is clear but could be improved by specifying the authentication requirement.",
+    "message": "Operation 'storage.projects.hmacKeys.get' has semantic quality issues: vague_summary, missing_output_details. Original description is incomplete - it doesn't specify what is returned or the structure of the response. Added clarity about the return type (HmacKeyMetadata) and what information is included. Summary was missing entirely.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -20485,12 +20486,14 @@
       "operation_id": "storage.projects.hmacKeys.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Retrieves an HMAC key's metadata",
-      "summary_suggestion": "Get HMAC key metadata",
-      "reasoning": "The current summary is missing. The description is clear but could be improved by specifying the authentication requirement.",
+      "summary_suggestion": "Retrieve HMAC key metadata by access ID",
+      "description_suggestion": "Retrieves the metadata for an HMAC key identified by the specified accessId within the given project. Returns the HmacKeyMetadata object containing key details such as creation time, state, and associated service account information.",
+      "reasoning": "Original description is incomplete - it doesn't specify what is returned or the structure of the response. Added clarity about the return type (HmacKeyMetadata) and what information is included. Summary was missing entirely.",
       "batch_index": 11
     }
   },
@@ -20505,7 +20508,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'storage.projects.hmacKeys.update' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing, and the description lacks details about the authentication requirement and potential side effects of updating the key's state.",
+    "message": "Operation 'storage.projects.hmacKeys.update' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original description relies on external documentation for critical information about valid states and inputs. Added clarity about the request body schema (HmacKeyMetadata), what the operation returns, and what state values are valid. Summary was missing entirely. This helps AI agents understand the operation's inputs and outputs without external reference.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -20520,13 +20523,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Updates the state of an HMAC key. See the [HMAC Key resource descriptor](https://cloud.google.com/storage/docs/json_api/v1/projects/hmacKeys/update#request-body) for valid states.",
       "summary_suggestion": "Update HMAC key state",
-      "description_suggestion": "Updates the state of an HMAC key by its access ID. Requires authentication. Refer to the [HMAC Key resource descriptor](https://cloud.google.com/storage/docs/json_api/v1/projects/hmacKeys/update#request-body) for valid states. This action may result in the key becoming unusable if an invalid state is provided.",
-      "reasoning": "The current summary is missing, and the description lacks details about the authentication requirement and potential side effects of updating the key's state.",
+      "description_suggestion": "Updates the state of an HMAC key identified by the specified accessId within the given project. Accepts a HmacKeyMetadata object in the request body to specify the new state (e.g., ACTIVE or INACTIVE). Returns the updated HmacKeyMetadata object. Valid state transitions are documented in the HMAC Key resource descriptor.",
+      "reasoning": "Original description relies on external documentation for critical information about valid states and inputs. Added clarity about the request body schema (HmacKeyMetadata), what the operation returns, and what state values are valid. Summary was missing entirely. This helps AI agents understand the operation's inputs and outputs without external reference.",
       "batch_index": 11
     }
   },
@@ -20541,7 +20545,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'storage.projects.serviceAccount.get' has semantic quality issues: vague_summary. The current summary is missing. The description is clear but could be improved by specifying the authentication requirement.",
+    "message": "Operation 'storage.buckets.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks detail about filtering/pagination capabilities and return type. AI agents need to understand available query parameters and response structure to use this operation effectively.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -20552,16 +20556,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "storage.projects.serviceAccount.get",
+      "operation_id": "storage.buckets.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Get the email address of this project's Google Cloud Storage service account.",
-      "summary_suggestion": "Get project's service account email",
-      "reasoning": "The current summary is missing. The description is clear but could be improved by specifying the authentication requirement.",
-      "batch_index": 11
+      "current_description": "Retrieves a list of buckets for a given project.",
+      "summary_suggestion": "List all buckets in a project",
+      "description_suggestion": "Retrieves a list of buckets for the specified project. Supports filtering, pagination, and projection of bucket metadata. Returns a Buckets object containing an array of Bucket resources matching the query criteria.",
+      "reasoning": "Missing summary entirely. Description lacks detail about filtering/pagination capabilities and return type. AI agents need to understand available query parameters and response structure to use this operation effectively.",
+      "batch_index": 0
     }
   },
   {
@@ -20575,7 +20582,706 @@
         "character": 0
       }
     },
-    "message": "Operation 'storage.objects.move' has semantic quality issues: vague_summary, missing_side_effects. Added a summary to clarify the operation's purpose and included side effects in the description to indicate the source object's state change.",
+    "message": "Operation 'storage.buckets.insert' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too minimal and doesn't explain required inputs (Bucket schema), constraints (globally unique names), or what is returned. AI agents need this context to construct proper requests.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.buckets.insert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new bucket.",
+      "summary_suggestion": "Create a new bucket",
+      "description_suggestion": "Creates a new bucket in the specified project. Requires a Bucket resource in the request body with required properties such as name and project ID. Returns the newly created Bucket resource with all metadata. Bucket names must be globally unique.",
+      "reasoning": "Missing summary. Description is too minimal and doesn't explain required inputs (Bucket schema), constraints (globally unique names), or what is returned. AI agents need this context to construct proper requests.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.buckets.delete' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Missing summary. Description mentions soft delete but lacks clarity about preconditions (bucket must be empty), what happens in each scenario, and required parameters. AI agents need to understand when this operation can succeed and its effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.buckets.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes an empty bucket. Deletions are permanent unless soft delete is enabled on the bucket.",
+      "summary_suggestion": "Delete an empty bucket",
+      "description_suggestion": "Deletes the specified bucket. The bucket must be empty (contain no objects). Deletions are permanent unless soft delete is enabled on the bucket, in which case the bucket enters a soft-deleted state and can be restored within a retention period. Requires the bucket name as a path parameter.",
+      "reasoning": "Missing summary. Description mentions soft delete but lacks clarity about preconditions (bucket must be empty), what happens in each scenario, and required parameters. AI agents need to understand when this operation can succeed and its effects.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.buckets.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks specificity about what metadata is returned. AI agents benefit from knowing the scope of information available in the response.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.buckets.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns metadata for the specified bucket.",
+      "summary_suggestion": "Retrieve bucket metadata",
+      "description_suggestion": "Retrieves metadata for the specified bucket. Returns a Bucket resource containing all bucket properties including configuration, location, storage class, versioning status, lifecycle rules, and access control settings.",
+      "reasoning": "Missing summary. Description lacks specificity about what metadata is returned. AI agents benefit from knowing the scope of information available in the response.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.buckets.patch' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Missing summary. Description doesn't explain partial update semantics clearly or mention that only provided fields are modified. AI agents need to understand the difference between PATCH and PUT operations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.buckets.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Patches a bucket. Changes to the bucket will be readable immediately after writing, but configuration changes may take time to propagate.",
+      "summary_suggestion": "Partially update bucket configuration",
+      "description_suggestion": "Partially updates the specified bucket with provided fields. Accepts a Bucket resource in the request body; only specified fields are modified while others remain unchanged. Changes are readable immediately, but configuration changes may take time to propagate to all systems. Returns the updated Bucket resource.",
+      "reasoning": "Missing summary. Description doesn't explain partial update semantics clearly or mention that only provided fields are modified. AI agents need to understand the difference between PATCH and PUT operations.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.buckets.update' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Missing summary. Description doesn't clarify that this is a full replacement operation (unlike PATCH). AI agents need to understand they must provide complete bucket configuration and the propagation delay implications.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.buckets.update",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Updates a bucket. Changes to the bucket will be readable immediately after writing, but configuration changes may take time to propagate.",
+      "summary_suggestion": "Replace entire bucket configuration",
+      "description_suggestion": "Replaces the entire bucket configuration with the provided Bucket resource. Requires a complete Bucket object in the request body; all fields must be specified. Changes are readable immediately, but configuration changes may take time to propagate to all systems. Returns the updated Bucket resource.",
+      "reasoning": "Missing summary. Description doesn't clarify that this is a full replacement operation (unlike PATCH). AI agents need to understand they must provide complete bucket configuration and the propagation delay implications.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.bucketAccessControls.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description uses 'ACL entries' without explaining what they represent. AI agents need to understand that this returns BucketAccessControl resources defining entity-level permissions.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.bucketAccessControls.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves ACL entries on the specified bucket.",
+      "summary_suggestion": "List bucket access control entries",
+      "description_suggestion": "Retrieves all access control entries (ACL) for the specified bucket. Returns a list of BucketAccessControl resources, each defining permissions for a specific entity (user, group, or project) on the bucket.",
+      "reasoning": "Missing summary. Description uses 'ACL entries' without explaining what they represent. AI agents need to understand that this returns BucketAccessControl resources defining entity-level permissions.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.managedFolders.insert' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_context. Missing summary entirely. Description lacks context about what inputs are expected (ManagedFolder schema), what is returned, and the operational context (hierarchical namespace requirement). Added details about request/response schemas and use case for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.managedFolders.insert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new managed folder.",
+      "summary_suggestion": "Create a new managed folder in bucket",
+      "description_suggestion": "Creates a new managed folder within the specified bucket. Accepts a ManagedFolder object with configuration details. Returns the created ManagedFolder object with assigned metadata including creation timestamp and resource identifiers. The managed folder will be available for organizing objects within hierarchical namespace-enabled buckets.",
+      "reasoning": "Missing summary entirely. Description lacks context about what inputs are expected (ManagedFolder schema), what is returned, and the operational context (hierarchical namespace requirement). Added details about request/response schemas and use case for AI agent clarity.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.managedFolders.delete' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary. Description lacks important context about preconditions (empty folder requirement), side effects (irreversibility), and permission requirements. Enhanced for AI agents to understand deletion constraints and potential failure scenarios.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.managedFolders.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Permanently deletes a managed folder.",
+      "summary_suggestion": "Permanently delete a managed folder",
+      "description_suggestion": "Permanently deletes the specified managed folder from the bucket. This operation is irreversible and will remove the managed folder and its associated metadata. The folder must be empty or the deletion may fail depending on bucket configuration. Requires appropriate IAM permissions (storage.managedFolders.delete).",
+      "reasoning": "Missing summary. Description lacks important context about preconditions (empty folder requirement), side effects (irreversibility), and permission requirements. Enhanced for AI agents to understand deletion constraints and potential failure scenarios.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.managedFolders.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is vague about what metadata is returned. Added specific examples of returned fields and clarified return type for better AI agent understanding of available data.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.managedFolders.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns metadata of the specified managed folder.",
+      "summary_suggestion": "Retrieve managed folder metadata",
+      "description_suggestion": "Retrieves the metadata for the specified managed folder, including its name, creation timestamp, update timestamp, and other configuration details. Returns a ManagedFolder object containing all current properties and state information for the requested managed folder.",
+      "reasoning": "Missing summary. Description is vague about what metadata is returned. Added specific examples of returned fields and clarified return type for better AI agent understanding of available data.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.managedFolders.getIamPolicy' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about what the Policy object contains and its purpose. Added context about role bindings, principals, and use case for AI agent understanding of access control inspection.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.managedFolders.getIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns an IAM policy for the specified managed folder.",
+      "summary_suggestion": "Retrieve IAM policy for managed folder",
+      "description_suggestion": "Retrieves the Identity and Access Management (IAM) policy for the specified managed folder. Returns a Policy object containing role bindings and principals with access to the managed folder. This allows inspection of current access control settings.",
+      "reasoning": "Missing summary. Description lacks clarity about what the Policy object contains and its purpose. Added context about role bindings, principals, and use case for AI agent understanding of access control inspection.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.managedFolders.setIamPolicy' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description lacks input/output details and critical side effect information about policy replacement behavior. Added warning about complete policy requirement to prevent accidental access removal, important for AI agent safety.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.managedFolders.setIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Updates an IAM policy for the specified managed folder.",
+      "summary_suggestion": "Update IAM policy for managed folder",
+      "description_suggestion": "Updates the Identity and Access Management (IAM) policy for the specified managed folder. Accepts a Policy object defining role bindings and access grants. Returns the updated Policy object. This operation replaces the existing policy - provide complete policy configuration to avoid unintended access revocation.",
+      "reasoning": "Missing summary. Description lacks input/output details and critical side effect information about policy replacement behavior. Added warning about complete policy requirement to prevent accidental access removal, important for AI agent safety.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.notifications.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks specificity about what notification objects contain and their purpose. Added details about Pub/Sub integration, event types, and use case for AI agent understanding of notification configuration inspection.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.notifications.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves a list of notification subscriptions for a given bucket.",
+      "summary_suggestion": "List notification subscriptions for bucket",
+      "description_suggestion": "Retrieves a list of all notification subscriptions (Pub/Sub topic configurations) for the specified bucket. Returns a collection of Notification objects, each containing topic name, event types, and custom attributes. Useful for auditing configured event notifications.",
+      "reasoning": "Missing summary. Description lacks specificity about what notification objects contain and their purpose. Added details about Pub/Sub integration, event types, and use case for AI agent understanding of notification configuration inspection.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.bucketAccessControls.insert' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary entirely. Description lacks clarity about what the operation accepts (BucketAccessControl object), what it returns, and the side effect of granting access permissions. Added these details for better AI agent understanding of when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.bucketAccessControls.insert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new ACL entry on the specified bucket.",
+      "summary_suggestion": "Create bucket access control entry",
+      "description_suggestion": "Creates a new access-control entry for the specified bucket. Accepts a BucketAccessControl object defining the entity and role permissions. Returns the created BucketAccessControl resource. This operation grants the specified entity access permissions to the bucket.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about what the operation accepts (BucketAccessControl object), what it returns, and the side effect of granting access permissions. Added these details for better AI agent understanding of when and how to use this operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.bucketAccessControls.delete' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is somewhat clear but lacks information about required parameters, response format, and the side effect of revoking access. Enhanced for AI agent clarity on what parameters are needed and what to expect in response.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.bucketAccessControls.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Permanently deletes the ACL entry for the specified entity on the specified bucket.",
+      "summary_suggestion": "Delete bucket access control entry",
+      "description_suggestion": "Permanently deletes the access-control entry for the specified entity on the specified bucket. Requires the bucket name and entity identifier as parameters. Returns a 204 No Content response on successful deletion. This operation revokes all access permissions previously granted to the entity for the bucket.",
+      "reasoning": "Missing summary. Description is somewhat clear but lacks information about required parameters, response format, and the side effect of revoking access. Enhanced for AI agent clarity on what parameters are needed and what to expect in response.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.bucketAccessControls.get' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description lacks clarity about required parameters and return type. Added parameter requirements and explicit mention of BucketAccessControl return type for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.bucketAccessControls.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns the ACL entry for the specified entity on the specified bucket.",
+      "summary_suggestion": "Retrieve bucket access control entry",
+      "description_suggestion": "Retrieves the access-control entry for the specified entity on the specified bucket. Requires the bucket name and entity identifier as parameters. Returns the BucketAccessControl resource containing the entity's role and permissions for the bucket.",
+      "reasoning": "Missing summary. Description lacks clarity about required parameters and return type. Added parameter requirements and explicit mention of BucketAccessControl return type for better AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.bucketAccessControls.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is vague about what inputs are expected and what is returned. Added clarity about partial update semantics, required parameters, request/response schemas, and the behavior of omitted fields for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.bucketAccessControls.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Patches an ACL entry on the specified bucket.",
+      "summary_suggestion": "Partially update bucket access control entry",
+      "description_suggestion": "Partially updates an access-control entry on the specified bucket. Accepts a BucketAccessControl object with only the fields to be modified. Requires the bucket name and entity identifier. Returns the updated BucketAccessControl resource. Only provided fields are modified; omitted fields retain their current values.",
+      "reasoning": "Missing summary. Description is vague about what inputs are expected and what is returned. Added clarity about partial update semantics, required parameters, request/response schemas, and the behavior of omitted fields for AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.bucketAccessControls.update' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks detail about input requirements, response type, and update semantics (full replacement vs. partial). Distinguished from PATCH operation by clarifying this is a full replacement operation for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.bucketAccessControls.update",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates an ACL entry on the specified bucket.",
+      "summary_suggestion": "Replace bucket access control entry",
+      "description_suggestion": "Replaces an access-control entry on the specified bucket. Accepts a complete BucketAccessControl object. Requires the bucket name and entity identifier. Returns the updated BucketAccessControl resource. All fields in the provided object replace the existing entry's values.",
+      "reasoning": "Missing summary. Description lacks detail about input requirements, response type, and update semantics (full replacement vs. partial). Distinguished from PATCH operation by clarifying this is a full replacement operation for AI agent clarity.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.anywhereCaches.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description mentions 'criteria' but doesn't explain what filtering options are available or how pagination works. Added clarity about optional parameters, return type, and filtering capabilities for better AI agent understanding of how to query Anywhere Cache instances.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.anywhereCaches.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns a list of Anywhere Cache instances of the bucket matching the criteria.",
+      "summary_suggestion": "List Anywhere Cache instances",
+      "description_suggestion": "Retrieves a list of Anywhere Cache instances for the specified bucket that match the provided filter criteria. Accepts optional parameters for filtering and pagination. Returns a list of AnywhereCache resources matching the criteria. Supports filtering by cache state and other properties.",
+      "reasoning": "Missing summary. Description mentions 'criteria' but doesn't explain what filtering options are available or how pagination works. Added clarity about optional parameters, return type, and filtering capabilities for better AI agent understanding of how to query Anywhere Cache instances.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.anywhereCaches.insert' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description is too brief and lacks information about what configuration is required, what is returned, and the side effect of provisioning a new cache. Added details about expected input structure, return value, and operational side effects for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.anywhereCaches.insert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates an Anywhere Cache instance.",
+      "summary_suggestion": "Create Anywhere Cache instance",
+      "description_suggestion": "Creates a new Anywhere Cache instance for the specified bucket. Accepts an AnywhereCache object defining the cache configuration including location and TTL settings. Returns the created AnywhereCache resource with assigned metadata. This operation provisions a new cache instance that will begin serving cached data according to the specified configuration.",
+      "reasoning": "Missing summary. Description is too brief and lacks information about what configuration is required, what is returned, and the side effect of provisioning a new cache. Added details about expected input structure, return value, and operational side effects for AI agent clarity.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.objects.move' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description lacks clarity on what 'move' means (rename vs copy), input requirements (permissions), output details (returns object metadata), and side effects (source object replacement). Added these details for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -20590,13 +21296,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Moves the source object to the destination object in the same bucket.",
-      "summary_suggestion": "Move object within the same bucket",
-      "description_suggestion": "Moves the source object to the destination object in the same bucket. The source object will no longer exist in its original location after the operation completes.",
-      "reasoning": "Added a summary to clarify the operation's purpose and included side effects in the description to indicate the source object's state change.",
+      "summary_suggestion": "Move object to new destination within bucket",
+      "description_suggestion": "Moves a source object to a destination object within the same bucket. The source object is renamed/relocated to the destination path. Requires appropriate permissions on both source and destination paths. Returns the moved object metadata. The source object is replaced by the destination object after successful completion.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on what 'move' means (rename vs copy), input requirements (permissions), output details (returns object metadata), and side effects (source object replacement). Added these details for AI agent clarity.",
       "batch_index": 9
     }
   },
@@ -20611,7 +21319,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'storage.buckets.operations.list' has semantic quality issues: vague_summary, missing_context. Added a summary to clarify the operation's purpose and expanded the description to include context about the types of filters that can be applied.",
+    "message": "Operation 'storage.buckets.operations.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is vague about what operations are listed (long-running operations), what filters are available, and what is returned. Added context about operation types, pagination, and return schema for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -20626,13 +21334,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists operations that match the specified filter in the request.",
-      "summary_suggestion": "List matching bucket operations",
-      "description_suggestion": "Lists operations that match the specified filter in the request. Filters can include operation names, status, and other criteria.",
-      "reasoning": "Added a summary to clarify the operation's purpose and expanded the description to include context about the types of filters that can be applied.",
+      "summary_suggestion": "List long-running operations in bucket",
+      "description_suggestion": "Lists long-running operations for the specified bucket that match the provided filter criteria. Supports filtering by operation status, type, and other criteria via request parameters. Returns a paginated list of GoogleLongrunningOperation objects representing the matching operations.",
+      "reasoning": "Missing summary. Description is vague about what operations are listed (long-running operations), what filters are available, and what is returned. Added context about operation types, pagination, and return schema for better AI agent understanding.",
       "batch_index": 9
     }
   },
@@ -20647,7 +21356,117 @@
         "character": 0
       }
     },
-    "message": "Operation 'storage.buckets.relocate' has semantic quality issues: vague_summary, missing_side_effects. Added a summary to clarify the operation's purpose and included side effects in the description to indicate the bucket's state change.",
+    "message": "Operation 'storage.buckets.operations.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks output details (returns GoogleLongrunningOperation) and use case context (polling for completion). Added return schema and typical usage pattern for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.buckets.operations.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the latest state of a long-running operation.",
+      "summary_suggestion": "Get long-running operation status",
+      "description_suggestion": "Retrieves the current state and status of a long-running operation by operation ID. Returns a GoogleLongrunningOperation object containing the operation's metadata, progress, and completion status. Use this to poll for operation completion or check operation results.",
+      "reasoning": "Missing summary. Description lacks output details (returns GoogleLongrunningOperation) and use case context (polling for completion). Added return schema and typical usage pattern for AI agents.",
+      "batch_index": 9
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.buckets.operations.advanceRelocateBucket' has semantic quality issues: vague_summary, missing_output_details, unclear_purpose. Missing summary. Description is complex and unclear about when to use this operation and what it returns. Simplified language, clarified prerequisites (active relocate operation), and added return type for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.buckets.operations.advanceRelocateBucket",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "unclear_purpose"
+      ],
+      "current_summary": "",
+      "current_description": "Starts asynchronous advancement of the relocate bucket operation in the case of required write downtime, to allow it to lock the bucket at the source location, and proceed with the bucket location swap. The server makes a best effort to advance the relocate bucket operation, but success is not guaranteed.",
+      "summary_suggestion": "Advance bucket relocation operation",
+      "description_suggestion": "Advances a relocate bucket operation to the next phase, enabling write downtime and bucket locking at the source location to proceed with the location swap. This operation is asynchronous and best-effort; success is not guaranteed. Requires an active relocate bucket operation. Returns a GoogleLongrunningOperation object representing the advanced operation state.",
+      "reasoning": "Missing summary. Description is complex and unclear about when to use this operation and what it returns. Simplified language, clarified prerequisites (active relocate operation), and added return type for better AI agent interpretability.",
+      "batch_index": 9
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.buckets.operations.cancel' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks output details (return type) and important side effects (operation may continue briefly, need to check status). Added these details for AI agents to understand operation behavior and how to verify cancellation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.buckets.operations.cancel",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed.",
+      "summary_suggestion": "Cancel long-running operation",
+      "description_suggestion": "Requests cancellation of a long-running operation. The cancellation is asynchronous and best-effort; success is not guaranteed. The operation may continue briefly after cancellation is requested. Returns a GoogleLongrunningOperation object with updated status. Check the operation status to verify cancellation completion.",
+      "reasoning": "Missing summary. Description lacks output details (return type) and important side effects (operation may continue briefly, need to check status). Added these details for AI agents to understand operation behavior and how to verify cancellation.",
+      "batch_index": 9
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.buckets.relocate' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks output details (returns GoogleLongrunningOperation) and guidance on how to monitor the operation. Added return type and reference to monitoring operation for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -20662,13 +21481,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Initiates a long-running Relocate Bucket operation on the specified bucket.",
-      "summary_suggestion": "Initiate a long-running relocate bucket operation",
-      "description_suggestion": "Initiates a long-running Relocate Bucket operation on the specified bucket. The bucket will be unavailable during the relocation process.",
-      "reasoning": "Added a summary to clarify the operation's purpose and included side effects in the description to indicate the bucket's state change.",
+      "summary_suggestion": "Initiate bucket relocation operation",
+      "description_suggestion": "Initiates a long-running operation to relocate a bucket to a new location. Requires a RelocateBucketRequest specifying the destination location. Returns a GoogleLongrunningOperation object that can be monitored for completion. Use storage.buckets.operations.get to check operation status.",
+      "reasoning": "Missing summary. Description lacks output details (returns GoogleLongrunningOperation) and guidance on how to monitor the operation. Added return type and reference to monitoring operation for AI agent clarity.",
       "batch_index": 9
     }
   },
@@ -20683,7 +21502,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'storage.managedFolders.insert' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented. The description is improved to include details about authentication, request body schema, and return value.",
+    "message": "Operation 'storage.buckets.restore' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks context about soft-deletion (retention period), prerequisites (bucket state), output details (returns Bucket object), and side effects (contents preserved). Added these details for AI agents to understand when and how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -20694,123 +21513,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "storage.managedFolders.insert",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Creates a new managed folder.",
-      "summary_suggestion": "Create a new managed folder",
-      "description_suggestion": "Creates a new managed folder within the specified bucket. Requires authentication and a valid ManagedFolder schema in the request body. Returns the newly created ManagedFolder object.",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented. The description is improved to include details about authentication, request body schema, and return value.",
-      "batch_index": 5
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'storage.managedFolders.delete' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented. The description is improved to include details about authentication and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "storage.managedFolders.delete",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Permanently deletes a managed folder.",
-      "summary_suggestion": "Delete a managed folder",
-      "description_suggestion": "Permanently deletes the specified managed folder within the specified bucket. Requires authentication. The operation returns an empty response body if successful.",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented. The description is improved to include details about authentication and return value.",
-      "batch_index": 5
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'storage.notifications.list' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented. The description is clear and complete.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "storage.notifications.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Retrieves a list of notification subscriptions for a given bucket.",
-      "summary_suggestion": "List notification subscriptions for a bucket",
-      "description_suggestion": "Retrieves a list of notification subscriptions for the specified bucket. Requires authentication. Returns a list of Notification objects.",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented. The description is clear and complete.",
-      "batch_index": 5
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'storage.objects.compose' has semantic quality issues: vague_summary, missing_input_details. The original summary was missing. Added a summary and expanded the description to include details about required inputs and return values.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "storage.objects.compose",
+      "operation_id": "storage.buckets.restore",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Concatenates a list of existing objects into a new object in the same bucket.",
-      "summary_suggestion": "Concatenate existing objects into a new object",
-      "description_suggestion": "Concatenates a list of existing objects into a new object in the same bucket. Requires a list of source object names and destination object details. Optionally overrides metadata. Returns the new object's metadata.",
-      "reasoning": "The original summary was missing. Added a summary and expanded the description to include details about required inputs and return values.",
-      "batch_index": 10
+      "current_description": "Restores a soft-deleted bucket.",
+      "summary_suggestion": "Restore soft-deleted bucket",
+      "description_suggestion": "Restores a soft-deleted bucket, making it accessible again. The bucket must be in soft-deleted state (within retention period). Requires appropriate permissions. Returns the restored Bucket object with updated metadata. The bucket's contents and configuration are preserved from the deletion point.",
+      "reasoning": "Missing summary. Description lacks context about soft-deletion (retention period), prerequisites (bucket state), output details (returns Bucket object), and side effects (contents preserved). Added these details for AI agents to understand when and how to use this operation.",
+      "batch_index": 9
     }
   },
   {
@@ -20824,7 +21539,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'storage.objects.copy' has semantic quality issues: vague_summary, missing_input_details. The original summary was missing. Added a summary and expanded the description to include details about required inputs and return values.",
+    "message": "Operation 'storage.anywhereCaches.get' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is minimal and lacks context about what metadata is returned and required parameters. Enhanced description clarifies the specific configuration details available, required inputs, and return type for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -20835,18 +21550,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "storage.objects.copy",
+      "operation_id": "storage.anywhereCaches.get",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_context"
       ],
       "current_summary": "",
-      "current_description": "Copies a source object to a destination object. Optionally overrides metadata.",
-      "summary_suggestion": "Copy an object to a new destination",
-      "description_suggestion": "Copies a source object to a destination object. Optionally overrides metadata. Requires source and destination object details. Returns the copied object's metadata.",
-      "reasoning": "The original summary was missing. Added a summary and expanded the description to include details about required inputs and return values.",
-      "batch_index": 10
+      "current_description": "Returns the metadata of an Anywhere Cache instance.",
+      "summary_suggestion": "Retrieve Anywhere Cache instance metadata",
+      "description_suggestion": "Retrieves the metadata of a specific Anywhere Cache instance, including its configuration (TTL, admission policy), status, and other properties. Requires the bucket name and Anywhere Cache instance ID. Returns the complete AnywhereCache object.",
+      "reasoning": "Missing summary entirely. Description is minimal and lacks context about what metadata is returned and required parameters. Enhanced description clarifies the specific configuration details available, required inputs, and return type for better AI agent understanding.",
+      "batch_index": 2
     }
   },
   {
@@ -20860,7 +21575,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'storage.objects.rewrite' has semantic quality issues: vague_summary, missing_input_details. The original summary was missing. Added a summary and expanded the description to include details about required inputs and return values.",
+    "message": "Operation 'storage.anywhereCaches.update' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description uses informal notation 'config(ttl and admissionPolicy)' and lacks clarity about request/response formats and partial update behavior. Improved version uses consistent terminology, clarifies input/output schemas, and explains partial update support for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -20871,18 +21586,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "storage.objects.rewrite",
+      "operation_id": "storage.anywhereCaches.update",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Rewrites a source object to a destination object. Optionally overrides metadata.",
-      "summary_suggestion": "Rewrite a source object to a destination object",
-      "description_suggestion": "Rewrites a source object to a destination object. Optionally overrides metadata. Requires source and destination object details. Returns the rewritten object's metadata.",
-      "reasoning": "The original summary was missing. Added a summary and expanded the description to include details about required inputs and return values.",
-      "batch_index": 10
+      "current_description": "Updates the config(ttl and admissionPolicy) of an Anywhere Cache instance.",
+      "summary_suggestion": "Update Anywhere Cache configuration",
+      "description_suggestion": "Updates the configuration of an Anywhere Cache instance, specifically the TTL (time-to-live) and admission policy settings. Accepts an AnywhereCache object with the fields to be updated. Returns the updated AnywhereCache instance with all current configuration values. Supports partial updates - only provided fields will be modified.",
+      "reasoning": "Missing summary. Description uses informal notation 'config(ttl and admissionPolicy)' and lacks clarity about request/response formats and partial update behavior. Improved version uses consistent terminology, clarifies input/output schemas, and explains partial update support for AI agent decision-making.",
+      "batch_index": 2
     }
   },
   {
@@ -20896,7 +21612,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'storage.projects.hmacKeys.create' has semantic quality issues: vague_summary, missing_input_details. The original summary was missing. Added a summary and expanded the description to include details about required inputs and return values.",
+    "message": "Operation 'storage.anywhereCaches.disable' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary. Description is too brief and lacks information about side effects (cache stops serving, no updates) and recovery options. Enhanced description clarifies the operational impact and relationship to other operations for better AI agent understanding of consequences.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -20907,18 +21623,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "storage.projects.hmacKeys.create",
+      "operation_id": "storage.anywhereCaches.disable",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_context",
+        "missing_side_effects"
       ],
       "current_summary": "",
-      "current_description": "Creates a new HMAC key for the specified service account.",
-      "summary_suggestion": "Create a new HMAC key for a project",
-      "description_suggestion": "Creates a new HMAC key for the specified service account. Requires HMAC key metadata. Returns the new HMAC key's metadata.",
-      "reasoning": "The original summary was missing. Added a summary and expanded the description to include details about required inputs and return values.",
-      "batch_index": 10
+      "current_description": "Disables an Anywhere Cache instance.",
+      "summary_suggestion": "Disable Anywhere Cache instance",
+      "description_suggestion": "Disables an Anywhere Cache instance, stopping it from serving cached data. Once disabled, the instance will no longer process requests and its cache will not be updated. The instance can be resumed later using the resume operation. Returns the updated AnywhereCache object with disabled status.",
+      "reasoning": "Missing summary. Description is too brief and lacks information about side effects (cache stops serving, no updates) and recovery options. Enhanced description clarifies the operational impact and relationship to other operations for better AI agent understanding of consequences.",
+      "batch_index": 2
     }
   },
   {
@@ -20932,7 +21649,668 @@
         "character": 0
       }
     },
-    "message": "Operation 'storage.notifications.insert' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing. Added a concise summary and expanded the description to include side effects and return details.",
+    "message": "Operation 'storage.anywhereCaches.pause' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary. Description lacks context about the difference between pause and disable, what happens to cached data, and recovery options. Improved description clarifies that pause is temporary, data is preserved, and distinguishes it from disable operation for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.anywhereCaches.pause",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Pauses an Anywhere Cache instance.",
+      "summary_suggestion": "Pause Anywhere Cache instance",
+      "description_suggestion": "Pauses an Anywhere Cache instance, temporarily suspending cache operations while preserving its configuration and cached data. A paused instance can be resumed to continue serving cached data. Returns the updated AnywhereCache object with paused status.",
+      "reasoning": "Missing summary. Description lacks context about the difference between pause and disable, what happens to cached data, and recovery options. Improved description clarifies that pause is temporary, data is preserved, and distinguishes it from disable operation for AI agent decision-making.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.anywhereCaches.resume' has semantic quality issues: vague_summary, missing_context. Missing summary. Description mentions both paused and disabled states but lacks clarity about what 'resume' means operationally and what the instance will do after resuming. Enhanced description clarifies the operational effect and relationship to configuration for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.anywhereCaches.resume",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Resumes a paused or disabled Anywhere Cache instance.",
+      "summary_suggestion": "Resume Anywhere Cache instance",
+      "description_suggestion": "Resumes an Anywhere Cache instance that was previously paused or disabled, restoring it to active operation. The instance will resume serving cached data according to its configured TTL and admission policy. Returns the updated AnywhereCache object with active status.",
+      "reasoning": "Missing summary. Description mentions both paused and disabled states but lacks clarity about what 'resume' means operationally and what the instance will do after resuming. Enhanced description clarifies the operational effect and relationship to configuration for better AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.defaultObjectAccessControls.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks context about what 'default' means in this context and what the response contains. Enhanced description clarifies that these are defaults applied to new objects and specifies the return type for better AI agent understanding of the operation's purpose.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.defaultObjectAccessControls.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves default object ACL entries on the specified bucket.",
+      "summary_suggestion": "List default object access controls",
+      "description_suggestion": "Retrieves all default object access control (ACL) entries for a specified bucket. These defaults are applied to new objects created in the bucket. Returns a list of ObjectAccessControl entries that define the default permissions for objects in the bucket.",
+      "reasoning": "Missing summary. Description lacks context about what 'default' means in this context and what the response contains. Enhanced description clarifies that these are defaults applied to new objects and specifies the return type for better AI agent understanding of the operation's purpose.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.defaultObjectAccessControls.insert' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks clarity about what input is required and what is returned. Enhanced description specifies the input schema (ObjectAccessControl), clarifies the effect on future objects, and indicates the response type for better AI agent understanding of inputs and outputs.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.defaultObjectAccessControls.insert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new default object ACL entry on the specified bucket.",
+      "summary_suggestion": "Create default object access control",
+      "description_suggestion": "Creates a new default object access control (ACL) entry for a specified bucket. The provided ObjectAccessControl object defines the entity and role for the default permission. This entry will be applied to new objects created in the bucket. Returns the created ObjectAccessControl entry.",
+      "reasoning": "Missing summary. Description lacks clarity about what input is required and what is returned. Enhanced description specifies the input schema (ObjectAccessControl), clarifies the effect on future objects, and indicates the response type for better AI agent understanding of inputs and outputs.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.defaultObjectAccessControls.delete' has semantic quality issues: vague_summary, missing_side_effects. Missing summary entirely. Description lacks clarity on scope of effect (impacts future objects), expected inputs (entity, bucket), and response format. Added these details for better AI agent understanding of when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.defaultObjectAccessControls.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Permanently deletes the default object ACL entry for the specified entity on the specified bucket.",
+      "summary_suggestion": "Delete default object access control entry",
+      "description_suggestion": "Permanently deletes the default object ACL entry for the specified entity on the specified bucket. This operation removes the access control rule and affects all new objects created in the bucket that would have inherited this default ACL. Requires the entity identifier and bucket name. Returns a 204 No Content response on successful deletion.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on scope of effect (impacts future objects), expected inputs (entity, bucket), and response format. Added these details for better AI agent understanding of when and how to use this operation.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.defaultObjectAccessControls.get' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks input parameter details and output schema information. Added clarity about required parameters and return type (ObjectAccessControl) to improve AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.defaultObjectAccessControls.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns the default object ACL entry for the specified entity on the specified bucket.",
+      "summary_suggestion": "Retrieve default object access control entry",
+      "description_suggestion": "Retrieves the default object ACL entry for the specified entity on the specified bucket. Requires the entity identifier and bucket name as path parameters. Returns an ObjectAccessControl resource containing the access control entry details including role, entity type, and permissions. This operation does not modify any data.",
+      "reasoning": "Missing summary. Description lacks input parameter details and output schema information. Added clarity about required parameters and return type (ObjectAccessControl) to improve AI agent interpretability.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.defaultObjectAccessControls.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks detail about request/response schemas, partial update semantics, and which fields can be modified. Added these details to clarify the operation's behavior for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.defaultObjectAccessControls.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Patches a default object ACL entry on the specified bucket.",
+      "summary_suggestion": "Partially update default object access control",
+      "description_suggestion": "Patches a default object ACL entry on the specified bucket, allowing partial updates to the access control configuration. Accepts an ObjectAccessControl resource in the request body with only the fields to be modified. Requires the entity identifier and bucket name. Returns the updated ObjectAccessControl resource. Only provided fields are modified; omitted fields retain their existing values.",
+      "reasoning": "Missing summary. Description lacks detail about request/response schemas, partial update semantics, and which fields can be modified. Added these details to clarify the operation's behavior for AI agents.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.defaultObjectAccessControls.update' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity on full replacement semantics versus partial updates, request/response schema details, and required parameters. Added distinction from PATCH operation and clarified that all fields must be provided.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.defaultObjectAccessControls.update",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates a default object ACL entry on the specified bucket.",
+      "summary_suggestion": "Replace default object access control entry",
+      "description_suggestion": "Updates a default object ACL entry on the specified bucket, replacing the entire access control configuration. Accepts an ObjectAccessControl resource in the request body. Requires the entity identifier and bucket name. Returns the updated ObjectAccessControl resource. This is a full replacement operation; all fields must be provided.",
+      "reasoning": "Missing summary. Description lacks clarity on full replacement semantics versus partial updates, request/response schema details, and required parameters. Added distinction from PATCH operation and clarified that all fields must be provided.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.folders.list' has semantic quality issues: vague_summary, missing_output_details, missing_context. Missing summary. Description mentions criteria but doesn't explain what criteria are available (filtering, pagination). Missing output schema details. Added information about pagination support and return type to improve AI agent understanding of filtering capabilities and response structure.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.folders.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves a list of folders matching the criteria. Only applicable to buckets with hierarchical namespace enabled.",
+      "summary_suggestion": "List folders in hierarchical namespace bucket",
+      "description_suggestion": "Retrieves a list of folders matching the specified criteria from a bucket with hierarchical namespace enabled. Supports filtering and pagination through query parameters. Returns a list of Folder resources with metadata including folder name, creation time, and update time. This operation is only available for buckets with hierarchical namespace enabled; it will fail for standard buckets.",
+      "reasoning": "Missing summary. Description mentions criteria but doesn't explain what criteria are available (filtering, pagination). Missing output schema details. Added information about pagination support and return type to improve AI agent understanding of filtering capabilities and response structure.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.folders.insert' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks input schema details (what Folder fields are required/optional), output details, and required parameters. Added clarity about request/response schemas and parameter requirements for better AI agent guidance.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.folders.insert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new folder. Only applicable to buckets with hierarchical namespace enabled.",
+      "summary_suggestion": "Create new folder in hierarchical bucket",
+      "description_suggestion": "Creates a new folder in a bucket with hierarchical namespace enabled. Accepts a Folder resource in the request body specifying the folder name and optional metadata. Requires the bucket name as a path parameter. Returns the created Folder resource with system-generated metadata including creation timestamp and folder ID. This operation is only available for buckets with hierarchical namespace enabled.",
+      "reasoning": "Missing summary. Description lacks input schema details (what Folder fields are required/optional), output details, and required parameters. Added clarity about request/response schemas and parameter requirements for better AI agent guidance.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.folders.delete' has semantic quality issues: vague_summary, missing_side_effects, missing_output_details. Missing summary. Description lacks important preconditions (folder must be empty), response format, and required parameters. Added these critical details to help AI agents understand deletion constraints and expected outcomes.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.folders.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Permanently deletes a folder. Only applicable to buckets with hierarchical namespace enabled.",
+      "summary_suggestion": "Delete folder from hierarchical bucket",
+      "description_suggestion": "Permanently deletes a folder from a bucket with hierarchical namespace enabled. Requires the bucket name and folder identifier as path parameters. The folder must be empty before deletion; attempting to delete a non-empty folder will fail. Returns a 204 No Content response on successful deletion. This operation is only available for buckets with hierarchical namespace enabled.",
+      "reasoning": "Missing summary. Description lacks important preconditions (folder must be empty), response format, and required parameters. Added these critical details to help AI agents understand deletion constraints and expected outcomes.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.objects.delete' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Missing summary entirely. Description lacks clarity about versioning behavior, parameter requirements, and permission implications. Enhanced version clarifies when deletions are permanent, explains the role of the generation parameter, and notes the irreversible nature of the operation for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.objects.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes an object and its metadata. Deletions are permanent if versioning is not enabled for the bucket, or if the generation parameter is used.",
+      "summary_suggestion": "Delete an object and its metadata",
+      "description_suggestion": "Permanently deletes an object and its associated metadata from the specified bucket. Deletion behavior depends on bucket versioning configuration: if versioning is disabled, the deletion is permanent; if versioning is enabled, specify the generation parameter to delete a specific version. This operation cannot be undone. Requires appropriate permissions on the bucket and object.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about versioning behavior, parameter requirements, and permission implications. Enhanced version clarifies when deletions are permanent, explains the role of the generation parameter, and notes the irreversible nature of the operation for better AI agent decision-making.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.objects.get' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too vague about what 'or its metadata' means and doesn't explain how to control retrieval behavior. Enhanced version clarifies the 'alt' parameter's role, explains conditional retrieval options, and specifies return formats for better AI agent understanding of operation capabilities.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.objects.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves an object or its metadata.",
+      "summary_suggestion": "Retrieve an object or its metadata",
+      "description_suggestion": "Retrieves either the full object content or its metadata from the specified bucket. Use the 'alt' parameter to control the response format: 'media' returns the object content, 'json' returns metadata only. Supports conditional retrieval using generation and metageneration parameters. Returns the Object schema containing metadata properties or the raw object content depending on the requested format.",
+      "reasoning": "Missing summary. Description is too vague about what 'or its metadata' means and doesn't explain how to control retrieval behavior. Enhanced version clarifies the 'alt' parameter's role, explains conditional retrieval options, and specifies return formats for better AI agent understanding of operation capabilities.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.objects.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks detail about partial update semantics, conditional update support, and practical use cases. Enhanced version clarifies that only provided fields are modified, explains metageneration for conflict prevention, and provides context about typical metadata updates for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.objects.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Patches an object's metadata.",
+      "summary_suggestion": "Partially update object metadata",
+      "description_suggestion": "Applies partial updates to an object's metadata without modifying the object content. Only provided fields in the Object request schema are updated; omitted fields remain unchanged. Supports conditional updates using metageneration parameter to prevent conflicts. Returns the updated Object with all current metadata properties. This operation is useful for updating specific metadata fields like cache control, content type, or custom metadata without affecting other properties.",
+      "reasoning": "Missing summary. Description lacks detail about partial update semantics, conditional update support, and practical use cases. Enhanced version clarifies that only provided fields are modified, explains metageneration for conflict prevention, and provides context about typical metadata updates for better AI agent interpretability.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.objects.update' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description doesn't distinguish between full replacement (PUT) and partial update (PATCH) semantics, which is critical for AI agents. Enhanced version clarifies the full replacement behavior, explains the difference from PATCH, and notes the metageneration support for better operation selection.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.objects.update",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates an object's metadata.",
+      "summary_suggestion": "Replace object metadata",
+      "description_suggestion": "Replaces an object's metadata with the provided Object schema. Unlike PATCH, this operation performs a full replacement of metadata fields - any fields not included in the request will be reset to their default values. Supports conditional updates using metageneration parameter. Returns the updated Object with all metadata properties. Use this operation when you need to comprehensively update an object's metadata properties.",
+      "reasoning": "Missing summary. Description doesn't distinguish between full replacement (PUT) and partial update (PATCH) semantics, which is critical for AI agents. Enhanced version clarifies the full replacement behavior, explains the difference from PATCH, and notes the metageneration support for better operation selection.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.objectAccessControls.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about return format and practical use cases. Enhanced version specifies the return schema (ObjectAccessControls collection), explains what information is returned, and provides context about the operation's purpose for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.objectAccessControls.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves ACL entries on the specified object.",
+      "summary_suggestion": "List object access control entries",
+      "description_suggestion": "Retrieves all Access Control List (ACL) entries for the specified object, showing which entities have what permissions. Returns an ObjectAccessControls collection containing individual ObjectAccessControl entries with entity identifiers and their associated roles. Useful for auditing object-level access permissions and understanding who has access to the object.",
+      "reasoning": "Missing summary. Description lacks clarity about return format and practical use cases. Enhanced version specifies the return schema (ObjectAccessControls collection), explains what information is returned, and provides context about the operation's purpose for better AI agent understanding.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.objectAccessControls.insert' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks input details about what must be specified in the request and what the response contains. Enhanced version clarifies the ObjectAccessControl schema requirements, explains entity and role concepts, and specifies the return value for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.objectAccessControls.insert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new ACL entry on the specified object.",
+      "summary_suggestion": "Create object access control entry",
+      "description_suggestion": "Creates a new Access Control List (ACL) entry on the specified object, granting permissions to a specified entity. Requires an ObjectAccessControl request schema specifying the entity (user, group, or domain) and their role (READER, OWNER, etc.). Returns the created ObjectAccessControl entry with all properties including the assigned role and entity identifier. This operation grants access permissions at the object level.",
+      "reasoning": "Missing summary. Description lacks input details about what must be specified in the request and what the response contains. Enhanced version clarifies the ObjectAccessControl schema requirements, explains entity and role concepts, and specifies the return value for better AI agent understanding.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.objectAccessControls.delete' has semantic quality issues: vague_summary, missing_side_effects. Missing summary. Description lacks context about the irreversible nature of the operation and its implications for access control. Enhanced version clarifies what 'entity' means, explains the cascading permission implications, and notes the permanent nature of the deletion for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.objectAccessControls.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Permanently deletes the ACL entry for the specified entity on the specified object.",
+      "summary_suggestion": "Delete object access control entry",
+      "description_suggestion": "Permanently removes the Access Control List (ACL) entry for the specified entity on the specified object, revoking their access permissions. The entity parameter identifies which ACL entry to delete (e.g., user email, group email, or domain). This operation cannot be undone - the entity will lose all object-level permissions unless they have bucket-level or project-level permissions. Requires appropriate permissions to modify object ACLs.",
+      "reasoning": "Missing summary. Description lacks context about the irreversible nature of the operation and its implications for access control. Enhanced version clarifies what 'entity' means, explains the cascading permission implications, and notes the permanent nature of the deletion for better AI agent decision-making.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.notifications.insert' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity about what notifications are for (object changes), what inputs are required (bucket name, notification config), and what is returned (Notification object with ID). Added these details for better AI agent understanding of when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -20947,13 +22325,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Creates a notification subscription for a given bucket.",
       "summary_suggestion": "Create a notification subscription for a bucket",
-      "description_suggestion": "Creates a notification subscription for a given bucket. This operation will trigger a notification whenever a specified event occurs in the bucket. The subscription details are returned.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include side effects and return details.",
+      "description_suggestion": "Creates a notification subscription for a given bucket to receive Google PubSub notifications when objects change. Requires the bucket name and notification configuration details. Returns the created Notification object with its unique identifier and configuration.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about what notifications are for (object changes), what inputs are required (bucket name, notification config), and what is returned (Notification object with ID). Added these details for better AI agent understanding of when to use this operation.",
       "batch_index": 6
     }
   },
@@ -20968,7 +22346,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'storage.notifications.delete' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing. Added a concise summary and expanded the description to include side effects and return details.",
+    "message": "Operation 'storage.notifications.delete' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is minimal and lacks context about required parameters (bucket, notification ID) and the irreversible nature of the operation. Added parameter requirements and emphasized permanence for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -20983,13 +22361,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Permanently deletes a notification subscription.",
-      "summary_suggestion": "Delete a notification subscription",
-      "description_suggestion": "Permanently deletes a notification subscription for a given bucket. This operation removes the subscription and stops any future notifications. The operation returns a success status.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include side effects and return details.",
+      "summary_suggestion": "Delete a notification subscription permanently",
+      "description_suggestion": "Permanently deletes a notification subscription for a bucket. Requires the bucket name and notification ID. After deletion, no further notifications will be sent for this subscription. This operation cannot be undone.",
+      "reasoning": "Missing summary. Description is minimal and lacks context about required parameters (bucket, notification ID) and the irreversible nature of the operation. Added parameter requirements and emphasized permanence for AI agent clarity.",
       "batch_index": 6
     }
   },
@@ -21004,7 +22382,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'storage.notifications.get' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing. Added a concise summary and expanded the description to include output details.",
+    "message": "Operation 'storage.notifications.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is vague about what 'view' means and lacks output details. Added clarity about required parameters and what the returned Notification object contains for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -21023,9 +22401,9 @@
       ],
       "current_summary": "",
       "current_description": "View a notification configuration.",
-      "summary_suggestion": "Get a notification configuration",
-      "description_suggestion": "Views a notification configuration for a given bucket. This operation returns the details of the specified notification subscription, including the event triggers and notification settings.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include output details.",
+      "summary_suggestion": "Retrieve a notification subscription configuration",
+      "description_suggestion": "Retrieves the configuration details of a specific notification subscription. Requires the bucket name and notification ID. Returns the Notification object containing the subscription configuration, including the topic, event types, and custom attributes.",
+      "reasoning": "Missing summary. Description is vague about what 'view' means and lacks output details. Added clarity about required parameters and what the returned Notification object contains for better AI agent interpretability.",
       "batch_index": 6
     }
   },
@@ -21040,7 +22418,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'storage.objects.list' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing. Added a concise summary and expanded the description to include input details.",
+    "message": "Operation 'storage.objects.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is too generic about 'criteria' without explaining what filtering options are available. Added context about prefix/delimiter filtering, pagination, and use cases to help AI agents understand when and how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -21055,13 +22433,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Retrieves a list of objects matching the criteria.",
-      "summary_suggestion": "List objects in a bucket",
-      "description_suggestion": "Retrieves a list of objects matching the specified criteria within a bucket. The criteria can include object names, prefixes, and version IDs. The operation returns a list of objects with their metadata.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include input details.",
+      "summary_suggestion": "List objects in a bucket with optional filtering",
+      "description_suggestion": "Retrieves a list of objects in a bucket matching specified criteria. Supports filtering by prefix, delimiter, and other parameters for hierarchical browsing. Returns a paginated list of Object metadata. Useful for enumerating bucket contents or finding specific objects.",
+      "reasoning": "Missing summary. Description is too generic about 'criteria' without explaining what filtering options are available. Added context about prefix/delimiter filtering, pagination, and use cases to help AI agents understand when and how to use this operation.",
       "batch_index": 6
     }
   },
@@ -21076,7 +22454,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'storage.objects.bulkRestore' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing. Added a concise summary and expanded the description to include output details.",
+    "message": "Operation 'storage.objects.insert' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary. Description lacks context about immutability (key API characteristic), what metadata is accepted, and what properties are returned. Added these details and emphasized immutability as a side effect for AI agents to understand the operation's constraints.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.objects.insert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Stores a new object and metadata.",
+      "summary_suggestion": "Upload and store a new object in a bucket",
+      "description_suggestion": "Stores a new immutable object and its metadata in a bucket. Accepts object data and metadata (name, content type, etc.) in the request. Returns the created Object resource with generated properties like generation number, etag, and storage class. Objects are immutable after creation; modifications require creating a new version.",
+      "reasoning": "Missing summary. Description lacks context about immutability (key API characteristic), what metadata is accepted, and what properties are returned. Added these details and emphasized immutability as a side effect for AI agents to understand the operation's constraints.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.objects.bulkRestore' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description mentions 'long-running' but lacks context about what is being restored (deleted objects), what input is required (BulkRestoreObjectsRequest), and how to track progress (GoogleLongrunningOperation). Added these details for AI agents to understand this is an async operation requiring polling.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -21091,13 +22506,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_context",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Initiates a long-running bulk restore operation on the specified bucket.",
-      "summary_suggestion": "Initiate a bulk restore operation",
-      "description_suggestion": "Initiates a long-running bulk restore operation on the specified bucket. This operation restores multiple objects from a previous version. The operation returns a reference to the long-running operation, which can be used to track its progress.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include output details.",
+      "summary_suggestion": "Initiate bulk restore of deleted objects",
+      "description_suggestion": "Initiates a long-running bulk restore operation to recover previously deleted objects in a bucket. Requires a BulkRestoreObjectsRequest specifying which objects to restore. Returns a GoogleLongrunningOperation that can be monitored for progress. Use the operation ID to check status and retrieve results.",
+      "reasoning": "Missing summary. Description mentions 'long-running' but lacks context about what is being restored (deleted objects), what input is required (BulkRestoreObjectsRequest), and how to track progress (GoogleLongrunningOperation). Added these details for AI agents to understand this is an async operation requiring polling.",
       "batch_index": 6
     }
   },
@@ -21112,7 +22528,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'storage.objects.watchAll' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing. Added a concise summary and expanded the description to include output details.",
+    "message": "Operation 'storage.objects.watchAll' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description is vague about how watching works and what is required/returned. Added context about Channel objects, delivery mechanism, filtering support, and asynchronous nature. This helps AI agents understand the operation requires setting up a callback mechanism and is event-driven.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -21127,14 +22543,719 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_context",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Watch for changes on all objects in a bucket.",
-      "summary_suggestion": "Watch for changes on all objects in a bucket",
-      "description_suggestion": "Watches for changes on all objects in a specified bucket. This operation sets up a channel for receiving notifications about changes to objects. The operation returns a reference to the channel, which can be used to receive notifications.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include output details.",
+      "summary_suggestion": "Watch for changes on all bucket objects",
+      "description_suggestion": "Establishes a watch on all objects in a bucket to receive notifications of changes via a notification channel. Requires a Channel object specifying the delivery method (webhook URL, etc.). Returns a Channel resource with the watch ID. Supports the same filtering parameters as list operations. Changes are delivered asynchronously to the specified channel.",
+      "reasoning": "Missing summary. Description is vague about how watching works and what is required/returned. Added context about Channel objects, delivery mechanism, filtering support, and asynchronous nature. This helps AI agents understand the operation requires setting up a callback mechanism and is event-driven.",
       "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.buckets.getStorageLayout' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity about what storage layout configuration contains and what the response object includes. Added summary and expanded description to clarify the operation's purpose and return value for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.buckets.getStorageLayout",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns the storage layout configuration for the specified bucket. Note that this operation requires storage.objects.list permission.",
+      "summary_suggestion": "Retrieve bucket storage layout configuration",
+      "description_suggestion": "Returns the storage layout configuration for the specified bucket, including hierarchical namespace settings and organization. Requires storage.objects.list permission. Returns a storage layout object describing the bucket's organizational structure.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about what storage layout configuration contains and what the response object includes. Added summary and expanded description to clarify the operation's purpose and return value for AI agent understanding.",
+      "batch_index": 10
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.objects.compose' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks input details (ComposeRequest structure), output details (returns Object), and clarification that source objects remain unchanged. Added summary and expanded description to help AI agents understand the composition process and expected inputs/outputs.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.objects.compose",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Concatenates a list of existing objects into a new object in the same bucket.",
+      "summary_suggestion": "Concatenate multiple objects into new object",
+      "description_suggestion": "Concatenates a list of existing objects into a new object in the same bucket. Accepts a ComposeRequest containing the source objects to concatenate and destination object metadata. The operation creates a new composite object without modifying source objects. Returns the newly created Object resource.",
+      "reasoning": "Missing summary. Description lacks input details (ComposeRequest structure), output details (returns Object), and clarification that source objects remain unchanged. Added summary and expanded description to help AI agents understand the composition process and expected inputs/outputs.",
+      "batch_index": 10
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.objects.copy' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks clarity about cross-bucket capability, what metadata can be overridden, return value, and that source object is not modified. Added summary and expanded description with specific metadata examples and side effects for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.objects.copy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Copies a source object to a destination object. Optionally overrides metadata.",
+      "summary_suggestion": "Copy object to destination with optional metadata",
+      "description_suggestion": "Copies a source object to a destination object in the same or different bucket. Accepts an Object resource to optionally override metadata such as content type, cache control, and custom metadata. Creates a new object at the destination without modifying the source. Returns the newly created Object resource.",
+      "reasoning": "Missing summary. Description lacks clarity about cross-bucket capability, what metadata can be overridden, return value, and that source object is not modified. Added summary and expanded description with specific metadata examples and side effects for better AI agent interpretability.",
+      "batch_index": 10
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.objects.rewrite' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks context distinguishing rewrite from copy operation, missing output details, and missing information about resumable transfer capability. Added summary and expanded description to clarify when to use rewrite versus copy and its advantages for large objects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.objects.rewrite",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Rewrites a source object to a destination object. Optionally overrides metadata.",
+      "summary_suggestion": "Rewrite object to destination with optional metadata",
+      "description_suggestion": "Rewrites a source object to a destination object, supporting large objects and resumable operations. Accepts an Object resource to optionally override metadata. Unlike copy, rewrite can handle large objects and provides resumable transfer capability through rewrite tokens. Returns the rewritten Object resource. Useful for cross-region transfers and large object operations.",
+      "reasoning": "Missing summary. Description lacks context distinguishing rewrite from copy operation, missing output details, and missing information about resumable transfer capability. Added summary and expanded description to clarify when to use rewrite versus copy and its advantages for large objects.",
+      "batch_index": 10
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.channels.stop' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is incomplete - lacks input details (Channel resource required), output details (no response body), and clarity about what happens to the channel. Added summary and expanded description to clarify inputs, side effects, and response for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.channels.stop",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Stop watching resources through this channel",
+      "summary_suggestion": "Stop watching resources on channel",
+      "description_suggestion": "Stops watching resources through the specified notification channel. Terminates the watch subscription and stops delivery of notifications to the channel endpoint. Requires the Channel resource with id and resourceId. No response body is returned on successful completion.",
+      "reasoning": "Missing summary. Description is incomplete - lacks input details (Channel resource required), output details (no response body), and clarity about what happens to the channel. Added summary and expanded description to clarify inputs, side effects, and response for AI agent understanding.",
+      "batch_index": 10
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.projects.hmacKeys.list' has semantic quality issues: vague_summary. Missing summary. Description is clear and complete - explains the operation retrieves HMAC keys with filtering criteria. Added concise action-oriented summary to complete the documentation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.projects.hmacKeys.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves a list of HMAC keys matching the criteria.",
+      "summary_suggestion": "List HMAC keys for project",
+      "reasoning": "Missing summary. Description is clear and complete - explains the operation retrieves HMAC keys with filtering criteria. Added concise action-oriented summary to complete the documentation.",
+      "batch_index": 10
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.projects.hmacKeys.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks input details (service account specification), output details (returns HmacKeyMetadata with secret key), and important context about secret key handling. Added summary and expanded description to clarify the one-time secret key retrieval and security implications for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.projects.hmacKeys.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new HMAC key for the specified service account.",
+      "summary_suggestion": "Create HMAC key for service account",
+      "description_suggestion": "Creates a new HMAC key for the specified service account in the project. The HMAC key is used for authentication with the Cloud Storage API. Returns an HmacKeyMetadata object containing the key metadata and the secret access key (only returned at creation time). The secret key must be securely stored as it cannot be retrieved later.",
+      "reasoning": "Missing summary. Description lacks input details (service account specification), output details (returns HmacKeyMetadata with secret key), and important context about secret key handling. Added summary and expanded description to clarify the one-time secret key retrieval and security implications for AI agents.",
+      "batch_index": 10
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.folders.get' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks clarity about required inputs (bucket, folder parameters) and what specific metadata is returned. Added input/output details and clarified the hierarchical namespace requirement for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.folders.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns metadata for the specified folder. Only applicable to buckets with hierarchical namespace enabled.",
+      "summary_suggestion": "Retrieve folder metadata",
+      "description_suggestion": "Retrieves metadata for a specified folder within a bucket. Only applicable to buckets with hierarchical namespace enabled. Requires the bucket name and folder identifier as inputs. Returns a Folder object containing folder properties such as name, creation time, and update time.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about required inputs (bucket, folder parameters) and what specific metadata is returned. Added input/output details and clarified the hierarchical namespace requirement for better AI agent understanding.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.folders.rename' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description lacks input parameter details and doesn't explain what is returned. Missing side effects information about how renaming affects the folder hierarchy and object access paths. Added these details for improved AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.folders.rename",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Renames a source folder to a destination folder. Only applicable to buckets with hierarchical namespace enabled.",
+      "summary_suggestion": "Rename folder to new destination",
+      "description_suggestion": "Renames a source folder to a destination folder within a bucket. Only applicable to buckets with hierarchical namespace enabled. Requires the bucket name, source folder path, and destination folder path as inputs. Returns the renamed Folder object. This operation modifies the folder hierarchy and may affect access paths to contained objects.",
+      "reasoning": "Missing summary. Description lacks input parameter details and doesn't explain what is returned. Missing side effects information about how renaming affects the folder hierarchy and object access paths. Added these details for improved AI agent interpretability.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.buckets.getIamPolicy' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too brief and lacks input/output details. Added clarity about what IAM policy contains (role bindings and members), specified that bucket name is required, and clarified that this is a read-only operation for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.buckets.getIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns an IAM policy for the specified bucket.",
+      "summary_suggestion": "Retrieve bucket IAM policy",
+      "description_suggestion": "Retrieves the Identity and Access Management (IAM) policy for a specified bucket. Requires the bucket name as input. Returns a Policy object containing role bindings and members with access to the bucket. This operation is read-only and does not modify any policies.",
+      "reasoning": "Missing summary. Description is too brief and lacks input/output details. Added clarity about what IAM policy contains (role bindings and members), specified that bucket name is required, and clarified that this is a read-only operation for better AI agent decision-making.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.buckets.setIamPolicy' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Missing summary. Description lacks input details (Policy object requirement) and side effects information about how policy changes affect access control. Added these details to help AI agents understand the operation's impact on bucket access.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.buckets.setIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Updates an IAM policy for the specified bucket.",
+      "summary_suggestion": "Update bucket IAM policy",
+      "description_suggestion": "Updates the Identity and Access Management (IAM) policy for a specified bucket. Requires the bucket name and a Policy object containing the new role bindings and members. Returns the updated Policy object. This operation modifies access control for the bucket and affects which principals can perform actions on the bucket and its contents.",
+      "reasoning": "Missing summary. Description lacks input details (Policy object requirement) and side effects information about how policy changes affect access control. Added these details to help AI agents understand the operation's impact on bucket access.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.buckets.lockRetentionPolicy' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description is too vague about what 'locking' means and lacks critical details about inputs, outputs, and side effects. Added clarity that locking is irreversible, prevents modifications, and enforces compliance. Explained the practical implications for AI agents to understand the operation's significance.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.buckets.lockRetentionPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Locks retention policy on a bucket.",
+      "summary_suggestion": "Lock bucket retention policy",
+      "description_suggestion": "Locks the retention policy for a specified bucket, making it immutable and preventing further modifications. Requires the bucket name as input. Returns the updated Bucket object with the locked retention policy. Once locked, the retention policy cannot be modified or removed, and this action is irreversible. This operation enforces compliance requirements by preventing accidental or unauthorized policy changes.",
+      "reasoning": "Missing summary. Description is too vague about what 'locking' means and lacks critical details about inputs, outputs, and side effects. Added clarity that locking is irreversible, prevents modifications, and enforces compliance. Explained the practical implications for AI agents to understand the operation's significance.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.managedFolders.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks input parameter details and doesn't specify what is returned or mention pagination support. Added details about required bucket parameter, pagination capabilities, and the structure of returned ManagedFolder objects for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.managedFolders.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists managed folders in the given bucket.",
+      "summary_suggestion": "List managed folders in bucket",
+      "description_suggestion": "Lists all managed folders within a specified bucket. Requires the bucket name as input. Supports pagination through optional parameters for result limiting and continuation tokens. Returns a list of ManagedFolder objects containing folder metadata such as name, creation time, and update time.",
+      "reasoning": "Missing summary. Description lacks input parameter details and doesn't specify what is returned or mention pagination support. Added details about required bucket parameter, pagination capabilities, and the structure of returned ManagedFolder objects for better AI agent understanding.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.objectAccessControls.get' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description lacks context about what an ACL entry represents and what parameters are required. Added clarity about the ObjectAccessControl schema being returned and parameter requirements for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.objectAccessControls.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Returns the ACL entry for the specified entity on the specified object.",
+      "summary_suggestion": "Get object access control entry",
+      "description_suggestion": "Retrieves the access control entry (ACL) for a specified entity on a given object. Returns the ObjectAccessControl resource containing the entity's permissions on the object. Requires the bucket name, object name, and entity identifier.",
+      "reasoning": "Missing summary entirely. Description lacks context about what an ACL entry represents and what parameters are required. Added clarity about the ObjectAccessControl schema being returned and parameter requirements for AI agent understanding.",
+      "batch_index": 8
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.objectAccessControls.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description is too brief and doesn't explain partial update semantics, input schema, output, or side effects. Added details about PATCH semantics (partial updates), the ObjectAccessControl input/output, and clarified that this modifies access permissions.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.objectAccessControls.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Patches an ACL entry on the specified object.",
+      "summary_suggestion": "Patch object access control entry",
+      "description_suggestion": "Partially updates an access control entry (ACL) on the specified object. Accepts an ObjectAccessControl resource with fields to be modified. Only provided fields are updated; existing fields not specified are preserved. Returns the updated ObjectAccessControl resource. Modifies object access permissions.",
+      "reasoning": "Missing summary. Description is too brief and doesn't explain partial update semantics, input schema, output, or side effects. Added details about PATCH semantics (partial updates), the ObjectAccessControl input/output, and clarified that this modifies access permissions.",
+      "batch_index": 8
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.objectAccessControls.update' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description lacks distinction from PATCH operation, doesn't specify input/output schemas, and omits side effects. Added clarity about full replacement semantics (PUT vs PATCH), explicit mention of ObjectAccessControl schema, and side effect information.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.objectAccessControls.update",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Updates an ACL entry on the specified object.",
+      "summary_suggestion": "Update object access control entry",
+      "description_suggestion": "Replaces an access control entry (ACL) on the specified object with the provided ObjectAccessControl resource. All fields in the ACL entry are replaced; partial updates are not supported. Returns the updated ObjectAccessControl resource. Modifies object access permissions.",
+      "reasoning": "Missing summary. Description lacks distinction from PATCH operation, doesn't specify input/output schemas, and omits side effects. Added clarity about full replacement semantics (PUT vs PATCH), explicit mention of ObjectAccessControl schema, and side effect information.",
+      "batch_index": 8
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.objects.getIamPolicy' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description is minimal and doesn't explain what an IAM policy contains or the return schema. Added context about IAM policy structure (role bindings), explicit mention of Policy schema, and authentication requirements for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.objects.getIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns an IAM policy for the specified object.",
+      "summary_suggestion": "Get object IAM policy",
+      "description_suggestion": "Retrieves the Identity and Access Management (IAM) policy for the specified object. Returns a Policy resource containing role bindings and conditions that define who has what access to the object. Requires authentication and appropriate permissions to view the policy.",
+      "reasoning": "Missing summary. Description is minimal and doesn't explain what an IAM policy contains or the return schema. Added context about IAM policy structure (role bindings), explicit mention of Policy schema, and authentication requirements for AI agent clarity.",
+      "batch_index": 8
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.objects.setIamPolicy' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description lacks input/output schema details and doesn't warn about the destructive nature of policy replacement. Added explicit mention of Policy schema, clarified that this replaces the entire policy (not partial update), and included a caution about access permission changes.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.objects.setIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Updates an IAM policy for the specified object.",
+      "summary_suggestion": "Set object IAM policy",
+      "description_suggestion": "Sets or replaces the Identity and Access Management (IAM) policy for the specified object. Accepts a Policy resource defining role bindings and access conditions. Returns the updated Policy resource. Replaces the entire existing policy; use with caution as this modifies all access permissions for the object.",
+      "reasoning": "Missing summary. Description lacks input/output schema details and doesn't warn about the destructive nature of policy replacement. Added explicit mention of Policy schema, clarified that this replaces the entire policy (not partial update), and included a caution about access permission changes.",
+      "batch_index": 8
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storage.objects.restore' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_output_details. Missing summary. Description lacks context about soft-deletion semantics, what parameters are needed, what is returned, and preconditions. Added explanation of soft-deletion concept, explicit mention of Object schema return, and clarified preconditions (permissions, object state) for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storage.objects.restore",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Restores a soft-deleted object.",
+      "summary_suggestion": "Restore soft-deleted object",
+      "description_suggestion": "Restores a soft-deleted object to an accessible state. Soft-deleted objects are retained for a configurable period before permanent deletion. This operation recovers the object's data and metadata, making it available for normal operations. Returns the restored Object resource. Requires appropriate permissions and the object must be in soft-deleted state.",
+      "reasoning": "Missing summary. Description lacks context about soft-deletion semantics, what parameters are needed, what is returned, and preconditions. Added explanation of soft-deletion concept, explicit mention of Object schema return, and clarified preconditions (permissions, object state) for AI agent understanding.",
+      "batch_index": 8
     }
   },
   {
@@ -21148,7 +23269,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 81 operations analyzed, 20 quality issues found",
+    "message": "Semantic analysis completed: 81 operations analyzed, 77 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -21160,7 +23281,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 81,
-      "total_issues_found": 20,
+      "total_issues_found": 77,
       "batches_processed": 12
     }
   }

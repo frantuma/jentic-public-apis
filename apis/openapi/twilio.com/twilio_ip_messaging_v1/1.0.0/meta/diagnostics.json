@@ -13358,7 +13358,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteUser' has semantic quality issues: vague_summary, vague_description, missing_side_effects. Original summary and description were missing. Added details about the operation's purpose, authentication requirements, and return value. Side effects were also added.",
+    "message": "Operation 'DeleteUser' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_context, missing_side_effects. Operation has no summary or description. Added clear action verb, specified what is being deleted, identified required parameters (ServiceSid, Sid), explained the scope of deletion (user and associated data), and clarified the side effects (permanent removal, loss of access). This helps AI agents understand when to use this destructive operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -13374,13 +13374,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
+        "missing_context",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Delete a specific user",
-      "description_suggestion": "Deletes a specific user from the specified service. Requires authentication and the user's SID. Returns a success message upon deletion.",
-      "reasoning": "Original summary and description were missing. Added details about the operation's purpose, authentication requirements, and return value. Side effects were also added.",
+      "summary_suggestion": "Delete a user from the service",
+      "description_suggestion": "Removes a user from the specified IP Messaging service. Requires the service SID and user SID. This operation permanently deletes the user and all associated data including channel memberships and message history. The user will no longer be able to access the service.",
+      "reasoning": "Operation has no summary or description. Added clear action verb, specified what is being deleted, identified required parameters (ServiceSid, Sid), explained the scope of deletion (user and associated data), and clarified the side effects (permanent removal, loss of access). This helps AI agents understand when to use this destructive operation.",
       "batch_index": 5
     }
   },
@@ -13395,7 +13397,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateUser' has semantic quality issues: vague_summary, vague_description, missing_input_details. Original summary and description were missing. Added details about the operation's purpose, authentication requirements, input parameters, and return value.",
+    "message": "Operation 'UpdateUser' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details. Operation lacks summary and description entirely. Added action-oriented summary, clarified what can be updated (friendly name, attributes), specified required path parameters, explained the response format, and noted partial update support. This enables AI agents to understand the operation's scope and capabilities.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -13411,13 +13413,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Update user information",
-      "description_suggestion": "Updates the specified user's information in the specified service. Requires authentication and the user's SID. Accepts an inline JSON object with the user's new information. Returns the updated user object.",
-      "reasoning": "Original summary and description were missing. Added details about the operation's purpose, authentication requirements, input parameters, and return value.",
+      "summary_suggestion": "Update user profile and attributes",
+      "description_suggestion": "Updates an existing user's profile information within the specified IP Messaging service. Accepts user attributes such as friendly name, attributes, and other profile data. Requires the service SID and user SID. Returns the updated user object with all current properties. Supports partial updates - only provided fields will be modified.",
+      "reasoning": "Operation lacks summary and description entirely. Added action-oriented summary, clarified what can be updated (friendly name, attributes), specified required path parameters, explained the response format, and noted partial update support. This enables AI agents to understand the operation's scope and capabilities.",
       "batch_index": 5
     }
   },
@@ -13432,7 +13436,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateUser' has semantic quality issues: vague_summary, vague_description, missing_input_details. Original summary and description were missing. Added details about the operation's purpose, authentication requirements, input parameters, and return value.",
+    "message": "Operation 'CreateUser' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details. No summary or description provided. Added clear creation action, specified required parameter (ServiceSid), explained what inputs are needed (identity, optional friendly name and attributes), and described the response (new user object with SID and metadata). This helps AI agents understand how to provision new users in the service.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -13448,13 +13452,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Create a new user",
-      "description_suggestion": "Creates a new user in the specified service. Requires authentication and the service's SID. Accepts an inline JSON object with the user's information. Returns the newly created user object.",
-      "reasoning": "Original summary and description were missing. Added details about the operation's purpose, authentication requirements, input parameters, and return value.",
+      "summary_suggestion": "Create a new user in the service",
+      "description_suggestion": "Creates a new user within the specified IP Messaging service. Requires the service SID and a unique identity for the user. Accepts optional parameters including friendly name and custom attributes. Returns the newly created user object with assigned SID and metadata including creation timestamp.",
+      "reasoning": "No summary or description provided. Added clear creation action, specified required parameter (ServiceSid), explained what inputs are needed (identity, optional friendly name and attributes), and described the response (new user object with SID and metadata). This helps AI agents understand how to provision new users in the service.",
       "batch_index": 5
     }
   },
@@ -13469,7 +13475,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListUser' has semantic quality issues: vague_summary, vague_description, missing_output_details. Original summary and description were missing. Added details about the operation's purpose, authentication requirements, and return value.",
+    "message": "Operation 'ListUser' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. Missing summary and description. Added list action, specified required parameter (ServiceSid), mentioned pagination support (limit, offset parameters), and clarified the response format (array of user objects with key properties). This enables AI agents to understand how to retrieve and iterate through users.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -13485,13 +13491,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "List all users in a service",
-      "description_suggestion": "Lists all users in the specified service. Requires authentication and the service's SID. Returns a list of user objects.",
-      "reasoning": "Original summary and description were missing. Added details about the operation's purpose, authentication requirements, and return value.",
+      "summary_suggestion": "List all users in the service",
+      "description_suggestion": "Retrieves a paginated list of all users in the specified IP Messaging service. Requires the service SID. Supports filtering and pagination through optional parameters including limit and offset. Returns an array of user objects with their properties including SID, identity, friendly name, and metadata.",
+      "reasoning": "Missing summary and description. Added list action, specified required parameter (ServiceSid), mentioned pagination support (limit, offset parameters), and clarified the response format (array of user objects with key properties). This enables AI agents to understand how to retrieve and iterate through users.",
       "batch_index": 5
     }
   },
@@ -13506,7 +13513,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListUserChannel' has semantic quality issues: vague_summary, vague_description, missing_output_details. Original summary and description were missing. Added details about the operation's purpose, authentication requirements, and return value.",
+    "message": "Operation 'ListUserChannel' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. No summary or description provided. Added clear list action with context (channels for a user), specified required parameters (ServiceSid, UserSid), mentioned pagination support, and clarified the response includes channel information and membership status. This helps AI agents understand how to discover a user's channel memberships.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -13522,13 +13529,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "List all user channels",
-      "description_suggestion": "Lists all channels for the specified user in the specified service. Requires authentication and the user's SID. Returns a list of channel objects.",
-      "reasoning": "Original summary and description were missing. Added details about the operation's purpose, authentication requirements, and return value.",
+      "summary_suggestion": "List channels for a specific user",
+      "description_suggestion": "Retrieves a paginated list of all channels that a specific user is a member of within the IP Messaging service. Requires the service SID and user SID. Supports filtering and pagination through optional parameters including limit and offset. Returns an array of user channel objects containing channel information and membership status.",
+      "reasoning": "No summary or description provided. Added clear list action with context (channels for a user), specified required parameters (ServiceSid, UserSid), mentioned pagination support, and clarified the response includes channel information and membership status. This helps AI agents understand how to discover a user's channel memberships.",
       "batch_index": 5
     }
   },
@@ -13543,791 +13551,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListRole' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original summary and description were missing. Added a clear summary and description that include the purpose, required parameters, and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListRole",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_input_details",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "List all roles in a service",
-      "description_suggestion": "Retrieves a list of all roles in a specified service. Requires authentication and service SID. Returns a list of role objects.",
-      "reasoning": "Original summary and description were missing. Added a clear summary and description that include the purpose, required parameters, and return value.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchService' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original summary and description were missing. Added a clear summary and description that include the purpose, required parameters, and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchService",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_input_details",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Fetch details of a specific service",
-      "description_suggestion": "Retrieves the details of a specific service identified by its SID. Requires authentication and service SID. Returns the service details object.",
-      "reasoning": "Original summary and description were missing. Added a clear summary and description that include the purpose, required parameters, and return value.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeleteService' has semantic quality issues: vague_summary, vague_description, missing_output_details, missing_side_effects. Original summary and description were missing. Added a clear summary and description that include the purpose, required parameters, return value, and side effects.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteService",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_output_details",
-        "missing_side_effects"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Delete a specific service",
-      "description_suggestion": "Deletes a specific service identified by its SID. Requires authentication and service SID. Returns a success message upon deletion.",
-      "reasoning": "Original summary and description were missing. Added a clear summary and description that include the purpose, required parameters, return value, and side effects.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'UpdateService' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original summary and description were missing. Added a clear summary and description that include the purpose, required parameters, and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "UpdateService",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_input_details",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Update details of a specific service",
-      "description_suggestion": "Updates the details of a specific service identified by its SID. Requires authentication and service SID. Returns the updated service details object.",
-      "reasoning": "Original summary and description were missing. Added a clear summary and description that include the purpose, required parameters, and return value.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateService' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original summary and description were missing. Added a clear summary and description that include the purpose, required parameters, and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateService",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_input_details",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Create a new service",
-      "description_suggestion": "Creates a new service with the provided details. Requires authentication and service details. Returns the newly created service details object.",
-      "reasoning": "Original summary and description were missing. Added a clear summary and description that include the purpose, required parameters, and return value.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListService' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original summary and description were missing. Added a clear summary and description that include the purpose, required parameters, and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListService",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_input_details",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "List all services",
-      "description_suggestion": "Retrieves a list of all services. Requires authentication. Returns a list of service objects.",
-      "reasoning": "Original summary and description were missing. Added a clear summary and description that include the purpose, required parameters, and return value.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchUser' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original summary and description were missing. Added a clear summary and description that include the purpose, required parameters, and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchUser",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_input_details",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Fetch details of a specific user in a service",
-      "description_suggestion": "Retrieves the details of a specific user in a specified service identified by the service SID and user SID. Requires authentication and service SID. Returns the user details object.",
-      "reasoning": "Original summary and description were missing. Added a clear summary and description that include the purpose, required parameters, and return value.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'UpdateMessage' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. The original summary and description were missing. Added a clear summary and description that include the required parameters and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "UpdateMessage",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_input_details",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Update an existing message",
-      "description_suggestion": "Updates an existing message in a specified channel. Requires the ServiceSid, ChannelSid, and Message Sid. Returns the updated message object.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that include the required parameters and return value.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateMessage' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. The original summary and description were missing. Added a clear summary and description that include the required parameters and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateMessage",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_input_details",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Create a new message",
-      "description_suggestion": "Creates a new message in a specified channel. Requires the ServiceSid and ChannelSid. Returns the newly created message object.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that include the required parameters and return value.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListMessage' has semantic quality issues: vague_summary, missing_context, missing_output_details. The original summary and description were missing. Added a clear summary and description that include the required parameters and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListMessage",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_context",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "List messages in a channel",
-      "description_suggestion": "Lists all messages in a specified channel. Requires the ServiceSid and ChannelSid. Returns a list of message objects.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that include the required parameters and return value.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchRole' has semantic quality issues: vague_summary, missing_output_details. The original summary and description were missing. Added a clear summary and description that include the required parameters and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchRole",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Fetch a role",
-      "description_suggestion": "Fetches a specific role in a service. Requires the ServiceSid and Role Sid. Returns the role object.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that include the required parameters and return value.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeleteRole' has semantic quality issues: vague_summary, missing_side_effects. The original summary and description were missing. Added a clear summary and description that include the required parameters and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteRole",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_side_effects"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Delete a role",
-      "description_suggestion": "Deletes a specific role in a service. Requires the ServiceSid and Role Sid. Returns a success message upon deletion.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that include the required parameters and return value.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'UpdateRole' has semantic quality issues: vague_summary, vague_description, missing_output_details. The original summary and description were missing. Added a clear summary and description that include the required parameters and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "UpdateRole",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Update a role",
-      "description_suggestion": "Updates a specific role in a service. Requires the ServiceSid and Role Sid. Returns the updated role object.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that include the required parameters and return value.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateRole' has semantic quality issues: vague_summary, missing_output_details. The original summary and description were missing. Added a clear summary and description that include the required parameters and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateRole",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Create a new role",
-      "description_suggestion": "Creates a new role in a service. Requires the ServiceSid. Returns the newly created role object.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that include the required parameters and return value.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchCredential' has semantic quality issues: vague_summary, vague_description, missing_output_details. The original summary and description were missing. Added a clear summary and description that includes the purpose, authentication requirement, and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchCredential",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Retrieve a specific credential",
-      "description_suggestion": "Fetches the details of a specific credential identified by its Sid. Requires authentication. Returns the credential object.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that includes the purpose, authentication requirement, and return value.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'UpdateCredential' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. The original summary and description were missing. Added a clear summary and description that includes the purpose, authentication requirement, input details, and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "UpdateCredential",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_input_details",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Update a specific credential",
-      "description_suggestion": "Updates the details of a specific credential identified by its Sid. Requires authentication. Accepts a JSON payload with the updated fields. Returns the updated credential object.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that includes the purpose, authentication requirement, input details, and return value.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeleteCredential' has semantic quality issues: vague_summary, vague_description, missing_side_effects. The original summary and description were missing. Added a clear summary and description that includes the purpose, authentication requirement, and side effects.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteCredential",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_side_effects"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Delete a specific credential",
-      "description_suggestion": "Deletes a specific credential identified by its Sid. Requires authentication. Returns a success message upon successful deletion.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that includes the purpose, authentication requirement, and side effects.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchInvite' has semantic quality issues: vague_summary, vague_description, missing_output_details. The original summary and description were missing. Added a clear summary and description that includes the purpose, authentication requirement, and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchInvite",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Retrieve a specific invite",
-      "description_suggestion": "Fetches the details of a specific invite identified by its Sid within a specific channel of a service. Requires authentication. Returns the invite object.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that includes the purpose, authentication requirement, and return value.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeleteInvite' has semantic quality issues: vague_summary, vague_description, missing_side_effects. The original summary and description were missing. Added a clear summary and description that includes the purpose, authentication requirement, and side effects.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteInvite",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_side_effects"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Delete a specific invite",
-      "description_suggestion": "Deletes a specific invite identified by its Sid within a specific channel of a service. Requires authentication. Returns a success message upon successful deletion.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that includes the purpose, authentication requirement, and side effects.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateInvite' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. The original summary and description were missing. Added a clear summary and description that includes the purpose, authentication requirement, input details, and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateInvite",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_input_details",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Create a new invite",
-      "description_suggestion": "Creates a new invite for a specific channel within a service. Requires authentication. Accepts a JSON payload with the invite details. Returns the newly created invite object.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that includes the purpose, authentication requirement, input details, and return value.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListInvite' has semantic quality issues: vague_summary, vague_description, missing_output_details. The original summary and description were missing. Added a clear summary and description that includes the purpose, authentication requirement, and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListInvite",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "List invites for a specific channel",
-      "description_suggestion": "Lists all invites for a specific channel within a service. Requires authentication. Returns a list of invite objects.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that includes the purpose, authentication requirement, and return value.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchMember' has semantic quality issues: vague_summary, vague_description, missing_input_details. The original summary and description were missing. Added a clear summary and description that includes the required parameters and the expected return value.",
+    "message": "Operation 'FetchMember' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. Operation has no summary or description. Added clear action verb 'Retrieve', specified what is being retrieved (channel member), and included required parameters and expected response to aid AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14343,13 +13567,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "unclear_purpose",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Retrieve member details",
-      "description_suggestion": "Retrieves the details of a specific member in a channel within a service. Requires the service, channel, and member SIDs. Returns the member object.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that includes the required parameters and the expected return value.",
+      "summary_suggestion": "Retrieve a channel member by ID",
+      "description_suggestion": "Retrieves a specific member of a channel within a service. Requires the service SID, channel SID, and member SID. Returns the member object containing member details including identity, role, and channel membership status.",
+      "reasoning": "Operation has no summary or description. Added clear action verb 'Retrieve', specified what is being retrieved (channel member), and included required parameters and expected response to aid AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -14364,7 +13589,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteMember' has semantic quality issues: vague_summary, vague_description, missing_side_effects. The original summary and description were missing. Added a clear summary and description that includes the required parameters, the action performed, and the expected return value.",
+    "message": "Operation 'DeleteMember' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_side_effects. Operation lacks documentation. Added action verb 'Remove', clarified the scope (member from channel), and included important side effect information about permanent removal and access revocation for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14380,13 +13605,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "",
       "summary_suggestion": "Remove a member from a channel",
-      "description_suggestion": "Removes a specific member from a channel within a service. Requires the service, channel, and member SIDs. Returns a success message upon deletion.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that includes the required parameters, the action performed, and the expected return value.",
+      "description_suggestion": "Removes a member from a channel within a service. Requires the service SID, channel SID, and member SID. This operation permanently removes the member's access to the channel and cannot be undone without re-adding the member.",
+      "reasoning": "Operation lacks documentation. Added action verb 'Remove', clarified the scope (member from channel), and included important side effect information about permanent removal and access revocation for AI agent decision-making.",
       "batch_index": 2
     }
   },
@@ -14401,7 +13627,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateMember' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. The original summary and description were missing. Added a clear summary and description that includes the required parameters, the request body, and the expected return value.",
+    "message": "Operation 'UpdateMember' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details. Operation has no documentation. Added clear action verb 'Update', specified what can be modified (member attributes like role), included required parameters, and clarified the response to help AI agents understand the operation's scope and effects.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14417,14 +13643,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Update member information",
-      "description_suggestion": "Updates the information of a specific member in a channel within a service. Requires the service, channel, and member SIDs. Accepts an inline request body with the updated member details. Returns the updated member object.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that includes the required parameters, the request body, and the expected return value.",
+      "summary_suggestion": "Update a channel member's properties",
+      "description_suggestion": "Updates properties of a channel member within a service. Requires the service SID, channel SID, and member SID. Accepts request body with updatable member attributes such as role. Returns the updated member object with all current member details.",
+      "reasoning": "Operation has no documentation. Added clear action verb 'Update', specified what can be modified (member attributes like role), included required parameters, and clarified the response to help AI agents understand the operation's scope and effects.",
       "batch_index": 2
     }
   },
@@ -14439,7 +13666,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateMember' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. The original summary and description were missing. Added a clear summary and description that includes the required parameters, the request body, and the expected return value.",
+    "message": "Operation 'CreateMember' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details. Operation lacks documentation. Added action verb 'Add', specified required parameters and expected inputs (identity, optional role), and clarified the 201 response status and returned member object for proper AI agent interpretation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14455,14 +13682,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Add a new member to a channel",
-      "description_suggestion": "Adds a new member to a specific channel within a service. Requires the service and channel SIDs. Accepts an inline request body with the new member details. Returns the newly created member object.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that includes the required parameters, the request body, and the expected return value.",
+      "summary_suggestion": "Add a member to a channel",
+      "description_suggestion": "Adds a new member to a channel within a service. Requires the service SID and channel SID. Accepts request body with member identity and optional role assignment. Returns the newly created member object with HTTP 201 status, including member details and channel membership information.",
+      "reasoning": "Operation lacks documentation. Added action verb 'Add', specified required parameters and expected inputs (identity, optional role), and clarified the 201 response status and returned member object for proper AI agent interpretation.",
       "batch_index": 2
     }
   },
@@ -14477,7 +13705,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListMember' has semantic quality issues: vague_summary, vague_description, missing_input_details. The original summary and description were missing. Added a clear summary and description that includes the required parameters, optional query parameters, and the expected return value.",
+    "message": "Operation 'ListMember' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. Operation has no documentation. Added action verb 'List', specified the resource being listed (channel members), mentioned pagination support for handling large result sets, and clarified the response format to help AI agents understand how to process results.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14493,13 +13721,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "unclear_purpose",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "List members in a channel",
-      "description_suggestion": "Lists all members in a specific channel within a service. Requires the service and channel SIDs. Optionally accepts query parameters to filter the list. Returns a list of member objects.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that includes the required parameters, optional query parameters, and the expected return value.",
+      "summary_suggestion": "List all members in a channel",
+      "description_suggestion": "Retrieves a paginated list of all members in a channel within a service. Requires the service SID and channel SID. Supports filtering and pagination parameters. Returns a list of member objects containing member details, identities, roles, and channel membership status.",
+      "reasoning": "Operation has no documentation. Added action verb 'List', specified the resource being listed (channel members), mentioned pagination support for handling large result sets, and clarified the response format to help AI agents understand how to process results.",
       "batch_index": 2
     }
   },
@@ -14514,7 +13743,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchMessage' has semantic quality issues: vague_summary, vague_description, missing_input_details. The original summary and description were missing. Added a clear summary and description that includes the required parameters and the expected return value.",
+    "message": "Operation 'FetchMessage' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. Operation lacks documentation. Added clear action verb 'Retrieve', specified what is being retrieved (channel message), included required parameters, and described the response content to enable AI agents to understand the operation's purpose and output.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14530,13 +13759,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "unclear_purpose",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Retrieve message details",
-      "description_suggestion": "Retrieves the details of a specific message in a channel within a service. Requires the service, channel, and message SIDs. Returns the message object.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that includes the required parameters and the expected return value.",
+      "summary_suggestion": "Retrieve a channel message by ID",
+      "description_suggestion": "Retrieves a specific message from a channel within a service. Requires the service SID, channel SID, and message SID. Returns the message object containing message content, sender identity, timestamp, and delivery status.",
+      "reasoning": "Operation lacks documentation. Added clear action verb 'Retrieve', specified what is being retrieved (channel message), included required parameters, and described the response content to enable AI agents to understand the operation's purpose and output.",
       "batch_index": 2
     }
   },
@@ -14551,7 +13781,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteMessage' has semantic quality issues: vague_summary, vague_description, missing_side_effects. The original summary and description were missing. Added a clear summary and description that includes the required parameters, the action performed, and the expected return value.",
+    "message": "Operation 'DeleteMessage' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_side_effects. Operation has no documentation. Added action verb 'Delete', clarified the scope (message from channel), and included important side effect information about permanent removal and visibility impact for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14567,13 +13797,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Remove a message from a channel",
-      "description_suggestion": "Removes a specific message from a channel within a service. Requires the service, channel, and message SIDs. Returns a success message upon deletion.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that includes the required parameters, the action performed, and the expected return value.",
+      "summary_suggestion": "Delete a message from a channel",
+      "description_suggestion": "Deletes a message from a channel within a service. Requires the service SID, channel SID, and message SID. This operation permanently removes the message from the channel and makes it unavailable to all channel members.",
+      "reasoning": "Operation has no documentation. Added action verb 'Delete', clarified the scope (message from channel), and included important side effect information about permanent removal and visibility impact for AI agent decision-making.",
       "batch_index": 2
     }
   },
@@ -14588,7 +13819,561 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchChannel' has semantic quality issues: vague_summary, vague_description, missing_input_details. Original summary and description were missing. Added a clear summary and description that include the purpose, authentication requirement, and return value.",
+    "message": "Operation 'FetchCredential' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. Operation has no summary or description. Added action-oriented summary and description explaining what is fetched, what is returned, and authentication requirements for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchCredential",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Retrieve a specific credential by ID",
+      "description_suggestion": "Fetches a credential resource by its unique identifier (Sid). Returns the credential object containing push service configuration details including the push service type and associated credentials. Requires authentication with valid account credentials.",
+      "reasoning": "Operation has no summary or description. Added action-oriented summary and description explaining what is fetched, what is returned, and authentication requirements for AI agent clarity.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateCredential' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, missing_side_effects. Operation lacks summary and description. Added context about what is being updated, expected inputs, return value, partial update support, and side effects for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateCredential",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Update credential configuration",
+      "description_suggestion": "Updates an existing credential resource identified by its Sid. Accepts credential configuration parameters in the request body to modify push service settings. Returns the updated credential object. Supports partial updates - only provided fields will be modified. Changes take effect immediately.",
+      "reasoning": "Operation lacks summary and description. Added context about what is being updated, expected inputs, return value, partial update support, and side effects for AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteCredential' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_side_effects. Operation has no summary or description. Added action-oriented summary and description explaining the deletion action, its permanent nature, side effects on push services, and expected response for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteCredential",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Delete a credential resource",
+      "description_suggestion": "Permanently deletes a credential resource identified by its Sid. Once deleted, the credential cannot be recovered and any associated push service integrations will no longer function. Requires authentication. Returns HTTP 204 No Content on successful deletion.",
+      "reasoning": "Operation has no summary or description. Added action-oriented summary and description explaining the deletion action, its permanent nature, side effects on push services, and expected response for AI agent clarity.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchInvite' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. Operation lacks summary and description. Added action-oriented summary and description explaining the hierarchical resource structure, required parameters, return value, and authentication requirement for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchInvite",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Retrieve a specific channel invite",
+      "description_suggestion": "Fetches a specific invite resource for a channel within a service. Requires the service identifier (ServiceSid), channel identifier (ChannelSid), and invite identifier (Sid). Returns the invite object containing invitation details, recipient information, and invitation status. Requires authentication.",
+      "reasoning": "Operation lacks summary and description. Added action-oriented summary and description explaining the hierarchical resource structure, required parameters, return value, and authentication requirement for AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteInvite' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_side_effects. Operation has no summary or description. Added action-oriented summary and description explaining the hierarchical resource structure, required parameters, side effects of revocation, and expected response for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteInvite",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Revoke a channel invitation",
+      "description_suggestion": "Permanently revokes a channel invitation identified by its Sid within a specific service and channel. Requires the service identifier (ServiceSid), channel identifier (ChannelSid), and invite identifier (Sid). Once revoked, the invitation cannot be accepted by the recipient. Returns HTTP 204 No Content on successful deletion.",
+      "reasoning": "Operation has no summary or description. Added action-oriented summary and description explaining the hierarchical resource structure, required parameters, side effects of revocation, and expected response for AI agent clarity.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateInvite' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details. Operation lacks summary and description. Added action-oriented summary and description explaining the hierarchical resource structure, required parameters, expected inputs, return value, and subsequent user actions for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateInvite",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Create a new channel invitation",
+      "description_suggestion": "Creates a new invitation to join a channel within a service. Requires the service identifier (ServiceSid) and channel identifier (ChannelSid). Accepts invitation parameters in the request body including the identity of the user to invite. Returns the newly created invite object with HTTP 201 Created status. The invited user can then accept or decline the invitation.",
+      "reasoning": "Operation lacks summary and description. Added action-oriented summary and description explaining the hierarchical resource structure, required parameters, expected inputs, return value, and subsequent user actions for AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListInvite' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. Operation has no summary or description. Added action-oriented summary and description explaining the hierarchical resource structure, required parameters, pagination support, return value, and authentication requirement for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListInvite",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "List all invitations for a channel",
+      "description_suggestion": "Retrieves a paginated list of all invitations for a specific channel within a service. Requires the service identifier (ServiceSid) and channel identifier (ChannelSid). Supports filtering and pagination parameters including limit, offset, and ordering options. Returns a list of invite objects with pagination metadata. Requires authentication.",
+      "reasoning": "Operation has no summary or description. Added action-oriented summary and description explaining the hierarchical resource structure, required parameters, pagination support, return value, and authentication requirement for AI agent clarity.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateMessage' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Operation has no summary or description. Added clear action verb, context about what can be updated, required parameters, return value, and access control information to help AI agents understand when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateMessage",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Update a channel message",
+      "description_suggestion": "Updates an existing message in a channel. Allows modification of message content and attributes. Requires the Service SID, Channel SID, and Message SID. Returns the updated message object with all current properties including timestamp and author information. Only the message creator or service administrators can update messages.",
+      "reasoning": "Operation has no summary or description. Added clear action verb, context about what can be updated, required parameters, return value, and access control information to help AI agents understand when and how to use this operation.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateMessage' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Operation has no summary or description. Added action-oriented summary, clarified that this sends messages to channels, specified required parameters, explained what gets returned, and noted the immediate availability to channel members for AI agent context.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateMessage",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Send a message to a channel",
+      "description_suggestion": "Creates and sends a new message to a specified channel within a service. Requires the Service SID and Channel SID. The message body and sender information must be provided in the request. Returns the created message object with generated metadata including message SID, timestamp, and delivery status. Messages are immediately available to all channel members.",
+      "reasoning": "Operation has no summary or description. Added action-oriented summary, clarified that this sends messages to channels, specified required parameters, explained what gets returned, and noted the immediate availability to channel members for AI agent context.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListMessage' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, missing_context, poor_ai_interpretability. Operation has no summary or description. Added clear retrieval action, specified required path parameters, noted support for 6 query parameters (filtering/pagination), explained return format, and provided use case context for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListMessage",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Retrieve messages from a channel",
+      "description_suggestion": "Retrieves a paginated list of messages from a specified channel. Requires the Service SID and Channel SID. Supports filtering and sorting options through query parameters including order type, limit, and pagination tokens. Returns a collection of message objects with full message details. Useful for retrieving message history or implementing message feeds.",
+      "reasoning": "Operation has no summary or description. Added clear retrieval action, specified required path parameters, noted support for 6 query parameters (filtering/pagination), explained return format, and provided use case context for AI agents.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchRole' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, poor_ai_interpretability. Operation has no summary or description. Added clear fetch action, specified required parameters, explained return value, and provided domain context about role purpose in the service.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchRole",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Retrieve a service role",
+      "description_suggestion": "Retrieves a specific role within a service by its SID. Requires the Service SID and Role SID as path parameters. Returns the complete role object including role type, permissions, and metadata. Roles define access levels and capabilities for service members.",
+      "reasoning": "Operation has no summary or description. Added clear fetch action, specified required parameters, explained return value, and provided domain context about role purpose in the service.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteRole' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_side_effects, poor_ai_interpretability. Operation has no summary or description. Added clear delete action, specified required parameters, explained side effects regarding member assignments, and clarified the response status for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteRole",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Delete a service role",
+      "description_suggestion": "Deletes a role from a service. Requires the Service SID and Role SID as path parameters. This operation permanently removes the role definition. Members currently assigned to this role may be affected depending on service configuration. Returns HTTP 204 No Content on successful deletion.",
+      "reasoning": "Operation has no summary or description. Added clear delete action, specified required parameters, explained side effects regarding member assignments, and clarified the response status for AI agent understanding.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateRole' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Operation has no summary or description. Added clear update action, specified required parameters, explained what can be modified, clarified return value, and noted the impact on assigned members for AI agent context.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateRole",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Update a service role",
+      "description_suggestion": "Updates an existing role within a service. Requires the Service SID and Role SID as path parameters. Allows modification of role properties such as permissions and attributes. Returns the updated role object with all current properties. Changes apply to all members currently assigned to this role.",
+      "reasoning": "Operation has no summary or description. Added clear update action, specified required parameters, explained what can be modified, clarified return value, and noted the impact on assigned members for AI agent context.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateRole' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Operation has no summary or description. Added clear creation action, specified required parameter, explained what must be provided in request, clarified return value, and described the role's purpose for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateRole",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Create a new service role",
+      "description_suggestion": "Creates a new role within a service. Requires the Service SID as a path parameter. The request body must specify the role type and permissions configuration. Returns the created role object with generated role SID and metadata. The new role can then be assigned to service members to control their access levels and capabilities.",
+      "reasoning": "Operation has no summary or description. Added clear creation action, specified required parameter, explained what must be provided in request, clarified return value, and described the role's purpose for AI agent understanding.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchChannel' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. Operation has no summary or description. Added clear action verb, specified what is being retrieved, identified required parameters, and described the response structure to enable AI agents to understand when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14604,13 +14389,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "unclear_purpose",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Retrieve details of a specific channel",
-      "description_suggestion": "Fetches the details of a specific channel identified by the ServiceSid and Channel Sid. Requires authentication. Returns the channel object with its properties.",
-      "reasoning": "Original summary and description were missing. Added a clear summary and description that include the purpose, authentication requirement, and return value.",
+      "summary_suggestion": "Retrieve a specific channel by ID",
+      "description_suggestion": "Retrieves detailed information about a specific channel within a service. Requires the service SID and channel SID as identifiers. Returns the complete channel object including properties such as name, type, creation timestamp, and configuration details.",
+      "reasoning": "Operation has no summary or description. Added clear action verb, specified what is being retrieved, identified required parameters, and described the response structure to enable AI agents to understand when to use this operation.",
       "batch_index": 0
     }
   },
@@ -14625,7 +14411,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteChannel' has semantic quality issues: vague_summary, vague_description, missing_side_effects. Original summary and description were missing. Added a clear summary and description that include the purpose, authentication requirement, and return value.",
+    "message": "Operation 'DeleteChannel' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_side_effects. Operation lacks documentation. Added explicit action, required parameters, and critical side effects (permanent deletion, member access removal) to help AI agents understand the destructive nature of this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14641,13 +14427,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Remove a specific channel",
-      "description_suggestion": "Deletes a specific channel identified by the ServiceSid and Channel Sid. Requires authentication. Returns a success message upon deletion.",
-      "reasoning": "Original summary and description were missing. Added a clear summary and description that include the purpose, authentication requirement, and return value.",
+      "summary_suggestion": "Delete a channel from a service",
+      "description_suggestion": "Permanently deletes a channel from the specified service. Requires the service SID and channel SID. This operation removes the channel and all associated data. Members will no longer have access to the channel after deletion.",
+      "reasoning": "Operation lacks documentation. Added explicit action, required parameters, and critical side effects (permanent deletion, member access removal) to help AI agents understand the destructive nature of this operation.",
       "batch_index": 0
     }
   },
@@ -14662,7 +14449,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateChannel' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original summary and description were missing. Added a clear summary and description that include the purpose, authentication requirement, input details, and return value.",
+    "message": "Operation 'UpdateChannel' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details. No documentation provided. Added action clarity, specified which parameters can be modified, identified required path parameters, described return value, and noted partial update support for comprehensive AI agent guidance.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14678,14 +14465,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Modify details of a specific channel",
-      "description_suggestion": "Updates the details of a specific channel identified by the ServiceSid and Channel Sid. Requires authentication and includes the updated channel properties in the request body. Returns the updated channel object.",
-      "reasoning": "Original summary and description were missing. Added a clear summary and description that include the purpose, authentication requirement, input details, and return value.",
+      "summary_suggestion": "Update channel properties and configuration",
+      "description_suggestion": "Updates properties of an existing channel within a service. Accepts modifiable channel attributes such as friendly name, topic, and attributes. Requires the service SID and channel SID. Returns the updated channel object with all current properties. Supports partial updates - only provided fields are modified.",
+      "reasoning": "No documentation provided. Added action clarity, specified which parameters can be modified, identified required path parameters, described return value, and noted partial update support for comprehensive AI agent guidance.",
       "batch_index": 0
     }
   },
@@ -14700,7 +14488,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateChannel' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original summary and description were missing. Added a clear summary and description that include the purpose, authentication requirement, input details, and return value.",
+    "message": "Operation 'CreateChannel' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details. Missing all documentation. Added clear creation action, specified key input parameters (name, type, attributes), identified required service SID, and described the response including the assigned channel SID for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14716,14 +14504,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Create a new channel",
-      "description_suggestion": "Creates a new channel under a specific service identified by the ServiceSid. Requires authentication and includes the channel properties in the request body. Returns the newly created channel object.",
-      "reasoning": "Original summary and description were missing. Added a clear summary and description that include the purpose, authentication requirement, input details, and return value.",
+      "summary_suggestion": "Create a new channel in a service",
+      "description_suggestion": "Creates a new channel within the specified service. Accepts channel configuration including friendly name, unique name, channel type, and optional attributes. Requires the service SID. Returns the newly created channel object with assigned SID, creation timestamp, and all provided properties.",
+      "reasoning": "Missing all documentation. Added clear creation action, specified key input parameters (name, type, attributes), identified required service SID, and described the response including the assigned channel SID for AI agent clarity.",
       "batch_index": 0
     }
   },
@@ -14738,7 +14527,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListChannel' has semantic quality issues: vague_summary, vague_description, missing_input_details. Original summary and description were missing. Added a clear summary and description that include the purpose, authentication requirement, and input details.",
+    "message": "Operation 'ListChannel' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. No documentation present. Added list action, specified the service scope, noted pagination and filtering capabilities, and described the paginated response structure to help AI agents understand result handling.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14754,13 +14543,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "unclear_purpose",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
       "summary_suggestion": "List all channels in a service",
-      "description_suggestion": "Lists all channels in a specific service identified by the ServiceSid. Requires authentication. Returns a list of channel objects with optional filtering and pagination.",
-      "reasoning": "Original summary and description were missing. Added a clear summary and description that include the purpose, authentication requirement, and input details.",
+      "description_suggestion": "Retrieves a paginated list of all channels within the specified service. Supports filtering and pagination through query parameters including limit, offset, and type filters. Requires the service SID. Returns a collection of channel objects with pagination metadata.",
+      "reasoning": "No documentation present. Added list action, specified the service scope, noted pagination and filtering capabilities, and described the paginated response structure to help AI agents understand result handling.",
       "batch_index": 0
     }
   },
@@ -14775,7 +14565,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListCredential' has semantic quality issues: vague_summary, vague_description, missing_input_details. Original summary and description were missing. Added a clear summary and description that include the purpose, authentication requirement, and input details.",
+    "message": "Operation 'ListCredential' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. Missing documentation. Added specific context (push notification credentials), clarified the account-level scope, noted pagination support, and described the response structure including credential types for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14791,13 +14581,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "unclear_purpose",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "List all credentials",
-      "description_suggestion": "Lists all credentials associated with the account. Requires authentication. Returns a list of credential objects with optional filtering and pagination.",
-      "reasoning": "Original summary and description were missing. Added a clear summary and description that include the purpose, authentication requirement, and input details.",
+      "summary_suggestion": "List all push notification credentials",
+      "description_suggestion": "Retrieves a paginated list of all push notification credentials configured for the account. Supports pagination through query parameters including limit and offset. Returns a collection of credential objects containing push service type, friendly name, and configuration details.",
+      "reasoning": "Missing documentation. Added specific context (push notification credentials), clarified the account-level scope, noted pagination support, and described the response structure including credential types for AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -14812,7 +14603,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateCredential' has semantic quality issues: vague_summary, vague_description, missing_input_details. Original summary and description were missing. Added a clear summary and description that include the purpose, authentication requirement, and input details.",
+    "message": "Operation 'CreateCredential' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details. No documentation provided. Added specific credential type context (push notifications), specified input parameters including service types, identified the account-level scope, and described the response with assigned SID for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14828,14 +14619,293 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Create a new credential",
-      "description_suggestion": "Creates a new credential for the account. Requires authentication and includes the credential properties in the request body. Returns the newly created credential object.",
-      "reasoning": "Original summary and description were missing. Added a clear summary and description that include the purpose, authentication requirement, and input details.",
+      "summary_suggestion": "Create a push notification credential",
+      "description_suggestion": "Creates a new push notification credential for the account. Accepts credential configuration including push service type (e.g., GCM, APNS), friendly name, and service-specific authentication details. Returns the newly created credential object with assigned SID and all provided properties.",
+      "reasoning": "No documentation provided. Added specific credential type context (push notifications), specified input parameters including service types, identified the account-level scope, and described the response with assigned SID for AI agent clarity.",
       "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListRole' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, poor_ai_interpretability. Operation has no summary or description. AI agents need to understand that this retrieves roles (permission sets) for a service, what parameters control pagination, and what the response contains. Added domain context about roles defining permissions.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListRole",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "List all roles in a service",
+      "description_suggestion": "Retrieves a paginated list of all roles defined for a specific IP Messaging service. Roles define permission sets for channel members. Supports pagination via limit and offset parameters. Returns a list of role objects containing role SID, friendly name, type, and permission definitions.",
+      "reasoning": "Operation has no summary or description. AI agents need to understand that this retrieves roles (permission sets) for a service, what parameters control pagination, and what the response contains. Added domain context about roles defining permissions.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchService' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details, poor_ai_interpretability. Missing summary and description. AI agents need to know this retrieves a single service's details by SID and what information is returned. Added context about what service details are available.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchService",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Retrieve a specific IP Messaging service",
+      "description_suggestion": "Fetches detailed information about a specific IP Messaging service by its service SID. Returns the complete service object including configuration, status, and metadata such as friendly name, default role assignments, and webhook URLs.",
+      "reasoning": "Missing summary and description. AI agents need to know this retrieves a single service's details by SID and what information is returned. Added context about what service details are available.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteService' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_side_effects, poor_ai_interpretability. No summary or description provided. Critical to inform AI agents about destructive nature of this operation and its cascading effects on related resources. Added warning about permanence and side effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteService",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_side_effects",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Delete an IP Messaging service",
+      "description_suggestion": "Permanently deletes an IP Messaging service and all associated resources including channels, users, messages, and roles. This action cannot be undone. Requires the service SID as input. Returns HTTP 204 No Content on successful deletion.",
+      "reasoning": "No summary or description provided. Critical to inform AI agents about destructive nature of this operation and its cascading effects on related resources. Added warning about permanence and side effects.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateService' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, poor_ai_interpretability. Missing summary and description. AI agents need to understand what service properties can be modified, that partial updates are supported, and what is returned. Added clarity about updateable fields and response content.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateService",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Update IP Messaging service configuration",
+      "description_suggestion": "Updates configuration settings for an IP Messaging service. Supports partial updates to properties such as friendly name, default role assignments, and webhook URLs. Requires the service SID. Returns the updated service object with all current configuration details.",
+      "reasoning": "Missing summary and description. AI agents need to understand what service properties can be modified, that partial updates are supported, and what is returned. Added clarity about updateable fields and response content.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateService' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, poor_ai_interpretability. No summary or description. AI agents need to know this creates a new service, what required and optional inputs are needed, and what the response contains. Added context about required friendly name and optional configuration.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateService",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Create a new IP Messaging service",
+      "description_suggestion": "Creates a new IP Messaging service instance. Requires a friendly name for the service. Optional parameters include default role assignments and webhook configuration. Returns the newly created service object with assigned service SID and default configuration values.",
+      "reasoning": "No summary or description. AI agents need to know this creates a new service, what required and optional inputs are needed, and what the response contains. Added context about required friendly name and optional configuration.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListService' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, poor_ai_interpretability. Missing summary and description. AI agents need to understand this lists all services with pagination support and what information is returned. Added clarity about pagination parameters and response content.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListService",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "List all IP Messaging services",
+      "description_suggestion": "Retrieves a paginated list of all IP Messaging services in the account. Supports pagination via limit and offset parameters. Returns a list of service objects containing service SID, friendly name, creation date, and configuration status.",
+      "reasoning": "Missing summary and description. AI agents need to understand this lists all services with pagination support and what information is returned. Added clarity about pagination parameters and response content.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchUser' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details, poor_ai_interpretability. No summary or description provided. AI agents need to know this retrieves a single user's details within a service context, requires two identifiers, and what user information is returned. Added clarity about required parameters and response content.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchUser",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Retrieve a specific service user",
+      "description_suggestion": "Fetches detailed information about a specific user within an IP Messaging service. Requires both the service SID and user SID. Returns the user object including identity, friendly name, attributes, and channel membership information.",
+      "reasoning": "No summary or description provided. AI agents need to know this retrieves a single user's details within a service context, requires two identifiers, and what user information is returned. Added clarity about required parameters and response content.",
+      "batch_index": 4
     }
   },
   {

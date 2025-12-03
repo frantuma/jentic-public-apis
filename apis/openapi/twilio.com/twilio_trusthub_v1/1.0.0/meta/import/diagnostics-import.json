@@ -8205,7 +8205,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteTrustProductEntityAssignment' has semantic quality issues: vague_summary, vague_description, missing_side_effects. The current summary and description are vague. The suggestion provides a clear action, required parameters, and the side effect of the operation.",
+    "message": "Operation 'DeleteTrustProductEntityAssignment' has semantic quality issues: vague_summary, vague_description, missing_context, missing_side_effects, not_actionable. Original description is too generic and doesn't clarify what 'Assignment Item Instance' means in the Trusthub context. Improved version specifies that this removes entity-to-trust-product associations, explains the irreversible nature of deletion, and clarifies required parameters. This helps AI agents understand the operation's purpose and consequences.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8221,13 +8221,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_side_effects"
+        "missing_context",
+        "missing_side_effects",
+        "not_actionable"
       ],
       "current_summary": "Remove an Assignment Item Instance.",
       "current_description": "Remove an Assignment Item Instance.",
-      "summary_suggestion": "Delete a specific Trust Product Entity Assignment.",
-      "description_suggestion": "Deletes a specific Entity Assignment from a Trust Product. Requires the Trust Product SID and the Entity Assignment SID. Returns a success message upon deletion. The deletion will remove the specified Entity Assignment from the Trust Product.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action, required parameters, and the side effect of the operation.",
+      "summary_suggestion": "Delete a trust product entity assignment",
+      "description_suggestion": "Removes an entity assignment from a trust product. This operation deletes the association between an entity and the specified trust product, effectively unassigning the entity from the trust product. The assignment cannot be recovered after deletion. Requires the trust product SID and the assignment SID.",
+      "reasoning": "Original description is too generic and doesn't clarify what 'Assignment Item Instance' means in the Trusthub context. Improved version specifies that this removes entity-to-trust-product associations, explains the irreversible nature of deletion, and clarifies required parameters. This helps AI agents understand the operation's purpose and consequences.",
       "batch_index": 7
     }
   },
@@ -8242,7 +8244,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateTrustProductEvaluation' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The current description is vague. The suggestion provides details about the required parameters, the request schema, and the return value.",
+    "message": "Operation 'CreateTrustProductEvaluation' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details, unclear_purpose. Original description lacks domain context about what evaluations do in the Trusthub system. Improved version explains that evaluations assess compliance/verification, clarifies the purpose within the trust product lifecycle, and indicates what is returned. This helps AI agents understand when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8256,15 +8258,18 @@
       "operation_id": "CreateTrustProductEvaluation",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
+        "missing_context",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "unclear_purpose"
       ],
       "current_summary": "Create a new Evaluation",
       "current_description": "Create a new Evaluation",
-      "summary_suggestion": "Create a new Evaluation for a Trust Product.",
-      "description_suggestion": "Creates a new Evaluation for a specified Trust Product. Requires the Trust Product SID and the evaluation details. Returns the newly created Evaluation object with its unique SID.",
-      "reasoning": "The current description is vague. The suggestion provides details about the required parameters, the request schema, and the return value.",
+      "summary_suggestion": "Create a trust product evaluation",
+      "description_suggestion": "Creates a new evaluation for a trust product to assess compliance and verification status. This operation initiates an evaluation process that determines whether the trust product meets regulatory and platform requirements. Returns the created evaluation resource with its status, results, and any identified issues. The evaluation is associated with the specified trust product SID.",
+      "reasoning": "Original description lacks domain context about what evaluations do in the Trusthub system. Improved version explains that evaluations assess compliance/verification, clarifies the purpose within the trust product lifecycle, and indicates what is returned. This helps AI agents understand when to use this operation and what to expect.",
       "batch_index": 7
     }
   },
@@ -8279,44 +8284,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListTrustProductEvaluation' has semantic quality issues: vague_summary, vague_description, missing_input_details. The current summary and description are vague. The suggestion provides a clear action, required parameters, and the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListTrustProductEvaluation",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_input_details"
-      ],
-      "current_summary": "Retrieve a list of Evaluations associated to the trust_product resource.",
-      "current_description": "Retrieve a list of Evaluations associated to the trust_product resource.",
-      "summary_suggestion": "List all Evaluations for a Trust Product.",
-      "description_suggestion": "Retrieves a list of all Evaluations associated with a specified Trust Product. Requires the Trust Product SID. Returns a list of Evaluation objects.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action, required parameters, and the return value.",
-      "batch_index": 7
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchTrustProductEvaluation' has semantic quality issues: vague_summary, vague_description, missing_output_details. The current summary and description are vague. The suggestion provides a clear action, required parameters, and the return value.",
+    "message": "Operation 'FetchTrustProductEvaluation' has semantic quality issues: vague_summary, vague_description, missing_context, not_actionable. Original description uses generic 'Fetch' and 'Instance' terminology without domain context. Improved version clarifies that this retrieves a specific evaluation by SID, explains what data is returned (results, compliance status, issues), and provides context for when to use this operation. This enhances AI agent interpretability and helps distinguish this from other retrieval operations.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8332,13 +8300,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_output_details"
+        "missing_context",
+        "not_actionable"
       ],
       "current_summary": "Fetch specific Evaluation Instance.",
       "current_description": "Fetch specific Evaluation Instance.",
-      "summary_suggestion": "Retrieve a specific Evaluation for a Trust Product.",
-      "description_suggestion": "Retrieves a specific Evaluation for a specified Trust Product. Requires the Trust Product SID and the Evaluation SID. Returns the Evaluation object.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action, required parameters, and the return value.",
+      "summary_suggestion": "Retrieve a specific trust product evaluation",
+      "description_suggestion": "Retrieves a specific evaluation instance for a trust product by its evaluation SID. Returns the complete evaluation resource including assessment results, compliance status, identified issues, and timestamps. Use this operation to review detailed evaluation findings for a particular trust product evaluation.",
+      "reasoning": "Original description uses generic 'Fetch' and 'Instance' terminology without domain context. Improved version clarifies that this retrieves a specific evaluation by SID, explains what data is returned (results, compliance status, issues), and provides context for when to use this operation. This enhances AI agent interpretability and helps distinguish this from other retrieval operations.",
       "batch_index": 7
     }
   },
@@ -8353,328 +8322,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateEndUser' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about the authentication requirement and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateEndUser",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Create a new End User.",
-      "current_description": "Create a new End User.",
-      "description_suggestion": "Creates a new End User for an account. Requires authentication. Returns the newly created End User object.",
-      "reasoning": "The current description is too vague. Added context about the authentication requirement and return value.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListEndUser' has semantic quality issues: vague_description, missing_context. The current description is vague. Added context about the authentication requirement and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListEndUser",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Retrieve a list of all End User for an account.",
-      "current_description": "Retrieve a list of all End User for an account.",
-      "summary_suggestion": "Retrieve a list of all End Users.",
-      "description_suggestion": "Retrieves a list of all End Users registered for an account. Requires authentication. Returns a list of End User objects.",
-      "reasoning": "The current description is vague. Added context about the authentication requirement and return value.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchEndUser' has semantic quality issues: vague_description, missing_context. The current description is vague. Added context about the authentication requirement and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchEndUser",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Fetch specific End User Instance.",
-      "current_description": "Fetch specific End User Instance.",
-      "summary_suggestion": "Fetch a specific End User Instance.",
-      "description_suggestion": "Fetches a specific End User instance by its unique identifier. Requires authentication. Returns the End User object.",
-      "reasoning": "The current description is vague. Added context about the authentication requirement and return value.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'UpdateEndUser' has semantic quality issues: vague_description, missing_context. The current description is vague. Added context about the authentication requirement and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "UpdateEndUser",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Update an existing End User.",
-      "current_description": "Update an existing End User.",
-      "description_suggestion": "Updates an existing End User by its unique identifier. Requires authentication. Returns the updated End User object.",
-      "reasoning": "The current description is vague. Added context about the authentication requirement and return value.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeleteEndUser' has semantic quality issues: vague_description, missing_context. The current description is vague. Added context about the authentication requirement and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteEndUser",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Delete a specific End User.",
-      "current_description": "Delete a specific End User.",
-      "description_suggestion": "Deletes a specific End User by its unique identifier. Requires authentication. Returns a success message.",
-      "reasoning": "The current description is vague. Added context about the authentication requirement and return value.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListEndUserType' has semantic quality issues: vague_description, missing_context. The current description is vague. Added context about the authentication requirement and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListEndUserType",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Retrieve a list of all End-User Types.",
-      "current_description": "Retrieve a list of all End-User Types.",
-      "description_suggestion": "Retrieves a list of all End-User Types available for an account. Requires authentication. Returns a list of End-User Type objects.",
-      "reasoning": "The current description is vague. Added context about the authentication requirement and return value.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchEndUserType' has semantic quality issues: vague_description, missing_context. The current description is vague. Added context about the authentication requirement and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchEndUserType",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Fetch a specific End-User Type Instance.",
-      "current_description": "Fetch a specific End-User Type Instance.",
-      "description_suggestion": "Fetches a specific End-User Type instance by its unique identifier. Requires authentication. Returns the End-User Type object.",
-      "reasoning": "The current description is vague. Added context about the authentication requirement and return value.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'UpdateCustomerProfile' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The current summary and description are vague. The suggestion adds details about authentication, input parameters, and the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "UpdateCustomerProfile",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_input_details",
-        "missing_output_details"
-      ],
-      "current_summary": "Updates a Customer-Profile in an account.",
-      "current_description": "Updates a Customer-Profile in an account.",
-      "summary_suggestion": "Update a specific Customer-Profile.",
-      "description_suggestion": "Updates a specific Customer-Profile in an account with provided details. Requires authentication. Returns the updated Customer-Profile object.",
-      "reasoning": "The current summary and description are vague. The suggestion adds details about authentication, input parameters, and the return value.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateCustomerProfileChannelEndpointAssignment' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The current summary and description are vague. The suggestion adds details about authentication, input parameters, and the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateCustomerProfileChannelEndpointAssignment",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_input_details",
-        "missing_output_details"
-      ],
-      "current_summary": "Create a new Assigned Item.",
-      "current_description": "Create a new Assigned Item.",
-      "summary_suggestion": "Create a new Channel Endpoint Assignment for a Customer-Profile.",
-      "description_suggestion": "Creates a new Channel Endpoint Assignment for a specified Customer-Profile. Requires authentication and specific details. Returns the newly created Channel Endpoint Assignment object.",
-      "reasoning": "The current summary and description are vague. The suggestion adds details about authentication, input parameters, and the return value.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListSupportingDocumentType' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about what the operation retrieves and the authentication requirement.",
+    "message": "Operation 'ListSupportingDocumentType' has semantic quality issues: vague_description, missing_output_details, missing_context. Original description is repetitive and lacks context about what Supporting Document Types are used for, pagination support, and what the response contains. Added domain context about compliance verification and clarified the response structure for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8689,12 +8337,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_output_details",
         "missing_context"
       ],
       "current_summary": "Retrieve a list of all Supporting Document Types.",
       "current_description": "Retrieve a list of all Supporting Document Types.",
-      "description_suggestion": "Retrieves a list of all available Supporting Document Types for an account. This includes details such as type name, description, and associated metadata. Requires authentication.",
-      "reasoning": "The current description is too vague. Added context about what the operation retrieves and the authentication requirement.",
+      "summary_suggestion": "List all Supporting Document Types",
+      "description_suggestion": "Retrieves a paginated list of all Supporting Document Types available in the Trusthub system. Supporting Document Types define the categories of documents that can be submitted for compliance verification. Returns an array of Supporting Document Type objects with their identifiers, names, and field requirements.",
+      "reasoning": "Original description is repetitive and lacks context about what Supporting Document Types are used for, pagination support, and what the response contains. Added domain context about compliance verification and clarified the response structure for better AI agent understanding.",
       "batch_index": 5
     }
   },
@@ -8709,7 +8359,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchSupportingDocumentType' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about what the operation retrieves and the authentication requirement.",
+    "message": "Operation 'FetchSupportingDocumentType' has semantic quality issues: vague_description, missing_output_details, missing_context. Original description is vague and doesn't explain what information is returned or the purpose of the operation. Added clarity about the Sid parameter, response contents, and domain context about compliance verification for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8724,12 +8374,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_output_details",
         "missing_context"
       ],
       "current_summary": "Fetch a specific Supporting Document Type Instance.",
       "current_description": "Fetch a specific Supporting Document Type Instance.",
-      "description_suggestion": "Fetches a specific Supporting Document Type instance by its unique identifier. This includes details such as type name, description, and associated metadata. Requires authentication.",
-      "reasoning": "The current description is too vague. Added context about what the operation retrieves and the authentication requirement.",
+      "summary_suggestion": "Retrieve a Supporting Document Type by ID",
+      "description_suggestion": "Retrieves a specific Supporting Document Type by its unique identifier (Sid). Returns the Supporting Document Type object containing its name, description, required fields, and field specifications needed for document submission and compliance verification.",
+      "reasoning": "Original description is vague and doesn't explain what information is returned or the purpose of the operation. Added clarity about the Sid parameter, response contents, and domain context about compliance verification for better AI agent interpretability.",
       "batch_index": 5
     }
   },
@@ -8744,7 +8396,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateTrustProduct' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about what the operation does, the authentication requirement, and the return value.",
+    "message": "Operation 'CreateTrustProduct' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_context. Original description lacks all essential details about what a Trust Product is, what inputs are required, and what is returned. Added domain context explaining Trust Products' purpose in compliance verification, clarified required inputs, and specified the response structure for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8759,12 +8411,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_input_details",
+        "missing_output_details",
         "missing_context"
       ],
       "current_summary": "Create a new Trust Product.",
       "current_description": "Create a new Trust Product.",
-      "description_suggestion": "Creates a new Trust Product for an account. This includes specifying details such as product name, description, and associated metadata. Requires authentication. Returns the newly created Trust Product object.",
-      "reasoning": "The current description is too vague. Added context about what the operation does, the authentication requirement, and the return value.",
+      "summary_suggestion": "Create a new Trust Product",
+      "description_suggestion": "Creates a new Trust Product for an account. Trust Products represent phone numbers or messaging channels that require compliance verification and brand registration. Requires specifying the product type, friendly name, and associated customer profile. Returns the created Trust Product object with its unique identifier (Sid), status, and verification details.",
+      "reasoning": "Original description lacks all essential details about what a Trust Product is, what inputs are required, and what is returned. Added domain context explaining Trust Products' purpose in compliance verification, clarified required inputs, and specified the response structure for AI agent decision-making.",
       "batch_index": 5
     }
   },
@@ -8779,7 +8434,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListTrustProduct' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about what the operation retrieves and the authentication requirement.",
+    "message": "Operation 'ListTrustProduct' has semantic quality issues: vague_description, missing_output_details, missing_context. Original description is repetitive and doesn't explain what Trust Products are, filtering capabilities, or response structure. Added domain context about Trust Products' purpose, mentioned pagination and filtering support, and clarified the response contents for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8794,12 +8449,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_output_details",
         "missing_context"
       ],
       "current_summary": "Retrieve a list of all Trust Products for an account.",
       "current_description": "Retrieve a list of all Trust Products for an account.",
-      "description_suggestion": "Retrieves a list of all Trust Products for an account. This includes details such as product name, description, and associated metadata. Requires authentication.",
-      "reasoning": "The current description is too vague. Added context about what the operation retrieves and the authentication requirement.",
+      "summary_suggestion": "List Trust Products for account",
+      "description_suggestion": "Retrieves a paginated list of all Trust Products associated with the authenticated account. Trust Products represent phone numbers or messaging channels requiring compliance verification. Supports filtering by status and other criteria. Returns an array of Trust Product objects with their identifiers, types, verification statuses, and associated customer profiles.",
+      "reasoning": "Original description is repetitive and doesn't explain what Trust Products are, filtering capabilities, or response structure. Added domain context about Trust Products' purpose, mentioned pagination and filtering support, and clarified the response contents for better AI agent understanding.",
       "batch_index": 5
     }
   },
@@ -8814,7 +8471,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchTrustProduct' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about what the operation retrieves and the authentication requirement.",
+    "message": "Operation 'FetchTrustProduct' has semantic quality issues: vague_description, missing_output_details, missing_context. Original description is vague and doesn't explain what information is returned or the purpose of fetching a specific Trust Product. Added clarity about the Sid parameter, comprehensive response contents including verification status and evaluations, for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8829,12 +8486,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_output_details",
         "missing_context"
       ],
       "current_summary": "Fetch a specific Trust Product instance.",
       "current_description": "Fetch a specific Trust Product instance.",
-      "description_suggestion": "Fetches a specific Trust Product instance by its unique identifier. This includes details such as product name, description, and associated metadata. Requires authentication.",
-      "reasoning": "The current description is too vague. Added context about what the operation retrieves and the authentication requirement.",
+      "summary_suggestion": "Retrieve a Trust Product by ID",
+      "description_suggestion": "Retrieves a specific Trust Product by its unique identifier (Sid). Returns the complete Trust Product object including its type, friendly name, verification status, associated customer profile, compliance evaluation results, and channel endpoint assignments.",
+      "reasoning": "Original description is vague and doesn't explain what information is returned or the purpose of fetching a specific Trust Product. Added clarity about the Sid parameter, comprehensive response contents including verification status and evaluations, for better AI agent interpretability.",
       "batch_index": 5
     }
   },
@@ -8849,7 +8508,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateTrustProduct' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about what the operation does, the authentication requirement, and the return value.",
+    "message": "Operation 'UpdateTrustProduct' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description lacks details about what can be updated, whether partial updates are supported, and what side effects occur. Added clarity about updateable fields, partial update support, response contents, and important side effect about compliance re-evaluation for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8864,12 +8523,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Updates a Trust Product in an account.",
       "current_description": "Updates a Trust Product in an account.",
-      "description_suggestion": "Updates a specific Trust Product in an account by its unique identifier. This includes modifying details such as product name, description, and associated metadata. Requires authentication. Returns the updated Trust Product object.",
-      "reasoning": "The current description is too vague. Added context about what the operation does, the authentication requirement, and the return value.",
+      "summary_suggestion": "Update a Trust Product",
+      "description_suggestion": "Updates an existing Trust Product identified by its Sid. Allows modification of friendly name, customer profile association, and other mutable properties. Supports partial updates - only provided fields will be modified. Returns the updated Trust Product object with its new state and verification status. Note: Changing certain properties may trigger re-evaluation of compliance status.",
+      "reasoning": "Original description lacks details about what can be updated, whether partial updates are supported, and what side effects occur. Added clarity about updateable fields, partial update support, response contents, and important side effect about compliance re-evaluation for AI agent decision-making.",
       "batch_index": 5
     }
   },
@@ -8884,7 +8546,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteTrustProduct' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about what the operation does, the authentication requirement, and the return value.",
+    "message": "Operation 'DeleteTrustProduct' has semantic quality issues: vague_description, missing_output_details, missing_side_effects, missing_context. Original description is minimal and doesn't explain side effects or consequences of deletion. Added important context about what gets deleted (channel assignments), permanence of the action, response code, and critical side effect about impact on active channels for AI agent safety and understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8899,12 +8561,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_output_details",
+        "missing_side_effects",
         "missing_context"
       ],
       "current_summary": "Delete a specific Trust Product.",
       "current_description": "Delete a specific Trust Product.",
-      "description_suggestion": "Deletes a specific Trust Product by its unique identifier. Requires authentication. Returns a success message if the deletion is successful.",
-      "reasoning": "The current description is too vague. Added context about what the operation does, the authentication requirement, and the return value.",
+      "summary_suggestion": "Delete a Trust Product",
+      "description_suggestion": "Deletes a specific Trust Product identified by its Sid. Removes the Trust Product and its associated channel endpoint assignments from the account. This action is permanent and cannot be undone. Returns a 204 No Content response on successful deletion. Note: Deleting a Trust Product may affect active phone numbers or messaging channels associated with it.",
+      "reasoning": "Original description is minimal and doesn't explain side effects or consequences of deletion. Added important context about what gets deleted (channel assignments), permanence of the action, response code, and critical side effect about impact on active channels for AI agent safety and understanding.",
       "batch_index": 5
     }
   },
@@ -8919,7 +8584,792 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateCustomerProfileEntityAssignment' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are vague. The suggestions provide clarity on the operation's purpose and context, making it more understandable for AI agents.",
+    "message": "Operation 'CreateEndUser' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is identical to summary and lacks essential details. Added context about what an End User represents in the Trusthub domain, what inputs are expected, what is returned (including the Sid identifier), and the side effect of creating a new assignable resource. This helps AI agents understand the operation's purpose and when to use it.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateEndUser",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Create a new End User.",
+      "current_description": "Create a new End User.",
+      "summary_suggestion": "Create a new End User resource",
+      "description_suggestion": "Creates a new End User resource in the Trusthub system. The End User represents an individual or entity that will be associated with customer profiles or trust products. Accepts End User details (such as name, type, and attributes) in the request body. Returns the created End User object with a unique Sid identifier. This operation establishes a new End User record that can subsequently be assigned to customer profiles or trust products.",
+      "reasoning": "Original description is identical to summary and lacks essential details. Added context about what an End User represents in the Trusthub domain, what inputs are expected, what is returned (including the Sid identifier), and the side effect of creating a new assignable resource. This helps AI agents understand the operation's purpose and when to use it.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListEndUser' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Original description lacks specificity about pagination, filtering capabilities, and return format. Enhanced to clarify that results are paginated, mention parameter support, specify the return format (array of objects with Sids), and provide context for when an AI agent should use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListEndUser",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a list of all End User for an account.",
+      "current_description": "Retrieve a list of all End User for an account.",
+      "summary_suggestion": "List all End Users for account",
+      "description_suggestion": "Retrieves a paginated list of all End User resources associated with the authenticated account. Supports filtering and pagination parameters to control the result set. Returns an array of End User objects with their details and unique Sid identifiers. Use this operation to discover existing End Users or to audit End User records within your account.",
+      "reasoning": "Original description lacks specificity about pagination, filtering capabilities, and return format. Enhanced to clarify that results are paginated, mention parameter support, specify the return format (array of objects with Sids), and provide context for when an AI agent should use this operation.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchEndUser' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Original description uses vague terminology ('Instance'). Improved by clarifying the required input (Sid parameter), specifying what is returned (complete End User object with attributes), and providing context for when to use this operation. More precise for AI agent interpretation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchEndUser",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Fetch specific End User Instance.",
+      "current_description": "Fetch specific End User Instance.",
+      "summary_suggestion": "Retrieve a specific End User by Sid",
+      "description_suggestion": "Retrieves a specific End User resource by its unique Sid identifier. Returns the complete End User object including all attributes and metadata. Use this operation when you need to access detailed information about a particular End User or verify an End User's current state.",
+      "reasoning": "Original description uses vague terminology ('Instance'). Improved by clarifying the required input (Sid parameter), specifying what is returned (complete End User object with attributes), and providing context for when to use this operation. More precise for AI agent interpretation.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateEndUser' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description lacks critical details about the Sid parameter requirement, what can be updated, whether partial updates are supported, and potential side effects. Enhanced to clarify all inputs, specify partial update support, indicate the return value, and mention downstream effects on associated resources.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateEndUser",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Update an existing End User.",
+      "current_description": "Update an existing End User.",
+      "summary_suggestion": "Update End User attributes",
+      "description_suggestion": "Updates an existing End User resource identified by its Sid. Accepts updated End User attributes in the request body. Supports partial updates - only provided fields will be modified. Returns the updated End User object reflecting all changes. This operation modifies the End User's properties and may affect any associated customer profiles or trust products.",
+      "reasoning": "Original description lacks critical details about the Sid parameter requirement, what can be updated, whether partial updates are supported, and potential side effects. Enhanced to clarify all inputs, specify partial update support, indicate the return value, and mention downstream effects on associated resources.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteEndUser' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description lacks input parameter details, response information, and critical side effect warnings. Enhanced to specify the Sid requirement, clarify the response (204 No Content), and warn about potential impacts on associated resources. This helps AI agents understand the destructive nature of this operation and when it's appropriate to use.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteEndUser",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete a specific End User.",
+      "current_description": "Delete a specific End User.",
+      "summary_suggestion": "Delete an End User resource",
+      "description_suggestion": "Deletes a specific End User resource identified by its Sid. Removes the End User record from the Trusthub system. Returns a 204 No Content response on successful deletion. Note: Deleting an End User may impact any customer profiles or trust products that reference this End User. Ensure the End User is no longer needed before deletion.",
+      "reasoning": "Original description lacks input parameter details, response information, and critical side effect warnings. Enhanced to specify the Sid requirement, clarify the response (204 No Content), and warn about potential impacts on associated resources. This helps AI agents understand the destructive nature of this operation and when it's appropriate to use.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListEndUserType' has semantic quality issues: vague_description, missing_output_details. Original description lacks context about what End-User Types represent, pagination details, and return format. Enhanced to explain the domain concept (types define classifications), clarify pagination support, specify the return format, and provide guidance on when to use this operation for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListEndUserType",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a list of all End-User Types.",
+      "current_description": "Retrieve a list of all End-User Types.",
+      "summary_suggestion": "List available End-User Types",
+      "description_suggestion": "Retrieves a paginated list of all available End-User Types in the Trusthub system. End-User Types define the categories or classifications of End Users (e.g., individual, business, etc.). Supports filtering and pagination parameters. Returns an array of End-User Type objects with their identifiers and descriptions. Use this operation to discover valid End-User Types when creating or updating End Users.",
+      "reasoning": "Original description lacks context about what End-User Types represent, pagination details, and return format. Enhanced to explain the domain concept (types define classifications), clarify pagination support, specify the return format, and provide guidance on when to use this operation for AI agent decision-making.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchEndUserType' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Original description uses vague terminology ('Instance'). Improved by clarifying the required Sid input parameter, specifying what fields are returned in the response, and providing context for when an AI agent should use this operation. More precise and actionable for AI interpretation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchEndUserType",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Fetch a specific End-User Type Instance.",
+      "current_description": "Fetch a specific End-User Type Instance.",
+      "summary_suggestion": "Retrieve a specific End-User Type",
+      "description_suggestion": "Retrieves a specific End-User Type resource by its unique Sid identifier. Returns the complete End-User Type object including its identifier, name, description, and other metadata. Use this operation to access detailed information about a particular End-User Type or verify its current definition.",
+      "reasoning": "Original description uses vague terminology ('Instance'). Improved by clarifying the required Sid input parameter, specifying what fields are returned in the response, and providing context for when an AI agent should use this operation. More precise and actionable for AI interpretation.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListPolicies' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details. Original description is too generic and lacks domain context. Added clarity about pagination support, filtering capabilities, and what policy information is returned. Improved summary to be more specific about the policy domain context for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListPolicies",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a list of all Policys.",
+      "current_description": "Retrieve a list of all Policys.",
+      "summary_suggestion": "List all compliance policies",
+      "description_suggestion": "Retrieves a paginated list of all compliance policies available in the Trusthub. Supports filtering and pagination through query parameters. Returns an array of policy objects containing policy identifiers, names, descriptions, and requirements.",
+      "reasoning": "Original description is too generic and lacks domain context. Added clarity about pagination support, filtering capabilities, and what policy information is returned. Improved summary to be more specific about the policy domain context for better AI agent understanding.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchPolicies' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details. Original description lacks specificity about what constitutes the policy object and what the Sid parameter represents. Added clarity about required input parameter and comprehensive output details for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchPolicies",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Fetch specific Policy Instance.",
+      "current_description": "Fetch specific Policy Instance.",
+      "summary_suggestion": "Retrieve a specific compliance policy",
+      "description_suggestion": "Retrieves a specific compliance policy by its unique identifier (Sid). Returns the complete policy object including policy name, description, requirements, and applicable compliance rules. Requires a valid policy Sid as input.",
+      "reasoning": "Original description lacks specificity about what constitutes the policy object and what the Sid parameter represents. Added clarity about required input parameter and comprehensive output details for AI agent decision-making.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateSupportingDocument' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details, missing_side_effects. Original description provides no context about what supporting documents are used for, what inputs are required, or what the created resource contains. Added domain context about compliance verification, clarified expected inputs and outputs, and explained the side effect of document availability for assignment.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateSupportingDocument",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Create a new Supporting Document.",
+      "current_description": "Create a new Supporting Document.",
+      "summary_suggestion": "Create a new supporting document",
+      "description_suggestion": "Creates a new supporting document for compliance verification in Trusthub. Accepts document metadata including type, file reference, and associated entity information. Returns the created supporting document object with assigned Sid, creation timestamp, and initial verification status. The document becomes available for assignment to customer profiles or trust products.",
+      "reasoning": "Original description provides no context about what supporting documents are used for, what inputs are required, or what the created resource contains. Added domain context about compliance verification, clarified expected inputs and outputs, and explained the side effect of document availability for assignment.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListSupportingDocument' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details. Original description is vague about filtering and pagination capabilities. Added clarity about supported query parameters, filtering options, and what information is returned in each document object for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListSupportingDocument",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a list of all Supporting Document for an account.",
+      "current_description": "Retrieve a list of all Supporting Document for an account.",
+      "summary_suggestion": "List account supporting documents",
+      "description_suggestion": "Retrieves a paginated list of all supporting documents associated with the authenticated account. Supports filtering by document type and status, and pagination through query parameters. Returns an array of supporting document objects including Sid, type, status, and metadata for each document.",
+      "reasoning": "Original description is vague about filtering and pagination capabilities. Added clarity about supported query parameters, filtering options, and what information is returned in each document object for better AI agent interpretability.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchSupportingDocument' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details. Original description lacks specificity about input requirements and output content. Added clarity about the Sid parameter requirement and comprehensive details about what information is returned in the document object.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchSupportingDocument",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Fetch specific Supporting Document Instance.",
+      "current_description": "Fetch specific Supporting Document Instance.",
+      "summary_suggestion": "Retrieve a specific supporting document",
+      "description_suggestion": "Retrieves a specific supporting document by its unique identifier (Sid). Returns the complete supporting document object including document type, status, file reference, associated entities, creation and update timestamps, and verification details. Requires a valid supporting document Sid as input.",
+      "reasoning": "Original description lacks specificity about input requirements and output content. Added clarity about the Sid parameter requirement and comprehensive details about what information is returned in the document object.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateSupportingDocument' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details, missing_side_effects. Original description provides no context about what fields can be updated or what the side effects are. Added clarity about partial update support, return value, and important side effect about potential re-evaluation of dependent resources.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateSupportingDocument",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Update an existing Supporting Document.",
+      "current_description": "Update an existing Supporting Document.",
+      "summary_suggestion": "Update supporting document details",
+      "description_suggestion": "Updates an existing supporting document identified by its Sid. Allows modification of document metadata, file references, and associated entity information. Supports partial updates - only provided fields will be modified. Returns the updated supporting document object with modified timestamp. Changes may trigger re-evaluation of associated customer profiles or trust products.",
+      "reasoning": "Original description provides no context about what fields can be updated or what the side effects are. Added clarity about partial update support, return value, and important side effect about potential re-evaluation of dependent resources.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteSupportingDocument' has semantic quality issues: vague_description, missing_context, missing_side_effects. Original description lacks context about the permanence of deletion and important side effects. Added clarity about what happens to the document and its assignments, and emphasized the destructive nature of this operation for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteSupportingDocument",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete a specific Supporting Document.",
+      "current_description": "Delete a specific Supporting Document.",
+      "summary_suggestion": "Delete a supporting document",
+      "description_suggestion": "Permanently deletes a specific supporting document identified by its Sid. The document is removed from the system and becomes unavailable for assignment to customer profiles or trust products. Any existing assignments to this document will be affected. Requires a valid supporting document Sid as input.",
+      "reasoning": "Original description lacks context about the permanence of deletion and important side effects. Added clarity about what happens to the document and its assignments, and emphasized the destructive nature of this operation for AI agent decision-making.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateComplianceInquiry' has semantic quality issues: missing_output_details, missing_context. Original description lacks clarity about what is returned and how the session identifier is used. Added details about the response structure and the purpose of the session for AI agent understanding. Improved summary to be more concise and action-oriented.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateComplianceInquiry",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Create a new Compliance Inquiry for the authenticated account. This is necessary to start a new embedded session.",
+      "current_description": "Create a new Compliance Inquiry for the authenticated account. This is necessary to start a new embedded session.",
+      "summary_suggestion": "Initialize a new Compliance Inquiry for embedded session",
+      "description_suggestion": "Creates a new Compliance Inquiry for the authenticated account to initiate an embedded compliance verification session. Returns a compliance inquiry resource with a session identifier that can be used to embed the compliance workflow in your application. This operation is required before users can begin the compliance verification process.",
+      "reasoning": "Original description lacks clarity about what is returned and how the session identifier is used. Added details about the response structure and the purpose of the session for AI agent understanding. Improved summary to be more concise and action-oriented.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateComplianceInquiry' has semantic quality issues: missing_input_details, missing_output_details, missing_context. Missing details about the CustomerId parameter requirement and what the response contains. Added clarity about when to use this operation and what session information is returned for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateComplianceInquiry",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Resume a specific Compliance Inquiry that has expired, or re-open a rejected Compliance Inquiry for editing.",
+      "current_description": "Resume a specific Compliance Inquiry that has expired, or re-open a rejected Compliance Inquiry for editing.",
+      "summary_suggestion": "Resume or re-open an existing Compliance Inquiry",
+      "description_suggestion": "Resumes a specific Compliance Inquiry identified by CustomerId that has expired, or re-opens a rejected Compliance Inquiry for editing. Requires the CustomerId path parameter. Returns the compliance inquiry resource with an updated session identifier for continuing the embedded compliance verification workflow. Use this operation to allow users to resume incomplete or rejected compliance inquiries.",
+      "reasoning": "Missing details about the CustomerId parameter requirement and what the response contains. Added clarity about when to use this operation and what session information is returned for AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateComplianceRegistration' has semantic quality issues: missing_output_details, missing_context. Description lacks specificity about GB regulatory context and what is returned. Added geographic and regulatory context, clarified the response structure, and explained the purpose of the session identifier for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateComplianceRegistration",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Initialize a new Compliance Registration Inquiry for embedded session",
+      "current_description": "Create a new Compliance Registration Inquiry for the authenticated account. This is necessary to start a new embedded session.",
+      "summary_suggestion": "Initialize a new Regulatory Compliance Registration Inquiry",
+      "description_suggestion": "Creates a new Compliance Registration Inquiry for GB regulatory compliance for the authenticated account to initiate an embedded registration verification session. Returns a compliance registration resource with a session identifier for embedding the regulatory compliance workflow in your application. This operation is required before users can begin the GB regulatory compliance registration process.",
+      "reasoning": "Description lacks specificity about GB regulatory context and what is returned. Added geographic and regulatory context, clarified the response structure, and explained the purpose of the session identifier for AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateComplianceRegistration' has semantic quality issues: missing_input_details, missing_output_details, missing_context. Missing details about the RegistrationId parameter and response content. Added clarity about parameter requirements, response structure, and the specific use case for resuming GB regulatory compliance registrations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateComplianceRegistration",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Resume a specific Regulatory Compliance Inquiry that has expired, or re-open a rejected Compliance Inquiry for editing.",
+      "current_description": "Resume a specific Regulatory Compliance Inquiry that has expired, or re-open a rejected Compliance Inquiry for editing.",
+      "summary_suggestion": "Resume or re-open an existing Regulatory Compliance Registration",
+      "description_suggestion": "Resumes a specific Regulatory Compliance Registration Inquiry identified by RegistrationId that has expired, or re-opens a rejected Compliance Registration Inquiry for editing. Requires the RegistrationId path parameter. Returns the compliance registration resource with an updated session identifier for continuing the embedded GB regulatory compliance workflow. Use this operation to allow users to resume incomplete or rejected regulatory compliance registrations.",
+      "reasoning": "Missing details about the RegistrationId parameter and response content. Added clarity about parameter requirements, response structure, and the specific use case for resuming GB regulatory compliance registrations.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateComplianceTollfreeInquiry' has semantic quality issues: missing_output_details, missing_context. Description lacks clarity about what is returned and the specific tollfree verification context. Added details about the response structure and clarified the purpose of the session identifier for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateComplianceTollfreeInquiry",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Create a new Compliance Tollfree Verification Inquiry for the authenticated account. This is necessary to start a new embedded session.",
+      "current_description": "Create a new Compliance Tollfree Verification Inquiry for the authenticated account. This is necessary to start a new embedded session.",
+      "summary_suggestion": "Initialize a new Tollfree Compliance Verification Inquiry",
+      "description_suggestion": "Creates a new Compliance Tollfree Verification Inquiry for the authenticated account to initiate an embedded tollfree compliance verification session. Returns a compliance inquiry resource with a session identifier that can be used to embed the tollfree verification workflow in your application. This operation is required before users can begin the tollfree compliance verification process.",
+      "reasoning": "Description lacks clarity about what is returned and the specific tollfree verification context. Added details about the response structure and clarified the purpose of the session identifier for AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateCustomerProfile' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_context. Original description is extremely vague with no context about purpose or what is returned. Added domain context about the Customer Profile's role in the trust verification workflow, clarified the response structure, and explained the prerequisite nature of this operation for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateCustomerProfile",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Create a new Customer-Profile.",
+      "current_description": "Create a new Customer-Profile.",
+      "summary_suggestion": "Create a new Customer Profile for trust verification",
+      "description_suggestion": "Creates a new Customer Profile resource for the authenticated account. The Customer Profile serves as a container for managing end users, supporting documents, and trust product assignments for compliance and verification purposes. Returns the created Customer Profile object with a unique profile identifier, status, and timestamps. The profile must be created before assigning end users or trust products.",
+      "reasoning": "Original description is extremely vague with no context about purpose or what is returned. Added domain context about the Customer Profile's role in the trust verification workflow, clarified the response structure, and explained the prerequisite nature of this operation for AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListCustomerProfile' has semantic quality issues: missing_output_details, missing_context. Description lacks details about pagination, filtering capabilities, and what information is returned in the response. Added clarity about query parameter support, response structure, and use cases for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListCustomerProfile",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Retrieve a list of all Customer-Profiles for an account.",
+      "current_description": "Retrieve a list of all Customer-Profiles for an account.",
+      "summary_suggestion": "List all Customer Profiles for the account",
+      "description_suggestion": "Retrieves a paginated list of all Customer Profile resources for the authenticated account. Supports filtering and pagination through query parameters. Returns an array of Customer Profile objects with their verification status, associated end users, and trust product assignments. Use this operation to discover existing profiles or monitor their compliance status.",
+      "reasoning": "Description lacks details about pagination, filtering capabilities, and what information is returned in the response. Added clarity about query parameter support, response structure, and use cases for AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateCustomerProfileEntityAssignment' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details, poor_ai_interpretability. Original description is too generic and doesn't explain the domain context. 'Assigned Item' is vague terminology. Improved version clarifies that this assigns end user entities to customer profiles, explains the business purpose (compliance/verification), specifies required inputs (profile SID, entity SID), and describes the return value. This helps AI agents understand when to use this operation in the Trusthub workflow.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8935,13 +9385,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Create a new Assigned Item.",
       "current_description": "Create a new Assigned Item.",
-      "summary_suggestion": "Create a new Entity Assignment for a Customer Profile.",
-      "description_suggestion": "Creates a new Entity Assignment for a specified Customer Profile. Requires the CustomerProfileSid as a parameter. Returns the newly created Entity Assignment details.",
-      "reasoning": "The current summary and description are vague. The suggestions provide clarity on the operation's purpose and context, making it more understandable for AI agents.",
+      "summary_suggestion": "Assign an end user entity to customer profile",
+      "description_suggestion": "Creates a new entity assignment linking an end user to a customer profile within the Trusthub system. This operation associates an end user entity with a specific customer profile, enabling the entity to be used for compliance and verification purposes. Requires the customer profile SID and the end user entity SID as inputs. Returns the created entity assignment resource with assignment details and timestamps.",
+      "reasoning": "Original description is too generic and doesn't explain the domain context. 'Assigned Item' is vague terminology. Improved version clarifies that this assigns end user entities to customer profiles, explains the business purpose (compliance/verification), specifies required inputs (profile SID, entity SID), and describes the return value. This helps AI agents understand when to use this operation in the Trusthub workflow.",
       "batch_index": 2
     }
   },
@@ -8956,7 +9409,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListCustomerProfileEntityAssignment' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are vague. The suggestions provide clarity on the operation's purpose and context, making it more understandable for AI agents.",
+    "message": "Operation 'ListCustomerProfileEntityAssignment' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, poor_ai_interpretability. Original description lacks domain context and clarity about what 'Assigned Items' are. Improved version specifies that it lists entity assignments for a customer profile, mentions pagination support, clarifies the return structure, and explains the compliance use case. This helps AI agents understand the operation's purpose and when to use it in verification workflows.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8972,13 +9425,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Retrieve a list of all Assigned Items for an account.",
       "current_description": "Retrieve a list of all Assigned Items for an account.",
-      "summary_suggestion": "List all Entity Assignments for a Customer Profile.",
-      "description_suggestion": "Retrieves a list of all Entity Assignments associated with a specified Customer Profile. Parameters can be used to filter the results. Returns a list of Entity Assignment objects.",
-      "reasoning": "The current summary and description are vague. The suggestions provide clarity on the operation's purpose and context, making it more understandable for AI agents.",
+      "summary_suggestion": "List entity assignments for customer profile",
+      "description_suggestion": "Retrieves a paginated list of all entity assignments associated with a specific customer profile. Returns all end user entities currently assigned to the customer profile, including assignment status, creation timestamps, and entity details. Supports filtering and pagination parameters to manage large result sets. Useful for auditing which entities are linked to a customer profile for compliance purposes.",
+      "reasoning": "Original description lacks domain context and clarity about what 'Assigned Items' are. Improved version specifies that it lists entity assignments for a customer profile, mentions pagination support, clarifies the return structure, and explains the compliance use case. This helps AI agents understand the operation's purpose and when to use it in verification workflows.",
       "batch_index": 2
     }
   },
@@ -8993,7 +9448,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchCustomerProfileEntityAssignment' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are vague. The suggestions provide clarity on the operation's purpose and context, making it more understandable for AI agents.",
+    "message": "Operation 'FetchCustomerProfileEntityAssignment' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, poor_ai_interpretability. Original description uses vague terminology ('Assigned Item Instance') without domain context. Improved version clarifies that it retrieves a specific entity assignment, specifies required parameters (profile SID and assignment SID), and describes the returned fields. This enables AI agents to understand the operation's purpose and required inputs.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9009,13 +9464,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Fetch specific Assigned Item Instance.",
       "current_description": "Fetch specific Assigned Item Instance.",
-      "summary_suggestion": "Fetch a specific Entity Assignment for a Customer Profile.",
-      "description_suggestion": "Fetches a specific Entity Assignment for a specified Customer Profile by its unique identifier. Returns the details of the Entity Assignment.",
-      "reasoning": "The current summary and description are vague. The suggestions provide clarity on the operation's purpose and context, making it more understandable for AI agents.",
+      "summary_suggestion": "Retrieve a specific entity assignment",
+      "description_suggestion": "Retrieves details of a specific entity assignment within a customer profile. Returns the complete entity assignment resource including the assigned end user entity SID, assignment status, creation and update timestamps, and any associated metadata. Requires both the customer profile SID and the entity assignment SID to identify the specific assignment to retrieve.",
+      "reasoning": "Original description uses vague terminology ('Assigned Item Instance') without domain context. Improved version clarifies that it retrieves a specific entity assignment, specifies required parameters (profile SID and assignment SID), and describes the returned fields. This enables AI agents to understand the operation's purpose and required inputs.",
       "batch_index": 2
     }
   },
@@ -9030,7 +9487,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteCustomerProfileEntityAssignment' has semantic quality issues: vague_description, missing_context. The current description is vague. The suggestion provides clarity on the operation's purpose and context, making it more understandable for AI agents.",
+    "message": "Operation 'DeleteCustomerProfileEntityAssignment' has semantic quality issues: vague_summary, vague_description, missing_context, missing_side_effects, poor_ai_interpretability. Original description is vague and doesn't explain side effects. Improved version clarifies the action (unassigning an entity), explains the business impact (entity no longer available for the profile), specifies required parameters, and warns that deletion is permanent. This helps AI agents understand the consequences of this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9044,13 +9501,17 @@
       "operation_id": "DeleteCustomerProfileEntityAssignment",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Remove an Assignment Item Instance.",
       "current_description": "Remove an Assignment Item Instance.",
-      "description_suggestion": "Deletes a specific Entity Assignment for a specified Customer Profile by its unique identifier. The operation does not return any content.",
-      "reasoning": "The current description is vague. The suggestion provides clarity on the operation's purpose and context, making it more understandable for AI agents.",
+      "summary_suggestion": "Delete entity assignment from customer profile",
+      "description_suggestion": "Removes an entity assignment from a customer profile, effectively unassigning the end user entity from the profile. This operation deletes the association between the entity and customer profile. After deletion, the entity will no longer be available for use with this customer profile in compliance and verification workflows. Requires both the customer profile SID and the entity assignment SID. This action cannot be undone.",
+      "reasoning": "Original description is vague and doesn't explain side effects. Improved version clarifies the action (unassigning an entity), explains the business impact (entity no longer available for the profile), specifies required parameters, and warns that deletion is permanent. This helps AI agents understand the consequences of this operation.",
       "batch_index": 2
     }
   },
@@ -9065,7 +9526,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateCustomerProfileEvaluation' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are vague. The suggestions provide clarity on the operation's purpose and context, making it more understandable for AI agents.",
+    "message": "Operation 'CreateCustomerProfileEvaluation' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details, poor_ai_interpretability. Original description lacks all context about what an evaluation is and why it's created. Improved version explains that evaluations assess compliance status, describes what gets evaluated (entities, documents), clarifies the asynchronous nature of the process, and specifies the return value. This helps AI agents understand when to trigger evaluations in compliance workflows.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9081,13 +9542,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Create a new Evaluation",
       "current_description": "Create a new Evaluation",
-      "summary_suggestion": "Create a new Evaluation for a Customer Profile.",
-      "description_suggestion": "Creates a new Evaluation for a specified Customer Profile. Requires the CustomerProfileSid as a parameter. Returns the newly created Evaluation details.",
-      "reasoning": "The current summary and description are vague. The suggestions provide clarity on the operation's purpose and context, making it more understandable for AI agents.",
+      "summary_suggestion": "Initiate compliance evaluation for customer profile",
+      "description_suggestion": "Creates a new compliance evaluation for a customer profile within the Trusthub system. This operation triggers an evaluation process to assess the customer profile's compliance status against regulatory requirements. The evaluation analyzes the profile's entities, supporting documents, and other compliance data. Returns the created evaluation resource with evaluation ID, status, and initial assessment results. The evaluation status will be updated asynchronously as the compliance review progresses.",
+      "reasoning": "Original description lacks all context about what an evaluation is and why it's created. Improved version explains that evaluations assess compliance status, describes what gets evaluated (entities, documents), clarifies the asynchronous nature of the process, and specifies the return value. This helps AI agents understand when to trigger evaluations in compliance workflows.",
       "batch_index": 2
     }
   },
@@ -9102,7 +9566,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListCustomerProfileEvaluation' has semantic quality issues: vague_description, missing_context. The current description is vague. The suggestion provides clarity on the operation's purpose and context, making it more understandable for AI agents.",
+    "message": "Operation 'ListCustomerProfileEvaluation' has semantic quality issues: vague_description, missing_context, missing_output_details, poor_ai_interpretability. Summary is adequate but description lacks domain context and details about what information is returned. Improved description clarifies that these are compliance evaluations, specifies the status values and returned fields, mentions pagination support, and explains the use case for tracking evaluation history.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9117,12 +9581,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Retrieve a list of Evaluations associated to the customer_profile resource.",
       "current_description": "Retrieve a list of Evaluations associated to the customer_profile resource.",
-      "description_suggestion": "Retrieves a list of all Evaluations associated with a specified Customer Profile. Parameters can be used to filter the results. Returns a list of Evaluation objects.",
-      "reasoning": "The current description is vague. The suggestion provides clarity on the operation's purpose and context, making it more understandable for AI agents.",
+      "description_suggestion": "Retrieves a paginated list of all compliance evaluations associated with a specific customer profile. Returns evaluation records including evaluation ID, status (pending, approved, rejected, etc.), compliance findings, and timestamps. Supports filtering and pagination parameters to manage large result sets. Useful for tracking the compliance evaluation history and current status of a customer profile.",
+      "reasoning": "Summary is adequate but description lacks domain context and details about what information is returned. Improved description clarifies that these are compliance evaluations, specifies the status values and returned fields, mentions pagination support, and explains the use case for tracking evaluation history.",
       "batch_index": 2
     }
   },
@@ -9137,7 +9603,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchCustomerProfileEvaluation' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are vague. The suggestions provide clarity on the operation's purpose and context, making it more understandable for AI agents.",
+    "message": "Operation 'FetchCustomerProfileEvaluation' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, poor_ai_interpretability. Original description is too generic and doesn't explain what evaluation data is returned. Improved version clarifies that it retrieves compliance evaluation details, specifies the required parameters (profile SID and evaluation SID), and describes the returned fields including status and findings. This helps AI agents understand what information they'll receive.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9153,13 +9619,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Fetch specific Evaluation Instance.",
       "current_description": "Fetch specific Evaluation Instance.",
-      "summary_suggestion": "Fetch a specific Evaluation for a Customer Profile.",
-      "description_suggestion": "Fetches a specific Evaluation for a specified Customer Profile by its unique identifier. Returns the details of the Evaluation.",
-      "reasoning": "The current summary and description are vague. The suggestions provide clarity on the operation's purpose and context, making it more understandable for AI agents.",
+      "summary_suggestion": "Retrieve a specific compliance evaluation",
+      "description_suggestion": "Retrieves detailed information about a specific compliance evaluation for a customer profile. Returns the complete evaluation resource including evaluation ID, current status, compliance findings, assessment details, creation and update timestamps, and any associated compliance notes or requirements. Requires both the customer profile SID and the evaluation SID to identify the specific evaluation to retrieve.",
+      "reasoning": "Original description is too generic and doesn't explain what evaluation data is returned. Improved version clarifies that it retrieves compliance evaluation details, specifies the required parameters (profile SID and evaluation SID), and describes the returned fields including status and findings. This helps AI agents understand what information they'll receive.",
       "batch_index": 2
     }
   },
@@ -9174,7 +9642,271 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateTrustProductChannelEndpointAssignment' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected inputs/outputs.",
+    "message": "Operation 'FetchCustomerProfile' has semantic quality issues: vague_description, missing_output_details, missing_context. Original description is repetitive and lacks detail. Enhanced version clarifies the retrieval mechanism, explains what data is returned, and specifies required parameters for better AI agent understanding of the operation's scope and outputs.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchCustomerProfile",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Fetch a specific Customer-Profile instance.",
+      "current_description": "Fetch a specific Customer-Profile instance.",
+      "summary_suggestion": "Retrieve a specific Customer-Profile by ID",
+      "description_suggestion": "Retrieves a specific Customer-Profile resource by its unique identifier (Sid). Returns the complete Customer-Profile object including verification status, associated entities, and channel endpoint assignments. Requires the Customer-Profile Sid as a path parameter.",
+      "reasoning": "Original description is repetitive and lacks detail. Enhanced version clarifies the retrieval mechanism, explains what data is returned, and specifies required parameters for better AI agent understanding of the operation's scope and outputs.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateCustomerProfile' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description lacks specificity about what can be updated, what inputs are expected, and what the operation returns. Enhanced version clarifies updateable fields, return value, and side effects (re-evaluation) to help AI agents understand when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateCustomerProfile",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Updates a Customer-Profile in an account.",
+      "current_description": "Updates a Customer-Profile in an account.",
+      "summary_suggestion": "Update Customer-Profile attributes and status",
+      "description_suggestion": "Updates an existing Customer-Profile resource with new attribute values. Accepts inline request parameters to modify profile details such as friendly name, email, and other profile attributes. Returns the updated Customer-Profile object with current verification status. Changes are immediately reflected in the account and may trigger re-evaluation of compliance status.",
+      "reasoning": "Original description lacks specificity about what can be updated, what inputs are expected, and what the operation returns. Enhanced version clarifies updateable fields, return value, and side effects (re-evaluation) to help AI agents understand when and how to use this operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteCustomerProfile' has semantic quality issues: vague_description, missing_context, missing_side_effects. Original description is minimal and doesn't explain cascading effects or irreversibility. Enhanced version clarifies what gets deleted, the permanent nature of the operation, and cascading impacts on related resources to help AI agents understand the consequences of this destructive operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteCustomerProfile",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete a specific Customer-Profile.",
+      "current_description": "Delete a specific Customer-Profile.",
+      "summary_suggestion": "Delete a Customer-Profile by ID",
+      "description_suggestion": "Permanently deletes a specific Customer-Profile resource identified by its Sid. This operation removes the profile and all associated assignments (entity assignments and channel endpoint assignments). Deletion is irreversible. Requires the Customer-Profile Sid as a path parameter.",
+      "reasoning": "Original description is minimal and doesn't explain cascading effects or irreversibility. Enhanced version clarifies what gets deleted, the permanent nature of the operation, and cascading impacts on related resources to help AI agents understand the consequences of this destructive operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateCustomerProfileChannelEndpointAssignment' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details. Original description uses generic 'Assigned Item' terminology that lacks domain context. Enhanced version uses proper Trusthub terminology (channel endpoint assignment), clarifies the relationship being created, specifies required inputs, and explains the return value for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateCustomerProfileChannelEndpointAssignment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Create a new Assigned Item.",
+      "current_description": "Create a new Assigned Item.",
+      "summary_suggestion": "Assign a channel endpoint to Customer-Profile",
+      "description_suggestion": "Creates a new channel endpoint assignment for a Customer-Profile, linking a specific communication channel (e.g., phone number, messaging endpoint) to the profile. Requires the Customer-Profile Sid and inline request parameters specifying the channel endpoint details. Returns the created assignment resource with a unique Sid and assignment status.",
+      "reasoning": "Original description uses generic 'Assigned Item' terminology that lacks domain context. Enhanced version uses proper Trusthub terminology (channel endpoint assignment), clarifies the relationship being created, specifies required inputs, and explains the return value for better AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListCustomerProfileChannelEndpointAssignment' has semantic quality issues: vague_description, missing_context, missing_output_details. Original description is vague about scope and doesn't mention pagination or filtering capabilities. Enhanced version clarifies that results are scoped to a specific Customer-Profile (not account-wide), explains pagination support, and specifies the return format for better AI agent understanding of list retrieval patterns.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListCustomerProfileChannelEndpointAssignment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a list of all Assigned Items for an account.",
+      "current_description": "Retrieve a list of all Assigned Items for an account.",
+      "summary_suggestion": "List channel endpoint assignments for Customer-Profile",
+      "description_suggestion": "Retrieves a paginated list of all channel endpoint assignments associated with a specific Customer-Profile. Supports filtering and pagination through query parameters (limit, offset, etc.). Returns an array of channel endpoint assignment resources, each containing endpoint details and assignment status. Scoped to the specified Customer-Profile Sid.",
+      "reasoning": "Original description is vague about scope and doesn't mention pagination or filtering capabilities. Enhanced version clarifies that results are scoped to a specific Customer-Profile (not account-wide), explains pagination support, and specifies the return format for better AI agent understanding of list retrieval patterns.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchCustomerProfileChannelEndpointAssignment' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description uses generic 'Assigned Item Instance' terminology lacking domain context. Enhanced version uses proper Trusthub terminology, clarifies the hierarchical resource structure (Customer-Profile contains assignments), specifies both required path parameters, and explains the return value.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchCustomerProfileChannelEndpointAssignment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Fetch specific Assigned Item Instance.",
+      "current_description": "Fetch specific Assigned Item Instance.",
+      "summary_suggestion": "Retrieve a specific channel endpoint assignment",
+      "description_suggestion": "Retrieves a specific channel endpoint assignment resource by its unique identifier (Sid) within a Customer-Profile. Requires both the Customer-Profile Sid and the assignment Sid as path parameters. Returns the complete assignment object including endpoint details, assignment status, and metadata.",
+      "reasoning": "Original description uses generic 'Assigned Item Instance' terminology lacking domain context. Enhanced version uses proper Trusthub terminology, clarifies the hierarchical resource structure (Customer-Profile contains assignments), specifies both required path parameters, and explains the return value.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteCustomerProfileChannelEndpointAssignment' has semantic quality issues: vague_summary, vague_description, missing_context, missing_side_effects. Original description uses generic 'Assignment Item Instance' terminology and lacks operational context. Enhanced version uses proper domain terminology, clarifies the hierarchical resource structure, specifies both required parameters, explains potential side effects on compliance status, and notes irreversibility for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteCustomerProfileChannelEndpointAssignment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "Remove an Assignment Item Instance.",
+      "current_description": "Remove an Assignment Item Instance.",
+      "summary_suggestion": "Delete a channel endpoint assignment",
+      "description_suggestion": "Permanently removes a channel endpoint assignment from a Customer-Profile. Requires both the Customer-Profile Sid and the assignment Sid as path parameters. Deletion unlinks the channel endpoint from the profile and may affect the profile's compliance status if this was the only endpoint for a required channel. This operation is irreversible.",
+      "reasoning": "Original description uses generic 'Assignment Item Instance' terminology and lacks operational context. Enhanced version uses proper domain terminology, clarifies the hierarchical resource structure, specifies both required parameters, explains potential side effects on compliance status, and notes irreversibility for better AI agent decision-making.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateTrustProductChannelEndpointAssignment' has semantic quality issues: vague_summary, vague_description, missing_context, unclear_purpose, missing_input_details, missing_output_details, not_actionable, poor_ai_interpretability. Original description uses generic 'Assigned Item' terminology that lacks domain context. AI agents need to understand this assigns channel endpoints to Trust Products, not generic items. Added specific resource types, the relationship being created, the purpose of the assignment, and the expected response status for clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9190,13 +9922,18 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "not_actionable",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Create a new Assigned Item.",
       "current_description": "Create a new Assigned Item.",
-      "summary_suggestion": "Create a new Channel Endpoint Assignment for a Trust Product.",
-      "description_suggestion": "Creates a new Channel Endpoint Assignment for a specified Trust Product. This operation requires the Trust Product SID and expects a JSON payload with the assignment details. Returns the newly created Channel Endpoint Assignment object.",
-      "reasoning": "The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected inputs/outputs.",
+      "summary_suggestion": "Assign channel endpoint to Trust Product",
+      "description_suggestion": "Creates a new channel endpoint assignment for a Trust Product. This operation associates a specific channel endpoint with a Trust Product identified by TrustProductSid. The assignment enables the Trust Product to use the specified channel endpoint for communications. Returns the created channel endpoint assignment resource with status 201.",
+      "reasoning": "Original description uses generic 'Assigned Item' terminology that lacks domain context. AI agents need to understand this assigns channel endpoints to Trust Products, not generic items. Added specific resource types, the relationship being created, the purpose of the assignment, and the expected response status for clarity.",
       "batch_index": 6
     }
   },
@@ -9211,7 +9948,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListTrustProductChannelEndpointAssignment' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected inputs/outputs.",
+    "message": "Operation 'ListTrustProductChannelEndpointAssignment' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, inconsistent_terminology, poor_ai_interpretability. Original uses vague 'Assigned Items' terminology. Clarified that this lists channel endpoint assignments scoped to a specific Trust Product (not account-wide), added context about pagination support, and explained what each returned resource represents for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9227,13 +9964,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details",
+        "inconsistent_terminology",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Retrieve a list of all Assigned Items for an account.",
       "current_description": "Retrieve a list of all Assigned Items for an account.",
-      "summary_suggestion": "List all Channel Endpoint Assignments for a Trust Product.",
-      "description_suggestion": "Retrieves a list of all Channel Endpoint Assignments for a specified Trust Product. This operation requires the Trust Product SID and can be filtered using various parameters. Returns a list of Channel Endpoint Assignment objects.",
-      "reasoning": "The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected inputs/outputs.",
+      "summary_suggestion": "List channel endpoint assignments for Trust Product",
+      "description_suggestion": "Retrieves a paginated list of all channel endpoint assignments for a specific Trust Product. Returns channel endpoint assignment resources associated with the Trust Product identified by TrustProductSid. Supports filtering and pagination parameters to narrow results. Each assignment represents a channel endpoint linked to the Trust Product.",
+      "reasoning": "Original uses vague 'Assigned Items' terminology. Clarified that this lists channel endpoint assignments scoped to a specific Trust Product (not account-wide), added context about pagination support, and explained what each returned resource represents for better AI agent understanding.",
       "batch_index": 6
     }
   },
@@ -9248,7 +9988,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchTrustProductChannelEndpointAssignment' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected inputs/outputs.",
+    "message": "Operation 'FetchTrustProductChannelEndpointAssignment' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, inconsistent_terminology, not_actionable. Original uses generic 'Assigned Item Instance' terminology. Clarified this retrieves a specific channel endpoint assignment, added context about the resource hierarchy (Trust Product contains assignment), and explained what information is returned for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9264,13 +10004,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details",
+        "inconsistent_terminology",
+        "not_actionable"
       ],
       "current_summary": "Fetch specific Assigned Item Instance.",
       "current_description": "Fetch specific Assigned Item Instance.",
-      "summary_suggestion": "Fetch a specific Channel Endpoint Assignment for a Trust Product.",
-      "description_suggestion": "Fetches a specific Channel Endpoint Assignment for a specified Trust Product. This operation requires the Trust Product SID and the Assignment SID. Returns the Channel Endpoint Assignment object.",
-      "reasoning": "The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected inputs/outputs.",
+      "summary_suggestion": "Retrieve specific channel endpoint assignment",
+      "description_suggestion": "Retrieves a specific channel endpoint assignment for a Trust Product. Returns the channel endpoint assignment resource identified by Sid within the context of the Trust Product identified by TrustProductSid. Includes all assignment details such as channel type, endpoint information, and assignment status.",
+      "reasoning": "Original uses generic 'Assigned Item Instance' terminology. Clarified this retrieves a specific channel endpoint assignment, added context about the resource hierarchy (Trust Product contains assignment), and explained what information is returned for AI agent clarity.",
       "batch_index": 6
     }
   },
@@ -9285,7 +10028,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteTrustProductChannelEndpointAssignment' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected inputs/outputs.",
+    "message": "Operation 'DeleteTrustProductChannelEndpointAssignment' has semantic quality issues: vague_summary, vague_description, missing_context, missing_side_effects, inconsistent_terminology, not_actionable. Original uses imprecise 'Assignment Item' terminology. Clarified this removes a channel endpoint assignment, explained the side effect (Trust Product loses access to that endpoint), and specified the expected HTTP response for successful deletion to aid AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9301,13 +10044,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_side_effects",
+        "inconsistent_terminology",
+        "not_actionable"
       ],
       "current_summary": "Remove an Assignment Item Instance.",
       "current_description": "Remove an Assignment Item Instance.",
-      "summary_suggestion": "Delete a specific Channel Endpoint Assignment for a Trust Product.",
-      "description_suggestion": "Deletes a specific Channel Endpoint Assignment for a specified Trust Product. This operation requires the Trust Product SID and the Assignment SID. Returns a success status upon deletion.",
-      "reasoning": "The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected inputs/outputs.",
+      "summary_suggestion": "Delete channel endpoint assignment from Trust Product",
+      "description_suggestion": "Deletes a channel endpoint assignment from a Trust Product. Removes the association between the channel endpoint and the Trust Product identified by TrustProductSid. After deletion, the Trust Product will no longer be able to use the specified channel endpoint for communications. Returns HTTP 204 on successful deletion.",
+      "reasoning": "Original uses imprecise 'Assignment Item' terminology. Clarified this removes a channel endpoint assignment, explained the side effect (Trust Product loses access to that endpoint), and specified the expected HTTP response for successful deletion to aid AI agent decision-making.",
       "batch_index": 6
     }
   },
@@ -9322,7 +10068,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateTrustProductEntityAssignment' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected inputs/outputs.",
+    "message": "Operation 'CreateTrustProductEntityAssignment' has semantic quality issues: vague_summary, vague_description, missing_context, unclear_purpose, missing_input_details, missing_output_details, not_actionable, poor_ai_interpretability. Original description is too generic. Clarified this assigns entities (end users) to Trust Products, explained the purpose (linking compliance information), and specified the expected response status. This helps AI agents understand when to use this operation versus channel endpoint assignments.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9338,13 +10084,18 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "not_actionable",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Create a new Assigned Item.",
       "current_description": "Create a new Assigned Item.",
-      "summary_suggestion": "Create a new Entity Assignment for a Trust Product.",
-      "description_suggestion": "Creates a new Entity Assignment for a specified Trust Product. This operation requires the Trust Product SID and expects a JSON payload with the assignment details. Returns the newly created Entity Assignment object.",
-      "reasoning": "The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected inputs/outputs.",
+      "summary_suggestion": "Assign entity to Trust Product",
+      "description_suggestion": "Creates a new entity assignment for a Trust Product. This operation associates an end user entity with a Trust Product identified by TrustProductSid. The assignment links the entity's compliance and verification information to the Trust Product. Returns the created entity assignment resource with status 201.",
+      "reasoning": "Original description is too generic. Clarified this assigns entities (end users) to Trust Products, explained the purpose (linking compliance information), and specified the expected response status. This helps AI agents understand when to use this operation versus channel endpoint assignments.",
       "batch_index": 6
     }
   },
@@ -9359,7 +10110,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListTrustProductEntityAssignment' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected inputs/outputs.",
+    "message": "Operation 'ListTrustProductEntityAssignment' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, inconsistent_terminology, poor_ai_interpretability. Original uses vague 'Assigned Items' terminology. Clarified this lists entity assignments (not channel endpoints) scoped to a specific Trust Product, explained that entities are end users, and added context about pagination support for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9375,13 +10126,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details",
+        "inconsistent_terminology",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Retrieve a list of all Assigned Items for an account.",
       "current_description": "Retrieve a list of all Assigned Items for an account.",
-      "summary_suggestion": "List all Entity Assignments for a Trust Product.",
-      "description_suggestion": "Retrieves a list of all Entity Assignments for a specified Trust Product. This operation requires the Trust Product SID and can be filtered using various parameters. Returns a list of Entity Assignment objects.",
-      "reasoning": "The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected inputs/outputs.",
+      "summary_suggestion": "List entity assignments for Trust Product",
+      "description_suggestion": "Retrieves a paginated list of all entity assignments for a specific Trust Product. Returns entity assignment resources associated with the Trust Product identified by TrustProductSid. Each assignment represents an end user entity linked to the Trust Product for compliance and verification purposes. Supports filtering and pagination parameters.",
+      "reasoning": "Original uses vague 'Assigned Items' terminology. Clarified this lists entity assignments (not channel endpoints) scoped to a specific Trust Product, explained that entities are end users, and added context about pagination support for better AI agent understanding.",
       "batch_index": 6
     }
   },
@@ -9396,7 +10150,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchTrustProductEntityAssignment' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected inputs/outputs.",
+    "message": "Operation 'FetchTrustProductEntityAssignment' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, inconsistent_terminology, not_actionable. Original uses generic 'Assigned Item Instance' terminology. Clarified this retrieves a specific entity assignment, added context about the resource hierarchy, and explained what information is returned (entity details, status, compliance info) for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9412,300 +10166,17 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details",
+        "inconsistent_terminology",
+        "not_actionable"
       ],
       "current_summary": "Fetch specific Assigned Item Instance.",
       "current_description": "Fetch specific Assigned Item Instance.",
-      "summary_suggestion": "Fetch a specific Entity Assignment for a Trust Product.",
-      "description_suggestion": "Fetches a specific Entity Assignment for a specified Trust Product. This operation requires the Trust Product SID and the Assignment SID. Returns the Entity Assignment object.",
-      "reasoning": "The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected inputs/outputs.",
+      "summary_suggestion": "Retrieve specific entity assignment",
+      "description_suggestion": "Retrieves a specific entity assignment for a Trust Product. Returns the entity assignment resource identified by Sid within the context of the Trust Product identified by TrustProductSid. Includes assignment details such as the associated end user entity, assignment status, and compliance information.",
+      "reasoning": "Original uses generic 'Assigned Item Instance' terminology. Clarified this retrieves a specific entity assignment, added context about the resource hierarchy, and explained what information is returned (entity details, status, compliance info) for AI agent clarity.",
       "batch_index": 6
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateCustomerProfile' has semantic quality issues: vague_description, missing_output_details. Description is too vague and missing details about the expected inputs and the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateCustomerProfile",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_output_details"
-      ],
-      "current_summary": "Create a new Customer-Profile.",
-      "current_description": "Create a new Customer-Profile.",
-      "description_suggestion": "Creates a new Customer-Profile for the authenticated account. This operation requires specific customer profile details. Returns the newly created Customer-Profile object.",
-      "reasoning": "Description is too vague and missing details about the expected inputs and the return value.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListPolicies' has semantic quality issues: vague_summary, vague_description, inconsistent_terminology. The summary and description were too vague and used inconsistent terminology. The corrected version provides a more precise description and uses the correct plural form of 'policy'.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListPolicies",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "inconsistent_terminology"
-      ],
-      "current_summary": "Retrieve a list of all Policys.",
-      "current_description": "Retrieve a list of all Policys.",
-      "summary_suggestion": "Retrieve a list of all policies.",
-      "description_suggestion": "Retrieves a list of all policies associated with the account. Returns a paginated list of policy objects. Parameters can be used to filter and sort the list.",
-      "reasoning": "The summary and description were too vague and used inconsistent terminology. The corrected version provides a more precise description and uses the correct plural form of 'policy'.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchPolicies' has semantic quality issues: vague_summary, vague_description, inconsistent_terminology. The summary and description were too vague and used inconsistent terminology. The corrected version provides a more precise description and uses the correct singular form of 'policy'.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchPolicies",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "inconsistent_terminology"
-      ],
-      "current_summary": "Fetch specific Policy Instance.",
-      "current_description": "Fetch specific Policy Instance.",
-      "summary_suggestion": "Fetch a specific policy instance.",
-      "description_suggestion": "Fetches a specific policy instance by its unique SID. Returns the policy object if found.",
-      "reasoning": "The summary and description were too vague and used inconsistent terminology. The corrected version provides a more precise description and uses the correct singular form of 'policy'.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateSupportingDocument' has semantic quality issues: vague_description, missing_input_details. The description was too vague and lacked details about the input required for the operation. The corrected version specifies the need for document details in the request body and the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateSupportingDocument",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_input_details"
-      ],
-      "current_summary": "Create a new Supporting Document.",
-      "current_description": "Create a new Supporting Document.",
-      "description_suggestion": "Creates a new supporting document for an account. Requires the document details in the request body. Returns the newly created supporting document object.",
-      "reasoning": "The description was too vague and lacked details about the input required for the operation. The corrected version specifies the need for document details in the request body and the return value.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListSupportingDocument' has semantic quality issues: vague_summary, vague_description, inconsistent_terminology. The summary and description were too vague and used inconsistent terminology. The corrected version provides a more precise description and uses the correct plural form of 'supporting document'.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListSupportingDocument",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "inconsistent_terminology"
-      ],
-      "current_summary": "Retrieve a list of all Supporting Document for an account.",
-      "current_description": "Retrieve a list of all Supporting Document for an account.",
-      "summary_suggestion": "Retrieve a list of all supporting documents for an account.",
-      "description_suggestion": "Retrieves a list of all supporting documents associated with the account. Returns a paginated list of supporting document objects. Parameters can be used to filter and sort the list.",
-      "reasoning": "The summary and description were too vague and used inconsistent terminology. The corrected version provides a more precise description and uses the correct plural form of 'supporting document'.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchSupportingDocument' has semantic quality issues: vague_description, inconsistent_terminology. The description used inconsistent terminology. The corrected version uses the correct singular form of 'supporting document'.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchSupportingDocument",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "inconsistent_terminology"
-      ],
-      "current_summary": "Fetch specific Supporting Document Instance.",
-      "current_description": "Fetch specific Supporting Document Instance.",
-      "description_suggestion": "Fetches a specific supporting document instance by its unique SID. Returns the supporting document object if found.",
-      "reasoning": "The description used inconsistent terminology. The corrected version uses the correct singular form of 'supporting document'.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'UpdateSupportingDocument' has semantic quality issues: vague_description, missing_input_details. The description was too vague and lacked details about the input required for the operation. The corrected version specifies the need for updated document details in the request body and the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "UpdateSupportingDocument",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_input_details"
-      ],
-      "current_summary": "Update an existing Supporting Document.",
-      "current_description": "Update an existing Supporting Document.",
-      "description_suggestion": "Updates an existing supporting document by its unique SID. Requires the updated document details in the request body. Returns the updated supporting document object.",
-      "reasoning": "The description was too vague and lacked details about the input required for the operation. The corrected version specifies the need for updated document details in the request body and the return value.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeleteSupportingDocument' has semantic quality issues: vague_description, missing_side_effects. The description was too vague and lacked details about the side effects of the operation. The corrected version specifies the return value upon successful deletion.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteSupportingDocument",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_side_effects"
-      ],
-      "current_summary": "Delete a specific Supporting Document.",
-      "current_description": "Delete a specific Supporting Document.",
-      "description_suggestion": "Deletes a specific supporting document by its unique SID. Returns a success message if the document is deleted.",
-      "reasoning": "The description was too vague and lacked details about the side effects of the operation. The corrected version specifies the return value upon successful deletion.",
-      "batch_index": 4
     }
   },
   {
@@ -9719,7 +10190,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 53 operations analyzed, 42 quality issues found",
+    "message": "Semantic analysis completed: 53 operations analyzed, 52 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -9731,7 +10202,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 53,
-      "total_issues_found": 42,
+      "total_issues_found": 52,
       "batches_processed": 8
     }
   }

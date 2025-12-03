@@ -5799,7 +5799,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.updateConnections' has semantic quality issues: vague_summary, missing_input_details. The original summary is missing. The description lacks details about the input parameters and the exact nature of the update. The suggestions provide clarity and specificity.",
+    "message": "Operation 'servicenetworking.services.updateConnections' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Original description lacks clarity on what inputs are expected and what side effects occur. Added explicit mention of the request schema type, clarified that this modifies existing allocations, and noted the impact on network routing. Summary was missing entirely. These additions improve AI agent understanding of when and how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5814,13 +5814,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Updates the allocated ranges that are assigned to a connection. The response from the `get` operation will be of type `Connection` if the operation successfully completes.",
-      "summary_suggestion": "Update allocated ranges for a connection",
-      "description_suggestion": "Updates the allocated IP ranges assigned to a specific connection. Requires the connection name and updated IP range information. Returns a `Connection` object if the update is successful.",
-      "reasoning": "The original summary is missing. The description lacks details about the input parameters and the exact nature of the update. The suggestions provide clarity and specificity.",
+      "summary_suggestion": "Update connection allocated IP ranges",
+      "description_suggestion": "Updates the allocated IP ranges assigned to an existing private connection between a service consumer and producer VPC network. Accepts a GoogleCloudServicenetworkingV1betaConnection object with updated range allocations. Returns the updated Connection resource upon successful completion. This operation modifies the network configuration and may affect traffic routing for the peered networks.",
+      "reasoning": "Original description lacks clarity on what inputs are expected and what side effects occur. Added explicit mention of the request schema type, clarified that this modifies existing allocations, and noted the impact on network routing. Summary was missing entirely. These additions improve AI agent understanding of when and how to use this operation.",
       "batch_index": 0
     }
   },
@@ -5835,7 +5836,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.connections.create' has semantic quality issues: vague_summary, missing_input_details. The original summary is missing. The description lacks details about the input parameters and the exact nature of the creation process. The suggestions provide clarity and specificity.",
+    "message": "Operation 'servicenetworking.services.connections.create' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Original description is verbose and lacks clear input/output specification. Added explicit mention of request schema type, clarified the one-time nature of the operation, and documented side effects (network peering establishment, traffic routing, shared VPC configuration). Summary was missing. These improvements help AI agents understand the operation's significance and prerequisites.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5850,13 +5851,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Creates a private connection that establishes a VPC Network Peering connection to a VPC network in the service producer's organization. The administrator of the service consumer's VPC network invokes this method. The administrator must assign one or more allocated IP ranges for provisioning subnetworks in the service producer's VPC network. This connection is used for all supported services in the service producer's organization, so it only needs to be invoked once. The response from the `get` operation will be of type `Connection` if the operation successfully completes.",
-      "summary_suggestion": "Create a private connection for VPC Network Peering",
-      "description_suggestion": "Creates a private connection that establishes a VPC Network Peering connection to a VPC network in the service producer's organization. Requires the service consumer's VPC network administrator to assign one or more allocated IP ranges. Returns a `Connection` object if the creation is successful.",
-      "reasoning": "The original summary is missing. The description lacks details about the input parameters and the exact nature of the creation process. The suggestions provide clarity and specificity.",
+      "summary_suggestion": "Create VPC Network Peering connection",
+      "description_suggestion": "Creates a private VPC Network Peering connection between a service consumer's VPC network and the service producer's VPC network. Requires a GoogleCloudServicenetworkingV1betaConnection object specifying one or more allocated IP ranges for subnetwork provisioning. This connection enables all supported services in the producer organization and should typically be created only once per consumer-producer pair. Returns the created Connection resource upon successful completion. Side effects include establishing network peering, enabling traffic routing between networks, and provisioning shared VPC service project access.",
+      "reasoning": "Original description is verbose and lacks clear input/output specification. Added explicit mention of request schema type, clarified the one-time nature of the operation, and documented side effects (network peering establishment, traffic routing, shared VPC configuration). Summary was missing. These improvements help AI agents understand the operation's significance and prerequisites.",
       "batch_index": 0
     }
   },
@@ -5871,7 +5873,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.addSubnetwork' has semantic quality issues: vague_summary, missing_input_details. The original summary is missing. The description lacks details about the input parameters and the exact nature of the addition process. The suggestions provide clarity and specificity.",
+    "message": "Operation 'servicenetworking.services.addSubnetwork' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original description is lengthy and unclear about input/output. Added explicit mention of AddSubnetworkRequest schema, clarified the idempotent behavior (reuse on identical parameters), and specified the return type. Summary was missing. These changes make it clearer for AI agents to understand when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5886,13 +5888,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "For service producers, provisions a new subnet in a peered service's shared VPC network in the requested region and with the requested size that's expressed as a CIDR range (number of leading bits of ipV4 network mask). The method checks against the assigned allocated ranges to find a non-conflicting IP address range. The method will reuse a subnet if subsequent calls contain the same subnet name, region, and prefix length. This method will make producer's tenant project to be a shared VPC service project as needed. The response from the `get` operation will be of type `Subnetwork` if the operation successfully completes.",
-      "summary_suggestion": "Add a new subnet to a peered service's VPC network",
-      "description_suggestion": "Provisions a new subnet in a peered service's shared VPC network. Requires the region, size (CIDR range), and subnet name. Checks for non-conflicting IP address ranges. Returns a `Subnetwork` object if the addition is successful.",
-      "reasoning": "The original summary is missing. The description lacks details about the input parameters and the exact nature of the addition process. The suggestions provide clarity and specificity.",
+      "summary_suggestion": "Provision subnet in peered VPC network",
+      "description_suggestion": "Provisions a new subnet in a peered service producer's shared VPC network. Accepts an AddSubnetworkRequest specifying subnet name, region, and CIDR prefix length. The operation validates the requested range against allocated ranges to ensure no conflicts. If a subnet with identical name, region, and prefix length already exists, it will be reused rather than recreated. Automatically configures the producer's tenant project as a shared VPC service project if needed. Returns the created or reused Subnetwork resource upon successful completion.",
+      "reasoning": "Original description is lengthy and unclear about input/output. Added explicit mention of AddSubnetworkRequest schema, clarified the idempotent behavior (reuse on identical parameters), and specified the return type. Summary was missing. These changes make it clearer for AI agents to understand when to use this operation and what to expect.",
       "batch_index": 0
     }
   },
@@ -5907,7 +5910,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.searchRange' has semantic quality issues: vague_summary, missing_input_details. The original summary is missing. The description lacks details about the input parameters and the exact nature of the search process. The suggestions provide clarity and specificity.",
+    "message": "Operation 'servicenetworking.services.searchRange' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, not_actionable. Original description is incomplete (ends abruptly with 'Operation'), lacks input/output specification, and doesn't clearly explain the operation's limitations. Added explicit mention of SearchRangeRequest and SearchRangeResponse schemas, clarified the non-reserved nature of results and the need for immediate use, and completed the truncated description. Summary was missing. These improvements help AI agents understand this is a discovery operation with important caveats about result validity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5922,13 +5925,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "not_actionable"
       ],
       "current_summary": "",
       "current_description": "Service producers can use this method to find a currently unused range within consumer allocated ranges. This returned range is not reserved, and not guaranteed to remain unused. It will validate previously provided allocated ranges, find non-conflicting sub-range of requested size (expressed in number of leading bits of ipv4 network mask, as in CIDR range notation). Operation",
-      "summary_suggestion": "Search for an unused range within consumer allocated ranges",
-      "description_suggestion": "Finds a currently unused range within consumer allocated ranges. Requires the size of the range (in CIDR notation). Validates previously provided allocated ranges and returns a non-conflicting sub-range. The returned range is not reserved and not guaranteed to remain unused.",
-      "reasoning": "The original summary is missing. The description lacks details about the input parameters and the exact nature of the search process. The suggestions provide clarity and specificity.",
+      "summary_suggestion": "Find available IP range in allocations",
+      "description_suggestion": "Searches for an available, non-conflicting IP address range within the consumer's allocated ranges. Accepts a SearchRangeRequest specifying the desired range size as a CIDR prefix length. Validates against previously allocated ranges and returns a suggested unused range that meets the size requirements. Note: The returned range is not reserved and may be allocated by other operations, so it should be used immediately or reserved through a subsequent operation. Returns a SearchRangeResponse containing the available IP range in CIDR notation.",
+      "reasoning": "Original description is incomplete (ends abruptly with 'Operation'), lacks input/output specification, and doesn't clearly explain the operation's limitations. Added explicit mention of SearchRangeRequest and SearchRangeResponse schemas, clarified the non-reserved nature of results and the need for immediate use, and completed the truncated description. Summary was missing. These improvements help AI agents understand this is a discovery operation with important caveats about result validity.",
       "batch_index": 0
     }
   },

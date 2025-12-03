@@ -2168,7 +2168,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchAlert' has semantic quality issues: vague_summary, vague_description, missing_input_details. The original summary and description were missing. Added a clear summary and description that specify the purpose, required input, and the return value.",
+    "message": "Operation 'FetchAlert' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, poor_ai_interpretability. Operation has no summary or description, making it impossible for AI agents to understand its purpose. Added clear action verb, parameter requirements, and expected return value using Monitor domain terminology.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2184,13 +2184,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Retrieve a specific alert by its SID",
-      "description_suggestion": "Fetches a specific alert by its unique SID. Requires the SID of the alert. Returns the alert object if found.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that specify the purpose, required input, and the return value.",
+      "summary_suggestion": "Retrieve a specific alert by ID",
+      "description_suggestion": "Fetches a single alert from the Twilio Monitor service by its unique identifier (Sid). Returns the complete alert object containing alert details, timestamps, and status information. Requires the alert Sid as a path parameter.",
+      "reasoning": "Operation has no summary or description, making it impossible for AI agents to understand its purpose. Added clear action verb, parameter requirements, and expected return value using Monitor domain terminology.",
       "batch_index": 0
     }
   },
@@ -2205,7 +2208,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListAlert' has semantic quality issues: vague_summary, vague_description, missing_input_details. The original summary and description were missing. Added a clear summary and description that specify the purpose, supported parameters, and the return value.",
+    "message": "Operation 'ListAlert' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details, poor_ai_interpretability. Missing summary and description entirely. Added action-oriented summary, explained filtering/pagination capabilities based on 6 parameters, and clarified return format for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2221,13 +2224,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "unclear_purpose",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "",
       "summary_suggestion": "List all alerts in the account",
-      "description_suggestion": "Lists all alerts in the account. Supports filtering by various parameters such as status, date range, and type. Returns a list of alert objects.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that specify the purpose, supported parameters, and the return value.",
+      "description_suggestion": "Retrieves a paginated list of all alerts in the Twilio account. Supports filtering and sorting through query parameters including date ranges, alert types, and severity levels. Returns a collection of alert objects with pagination metadata. Useful for monitoring account health and reviewing alert history.",
+      "reasoning": "Missing summary and description entirely. Added action-oriented summary, explained filtering/pagination capabilities based on 6 parameters, and clarified return format for AI agent decision-making.",
       "batch_index": 0
     }
   },
@@ -2242,7 +2247,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchEvent' has semantic quality issues: vague_summary, vague_description, missing_input_details. The original summary and description were missing. Added a clear summary and description that specify the purpose, required input, and the return value.",
+    "message": "Operation 'FetchEvent' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, poor_ai_interpretability. Operation lacks any documentation. Added clear action verb, parameter requirements, and expected return value using Monitor domain terminology consistent with FetchAlert pattern.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2258,13 +2263,54 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Retrieve a specific event by its SID",
-      "description_suggestion": "Fetches a specific event by its unique SID. Requires the SID of the event. Returns the event object if found.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that specify the purpose, required input, and the return value.",
+      "summary_suggestion": "Retrieve a specific event by ID",
+      "description_suggestion": "Fetches a single event from the Twilio Monitor service by its unique identifier (Sid). Returns the complete event object containing event details, timestamps, and associated metadata. Requires the event Sid as a path parameter.",
+      "reasoning": "Operation lacks any documentation. Added clear action verb, parameter requirements, and expected return value using Monitor domain terminology consistent with FetchAlert pattern.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListEvent' has semantic quality issues: vague_summary, vague_description, missing_output_details, poor_ai_interpretability. Current summary/description are repetitive and lack detail. Added pagination context, filtering capabilities (9 parameters suggest rich filtering), and clarified use cases. Enhanced AI agent interpretability by explaining what filtering options are available and the practical purpose of the operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListEvent",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Returns a list of events in the account, sorted by event-date.",
+      "current_description": "Returns a list of events in the account, sorted by event-date.",
+      "summary_suggestion": "List all account events sorted by date",
+      "description_suggestion": "Retrieves a paginated list of all events in the Twilio account, sorted by event date in descending order. Supports filtering through query parameters including date ranges, event types, and severity levels. Returns a collection of event objects with pagination metadata. Useful for auditing account activity and investigating issues.",
+      "reasoning": "Current summary/description are repetitive and lack detail. Added pagination context, filtering capabilities (9 parameters suggest rich filtering), and clarified use cases. Enhanced AI agent interpretability by explaining what filtering options are available and the practical purpose of the operation.",
       "batch_index": 0
     }
   },
@@ -2279,7 +2325,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 4 operations analyzed, 3 quality issues found",
+    "message": "Semantic analysis completed: 4 operations analyzed, 4 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -2291,7 +2337,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 4,
-      "total_issues_found": 3,
+      "total_issues_found": 4,
       "batches_processed": 1
     }
   }

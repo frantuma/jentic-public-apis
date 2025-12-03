@@ -1689,7 +1689,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'readerrevenuesubscriptionlinking.publications.readers.delete' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing. The description is clear but lacks information about the side effects and what is returned when the operation is successful.",
+    "message": "Operation 'readerrevenuesubscriptionlinking.publications.readers.delete' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is detailed but could be reorganized for clarity. Added explicit mention of the response schema (DeleteReaderResponse) and clarified the conditional logic around the force parameter for better AI agent understanding of when this operation will succeed or fail.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1704,13 +1704,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Removes a publication reader, effectively severing the association with a Google user. If `force` is set to true, any entitlements for this reader will also be deleted. (Otherwise, the request will only work if the reader has no entitlements.) - If the reader does not exist, return NOT_FOUND. - Return FAILED_PRECONDITION if the force field is false (or unset) and entitlements are present.",
-      "summary_suggestion": "Delete a publication reader",
-      "description_suggestion": "Removes a publication reader, effectively severing the association with a Google user. If `force` is set to true, any entitlements for this reader will also be deleted. (Otherwise, the request will only work if the reader has no entitlements.) Returns NOT_FOUND if the reader does not exist. Returns FAILED_PRECONDITION if the force field is false (or unset) and entitlements are present. No content is returned.",
-      "reasoning": "The current summary is missing. The description is clear but lacks information about the side effects and what is returned when the operation is successful.",
+      "summary_suggestion": "Delete a publication reader and optionally their entitlements",
+      "description_suggestion": "Removes a publication reader, severing the association with a Google user. When `force` is true, all associated entitlements are deleted. When `force` is false or unset, deletion only succeeds if the reader has no entitlements. Returns NOT_FOUND if the reader does not exist. Returns FAILED_PRECONDITION if force is false and entitlements are present. Returns DeleteReaderResponse on success.",
+      "reasoning": "Missing summary entirely. Description is detailed but could be reorganized for clarity. Added explicit mention of the response schema (DeleteReaderResponse) and clarified the conditional logic around the force parameter for better AI agent understanding of when this operation will succeed or fail.",
       "batch_index": 0
     }
   },
@@ -1725,7 +1725,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'readerrevenuesubscriptionlinking.publications.readers.getEntitlements' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing. The description is missing details about the output schema and what it contains.",
+    "message": "Operation 'readerrevenuesubscriptionlinking.publications.readers.getEntitlements' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks explicit mention of the return schema (ReaderEntitlements). Added clarity about what is returned and reorganized error conditions for better AI agent interpretability of success and failure scenarios.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1744,9 +1744,9 @@
       ],
       "current_summary": "",
       "current_description": "Gets the reader entitlements for a publication reader. - Returns PERMISSION_DENIED if the caller does not have access. - Returns NOT_FOUND if the reader does not exist.",
-      "summary_suggestion": "Get reader entitlements for a publication",
-      "description_suggestion": "Gets the reader entitlements for a publication reader. The response includes the reader's entitlements. Returns PERMISSION_DENIED if the caller does not have access. Returns NOT_FOUND if the reader does not exist.",
-      "reasoning": "The current summary is missing. The description is missing details about the output schema and what it contains.",
+      "summary_suggestion": "Retrieve all entitlements for a publication reader",
+      "description_suggestion": "Retrieves all entitlements for a specified publication reader. Returns a ReaderEntitlements object containing the reader's complete entitlement set. Returns PERMISSION_DENIED if the caller lacks access to this reader's data. Returns NOT_FOUND if the reader does not exist.",
+      "reasoning": "Missing summary entirely. Description lacks explicit mention of the return schema (ReaderEntitlements). Added clarity about what is returned and reorganized error conditions for better AI agent interpretability of success and failure scenarios.",
       "batch_index": 0
     }
   },
@@ -1761,7 +1761,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'readerrevenuesubscriptionlinking.publications.readers.updateEntitlements' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing. The description is missing details about the side effects and what is returned when the operation is successful.",
+    "message": "Operation 'readerrevenuesubscriptionlinking.publications.readers.updateEntitlements' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description mentions PUT-like behavior but could be clearer about the full replacement semantics. Added explicit mention of the request and response schemas (ReaderEntitlements) and clarified that this is a complete replacement operation to help AI agents understand the operation's destructive nature and distinguish it from partial updates.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1776,13 +1776,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Updates the reader entitlements for a publication reader. The entire reader entitlements will be overwritten by the new reader entitlements in the payload, like a PUT. - Returns PERMISSION_DENIED if the caller does not have access. - Returns NOT_FOUND if the reader does not exist.",
-      "summary_suggestion": "Update reader entitlements for a publication",
-      "description_suggestion": "Updates the reader entitlements for a publication reader. The entire reader entitlements are overwritten by the new reader entitlements in the payload, similar to a PUT request. Returns PERMISSION_DENIED if the caller does not have access. Returns NOT_FOUND if the reader does not exist. The response includes the updated reader entitlements.",
-      "reasoning": "The current summary is missing. The description is missing details about the side effects and what is returned when the operation is successful.",
+      "summary_suggestion": "Replace all entitlements for a publication reader",
+      "description_suggestion": "Replaces all entitlements for a specified publication reader with the provided ReaderEntitlements object. This is a full replacement operation (not a partial update) - all existing entitlements are overwritten. Returns the updated ReaderEntitlements object on success. Returns PERMISSION_DENIED if the caller lacks access. Returns NOT_FOUND if the reader does not exist.",
+      "reasoning": "Missing summary entirely. Description mentions PUT-like behavior but could be clearer about the full replacement semantics. Added explicit mention of the request and response schemas (ReaderEntitlements) and clarified that this is a complete replacement operation to help AI agents understand the operation's destructive nature and distinguish it from partial updates.",
       "batch_index": 0
     }
   },

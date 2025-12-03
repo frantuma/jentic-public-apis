@@ -12590,7 +12590,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'notebooks.projects.locations.schedules.list' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented.",
+    "message": "Operation 'notebooks.projects.locations.runtimes.create' has semantic quality issues: vague_summary, missing_side_effects. Missing summary entirely. Description lacks context about what a Runtime is, what inputs are expected (the Runtime schema), and that this is a long-running operation. Added domain context about Runtime purpose and clarified the asynchronous nature of the operation for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12601,15 +12601,17 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "notebooks.projects.locations.schedules.list",
+      "operation_id": "notebooks.projects.locations.runtimes.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_side_effects"
       ],
       "current_summary": "",
-      "current_description": "Lists schedules in a given project and location.",
-      "summary_suggestion": "List all schedules in a specified project and location.",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented.",
+      "current_description": "Creates a new Runtime in a given project and location.",
+      "summary_suggestion": "Create a new managed notebook runtime",
+      "description_suggestion": "Creates a new Runtime resource for a managed notebook instance in the specified project and location. The Runtime defines the execution environment configuration including machine type, accelerators, and software packages. Returns a long-running Operation that completes when the runtime is provisioned and ready for use.",
+      "reasoning": "Missing summary entirely. Description lacks context about what a Runtime is, what inputs are expected (the Runtime schema), and that this is a long-running operation. Added domain context about Runtime purpose and clarified the asynchronous nature of the operation for better AI agent understanding.",
       "batch_index": 5
     }
   },
@@ -12624,7 +12626,412 @@
         "character": 0
       }
     },
-    "message": "Operation 'notebooks.projects.locations.instances.getInstanceHealth' has semantic quality issues: vague_summary, missing_context. The current summary is missing. Added a concise summary and expanded the description to include more context about what the operation returns.",
+    "message": "Operation 'notebooks.projects.locations.schedules.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is minimal and doesn't explain what schedules are used for or mention pagination/filtering capabilities. Added context about Schedule purpose and clarified return format for AI agents to understand the response structure.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.schedules.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists schedules in a given project and location.",
+      "summary_suggestion": "List notebook execution schedules",
+      "description_suggestion": "Lists all Schedule resources in the specified project and location. Schedules define automated execution patterns for notebook workloads. Supports pagination through page size and token parameters. Returns a list of Schedule objects matching the query filters.",
+      "reasoning": "Missing summary. Description is minimal and doesn't explain what schedules are used for or mention pagination/filtering capabilities. Added context about Schedule purpose and clarified return format for AI agents to understand the response structure.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.schedules.create' has semantic quality issues: vague_summary, missing_side_effects. Missing summary. Description uses inconsistent terminology ('Scheduled Notebook' vs 'Schedule') and doesn't clarify that this is a long-running operation or explain what the schedule configuration controls. Improved terminology consistency and added operational context.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.schedules.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new Scheduled Notebook in a given project and location.",
+      "summary_suggestion": "Create a notebook execution schedule",
+      "description_suggestion": "Creates a new Schedule resource that defines automated execution patterns for notebook workloads in the specified project and location. The schedule configuration determines when and how the associated notebook will be executed. Returns a long-running Operation that completes when the schedule is created and activated.",
+      "reasoning": "Missing summary. Description uses inconsistent terminology ('Scheduled Notebook' vs 'Schedule') and doesn't clarify that this is a long-running operation or explain what the schedule configuration controls. Improved terminology consistency and added operational context.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.instances.setIamPolicy' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description mentions error cases but doesn't explain what input is required (SetIamPolicyRequest structure) or what is returned. Added clarity about input schema, return value, and more specific error condition context for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.instances.setIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.",
+      "summary_suggestion": "Set resource access control policy",
+      "description_suggestion": "Sets the access control policy on the specified notebook instance resource, replacing any existing policy. Requires a SetIamPolicyRequest containing the new Policy object with role bindings. Returns the updated Policy object. May return NOT_FOUND if resource doesn't exist, INVALID_ARGUMENT if policy is malformed, or PERMISSION_DENIED if caller lacks setIamPolicy permission.",
+      "reasoning": "Missing summary. Description mentions error cases but doesn't explain what input is required (SetIamPolicyRequest structure) or what is returned. Added clarity about input schema, return value, and more specific error condition context for AI agent decision-making.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.instances.testIamPermissions' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks input/output details (what request/response schemas are used). Added clarity about the request and response structures, and emphasized the distinction between this operation and authorization checking to help AI agents understand appropriate use cases.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.instances.testIamPermissions",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.",
+      "summary_suggestion": "Test caller permissions on resource",
+      "description_suggestion": "Tests which permissions the authenticated caller has on the specified notebook instance resource. Accepts a TestIamPermissionsRequest with a list of permissions to check. Returns a TestIamPermissionsResponse containing only the permissions the caller possesses. Returns an empty permission set if the resource doesn't exist (not a NOT_FOUND error). Designed for building permission-aware UIs and tools, not for authorization enforcement. May fail open without warning.",
+      "reasoning": "Missing summary. Description lacks input/output details (what request/response schemas are used). Added clarity about the request and response structures, and emphasized the distinction between this operation and authorization checking to help AI agents understand appropriate use cases.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.instances.updateConfig' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description is too vague about what configurations can be updated and what the operation returns. Added clarity about request/response types, operation nature, and when changes take effect for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.instances.updateConfig",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Update Notebook Instance configurations.",
+      "summary_suggestion": "Update notebook instance configuration settings",
+      "description_suggestion": "Updates the configuration settings of a notebook instance. Accepts configuration parameters via UpdateInstanceConfigRequest to modify instance behavior and properties. Returns an Operation resource representing the long-running update operation. Changes take effect after the operation completes.",
+      "reasoning": "Missing summary entirely. Description is too vague about what configurations can be updated and what the operation returns. Added clarity about request/response types, operation nature, and when changes take effect for better AI agent understanding.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.instances.updateMetadataItems' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks detail about return type and operation completion behavior. Added information about request structure, return value (Operation), and when metadata changes take effect for improved AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.instances.updateMetadataItems",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Add/update metadata items for an instance.",
+      "summary_suggestion": "Add or update instance metadata items",
+      "description_suggestion": "Adds or updates metadata items associated with a notebook instance. Accepts metadata key-value pairs via UpdateInstanceMetadataItemsRequest. Returns an Operation resource representing the long-running update. Metadata changes are applied to the instance after the operation completes.",
+      "reasoning": "Missing summary. Description lacks detail about return type and operation completion behavior. Added information about request structure, return value (Operation), and when metadata changes take effect for improved AI agent interpretability.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.instances.updateShieldedInstanceConfig' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description is vague about what Shielded Instance settings are modified and what is returned. Added specific security configuration details, request/response types, and operation completion behavior for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.instances.updateShieldedInstanceConfig",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Updates the Shielded instance configuration of a single Instance.",
+      "summary_suggestion": "Update Shielded Instance security configuration",
+      "description_suggestion": "Updates the Shielded Instance security configuration for a notebook instance. Modifies security settings such as secure boot, vTPM, and integrity monitoring via UpdateShieldedInstanceConfigRequest. Returns an Operation resource representing the long-running update. Security configuration changes take effect after the operation completes.",
+      "reasoning": "Missing summary. Description is vague about what Shielded Instance settings are modified and what is returned. Added specific security configuration details, request/response types, and operation completion behavior for better AI agent understanding.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.instances.upgrade' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks information about return type and operational side effects. Added clarity about request type, Operation return value, and instance availability impact during upgrade for improved AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.instances.upgrade",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Upgrades a notebook instance to the latest version.",
+      "summary_suggestion": "Upgrade notebook instance to latest version",
+      "description_suggestion": "Upgrades a notebook instance to the latest available version. Initiates an upgrade process via UpgradeInstanceRequest. Returns an Operation resource representing the long-running upgrade operation. The instance may be temporarily unavailable during the upgrade process.",
+      "reasoning": "Missing summary. Description lacks information about return type and operational side effects. Added clarity about request type, Operation return value, and instance availability impact during upgrade for improved AI agent interpretability.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.instances.upgradeInternal' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects, not_actionable. Missing summary. Description is unclear about purpose and return type, with a warning that reduces actionability. Clarified that this is internal-only, added request/response details, and structured the warning more professionally for better AI agent understanding and appropriate usage prevention.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.instances.upgradeInternal",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects",
+        "not_actionable"
+      ],
+      "current_summary": "",
+      "current_description": "Allows notebook instances to call this endpoint to upgrade themselves. Do not use this method directly.",
+      "summary_suggestion": "Internal self-upgrade endpoint for notebook instances",
+      "description_suggestion": "Internal endpoint for notebook instances to initiate self-upgrades. This is an internal API and should not be called directly by external clients. Accepts UpgradeInstanceInternalRequest parameters. Returns an Operation resource representing the upgrade operation. Reserved for internal system use only.",
+      "reasoning": "Missing summary. Description is unclear about purpose and return type, with a warning that reduces actionability. Clarified that this is internal-only, added request/response details, and structured the warning more professionally for better AI agent understanding and appropriate usage prevention.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.instances.isUpgradeable' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks information about what the response contains and how to use this operation in context. Added details about response content, eligibility status information, and suggested usage pattern for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.instances.isUpgradeable",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Checks whether a notebook instance is upgradable.",
+      "summary_suggestion": "Check if notebook instance is upgradeable",
+      "description_suggestion": "Checks whether a notebook instance is eligible for upgrade to a newer version. Returns a response indicating upgrade eligibility status and any applicable constraints or requirements. Use this operation before attempting to upgrade an instance.",
+      "reasoning": "Missing summary. Description lacks information about what the response contains and how to use this operation in context. Added details about response content, eligibility status information, and suggested usage pattern for better AI agent decision-making.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.environments.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too vague about pagination support and response structure. Added information about parameter support for pagination, response type, and what the response contains for improved AI agent understanding of filtering and pagination capabilities.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.environments.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists environments in a project.",
+      "summary_suggestion": "List notebook environments in a project",
+      "description_suggestion": "Lists all notebook environments available in a specified project and location. Supports pagination via page size and page token parameters. Returns a ListEnvironmentsResponse containing an array of Environment resources matching the query criteria.",
+      "reasoning": "Missing summary. Description is too vague about pagination support and response structure. Added information about parameter support for pagination, response type, and what the response contains for improved AI agent understanding of filtering and pagination capabilities.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.instances.getInstanceHealth' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description is too brief and lacks information about what health data is returned and the purpose of the check. Enhanced version clarifies the return value and use case for AI agents.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12639,13 +13046,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Checks whether a notebook instance is healthy.",
-      "summary_suggestion": "Check the health status of a notebook instance.",
-      "description_suggestion": "Checks whether a notebook instance is healthy. This operation returns a health status report that includes details such as CPU usage, memory usage, and disk space. It requires the instance name as a parameter.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include more context about what the operation returns.",
+      "summary_suggestion": "Check notebook instance health status",
+      "description_suggestion": "Checks the health status of a specified notebook instance. Returns health information indicating whether the instance is operational and ready for use. This operation helps determine if the instance requires maintenance or troubleshooting.",
+      "reasoning": "Missing summary entirely. Description is too brief and lacks information about what health data is returned and the purpose of the check. Enhanced version clarifies the return value and use case for AI agents.",
       "batch_index": 1
     }
   },
@@ -12660,7 +13067,81 @@
         "character": 0
       }
     },
-    "message": "Operation 'notebooks.projects.locations.instances.report' has semantic quality issues: vague_summary, missing_context. The current summary is missing. Added a concise summary and expanded the description to include the return value.",
+    "message": "Operation 'notebooks.projects.locations.instances.migrate' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks details about the operation being long-running, potential downtime, and what happens to the original instance. Added clarity about the Operation response type and migration implications for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.instances.migrate",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Migrates an existing User-Managed Notebook to Workbench Instances.",
+      "summary_suggestion": "Migrate User-Managed Notebook to Workbench",
+      "description_suggestion": "Migrates an existing User-Managed Notebook instance to Google Cloud Workbench Instances. This operation converts the notebook to a managed instance, which may involve state changes and service interruption. Returns a long-running Operation that tracks the migration progress. The original instance configuration will be transferred to the new managed environment.",
+      "reasoning": "Missing summary. Description lacks details about the operation being long-running, potential downtime, and what happens to the original instance. Added clarity about the Operation response type and migration implications for AI agent decision-making.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.runtimes.refreshRuntimeTokenInternal' has semantic quality issues: vague_summary, missing_output_details, missing_context. Missing summary. Description mentions access restrictions but lacks clarity on what is returned and the token's purpose. Clarified that this returns an access token and emphasized the internal-only nature for AI agents to understand usage constraints.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.runtimes.refreshRuntimeTokenInternal",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Gets an access token for the consumer service account that the customer attached to the runtime. Only accessible from the tenant instance.",
+      "summary_suggestion": "Refresh runtime service account access token",
+      "description_suggestion": "Retrieves a fresh access token for the consumer service account associated with the runtime. This operation is restricted to internal use and can only be called from the tenant instance. Returns an access token that can be used for authenticated API calls. Intended for internal runtime operations only.",
+      "reasoning": "Missing summary. Description mentions access restrictions but lacks clarity on what is returned and the token's purpose. Clarified that this returns an access token and emphasized the internal-only nature for AI agents to understand usage constraints.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.instances.report' has semantic quality issues: vague_summary, missing_context, not_actionable. Missing summary. Description is unclear about the operation's purpose and has a confusing 'Do not use' warning that should be more explicit. Reframed to clarify this is for internal instance-to-server communication and emphasized it's not for external use.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12675,13 +13156,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "not_actionable"
       ],
       "current_summary": "",
       "current_description": "Allows notebook instances to report their latest instance information to the Notebooks API server. The server will merge the reported information to the instance metadata store. Do not use this method directly.",
-      "summary_suggestion": "Report notebook instance information to the server.",
-      "description_suggestion": "Allows notebook instances to report their latest instance information to the Notebooks API server. The server will merge the reported information to the instance metadata store. This operation requires the instance name as a parameter and returns the status of the report.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include the return value.",
+      "summary_suggestion": "Report instance information to API server",
+      "description_suggestion": "Enables notebook instances to report their current status and metadata to the Notebooks API server for synchronization. The reported information is merged into the instance metadata store. This is an internal operation intended for use by notebook instances only - external callers should not invoke this method directly.",
+      "reasoning": "Missing summary. Description is unclear about the operation's purpose and has a confusing 'Do not use' warning that should be more explicit. Reframed to clarify this is for internal instance-to-server communication and emphasized it's not for external use.",
       "batch_index": 1
     }
   },
@@ -12696,7 +13178,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'notebooks.projects.locations.instances.reportEvent' has semantic quality issues: vague_summary, missing_context. The current summary is missing. Added a concise summary and expanded the description to include the parameters and return value.",
+    "message": "Operation 'notebooks.projects.locations.instances.reportEvent' has semantic quality issues: vague_summary, vague_description, missing_output_details, missing_context. Missing summary. Description is extremely vague - doesn't explain what types of events, what processing occurs, or what is returned. Enhanced version clarifies event types, processing implications, and return value to help AI agents understand when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12711,13 +13193,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
+        "missing_output_details",
         "missing_context"
       ],
       "current_summary": "",
       "current_description": "Reports and processes an instance event.",
-      "summary_suggestion": "Report and process an instance event.",
-      "description_suggestion": "Reports and processes an instance event. This operation requires the instance name and event details as parameters and returns the status of the event processing.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include the parameters and return value.",
+      "summary_suggestion": "Report and process instance event",
+      "description_suggestion": "Reports an event that occurred on a notebook instance and triggers processing of that event. Events are recorded in the instance's event history and may trigger automated responses or state transitions. Accepts an Event object describing the incident. Returns confirmation of event processing. Used for tracking instance lifecycle and operational events.",
+      "reasoning": "Missing summary. Description is extremely vague - doesn't explain what types of events, what processing occurs, or what is returned. Enhanced version clarifies event types, processing implications, and return value to help AI agents understand when to use this operation.",
       "batch_index": 1
     }
   },
@@ -12732,7 +13216,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'notebooks.projects.locations.environments.create' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing. Added a concise summary and detailed description including input details and response information.",
+    "message": "Operation 'notebooks.projects.locations.instances.reset' has semantic quality issues: vague_summary, missing_side_effects, missing_output_details. Missing summary. Description lacks critical information about data loss, service interruption, and the long-running nature of the operation. Enhanced version includes side effects and operational context essential for AI agents to understand the impact of this destructive operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12743,18 +13227,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "notebooks.projects.locations.environments.create",
+      "operation_id": "notebooks.projects.locations.instances.reset",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_side_effects",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Creates a new Environment.",
-      "summary_suggestion": "Create a new Environment in a project.",
-      "description_suggestion": "Creates a new Environment in a specified project and location. Requires an `Environment` object in the request body. The response includes details of the newly created environment.",
-      "reasoning": "The current summary is missing. Added a concise summary and detailed description including input details and response information.",
-      "batch_index": 4
+      "current_description": "Resets a notebook instance.",
+      "summary_suggestion": "Reset notebook instance to initial state",
+      "description_suggestion": "Resets a notebook instance to its initial state, clearing any user data and temporary files. This operation restarts the instance and may cause service interruption. Returns a long-running Operation tracking the reset progress. All unsaved work will be lost. The instance will be unavailable during the reset process.",
+      "reasoning": "Missing summary. Description lacks critical information about data loss, service interruption, and the long-running nature of the operation. Enhanced version includes side effects and operational context essential for AI agents to understand the impact of this destructive operation.",
+      "batch_index": 1
     }
   },
   {
@@ -12768,7 +13253,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'notebooks.projects.locations.executions.list' has semantic quality issues: vague_summary, missing_context. The current summary is missing. Added a concise summary and additional context about filtering capabilities.",
+    "message": "Operation 'notebooks.projects.locations.instances.rollback' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks information about what gets reverted, the long-running nature, service interruption, and data loss implications. Enhanced version clarifies the scope of rollback and side effects for AI agents to make informed decisions about using this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12779,18 +13264,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "notebooks.projects.locations.executions.list",
+      "operation_id": "notebooks.projects.locations.instances.rollback",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
-      "current_description": "Lists executions in a given project and location",
-      "summary_suggestion": "List Executions in a project and location.",
-      "description_suggestion": "Lists all Executions in a given project and location. Filters are available to narrow down the list based on various criteria. The response includes a list of `Execution` objects.",
-      "reasoning": "The current summary is missing. Added a concise summary and additional context about filtering capabilities.",
-      "batch_index": 4
+      "current_description": "Rollbacks a notebook instance to the previous version.",
+      "summary_suggestion": "Rollback instance to previous version",
+      "description_suggestion": "Rolls back a notebook instance to its previous version, reverting any recent changes or updates. This operation restores the instance configuration and environment to the prior state. Returns a long-running Operation tracking the rollback progress. The instance will be temporarily unavailable during the rollback process. Recent changes made after the previous version will be lost.",
+      "reasoning": "Missing summary. Description lacks information about what gets reverted, the long-running nature, service interruption, and data loss implications. Enhanced version clarifies the scope of rollback and side effects for AI agents to make informed decisions about using this operation.",
+      "batch_index": 1
     }
   },
   {
@@ -12804,151 +13290,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'notebooks.projects.locations.executions.create' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing. Added a concise summary and detailed description including input details and response information.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "notebooks.projects.locations.executions.create",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_input_details"
-      ],
-      "current_summary": "",
-      "current_description": "Creates a new Execution in a given project and location.",
-      "summary_suggestion": "Create a new Execution in a project.",
-      "description_suggestion": "Creates a new Execution in a specified project and location. Requires an `Execution` object in the request body. The response includes details of the newly created execution.",
-      "reasoning": "The current summary is missing. Added a concise summary and detailed description including input details and response information.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'notebooks.projects.locations.instances.list' has semantic quality issues: vague_summary, missing_context. The current summary is missing. Added a concise summary and additional context about filtering capabilities.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "notebooks.projects.locations.instances.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_context"
-      ],
-      "current_summary": "",
-      "current_description": "Lists instances in a given project and location.",
-      "summary_suggestion": "List Instances in a project and location.",
-      "description_suggestion": "Lists all Instances in a given project and location. Filters are available to narrow down the list based on various criteria. The response includes a list of `Instance` objects.",
-      "reasoning": "The current summary is missing. Added a concise summary and additional context about filtering capabilities.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'notebooks.projects.locations.instances.create' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing. Added a concise summary and detailed description including input details and response information.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "notebooks.projects.locations.instances.create",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_input_details"
-      ],
-      "current_summary": "",
-      "current_description": "Creates a new Instance in a given project and location.",
-      "summary_suggestion": "Create a new Instance in a project.",
-      "description_suggestion": "Creates a new Instance in a specified project and location. Requires an `Instance` object in the request body. The response includes details of the newly created instance.",
-      "reasoning": "The current summary is missing. Added a concise summary and detailed description including input details and response information.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'notebooks.projects.locations.runtimes.list' has semantic quality issues: vague_summary, missing_context. The current summary is missing. Added a concise summary and additional context about filtering capabilities.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "notebooks.projects.locations.runtimes.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_context"
-      ],
-      "current_summary": "",
-      "current_description": "Lists Runtimes in a given project and location.",
-      "summary_suggestion": "List Runtimes in a project and location.",
-      "description_suggestion": "Lists all Runtimes in a given project and location. Filters are available to narrow down the list based on various criteria. The response includes a list of `Runtime` objects.",
-      "reasoning": "The current summary is missing. Added a concise summary and additional context about filtering capabilities.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'notebooks.projects.locations.executions.delete' has semantic quality issues: vague_summary, vague_description, missing_side_effects. The current summary and description are vague. The suggestion provided a clear action, explained the input, and added information about potential side effects.",
+    "message": "Operation 'notebooks.projects.locations.executions.delete' has semantic quality issues: vague_summary, vague_description, missing_context, missing_side_effects. Original description is too terse and lacks context. Added clarity about what is being deleted, required input format, and expected response. Summary was missing entirely. Improved AI agent interpretability by specifying the resource type and expected parameters.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12964,13 +13306,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "missing_context",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes execution",
-      "summary_suggestion": "Delete a specific execution",
-      "description_suggestion": "Deletes a specific execution identified by the resource name. Upon successful deletion, the execution resource is no longer available. If the execution is currently running, the operation may fail.",
-      "reasoning": "The current summary and description are vague. The suggestion provided a clear action, explained the input, and added information about potential side effects.",
+      "summary_suggestion": "Delete a notebook execution",
+      "description_suggestion": "Deletes a specified notebook execution resource. This operation removes the execution record and associated data from the system. Requires the execution name in the format 'projects/{project}/locations/{location}/executions/{execution}'. Returns an empty response on successful deletion.",
+      "reasoning": "Original description is too terse and lacks context. Added clarity about what is being deleted, required input format, and expected response. Summary was missing entirely. Improved AI agent interpretability by specifying the resource type and expected parameters.",
       "batch_index": 0
     }
   },
@@ -12985,7 +13328,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'notebooks.projects.locations.executions.get' has semantic quality issues: vague_summary, missing_context. The current summary and description are vague. The suggestion provided a clear action, explained the input, and added context about what information is returned.",
+    "message": "Operation 'notebooks.projects.locations.executions.get' has semantic quality issues: vague_summary, vague_description, missing_output_details. Original description uses plural 'executions' but operation retrieves a single execution. Added clarity about return type (Execution schema), required input format, and what information is returned. Missing summary entirely. Improved for AI agent clarity on singular vs. plural semantics.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -13000,13 +13343,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "vague_description",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets details of executions",
-      "summary_suggestion": "Get details of a specific execution",
-      "description_suggestion": "Gets details of a specific execution identified by the resource name. Returns the details of the execution, including its status, start time, and end time.",
-      "reasoning": "The current summary and description are vague. The suggestion provided a clear action, explained the input, and added context about what information is returned.",
+      "summary_suggestion": "Retrieve notebook execution details",
+      "description_suggestion": "Retrieves detailed information about a specific notebook execution. Returns the Execution resource containing execution status, configuration, results, and metadata. Requires the execution name in the format 'projects/{project}/locations/{location}/executions/{execution}'.",
+      "reasoning": "Original description uses plural 'executions' but operation retrieves a single execution. Added clarity about return type (Execution schema), required input format, and what information is returned. Missing summary entirely. Improved for AI agent clarity on singular vs. plural semantics.",
       "batch_index": 0
     }
   },
@@ -13021,7 +13365,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'notebooks.projects.locations.instances.updateConfig' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description that includes authentication, request body details, and the return value.",
+    "message": "Operation 'notebooks.projects.locations.runtimes.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original description lacks detail about input parameters, update mask support, and return value. Missing summary. Added information about partial update support, required input format, and response type to improve AI agent understanding of how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -13032,18 +13376,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "notebooks.projects.locations.instances.updateConfig",
+      "operation_id": "notebooks.projects.locations.runtimes.patch",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Update Notebook Instance configurations.",
-      "summary_suggestion": "Update notebook instance configurations",
-      "description_suggestion": "Updates the configuration settings of a specified notebook instance. Requires authentication. The request body should include the updated configuration details. Returns the updated configuration object.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description that includes authentication, request body details, and the return value.",
-      "batch_index": 3
+      "current_description": "Update Notebook Runtime configuration.",
+      "summary_suggestion": "Update notebook runtime configuration",
+      "description_suggestion": "Updates the configuration of a managed notebook Runtime resource. Accepts a Runtime object with updated settings and an optional update mask to specify which fields to modify. Supports partial updates - only specified fields will be changed. Returns the updated Runtime resource. Requires the runtime name in the format 'projects/{project}/locations/{location}/runtimes/{runtime}'.",
+      "reasoning": "Original description lacks detail about input parameters, update mask support, and return value. Missing summary. Added information about partial update support, required input format, and response type to improve AI agent understanding of how to use this operation.",
+      "batch_index": 0
     }
   },
   {
@@ -13057,7 +13402,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'notebooks.projects.locations.instances.updateMetadataItems' has semantic quality issues: vague_summary, missing_context. The current summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description that includes authentication and the request body details.",
+    "message": "Operation 'notebooks.projects.locations.operations.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original description mentions filter but lacks detail about pagination, return type, and domain context. Added information about expected parameters (filter, page size, page token), return type (Operation resources), and use cases specific to the Notebooks API. Missing summary. Improved AI agent interpretability by clarifying what operations are being listed.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -13068,18 +13413,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "notebooks.projects.locations.instances.updateMetadataItems",
+      "operation_id": "notebooks.projects.locations.operations.list",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Add/update metadata items for an instance.",
-      "summary_suggestion": "Update metadata items for a notebook instance",
-      "description_suggestion": "Updates or adds metadata items for a specified notebook instance. Requires authentication. The request body should include the metadata items to be updated or added. Returns the updated metadata items.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description that includes authentication and the request body details.",
-      "batch_index": 3
+      "current_description": "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
+      "summary_suggestion": "List long-running operations",
+      "description_suggestion": "Lists long-running operations that match the specified filter criteria. Accepts filter, page size, and page token parameters to control results. Returns a list of Operation resources representing asynchronous tasks in progress or completed. If the server doesn't support this method, it returns `UNIMPLEMENTED`. Useful for monitoring notebook instance creation, deletion, and update operations.",
+      "reasoning": "Original description mentions filter but lacks detail about pagination, return type, and domain context. Added information about expected parameters (filter, page size, page token), return type (Operation resources), and use cases specific to the Notebooks API. Missing summary. Improved AI agent interpretability by clarifying what operations are being listed.",
+      "batch_index": 0
     }
   },
   {
@@ -13093,7 +13439,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'notebooks.projects.locations.instances.updateShieldedInstanceConfig' has semantic quality issues: vague_summary, missing_context. The current description is missing context about the request body. The suggestion provides a clear action-oriented summary and a detailed description that includes authentication and the request body details.",
+    "message": "Operation 'notebooks.projects.locations.operations.cancel' has semantic quality issues: vague_summary, missing_input_details. Description is comprehensive and well-detailed, explaining the asynchronous nature, best-effort semantics, error handling, and final state of cancelled operations. However, summary is missing. Added a concise action-oriented summary. The description already provides excellent AI agent interpretability regarding operation semantics and expected outcomes.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -13104,18 +13450,17 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "notebooks.projects.locations.instances.updateShieldedInstanceConfig",
+      "operation_id": "notebooks.projects.locations.operations.cancel",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details"
       ],
       "current_summary": "",
-      "current_description": "Updates the Shielded instance configuration of a single Instance.",
-      "summary_suggestion": "Update Shielded instance configuration",
-      "description_suggestion": "Updates the Shielded instance configuration of a specified notebook instance. Requires authentication. The request body should include the updated Shielded instance configuration details. Returns the updated Shielded instance configuration object.",
-      "reasoning": "The current description is missing context about the request body. The suggestion provides a clear action-oriented summary and a detailed description that includes authentication and the request body details.",
-      "batch_index": 3
+      "current_description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of `1`, corresponding to `Code.CANCELLED`.",
+      "summary_suggestion": "Request cancellation of long-running operation",
+      "reasoning": "Description is comprehensive and well-detailed, explaining the asynchronous nature, best-effort semantics, error handling, and final state of cancelled operations. However, summary is missing. Added a concise action-oriented summary. The description already provides excellent AI agent interpretability regarding operation semantics and expected outcomes.",
+      "batch_index": 0
     }
   },
   {
@@ -13129,7 +13474,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'notebooks.projects.locations.instances.upgrade' has semantic quality issues: vague_summary, missing_context. The current summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description that includes authentication and the request body details.",
+    "message": "Operation 'notebooks.projects.locations.instances.diagnose' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Original description is vague about inputs and outputs. Missing summary. Added clarity about request type (DiagnoseInstanceRequest), return type (Operation), and side effects (diagnostic file creation and storage). Specified that this is a long-running operation and explained the purpose for AI agent understanding of when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -13140,18 +13485,20 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "notebooks.projects.locations.instances.upgrade",
+      "operation_id": "notebooks.projects.locations.instances.diagnose",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
-      "current_description": "Upgrades a notebook instance to the latest version.",
-      "summary_suggestion": "Upgrade notebook instance to the latest version",
-      "description_suggestion": "Upgrades a specified notebook instance to the latest version. Requires authentication. The request body should include the upgrade details. Returns the upgraded instance details.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description that includes authentication and the request body details.",
-      "batch_index": 3
+      "current_description": "Creates a Diagnostic File and runs Diagnostic Tool given an Instance.",
+      "summary_suggestion": "Run diagnostics on notebook instance",
+      "description_suggestion": "Initiates diagnostic analysis on a specified notebook Instance. Creates a diagnostic file and executes the diagnostic tool to collect system information, logs, and configuration details. Accepts a DiagnoseInstanceRequest containing the instance name and optional diagnostic configuration parameters. Returns a long-running Operation that can be monitored for completion. The diagnostic results are stored and can be retrieved for troubleshooting instance issues.",
+      "reasoning": "Original description is vague about inputs and outputs. Missing summary. Added clarity about request type (DiagnoseInstanceRequest), return type (Operation), and side effects (diagnostic file creation and storage). Specified that this is a long-running operation and explained the purpose for AI agent understanding of when to use this operation.",
+      "batch_index": 0
     }
   },
   {
@@ -13165,7 +13512,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'notebooks.projects.locations.instances.upgradeInternal' has semantic quality issues: vague_summary, missing_context. The current summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description that includes authentication and the request body details.",
+    "message": "Operation 'notebooks.projects.locations.instances.setAccelerator' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary entirely. Description lacks context about what guest accelerators are (GPUs/TPUs), potential side effects (restart requirement), and input expectations. Added domain-specific terminology and clarified the operation's impact for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -13176,18 +13523,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "notebooks.projects.locations.instances.upgradeInternal",
+      "operation_id": "notebooks.projects.locations.instances.setAccelerator",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_side_effects"
       ],
       "current_summary": "",
-      "current_description": "Allows notebook instances to call this endpoint to upgrade themselves. Do not use this method directly.",
-      "summary_suggestion": "Internal upgrade for notebook instances",
-      "description_suggestion": "Allows notebook instances to call this endpoint to upgrade themselves. Requires authentication. The request body should include the upgrade details. Returns the upgraded instance details. Note: Do not use this method directly.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description that includes authentication and the request body details.",
-      "batch_index": 3
+      "current_description": "Updates the guest accelerators of a single Instance.",
+      "summary_suggestion": "Update instance guest accelerators",
+      "description_suggestion": "Updates the guest accelerators (GPUs or TPUs) attached to a notebook instance. This operation modifies the hardware acceleration configuration of the specified instance. The instance may require a restart for changes to take effect. Requires the instance name and new accelerator configuration in the request.",
+      "reasoning": "Missing summary entirely. Description lacks context about what guest accelerators are (GPUs/TPUs), potential side effects (restart requirement), and input expectations. Added domain-specific terminology and clarified the operation's impact for AI agent decision-making.",
+      "batch_index": 2
     }
   },
   {
@@ -13201,7 +13549,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'notebooks.projects.locations.instances.isUpgradeable' has semantic quality issues: vague_summary, missing_context. The current summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description that includes authentication and the return value.",
+    "message": "Operation 'notebooks.projects.locations.instances.setLabels' has semantic quality issues: vague_summary, missing_context. Missing summary. Description doesn't clarify that this is a full replacement (not merge) operation, which is critical for AI agents to understand the destructive nature. Added context about label purpose and operation semantics.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -13212,18 +13560,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "notebooks.projects.locations.instances.isUpgradeable",
+      "operation_id": "notebooks.projects.locations.instances.setLabels",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
         "missing_context"
       ],
       "current_summary": "",
-      "current_description": "Checks whether a notebook instance is upgradable.",
-      "summary_suggestion": "Check if a notebook instance is upgradable",
-      "description_suggestion": "Checks whether a specified notebook instance is upgradable. Requires authentication. Returns a boolean indicating whether the instance is upgradable.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description that includes authentication and the return value.",
-      "batch_index": 3
+      "current_description": "Replaces all the labels of an Instance.",
+      "summary_suggestion": "Replace instance labels",
+      "description_suggestion": "Replaces all labels on a notebook instance with the provided label set. This is a full replacement operation - existing labels not included in the request will be removed. Labels are key-value pairs used for organizing and managing instances. Requires the instance name and new label map in the request.",
+      "reasoning": "Missing summary. Description doesn't clarify that this is a full replacement (not merge) operation, which is critical for AI agents to understand the destructive nature. Added context about label purpose and operation semantics.",
+      "batch_index": 2
     }
   },
   {
@@ -13237,7 +13585,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'notebooks.projects.locations.environments.list' has semantic quality issues: vague_summary, missing_context. The current summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description that includes authentication and the return value.",
+    "message": "Operation 'notebooks.projects.locations.instances.setMachineType' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary. Description is too generic and doesn't explain what machine type means in this context or the operational impact (stop/restart requirement). Added clarity about compute resource implications and lifecycle requirements for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -13248,18 +13596,316 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "notebooks.projects.locations.environments.list",
+      "operation_id": "notebooks.projects.locations.instances.setMachineType",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_side_effects"
       ],
       "current_summary": "",
-      "current_description": "Lists environments in a project.",
-      "summary_suggestion": "List environments in a project",
-      "description_suggestion": "Lists all environments in a specified project. Requires authentication. Returns a list of environment objects.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description that includes authentication and the return value.",
-      "batch_index": 3
+      "current_description": "Updates the machine type of a single Instance.",
+      "summary_suggestion": "Update instance machine type",
+      "description_suggestion": "Updates the machine type (compute resources) of a notebook instance. This operation changes the CPU, memory, and other compute specifications of the instance. The instance typically requires a stop and restart for the machine type change to take effect. Requires the instance name and new machine type specification in the request.",
+      "reasoning": "Missing summary. Description is too generic and doesn't explain what machine type means in this context or the operational impact (stop/restart requirement). Added clarity about compute resource implications and lifecycle requirements for better AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.runtimes.switch' has semantic quality issues: vague_summary, vague_description, missing_context, unclear_purpose. Missing summary and vague description. 'Switch' is ambiguous - unclear what is being switched to or why. Added context about what runtime switching means (environment/version changes), potential side effects, and input requirements. Improved domain terminology consistency with 'Runtime' schema context.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.runtimes.switch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "unclear_purpose"
+      ],
+      "current_summary": "",
+      "current_description": "Switch a Managed Notebook Runtime.",
+      "summary_suggestion": "Switch managed notebook runtime",
+      "description_suggestion": "Switches a managed notebook runtime to a different runtime configuration or version. This operation allows changing the runtime environment of a managed notebook instance, which may include updating the Python version, installed packages, or other runtime dependencies. The instance may require a restart for the switch to take effect. Requires the runtime name and target runtime configuration in the request.",
+      "reasoning": "Missing summary and vague description. 'Switch' is ambiguous - unclear what is being switched to or why. Added context about what runtime switching means (environment/version changes), potential side effects, and input requirements. Improved domain terminology consistency with 'Runtime' schema context.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.schedules.trigger' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary. Description lacks context about what triggering means (immediate vs. scheduled), asynchronous execution behavior, and the resulting Execution resource. Added clarity about operation semantics and return value for AI agents to understand the execution model and monitoring requirements.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.schedules.trigger",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Triggers execution of an existing schedule.",
+      "summary_suggestion": "Trigger schedule execution",
+      "description_suggestion": "Triggers immediate execution of an existing notebook schedule, bypassing the normal scheduled time. This operation initiates an execution of the notebook defined in the schedule. The execution will run asynchronously and create an Execution resource that can be monitored for completion. Requires the schedule name in the request.",
+      "reasoning": "Missing summary. Description lacks context about what triggering means (immediate vs. scheduled), asynchronous execution behavior, and the resulting Execution resource. Added clarity about operation semantics and return value for AI agents to understand the execution model and monitoring requirements.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.environments.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Original description is too minimal. Missing summary entirely. Added clarity about what an Environment is (software environment for notebooks), input expectations (Environment object), output details (newly created resource with name), and operation nature (asynchronous with Operation tracking). This helps AI agents understand the resource type and operation lifecycle.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.environments.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new Environment.",
+      "summary_suggestion": "Create a new notebook environment",
+      "description_suggestion": "Creates a new Environment resource in the specified project and location. The Environment defines a software environment for starting notebook instances. Accepts an Environment object with configuration details. Returns the newly created Environment resource with a generated resource name. The operation is asynchronous and returns an Operation object for tracking completion.",
+      "reasoning": "Original description is too minimal. Missing summary entirely. Added clarity about what an Environment is (software environment for notebooks), input expectations (Environment object), output details (newly created resource with name), and operation nature (asynchronous with Operation tracking). This helps AI agents understand the resource type and operation lifecycle.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.executions.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks context about what Executions are and what the response contains. Added explanation of Execution resource type, pagination support, and return value structure to improve AI agent understanding of list operation behavior.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.executions.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists executions in a given project and location",
+      "summary_suggestion": "List notebook executions in a location",
+      "description_suggestion": "Lists all Execution resources in the specified project and location. Executions represent individual executed notebooks. Supports filtering, sorting, and pagination through standard list parameters. Returns a paginated list of Execution objects matching the query criteria.",
+      "reasoning": "Missing summary. Description lacks context about what Executions are and what the response contains. Added explanation of Execution resource type, pagination support, and return value structure to improve AI agent understanding of list operation behavior.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.executions.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description lacks detail about Execution semantics, input structure, and output format. Added context about what Executions represent, input expectations, return value, and asynchronous operation nature to help AI agents understand when to use this operation and what to expect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.executions.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new Execution in a given project and location.",
+      "summary_suggestion": "Create a new notebook execution",
+      "description_suggestion": "Creates a new Execution resource in the specified project and location. Executions represent individual executed notebooks. Accepts an Execution object with notebook configuration and execution parameters. Returns the newly created Execution resource with a generated resource name. The operation is asynchronous and returns an Operation object for tracking the execution progress.",
+      "reasoning": "Missing summary. Description lacks detail about Execution semantics, input structure, and output format. Added context about what Executions represent, input expectations, return value, and asynchronous operation nature to help AI agents understand when to use this operation and what to expect.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.instances.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks information about response structure and pagination. Added clarity about Instance resource type, list operation capabilities (filtering, sorting, pagination), and return value format for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.instances.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists instances in a given project and location.",
+      "summary_suggestion": "List notebook instances in a location",
+      "description_suggestion": "Lists all Instance resources in the specified project and location. Instances represent notebook instances that can be managed or semi-managed. Supports filtering, sorting, and pagination through standard list parameters. Returns a paginated list of Instance objects matching the query criteria.",
+      "reasoning": "Missing summary. Description lacks information about response structure and pagination. Added clarity about Instance resource type, list operation capabilities (filtering, sorting, pagination), and return value format for better AI agent interpretability.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.instances.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description lacks context about Instance configuration options and operation lifecycle. Added explanation of Instance resource type, configuration capabilities, input expectations, return value, and asynchronous nature to help AI agents understand resource creation and provisioning tracking.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.instances.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new Instance in a given project and location.",
+      "summary_suggestion": "Create a new notebook instance",
+      "description_suggestion": "Creates a new Instance resource in the specified project and location. Instances represent managed or semi-managed notebook instances with configurable compute, storage, and environment settings. Accepts an Instance object with configuration details including machine type, image, and environment specifications. Returns the newly created Instance resource with a generated resource name. The operation is asynchronous and returns an Operation object for tracking instance provisioning.",
+      "reasoning": "Missing summary. Description lacks context about Instance configuration options and operation lifecycle. Added explanation of Instance resource type, configuration capabilities, input expectations, return value, and asynchronous nature to help AI agents understand resource creation and provisioning tracking.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'notebooks.projects.locations.runtimes.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks context about Runtime resource purpose and response structure. Added explanation of Runtime semantics (execution environment for managed notebooks), list operation capabilities, and return value format to improve AI agent understanding of when and how to use this list operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "notebooks.projects.locations.runtimes.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists Runtimes in a given project and location.",
+      "summary_suggestion": "List managed notebook runtimes",
+      "description_suggestion": "Lists all Runtime resources in the specified project and location. Runtimes define the execution environment for managed notebook instances with configurable compute, memory, and accelerator settings. Supports filtering, sorting, and pagination through standard list parameters. Returns a paginated list of Runtime objects matching the query criteria.",
+      "reasoning": "Missing summary. Description lacks context about Runtime resource purpose and response structure. Added explanation of Runtime semantics (execution environment for managed notebooks), list operation capabilities, and return value format to improve AI agent understanding of when and how to use this list operation.",
+      "batch_index": 4
     }
   },
   {
@@ -13273,7 +13919,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 41 operations analyzed, 19 quality issues found",
+    "message": "Semantic analysis completed: 41 operations analyzed, 36 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -13285,7 +13931,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 41,
-      "total_issues_found": 19,
+      "total_issues_found": 36,
       "batches_processed": 6
     }
   }

@@ -11892,7 +11892,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateWebhook' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Both the summary and description were missing. The suggestions provide clarity on the operation's purpose, required inputs, and the output.",
+    "message": "Operation 'ListWebhook' has semantic quality issues: missing_input_details, missing_output_details, missing_context. Original description is too minimal. Added context about webhook purpose, pagination support, filtering capabilities, and what the response contains to help AI agents understand when to use this operation and what to expect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListWebhook",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Retrieve a list of all Webhooks for a Service.",
+      "current_description": "Retrieve a list of all Webhooks for a Service.",
+      "summary_suggestion": "List all webhooks for a service",
+      "description_suggestion": "Retrieves a paginated list of all webhooks configured for a specific Verify service. Webhooks are used to receive HTTP callbacks for verification events. Supports filtering and pagination parameters. Returns an array of webhook objects containing configuration details such as URL, event types, and status.",
+      "reasoning": "Original description is too minimal. Added context about webhook purpose, pagination support, filtering capabilities, and what the response contains to help AI agents understand when to use this operation and what to expect.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateWebhook' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, missing_side_effects. Operation had no summary or description. Added comprehensive information about what can be updated (URL, event types, status), clarified that partial updates are supported, specified the return value, and noted that changes are immediate. This enables AI agents to understand the operation's purpose and effects.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11908,14 +11945,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Update a specific Webhook.",
-      "description_suggestion": "Updates the details of a specific Webhook for a given Service. Requires the Service SID and Webhook SID. Accepts a JSON payload with the updated fields. Returns the updated Webhook object.",
-      "reasoning": "Both the summary and description were missing. The suggestions provide clarity on the operation's purpose, required inputs, and the output.",
+      "summary_suggestion": "Update webhook configuration and event settings",
+      "description_suggestion": "Updates the configuration of an existing webhook for a Verify service. Allows modification of the webhook URL, event types to subscribe to, and enabled/disabled status. Accepts partial updates - only provided fields will be modified. Returns the updated webhook object with all current configuration details. Changes take effect immediately for new verification events.",
+      "reasoning": "Operation had no summary or description. Added comprehensive information about what can be updated (URL, event types, status), clarified that partial updates are supported, specified the return value, and noted that changes are immediate. This enables AI agents to understand the operation's purpose and effects.",
       "batch_index": 7
     }
   },
@@ -11930,7 +11969,600 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchVerification' has semantic quality issues: vague_description, missing_output_details. The current description is too vague. It should specify the input parameters and the output details.",
+    "message": "Operation 'DeleteWebhook' has semantic quality issues: missing_context, missing_side_effects, missing_output_details. Original description lacks important context about consequences. Added information that deletion is permanent, clarifies that event callbacks will cease, notes the action cannot be undone, and specifies the expected HTTP response. This helps AI agents understand the destructive nature of this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteWebhook",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_context",
+        "missing_side_effects",
+        "missing_output_details"
+      ],
+      "current_summary": "Delete a specific Webhook.",
+      "current_description": "Delete a specific Webhook.",
+      "summary_suggestion": "Delete a webhook from a service",
+      "description_suggestion": "Permanently deletes a specific webhook from a Verify service. Once deleted, the service will no longer send HTTP callbacks to this webhook URL for verification events. This action cannot be undone. Returns a 204 No Content response on successful deletion.",
+      "reasoning": "Original description lacks important context about consequences. Added information that deletion is permanent, clarifies that event callbacks will cease, notes the action cannot be undone, and specifies the expected HTTP response. This helps AI agents understand the destructive nature of this operation.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchWebhook' has semantic quality issues: missing_context, missing_output_details. Original description is minimal. Added context about what information is returned (URL, event types, status, metadata), clarified the use case (inspecting before updates), and specified that it returns a complete webhook object. This helps AI agents understand what data they'll receive and when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchWebhook",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Fetch a specific Webhook.",
+      "current_description": "Fetch a specific Webhook.",
+      "summary_suggestion": "Retrieve a specific webhook configuration",
+      "description_suggestion": "Retrieves the complete configuration details of a specific webhook within a Verify service. Returns the webhook object including URL, subscribed event types, status (enabled/disabled), and other metadata. Use this to inspect webhook settings before making updates.",
+      "reasoning": "Original description is minimal. Added context about what information is returned (URL, event types, status, metadata), clarified the use case (inspecting before updates), and specified that it returns a complete webhook object. This helps AI agents understand what data they'll receive and when to use this operation.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListRateLimit' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Original description is repetitive and lacks detail about pagination, filtering capabilities, and response structure. Added information about query parameters, pagination support, and what the response contains to improve AI agent understanding of available options and expected output.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListRateLimit",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a list of all Rate Limits for a service.",
+      "current_description": "Retrieve a list of all Rate Limits for a service.",
+      "summary_suggestion": "List all rate limits for a service",
+      "description_suggestion": "Retrieves a paginated list of all rate limit configurations for a specified Verify service. Supports filtering and pagination through query parameters. Returns an array of rate limit objects containing bucket configurations, limits, and window settings.",
+      "reasoning": "Original description is repetitive and lacks detail about pagination, filtering capabilities, and response structure. Added information about query parameters, pagination support, and what the response contains to improve AI agent understanding of available options and expected output.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateRateLimit' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description lacks specificity about what can be updated, what inputs are required, what is returned, and when changes take effect. Enhanced version clarifies the updateable fields, return value, and side effects (immediate application) for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateRateLimit",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Update a specific Rate Limit.",
+      "current_description": "Update a specific Rate Limit.",
+      "summary_suggestion": "Update rate limit configuration",
+      "description_suggestion": "Updates the configuration of a specific rate limit for a Verify service. Accepts parameters to modify rate limit thresholds, windows, or bucket settings. Returns the updated rate limit object. Changes take effect immediately and apply to subsequent verification requests.",
+      "reasoning": "Original description lacks specificity about what can be updated, what inputs are required, what is returned, and when changes take effect. Enhanced version clarifies the updateable fields, return value, and side effects (immediate application) for better AI agent decision-making.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchRateLimit' has semantic quality issues: vague_description, missing_output_details. Original description is minimal and doesn't explain what information is returned. Enhanced version specifies the response structure and what configuration details are included, helping AI agents understand the available data.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchRateLimit",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Fetch a specific Rate Limit.",
+      "current_description": "Fetch a specific Rate Limit.",
+      "summary_suggestion": "Retrieve a specific rate limit",
+      "description_suggestion": "Retrieves the configuration details of a specific rate limit by its identifier. Returns the rate limit object including bucket configuration, thresholds, time windows, and current status for the specified Verify service.",
+      "reasoning": "Original description is minimal and doesn't explain what information is returned. Enhanced version specifies the response structure and what configuration details are included, helping AI agents understand the available data.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteRateLimit' has semantic quality issues: vague_description, missing_output_details, missing_side_effects. Original description lacks information about side effects and response format. Enhanced version clarifies what happens after deletion (rate limit no longer applies), the response code, and that deletion is permanent, helping AI agents understand the consequences of this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteRateLimit",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete a specific Rate Limit.",
+      "current_description": "Delete a specific Rate Limit.",
+      "summary_suggestion": "Delete a rate limit configuration",
+      "description_suggestion": "Deletes a specific rate limit configuration from a Verify service. Once deleted, the rate limit no longer applies to verification requests for that service. Returns a 204 No Content response on successful deletion. This action cannot be undone.",
+      "reasoning": "Original description lacks information about side effects and response format. Enhanced version clarifies what happens after deletion (rate limit no longer applies), the response code, and that deletion is permanent, helping AI agents understand the consequences of this operation.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateSafelist' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Original description lacks input format requirements, response details, and behavior for duplicates. Enhanced version specifies E.164 format requirement, what is returned, and duplicate handling to help AI agents properly format requests and understand outcomes.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateSafelist",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Add a new phone number to SafeList.",
+      "current_description": "Add a new phone number to SafeList.",
+      "summary_suggestion": "Add phone number to SafeList",
+      "description_suggestion": "Adds a phone number to the SafeList, marking it as a trusted number that bypasses verification requirements. Requires the phone number in E.164 format. Returns the created SafeList entry with the phone number and timestamp. Duplicate entries are rejected.",
+      "reasoning": "Original description lacks input format requirements, response details, and behavior for duplicates. Enhanced version specifies E.164 format requirement, what is returned, and duplicate handling to help AI agents properly format requests and understand outcomes.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchSafelist' has semantic quality issues: vague_description, missing_output_details. Original description doesn't clarify response structure or error handling. Enhanced version specifies what is returned on success (entry details), what information is included, and error response (404), enabling AI agents to properly interpret results.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchSafelist",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Check if a phone number exists in SafeList.",
+      "current_description": "Check if a phone number exists in SafeList.",
+      "summary_suggestion": "Check if phone number is SafeListed",
+      "description_suggestion": "Checks whether a phone number exists in the SafeList. Returns the SafeList entry if found, including the phone number and when it was added. Returns a 404 error if the phone number is not in the SafeList.",
+      "reasoning": "Original description doesn't clarify response structure or error handling. Enhanced version specifies what is returned on success (entry details), what information is included, and error response (404), enabling AI agents to properly interpret results.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteSafelist' has semantic quality issues: vague_description, missing_output_details, missing_side_effects. Original description lacks information about side effects and response format. Enhanced version clarifies what happens after removal (verification requirements restored), the response code, and the impact on future verification attempts, helping AI agents understand the operation's consequences.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteSafelist",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Remove a phone number from SafeList.",
+      "current_description": "Remove a phone number from SafeList.",
+      "summary_suggestion": "Remove phone number from SafeList",
+      "description_suggestion": "Removes a phone number from the SafeList, restoring normal verification requirements for that number. Returns a 204 No Content response on successful deletion. After removal, the phone number will no longer bypass verification checks.",
+      "reasoning": "Original description lacks information about side effects and response format. Enhanced version clarifies what happens after removal (verification requirements restored), the response code, and the impact on future verification attempts, helping AI agents understand the operation's consequences.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateAccessToken' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_context. Original description is repetitive and lacks detail. Improved version clarifies the purpose (enrollment authentication), specifies required inputs (ServiceSid, entity identifier), explains the use case, and describes the response structure for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateAccessToken",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Create a new enrollment Access Token for the Entity",
+      "current_description": "Create a new enrollment Access Token for the Entity",
+      "summary_suggestion": "Create enrollment access token for entity",
+      "description_suggestion": "Creates a new enrollment access token for the specified entity within a service. The access token is used to authenticate and authorize entity enrollment operations. Requires the ServiceSid and entity identifier. Returns the created access token object with token value, expiration details, and metadata.",
+      "reasoning": "Original description is repetitive and lacks detail. Improved version clarifies the purpose (enrollment authentication), specifies required inputs (ServiceSid, entity identifier), explains the use case, and describes the response structure for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchAccessToken' has semantic quality issues: vague_description, missing_output_details, missing_context. Original description is too brief and lacks context about what data is returned. Enhanced version clarifies the retrieval operation, specifies required identifiers, and describes the response structure for improved AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchAccessToken",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Fetch an Access Token for the Entity",
+      "current_description": "Fetch an Access Token for the Entity",
+      "summary_suggestion": "Retrieve access token for entity",
+      "description_suggestion": "Retrieves an existing access token for the specified entity. Requires the ServiceSid and access token Sid. Returns the access token object including token value, status, expiration information, and associated entity details.",
+      "reasoning": "Original description is too brief and lacks context about what data is returned. Enhanced version clarifies the retrieval operation, specifies required identifiers, and describes the response structure for improved AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateBucket' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_context. Original description lacks domain context about bucket purpose in rate limiting. Improved version explains the functional role of buckets in rate limiting, specifies required parameters, and describes the response including usage metrics for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateBucket",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Create a new Bucket for a Rate Limit",
+      "current_description": "Create a new Bucket for a Rate Limit",
+      "summary_suggestion": "Create rate limit bucket",
+      "description_suggestion": "Creates a new bucket within a rate limit configuration to manage request throttling. Buckets define capacity and reset intervals for rate limiting. Requires ServiceSid and RateLimitSid. Returns the created bucket object with capacity, interval, and current usage metrics.",
+      "reasoning": "Original description lacks domain context about bucket purpose in rate limiting. Improved version explains the functional role of buckets in rate limiting, specifies required parameters, and describes the response including usage metrics for better AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListBucket' has semantic quality issues: vague_description, missing_output_details, missing_context. Original description is minimal. Enhanced version clarifies pagination support, specifies required identifiers, and describes the response structure including usage metrics for each bucket, enabling AI agents to properly handle list operations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListBucket",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Retrieve a list of all Buckets for a Rate Limit.",
+      "current_description": "Retrieve a list of all Buckets for a Rate Limit.",
+      "summary_suggestion": "List rate limit buckets",
+      "description_suggestion": "Retrieves a paginated list of all buckets configured for a specific rate limit. Requires ServiceSid and RateLimitSid. Supports pagination parameters (PageSize, Page, PageToken). Returns an array of bucket objects with capacity, interval, and current usage information for each bucket.",
+      "reasoning": "Original description is minimal. Enhanced version clarifies pagination support, specifies required identifiers, and describes the response structure including usage metrics for each bucket, enabling AI agents to properly handle list operations.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateBucket' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_context. Original description is too generic. Improved version specifies what can be updated (capacity, interval), clarifies required identifiers, and describes the response structure for better AI agent understanding of the update operation's scope and effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateBucket",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Update a specific Bucket.",
+      "current_description": "Update a specific Bucket.",
+      "summary_suggestion": "Update rate limit bucket configuration",
+      "description_suggestion": "Updates the configuration of a specific bucket within a rate limit. Allows modification of capacity and interval settings. Requires ServiceSid, RateLimitSid, and bucket Sid. Returns the updated bucket object with new configuration values and current usage metrics.",
+      "reasoning": "Original description is too generic. Improved version specifies what can be updated (capacity, interval), clarifies required identifiers, and describes the response structure for better AI agent understanding of the update operation's scope and effects.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchBucket' has semantic quality issues: vague_description, missing_output_details, missing_context. Original description lacks specificity about returned data. Enhanced version clarifies what information is retrieved (configuration and usage metrics), specifies required identifiers, and describes the response structure for improved AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchBucket",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Fetch a specific Bucket.",
+      "current_description": "Fetch a specific Bucket.",
+      "summary_suggestion": "Retrieve bucket configuration and metrics",
+      "description_suggestion": "Retrieves detailed information about a specific bucket within a rate limit configuration. Requires ServiceSid, RateLimitSid, and bucket Sid. Returns the bucket object including capacity, interval, current usage, and reset timing information.",
+      "reasoning": "Original description lacks specificity about returned data. Enhanced version clarifies what information is retrieved (configuration and usage metrics), specifies required identifiers, and describes the response structure for improved AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteBucket' has semantic quality issues: vague_description, missing_side_effects, missing_context. Original description is too minimal. Improved version clarifies the deletion action, specifies required identifiers, explains the side effect (impact on rate limiting), and indicates the success response code for better AI agent understanding of the operation's consequences.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteBucket",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_side_effects",
+        "missing_context"
+      ],
+      "current_summary": "Delete a specific Bucket.",
+      "current_description": "Delete a specific Bucket.",
+      "summary_suggestion": "Delete rate limit bucket",
+      "description_suggestion": "Deletes a specific bucket from a rate limit configuration. Requires ServiceSid, RateLimitSid, and bucket Sid. Removing a bucket will affect the rate limiting behavior for the associated service. Returns HTTP 204 on successful deletion.",
+      "reasoning": "Original description is too minimal. Improved version clarifies the deletion action, specifies required identifiers, explains the side effect (impact on rate limiting), and indicates the success response code for better AI agent understanding of the operation's consequences.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchVerification' has semantic quality issues: vague_summary, vague_description, missing_output_details. Original description is too generic and doesn't explain what data is returned or what the verification object contains. Added clarity about required parameters, return value details, and what information an AI agent can expect to receive.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11944,13 +12576,15 @@
       "operation_id": "FetchVerification",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
         "missing_output_details"
       ],
       "current_summary": "Fetch a specific Verification",
       "current_description": "Fetch a specific Verification",
-      "description_suggestion": "Retrieves a specific Verification by its Service SID and Verification SID. Returns the detailed verification object.",
-      "reasoning": "The current description is too vague. It should specify the input parameters and the output details.",
+      "summary_suggestion": "Retrieve a specific verification by ID",
+      "description_suggestion": "Retrieves the details of a specific verification within a service. Requires the Service SID and Verification SID. Returns the verification object containing status, channel, creation timestamp, and other verification metadata.",
+      "reasoning": "Original description is too generic and doesn't explain what data is returned or what the verification object contains. Added clarity about required parameters, return value details, and what information an AI agent can expect to receive.",
       "batch_index": 6
     }
   },
@@ -11965,7 +12599,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListVerificationAttempt' has semantic quality issues: vague_description, missing_output_details. The current description is too vague. It should specify the input parameters and the output details.",
+    "message": "Operation 'ListVerificationAttempt' has semantic quality issues: vague_description, missing_output_details, missing_context. Summary is adequate but description lacks detail about pagination, filtering capabilities, and what the returned attempt objects contain. Added information about query parameter filtering and response structure to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11980,12 +12614,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "List all the verification attempts for a given Account.",
       "current_description": "List all the verification attempts for a given Account.",
-      "description_suggestion": "Lists all verification attempts for a given Account. Filters can be applied using query parameters. Returns a list of verification attempt objects.",
-      "reasoning": "The current description is too vague. It should specify the input parameters and the output details.",
+      "description_suggestion": "Retrieves a paginated list of all verification attempts for the authenticated account. Supports filtering by date range, status, and other criteria through query parameters. Returns an array of verification attempt objects with details including attempt status, channel, timestamp, and verification outcome.",
+      "reasoning": "Summary is adequate but description lacks detail about pagination, filtering capabilities, and what the returned attempt objects contain. Added information about query parameter filtering and response structure to improve AI agent interpretability.",
       "batch_index": 6
     }
   },
@@ -12000,7 +12635,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchVerificationAttempt' has semantic quality issues: vague_description, missing_output_details. The current description is too vague. It should specify the input parameters and the output details.",
+    "message": "Operation 'FetchVerificationAttempt' has semantic quality issues: vague_summary, vague_description, missing_output_details. Original description was too minimal. Enhanced summary to be more specific about the lookup mechanism and improved description to clarify the returned data structure and use cases for AI agents.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12014,13 +12649,15 @@
       "operation_id": "FetchVerificationAttempt",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
         "missing_output_details"
       ],
-      "current_summary": "Fetch a specific verification attempt.",
-      "current_description": "Fetch a specific verification attempt.",
-      "description_suggestion": "Retrieves a specific verification attempt by its SID. Returns the detailed verification attempt object.",
-      "reasoning": "The current description is too vague. It should specify the input parameters and the output details.",
+      "current_summary": "Retrieve a specific verification attempt",
+      "current_description": "Retrieves the details of a specific verification attempt by its SID. Returns the verification attempt object containing status, channel, timestamp, and verification outcome information.",
+      "summary_suggestion": "Retrieve a specific verification attempt by ID",
+      "description_suggestion": "Retrieves the details of a specific verification attempt by its SID. Returns the verification attempt object containing status, channel, timestamp, verification outcome, and related metadata for auditing and troubleshooting purposes.",
+      "reasoning": "Original description was too minimal. Enhanced summary to be more specific about the lookup mechanism and improved description to clarify the returned data structure and use cases for AI agents.",
       "batch_index": 6
     }
   },
@@ -12035,7 +12672,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchVerificationAttemptsSummary' has semantic quality issues: vague_description, missing_output_details. The current description is too vague. It should specify the output details.",
+    "message": "Operation 'FetchVerificationAttemptsSummary' has semantic quality issues: missing_output_details, missing_context. Summary is clear but description lacks detail about the actual metrics returned, filtering capabilities, and time period context. Added information about aggregation scope, specific metrics included, and query parameter support for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12049,14 +12686,13 @@
       "operation_id": "FetchVerificationAttemptsSummary",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "Get a summary of how many attempts were made and how many were converted.",
       "current_description": "Get a summary of how many attempts were made and how many were converted.",
-      "summary_suggestion": "Get a summary of verification attempts.",
-      "description_suggestion": "Retrieves a summary of verification attempts, including the total number of attempts and successful conversions. Returns a summary object.",
-      "reasoning": "The current description is too vague. It should specify the output details.",
+      "description_suggestion": "Retrieves aggregate statistics about verification attempts for the account within a specified time period. Returns summary metrics including total attempts, successful conversions, conversion rate, and breakdown by channel or status. Supports filtering by date range and other criteria through query parameters.",
+      "reasoning": "Summary is clear but description lacks detail about the actual metrics returned, filtering capabilities, and time period context. Added information about aggregation scope, specific metrics included, and query parameter support for better AI agent decision-making.",
       "batch_index": 6
     }
   },
@@ -12071,7 +12707,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateVerificationCheck' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The current description is too vague. It should specify the input parameters and the output details.",
+    "message": "Operation 'CreateVerificationCheck' has semantic quality issues: vague_summary, unclear_purpose, not_actionable, missing_input_details, missing_output_details. Original summary 'challenge a specific Verification Check' is confusing and not actionable. The operation appears to validate/verify codes, not challenge checks. Clarified the purpose, added details about required inputs (code/response), and specified what the response contains for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12085,14 +12721,17 @@
       "operation_id": "CreateVerificationCheck",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description",
+        "vague_summary",
+        "unclear_purpose",
+        "not_actionable",
         "missing_input_details",
         "missing_output_details"
       ],
-      "current_summary": "challenge a specific Verification Check.",
-      "current_description": "challenge a specific Verification Check.",
-      "description_suggestion": "Initiates a verification check for a specific service. Requires the Service SID and verification check details. Returns the created verification check object.",
-      "reasoning": "The current description is too vague. It should specify the input parameters and the output details.",
+      "current_summary": "Verify a verification check",
+      "current_description": "Verifies a verification check by validating the provided code or response against the pending verification. Requires the Service SID and the verification code or challenge response in the request body. Returns the verification check result indicating success or failure, along with status and metadata.",
+      "summary_suggestion": "Verify a code against a pending verification",
+      "description_suggestion": "Validates a verification code or challenge response against a pending verification within a service. Requires the Service SID and the verification code/response in the request body. Returns the verification check result with status (approved/denied), attempt count, and any error details if validation fails.",
+      "reasoning": "Original summary 'challenge a specific Verification Check' is confusing and not actionable. The operation appears to validate/verify codes, not challenge checks. Clarified the purpose, added details about required inputs (code/response), and specified what the response contains for AI agent clarity.",
       "batch_index": 6
     }
   },
@@ -12107,7 +12746,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListVerificationTemplate' has semantic quality issues: vague_description, missing_output_details. The current description is too vague. It should specify the output details.",
+    "message": "Operation 'ListVerificationTemplate' has semantic quality issues: missing_output_details, missing_context. Summary is clear but description lacks specificity about what template data is returned and pagination support. Added details about template object structure and filtering capabilities to help AI agents understand the response format.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12121,13 +12760,13 @@
       "operation_id": "ListVerificationTemplate",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "List all the available templates for a given Account.",
       "current_description": "List all the available templates for a given Account.",
-      "description_suggestion": "Lists all available templates for a given Account. Filters can be applied using query parameters. Returns a list of template objects.",
-      "reasoning": "The current description is too vague. It should specify the output details.",
+      "description_suggestion": "Retrieves a paginated list of all verification message templates available for the authenticated account. Returns template objects containing template SID, friendly name, message content, language, and creation metadata. Supports filtering and pagination through query parameters.",
+      "reasoning": "Summary is clear but description lacks specificity about what template data is returned and pagination support. Added details about template object structure and filtering capabilities to help AI agents understand the response format.",
       "batch_index": 6
     }
   },
@@ -12142,7 +12781,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateWebhook' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The current description is too vague. It should specify the input parameters and the output details.",
+    "message": "Operation 'CreateWebhook' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Description is too minimal and doesn't explain what inputs are required, what the webhook will do, or what is returned. Added details about required parameters, webhook configuration options, return value structure, and the side effect that the webhook becomes active immediately.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12158,13 +12797,13 @@
       "issues_found": [
         "vague_description",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Create a new Webhook for the Service",
       "current_description": "Create a new Webhook for the Service",
-      "summary_suggestion": "Create a new Webhook for the Service.",
-      "description_suggestion": "Creates a new webhook for a specific service. Requires the Service SID and webhook configuration details. Returns the created webhook object.",
-      "reasoning": "The current description is too vague. It should specify the input parameters and the output details.",
+      "description_suggestion": "Creates a new webhook endpoint for a service to receive event notifications. Requires the Service SID and webhook configuration in the request body including URL, event types, and status. Returns the created webhook object with SID, URL, event filters, and enabled status. The webhook will begin receiving events immediately upon creation.",
+      "reasoning": "Description is too minimal and doesn't explain what inputs are required, what the webhook will do, or what is returned. Added details about required parameters, webhook configuration options, return value structure, and the side effect that the webhook becomes active immediately.",
       "batch_index": 6
     }
   },
@@ -12179,7 +12818,537 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateChallenge' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The current summary is clear, but the description is vague and lacks details about inputs, outputs, and the action performed.",
+    "message": "Operation 'CreateMessagingConfiguration' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is repetitive and lacks essential details. Added clarity about what the configuration controls (country-specific messaging), required inputs, and what is returned. This helps AI agents understand the operation's purpose and when to use it.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateMessagingConfiguration",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Create a new MessagingConfiguration for a service.",
+      "current_description": "Create a new MessagingConfiguration for a service.",
+      "summary_suggestion": "Create messaging configuration for service",
+      "description_suggestion": "Creates a new MessagingConfiguration for the specified service. This configuration defines messaging behavior for a particular country or region. Requires the service SID and configuration parameters (country, messaging service SID, etc.). Returns the created MessagingConfiguration object with all properties including the country code and associated messaging service details.",
+      "reasoning": "Original description is repetitive and lacks essential details. Added clarity about what the configuration controls (country-specific messaging), required inputs, and what is returned. This helps AI agents understand the operation's purpose and when to use it.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListMessagingConfiguration' has semantic quality issues: vague_description, missing_output_details, missing_context. Original description lacks pagination context and return value details. Enhanced to explain pagination support, what each configuration contains, and the practical use case for listing configurations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListMessagingConfiguration",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Retrieve a list of all Messaging Configurations for a Service.",
+      "current_description": "Retrieve a list of all Messaging Configurations for a Service.",
+      "summary_suggestion": "List messaging configurations for service",
+      "description_suggestion": "Retrieves a paginated list of all MessagingConfigurations associated with the specified service. Supports filtering and pagination parameters. Returns an array of MessagingConfiguration objects, each containing country-specific messaging settings and their associated messaging service details. Useful for auditing or managing multi-country messaging strategies.",
+      "reasoning": "Original description lacks pagination context and return value details. Enhanced to explain pagination support, what each configuration contains, and the practical use case for listing configurations.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateMessagingConfiguration' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is too minimal. Added context about country-specific targeting, required identifiers, what can be modified, return value, and partial update support for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateMessagingConfiguration",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Update a specific MessagingConfiguration",
+      "current_description": "Update a specific MessagingConfiguration",
+      "summary_suggestion": "Update messaging configuration for country",
+      "description_suggestion": "Updates an existing MessagingConfiguration for a specific country within the service. Requires the service SID and country code to identify the configuration. Allows modification of messaging service associations and related settings. Returns the updated MessagingConfiguration object reflecting all changes. Partial updates are supported.",
+      "reasoning": "Original description is too minimal. Added context about country-specific targeting, required identifiers, what can be modified, return value, and partial update support for better AI agent decision-making.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchMessagingConfiguration' has semantic quality issues: vague_description, missing_output_details. Original description lacks specificity about the country-based lookup and return value details. Enhanced to clarify the country-based retrieval mechanism and what properties are returned.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchMessagingConfiguration",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Fetch a specific MessagingConfiguration.",
+      "current_description": "Fetch a specific MessagingConfiguration.",
+      "summary_suggestion": "Retrieve messaging configuration by country",
+      "description_suggestion": "Retrieves a specific MessagingConfiguration for a given country within the service. Requires the service SID and country code as identifiers. Returns the complete MessagingConfiguration object including the country code, associated messaging service SID, and all configuration properties.",
+      "reasoning": "Original description lacks specificity about the country-based lookup and return value details. Enhanced to clarify the country-based retrieval mechanism and what properties are returned.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteMessagingConfiguration' has semantic quality issues: vague_description, missing_output_details, missing_side_effects. Original description lacks context about what deletion means operationally and its potential side effects. Added clarity about country-specific targeting, the impact of deletion on message delivery, and the expected HTTP response.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteMessagingConfiguration",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete a specific MessagingConfiguration.",
+      "current_description": "Delete a specific MessagingConfiguration.",
+      "summary_suggestion": "Delete messaging configuration for country",
+      "description_suggestion": "Deletes a specific MessagingConfiguration for a given country within the service. Requires the service SID and country code. This operation removes the country-specific messaging configuration, which may affect verification message delivery for that country if no fallback configuration exists. Returns HTTP 204 No Content on successful deletion.",
+      "reasoning": "Original description lacks context about what deletion means operationally and its potential side effects. Added clarity about country-specific targeting, the impact of deletion on message delivery, and the expected HTTP response.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateNotification' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_context. Original description lacks context about the entity-challenge relationship and notification purpose. Added clarity about the hierarchical structure (service > entity > challenge > notification), what notifications do, and the practical use case.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateNotification",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Create a new Notification for the corresponding Challenge",
+      "current_description": "Create a new Notification for the corresponding Challenge",
+      "summary_suggestion": "Create notification for challenge",
+      "description_suggestion": "Creates a new Notification for a specific Challenge associated with an Entity. Requires the service SID, entity identity, and challenge SID to identify the target challenge. Notifications alert users about pending or active challenges. Returns the created Notification object with delivery status and metadata. This operation is typically used to resend or create additional notifications for a challenge.",
+      "reasoning": "Original description lacks context about the entity-challenge relationship and notification purpose. Added clarity about the hierarchical structure (service > entity > challenge > notification), what notifications do, and the practical use case.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateRateLimit' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_context. Original description lacks context about rate limiting's purpose (abuse prevention) and what parameters are involved. Enhanced to explain the operational purpose, required inputs, return value, and that multiple limits can coexist per service.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateRateLimit",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Create a new Rate Limit for a Service",
+      "current_description": "Create a new Rate Limit for a Service",
+      "summary_suggestion": "Create rate limit policy for service",
+      "description_suggestion": "Creates a new RateLimit configuration for the specified service. Rate limits control the frequency of verification attempts and other operations to prevent abuse. Requires the service SID and rate limit parameters (bucket name, max attempts, time window, etc.). Returns the created RateLimit object with all configuration details. Multiple rate limits can be configured per service for different verification scenarios.",
+      "reasoning": "Original description lacks context about rate limiting's purpose (abuse prevention) and what parameters are involved. Enhanced to explain the operational purpose, required inputs, return value, and that multiple limits can coexist per service.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchEntity' has semantic quality issues: vague_summary, vague_description, missing_output_details, poor_ai_interpretability. Original description is too minimal and doesn't explain what an Entity is in the Verify context, what parameters are required, or what is returned. Enhanced version clarifies the resource type, required parameters, and return value for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchEntity",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Fetch a specific Entity.",
+      "current_description": "Fetch a specific Entity.",
+      "summary_suggestion": "Retrieve a specific Entity by identity",
+      "description_suggestion": "Retrieves a specific Entity resource identified by the provided Identity within a Service. Returns the Entity object containing its configuration and associated metadata. Requires the ServiceSid and Identity parameters to identify the target Entity.",
+      "reasoning": "Original description is too minimal and doesn't explain what an Entity is in the Verify context, what parameters are required, or what is returned. Enhanced version clarifies the resource type, required parameters, and return value for better AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteFactor' has semantic quality issues: vague_summary, vague_description, missing_context, missing_side_effects, poor_ai_interpretability. Original description lacks context about what a Factor is, which Entity it belongs to, and the irreversible nature of deletion. Enhanced version clarifies the resource hierarchy, required parameters, and important side effects for AI agents to understand the destructive nature of this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteFactor",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_side_effects",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Delete a specific Factor.",
+      "current_description": "Delete a specific Factor.",
+      "summary_suggestion": "Delete a Factor from an Entity",
+      "description_suggestion": "Permanently deletes a specific Factor associated with an Entity within a Service. Requires ServiceSid, Identity, and Factor Sid parameters. This operation removes the Factor resource and any associated authentication methods. The deletion is irreversible.",
+      "reasoning": "Original description lacks context about what a Factor is, which Entity it belongs to, and the irreversible nature of deletion. Enhanced version clarifies the resource hierarchy, required parameters, and important side effects for AI agents to understand the destructive nature of this operation.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchFactor' has semantic quality issues: vague_summary, vague_description, missing_output_details, poor_ai_interpretability. Original description is too generic and doesn't explain the resource hierarchy or what information is returned. Enhanced version clarifies the nested resource structure, required parameters, and return value details for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchFactor",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Fetch a specific Factor.",
+      "current_description": "Fetch a specific Factor.",
+      "summary_suggestion": "Retrieve a specific Factor for an Entity",
+      "description_suggestion": "Retrieves a specific Factor resource associated with an Entity within a Service. Requires ServiceSid, Identity, and Factor Sid parameters. Returns the Factor object containing its configuration, status, and authentication method details.",
+      "reasoning": "Original description is too generic and doesn't explain the resource hierarchy or what information is returned. Enhanced version clarifies the nested resource structure, required parameters, and return value details for better AI agent interpretability.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateFactor' has semantic quality issues: vague_description, missing_input_details, missing_output_details, poor_ai_interpretability. Original description mentions dual functionality but lacks clarity on when to use each mode and what inputs/outputs are involved. Enhanced version explicitly explains both update and verification modes, clarifies the AuthPayload parameter's role, and specifies the return value for AI agents to understand the operation's dual purpose.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateFactor",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Update a specific Factor. This endpoint can be used to Verify a Factor if passed an `AuthPayload` param.",
+      "current_description": "Update a specific Factor. This endpoint can be used to Verify a Factor if passed an `AuthPayload` param.",
+      "summary_suggestion": "Update or verify a Factor with authentication payload",
+      "description_suggestion": "Updates a specific Factor associated with an Entity within a Service, or verifies the Factor by providing an AuthPayload parameter. Requires ServiceSid, Identity, and Factor Sid. When AuthPayload is provided, the Factor is verified and its status is updated accordingly. Returns the updated Factor object with current status and configuration.",
+      "reasoning": "Original description mentions dual functionality but lacks clarity on when to use each mode and what inputs/outputs are involved. Enhanced version explicitly explains both update and verification modes, clarifies the AuthPayload parameter's role, and specifies the return value for AI agents to understand the operation's dual purpose.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListFactor' has semantic quality issues: vague_description, missing_output_details, poor_ai_interpretability. Original description lacks information about pagination support and return format. Enhanced version clarifies pagination capabilities, required parameters, and specifies that a list/array is returned for better AI agent understanding of the response structure.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListFactor",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Retrieve a list of all Factors for an Entity.",
+      "current_description": "Retrieve a list of all Factors for an Entity.",
+      "summary_suggestion": "List all Factors for an Entity",
+      "description_suggestion": "Retrieves a paginated list of all Factors associated with a specific Entity within a Service. Requires ServiceSid and Identity parameters. Supports pagination through limit and offset parameters. Returns an array of Factor objects with their configurations and statuses.",
+      "reasoning": "Original description lacks information about pagination support and return format. Enhanced version clarifies pagination capabilities, required parameters, and specifies that a list/array is returned for better AI agent understanding of the response structure.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateNewFactor' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, poor_ai_interpretability. Original description is minimal and doesn't explain what inputs are required or what is returned. Enhanced version clarifies the required path parameters, mentions that request body contains factor configuration, and specifies the return value including the assigned Sid for AI agents to understand the creation workflow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateNewFactor",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Create a new Factor for the Entity",
+      "current_description": "Create a new Factor for the Entity",
+      "summary_suggestion": "Create a new Factor for an Entity",
+      "description_suggestion": "Creates a new Factor resource for a specific Entity within a Service. Requires ServiceSid and Identity parameters. Accepts factor configuration details in the request body such as factor type and authentication method. Returns the newly created Factor object with its assigned Sid and initial status.",
+      "reasoning": "Original description is minimal and doesn't explain what inputs are required or what is returned. Enhanced version clarifies the required path parameters, mentions that request body contains factor configuration, and specifies the return value including the assigned Sid for AI agents to understand the creation workflow.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchForm' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, poor_ai_interpretability. Original description is vague about what a Form Type is and what information is returned. Enhanced version provides domain context about form templates, clarifies the parameter, explains the return value structure, and indicates the use case for AI agents to understand when this operation is needed.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchForm",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Fetch the forms for a specific Form Type.",
+      "current_description": "Fetch the forms for a specific Form Type.",
+      "summary_suggestion": "Retrieve form configuration for a Form Type",
+      "description_suggestion": "Retrieves the form configuration and schema for a specific Form Type. Requires the FormType parameter to identify which form template to fetch. Returns the Form object containing field definitions, validation rules, and UI configuration for the specified form type. Used to dynamically render verification forms.",
+      "reasoning": "Original description is vague about what a Form Type is and what information is returned. Enhanced version provides domain context about form templates, clarifies the parameter, explains the return value structure, and indicates the use case for AI agents to understand when this operation is needed.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateChallenge' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details, missing_side_effects. Original description is repetitive and lacks essential context. Added clarification about what a challenge does (initiates verification), required parameters, return value structure, and initial state. This helps AI agents understand the operation's purpose and when to use it.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12194,13 +13363,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_context",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Create a new Challenge for the Factor",
       "current_description": "Create a new Challenge for the Factor",
-      "description_suggestion": "Creates a new Challenge for the specified Factor within the Service. Requires authentication. Expects the Challenge details in the request body. Returns the created Challenge object.",
-      "reasoning": "The current summary is clear, but the description is vague and lacks details about inputs, outputs, and the action performed.",
+      "summary_suggestion": "Create a new authentication challenge for a factor",
+      "description_suggestion": "Creates a new Challenge for a specific Factor within an Entity. This initiates a verification challenge that the user must respond to. Requires the Service SID and Entity Identity. Returns the created Challenge object with its unique SID, status, and challenge details. The challenge will be in 'pending' status until verified or expired.",
+      "reasoning": "Original description is repetitive and lacks essential context. Added clarification about what a challenge does (initiates verification), required parameters, return value structure, and initial state. This helps AI agents understand the operation's purpose and when to use it.",
       "batch_index": 1
     }
   },
@@ -12215,7 +13387,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListChallenge' has semantic quality issues: vague_description, missing_input_details. The current summary is clear, but the description is vague and lacks details about the parameters and the output.",
+    "message": "Operation 'ListChallenge' has semantic quality issues: vague_description, missing_context, missing_output_details. Original description lacks detail about pagination, filtering capabilities, and return structure. Enhanced to explain pagination support, what data is returned, and practical use cases for AI agents to determine relevance.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12230,12 +13402,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_input_details"
+        "missing_context",
+        "missing_output_details"
       ],
-      "current_summary": "Retrieve a list of all Challenges for a Factor",
-      "current_description": "Retrieve a list of all Challenges for a Factor",
-      "description_suggestion": "Retrieves a list of all Challenges for the specified Factor within the Service. Requires authentication. Parameters can be used to filter the list. Returns a list of Challenge objects.",
-      "reasoning": "The current summary is clear, but the description is vague and lacks details about the parameters and the output.",
+      "current_summary": "Retrieve a list of all Challenges for a Factor.",
+      "current_description": "Retrieve a list of all Challenges for a Factor.",
+      "summary_suggestion": "List all challenges for a factor",
+      "description_suggestion": "Retrieves a paginated list of all Challenges associated with a specific Factor within an Entity. Supports filtering and pagination parameters. Returns an array of Challenge objects with their SIDs, statuses, creation dates, and other metadata. Useful for auditing verification attempts and challenge history.",
+      "reasoning": "Original description lacks detail about pagination, filtering capabilities, and return structure. Enhanced to explain pagination support, what data is returned, and practical use cases for AI agents to determine relevance.",
       "batch_index": 1
     }
   },
@@ -12250,7 +13424,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchChallenge' has semantic quality issues: vague_description, missing_output_details. The current summary is clear, but the description is vague and lacks details about the output.",
+    "message": "Operation 'FetchChallenge' has semantic quality issues: vague_description, missing_context, missing_output_details. Original description is too minimal. Added required parameters, return value details, and practical use cases. This helps AI agents understand what information they need to provide and what they'll receive.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12265,12 +13439,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_context",
         "missing_output_details"
       ],
-      "current_summary": "Fetch a specific Challenge",
-      "current_description": "Fetch a specific Challenge",
-      "description_suggestion": "Fetches a specific Challenge for the specified Factor within the Service. Requires authentication. Returns the Challenge object if found.",
-      "reasoning": "The current summary is clear, but the description is vague and lacks details about the output.",
+      "current_summary": "Fetch a specific Challenge.",
+      "current_description": "Fetch a specific Challenge.",
+      "summary_suggestion": "Retrieve a specific challenge by SID",
+      "description_suggestion": "Retrieves the details of a specific Challenge by its SID. Requires the Service SID, Entity Identity, and Challenge SID. Returns the complete Challenge object including its status, creation timestamp, expiration details, and verification state. Use this to check the current status of a challenge or retrieve challenge metadata.",
+      "reasoning": "Original description is too minimal. Added required parameters, return value details, and practical use cases. This helps AI agents understand what information they need to provide and what they'll receive.",
       "batch_index": 1
     }
   },
@@ -12285,7 +13461,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateChallenge' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The current summary is unclear. The description is vague and lacks details about inputs, outputs, and the action performed.",
+    "message": "Operation 'UpdateChallenge' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details, missing_side_effects. Original description is vague about the action being performed. Clarified that this is a verification submission operation, added required input details (what response is needed), explained the side effect (Factor enablement), and specified possible status outcomes. Critical for AI agents to understand this is an action endpoint, not just a retrieval.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12300,14 +13476,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_context",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
-      "current_summary": "Verify a specific Challenge",
-      "current_description": "Verify a specific Challenge",
-      "summary_suggestion": "Update a specific Challenge",
-      "description_suggestion": "Updates a specific Challenge for the specified Factor within the Service. Requires authentication. Expects the updated Challenge details in the request body. Returns the updated Challenge object.",
-      "reasoning": "The current summary is unclear. The description is vague and lacks details about inputs, outputs, and the action performed.",
+      "current_summary": "Verify a specific Challenge.",
+      "current_description": "Verify a specific Challenge.",
+      "summary_suggestion": "Verify a challenge response",
+      "description_suggestion": "Verifies a Challenge by submitting the user's response. Requires the Service SID, Entity Identity, Challenge SID, and the verification response (typically an authentication factor response). Returns the updated Challenge object with its new status ('approved' or 'denied'). Successfully verified challenges enable the associated Factor for authentication.",
+      "reasoning": "Original description is vague about the action being performed. Clarified that this is a verification submission operation, added required input details (what response is needed), explained the side effect (Factor enablement), and specified possible status outcomes. Critical for AI agents to understand this is an action endpoint, not just a retrieval.",
       "batch_index": 1
     }
   },
@@ -12322,7 +13500,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateEntity' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The current summary is clear, but the description is vague and lacks details about inputs, outputs, and the action performed.",
+    "message": "Operation 'CreateEntity' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details. Original description lacks context about what an Entity represents and why it's needed. Added domain context (user/account representation), required parameters, return value, and the role of Entities in the verification workflow. This helps AI agents understand the operation's place in the larger system.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12337,13 +13515,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_context",
         "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "Create a new Entity for the Service",
       "current_description": "Create a new Entity for the Service",
-      "description_suggestion": "Creates a new Entity for the specified Service. Requires authentication. Expects the Entity details in the request body. Returns the created Entity object.",
-      "reasoning": "The current summary is clear, but the description is vague and lacks details about inputs, outputs, and the action performed.",
+      "summary_suggestion": "Create a new entity for a service",
+      "description_suggestion": "Creates a new Entity (typically representing a user or account) within a Verify Service. Requires the Service SID and an Identity parameter to uniquely identify the entity. Returns the created Entity object with its Identity, SID, and metadata. Entities serve as containers for Factors and Challenges used in multi-factor authentication workflows.",
+      "reasoning": "Original description lacks context about what an Entity represents and why it's needed. Added domain context (user/account representation), required parameters, return value, and the role of Entities in the verification workflow. This helps AI agents understand the operation's place in the larger system.",
       "batch_index": 1
     }
   },
@@ -12358,7 +13538,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListEntity' has semantic quality issues: vague_description, missing_input_details. The current summary is clear, but the description is vague and lacks details about the parameters and the output.",
+    "message": "Operation 'ListEntity' has semantic quality issues: vague_description, missing_context, missing_output_details. Original description is minimal and doesn't explain pagination, filtering, or what data is returned. Enhanced to clarify pagination support, return structure, and practical use cases for AI agents.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12373,12 +13553,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_input_details"
+        "missing_context",
+        "missing_output_details"
       ],
-      "current_summary": "Retrieve a list of all Entities for a Service",
-      "current_description": "Retrieve a list of all Entities for a Service",
-      "description_suggestion": "Retrieves a list of all Entities for the specified Service. Requires authentication. Parameters can be used to filter the list. Returns a list of Entity objects.",
-      "reasoning": "The current summary is clear, but the description is vague and lacks details about the parameters and the output.",
+      "current_summary": "Retrieve a list of all Entities for a Service.",
+      "current_description": "Retrieve a list of all Entities for a Service.",
+      "summary_suggestion": "List all entities in a service",
+      "description_suggestion": "Retrieves a paginated list of all Entities within a Verify Service. Supports filtering and pagination parameters. Returns an array of Entity objects with their Identities, SIDs, creation dates, and status information. Useful for auditing registered users/accounts and their verification status.",
+      "reasoning": "Original description is minimal and doesn't explain pagination, filtering, or what data is returned. Enhanced to clarify pagination support, return structure, and practical use cases for AI agents.",
       "batch_index": 1
     }
   },
@@ -12393,7 +13575,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteEntity' has semantic quality issues: vague_description, missing_side_effects. The current summary is clear, but the description is vague and lacks details about the side effects.",
+    "message": "Operation 'DeleteEntity' has semantic quality issues: vague_description, missing_context, missing_output_details, missing_side_effects. Original description lacks critical information about side effects and permanence. Added warning about irreversibility, clarified what gets deleted (Factors and Challenges), explained the impact on authentication, and specified the response code. Essential for AI agents to understand the destructive nature of this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12408,12 +13590,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_context",
+        "missing_output_details",
         "missing_side_effects"
       ],
-      "current_summary": "Delete a specific Entity",
-      "current_description": "Delete a specific Entity",
-      "description_suggestion": "Deletes a specific Entity for the specified Service. Requires authentication. Returns a success message if the Entity is deleted.",
-      "reasoning": "The current summary is clear, but the description is vague and lacks details about the side effects.",
+      "current_summary": "Delete a specific Entity.",
+      "current_description": "Delete a specific Entity.",
+      "summary_suggestion": "Delete an entity and its factors",
+      "description_suggestion": "Permanently deletes a specific Entity and all associated Factors and Challenges from a Verify Service. Requires the Service SID and Entity Identity. This operation cannot be undone. Deleting an Entity removes all verification data and authentication factors associated with that user/account. Returns a 204 No Content response on successful deletion.",
+      "reasoning": "Original description lacks critical information about side effects and permanence. Added warning about irreversibility, clarified what gets deleted (Factors and Challenges), explained the impact on authentication, and specified the response code. Essential for AI agents to understand the destructive nature of this operation.",
       "batch_index": 1
     }
   },
@@ -12428,7 +13613,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateService' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The current description is too vague. Added details about authentication, return value, and the unique SID for better AI agent understanding.",
+    "message": "Operation 'CreateService' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Current description is identical to summary and lacks essential details. Added information about what parameters are accepted, what is returned (Service object with Sid), and that the service is immediately available. This helps AI agents understand the operation's purpose and how to use the returned Sid in subsequent operations.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12444,12 +13629,14 @@
       "issues_found": [
         "vague_description",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Create a new Verification Service.",
       "current_description": "Create a new Verification Service.",
-      "description_suggestion": "Creates a new Verification Service for an account. Requires authentication. Returns the newly created Verification Service object with its unique SID.",
-      "reasoning": "The current description is too vague. Added details about authentication, return value, and the unique SID for better AI agent understanding.",
+      "summary_suggestion": "Create a new Verification Service",
+      "description_suggestion": "Creates a new Verification Service for managing verification workflows. Accepts configuration parameters such as friendly name and default messaging settings. Returns the created Service object with a unique Sid (Service ID) that is required for subsequent verification operations. The new Service is immediately available for use.",
+      "reasoning": "Current description is identical to summary and lacks essential details. Added information about what parameters are accepted, what is returned (Service object with Sid), and that the service is immediately available. This helps AI agents understand the operation's purpose and how to use the returned Sid in subsequent operations.",
       "batch_index": 5
     }
   },
@@ -12464,7 +13651,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListService' has semantic quality issues: vague_description, missing_output_details. The current description is too vague. Added details about authentication and return value, including the unique SID for each service.",
+    "message": "Operation 'ListService' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Summary is clear and actionable. Description needs expansion to explain pagination support, what fields are returned in each Service object, and the use case for listing services. This helps AI agents understand how to iterate through results and what data is available.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12479,12 +13666,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "Retrieve a list of all Verification Services for an account.",
       "current_description": "Retrieve a list of all Verification Services for an account.",
-      "description_suggestion": "Retrieves a list of all Verification Services for an account. Requires authentication. Returns a list of Verification Service objects, each with its unique SID.",
-      "reasoning": "The current description is too vague. Added details about authentication and return value, including the unique SID for each service.",
+      "description_suggestion": "Retrieves a paginated list of all Verification Services associated with the authenticated account. Supports filtering and pagination parameters. Returns an array of Service objects, each containing configuration details and metadata. Useful for discovering available Services and their current settings.",
+      "reasoning": "Summary is clear and actionable. Description needs expansion to explain pagination support, what fields are returned in each Service object, and the use case for listing services. This helps AI agents understand how to iterate through results and what data is available.",
       "batch_index": 5
     }
   },
@@ -12499,7 +13687,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchService' has semantic quality issues: vague_description, missing_output_details. The current description is too vague. Added details about authentication and return value, including the Verification Service object with its details.",
+    "message": "Operation 'FetchService' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Original summary uses vague term 'Instance' and description is too brief. Improved summary clarifies the 'by ID' aspect. Enhanced description explains the required Sid parameter, what data is returned, and typical use cases for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12514,12 +13702,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "Fetch specific Verification Service Instance.",
       "current_description": "Fetch specific Verification Service Instance.",
-      "description_suggestion": "Fetches a specific Verification Service Instance by its unique SID. Requires authentication. Returns the Verification Service object with its details.",
-      "reasoning": "The current description is too vague. Added details about authentication and return value, including the Verification Service object with its details.",
+      "summary_suggestion": "Retrieve a specific Verification Service by ID",
+      "description_suggestion": "Retrieves detailed information about a specific Verification Service using its Service ID (Sid). Returns the complete Service object including configuration, settings, and metadata. Requires the Service Sid as a path parameter. Use this operation to inspect a Service's current configuration before performing updates or creating verifications.",
+      "reasoning": "Original summary uses vague term 'Instance' and description is too brief. Improved summary clarifies the 'by ID' aspect. Enhanced description explains the required Sid parameter, what data is returned, and typical use cases for AI agent decision-making.",
       "batch_index": 5
     }
   },
@@ -12534,7 +13724,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteService' has semantic quality issues: vague_description, missing_side_effects. The current description is too vague. Added details about authentication, return value, and side effects.",
+    "message": "Operation 'DeleteService' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original summary uses vague 'Instance' terminology. Description lacks critical information about the Sid parameter, response status, and important side effects. Added warning about permanent deletion and impact on associated verifications to help AI agents understand the consequences.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12549,12 +13739,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_input_details",
+        "missing_output_details",
         "missing_side_effects"
       ],
       "current_summary": "Delete a specific Verification Service Instance.",
       "current_description": "Delete a specific Verification Service Instance.",
-      "description_suggestion": "Deletes a specific Verification Service Instance by its unique SID. Requires authentication. Returns a success message if the service is deleted.",
-      "reasoning": "The current description is too vague. Added details about authentication, return value, and side effects.",
+      "summary_suggestion": "Delete a Verification Service by ID",
+      "description_suggestion": "Permanently deletes a specific Verification Service using its Service ID (Sid). Requires the Service Sid as a path parameter. Returns HTTP 204 No Content on successful deletion. Warning: Deleting a Service will disable all verification workflows associated with it. This action cannot be undone.",
+      "reasoning": "Original summary uses vague 'Instance' terminology. Description lacks critical information about the Sid parameter, response status, and important side effects. Added warning about permanent deletion and impact on associated verifications to help AI agents understand the consequences.",
       "batch_index": 5
     }
   },
@@ -12569,7 +13762,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateService' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The current description is too vague. Added details about authentication, input parameters, and return value, including the updated Verification Service object.",
+    "message": "Operation 'UpdateService' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Summary is adequate. Description needs expansion to clarify the Sid parameter requirement, what fields can be updated, what is returned, and that partial updates are supported. This helps AI agents understand which fields are modifiable and how to construct update requests.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12589,8 +13782,8 @@
       ],
       "current_summary": "Update a specific Verification Service.",
       "current_description": "Update a specific Verification Service.",
-      "description_suggestion": "Updates a specific Verification Service by its unique SID. Requires authentication. Returns the updated Verification Service object with its new details.",
-      "reasoning": "The current description is too vague. Added details about authentication, input parameters, and return value, including the updated Verification Service object.",
+      "description_suggestion": "Updates configuration settings for a specific Verification Service using its Service ID (Sid). Accepts parameters such as friendly name, default messaging configuration, and other service-level settings. Returns the updated Service object reflecting all changes. Supports partial updates - only provided fields will be modified.",
+      "reasoning": "Summary is adequate. Description needs expansion to clarify the Sid parameter requirement, what fields can be updated, what is returned, and that partial updates are supported. This helps AI agents understand which fields are modifiable and how to construct update requests.",
       "batch_index": 5
     }
   },
@@ -12605,7 +13798,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateVerification' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The current description is too vague. Added details about authentication, input parameters, and return value, including the unique SID for the new Verification.",
+    "message": "Operation 'CreateVerification' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Current summary and description are too vague about the actual verification flow. Enhanced description explains the Service Sid requirement, typical input parameters (phone/email, method), what is returned, the immediate side effect (code sent), and how to use the returned Sid. This is critical for AI agents to understand the verification workflow.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12621,12 +13814,14 @@
       "issues_found": [
         "vague_description",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Create a new Verification using a Service",
       "current_description": "Create a new Verification using a Service",
-      "description_suggestion": "Creates a new Verification using a specified Service. Requires authentication. Returns the newly created Verification object with its unique SID.",
-      "reasoning": "The current description is too vague. Added details about authentication, input parameters, and return value, including the unique SID for the new Verification.",
+      "summary_suggestion": "Initiate a verification for a user",
+      "description_suggestion": "Initiates a new verification process for a user within a specific Verification Service. Requires the Service Sid as a path parameter and accepts parameters such as the recipient's phone number or email and verification method (SMS, call, email, etc.). Returns a Verification object with a unique Sid and status. The verification code is sent to the recipient immediately. Use the returned Verification Sid to check verification status or validate the code.",
+      "reasoning": "Current summary and description are too vague about the actual verification flow. Enhanced description explains the Service Sid requirement, typical input parameters (phone/email, method), what is returned, the immediate side effect (code sent), and how to use the returned Sid. This is critical for AI agents to understand the verification workflow.",
       "batch_index": 5
     }
   },
@@ -12641,7 +13836,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateVerification' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The current description is too vague. Added details about authentication, input parameters, and return value, including the updated Verification object with its new status.",
+    "message": "Operation 'UpdateVerification' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original summary 'Update a Verification status' is vague about the actual operation (code validation). Description lacks critical details about required parameters, what triggers status changes, and side effects like rate limiting. Improved version clarifies this is a code validation operation, specifies all required parameters, explains the status outcomes, and mentions rate limiting implications.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12657,1016 +13852,15 @@
       "issues_found": [
         "vague_description",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Update a Verification status",
       "current_description": "Update a Verification status",
-      "summary_suggestion": "Update a Verification status.",
-      "description_suggestion": "Updates the status of a specific Verification by its unique SID. Requires authentication. Returns the updated Verification object with its new status.",
-      "reasoning": "The current description is too vague. Added details about authentication, input parameters, and return value, including the updated Verification object with its new status.",
+      "summary_suggestion": "Validate a verification code",
+      "description_suggestion": "Validates a verification code submitted by a user to complete the verification process. Requires the Service Sid and Verification Sid as path parameters, and the verification code as a request parameter. Returns the updated Verification object with status (approved, denied, or expired). On successful validation, the verification is marked as approved and can be used for authentication. Failed attempts may trigger rate limiting.",
+      "reasoning": "Original summary 'Update a Verification status' is vague about the actual operation (code validation). Description lacks critical details about required parameters, what triggers status changes, and side effects like rate limiting. Improved version clarifies this is a code validation operation, specifies all required parameters, explains the status outcomes, and mentions rate limiting implications.",
       "batch_index": 5
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateMessagingConfiguration' has semantic quality issues: vague_description, missing_input_details. The current summary and description are vague and lack details about the required inputs and the returned object.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateMessagingConfiguration",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_input_details"
-      ],
-      "current_summary": "Create a new MessagingConfiguration for a service.",
-      "current_description": "Create a new MessagingConfiguration for a service.",
-      "summary_suggestion": "Create a new MessagingConfiguration for a specific service.",
-      "description_suggestion": "Creates a new MessagingConfiguration for a specific service. Requires the ServiceSid and configuration details. Returns the newly created MessagingConfiguration object.",
-      "reasoning": "The current summary and description are vague and lack details about the required inputs and the returned object.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListMessagingConfiguration' has semantic quality issues: vague_description, missing_input_details. The current summary and description are vague and lack details about the optional parameters and the returned list.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListMessagingConfiguration",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_input_details"
-      ],
-      "current_summary": "Retrieve a list of all Messaging Configurations for a Service.",
-      "current_description": "Retrieve a list of all Messaging Configurations for a Service.",
-      "summary_suggestion": "Retrieve a list of Messaging Configurations for a specific service.",
-      "description_suggestion": "Retrieves a list of all Messaging Configurations for a specific service. Accepts optional parameters for filtering and pagination. Returns a list of MessagingConfiguration objects.",
-      "reasoning": "The current summary and description are vague and lack details about the optional parameters and the returned list.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'UpdateMessagingConfiguration' has semantic quality issues: vague_description, missing_input_details. The current summary and description are vague and lack details about the required inputs and the returned object.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "UpdateMessagingConfiguration",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_input_details"
-      ],
-      "current_summary": "Update a specific MessagingConfiguration",
-      "current_description": "Update a specific MessagingConfiguration",
-      "summary_suggestion": "Update a specific MessagingConfiguration for a service.",
-      "description_suggestion": "Updates a specific MessagingConfiguration for a service. Requires the ServiceSid, Country, and updated configuration details. Returns the updated MessagingConfiguration object.",
-      "reasoning": "The current summary and description are vague and lack details about the required inputs and the returned object.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchMessagingConfiguration' has semantic quality issues: vague_description, missing_input_details. The current summary and description are vague and lack details about the required inputs and the returned object.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchMessagingConfiguration",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_input_details"
-      ],
-      "current_summary": "Fetch a specific MessagingConfiguration.",
-      "current_description": "Fetch a specific MessagingConfiguration.",
-      "summary_suggestion": "Fetch a specific MessagingConfiguration for a service.",
-      "description_suggestion": "Fetches a specific MessagingConfiguration for a service. Requires the ServiceSid and Country. Returns the requested MessagingConfiguration object.",
-      "reasoning": "The current summary and description are vague and lack details about the required inputs and the returned object.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeleteMessagingConfiguration' has semantic quality issues: vague_description, missing_input_details. The current summary and description are vague and lack details about the required inputs and the returned status.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteMessagingConfiguration",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_input_details"
-      ],
-      "current_summary": "Delete a specific MessagingConfiguration.",
-      "current_description": "Delete a specific MessagingConfiguration.",
-      "summary_suggestion": "Delete a specific MessagingConfiguration for a service.",
-      "description_suggestion": "Deletes a specific MessagingConfiguration for a service. Requires the ServiceSid and Country. Returns a success status if the deletion is successful.",
-      "reasoning": "The current summary and description are vague and lack details about the required inputs and the returned status.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateNotification' has semantic quality issues: vague_description, missing_input_details. The current summary and description are vague and lack details about the required inputs and the returned object.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateNotification",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_input_details"
-      ],
-      "current_summary": "Create a new Notification for the corresponding Challenge",
-      "current_description": "Create a new Notification for the corresponding Challenge",
-      "summary_suggestion": "Create a new Notification for a specific Challenge.",
-      "description_suggestion": "Creates a new Notification for a specific Challenge. Requires the ServiceSid, Identity, ChallengeSid, and notification details. Returns the newly created Notification object.",
-      "reasoning": "The current summary and description are vague and lack details about the required inputs and the returned object.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateRateLimit' has semantic quality issues: vague_description, missing_input_details. The current summary and description are vague and lack details about the required inputs and the returned object.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateRateLimit",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_input_details"
-      ],
-      "current_summary": "Create a new Rate Limit for a Service",
-      "current_description": "Create a new Rate Limit for a Service",
-      "summary_suggestion": "Create a new Rate Limit for a specific Service.",
-      "description_suggestion": "Creates a new Rate Limit for a specific Service. Requires the ServiceSid and rate limit details. Returns the newly created Rate Limit object.",
-      "reasoning": "The current summary and description are vague and lack details about the required inputs and the returned object.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateAccessToken' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the required parameters and the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateAccessToken",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Create a new enrollment Access Token for the Entity",
-      "current_description": "Create a new enrollment Access Token for the Entity",
-      "summary_suggestion": "Create a new enrollment Access Token for the specified Entity",
-      "description_suggestion": "Creates a new enrollment Access Token for the specified Entity. Requires the Service SID and optional parameters. Returns the newly created Access Token object.",
-      "reasoning": "The current description is too vague and lacks context about the required parameters and the return value.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchAccessToken' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the required parameters and the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchAccessToken",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Fetch an Access Token for the Entity",
-      "current_description": "Fetch an Access Token for the Entity",
-      "summary_suggestion": "Fetch a specific Access Token for the specified Entity",
-      "description_suggestion": "Fetches an Access Token for the specified Entity. Requires the Service SID and Access Token SID. Returns the Access Token object.",
-      "reasoning": "The current description is too vague and lacks context about the required parameters and the return value.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateBucket' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the required parameters and the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateBucket",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Create a new Bucket for a Rate Limit",
-      "current_description": "Create a new Bucket for a Rate Limit",
-      "summary_suggestion": "Create a new Bucket for the specified Rate Limit",
-      "description_suggestion": "Creates a new Bucket for the specified Rate Limit. Requires the Service SID and Rate Limit SID. Returns the newly created Bucket object.",
-      "reasoning": "The current description is too vague and lacks context about the required parameters and the return value.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListBucket' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the required parameters and the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListBucket",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Retrieve a list of all Buckets for a Rate Limit.",
-      "current_description": "Retrieve a list of all Buckets for a Rate Limit.",
-      "summary_suggestion": "Retrieve a list of all Buckets for the specified Rate Limit",
-      "description_suggestion": "Retrieves a list of all Buckets for the specified Rate Limit. Requires the Service SID and Rate Limit SID. Returns a list of Bucket objects.",
-      "reasoning": "The current description is too vague and lacks context about the required parameters and the return value.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'UpdateBucket' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the required parameters and the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "UpdateBucket",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Update a specific Bucket.",
-      "current_description": "Update a specific Bucket.",
-      "summary_suggestion": "Update a specific Bucket for the specified Rate Limit",
-      "description_suggestion": "Updates a specific Bucket for the specified Rate Limit. Requires the Service SID, Rate Limit SID, and Bucket SID. Returns the updated Bucket object.",
-      "reasoning": "The current description is too vague and lacks context about the required parameters and the return value.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchBucket' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the required parameters and the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchBucket",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Fetch a specific Bucket.",
-      "current_description": "Fetch a specific Bucket.",
-      "summary_suggestion": "Fetch a specific Bucket for the specified Rate Limit",
-      "description_suggestion": "Fetches a specific Bucket for the specified Rate Limit. Requires the Service SID, Rate Limit SID, and Bucket SID. Returns the Bucket object.",
-      "reasoning": "The current description is too vague and lacks context about the required parameters and the return value.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeleteBucket' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the required parameters and the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteBucket",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Delete a specific Bucket.",
-      "current_description": "Delete a specific Bucket.",
-      "summary_suggestion": "Delete a specific Bucket for the specified Rate Limit",
-      "description_suggestion": "Deletes a specific Bucket for the specified Rate Limit. Requires the Service SID, Rate Limit SID, and Bucket SID. Returns a success message if the deletion is successful.",
-      "reasoning": "The current description is too vague and lacks context about the required parameters and the return value.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListRateLimit' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the parameters and authentication requirements.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListRateLimit",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Retrieve a list of all Rate Limits for a service.",
-      "current_description": "Retrieve a list of all Rate Limits for a service.",
-      "description_suggestion": "Retrieves a list of all Rate Limits associated with a specific Twilio Verify service. This includes details such as the rate limit type, threshold, and period. Requires authentication and service SID as a parameter.",
-      "reasoning": "The current description is too vague and lacks context about the parameters and authentication requirements.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'UpdateRateLimit' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the parameters, request body, and authentication requirements.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "UpdateRateLimit",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Update a specific Rate Limit.",
-      "current_description": "Update a specific Rate Limit.",
-      "description_suggestion": "Updates a specific Rate Limit for a Twilio Verify service. Requires authentication, service SID, and rate limit SID as parameters. The request body should include the updated rate limit details.",
-      "reasoning": "The current description is too vague and lacks context about the parameters, request body, and authentication requirements.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchRateLimit' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the parameters and authentication requirements.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchRateLimit",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Fetch a specific Rate Limit.",
-      "current_description": "Fetch a specific Rate Limit.",
-      "description_suggestion": "Fetches details of a specific Rate Limit for a Twilio Verify service. Requires authentication and service SID and rate limit SID as parameters. Returns the rate limit details including type, threshold, and period.",
-      "reasoning": "The current description is too vague and lacks context about the parameters and authentication requirements.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeleteRateLimit' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the parameters and authentication requirements.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteRateLimit",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Delete a specific Rate Limit.",
-      "current_description": "Delete a specific Rate Limit.",
-      "description_suggestion": "Deletes a specific Rate Limit for a Twilio Verify service. Requires authentication and service SID and rate limit SID as parameters. Returns a success message upon deletion.",
-      "reasoning": "The current description is too vague and lacks context about the parameters and authentication requirements.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateSafelist' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the authentication requirements and input parameters.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateSafelist",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Add a new phone number to SafeList.",
-      "current_description": "Add a new phone number to SafeList.",
-      "description_suggestion": "Adds a new phone number to the SafeList for a Twilio Verify service. Requires authentication and the phone number as input. Returns a success message upon addition.",
-      "reasoning": "The current description is too vague and lacks context about the authentication requirements and input parameters.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchSafelist' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the authentication requirements and input parameters.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchSafelist",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Check if a phone number exists in SafeList.",
-      "current_description": "Check if a phone number exists in SafeList.",
-      "description_suggestion": "Checks if a specific phone number exists in the SafeList for a Twilio Verify service. Requires authentication and the phone number as input. Returns a boolean indicating the presence of the phone number in the SafeList.",
-      "reasoning": "The current description is too vague and lacks context about the authentication requirements and input parameters.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeleteSafelist' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the authentication requirements and input parameters.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteSafelist",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Remove a phone number from SafeList.",
-      "current_description": "Remove a phone number from SafeList.",
-      "description_suggestion": "Removes a specific phone number from the SafeList for a Twilio Verify service. Requires authentication and the phone number as input. Returns a success message upon removal.",
-      "reasoning": "The current description is too vague and lacks context about the authentication requirements and input parameters.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchEntity' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are too vague. Added context about what is fetched and the parameters involved.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchEntity",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Fetch a specific Entity.",
-      "current_description": "Fetch a specific Entity.",
-      "summary_suggestion": "Fetch details of a specific Entity by Identity.",
-      "description_suggestion": "Retrieves the details of a specific Entity identified by the provided Identity within the specified Service. Returns the Entity object with relevant details.",
-      "reasoning": "The current summary and description are too vague. Added context about what is fetched and the parameters involved.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeleteFactor' has semantic quality issues: vague_summary, vague_description, missing_side_effects. The current summary and description are too vague. Added context about the action's effect and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteFactor",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_side_effects"
-      ],
-      "current_summary": "Delete a specific Factor.",
-      "current_description": "Delete a specific Factor.",
-      "summary_suggestion": "Delete a specific Factor for an Entity.",
-      "description_suggestion": "Deletes the specified Factor for an Entity within the specified Service. The Factor is permanently removed. Returns a success message.",
-      "reasoning": "The current summary and description are too vague. Added context about the action's effect and return value.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchFactor' has semantic quality issues: vague_summary, vague_description, missing_output_details. The current summary and description are too vague. Added context about the returned Factor object.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchFactor",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_output_details"
-      ],
-      "current_summary": "Fetch a specific Factor.",
-      "current_description": "Fetch a specific Factor.",
-      "summary_suggestion": "Fetch details of a specific Factor for an Entity.",
-      "description_suggestion": "Retrieves the details of a specific Factor for an Entity within the specified Service. Returns the Factor object with relevant details.",
-      "reasoning": "The current summary and description are too vague. Added context about the returned Factor object.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'UpdateFactor' has semantic quality issues: vague_description, missing_output_details. The current description is too vague. Added context about the update process and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "UpdateFactor",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_output_details"
-      ],
-      "current_summary": "Update a specific Factor. This endpoint can be used to Verify a Factor if passed an `AuthPayload` param.",
-      "current_description": "Update a specific Factor. This endpoint can be used to Verify a Factor if passed an `AuthPayload` param.",
-      "summary_suggestion": "Update a specific Factor for an Entity.",
-      "description_suggestion": "Updates the specified Factor for an Entity within the specified Service. The provided parameters will update the Factor. Returns the updated Factor object.",
-      "reasoning": "The current description is too vague. Added context about the update process and return value.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListFactor' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about the returned list of Factor objects.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListFactor",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Retrieve a list of all Factors for an Entity.",
-      "current_description": "Retrieve a list of all Factors for an Entity.",
-      "description_suggestion": "Retrieves a list of all Factors for an Entity within the specified Service. Returns a list of Factor objects with relevant details.",
-      "reasoning": "The current description is too vague. Added context about the returned list of Factor objects.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateNewFactor' has semantic quality issues: vague_description, missing_output_details. The current description is too vague. Added context about the creation process and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateNewFactor",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_output_details"
-      ],
-      "current_summary": "Create a new Factor for the Entity",
-      "current_description": "Create a new Factor for the Entity",
-      "description_suggestion": "Creates a new Factor for the specified Entity within the specified Service. The provided parameters will create the new Factor. Returns the newly created Factor object.",
-      "reasoning": "The current description is too vague. Added context about the creation process and return value.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchForm' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about the returned list of Form objects.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchForm",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Fetch the forms for a specific Form Type.",
-      "current_description": "Fetch the forms for a specific Form Type.",
-      "summary_suggestion": "Fetch forms for a specific Form Type.",
-      "description_suggestion": "Retrieves the forms for a specific Form Type. Returns a list of Form objects with relevant details.",
-      "reasoning": "The current description is too vague. Added context about the returned list of Form objects.",
-      "batch_index": 2
     }
   },
   {
@@ -13680,7 +13874,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 53 operations analyzed, 50 quality issues found",
+    "message": "Semantic analysis completed: 53 operations analyzed, 53 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -13692,7 +13886,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 53,
-      "total_issues_found": 50,
+      "total_issues_found": 53,
       "batches_processed": 8
     }
   }

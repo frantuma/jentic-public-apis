@@ -2554,7 +2554,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'mybusinessverifications.locations.fetchVerificationOptions' has semantic quality issues: vague_summary, missing_context. The current summary is missing. Added a concise summary and expanded the description to include more context about the request parameters and expected response.",
+    "message": "Operation 'mybusinessverifications.locations.fetchVerificationOptions' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks clarity about what inputs are required (location, language), what outputs are returned (list of verification options), and the purpose context (determining available verification methods). Added these details for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2569,13 +2569,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Reports all eligible verification options for a location in a specific language.",
-      "summary_suggestion": "Fetch eligible verification options for a location.",
-      "description_suggestion": "Retrieves all eligible verification options for a specified location in a specific language. The request should include the location identifier and the desired language. Returns a list of verification options.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include more context about the request parameters and expected response.",
+      "summary_suggestion": "Fetch available verification options for location",
+      "description_suggestion": "Retrieves all eligible verification options available for a specific location in the requested language. Returns a list of verification methods (e.g., postcard, email, phone) and their associated details. Helps determine which verification approaches are available before initiating verification.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about what inputs are required (location, language), what outputs are returned (list of verification options), and the purpose context (determining available verification methods). Added these details for better AI agent interpretability.",
       "batch_index": 0
     }
   },
@@ -2590,7 +2591,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'mybusinessverifications.locations.getVoiceOfMerchantState' has semantic quality issues: vague_summary, missing_context, missing_output_details. The current summary is missing. Added a concise summary and expanded the description to include more context about the expected response.",
+    "message": "Operation 'mybusinessverifications.locations.getVoiceOfMerchantState' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Missing summary. Description is overly vague with no context about what 'VoiceOfMerchant state' represents or why an agent would need it. Added domain context about verification status tracking and merchant feedback, clarified return value, and explained the operational purpose.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2605,14 +2606,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
         "missing_context",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets the VoiceOfMerchant state.",
-      "summary_suggestion": "Get the current state of VoiceOfMerchant.",
-      "description_suggestion": "Retrieves the current state of VoiceOfMerchant for a specified location. The request should include the location identifier. Returns the VoiceOfMerchant state details.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include more context about the expected response.",
+      "summary_suggestion": "Retrieve Voice of Merchant state for location",
+      "description_suggestion": "Retrieves the current Voice of Merchant state for a location, including verification status, merchant feedback, and related metadata. Returns a VoiceOfMerchantState object containing the location's verification progress and merchant communication status. Used to monitor verification workflow and merchant engagement.",
+      "reasoning": "Missing summary. Description is overly vague with no context about what 'VoiceOfMerchant state' represents or why an agent would need it. Added domain context about verification status tracking and merchant feedback, clarified return value, and explained the operational purpose.",
       "batch_index": 0
     }
   },
@@ -2627,7 +2629,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'mybusinessverifications.locations.verify' has semantic quality issues: vague_summary, missing_context. The current summary is missing. Added a concise summary and expanded the description to include more context about the request parameters and expected response.",
+    "message": "Operation 'mybusinessverifications.locations.verifications.complete' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description explains conditions but lacks clarity about what the operation returns and the state transition it performs. Added explicit return value information and clearer explanation of when this operation is needed for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "mybusinessverifications.locations.verifications.complete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Completes a `PENDING` verification. It is only necessary for non `AUTO` verification methods. `AUTO` verification request is instantly `VERIFIED` upon creation.",
+      "summary_suggestion": "Complete pending verification for location",
+      "description_suggestion": "Completes a pending verification for a location. Required only for non-AUTO verification methods (e.g., postcard, email, phone). AUTO verifications are automatically marked VERIFIED upon creation and do not require this action. Returns the completed verification object with updated status. Transitions verification state from PENDING to VERIFIED.",
+      "reasoning": "Missing summary. Description explains conditions but lacks clarity about what the operation returns and the state transition it performs. Added explicit return value information and clearer explanation of when this operation is needed for better AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'mybusinessverifications.locations.verify' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description is too minimal - lacks information about required inputs (verification method), what is returned (Verification object), and side effects (communication sent, record created). Added these details to help AI agents understand the operation's full scope and consequences.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2642,13 +2680,51 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Starts the verification process for a location.",
-      "summary_suggestion": "Initiate the verification process for a location.",
-      "description_suggestion": "Initiates the verification process for a specified location. The request should include the location identifier and verification details. Returns a confirmation message once the verification process is started.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include more context about the request parameters and expected response.",
+      "summary_suggestion": "Initiate verification process for location",
+      "description_suggestion": "Initiates the verification process for a location using a specified verification method. Accepts verification method selection and optional business context data. Creates a new verification request and returns a Verification object with status PENDING or VERIFIED (for AUTO methods). Side effects: Creates verification record, may send verification communication (postcard, email, etc.) based on selected method.",
+      "reasoning": "Missing summary. Description is too minimal - lacks information about required inputs (verification method), what is returned (Verification object), and side effects (communication sent, record created). Added these details to help AI agents understand the operation's full scope and consequences.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'mybusinessverifications.locations.verifications.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks information about return format (paginated list, response structure), ordering direction, and pagination support. Added these details to clarify what data structure is returned and how to navigate results for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "mybusinessverifications.locations.verifications.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "List verifications of a location, ordered by create time.",
+      "summary_suggestion": "List verifications for location ordered by creation",
+      "description_suggestion": "Retrieves a paginated list of all verifications for a location, ordered by creation time (newest first). Returns a ListVerificationsResponse containing an array of Verification objects with their current status, method, and timestamps. Supports pagination parameters for controlling result set size and offset.",
+      "reasoning": "Missing summary. Description lacks information about return format (paginated list, response structure), ordering direction, and pagination support. Added these details to clarify what data structure is returned and how to navigate results for AI agents.",
       "batch_index": 0
     }
   },
@@ -2663,7 +2739,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 5 operations analyzed, 3 quality issues found",
+    "message": "Semantic analysis completed: 5 operations analyzed, 5 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -2675,7 +2751,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 5,
-      "total_issues_found": 3,
+      "total_issues_found": 5,
       "batches_processed": 1
     }
   }

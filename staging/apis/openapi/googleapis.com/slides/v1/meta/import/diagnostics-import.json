@@ -9820,7 +9820,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'slides.presentations.get' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented, providing a clear purpose.",
+    "message": "Operation 'slides.presentations.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description is mostly complete but lacks clarity about what is returned (the Presentation object structure) and could better emphasize that only the title is processed. Added summary and clarified return value for better AI agent understanding of the operation's effects.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9831,15 +9831,17 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "slides.presentations.get",
+      "operation_id": "slides.presentations.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Gets the latest version of the specified presentation.",
-      "summary_suggestion": "Retrieve the latest version of a presentation",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented, providing a clear purpose.",
+      "current_description": "Creates a blank presentation using the title given in the request. If a `presentationId` is provided, it is used as the ID of the new presentation. Otherwise, a new ID is generated. Other fields in the request, including any provided content, are ignored. Returns the created presentation.",
+      "summary_suggestion": "Create a new blank presentation",
+      "description_suggestion": "Creates a new blank presentation with the specified title. If a presentationId is provided in the request, it will be used as the ID of the new presentation; otherwise, a new ID is automatically generated. Note that only the title field is used; other request fields including content are ignored. Returns the created Presentation object with its assigned ID, title, and metadata.",
+      "reasoning": "Missing summary entirely. Description is mostly complete but lacks clarity about what is returned (the Presentation object structure) and could better emphasize that only the title is processed. Added summary and clarified return value for better AI agent understanding of the operation's effects.",
       "batch_index": 0
     }
   },
@@ -9854,7 +9856,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'slides.presentations.pages.get' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented, providing a clear purpose.",
+    "message": "Operation 'slides.presentations.get' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is too brief and lacks context about what data is returned and required parameters. Enhanced to clarify the return value (complete Presentation object) and explicitly mention the required presentationId parameter for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "slides.presentations.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the latest version of the specified presentation.",
+      "summary_suggestion": "Retrieve a presentation by ID",
+      "description_suggestion": "Retrieves the latest version of a presentation by its ID. Returns the complete Presentation object including all pages, metadata, and properties. Requires the presentationId path parameter.",
+      "reasoning": "Missing summary. Description is too brief and lacks context about what data is returned and required parameters. Enhanced to clarify the return value (complete Presentation object) and explicitly mention the required presentationId parameter for AI agent clarity.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'slides.presentations.pages.get' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks specificity about required parameters and return value. Added summary and enhanced description to clarify that both presentationId and pageObjectId are required, and that the full Page object is returned with all its elements and properties.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9868,12 +9906,89 @@
       "operation_id": "slides.presentations.pages.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets the latest version of the specified page in the presentation.",
-      "summary_suggestion": "Retrieve the latest version of a specific page",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented, providing a clear purpose.",
+      "summary_suggestion": "Retrieve a specific page from a presentation",
+      "description_suggestion": "Retrieves the latest version of a specific page within a presentation. Requires both presentationId and pageObjectId path parameters to identify the target page. Returns the complete Page object including all page elements, properties, and content.",
+      "reasoning": "Missing summary. Description lacks specificity about required parameters and return value. Added summary and enhanced description to clarify that both presentationId and pageObjectId are required, and that the full Page object is returned with all its elements and properties.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'slides.presentations.pages.getThumbnail' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description mentions quota impact but lacks clarity about parameters (the 4 parameters mentioned are not explained) and response format. Added summary and enhanced description to clarify that optional parameters control thumbnail dimensions/format, and that the response contains a URL rather than the image itself.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "slides.presentations.pages.getThumbnail",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Generates a thumbnail of the latest version of the specified page in the presentation and returns a URL to the thumbnail image. This request counts as an [expensive read request](/slides/limits) for quota purposes.",
+      "summary_suggestion": "Generate and retrieve a page thumbnail URL",
+      "description_suggestion": "Generates a thumbnail image of the specified page in a presentation and returns a URL to access the thumbnail. Requires presentationId and pageObjectId path parameters. Supports optional query parameters to control thumbnail dimensions and format. Returns a response containing the thumbnail image URL. Note: This operation counts as an expensive read request for quota purposes.",
+      "reasoning": "Missing summary. Description mentions quota impact but lacks clarity about parameters (the 4 parameters mentioned are not explained) and response format. Added summary and enhanced description to clarify that optional parameters control thumbnail dimensions/format, and that the response contains a URL rather than the image itself.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'slides.presentations.batchUpdate' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is verbose and repetitive with the example. Simplified and reorganized for clarity while preserving critical information about atomic transactions, validation, and response structure. Added summary and clarified input requirements (BatchUpdatePresentationRequest) and output format for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "slides.presentations.batchUpdate",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Applies one or more updates to the presentation. Each request is validated before being applied. If any request is not valid, then the entire request will fail and nothing will be applied. Some requests have replies to give you some information about how they are applied. Other requests do not need to return information; these each return an empty reply. The order of replies matches that of the requests. For example, suppose you call batchUpdate with four updates, and only the third one returns information. The response would have two empty replies: the reply to the third request, and another empty reply, in that order. Because other users may be editing the presentation, the presentation might not exactly reflect your changes: your changes may be altered with respect to collaborator changes. If there are no collaborators, the presentation should reflect your changes. In any case, the updates in your request are guaranteed to be applied together atomically.",
+      "summary_suggestion": "Apply multiple updates to a presentation atomically",
+      "description_suggestion": "Applies one or more updates to a presentation in a single atomic transaction. Requires presentationId path parameter and a BatchUpdatePresentationRequest containing an array of update requests. All requests are validated before application; if any request is invalid, the entire batch fails and no changes are applied. Returns a BatchUpdatePresentationResponse with replies corresponding to each request in order—some replies contain operation results while others are empty. Updates are applied atomically and guaranteed to succeed together, though concurrent edits by collaborators may alter the final presentation state. Note: Response reply order matches request order.",
+      "reasoning": "Missing summary. Description is verbose and repetitive with the example. Simplified and reorganized for clarity while preserving critical information about atomic transactions, validation, and response structure. Added summary and clarified input requirements (BatchUpdatePresentationRequest) and output format for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -9888,7 +10003,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 5 operations analyzed, 2 quality issues found",
+    "message": "Semantic analysis completed: 5 operations analyzed, 5 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -9900,7 +10015,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 5,
-      "total_issues_found": 2,
+      "total_issues_found": 5,
       "batches_processed": 1
     }
   }

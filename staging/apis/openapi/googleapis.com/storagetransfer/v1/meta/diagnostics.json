@@ -6353,7 +6353,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'storagetransfer.transferOperations.resume' has semantic quality issues: vague_summary, missing_context, poor_ai_interpretability. The original summary was missing. Added context about authentication, response, and the effect of the operation to improve AI agent interpretability.",
+    "message": "Operation 'storagetransfer.transferOperations.resume' has semantic quality issues: vague_summary, missing_context, missing_output_details, poor_ai_interpretability. The operation lacks a summary entirely and the description is too minimal for AI agent usability. Added: (1) a clear, action-oriented summary (5-8 words); (2) context about the paused state and progress preservation; (3) input requirements (resource name); (4) output details (Operation resource); (5) domain-appropriate terminology consistent with the API's Operation and TransferJob schemas. This helps AI agents understand when to use this operation (when a transfer is paused) and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6369,13 +6369,14 @@
       "issues_found": [
         "vague_summary",
         "missing_context",
+        "missing_output_details",
         "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Resumes a transfer operation that is paused.",
-      "summary_suggestion": "Resume paused transfer operation",
-      "description_suggestion": "Resumes a paused transfer operation identified by the provided name. Requires authentication. The operation returns a status indicating success or failure. The transfer operation will resume from the point where it was paused.",
-      "reasoning": "The original summary was missing. Added context about authentication, response, and the effect of the operation to improve AI agent interpretability.",
+      "summary_suggestion": "Resume a paused transfer operation",
+      "description_suggestion": "Resumes a transfer operation that is currently in a paused state. This operation allows you to continue a previously paused data transfer job without losing progress. Requires the full resource name of the transfer operation to resume. Returns an Operation resource representing the resumed transfer, which can be monitored for completion status.",
+      "reasoning": "The operation lacks a summary entirely and the description is too minimal for AI agent usability. Added: (1) a clear, action-oriented summary (5-8 words); (2) context about the paused state and progress preservation; (3) input requirements (resource name); (4) output details (Operation resource); (5) domain-appropriate terminology consistent with the API's Operation and TransferJob schemas. This helps AI agents understand when to use this operation (when a transfer is paused) and what to expect.",
       "batch_index": 2
     }
   },
@@ -6390,7 +6391,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'storagetransfer.projects.agentPools.list' has semantic quality issues: vague_summary, missing_context. The original summary and description were vague. The suggestions provide more context and clarity, improving AI agent interpretability.",
+    "message": "Operation 'storagetransfer.projects.agentPools.list' has semantic quality issues: vague_summary, vague_description, missing_output_details, poor_ai_interpretability. Original description is too minimal. Added context about what is being listed (agent pools in a project), what is returned (AgentPool resources), and pagination support. Summary provides action-oriented clarity for AI agent routing.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6405,13 +6406,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "vague_description",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Lists agent pools.",
-      "summary_suggestion": "List all agent pools for a project",
-      "description_suggestion": "Lists all agent pools associated with a specific Google Cloud project. Each agent pool is used to manage agents for transfer jobs.",
-      "reasoning": "The original summary and description were vague. The suggestions provide more context and clarity, improving AI agent interpretability.",
+      "summary_suggestion": "List agent pools in a project",
+      "description_suggestion": "Lists all agent pools associated with the specified Google Cloud project. Returns a collection of AgentPool resources with their configurations. Supports pagination through optional parameters for filtering and limiting results.",
+      "reasoning": "Original description is too minimal. Added context about what is being listed (agent pools in a project), what is returned (AgentPool resources), and pagination support. Summary provides action-oriented clarity for AI agent routing.",
       "batch_index": 0
     }
   },
@@ -6426,7 +6429,46 @@
         "character": 0
       }
     },
-    "message": "Operation 'storagetransfer.transferJobs.list' has semantic quality issues: vague_summary, missing_context. The original summary and description were vague. The suggestions provide more context and clarity, improving AI agent interpretability.",
+    "message": "Operation 'storagetransfer.projects.agentPools.create' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, not_actionable. Original description lacks specificity about inputs and outputs. Enhanced version clarifies that it accepts an AgentPool configuration, explains what is returned, and provides context about system-generated properties. Improves AI agent understanding of when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storagetransfer.projects.agentPools.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "not_actionable"
+      ],
+      "current_summary": "",
+      "current_description": "Creates an agent pool resource.",
+      "summary_suggestion": "Create a new agent pool",
+      "description_suggestion": "Creates a new agent pool resource within the specified Google Cloud project. Accepts an AgentPool configuration object defining the pool's properties and settings. Returns the created AgentPool resource with a system-generated resource name and current status.",
+      "reasoning": "Original description lacks specificity about inputs and outputs. Enhanced version clarifies that it accepts an AgentPool configuration, explains what is returned, and provides context about system-generated properties. Improves AI agent understanding of when and how to use this operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storagetransfer.transferJobs.list' has semantic quality issues: vague_summary, vague_description, missing_output_details, poor_ai_interpretability. Original description is overly terse. Added context about scope (project-specific), return type (TransferJob resources), and available filtering/pagination options. Helps AI agents understand the operation's scope and capabilities.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6441,13 +6483,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "vague_description",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Lists transfer jobs.",
-      "summary_suggestion": "List all transfer jobs for a project",
-      "description_suggestion": "Lists all transfer jobs associated with a specific Google Cloud project. Each transfer job is configured to run periodically and transfer data between storage sources.",
-      "reasoning": "The original summary and description were vague. The suggestions provide more context and clarity, improving AI agent interpretability.",
+      "summary_suggestion": "List transfer jobs",
+      "description_suggestion": "Lists transfer jobs configured in the specified Google Cloud project. Returns a collection of TransferJob resources with their configurations, schedules, and current status. Supports filtering and pagination through optional parameters.",
+      "reasoning": "Original description is overly terse. Added context about scope (project-specific), return type (TransferJob resources), and available filtering/pagination options. Helps AI agents understand the operation's scope and capabilities.",
       "batch_index": 0
     }
   },
@@ -6462,7 +6506,155 @@
         "character": 0
       }
     },
-    "message": "Operation 'storagetransfer.transferJobs.run' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does. The description is clear but the summary needs to be concise and action-oriented.",
+    "message": "Operation 'storagetransfer.transferJobs.create' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original description mentions periodicity but lacks input/output details. Enhanced version clarifies the required TransferJob configuration input, explains what configuration elements are needed (source, destination, options, schedule), and specifies the return value. Better supports AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storagetransfer.transferJobs.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a transfer job that runs periodically.",
+      "summary_suggestion": "Create a periodic transfer job",
+      "description_suggestion": "Creates a new transfer job that runs periodically according to a defined schedule. Accepts a TransferJob configuration object specifying the source, destination, transfer options, and schedule. Returns the created TransferJob resource with a system-generated job name and initial status.",
+      "reasoning": "Original description mentions periodicity but lacks input/output details. Enhanced version clarifies the required TransferJob configuration input, explains what configuration elements are needed (source, destination, options, schedule), and specifies the return value. Better supports AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storagetransfer.transferJobs.delete' has semantic quality issues: vague_summary, missing_output_details. Original description explains the side effect (status change to DELETED) but lacks summary and output details. Added summary for clarity, clarified that the job is identified by resource name, explained retention for audit purposes, and specified the empty response return type.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storagetransfer.transferJobs.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes a transfer job. Deleting a transfer job sets its status to DELETED.",
+      "summary_suggestion": "Delete a transfer job",
+      "description_suggestion": "Deletes a transfer job by setting its status to DELETED. The job is identified by its resource name. Deleted jobs are retained in the system for audit purposes but will not execute. Returns an empty response on successful deletion.",
+      "reasoning": "Original description explains the side effect (status change to DELETED) but lacks summary and output details. Added summary for clarity, clarified that the job is identified by resource name, explained retention for audit purposes, and specified the empty response return type.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storagetransfer.transferJobs.get' has semantic quality issues: vague_summary, vague_description, missing_output_details. Original description is minimal. Enhanced version clarifies the lookup mechanism (resource name), explains what information is returned (complete TransferJob with all configuration details and status), and helps AI agents understand the operation's scope and output.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storagetransfer.transferJobs.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets a transfer job.",
+      "summary_suggestion": "Retrieve a transfer job",
+      "description_suggestion": "Retrieves the configuration and status of a specific transfer job identified by its resource name. Returns the complete TransferJob resource including source, destination, schedule, transfer options, and current execution status.",
+      "reasoning": "Original description is minimal. Enhanced version clarifies the lookup mechanism (resource name), explains what information is returned (complete TransferJob with all configuration details and status), and helps AI agents understand the operation's scope and output.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storagetransfer.transferJobs.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks clarity on what inputs are expected (UpdateTransferJobRequest structure), what is returned (TransferJob), and doesn't clearly explain partial update semantics. Added input/output details and clarified that status changes are supported for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storagetransfer.transferJobs.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates a transfer job. Updating a job's transfer spec does not affect transfer operations that are running already. **Note:** The job's status field can be modified using this RPC (for example, to set a job's status to DELETED, DISABLED, or ENABLED).",
+      "summary_suggestion": "Update transfer job configuration and status",
+      "description_suggestion": "Updates an existing transfer job's configuration and status. Accepts partial updates to the transfer job resource specified by jobName. Modifying a job's transfer specification does not affect currently running transfer operations. The job's status field can be modified to DELETED, DISABLED, or ENABLED. Returns the updated TransferJob resource.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on what inputs are expected (UpdateTransferJobRequest structure), what is returned (TransferJob), and doesn't clearly explain partial update semantics. Added input/output details and clarified that status changes are supported for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storagetransfer.transferJobs.run' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary entirely. Description mentions the constraint about one active operation but doesn't clearly state what is returned (Operation resource) or explain the side effect of starting the transfer. Added output details and clarified the return value for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6476,12 +6668,163 @@
       "operation_id": "storagetransfer.transferJobs.run",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Starts a new operation for the specified transfer job. A `TransferJob` has a maximum of one active `TransferOperation`. If this method is called while a `TransferOperation` is active, an error is returned.",
-      "summary_suggestion": "Start a new operation for a transfer job",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. The description is clear but the summary needs to be concise and action-oriented.",
+      "summary_suggestion": "Start a new transfer operation for job",
+      "description_suggestion": "Initiates a new transfer operation for the specified transfer job. A TransferJob can have only one active TransferOperation at a time. If called while an operation is already running, returns an error. Returns an Operation resource representing the newly started transfer. The operation will execute according to the job's TransferSpec configuration.",
+      "reasoning": "Missing summary entirely. Description mentions the constraint about one active operation but doesn't clearly state what is returned (Operation resource) or explain the side effect of starting the transfer. Added output details and clarified the return value for better AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storagetransfer.projects.agentPools.delete' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary entirely. Description is too minimal and lacks domain context about what an agent pool is and what happens when deleted. Added context about resource identification, return value (Empty), and important precondition about active operations for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storagetransfer.projects.agentPools.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes an agent pool.",
+      "summary_suggestion": "Delete an agent pool resource",
+      "description_suggestion": "Deletes the specified agent pool resource. The agent pool must be identified by its resource name. Deletion removes the agent pool configuration and any associated metadata. Returns an Empty response on successful deletion. Ensure no active transfer operations are using this agent pool before deletion.",
+      "reasoning": "Missing summary entirely. Description is too minimal and lacks domain context about what an agent pool is and what happens when deleted. Added context about resource identification, return value (Empty), and important precondition about active operations for better AI agent decision-making.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storagetransfer.projects.agentPools.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity on what is returned. Added summary and clarified that it returns an AgentPool resource with configuration details for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storagetransfer.projects.agentPools.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets an agent pool.",
+      "summary_suggestion": "Retrieve agent pool configuration",
+      "description_suggestion": "Retrieves the configuration details of the specified agent pool resource. Returns the AgentPool resource containing the pool's configuration, status, and metadata.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on what is returned. Added summary and clarified that it returns an AgentPool resource with configuration details for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storagetransfer.projects.agentPools.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description is too vague about what can be updated and what is returned. Added summary, clarified that it accepts partial updates, mentioned modifiable fields, and specified the return value (AgentPool) for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storagetransfer.projects.agentPools.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates an existing agent pool resource.",
+      "summary_suggestion": "Update agent pool configuration",
+      "description_suggestion": "Updates an existing agent pool resource with the provided configuration. Accepts partial updates to the AgentPool resource specified by name. Modifiable fields include display name and other pool configuration parameters. Returns the updated AgentPool resource.",
+      "reasoning": "Missing summary entirely. Description is too vague about what can be updated and what is returned. Added summary, clarified that it accepts partial updates, mentioned modifiable fields, and specified the return value (AgentPool) for better AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'storagetransfer.transferOperations.pause' has semantic quality issues: vague_summary, missing_context, missing_output_details, missing_side_effects. Missing summary entirely. Description is too minimal and lacks important context about what pause means (suspension vs. cancellation), what is returned, and how to resume. Added summary, clarified the distinction from cancel, specified return value (Empty), and mentioned the resume operation for better AI agent understanding and decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "storagetransfer.transferOperations.pause",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Pauses a transfer operation.",
+      "summary_suggestion": "Pause an active transfer operation",
+      "description_suggestion": "Pauses the specified transfer operation. Pausing suspends the currently running transfer without canceling it. The operation can be resumed later. Returns an Empty response on successful pause. Only active transfer operations can be paused. Use transferOperations.resume to continue a paused operation.",
+      "reasoning": "Missing summary entirely. Description is too minimal and lacks important context about what pause means (suspension vs. cancellation), what is returned, and how to resume. Added summary, clarified the distinction from cancel, specified return value (Empty), and mentioned the resume operation for better AI agent understanding and decision-making.",
       "batch_index": 1
     }
   },
@@ -6496,7 +6839,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 15 operations analyzed, 4 quality issues found",
+    "message": "Semantic analysis completed: 15 operations analyzed, 13 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -6508,7 +6851,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 15,
-      "total_issues_found": 4,
+      "total_issues_found": 13,
       "batches_processed": 3
     }
   }

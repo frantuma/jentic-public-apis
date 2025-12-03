@@ -2568,7 +2568,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'policysimulator.projects.locations.replays.operations.list' has semantic quality issues: vague_summary, vague_description. The original summary and description were vague. The suggestions provide a clearer purpose, expected inputs, and outputs, improving AI agent interpretability.",
+    "message": "Operation 'policysimulator.projects.locations.replays.operations.list' has semantic quality issues: vague_summary, missing_context, poor_ai_interpretability. Original summary is missing entirely. Description lacks context about what operations are being listed (Replay operations specifically) and doesn't explain the purpose for AI agents. Added clarity about long-running operations, their use case in tracking Replay progress, and filtering capabilities to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2583,13 +2583,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
-      "summary_suggestion": "List operations for a specific Replay",
-      "description_suggestion": "Lists all operations that match the specified filter for a given Replay. If the server doesn't support this method, it returns `UNIMPLEMENTED`. The response includes details about each operation, such as the operation name, status, and start time.",
-      "reasoning": "The original summary and description were vague. The suggestions provide a clearer purpose, expected inputs, and outputs, improving AI agent interpretability.",
+      "summary_suggestion": "List long-running replay operations",
+      "description_suggestion": "Lists long-running operations for Replays that match the specified filter criteria. This operation is used to track the status and progress of asynchronous Replay simulations. Returns a list of Operation resources with their current state, metadata, and results. Supports filtering by operation name, status, and other criteria via query parameters.",
+      "reasoning": "Original summary is missing entirely. Description lacks context about what operations are being listed (Replay operations specifically) and doesn't explain the purpose for AI agents. Added clarity about long-running operations, their use case in tracking Replay progress, and filtering capabilities to improve AI agent interpretability.",
       "batch_index": 0
     }
   },
@@ -2604,7 +2605,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'policysimulator.projects.locations.replays.create' has semantic quality issues: vague_summary. The original summary was vague. The suggestion provides a clearer action-oriented statement that aligns with the operation's purpose.",
+    "message": "Operation 'policysimulator.projects.locations.replays.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Original summary is missing. Description is too brief and lacks critical context about what a Replay does (policy change simulation), what inputs are required (ReplayConfig), what is returned (long-running Operation), and how to track progress. Enhanced with domain context about IAM policy simulation, asynchronous execution model, and how to monitor results for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2618,12 +2619,16 @@
       "operation_id": "policysimulator.projects.locations.replays.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Creates and starts a Replay using the given ReplayConfig.",
-      "summary_suggestion": "Create and start a Replay",
-      "reasoning": "The original summary was vague. The suggestion provides a clearer action-oriented statement that aligns with the operation's purpose.",
+      "summary_suggestion": "Create and start a policy simulation replay",
+      "description_suggestion": "Creates and immediately starts a new Replay simulation to evaluate how IAM policy changes would affect member access. Accepts a ReplayConfig specifying the proposed policy changes and access tuples to simulate. Returns a long-running Operation resource that tracks the Replay execution. The operation completes asynchronously and can be monitored via the operations.get or operations.list endpoints. Results are available once the operation completes.",
+      "reasoning": "Original summary is missing. Description is too brief and lacks critical context about what a Replay does (policy change simulation), what inputs are required (ReplayConfig), what is returned (long-running Operation), and how to track progress. Enhanced with domain context about IAM policy simulation, asynchronous execution model, and how to monitor results for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -2638,7 +2643,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'policysimulator.projects.locations.replays.results.list' has semantic quality issues: vague_summary. The original summary was vague. The suggestion provides a clearer action-oriented statement that aligns with the operation's purpose.",
+    "message": "Operation 'policysimulator.projects.locations.replays.results.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Original summary is missing. Description is too vague about what results are returned and their significance. Added context about ReplayResult structure, the comparison between current and proposed policies, and the types of insights available (access state changes, policy explanations). Included pagination support for completeness. This helps AI agents understand the value and structure of the returned data.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2652,12 +2657,15 @@
       "operation_id": "policysimulator.projects.locations.replays.results.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists the results of running a Replay.",
-      "summary_suggestion": "List results of a Replay",
-      "reasoning": "The original summary was vague. The suggestion provides a clearer action-oriented statement that aligns with the operation's purpose.",
+      "summary_suggestion": "List replay simulation results and access changes",
+      "description_suggestion": "Lists the detailed results from a completed Replay simulation, showing how each access tuple was evaluated under both current and proposed IAM policies. Returns ReplayResult resources containing access state comparisons, policy explanations, and differences in member permissions. Results include information about which access attempts would be allowed, denied, or changed under the proposed policy. Supports pagination for large result sets.",
+      "reasoning": "Original summary is missing. Description is too vague about what results are returned and their significance. Added context about ReplayResult structure, the comparison between current and proposed policies, and the types of insights available (access state changes, policy explanations). Included pagination support for completeness. This helps AI agents understand the value and structure of the returned data.",
       "batch_index": 0
     }
   },

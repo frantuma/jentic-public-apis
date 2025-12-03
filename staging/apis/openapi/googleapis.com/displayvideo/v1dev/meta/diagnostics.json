@@ -1601,7 +1601,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'displayvideo.media.download' has semantic quality issues: vague_summary, missing_context. Added a clear summary and expanded the description to include necessary context and domain-specific terminology.",
+    "message": "Operation 'displayvideo.media.download' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description mentions the URI pattern and query requirement but lacks clarity about what is being downloaded, authentication context, and what the response contains. Added context about the operation's purpose within Display & Video 360, clarified the mandatory query parameter requirement, and specified the response format for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1616,13 +1616,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Downloads media. Download is supported on the URI `/download/{resource_name=**}?alt=media.` **Note**: Download requests will not be successful without including `alt=media` query string.",
-      "summary_suggestion": "Download media from Display & Video 360",
-      "description_suggestion": "Downloads media from Display & Video 360. Requires the resource name and the `alt=media` query string. The URI for download is `/download/{resource_name=**}?alt=media`. Ensure `alt=media` is included for successful requests.",
-      "reasoning": "Added a clear summary and expanded the description to include necessary context and domain-specific terminology.",
+      "summary_suggestion": "Download media resource by name",
+      "description_suggestion": "Downloads a media resource from Display & Video 360. The operation retrieves the media file associated with the specified resource name. Required query parameter: `alt=media` must be included for successful download. Returns the media file content in the response body. Supports standard HTTP range requests for partial downloads.",
+      "reasoning": "Missing summary entirely. Description mentions the URI pattern and query requirement but lacks clarity about what is being downloaded, authentication context, and what the response contains. Added context about the operation's purpose within Display & Video 360, clarified the mandatory query parameter requirement, and specified the response format for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -1637,7 +1638,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'displayvideo.media.upload' has semantic quality issues: vague_summary, missing_context. Added a clear summary and expanded the description to include necessary context and domain-specific terminology.",
+    "message": "Operation 'displayvideo.media.upload' has semantic quality issues: vague_summary, missing_context, missing_output_details, missing_side_effects. Missing summary entirely. Description only mentions URI pattern and query requirement without explaining the operation's purpose, input format, or response. Added context about the Display & Video 360 domain, clarified the input schema (GoogleBytestreamMedia), specified the response format, and noted the side effect of creating/replacing resources. Included information about resumable upload support for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1652,13 +1653,52 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Uploads media. Upload is supported on the URI `/upload/media/{resource_name=**}?upload_type=media.` **Note**: Upload requests will not be successful without including `upload_type=media` query string.",
-      "summary_suggestion": "Upload media to Display & Video 360",
-      "description_suggestion": "Uploads media to Display & Video 360. Requires the resource name and the `upload_type=media` query string. The URI for upload is `/upload/media/{resource_name=**}?upload_type=media`. Ensure `upload_type=media` is included for successful requests.",
-      "reasoning": "Added a clear summary and expanded the description to include necessary context and domain-specific terminology.",
+      "summary_suggestion": "Upload media resource to Display & Video 360",
+      "description_suggestion": "Uploads a media resource to Display & Video 360. Accepts media content in the request body as a GoogleBytestreamMedia object. Required query parameter: `upload_type=media` must be included for successful upload. Returns the created or updated media resource object. This operation creates or replaces the media resource at the specified resource name. Supports resumable uploads for large files.",
+      "reasoning": "Missing summary entirely. Description only mentions URI pattern and query requirement without explaining the operation's purpose, input format, or response. Added context about the Display & Video 360 domain, clarified the input schema (GoogleBytestreamMedia), specified the response format, and noted the side effect of creating/replacing resources. Included information about resumable upload support for better AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'displayvideo.sdfdownloadtasks.operations.get' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description mentions polling behavior but lacks context about what SDF download tasks are, what the response contains, and how to interpret completion. Added domain context (SDF = Structured Data File), clarified the response format (Operation resource), specified what to expect when complete, and explained the use case for better AI agent understanding of when to invoke this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "displayvideo.sdfdownloadtasks.operations.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the latest state of an asynchronous SDF download task operation. Clients should poll this method at intervals of 30 seconds.",
+      "summary_suggestion": "Get SDF download task operation status",
+      "description_suggestion": "Retrieves the current state of an asynchronous SDF (Structured Data File) download task operation. Returns an Operation resource containing the task's status, progress, and results. Use this method to poll for completion of long-running SDF download operations. Recommended polling interval: 30 seconds. When the operation completes (status is 'done'), the response includes the download results or error details. Useful for tracking bulk data export tasks.",
+      "reasoning": "Missing summary entirely. Description mentions polling behavior but lacks context about what SDF download tasks are, what the response contains, and how to interpret completion. Added domain context (SDF = Structured Data File), clarified the response format (Operation resource), specified what to expect when complete, and explained the use case for better AI agent understanding of when to invoke this operation.",
       "batch_index": 0
     }
   },
@@ -1673,7 +1713,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 3 operations analyzed, 2 quality issues found",
+    "message": "Semantic analysis completed: 3 operations analyzed, 3 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -1685,7 +1725,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 3,
-      "total_issues_found": 2,
+      "total_issues_found": 3,
       "batches_processed": 1
     }
   }

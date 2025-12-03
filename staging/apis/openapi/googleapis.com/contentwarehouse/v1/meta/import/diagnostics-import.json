@@ -14032,7 +14032,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'contentwarehouse.projects.locations.documents.setAcl' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary was missing. Added details about the input schema and return value for better clarity and AI agent interpretability.",
+    "message": "Operation 'contentwarehouse.projects.locations.documents.setAcl' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Original description is too generic and lacks critical details for AI agent decision-making. Missing: (1) empty summary - no action guidance, (2) no specification of what 'resource' parameter represents in this context (document path), (3) no mention of request/response schema details, (4) no explicit warning that this is a replacement operation (destructive), (5) no mention of required permissions or authentication context. Improved version adds domain-specific terminology (IAM policy, bindings), clarifies the destructive nature of the operation, specifies input requirements, and explains the side effect of replacing existing permissions.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14048,13 +14048,15 @@
       "issues_found": [
         "vague_summary",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Sets the access control policy for a resource. Replaces any existing policy.",
-      "summary_suggestion": "Set access control policy for a document",
-      "description_suggestion": "Sets the access control policy for a specified document. Replaces any existing policy. Expects a GoogleCloudContentwarehouseV1SetAclRequest object as input. Returns the updated access control policy upon successful completion.",
-      "reasoning": "Original summary was missing. Added details about the input schema and return value for better clarity and AI agent interpretability.",
+      "summary_suggestion": "Set document access control policy",
+      "description_suggestion": "Sets the Identity and Access Management (IAM) policy for a document resource, replacing any existing policy. Requires the resource identifier (document path) and a GoogleCloudContentwarehouseV1SetAclRequest containing the new policy bindings. Returns the updated IAM policy. This operation completely replaces the existing access control configuration - all previous permissions will be overwritten. Requires appropriate IAM permissions to modify document access controls.",
+      "reasoning": "Original description is too generic and lacks critical details for AI agent decision-making. Missing: (1) empty summary - no action guidance, (2) no specification of what 'resource' parameter represents in this context (document path), (3) no mention of request/response schema details, (4) no explicit warning that this is a replacement operation (destructive), (5) no mention of required permissions or authentication context. Improved version adds domain-specific terminology (IAM policy, bindings), clarifies the destructive nature of the operation, specifies input requirements, and explains the side effect of replacing existing permissions.",
       "batch_index": 3
     }
   },
@@ -14069,7 +14071,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'contentwarehouse.projects.locations.documents.lock' has semantic quality issues: vague_summary. The current summary is missing, making it difficult to understand the operation's purpose at a glance.",
+    "message": "Operation 'contentwarehouse.projects.locations.documents.lock' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description lacks clarity on inputs (document identifier), outputs (what is returned), and side effects (concurrency control behavior). Added specifics about document name requirement, return value, and locking behavior for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14083,12 +14085,16 @@
       "operation_id": "contentwarehouse.projects.locations.documents.lock",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Lock the document so the document cannot be updated by other users.",
-      "summary_suggestion": "Lock the document to prevent updates.",
-      "reasoning": "The current summary is missing, making it difficult to understand the operation's purpose at a glance.",
+      "summary_suggestion": "Lock document to prevent concurrent updates",
+      "description_suggestion": "Locks a document to prevent concurrent modifications by other users. Requires the document name/identifier as input. Returns the locked document object. Once locked, only the locking user can modify the document until it is unlocked. This operation is useful for preventing conflicts during document editing.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on inputs (document identifier), outputs (what is returned), and side effects (concurrency control behavior). Added specifics about document name requirement, return value, and locking behavior for AI agent clarity.",
       "batch_index": 1
     }
   },
@@ -14103,7 +14109,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'contentwarehouse.projects.locations.runPipeline' has semantic quality issues: vague_summary. The current summary is missing, making it difficult to understand the operation's purpose at a glance.",
+    "message": "Operation 'contentwarehouse.projects.locations.runPipeline' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details. Missing summary. Description is too vague about what 'pipeline' means in this domain context. Missing input details (pipeline identifier, configuration), output details (execution result structure), and domain context (document processing workflow). Enhanced with domain-specific terminology and operational clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14117,12 +14123,17 @@
       "operation_id": "contentwarehouse.projects.locations.runPipeline",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Run a predefined pipeline.",
-      "summary_suggestion": "Execute a predefined pipeline.",
-      "reasoning": "The current summary is missing, making it difficult to understand the operation's purpose at a glance.",
+      "summary_suggestion": "Execute a predefined document processing pipeline",
+      "description_suggestion": "Executes a predefined pipeline for document processing within a specified location. Requires the pipeline name/identifier and pipeline configuration in the request. Returns the pipeline execution result including processing status and any generated outputs. Pipelines typically process documents through multiple stages such as extraction, validation, and enrichment.",
+      "reasoning": "Missing summary. Description is too vague about what 'pipeline' means in this domain context. Missing input details (pipeline identifier, configuration), output details (execution result structure), and domain context (document processing workflow). Enhanced with domain-specific terminology and operational clarity.",
       "batch_index": 1
     }
   },
@@ -14137,7 +14148,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'contentwarehouse.projects.locations.documentSchemas.list' has semantic quality issues: vague_summary. The current summary is missing, making it difficult to understand the operation's purpose at a glance.",
+    "message": "Operation 'contentwarehouse.projects.locations.documents.documentLinks.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks input details (parent location, link type specification) and output details (returned DocumentLink structure). Added specifics about required parameters and return value to improve AI agent interpretability of when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "contentwarehouse.projects.locations.documents.documentLinks.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Create a link between a source document and a target document.",
+      "summary_suggestion": "Create a document link between source and target",
+      "description_suggestion": "Creates a document link establishing a relationship between a source document and a target document. Requires the parent location identifier and a DocumentLink object specifying the source and target document identifiers and link type. Returns the created DocumentLink object with its assigned identifier. Links enable document relationship tracking and navigation within the warehouse.",
+      "reasoning": "Missing summary. Description lacks input details (parent location, link type specification) and output details (returned DocumentLink structure). Added specifics about required parameters and return value to improve AI agent interpretability of when and how to use this operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'contentwarehouse.projects.locations.documentSchemas.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is minimal and lacks input details (parent location requirement, pagination support) and output details (paginated response structure). Enhanced with pagination context and use case clarity for AI agents.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14151,12 +14199,15 @@
       "operation_id": "contentwarehouse.projects.locations.documentSchemas.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists document schemas.",
-      "summary_suggestion": "List all available document schemas.",
-      "reasoning": "The current summary is missing, making it difficult to understand the operation's purpose at a glance.",
+      "summary_suggestion": "List all document schemas in location",
+      "description_suggestion": "Retrieves a list of all document schemas available in the specified location. Requires the parent location identifier. Supports pagination through optional parameters (page_size, page_token). Returns a paginated list of DocumentSchema objects containing schema definitions, properties, and metadata. Useful for discovering available document structure templates.",
+      "reasoning": "Missing summary. Description is minimal and lacks input details (parent location requirement, pagination support) and output details (paginated response structure). Enhanced with pagination context and use case clarity for AI agents.",
       "batch_index": 1
     }
   },
@@ -14171,7 +14222,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'contentwarehouse.projects.locations.getStatus' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestions provide clarity on what the operation does and what information it returns.",
+    "message": "Operation 'contentwarehouse.projects.locations.documentSchemas.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks input details (parent location, schema object structure) and output details (returned schema with identifier). Added specifics about required parameters, return value, and schema purpose for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14182,18 +14233,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "contentwarehouse.projects.locations.getStatus",
+      "operation_id": "contentwarehouse.projects.locations.documentSchemas.create",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Get the project status.",
-      "summary_suggestion": "Retrieve the status of the specified project location.",
-      "description_suggestion": "Retrieves the current status of the specified project location. This includes details about the resource provisioning and operational state.",
-      "reasoning": "The current summary and description are vague. The suggestions provide clarity on what the operation does and what information it returns.",
-      "batch_index": 0
+      "current_description": "Creates a document schema.",
+      "summary_suggestion": "Create a new document schema definition",
+      "description_suggestion": "Creates a new document schema that defines the structure and properties for documents in the warehouse. Requires the parent location identifier and a DocumentSchema object containing schema name, display name, and property definitions. Returns the created DocumentSchema object with an assigned schema identifier. Schemas define document structure and enable validation and categorization.",
+      "reasoning": "Missing summary. Description lacks input details (parent location, schema object structure) and output details (returned schema with identifier). Added specifics about required parameters, return value, and schema purpose for better AI agent understanding.",
+      "batch_index": 1
     }
   },
   {
@@ -14207,7 +14259,83 @@
         "character": 0
       }
     },
-    "message": "Operation 'contentwarehouse.projects.locations.documents.linkedSources' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestions provide clarity on the operation's purpose and expected output.",
+    "message": "Operation 'contentwarehouse.projects.locations.documents.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description is overly simplistic. Missing input details (parent location, request structure), output details (returned document with identifier), and side effects (document becomes searchable). Enhanced with complete operational context for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "contentwarehouse.projects.locations.documents.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a document.",
+      "summary_suggestion": "Create a new document in warehouse",
+      "description_suggestion": "Creates a new document in the content warehouse. Requires the parent location identifier and a CreateDocumentRequest containing document content, metadata, and optional schema reference. Returns the created Document object with an assigned document identifier. The document becomes immediately searchable and can be linked to other documents. Supports optional request metadata for performance optimization.",
+      "reasoning": "Missing summary. Description is overly simplistic. Missing input details (parent location, request structure), output details (returned document with identifier), and side effects (document becomes searchable). Enhanced with complete operational context for AI agent clarity.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'contentwarehouse.projects.locations.documents.search' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description mentions permission filtering but lacks input details (search parameters, pagination), output details (paginated results structure), and search capability context. Enhanced with specifics about search parameters, pagination support, and access control behavior for comprehensive AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "contentwarehouse.projects.locations.documents.search",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Searches for documents using provided SearchDocumentsRequest. This call only returns documents that the caller has permission to search against.",
+      "summary_suggestion": "Search documents with permission-based filtering",
+      "description_suggestion": "Searches for documents in the warehouse using query criteria specified in SearchDocumentsRequest. Requires the parent location identifier and search parameters (query, filters, page_size). Returns a paginated list of Document objects matching the search criteria, filtered by caller's access permissions. Supports full-text search, field-based filtering, and sorting. Results respect document-level access controls and only include documents the caller has permission to access.",
+      "reasoning": "Missing summary. Description mentions permission filtering but lacks input details (search parameters, pagination), output details (paginated results structure), and search capability context. Enhanced with specifics about search parameters, pagination support, and access control behavior for comprehensive AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'contentwarehouse.projects.locations.documents.linkedSources' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_output_details. Missing summary entirely. Description is too brief and lacks context about what source links represent, required inputs (parent parameter), expected output structure, and use cases. Added clarity about directionality (incoming references), parameter requirements, and return value structure for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14222,13 +14350,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Return all source document-links from the document.",
-      "summary_suggestion": "Retrieve all source document-links for a document.",
-      "description_suggestion": "Retrieves all source document-links from the specified document. Returns a list of linked source documents.",
-      "reasoning": "The current summary and description are vague. The suggestions provide clarity on the operation's purpose and expected output.",
+      "summary_suggestion": "List source document links for a document",
+      "description_suggestion": "Retrieves all source document-links (incoming references) associated with the specified document. Source documents are those that link to the current document. Requires the parent document resource identifier. Returns a list of DocumentLink objects representing all source relationships. Useful for understanding document dependencies and reference chains.",
+      "reasoning": "Missing summary entirely. Description is too brief and lacks context about what source links represent, required inputs (parent parameter), expected output structure, and use cases. Added clarity about directionality (incoming references), parameter requirements, and return value structure for better AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -14243,7 +14373,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'contentwarehouse.projects.locations.documents.linkedTargets' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestions provide clarity on the operation's purpose and expected output.",
+    "message": "Operation 'contentwarehouse.projects.locations.documents.linkedTargets' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_output_details. Missing summary entirely. Description is too brief and lacks context about what target links represent, required inputs (parent parameter), expected output structure, and use cases. Added clarity about directionality (outgoing references), parameter requirements, and return value structure for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14258,13 +14388,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Return all target document-links from the document.",
-      "summary_suggestion": "Retrieve all target document-links for a document.",
-      "description_suggestion": "Retrieves all target document-links from the specified document. Returns a list of linked target documents.",
-      "reasoning": "The current summary and description are vague. The suggestions provide clarity on the operation's purpose and expected output.",
+      "summary_suggestion": "List target document links for a document",
+      "description_suggestion": "Retrieves all target document-links (outgoing references) associated with the specified document. Target documents are those that the current document links to. Requires the parent document resource identifier. Returns a list of DocumentLink objects representing all target relationships. Useful for understanding document dependencies and reference chains.",
+      "reasoning": "Missing summary entirely. Description is too brief and lacks context about what target links represent, required inputs (parent parameter), expected output structure, and use cases. Added clarity about directionality (outgoing references), parameter requirements, and return value structure for better AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -14279,7 +14411,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'contentwarehouse.projects.locations.ruleSets.list' has semantic quality issues: vague_summary, missing_context. The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected output.",
+    "message": "Operation 'contentwarehouse.projects.locations.ruleSets.list' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Missing summary entirely. Description is overly generic and lacks domain context about what RuleSets are, pagination support, and return structure. Added explanation of RuleSet purpose from schema context, pagination support, and return value details for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14294,13 +14426,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists rulesets.",
-      "summary_suggestion": "List all rule sets for a specified location.",
-      "description_suggestion": "Lists all rule sets for the specified location. Returns a list of rule sets.",
-      "reasoning": "The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected output.",
+      "summary_suggestion": "List all rule sets in a location",
+      "description_suggestion": "Retrieves all RuleSet objects for the specified location. RuleSets represent collections of rules from a single customer that define automation and processing workflows. Supports pagination through optional parameters. Returns a paginated list of RuleSet objects containing rule definitions and metadata. Useful for discovering available automation rules and their configurations.",
+      "reasoning": "Missing summary entirely. Description is overly generic and lacks domain context about what RuleSets are, pagination support, and return structure. Added explanation of RuleSet purpose from schema context, pagination support, and return value details for better AI agent interpretability.",
       "batch_index": 2
     }
   },
@@ -14315,7 +14449,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'contentwarehouse.projects.locations.ruleSets.create' has semantic quality issues: vague_summary, missing_context. The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected output.",
+    "message": "Operation 'contentwarehouse.projects.locations.ruleSets.create' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description is too generic and lacks domain context about RuleSet purpose, required input structure, return value, and side effects. Added explanation of what RuleSets are, input requirements, return value details, and state change information for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14330,13 +14464,17 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Creates a ruleset.",
-      "summary_suggestion": "Create a new rule set for a specified location.",
-      "description_suggestion": "Creates a new rule set for the specified location. Returns the created rule set.",
-      "reasoning": "The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected output.",
+      "summary_suggestion": "Create a new rule set",
+      "description_suggestion": "Creates a new RuleSet for the specified location. A RuleSet represents a collection of rules from a single customer that define automation and processing workflows. Requires a RuleSet object in the request body with rule definitions. Returns the created RuleSet object with an assigned resource identifier. The new RuleSet becomes immediately available for use in document processing workflows.",
+      "reasoning": "Missing summary entirely. Description is too generic and lacks domain context about RuleSet purpose, required input structure, return value, and side effects. Added explanation of what RuleSets are, input requirements, return value details, and state change information for better AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -14351,7 +14489,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'contentwarehouse.projects.locations.synonymSets.list' has semantic quality issues: vague_summary, missing_context. The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected output.",
+    "message": "Operation 'contentwarehouse.projects.locations.synonymSets.list' has semantic quality issues: vague_summary, vague_description, missing_context. Missing summary entirely. Description mentions 'all contexts' but lacks domain context about what SynonymSets are and their purpose. Added explanation of SynonymSet purpose with concrete example from schema context, pagination support, and use cases for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14366,13 +14504,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
         "missing_context"
       ],
       "current_summary": "",
       "current_description": "Returns all SynonymSets (for all contexts) for the specified location.",
-      "summary_suggestion": "List all synonym sets for a specified location.",
-      "description_suggestion": "Lists all synonym sets for the specified location. Returns a list of synonym sets.",
-      "reasoning": "The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected output.",
+      "summary_suggestion": "List all synonym sets in a location",
+      "description_suggestion": "Retrieves all SynonymSet objects for the specified location across all contexts. SynonymSets define synonym mappings for different contexts (e.g., 'sales' context containing synonyms like sale, invoice, bill, order). Supports pagination through optional parameters. Returns a paginated list of SynonymSet objects with their context and synonym definitions. Useful for understanding available synonym mappings and their configurations.",
+      "reasoning": "Missing summary entirely. Description mentions 'all contexts' but lacks domain context about what SynonymSets are and their purpose. Added explanation of SynonymSet purpose with concrete example from schema context, pagination support, and use cases for better AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -14387,7 +14526,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'contentwarehouse.projects.locations.synonymSets.create' has semantic quality issues: vague_summary, missing_context. The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected output.",
+    "message": "Operation 'contentwarehouse.projects.locations.synonymSets.create' has semantic quality issues: vague_summary, missing_context, missing_output_details, missing_side_effects. Missing summary entirely. Description mentions error handling but lacks context about what SynonymSets are, input requirements, return value, and side effects. Added explanation of SynonymSet purpose with concrete example, input requirements, return value details, and state change information for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14402,13 +14541,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Creates a SynonymSet for a single context. Throws an ALREADY_EXISTS exception if a synonymset already exists for the context.",
-      "summary_suggestion": "Create a new synonym set for a specified context.",
-      "description_suggestion": "Creates a new synonym set for the specified context. Throws an ALREADY_EXISTS exception if a synonym set already exists for the context. Returns the created synonym set.",
-      "reasoning": "The current summary and description are vague and lack context. The suggestions provide clarity on the operation's purpose and expected output.",
+      "summary_suggestion": "Create a new synonym set for a context",
+      "description_suggestion": "Creates a new SynonymSet for a specified context. A SynonymSet defines synonym mappings for a given context (e.g., 'sales' context with synonyms: sale, invoice, bill, order). Requires a SynonymSet object in the request body with context and synonym definitions. Returns the created SynonymSet object with an assigned resource identifier. Throws ALREADY_EXISTS error if a SynonymSet already exists for the specified context. The new SynonymSet becomes immediately available for document processing and search operations.",
+      "reasoning": "Missing summary entirely. Description mentions error handling but lacks context about what SynonymSets are, input requirements, return value, and side effects. Added explanation of SynonymSet purpose with concrete example, input requirements, return value details, and state change information for better AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -14423,7 +14564,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'contentwarehouse.projects.locations.documents.fetchAcl' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestions provide clarity on the operation's purpose and expected output.",
+    "message": "Operation 'contentwarehouse.projects.locations.getStatus' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description is too generic. Added context about what status information is returned (provisioning state, initialization progress) and clarified that this relates to project resource provisioning, which aligns with the initialize operation. This helps AI agents understand when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14434,18 +14575,242 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "contentwarehouse.projects.locations.documents.fetchAcl",
+      "operation_id": "contentwarehouse.projects.locations.getStatus",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Gets the access control policy for a resource. Returns NOT_FOUND error if the resource does not exist. Returns an empty policy if the resource exists but does not have a policy set.",
-      "summary_suggestion": "Fetch the access control policy for a document.",
-      "description_suggestion": "Fetches the access control policy for the specified document. Returns NOT_FOUND if the document does not exist. Returns an empty policy if the document exists but does not have a policy set.",
-      "reasoning": "The current summary and description are vague. The suggestions provide clarity on the operation's purpose and expected output.",
-      "batch_index": 2
+      "current_description": "Get the project status.",
+      "summary_suggestion": "Retrieve project initialization and provisioning status",
+      "description_suggestion": "Retrieves the current status of the project, including provisioning state and resource initialization progress. Returns status information indicating whether the project has been initialized and the state of resource provisioning.",
+      "reasoning": "Original description is too generic. Added context about what status information is returned (provisioning state, initialization progress) and clarified that this relates to project resource provisioning, which aligns with the initialize operation. This helps AI agents understand when to use this operation and what to expect.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'contentwarehouse.projects.locations.initialize' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Added summary and clarified what resources are provisioned. Enhanced description to explain the asynchronous nature more clearly and specify what resources are being set up, helping AI agents understand the scope and duration of this initialization operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "contentwarehouse.projects.locations.initialize",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Provisions resources for given tenant project. Returns a long running operation.",
+      "summary_suggestion": "Provision resources for tenant project",
+      "description_suggestion": "Provisions infrastructure and resources for the specified tenant project in Content Warehouse. This is an asynchronous operation that returns a long-running operation object. The operation completes when all required resources (databases, storage, indexes) are initialized and ready for document management.",
+      "reasoning": "Added summary and clarified what resources are provisioned. Enhanced description to explain the asynchronous nature more clearly and specify what resources are being set up, helping AI agents understand the scope and duration of this initialization operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'contentwarehouse.projects.locations.synonymSets.delete' has semantic quality issues: vague_summary, missing_context. Added summary and clarified the purpose of SynonymSets (search/retrieval context). Improved error handling description for better AI agent understanding of failure scenarios.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "contentwarehouse.projects.locations.synonymSets.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes a SynonymSet for a given context. Throws a NOT_FOUND exception if the SynonymSet is not found.",
+      "summary_suggestion": "Delete synonym set for context",
+      "description_suggestion": "Deletes a SynonymSet associated with a specific context. The SynonymSet defines synonym mappings used for document search and retrieval. Returns a 404 NOT_FOUND error if the specified SynonymSet does not exist.",
+      "reasoning": "Added summary and clarified the purpose of SynonymSets (search/retrieval context). Improved error handling description for better AI agent understanding of failure scenarios.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'contentwarehouse.projects.locations.synonymSets.get' has semantic quality issues: vague_summary, missing_context, missing_output_details. Added summary and clarified the purpose and use case of SynonymSets. Specified what is returned (SynonymSet object with definitions) to help AI agents understand the response structure and when this operation is useful.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "contentwarehouse.projects.locations.synonymSets.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets a SynonymSet for a particular context. Throws a NOT_FOUND exception if the Synonymset does not exist",
+      "summary_suggestion": "Retrieve synonym set for context",
+      "description_suggestion": "Retrieves a SynonymSet for a specified context. SynonymSets define synonym mappings used to enhance document search and retrieval by recognizing equivalent terms. Returns the SynonymSet object containing synonym definitions. Returns a 404 NOT_FOUND error if the SynonymSet does not exist for the given context.",
+      "reasoning": "Added summary and clarified the purpose and use case of SynonymSets. Specified what is returned (SynonymSet object with definitions) to help AI agents understand the response structure and when this operation is useful.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'contentwarehouse.projects.locations.synonymSets.patch' has semantic quality issues: vague_summary, missing_context, missing_output_details. Added summary using 'Update' (more standard REST terminology than 'Remove and replace'). Clarified that this is a replacement operation and specified the return value. Added context about what happens to existing mappings to help AI agents understand the side effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "contentwarehouse.projects.locations.synonymSets.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Remove the existing SynonymSet for the context and replaces it with a new one. Throws a NOT_FOUND exception if the SynonymSet is not found.",
+      "summary_suggestion": "Update synonym set for context",
+      "description_suggestion": "Updates a SynonymSet for a specified context by replacing the existing synonym mappings with new ones. The operation removes all previous synonym definitions and applies the new SynonymSet provided in the request. Returns the updated SynonymSet object. Returns a 404 NOT_FOUND error if the SynonymSet does not exist for the given context.",
+      "reasoning": "Added summary using 'Update' (more standard REST terminology than 'Remove and replace'). Clarified that this is a replacement operation and specified the return value. Added context about what happens to existing mappings to help AI agents understand the side effects.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'contentwarehouse.projects.locations.documents.documentLinks.delete' has semantic quality issues: vague_summary, missing_context, missing_output_details. Added summary for clarity. Enhanced description to explain what DocumentLinks represent (relationships/provenance), what the operation does (removes association), and what is returned. This helps AI agents understand the purpose and impact of this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "contentwarehouse.projects.locations.documents.documentLinks.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Remove the link between the source and target documents.",
+      "summary_suggestion": "Delete document link between documents",
+      "description_suggestion": "Deletes a DocumentLink that establishes a relationship between a source and target document. This operation removes the association between the two documents. Returns an empty response on successful deletion. Document links are used to establish provenance and relationship tracking between documents in the warehouse.",
+      "reasoning": "Added summary for clarity. Enhanced description to explain what DocumentLinks represent (relationships/provenance), what the operation does (removes association), and what is returned. This helps AI agents understand the purpose and impact of this operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'contentwarehouse.projects.locations.documents.referenceId.get' has semantic quality issues: vague_summary, missing_context, missing_output_details, unclear_purpose. Added summary clarifying retrieval by reference ID (distinguishes from other document retrieval methods). Enhanced description to explain what document information is returned and the reference ID lookup mechanism. This helps AI agents understand when to use this specific operation versus other document retrieval methods.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "contentwarehouse.projects.locations.documents.referenceId.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details",
+        "unclear_purpose"
+      ],
+      "current_summary": "",
+      "current_description": "Gets a document. Returns NOT_FOUND if the document does not exist.",
+      "summary_suggestion": "Retrieve document by reference ID",
+      "description_suggestion": "Retrieves a document from the warehouse using its reference ID. This operation fetches the complete document object including metadata, content, and any associated document properties. Returns the Document object containing all document information. Returns a 404 NOT_FOUND error if no document exists with the specified reference ID.",
+      "reasoning": "Added summary clarifying retrieval by reference ID (distinguishes from other document retrieval methods). Enhanced description to explain what document information is returned and the reference ID lookup mechanism. This helps AI agents understand when to use this specific operation versus other document retrieval methods.",
+      "batch_index": 0
     }
   },
   {
@@ -14459,7 +14824,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 22 operations analyzed, 12 quality issues found",
+    "message": "Semantic analysis completed: 22 operations analyzed, 21 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -14471,7 +14836,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 22,
-      "total_issues_found": 12,
+      "total_issues_found": 21,
       "batches_processed": 4
     }
   }

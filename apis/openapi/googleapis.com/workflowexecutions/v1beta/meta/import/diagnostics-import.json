@@ -2109,7 +2109,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'workflowexecutions.projects.locations.workflows.executions.get' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestions provide clarity on the operation's purpose and expected output.",
+    "message": "Operation 'workflowexecutions.projects.locations.workflows.executions.get' has semantic quality issues: vague_summary, missing_output_details, poor_ai_interpretability. Missing summary entirely. Description is too minimal and doesn't explain what information is returned or help AI agents understand the execution's state details. Added context about return value structure and execution states for better AI interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2124,13 +2124,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Returns an execution of the given name.",
-      "summary_suggestion": "Retrieve the details of a specific workflow execution.",
-      "description_suggestion": "Retrieves the details of a workflow execution identified by the given name. It returns the current status and any other relevant information about the execution.",
-      "reasoning": "The current summary and description are vague. The suggestions provide clarity on the operation's purpose and expected output.",
+      "summary_suggestion": "Retrieve a workflow execution by name",
+      "description_suggestion": "Retrieves the details of a specific workflow execution by its resource name. Returns the Execution object containing the execution's current state, status, result, and any error information if the execution has failed or been cancelled.",
+      "reasoning": "Missing summary entirely. Description is too minimal and doesn't explain what information is returned or help AI agents understand the execution's state details. Added context about return value structure and execution states for better AI interpretability.",
       "batch_index": 0
     }
   },
@@ -2145,7 +2146,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'workflowexecutions.projects.locations.workflows.executions.cancel' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing, and the description lacks details about the side effects of the operation. The suggestions improve clarity and provide information on the expected outcome.",
+    "message": "Operation 'workflowexecutions.projects.locations.workflows.executions.cancel' has semantic quality issues: vague_summary, missing_side_effects, missing_output_details, poor_ai_interpretability. Missing summary. Description lacks detail about preconditions (execution must be active), side effects (status change to CANCELLED), and return value. Added these details to help AI agents understand when this operation is applicable and what state changes occur.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2160,13 +2161,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_side_effects",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Cancels an execution of the given name.",
-      "summary_suggestion": "Cancel an ongoing workflow execution.",
-      "description_suggestion": "Cancels an ongoing workflow execution identified by the given name. The operation will attempt to stop the execution and return the status of the cancellation request.",
-      "reasoning": "The current summary is missing, and the description lacks details about the side effects of the operation. The suggestions improve clarity and provide information on the expected outcome.",
+      "summary_suggestion": "Cancel a running workflow execution",
+      "description_suggestion": "Cancels a running workflow execution by its resource name. The execution must be in an active state to be cancelled. After cancellation, the execution's status transitions to CANCELLED and no further steps will be executed. Returns the updated Execution object reflecting the cancelled state.",
+      "reasoning": "Missing summary. Description lacks detail about preconditions (execution must be active), side effects (status change to CANCELLED), and return value. Added these details to help AI agents understand when this operation is applicable and what state changes occur.",
       "batch_index": 0
     }
   },
@@ -2181,7 +2184,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'workflowexecutions.projects.locations.workflows.executions.create' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing, and the description lacks details about the operation's output. The suggestions provide clarity on the operation's purpose and expected output.",
+    "message": "Operation 'workflowexecutions.projects.locations.workflows.executions.list' has semantic quality issues: vague_summary, missing_output_details, poor_ai_interpretability. Missing summary. Description explains ordering and revision scope but lacks information about pagination, filtering capabilities, and return type structure. Added details about ListExecutionsResponse and pagination support for better AI agent understanding of how to retrieve and process results.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "workflowexecutions.projects.locations.workflows.executions.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Returns a list of executions which belong to the workflow with the given name. The method returns executions of all workflow revisions. Returned executions are ordered by their start time (newest first).",
+      "summary_suggestion": "List all executions for a workflow",
+      "description_suggestion": "Lists all executions for a specified workflow across all revisions. Returns a paginated ListExecutionsResponse containing Execution objects ordered by start time in descending order (newest first). Supports filtering and pagination parameters to control the result set.",
+      "reasoning": "Missing summary. Description explains ordering and revision scope but lacks information about pagination, filtering capabilities, and return type structure. Added details about ListExecutionsResponse and pagination support for better AI agent understanding of how to retrieve and process results.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'workflowexecutions.projects.locations.workflows.executions.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, poor_ai_interpretability. Missing summary. Description doesn't explain what input is expected (Execution object with parameters), what the returned object contains, or that execution starts immediately. Added details about request body structure, return value, and execution lifecycle for AI agents to understand how to invoke and track the execution.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2196,13 +2236,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Creates a new execution using the latest revision of the given workflow.",
-      "summary_suggestion": "Initiate a new execution of a workflow.",
-      "description_suggestion": "Creates a new execution using the latest revision of the specified workflow. The operation returns the details of the newly created execution, including its status and any relevant identifiers.",
-      "reasoning": "The current summary is missing, and the description lacks details about the operation's output. The suggestions provide clarity on the operation's purpose and expected output.",
+      "summary_suggestion": "Create a new workflow execution",
+      "description_suggestion": "Creates and starts a new execution of a workflow using its latest revision. Accepts an Execution object in the request body to specify execution parameters and input arguments. Returns the newly created Execution object with an assigned execution ID and initial ACTIVE status. The execution begins processing immediately.",
+      "reasoning": "Missing summary. Description doesn't explain what input is expected (Execution object with parameters), what the returned object contains, or that execution starts immediately. Added details about request body structure, return value, and execution lifecycle for AI agents to understand how to invoke and track the execution.",
       "batch_index": 0
     }
   },
@@ -2217,7 +2259,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 4 operations analyzed, 3 quality issues found",
+    "message": "Semantic analysis completed: 4 operations analyzed, 4 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -2229,7 +2271,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 4,
-      "total_issues_found": 3,
+      "total_issues_found": 4,
       "batches_processed": 1
     }
   }

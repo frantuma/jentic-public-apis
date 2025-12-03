@@ -1030,7 +1030,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'safebrowsing.hashes.search' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. The current summary is missing. Added details about the input parameter and the output to improve clarity and AI agent interpretability.",
+    "message": "Operation 'safebrowsing.hashes.search' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_context, poor_ai_interpretability. The operation lacks a summary entirely and the description has several issues: (1) It doesn't explain what inputs are expected (hash prefixes), (2) It doesn't describe what outputs are returned (full hashes with threat details), (3) It doesn't clarify the use case or when an AI agent should call this operation, (4) The reference to AIP-136 is implementation detail noise that doesn't help AI agents understand the operation's purpose. The improved version adds context about Safe Browsing domain terminology, clarifies inputs/outputs based on the response schema context, explains the practical use case, and removes unnecessary implementation details while preserving the custom method note.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1046,13 +1046,15 @@
       "issues_found": [
         "vague_summary",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_context",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Search for full hashes matching the specified prefixes. This is a custom method as defined by https://google.aip.dev/136 (the custom method refers to this method having a custom name within Google's general API development nomenclature; it does not refer to using a custom HTTP method).",
-      "summary_suggestion": "Search for full hashes by specified prefixes",
-      "description_suggestion": "Searches for full hashes matching the specified prefixes. Expects a parameter 'prefix' which is a list of hash prefixes to search for. Returns a list of matching full hashes and their details if found. If no matches are found, returns an OK status with an empty response body.",
-      "reasoning": "The current summary is missing. Added details about the input parameter and the output to improve clarity and AI agent interpretability.",
+      "summary_suggestion": "Search threat hashes against Safe Browsing database",
+      "description_suggestion": "Searches for full hashes matching the specified hash prefixes against Google's Safe Browsing threat lists. This operation takes hash prefix(es) as input and returns matching full hashes with associated threat details (threat types and attributes). Returns an empty response if no matches are found. Useful for checking whether URLs or resources are flagged as unsafe. Note: This is a custom method endpoint following Google API design standards.",
+      "reasoning": "The operation lacks a summary entirely and the description has several issues: (1) It doesn't explain what inputs are expected (hash prefixes), (2) It doesn't describe what outputs are returned (full hashes with threat details), (3) It doesn't clarify the use case or when an AI agent should call this operation, (4) The reference to AIP-136 is implementation detail noise that doesn't help AI agents understand the operation's purpose. The improved version adds context about Safe Browsing domain terminology, clarifies inputs/outputs based on the response schema context, explains the practical use case, and removes unnecessary implementation details while preserving the custom method note.",
       "batch_index": 0
     }
   },

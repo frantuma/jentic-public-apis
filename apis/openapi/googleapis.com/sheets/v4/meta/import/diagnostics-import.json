@@ -22209,7 +22209,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'sheets.spreadsheets.values.batchUpdateByDataFilter' has semantic quality issues: vague_summary, missing_context. The original summary was missing. Added a concise action-oriented summary and clarified the description to include the return value.",
+    "message": "Operation 'sheets.spreadsheets.values.batchUpdateByDataFilter' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Original description lacks a summary entirely and is incomplete. Added summary for clarity. Enhanced description to include: what valueInputOption means, what the operation returns (response structure), and clarification that updates are atomic. This helps AI agents understand the operation's full lifecycle and when to use it versus other update methods.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22224,13 +22224,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Sets values in one or more ranges of a spreadsheet. The caller must specify the spreadsheet ID, a valueInputOption, and one or more DataFilterValueRanges.",
-      "summary_suggestion": "Batch update spreadsheet values by data filter",
-      "description_suggestion": "Sets values in one or more ranges of a spreadsheet using data filters. Requires the spreadsheet ID, a value input option, and one or more DataFilterValueRanges. Returns the updated ranges.",
-      "reasoning": "The original summary was missing. Added a concise action-oriented summary and clarified the description to include the return value.",
+      "summary_suggestion": "Update spreadsheet values using data filters",
+      "description_suggestion": "Sets values in one or more ranges of a spreadsheet using data filters to identify target ranges. Requires the spreadsheet ID, a valueInputOption (RAW or USER_ENTERED), and one or more DataFilterValueRanges specifying the data filters and values to set. Returns a BatchUpdateValuesByDataFilterResponse containing the number of rows and columns updated, and the spreadsheet ID. All updates are applied atomically.",
+      "reasoning": "Original description lacks a summary entirely and is incomplete. Added summary for clarity. Enhanced description to include: what valueInputOption means, what the operation returns (response structure), and clarification that updates are atomic. This helps AI agents understand the operation's full lifecycle and when to use it versus other update methods.",
       "batch_index": 2
     }
   },
@@ -22245,7 +22246,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'sheets.spreadsheets.getByDataFilter' has semantic quality issues: vague_summary, missing_context. The original summary was missing. Added a concise action-oriented summary and clarified the description to include the return value.",
+    "message": "Operation 'sheets.spreadsheets.batchUpdate' has semantic quality issues: vague_summary, missing_input_details, poor_ai_interpretability. Missing summary entirely. Original description is verbose and confusing for AI agents - it emphasizes edge cases and collaborative behavior over core functionality. Restructured to: clarify what types of requests are accepted, explain the request-response mapping clearly, emphasize atomic behavior upfront, and note the use case. This helps AI agents understand when to use batchUpdate versus simpler operations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sheets.spreadsheets.batchUpdate",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Applies one or more updates to the spreadsheet. Each request is validated before being applied. If any request is not valid then the entire request will fail and nothing will be applied. Some requests have replies to give you some information about how they are applied. The replies will mirror the requests. For example, if you applied 4 updates and the 3rd one had a reply, then the response will have 2 empty replies, the actual reply, and another empty reply, in that order. Due to the collaborative nature of spreadsheets, it is not guaranteed that the spreadsheet will reflect exactly your changes after this completes, however it is guaranteed that the updates in the request will be applied together atomically. Your changes may be altered with respect to collaborator changes. If there are no collaborators, the spreadsheet should reflect your changes.",
+      "summary_suggestion": "Apply multiple updates to spreadsheet atomically",
+      "description_suggestion": "Applies one or more updates to a spreadsheet atomically. Each update request is validated before application; if any request is invalid, the entire batch fails and no changes are applied. Accepts a BatchUpdateSpreadsheetRequest containing a list of requests (e.g., UpdateCellsRequest, AddSheetRequest, UpdateSheetPropertiesRequest). Returns a BatchUpdateSpreadsheetResponse with replies corresponding to each request in order (empty replies for requests without responses). Updates are applied atomically, though in collaborative environments, other users' concurrent changes may affect the final state. Ideal for complex multi-step spreadsheet modifications.",
+      "reasoning": "Missing summary entirely. Original description is verbose and confusing for AI agents - it emphasizes edge cases and collaborative behavior over core functionality. Restructured to: clarify what types of requests are accepted, explain the request-response mapping clearly, emphasize atomic behavior upfront, and note the use case. This helps AI agents understand when to use batchUpdate versus simpler operations.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sheets.spreadsheets.getByDataFilter' has semantic quality issues: vague_summary, missing_input_details, poor_ai_interpretability. Missing summary entirely. Original description is difficult for AI agents to parse - it buries the key distinction from GetSpreadsheet, uses unclear language about grid data inclusion, and doesn't clearly explain the return value. Restructured to: lead with the core purpose, clarify the two methods for including grid data, explain the multi-filter behavior, specify the return type, and highlight the performance benefit. This helps AI agents understand when to choose this operation over GetSpreadsheet.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22260,13 +22298,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. This method differs from GetSpreadsheet in that it allows selecting which subsets of spreadsheet data to return by specifying a dataFilters parameter. Multiple DataFilters can be specified. Specifying one or more data filters returns the portions of the spreadsheet that intersect ranges matched by any of the filters. By default, data within grids is not returned. You can include grid data one of 2 ways: * Specify a [field mask](https://developers.google.com/workspace/sheets/api/guides/field-masks) listing your desired fields using the `fields` URL parameter in HTTP * Set the includeGridData parameter to true. If a field mask is set, the `includeGridData` parameter is ignored For large spreadsheets, as a best practice, retrieve only the specific spreadsheet fields that you want.",
-      "summary_suggestion": "Get spreadsheet by data filter",
-      "description_suggestion": "Returns the spreadsheet at the given ID using data filters. Allows selecting specific subsets of spreadsheet data to return by specifying dataFilters. By default, data within grids is not returned. You can include grid data by setting a field mask or the includeGridData parameter. Returns the filtered spreadsheet data.",
-      "reasoning": "The original summary was missing. Added a concise action-oriented summary and clarified the description to include the return value.",
+      "summary_suggestion": "Retrieve spreadsheet data filtered by ranges",
+      "description_suggestion": "Retrieves spreadsheet metadata and optionally grid data for ranges matching specified data filters. Requires the spreadsheet ID and one or more DataFilters to identify target ranges. By default, returns only spreadsheet metadata (properties, sheets, named ranges). To include grid data, either set includeGridData to true or specify a field mask via the `fields` URL parameter. Multiple DataFilters can be specified; the response includes data from all matching ranges. Returns a Spreadsheet object containing the requested data. Use this method instead of GetSpreadsheet when you need to retrieve data from specific ranges only, improving performance for large spreadsheets.",
+      "reasoning": "Missing summary entirely. Original description is difficult for AI agents to parse - it buries the key distinction from GetSpreadsheet, uses unclear language about grid data inclusion, and doesn't clearly explain the return value. Restructured to: lead with the core purpose, clarify the two methods for including grid data, explain the multi-filter behavior, specify the return type, and highlight the performance benefit. This helps AI agents understand when to choose this operation over GetSpreadsheet.",
       "batch_index": 2
     }
   },
@@ -22281,7 +22320,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'sheets.spreadsheets.create' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'sheets.spreadsheets.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description is too brief and lacks details about inputs (Spreadsheet schema), outputs (generated spreadsheetId), and what properties can be configured. AI agents need to understand what fields they can set and what they'll receive back.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22295,13 +22334,452 @@
       "operation_id": "sheets.spreadsheets.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Creates a spreadsheet, returning the newly created spreadsheet.",
       "summary_suggestion": "Create a new spreadsheet",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
+      "description_suggestion": "Creates a new spreadsheet with the provided properties. Accepts a Spreadsheet object containing configuration such as title, sheets, and formatting. Returns the newly created Spreadsheet object with a generated spreadsheetId that can be used for subsequent operations.",
+      "reasoning": "Missing summary entirely. Description is too brief and lacks details about inputs (Spreadsheet schema), outputs (generated spreadsheetId), and what properties can be configured. AI agents need to understand what fields they can set and what they'll receive back.",
       "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sheets.spreadsheets.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is verbose and difficult for AI agents to parse. Reorganized to clarify: (1) primary purpose, (2) default behavior, (3) how to include grid data, (4) range filtering with examples, (5) return type. This structure helps agents understand when and how to use each parameter.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sheets.spreadsheets.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. By default, data within grids is not returned. You can include grid data in one of 2 ways: * Specify a [field mask](https://developers.google.com/workspace/sheets/api/guides/field-masks) listing your desired fields using the `fields` URL parameter in HTTP * Set the includeGridData URL parameter to true. If a field mask is set, the `includeGridData` parameter is ignored For large spreadsheets, as a best practice, retrieve only the specific spreadsheet fields that you want. To retrieve only subsets of spreadsheet data, use the ranges URL parameter. Ranges are specified using [A1 notation](https://developers.google.com/workspace/sheets/api/guides/concepts#cell). You can define a single cell (for example, `A1`) or multiple cells (for example, `A1:D5`). You can also get cells from other sheets within the same spreadsheet (for example, `Sheet2!A1:C4`) or retrieve multiple ranges at once (for example, `?ranges=A1:D5&ranges=Sheet2!A1:C4`). Limiting the range returns only the portions of the spreadsheet that intersect the requested ranges.",
+      "summary_suggestion": "Retrieve spreadsheet metadata and optionally grid data",
+      "description_suggestion": "Retrieves a spreadsheet's metadata and structure by spreadsheetId. By default, returns only metadata (SheetProperties, formatting, etc.) without grid cell data. To include grid data, either set includeGridData=true or use the fields parameter with a field mask. Use the ranges parameter with A1 notation to retrieve specific cell ranges (e.g., A1:D5 or Sheet2!A1:C4), which optimizes performance for large spreadsheets. Returns a Spreadsheet object containing the requested data.",
+      "reasoning": "Missing summary. Description is verbose and difficult for AI agents to parse. Reorganized to clarify: (1) primary purpose, (2) default behavior, (3) how to include grid data, (4) range filtering with examples, (5) return type. This structure helps agents understand when and how to use each parameter.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sheets.spreadsheets.developerMetadata.search' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description uses domain terminology (DataFilter, DeveloperMetadataLookup) but doesn't clearly explain the request schema or return type. AI agents need to understand what SearchDeveloperMetadataRequest contains and what the response structure is. Added clarity about input schema and return type.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sheets.spreadsheets.developerMetadata.search",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns all developer metadata matching the specified DataFilter. If the provided DataFilter represents a DeveloperMetadataLookup object, this will return all DeveloperMetadata entries selected by it. If the DataFilter represents a location in a spreadsheet, this will return all developer metadata associated with locations intersecting that region.",
+      "summary_suggestion": "Search developer metadata by filter criteria",
+      "description_suggestion": "Searches for developer metadata matching the provided DataFilter criteria. Accepts a SearchDeveloperMetadataRequest containing a DataFilter that can specify either a DeveloperMetadataLookup (to find metadata by specific attributes) or a location/range (to find metadata associated with cells in that region). Returns a list of DeveloperMetadata objects matching the filter criteria.",
+      "reasoning": "Missing summary. Description uses domain terminology (DataFilter, DeveloperMetadataLookup) but doesn't clearly explain the request schema or return type. AI agents need to understand what SearchDeveloperMetadataRequest contains and what the response structure is. Added clarity about input schema and return type.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sheets.spreadsheets.sheets.copyTo' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks input details (what CopySheetToAnotherSpreadsheetRequest contains) and output details (what SheetProperties are returned, including new sheetId). AI agents need to understand the cross-spreadsheet nature and what identifiers they'll receive back.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sheets.spreadsheets.sheets.copyTo",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Copies a single sheet from a spreadsheet to another spreadsheet. Returns the properties of the newly created sheet.",
+      "summary_suggestion": "Copy sheet to another spreadsheet",
+      "description_suggestion": "Copies a single sheet from the source spreadsheet to a destination spreadsheet. Requires the source spreadsheetId and sheetId, plus a CopySheetToAnotherSpreadsheetRequest specifying the destination spreadsheetId. Returns SheetProperties of the newly created sheet in the destination spreadsheet, including the new sheetId.",
+      "reasoning": "Missing summary. Description lacks input details (what CopySheetToAnotherSpreadsheetRequest contains) and output details (what SheetProperties are returned, including new sheetId). AI agents need to understand the cross-spreadsheet nature and what identifiers they'll receive back.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sheets.spreadsheets.values.get' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too minimal - doesn't explain the 5 parameters or what ValueRange contains. AI agents need to understand range notation, rendering options, and response structure to use this effectively.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sheets.spreadsheets.values.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns a range of values from a spreadsheet. The caller must specify the spreadsheet ID and a range.",
+      "summary_suggestion": "Retrieve cell values from a range",
+      "description_suggestion": "Retrieves cell values from a specified range in a spreadsheet. Requires spreadsheetId and range (in A1 notation, e.g., A1:D5 or Sheet2!A1:C4). Optional parameters include valueRenderOption (FORMATTED_VALUE or UNFORMATTED_VALUE) and dateTimeRenderOption for formatting control. Returns a ValueRange object containing the values, range, and majorDimension.",
+      "reasoning": "Missing summary. Description is too minimal - doesn't explain the 5 parameters or what ValueRange contains. AI agents need to understand range notation, rendering options, and response structure to use this effectively.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sheets.spreadsheets.values.update' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks critical input details (valueInputOption values and their meaning, ValueRange schema) and output details (UpdateValuesResponse structure). The distinction between USER_ENTERED and RAW is essential for AI agents to understand the operation's behavior.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sheets.spreadsheets.values.update",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Sets values in a range of a spreadsheet. The caller must specify the spreadsheet ID, range, and a valueInputOption.",
+      "summary_suggestion": "Update cell values in a range",
+      "description_suggestion": "Updates cell values in a specified range of a spreadsheet. Requires spreadsheetId, range (in A1 notation), and valueInputOption (USER_ENTERED or RAW) in the ValueRange request body. The valueInputOption determines whether formulas are parsed (USER_ENTERED) or treated as literal text (RAW). Optional parameters include responseValueOption and responseDateTimeOption for controlling the response format. Returns an UpdateValuesResponse containing the updated range, updated row/column counts, and optionally the updated values.",
+      "reasoning": "Missing summary. Description lacks critical input details (valueInputOption values and their meaning, ValueRange schema) and output details (UpdateValuesResponse structure). The distinction between USER_ENTERED and RAW is essential for AI agents to understand the operation's behavior.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sheets.spreadsheets.values.append' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description is lengthy and references external guides but lacks clarity on return value and response structure. Added concise summary and clarified what is returned (AppendValuesResponse with specific fields) to improve AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sheets.spreadsheets.values.append",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Appends values to a spreadsheet. The input range is used to search for existing data and find a \"table\" within that range. Values will be appended to the next row of the table, starting with the first column of the table. See the [guide](https://developers.google.com/workspace/sheets/api/guides/values#appending_values) and [sample code](https://developers.google.com/workspace/sheets/api/samples/writing#append_values) for specific details of how tables are detected and data is appended. The caller must specify the spreadsheet ID, range, and a valueInputOption. The `valueInputOption` only controls how the input data will be added to the sheet (column-wise or row-wise), it does not influence what cell the data starts being written to.",
+      "summary_suggestion": "Append values to next available row in table",
+      "description_suggestion": "Appends values to a spreadsheet by detecting an existing table within the specified range and inserting data into the next available row. The input range is searched to identify table boundaries, and values are appended starting with the first column of the table. Requires spreadsheet ID, range, and valueInputOption (which controls column-wise or row-wise input orientation). Returns an AppendValuesResponse containing the updated range, row count, and column count. Only cell values are modified; formatting and data validation are preserved.",
+      "reasoning": "Missing summary entirely. Description is lengthy and references external guides but lacks clarity on return value and response structure. Added concise summary and clarified what is returned (AppendValuesResponse with specific fields) to improve AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sheets.spreadsheets.values.clear' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks output information. Added summary and clarified return value (ClearValuesResponse with cleared range and cell count) for better AI agent understanding of operation effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sheets.spreadsheets.values.clear",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Clears values from a spreadsheet. The caller must specify the spreadsheet ID and range. Only values are cleared -- all other properties of the cell (such as formatting, data validation, etc..) are kept.",
+      "summary_suggestion": "Clear cell values from specified range",
+      "description_suggestion": "Clears all values from a specified range in a spreadsheet while preserving all cell properties including formatting, data validation, and borders. Requires spreadsheet ID and range specification. Returns a ClearValuesResponse containing the cleared range and the number of cleared cells. Other cell properties remain unchanged.",
+      "reasoning": "Missing summary. Description lacks output information. Added summary and clarified return value (ClearValuesResponse with cleared range and cell count) for better AI agent understanding of operation effects.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sheets.spreadsheets.values.batchClear' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks output information and doesn't emphasize batch/multiple-range capability. Added summary highlighting batch operation and clarified return value (BatchClearValuesResponse with cleared ranges list) for improved AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sheets.spreadsheets.values.batchClear",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Clears one or more ranges of values from a spreadsheet. The caller must specify the spreadsheet ID and one or more ranges. Only values are cleared -- all other properties of the cell (such as formatting and data validation) are kept.",
+      "summary_suggestion": "Clear values from multiple ranges in batch",
+      "description_suggestion": "Clears values from multiple specified ranges in a spreadsheet in a single operation while preserving all cell properties including formatting and data validation. Requires spreadsheet ID and one or more ranges. Returns a BatchClearValuesResponse containing the list of cleared ranges. Useful for efficiently clearing multiple non-contiguous areas.",
+      "reasoning": "Missing summary. Description lacks output information and doesn't emphasize batch/multiple-range capability. Added summary highlighting batch operation and clarified return value (BatchClearValuesResponse with cleared ranges list) for improved AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sheets.spreadsheets.values.batchClearByDataFilter' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks output information and doesn't clarify the DataFilter-based selection mechanism. Added summary and clarified return value (BatchClearValuesByDataFilterResponse) and the advantage of filter-based selection for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sheets.spreadsheets.values.batchClearByDataFilter",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Clears one or more ranges of values from a spreadsheet. The caller must specify the spreadsheet ID and one or more DataFilters. Ranges matching any of the specified data filters will be cleared. Only values are cleared -- all other properties of the cell (such as formatting, data validation, etc..) are kept.",
+      "summary_suggestion": "Clear values matching data filter criteria",
+      "description_suggestion": "Clears values from ranges that match specified DataFilter criteria in a spreadsheet. Ranges matching any of the provided data filters will have their values cleared while preserving all cell properties including formatting and data validation. Requires spreadsheet ID and one or more DataFilters. Returns a BatchClearValuesByDataFilterResponse containing the cleared ranges. Enables flexible clearing based on filter conditions rather than explicit range specifications.",
+      "reasoning": "Missing summary. Description lacks output information and doesn't clarify the DataFilter-based selection mechanism. Added summary and clarified return value (BatchClearValuesByDataFilterResponse) and the advantage of filter-based selection for AI agent decision-making.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sheets.spreadsheets.values.batchGet' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is too minimal and lacks output details. Added summary and clarified return structure (BatchGetValuesResponse with list of ValueRange objects) and the efficiency benefit of batch retrieval for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sheets.spreadsheets.values.batchGet",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns one or more ranges of values from a spreadsheet. The caller must specify the spreadsheet ID and one or more ranges.",
+      "summary_suggestion": "Retrieve values from multiple ranges",
+      "description_suggestion": "Retrieves values from one or more specified ranges in a spreadsheet in a single operation. Requires spreadsheet ID and one or more range specifications. Returns a BatchGetValuesResponse containing a list of ValueRange objects, each with the requested range, values, and major dimension. Supports efficient retrieval of multiple non-contiguous areas without multiple API calls.",
+      "reasoning": "Missing summary. Description is too minimal and lacks output details. Added summary and clarified return structure (BatchGetValuesResponse with list of ValueRange objects) and the efficiency benefit of batch retrieval for AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sheets.spreadsheets.values.batchGetByDataFilter' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks output information and doesn't clarify the filter-based selection mechanism. Added summary and clarified return structure (BatchGetValuesByDataFilterResponse with MatchedRanges) and the advantage of filter-based retrieval for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sheets.spreadsheets.values.batchGetByDataFilter",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns one or more ranges of values that match the specified data filters. The caller must specify the spreadsheet ID and one or more DataFilters. Ranges that match any of the data filters in the request will be returned.",
+      "summary_suggestion": "Retrieve values matching data filter criteria",
+      "description_suggestion": "Retrieves values from ranges that match specified DataFilter criteria in a spreadsheet. Ranges matching any of the provided data filters will be returned in a single operation. Requires spreadsheet ID and one or more DataFilters. Returns a BatchGetValuesByDataFilterResponse containing a list of MatchedRanges, each with the matched range, values, and major dimension. Enables flexible data retrieval based on filter conditions rather than explicit range specifications.",
+      "reasoning": "Missing summary. Description lacks output information and doesn't clarify the filter-based selection mechanism. Added summary and clarified return structure (BatchGetValuesByDataFilterResponse with MatchedRanges) and the advantage of filter-based retrieval for AI agent decision-making.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sheets.spreadsheets.values.batchUpdate' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks output information and doesn't explain valueInputOption significance. Added summary and clarified return structure (BatchUpdateValuesResponse with updated range details) and the importance of valueInputOption for AI agent understanding of data interpretation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sheets.spreadsheets.values.batchUpdate",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Sets values in one or more ranges of a spreadsheet. The caller must specify the spreadsheet ID, a valueInputOption, and one or more ValueRanges.",
+      "summary_suggestion": "Update values in multiple ranges in batch",
+      "description_suggestion": "Sets or updates values in one or more ranges of a spreadsheet in a single operation. Requires spreadsheet ID, valueInputOption (controlling how input data is interpreted: USER_ENTERED or RAW), and one or more ValueRange objects specifying ranges and values. Returns a BatchUpdateValuesResponse containing the updated ranges, row counts, and column counts for each updated range. Supports efficient multi-range updates without multiple API calls.",
+      "reasoning": "Missing summary. Description lacks output information and doesn't explain valueInputOption significance. Added summary and clarified return structure (BatchUpdateValuesResponse with updated range details) and the importance of valueInputOption for AI agent understanding of data interpretation.",
+      "batch_index": 1
     }
   },
   {
@@ -22315,7 +22793,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 17 operations analyzed, 3 quality issues found",
+    "message": "Semantic analysis completed: 17 operations analyzed, 16 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -22327,7 +22805,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 17,
-      "total_issues_found": 3,
+      "total_issues_found": 16,
       "batches_processed": 3
     }
   }

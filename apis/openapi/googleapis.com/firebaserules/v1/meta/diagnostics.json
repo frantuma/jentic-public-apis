@@ -3481,7 +3481,82 @@
         "character": 0
       }
     },
-    "message": "Operation 'firebaserules.projects.releases.delete' has semantic quality issues: vague_summary, missing_side_effects. Added a summary to clarify the action and expanded the description to include side effects of the deletion.",
+    "message": "Operation 'firebaserules.projects.releases.getExecutable' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description is too brief and lacks context about what the executable is used for, what format it's returned in, and why an agent would need it. Added clarity about the executable's purpose in rule enforcement, its role in the Release lifecycle, and that it returns compiled bytecode for deployment.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firebaserules.projects.releases.getExecutable",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Get the `Release` executable to use when enforcing rules.",
+      "summary_suggestion": "Retrieve the executable for a Release",
+      "description_suggestion": "Retrieves the compiled executable for a specified Release that rules-enabled services use to enforce the associated Ruleset. Returns the executable bytecode and metadata needed for rule enforcement. This operation is used to obtain the deployable artifact for a Release.",
+      "reasoning": "Missing summary entirely. Description is too brief and lacks context about what the executable is used for, what format it's returned in, and why an agent would need it. Added clarity about the executable's purpose in rule enforcement, its role in the Release lifecycle, and that it returns compiled bytecode for deployment.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firebaserules.projects.test' has semantic quality issues: vague_summary, missing_context, missing_output_details, poor_ai_interpretability. Missing summary. Current description is verbose with an unnecessary code example that reduces clarity for AI agents. Reorganized to clearly distinguish the two input modes (Source vs Ruleset name), their use cases, and what the response contains. Removed the lengthy example code and replaced with concise explanation of when to use each mode. Added context about the operation's role in the deployment workflow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firebaserules.projects.test",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Test `Source` for syntactic and semantic correctness. Issues present, if any, will be returned to the caller with a description, severity, and source location. The test method may be executed with `Source` or a `Ruleset` name. Passing `Source` is useful for unit testing new rules. Passing a `Ruleset` name is useful for regression testing an existing rule. The following is an example of `Source` that permits users to upload images to a bucket bearing their user id and matching the correct metadata: _*Example*_ // Users are allowed to subscribe and unsubscribe to the blog. service firebase.storage { match /users/{userId}/images/{imageName} { allow write: if userId == request.auth.uid && (imageName.matches('*.png$') || imageName.matches('*.jpg$')) && resource.mimeType.matches('^image/') } }",
+      "summary_suggestion": "Validate Ruleset or Source for correctness",
+      "description_suggestion": "Validates a Ruleset or Source for syntactic and semantic correctness. Accepts either a Source object for unit testing new rules or a Ruleset name for regression testing existing rules. Returns a TestRulesetResponse containing any validation issues with their descriptions, severity levels, and source locations. Use this operation to verify rules before deployment or to test rule changes.",
+      "reasoning": "Missing summary. Current description is verbose with an unnecessary code example that reduces clarity for AI agents. Reorganized to clearly distinguish the two input modes (Source vs Ruleset name), their use cases, and what the response contains. Removed the lengthy example code and replaced with concise explanation of when to use each mode. Added context about the operation's role in the deployment workflow.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firebaserules.projects.releases.delete' has semantic quality issues: vague_summary, missing_side_effects. Missing summary entirely. Description lacks clarity about consequences of deletion and what happens to associated resources. Added information about enforcement impact, irreversibility, and ruleset persistence for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3501,8 +3576,8 @@
       "current_summary": "",
       "current_description": "Delete a `Release` by resource name.",
       "summary_suggestion": "Delete a Release by resource name",
-      "description_suggestion": "Delete a `Release` by its resource name. This action removes the specified `Release` from the system. If the `Release` is currently being used by any Firebase Rules-enabled services, those services will no longer be able to enforce the rules associated with this `Release`.",
-      "reasoning": "Added a summary to clarify the action and expanded the description to include side effects of the deletion.",
+      "description_suggestion": "Deletes a `Release` by its resource name. Once deleted, the `Release` will no longer be available for enforcement by Firebase Rules-enabled services. This operation cannot be undone. The associated `Ruleset` will remain available for use by other `Release` resources.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about consequences of deletion and what happens to associated resources. Added information about enforcement impact, irreversibility, and ruleset persistence for better AI agent decision-making.",
       "batch_index": 0
     }
   },
@@ -3517,7 +3592,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firebaserules.projects.releases.get' has semantic quality issues: vague_summary. Added a summary to clarify the action.",
+    "message": "Operation 'firebaserules.projects.releases.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is too minimal and doesn't explain what information is returned. Enhanced to clarify return value structure and use case for AI agents.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3531,12 +3606,195 @@
       "operation_id": "firebaserules.projects.releases.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Get a `Release` by name.",
-      "summary_suggestion": "Get a Release by name",
-      "reasoning": "Added a summary to clarify the action.",
+      "summary_suggestion": "Retrieve a Release by resource name",
+      "description_suggestion": "Retrieves a `Release` resource by its resource name. Returns the complete `Release` object including its name, `Ruleset` reference, creation time, and update time. This operation is useful for verifying which `Ruleset` is currently active for a given `Release`.",
+      "reasoning": "Missing summary. Description is too minimal and doesn't explain what information is returned. Enhanced to clarify return value structure and use case for AI agents.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firebaserules.projects.releases.patch' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description lacks clarity about what can actually be modified and what the input request should contain. Added explicit mention of UpdateReleaseRequest and clarified immutability constraints for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firebaserules.projects.releases.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Update a `Release` via PATCH. Only updates to `ruleset_name` will be honored. `Release` rename is not supported. To create a `Release` use the CreateRelease method.",
+      "summary_suggestion": "Update a Release's Ruleset reference",
+      "description_suggestion": "Updates a `Release` via PATCH, allowing you to change the `Ruleset` that the `Release` refers to. Only the `ruleset_name` field can be modified; other fields are immutable. `Release` renaming is not supported. Requires an `UpdateReleaseRequest` with the new `ruleset_name`. To create a new `Release`, use the CreateRelease method instead.",
+      "reasoning": "Missing summary. Description lacks clarity about what can actually be modified and what the input request should contain. Added explicit mention of UpdateReleaseRequest and clarified immutability constraints for AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firebaserules.projects.releases.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description doesn't explain the response structure or pagination. Enhanced to clarify return value and typical use cases for AI agents determining when to call this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firebaserules.projects.releases.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "List the `Release` values for a project. This list may optionally be filtered by `Release` name, `Ruleset` name, `TestSuite` name, or any combination thereof.",
+      "summary_suggestion": "List Releases for a project with optional filtering",
+      "description_suggestion": "Lists all `Release` resources for a specified project. Supports optional filtering by `Release` name, `Ruleset` name, `TestSuite` name, or any combination thereof. Returns a `ListReleasesResponse` containing an array of `Release` objects and pagination information. Useful for discovering active deployments and their associated rulesets.",
+      "reasoning": "Missing summary. Description doesn't explain the response structure or pagination. Enhanced to clarify return value and typical use cases for AI agents determining when to call this operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firebaserules.projects.releases.create' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description is verbose with examples but lacks clarity about required inputs and the core action. Condensed to focus on essential information while preserving key concepts about concurrent releases and rollout patterns for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firebaserules.projects.releases.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Create a `Release`. Release names should reflect the developer's deployment practices. For example, the release name may include the environment name, application name, application version, or any other name meaningful to the developer. Once a `Release` refers to a `Ruleset`, the rules can be enforced by Firebase Rules-enabled services. More than one `Release` may be 'live' concurrently. Consider the following three `Release` names for `projects/foo` and the `Ruleset` to which they refer. Release Name -> Ruleset Name * projects/foo/releases/prod -> projects/foo/rulesets/uuid123 * projects/foo/releases/prod/beta -> projects/foo/rulesets/uuid123 * projects/foo/releases/prod/v23 -> projects/foo/rulesets/uuid456 The relationships reflect a `Ruleset` rollout in progress. The `prod` and `prod/beta` releases refer to the same `Ruleset`. However, `prod/v23` refers to a new `Ruleset`. The `Ruleset` reference for a `Release` may be updated using the UpdateRelease method.",
+      "summary_suggestion": "Create a Release to activate a Ruleset",
+      "description_suggestion": "Creates a new `Release` that associates a `Ruleset` with a deployment name. Once created, the `Release` enables Firebase Rules-enabled services to enforce the referenced `Ruleset`. Requires a `Release` object specifying the release name and `ruleset_name`. Release names should reflect deployment practices (e.g., environment, version). Multiple `Release` resources can reference the same `Ruleset` or different ones, supporting gradual rollouts. To change which `Ruleset` a `Release` refers to, use the UpdateRelease method.",
+      "reasoning": "Missing summary. Description is verbose with examples but lacks clarity about required inputs and the core action. Condensed to focus on essential information while preserving key concepts about concurrent releases and rollout patterns for AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firebaserules.projects.rulesets.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description doesn't clarify what metadata is included in the response or why an AI agent might choose this over GetRuleset. Enhanced to explain response structure and differentiate from GetRuleset operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firebaserules.projects.rulesets.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "List `Ruleset` metadata only and optionally filter the results by `Ruleset` name. The full `Source` contents of a `Ruleset` may be retrieved with GetRuleset.",
+      "summary_suggestion": "List Ruleset metadata with optional filtering",
+      "description_suggestion": "Lists `Ruleset` metadata for a project, optionally filtered by `Ruleset` name. Returns a `ListRulesetsResponse` containing an array of `Ruleset` objects with metadata (name, creation time, etc.) but not the full rule source code. To retrieve the complete `Source` contents of a `Ruleset`, use the GetRuleset operation. Useful for discovering available rulesets without loading full source.",
+      "reasoning": "Missing summary. Description doesn't clarify what metadata is included in the response or why an AI agent might choose this over GetRuleset. Enhanced to explain response structure and differentiate from GetRuleset operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firebaserules.projects.rulesets.create' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks clarity about immutability, return value structure, and the relationship to Release resources. Added information about immutability, error handling context, and how the created Ruleset is used downstream for better AI agent workflow understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firebaserules.projects.rulesets.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Create a `Ruleset` from `Source`. The `Ruleset` is given a unique generated name which is returned to the caller. `Source` containing syntactic or semantics errors will result in an error response indicating the first error encountered. For a detailed view of `Source` issues, use TestRuleset.",
+      "summary_suggestion": "Create a Ruleset from rule source code",
+      "description_suggestion": "Creates a new immutable `Ruleset` from provided `Source` code. The `Ruleset` is assigned a unique generated identifier and creation timestamp. If the `Source` contains syntactic or semantic errors, the operation fails with an error response indicating the first error encountered. For comprehensive validation and detailed error analysis before creating a `Ruleset`, use the TestRuleset operation. The created `Ruleset` can then be referenced by `Release` resources to enable rule enforcement.",
+      "reasoning": "Missing summary. Description lacks clarity about immutability, return value structure, and the relationship to Release resources. Added information about immutability, error handling context, and how the created Ruleset is used downstream for better AI agent workflow understanding.",
       "batch_index": 0
     }
   },
@@ -3551,7 +3809,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 9 operations analyzed, 2 quality issues found",
+    "message": "Semantic analysis completed: 9 operations analyzed, 9 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -3563,7 +3821,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 9,
-      "total_issues_found": 2,
+      "total_issues_found": 9,
       "batches_processed": 2
     }
   }

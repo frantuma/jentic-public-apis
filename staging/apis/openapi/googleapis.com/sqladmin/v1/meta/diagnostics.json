@@ -17320,7 +17320,118 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.Backups.DeleteBackup' has semantic quality issues: vague_summary, vague_description, missing_side_effects. The current summary and description are vague and lack details about the side effects of the operation.",
+    "message": "Operation 'sql.instances.stopReplica' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary entirely. Description lacks context about what happens to the replica after replication stops (becomes standalone), the asynchronous nature of the operation, and the return type. Added these details for better AI agent understanding of the operation's effects and how to monitor completion.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.stopReplica",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Stops the replication in the read replica instance.",
+      "summary_suggestion": "Stop replication on read replica instance",
+      "description_suggestion": "Stops replication on a read replica instance, disconnecting it from the primary instance. The replica instance will become a standalone instance and will no longer receive updates from the primary. This operation is asynchronous and returns an Operation resource to track progress.",
+      "reasoning": "Missing summary entirely. Description lacks context about what happens to the replica after replication stops (becomes standalone), the asynchronous nature of the operation, and the return type. Added these details for better AI agent understanding of the operation's effects and how to monitor completion.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.instances.switchover' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary. Description is vague about the switchover mechanics and side effects. Added clarity about role changes, asynchronous nature, return type, and potential downtime impact. This helps AI agents understand the significance of this operation and its consequences.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.switchover",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Switches over from the primary instance to the DR replica instance.",
+      "summary_suggestion": "Promote DR replica to primary instance",
+      "description_suggestion": "Performs a switchover operation that promotes a disaster recovery (DR) replica instance to become the primary instance. The original primary instance becomes read-only or is demoted. This operation is asynchronous and returns an Operation resource. Switchover may cause brief downtime during the transition.",
+      "reasoning": "Missing summary. Description is vague about the switchover mechanics and side effects. Added clarity about role changes, asynchronous nature, return type, and potential downtime impact. This helps AI agents understand the significance of this operation and its consequences.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.instances.truncateLog' has semantic quality issues: vague_summary, missing_context, unclear_purpose. Missing summary. Description has grammatical issues ('MySQL only' is awkwardly phrased) and lacks context about purpose, request requirements, and return type. Clarified the operation's purpose (freeing storage), database type restriction, request body requirement, and asynchronous nature for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.truncateLog",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "unclear_purpose"
+      ],
+      "current_summary": "",
+      "current_description": "Truncate MySQL general and slow query log tables MySQL only.",
+      "summary_suggestion": "Truncate MySQL query log tables",
+      "description_suggestion": "Truncates MySQL general and slow query log tables on the specified Cloud SQL instance. This operation clears historical query logs to free up storage space. Only applicable to MySQL instances. Requires the InstancesTruncateLogRequest body to specify which logs to truncate. This operation is asynchronous and returns an Operation resource.",
+      "reasoning": "Missing summary. Description has grammatical issues ('MySQL only' is awkwardly phrased) and lacks context about purpose, request requirements, and return type. Clarified the operation's purpose (freeing storage), database type restriction, request body requirement, and asynchronous nature for better AI agent interpretability.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.Backups.DeleteBackup' has semantic quality issues: vague_summary, vague_description, missing_context, missing_side_effects, poor_ai_interpretability. Original description is too minimal. Missing summary entirely. Lacks context about what gets deleted, the resource identifier format, return value, and critical information about permanence. AI agents need to understand the destructive nature and irreversibility of this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -17336,13 +17447,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_side_effects"
+        "missing_context",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
-      "current_summary": "Deletes the backup.",
+      "current_summary": "",
       "current_description": "Deletes the backup.",
-      "summary_suggestion": "Delete a specific backup.",
-      "description_suggestion": "Deletes the specified backup. This operation removes the backup from the system and any associated metadata. The backup cannot be recovered after deletion.",
-      "reasoning": "The current summary and description are vague and lack details about the side effects of the operation.",
+      "summary_suggestion": "Delete a Cloud SQL backup",
+      "description_suggestion": "Deletes a specified backup resource from a Cloud SQL instance. The backup is permanently removed and cannot be recovered. Requires the backup name in the format 'projects/{project}/instances/{instance}/backups/{backup}'. Returns an empty response on successful deletion. This operation cannot be undone.",
+      "reasoning": "Original description is too minimal. Missing summary entirely. Lacks context about what gets deleted, the resource identifier format, return value, and critical information about permanence. AI agents need to understand the destructive nature and irreversibility of this operation.",
       "batch_index": 9
     }
   },
@@ -17357,7 +17470,45 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.Backups.UpdateBackup' has semantic quality issues: vague_summary. The current summary is missing. The description is clear but could be improved by specifying the authentication requirements and the response details.",
+    "message": "Operation 'sql.Backups.GetBackup' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Missing summary. Description is vague about what information is returned and doesn't specify the required input format. AI agents need to know the expected parameter format and what fields will be in the response to determine if this operation meets their needs.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.Backups.GetBackup",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves a resource containing information about a backup.",
+      "summary_suggestion": "Retrieve Cloud SQL backup details",
+      "description_suggestion": "Retrieves detailed information about a specific backup resource. Requires the backup name in the format 'projects/{project}/instances/{instance}/backups/{backup}'. Returns a Backup object containing metadata such as creation time, status, type, and retention settings.",
+      "reasoning": "Missing summary. Description is vague about what information is returned and doesn't specify the required input format. AI agents need to know the expected parameter format and what fields will be in the response to determine if this operation meets their needs.",
+      "batch_index": 9
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.Backups.UpdateBackup' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description mentions the restriction about final backups but lacks clarity on what constitutes a 'final backup' and doesn't specify the return value. Added context about backup types and clarified the return value for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -17371,12 +17522,15 @@
       "operation_id": "sql.Backups.UpdateBackup",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Updates the retention period and description of the backup. You can use this API to update final backups only.",
-      "summary_suggestion": "Update the retention period and description of a backup.",
-      "reasoning": "The current summary is missing. The description is clear but could be improved by specifying the authentication requirements and the response details.",
+      "summary_suggestion": "Update backup retention and description",
+      "description_suggestion": "Updates the retention period and description of a backup resource. This operation only applies to final backups and cannot be used on automated or on-demand backups. Requires the backup name and a Backup object with updated retention and description fields. Returns the updated Backup resource with the new retention period and description applied.",
+      "reasoning": "Missing summary. Description mentions the restriction about final backups but lacks clarity on what constitutes a 'final backup' and doesn't specify the return value. Added context about backup types and clarified the return value for better AI agent understanding.",
       "batch_index": 9
     }
   },
@@ -17391,7 +17545,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.Backups.ListBackups' has semantic quality issues: vague_summary. The current summary is missing. The description is clear but could be improved by specifying the authentication requirements and the response details.",
+    "message": "Operation 'sql.Backups.ListBackups' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description is incomplete - doesn't mention pagination support, filtering capabilities, or the structure of the returned list. AI agents need to understand pagination and filtering options to properly use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -17405,12 +17559,15 @@
       "operation_id": "sql.Backups.ListBackups",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists all backups associated with the project.",
-      "summary_suggestion": "List all backups associated with a project.",
-      "reasoning": "The current summary is missing. The description is clear but could be improved by specifying the authentication requirements and the response details.",
+      "summary_suggestion": "List Cloud SQL backups for a project",
+      "description_suggestion": "Lists all backup resources associated with a Cloud SQL project. Requires the parent resource in the format 'projects/{project}'. Supports pagination through optional parameters for filtering and result limits. Returns a list of Backup objects with metadata for each backup including status, type, and creation time.",
+      "reasoning": "Missing summary. Description is incomplete - doesn't mention pagination support, filtering capabilities, or the structure of the returned list. AI agents need to understand pagination and filtering options to properly use this operation.",
       "batch_index": 9
     }
   },
@@ -17425,7 +17582,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.Backups.CreateBackup' has semantic quality issues: vague_summary. The current summary is missing. The description is clear but could be improved by specifying the authentication requirements and the response details.",
+    "message": "Operation 'sql.Backups.CreateBackup' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks detail about the required input format, clarification that this returns an Operation (not the Backup directly), and context about how on-demand backups differ from automated backups. AI agents need to understand they're initiating an asynchronous operation and should track it.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -17439,12 +17596,15 @@
       "operation_id": "sql.Backups.CreateBackup",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Creates a backup for a Cloud SQL instance. This API can be used only to create on-demand backups.",
-      "summary_suggestion": "Create an on-demand backup for a Cloud SQL instance.",
-      "reasoning": "The current summary is missing. The description is clear but could be improved by specifying the authentication requirements and the response details.",
+      "summary_suggestion": "Create an on-demand Cloud SQL backup",
+      "description_suggestion": "Creates an on-demand backup for a Cloud SQL instance. This operation is restricted to on-demand backups only; automated backups are managed by backup policies. Requires the parent resource in the format 'projects/{project}/instances/{instance}' and a Backup object with backup configuration. Returns an Operation resource that tracks the backup creation process. The backup will be available once the operation completes successfully.",
+      "reasoning": "Missing summary. Description lacks detail about the required input format, clarification that this returns an Operation (not the Backup directly), and context about how on-demand backups differ from automated backups. AI agents need to understand they're initiating an asynchronous operation and should track it.",
       "batch_index": 9
     }
   },
@@ -17459,7 +17619,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.instances.stopReplica' has semantic quality issues: vague_summary, missing_side_effects. Added a summary and expanded the description to include potential side effects and authentication requirements.",
+    "message": "Operation 'sql.instances.RotateServerCertificate' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity about return value and operation completion. Added summary and clarified that this returns an Operation resource and when the change takes effect, improving AI agent understanding of the operation's lifecycle.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -17470,123 +17630,17 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "sql.instances.stopReplica",
+      "operation_id": "sql.instances.RotateServerCertificate",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Stops the replication in the read replica instance.",
-      "summary_suggestion": "Stop replication in read replica instance",
-      "description_suggestion": "Stops the replication in the read replica instance. This operation may affect the availability and consistency of the data in the replica. Requires authentication.",
-      "reasoning": "Added a summary and expanded the description to include potential side effects and authentication requirements.",
-      "batch_index": 7
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'sql.instances.switchover' has semantic quality issues: vague_summary, missing_side_effects. Added a summary and expanded the description to include potential side effects and authentication requirements.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "sql.instances.switchover",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_side_effects"
-      ],
-      "current_summary": "",
-      "current_description": "Switches over from the primary instance to the DR replica instance.",
-      "summary_suggestion": "Switch over from primary to DR replica instance",
-      "description_suggestion": "Switches over from the primary instance to the DR replica instance. This operation may cause downtime and affect data availability. Requires authentication.",
-      "reasoning": "Added a summary and expanded the description to include potential side effects and authentication requirements.",
-      "batch_index": 7
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'sql.instances.truncateLog' has semantic quality issues: vague_summary, missing_side_effects. Added a summary and expanded the description to include potential side effects and authentication requirements.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "sql.instances.truncateLog",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_side_effects"
-      ],
-      "current_summary": "",
-      "current_description": "Truncate MySQL general and slow query log tables MySQL only.",
-      "summary_suggestion": "Truncate MySQL general and slow query log tables",
-      "description_suggestion": "Truncates MySQL general and slow query log tables. This operation may affect the size and retention of the logs. Requires authentication.",
-      "reasoning": "Added a summary and expanded the description to include potential side effects and authentication requirements.",
-      "batch_index": 7
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'sql.sslCerts.list' has semantic quality issues: vague_summary. The current description is clear but lacks a concise summary. Adding a summary improves clarity and AI agent interpretability.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "sql.sslCerts.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Lists all of the current SSL certificates for the instance.",
-      "summary_suggestion": "List all SSL certificates for Cloud SQL instance",
-      "reasoning": "The current description is clear but lacks a concise summary. Adding a summary improves clarity and AI agent interpretability.",
+      "current_description": "Rotates the server certificate version to one previously added with the addServerCertificate method. For instances not using Certificate Authority Service (CAS) server CA, use RotateServerCa instead.",
+      "summary_suggestion": "Rotate server certificate to previously added version",
+      "description_suggestion": "Rotates the server certificate version to one previously added with the addServerCertificate method. For instances not using Certificate Authority Service (CAS) server CA, use RotateServerCa instead. Returns an Operation resource that tracks the rotation process. The certificate change takes effect after the operation completes.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about return value and operation completion. Added summary and clarified that this returns an Operation resource and when the change takes effect, improving AI agent understanding of the operation's lifecycle.",
       "batch_index": 6
     }
   },
@@ -17601,7 +17655,637 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.instances.releaseSsrsLease' has semantic quality issues: vague_summary. The current summary is missing, making it difficult to quickly grasp the operation's purpose.",
+    "message": "Operation 'sql.sslCerts.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is minimal and lacks output details. Added summary and clarified return type and that private keys are not included, helping AI agents understand what data they will receive.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.sslCerts.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all of the current SSL certificates for the instance.",
+      "summary_suggestion": "List all SSL certificates for instance",
+      "description_suggestion": "Lists all current SSL certificates for the specified Cloud SQL instance. Returns a collection of SslCert resources containing certificate metadata. Does not include private keys.",
+      "reasoning": "Missing summary. Description is minimal and lacks output details. Added summary and clarified return type and that private keys are not included, helping AI agents understand what data they will receive.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.sslCerts.insert' has semantic quality issues: vague_summary, missing_side_effects. Missing summary. Description mentions the restart requirement but doesn't emphasize the critical side effect that the private key is only available once. Added summary and clarified the one-time availability of the private key to help AI agents understand the urgency of saving it.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.sslCerts.insert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates an SSL certificate and returns it along with the private key and server certificate authority. The new certificate will not be usable until the instance is restarted.",
+      "summary_suggestion": "Create new SSL certificate for instance",
+      "description_suggestion": "Creates a new SSL certificate for the Cloud SQL instance and returns it along with the private key and server certificate authority. The certificate becomes usable only after the instance is restarted. The private key is only available in this response and must be saved immediately.",
+      "reasoning": "Missing summary. Description mentions the restart requirement but doesn't emphasize the critical side effect that the private key is only available once. Added summary and clarified the one-time availability of the private key to help AI agents understand the urgency of saving it.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.sslCerts.delete' has semantic quality issues: vague_summary, missing_side_effects, missing_output_details. Missing summary. Description lacks clarity about return value and has incomplete side effect information (only mentions First Generation behavior). Added summary, clarified return type, and added context about newer instance types for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.sslCerts.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes the SSL certificate. For First Generation instances, the certificate remains valid until the instance is restarted.",
+      "summary_suggestion": "Delete SSL certificate from instance",
+      "description_suggestion": "Deletes the specified SSL certificate from the Cloud SQL instance. For First Generation instances, the certificate remains valid until the instance is restarted. Returns an Operation resource tracking the deletion. For newer instance types, the certificate is immediately invalidated.",
+      "reasoning": "Missing summary. Description lacks clarity about return value and has incomplete side effect information (only mentions First Generation behavior). Added summary, clarified return type, and added context about newer instance types for better AI agent decision-making.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.sslCerts.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is confusing about when private keys are available. Added summary and clarified that private keys are only available during creation, not retrieval, improving AI agent understanding of the certificate lifecycle.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.sslCerts.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves a particular SSL certificate. Does not include the private key (required for usage). The private key must be saved from the response to initial creation.",
+      "summary_suggestion": "Retrieve SSL certificate metadata",
+      "description_suggestion": "Retrieves a specific SSL certificate by SHA1 fingerprint. Returns the SslCert resource with certificate metadata and public key information. Does not include the private key (which is only available during initial certificate creation and must be saved at that time).",
+      "reasoning": "Missing summary. Description is confusing about when private keys are available. Added summary and clarified that private keys are only available during creation, not retrieval, improving AI agent understanding of the certificate lifecycle.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.projects.instances.startExternalSync' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Missing summary and vague description. Original description lacks context about what 'external primary' means and what the operation actually does. Added summary and comprehensive description explaining the migration context, prerequisites, return value, and asynchronous nature for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.projects.instances.startExternalSync",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Start External primary instance migration.",
+      "summary_suggestion": "Start external primary instance migration",
+      "description_suggestion": "Initiates migration of an external primary database instance to Cloud SQL. This operation sets up replication from the external source to the Cloud SQL instance. Requires the external instance connection details to be configured beforehand. Returns an Operation resource tracking the migration progress. The migration runs asynchronously and may take considerable time depending on database size.",
+      "reasoning": "Missing summary and vague description. Original description lacks context about what 'external primary' means and what the operation actually does. Added summary and comprehensive description explaining the migration context, prerequisites, return value, and asynchronous nature for better AI agent interpretability.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.instances.startReplica' has semantic quality issues: vague_summary, missing_output_details, missing_context. Missing summary. Description lacks context about when this operation is used (e.g., after stopping replication) and what the return value is. Added summary and clarified the use case and operation lifecycle for better AI agent understanding of when to invoke this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.startReplica",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Starts the replication in the read replica instance.",
+      "summary_suggestion": "Start replication on read replica instance",
+      "description_suggestion": "Starts replication on a read replica instance, enabling it to receive updates from the primary instance. Use this operation to resume replication after it has been stopped. Returns an Operation resource tracking the replication startup. The replica will begin synchronizing with the primary instance once the operation completes.",
+      "reasoning": "Missing summary. Description lacks context about when this operation is used (e.g., after stopping replication) and what the return value is. Added summary and clarified the use case and operation lifecycle for better AI agent understanding of when to invoke this operation.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.projects.instances.getLatestRecoveryTime' has semantic quality issues: vague_summary, vague_description, missing_output_details, poor_ai_interpretability. Original description is too terse and lacks context about what 'recovery time' means in the Cloud SQL domain. Added explanation of point-in-time recovery context, what the operation retrieves, and what is returned to help AI agents understand when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.projects.instances.getLatestRecoveryTime",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Get Latest Recovery Time for a given instance.",
+      "summary_suggestion": "Retrieve the latest recovery time for an instance",
+      "description_suggestion": "Retrieves the latest point-in-time recovery timestamp available for the specified Cloud SQL instance. This indicates the most recent moment to which the instance can be recovered using point-in-time recovery. Returns the latest recoverable timestamp in the response.",
+      "reasoning": "Original description is too terse and lacks context about what 'recovery time' means in the Cloud SQL domain. Added explanation of point-in-time recovery context, what the operation retrieves, and what is returned to help AI agents understand when to use this operation.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.projects.instances.performDiskShrink' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Original description is extremely terse and lacks critical context. Added explanation of what disk shrink does (reclaims unused space), impact on instance (performance), required inputs (PerformDiskShrinkContext), return value (Operation resource), and important side effects (temporary unavailability). Essential for AI agents to understand operation scope and consequences.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.projects.instances.performDiskShrink",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Perform Disk Shrink on primary instance.",
+      "summary_suggestion": "Shrink the disk storage of a primary instance",
+      "description_suggestion": "Initiates a disk shrink operation on the specified primary Cloud SQL instance to reduce allocated storage. This operation reclaims unused disk space and may impact instance performance during execution. Requires a PerformDiskShrinkContext request body specifying shrink parameters. Returns an Operation resource that can be monitored for completion status. Note: This operation may cause temporary unavailability.",
+      "reasoning": "Original description is extremely terse and lacks critical context. Added explanation of what disk shrink does (reclaims unused space), impact on instance (performance), required inputs (PerformDiskShrinkContext), return value (Operation resource), and important side effects (temporary unavailability). Essential for AI agents to understand operation scope and consequences.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.instances.promoteReplica' has semantic quality issues: vague_summary, missing_output_details, poor_ai_interpretability. Original description mentions the restart side effect but lacks context about the promotion outcome and return value. Added clarity about what happens after promotion (independent primary, write capability), what is returned (Operation resource), and additional side effects (backup/replication configuration changes) to help AI agents understand the full scope of this state-changing operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.promoteReplica",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Promotes the read replica instance to be an independent Cloud SQL primary instance. Using this operation might cause your instance to restart.",
+      "summary_suggestion": "Promote a read replica to an independent primary instance",
+      "description_suggestion": "Promotes the specified read replica instance to an independent Cloud SQL primary instance, severing its replication relationship with the source instance. The promoted instance becomes a standalone primary and can accept write operations. This operation may cause the instance to restart during promotion. Returns an Operation resource for monitoring the promotion progress. After promotion, the instance will have its own backup and replication configuration.",
+      "reasoning": "Original description mentions the restart side effect but lacks context about the promotion outcome and return value. Added clarity about what happens after promotion (independent primary, write capability), what is returned (Operation resource), and additional side effects (backup/replication configuration changes) to help AI agents understand the full scope of this state-changing operation.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.instances.reencrypt' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Original description uses domain acronym (CMEK) without sufficient context and lacks details about inputs, outputs, and side effects. Added explanation of what CMEK means in context, why reencryption is performed (latest key version), required request body, return value (Operation resource), and performance impact. Critical for AI agents to understand this security-related operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.reencrypt",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Reencrypt CMEK instance with latest key version.",
+      "summary_suggestion": "Reencrypt instance data with the latest CMEK key version",
+      "description_suggestion": "Reencrypts all data on a Customer-Managed Encryption Key (CMEK) encrypted Cloud SQL instance using the latest available key version. This operation ensures the instance uses the most current encryption key material. Requires an InstancesReencryptRequest specifying reencryption parameters. Returns an Operation resource for monitoring the reencryption progress. This operation may impact instance performance and availability during execution.",
+      "reasoning": "Original description uses domain acronym (CMEK) without sufficient context and lacks details about inputs, outputs, and side effects. Added explanation of what CMEK means in context, why reencryption is performed (latest key version), required request body, return value (Operation resource), and performance impact. Critical for AI agents to understand this security-related operation.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.instances.acquireSsrsLease' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Original description is too brief and lacks context about what acquiring a lease means operationally, what inputs are required, what is returned, and what side effects occur. Added clarity about the lease purpose, return value (Operation resource), and prerequisite nature for SSRS configuration to improve AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.acquireSsrsLease",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Acquire a lease for the setup of SQL Server Reporting Services (SSRS).",
+      "summary_suggestion": "Acquire SSRS setup lease for instance",
+      "description_suggestion": "Acquires a lease for setting up SQL Server Reporting Services (SSRS) on the specified Cloud SQL instance. This operation reserves resources and configuration for SSRS initialization. Returns an Operation resource indicating the lease acquisition status. The lease must be acquired before SSRS can be configured on the instance.",
+      "reasoning": "Original description is too brief and lacks context about what acquiring a lease means operationally, what inputs are required, what is returned, and what side effects occur. Added clarity about the lease purpose, return value (Operation resource), and prerequisite nature for SSRS configuration to improve AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.instances.addServerCa' has semantic quality issues: vague_summary, missing_output_details. Description is comprehensive and well-structured with good context about the operation's purpose, constraints, and related operations. However, missing a summary statement. Added concise action-oriented summary that captures the core operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.addServerCa",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Adds a new trusted Certificate Authority (CA) version for the specified instance. Required to prepare for a certificate rotation. If a CA version was previously added but never used in a certificate rotation, this operation replaces that version. There cannot be more than one CA version waiting to be rotated in. For instances that have enabled Certificate Authority Service (CAS) based server CA, use AddServerCertificate to add a new server certificate.",
+      "summary_suggestion": "Add new trusted CA version for rotation",
+      "reasoning": "Description is comprehensive and well-structured with good context about the operation's purpose, constraints, and related operations. However, missing a summary statement. Added concise action-oriented summary that captures the core operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.instances.addServerCertificate' has semantic quality issues: vague_summary. Description is comprehensive with clear context about CAS-based certificates, constraints, and relationship to AddServerCa operation. Only missing a concise summary statement. Added action-oriented summary that distinguishes this CAS-specific operation from the standard CA operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.addServerCertificate",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Add a new trusted server certificate version for the specified instance using Certificate Authority Service (CAS) server CA. Required to prepare for a certificate rotation. If a server certificate version was previously added but never used in a certificate rotation, this operation replaces that version. There cannot be more than one certificate version waiting to be rotated in. For instances not using CAS server CA, use AddServerCa instead.",
+      "summary_suggestion": "Add new CAS server certificate for rotation",
+      "reasoning": "Description is comprehensive with clear context about CAS-based certificates, constraints, and relationship to AddServerCa operation. Only missing a concise summary statement. Added action-oriented summary that distinguishes this CAS-specific operation from the standard CA operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.backupRuns.list' has semantic quality issues: vague_summary, missing_output_details. Original description lacks a summary and doesn't explicitly state what is returned. Enhanced description to clarify the return type (BackupRun resources), mention pagination support, and improve AI agent understanding of filtering capabilities.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.backupRuns.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all backup runs associated with the project or a given instance and configuration in the reverse chronological order of the backup initiation time.",
+      "summary_suggestion": "List backup runs in reverse chronological order",
+      "description_suggestion": "Lists all backup runs associated with a Cloud SQL instance or project, sorted in reverse chronological order by backup initiation time. Returns a collection of BackupRun resources containing metadata about each backup execution including status, timing, and configuration. Supports filtering by instance and pagination parameters.",
+      "reasoning": "Original description lacks a summary and doesn't explicitly state what is returned. Enhanced description to clarify the return type (BackupRun resources), mention pagination support, and improve AI agent understanding of filtering capabilities.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.backupRuns.insert' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Original description is too minimal. Added summary, clarified that this is an immediate/on-demand operation (not scheduled), specified return type (Operation resource), and explained the side effect of the backup appearing in the backup runs list for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.backupRuns.insert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new backup run on demand.",
+      "summary_suggestion": "Create on-demand backup run",
+      "description_suggestion": "Creates a new on-demand backup run for the specified Cloud SQL instance. Initiates an immediate backup operation outside of the scheduled backup window. Returns an Operation resource that tracks the backup execution status. The backup run will appear in the backup runs list once initiated.",
+      "reasoning": "Original description is too minimal. Added summary, clarified that this is an immediate/on-demand operation (not scheduled), specified return type (Operation resource), and explained the side effect of the backup appearing in the backup runs list for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.backupRuns.delete' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Original description is vague about what 'deletes the backup' means operationally. Added summary, clarified the side effects (storage freed, backup unrecoverable, record removal), specified return type (Operation resource), and emphasized the irreversible nature for AI agent safety and understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.backupRuns.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes the backup taken by a backup run.",
+      "summary_suggestion": "Delete backup run and associated backup",
+      "description_suggestion": "Deletes the backup data associated with a specific backup run. This operation removes the backup artifacts from Cloud SQL storage, freeing up storage resources. Returns an Operation resource indicating the deletion status. Once deleted, the backup cannot be restored and the backup run record will be removed from the backup runs list.",
+      "reasoning": "Original description is vague about what 'deletes the backup' means operationally. Added summary, clarified the side effects (storage freed, backup unrecoverable, record removal), specified return type (Operation resource), and emphasized the irreversible nature for AI agent safety and understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.backupRuns.get' has semantic quality issues: vague_summary, missing_output_details. Original description is generic and lacks specificity about return type. Added summary, clarified that it returns a BackupRun resource, and listed example fields (status, timing, type, configuration) to help AI agents understand what information is available.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.backupRuns.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves a resource containing information about a backup run.",
+      "summary_suggestion": "Retrieve backup run details",
+      "description_suggestion": "Retrieves detailed information about a specific backup run identified by its ID. Returns a BackupRun resource containing metadata such as backup status, start/end times, backup type, and configuration details for the specified instance.",
+      "reasoning": "Original description is generic and lacks specificity about return type. Added summary, clarified that it returns a BackupRun resource, and listed example fields (status, timing, type, configuration) to help AI agents understand what information is available.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.instances.releaseSsrsLease' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description lacks context about what releasing the lease accomplishes, when it should be used, and what is returned. Added clarity about the lease lifecycle, operation context, and return value for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -17615,12 +18299,15 @@
       "operation_id": "sql.instances.releaseSsrsLease",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Release a lease for the setup of SQL Server Reporting Services (SSRS).",
-      "summary_suggestion": "Release SQL Server Reporting Services (SSRS) lease",
-      "reasoning": "The current summary is missing, making it difficult to quickly grasp the operation's purpose.",
+      "summary_suggestion": "Release SQL Server Reporting Services setup lease",
+      "description_suggestion": "Releases an acquired lease for SQL Server Reporting Services (SSRS) setup on the Cloud SQL instance. This operation completes the SSRS configuration process and frees the lease resource. Returns an Operation resource indicating the completion status.",
+      "reasoning": "Missing summary entirely. Description lacks context about what releasing the lease accomplishes, when it should be used, and what is returned. Added clarity about the lease lifecycle, operation context, and return value for better AI agent understanding.",
       "batch_index": 5
     }
   },
@@ -17635,7 +18322,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.projects.instances.rescheduleMaintenance' has semantic quality issues: vague_summary. The current summary is missing, which is essential for quick understanding of the operation.",
+    "message": "Operation 'sql.projects.instances.rescheduleMaintenance' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description is too vague about what inputs are required, what the operation returns, and the side effects (maintenance window impact). Added details about request body, return value, and operational side effects for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -17649,12 +18336,16 @@
       "operation_id": "sql.projects.instances.rescheduleMaintenance",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Reschedules the maintenance on the given instance.",
-      "summary_suggestion": "Reschedule instance maintenance",
-      "reasoning": "The current summary is missing, which is essential for quick understanding of the operation.",
+      "summary_suggestion": "Reschedule instance maintenance window",
+      "description_suggestion": "Reschedules the maintenance window for a Cloud SQL instance. Accepts a maintenance reschedule request specifying the new maintenance window. This operation allows deferring or rescheduling planned maintenance to minimize impact on your workload. Returns an Operation resource tracking the reschedule request. The instance may experience brief connectivity interruptions during the rescheduled maintenance window.",
+      "reasoning": "Missing summary. Description is too vague about what inputs are required, what the operation returns, and the side effects (maintenance window impact). Added details about request body, return value, and operational side effects for AI agent clarity.",
       "batch_index": 5
     }
   },
@@ -17669,7 +18360,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.projects.instances.resetReplicaSize' has semantic quality issues: vague_summary. The current summary is missing, making it harder to quickly understand the operation's purpose.",
+    "message": "Operation 'sql.projects.instances.resetReplicaSize' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks context about when this operation is needed (independent scaling scenario), what it returns, and side effects (temporary unavailability). Enhanced with operational context and side effects for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -17683,12 +18374,15 @@
       "operation_id": "sql.projects.instances.resetReplicaSize",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Reset Replica Size to primary instance disk size.",
-      "summary_suggestion": "Reset replica size to primary disk size",
-      "reasoning": "The current summary is missing, making it harder to quickly understand the operation's purpose.",
+      "summary_suggestion": "Reset replica disk size to primary",
+      "description_suggestion": "Resets a read replica's disk size to match the primary Cloud SQL instance. This operation is used when a replica has been scaled independently and needs to be resynchronized with the primary instance's storage capacity. Returns an Operation resource tracking the resize operation. The replica will be temporarily unavailable during the resize process.",
+      "reasoning": "Missing summary. Description lacks context about when this operation is needed (independent scaling scenario), what it returns, and side effects (temporary unavailability). Enhanced with operational context and side effects for better AI agent decision-making.",
       "batch_index": 5
     }
   },
@@ -17703,7 +18397,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.instances.restart' has semantic quality issues: vague_summary. The current summary is missing, which is necessary for quick comprehension of the operation.",
+    "message": "Operation 'sql.instances.resetSslConfig' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks information about return value and critical side effects (client connection invalidation). Added context about use cases and explicit warning about connection impact for AI agents to understand consequences.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.resetSslConfig",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes all client certificates and generates a new server SSL certificate for the instance.",
+      "summary_suggestion": "Reset SSL configuration and certificates",
+      "description_suggestion": "Resets the SSL configuration for a Cloud SQL instance by deleting all existing client certificates and generating a new server SSL certificate. This operation is typically used for security remediation or certificate rotation. Returns an Operation resource tracking the reset process. All existing client certificate connections will be invalidated and clients must obtain new certificates to reconnect.",
+      "reasoning": "Missing summary. Description lacks information about return value and critical side effects (client connection invalidation). Added context about use cases and explicit warning about connection impact for AI agents to understand consequences.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.instances.restart' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description is too minimal - lacks return value information and critical side effects (connection termination, service interruption). Added details about operational impact and use cases for AI agents to understand when and why to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -17717,12 +18448,15 @@
       "operation_id": "sql.instances.restart",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Restarts a Cloud SQL instance.",
       "summary_suggestion": "Restart Cloud SQL instance",
-      "reasoning": "The current summary is missing, which is necessary for quick comprehension of the operation.",
+      "description_suggestion": "Restarts a Cloud SQL instance, which will cause a brief service interruption. All active connections will be terminated and the instance will be unavailable during the restart process. Returns an Operation resource tracking the restart progress. Use this operation for applying configuration changes or troubleshooting connectivity issues.",
+      "reasoning": "Missing summary. Description is too minimal - lacks return value information and critical side effects (connection termination, service interruption). Added details about operational impact and use cases for AI agents to understand when and why to use this operation.",
       "batch_index": 5
     }
   },
@@ -17737,7 +18471,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.instances.restoreBackup' has semantic quality issues: vague_summary. The current summary is missing, making it difficult to quickly understand the operation's purpose.",
+    "message": "Operation 'sql.instances.restoreBackup' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description mentions restart side effect but lacks input requirements (backup identifier) and clear return value information. Enhanced with details about request parameters, data overwrite implications, and return value for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -17751,12 +18485,15 @@
       "operation_id": "sql.instances.restoreBackup",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Restores a backup of a Cloud SQL instance. Using this operation might cause your instance to restart.",
-      "summary_suggestion": "Restore Cloud SQL instance backup",
-      "reasoning": "The current summary is missing, making it difficult to quickly understand the operation's purpose.",
+      "summary_suggestion": "Restore Cloud SQL instance from backup",
+      "description_suggestion": "Restores a Cloud SQL instance from a previously created backup. Requires a backup identifier in the request body specifying which backup to restore. This operation will overwrite the current instance data with the backup data and may cause the instance to restart, resulting in temporary service unavailability. Returns an Operation resource tracking the restore progress.",
+      "reasoning": "Missing summary. Description mentions restart side effect but lacks input requirements (backup identifier) and clear return value information. Enhanced with details about request parameters, data overwrite implications, and return value for better AI agent understanding.",
       "batch_index": 5
     }
   },
@@ -17771,7 +18508,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.instances.rotateServerCa' has semantic quality issues: vague_summary. The current summary is missing, which is essential for quick understanding of the operation.",
+    "message": "Operation 'sql.instances.rotateServerCa' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, unclear_purpose. Missing summary. Description is confusing with unclear prerequisites and alternative operation reference. Lacks clarity on input requirements, return value, and side effects. Reorganized to clarify prerequisites, input requirements, return value, and side effects while maintaining the alternative operation guidance.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -17785,12 +18522,16 @@
       "operation_id": "sql.instances.rotateServerCa",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "unclear_purpose"
       ],
       "current_summary": "",
       "current_description": "Rotates the server certificate to one signed by the Certificate Authority (CA) version previously added with the addServerCA method. For instances that have enabled Certificate Authority Service (CAS) based server CA, use RotateServerCertificate to rotate the server certificate.",
-      "summary_suggestion": "Rotate server certificate for Cloud SQL instance",
-      "reasoning": "The current summary is missing, which is essential for quick understanding of the operation.",
+      "summary_suggestion": "Rotate server certificate to new CA",
+      "description_suggestion": "Rotates the server SSL certificate for a Cloud SQL instance to one signed by a previously added Certificate Authority (CA) version. This operation requires that a new CA version has been added via the addServerCA method. The request body specifies which CA version to use for the new certificate. Returns an Operation resource tracking the certificate rotation. Note: For instances using Certificate Authority Service (CAS) based server CA, use the RotateServerCertificate operation instead. Clients may experience brief connectivity interruptions during certificate rotation.",
+      "reasoning": "Missing summary. Description is confusing with unclear prerequisites and alternative operation reference. Lacks clarity on input requirements, return value, and side effects. Reorganized to clarify prerequisites, input requirements, return value, and side effects while maintaining the alternative operation guidance.",
       "batch_index": 5
     }
   },
@@ -17805,41 +18546,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.connect.get' has semantic quality issues: vague_summary. The original summary was missing. The suggested summary is concise and action-oriented.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "sql.connect.get",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Retrieves connect settings about a Cloud SQL instance.",
-      "summary_suggestion": "Get Cloud SQL instance connect settings",
-      "reasoning": "The original summary was missing. The suggested summary is concise and action-oriented.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'sql.users.get' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides clarity on the required inputs and the returned resource.",
+    "message": "Operation 'sql.users.get' has semantic quality issues: vague_summary, vague_description. Missing summary entirely. Description is vague about what 'a resource' and 'a user' refer to in the Cloud SQL context. Improved version specifies it's a Cloud SQL user, clarifies the retrieval is by name from an instance, and indicates what information is returned for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -17858,9 +18565,9 @@
       ],
       "current_summary": "",
       "current_description": "Retrieves a resource containing information about a user.",
-      "summary_suggestion": "Retrieve user information",
-      "description_suggestion": "Retrieves detailed information about a specific Cloud SQL user. Requires the user's project, instance, and name. Returns a User resource.",
-      "reasoning": "The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides clarity on the required inputs and the returned resource.",
+      "summary_suggestion": "Retrieve a Cloud SQL user resource",
+      "description_suggestion": "Retrieves a Cloud SQL user resource by name from a specified database instance. Returns the user object containing authentication details, permissions, and configuration for the named user.",
+      "reasoning": "Missing summary entirely. Description is vague about what 'a resource' and 'a user' refer to in the Cloud SQL context. Improved version specifies it's a Cloud SQL user, clarifies the retrieval is by name from an instance, and indicates what information is returned for AI agent clarity.",
       "batch_index": 8
     }
   },
@@ -17875,7 +18582,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.projects.instances.verifyExternalSyncSettings' has semantic quality issues: vague_summary, missing_context. The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides clarity on the required inputs and the returned response.",
+    "message": "Operation 'sql.projects.instances.verifyExternalSyncSettings' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details. Missing summary. Description has grammatical issues ('Verify External primary instance external sync') and lacks clarity about what is being verified, why, and what the operation returns. Improved version clarifies the context (external replication), explains the validation purpose, and indicates the response contains verification results.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -17890,13 +18597,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Verify External primary instance external sync settings.",
-      "summary_suggestion": "Verify external sync settings",
-      "description_suggestion": "Verifies the external sync settings for a Cloud SQL instance. Requires the project and instance ID. Returns a response indicating the verification status.",
-      "reasoning": "The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides clarity on the required inputs and the returned response.",
+      "summary_suggestion": "Verify external sync settings for primary instance",
+      "description_suggestion": "Verifies the external sync settings configured for a Cloud SQL primary instance that is replicating to external databases. Validates the configuration and connectivity settings. Returns verification results indicating whether the external sync settings are valid and properly configured.",
+      "reasoning": "Missing summary. Description has grammatical issues ('Verify External primary instance external sync') and lacks clarity about what is being verified, why, and what the operation returns. Improved version clarifies the context (external replication), explains the validation purpose, and indicates the response contains verification results.",
       "batch_index": 8
     }
   },
@@ -17911,7 +18621,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.projects.instances.getLatestRecoveryTime' has semantic quality issues: vague_summary, vague_description. The current summary is missing. The description is vague and lacks details about the expected inputs and outputs.",
+    "message": "Operation 'sql.operations.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description explains the listing and sorting but lacks context about what information is returned and what constitutes an 'operation' in this API. Improved version adds clarity about return values and helps AI agents understand the response structure.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -17922,18 +18632,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "sql.projects.instances.getLatestRecoveryTime",
+      "operation_id": "sql.operations.list",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context"
       ],
       "current_summary": "",
-      "current_description": "Get Latest Recovery Time for a given instance.",
-      "summary_suggestion": "Retrieve the latest recovery time for a specific instance.",
-      "description_suggestion": "Retrieves the latest recovery time for a specified Cloud SQL instance. This operation provides the timestamp for the most recent recovery point available.",
-      "reasoning": "The current summary is missing. The description is vague and lacks details about the expected inputs and outputs.",
-      "batch_index": 4
+      "current_description": "Lists all instance operations that have been performed on the given Cloud SQL instance in the reverse chronological order of the start time.",
+      "summary_suggestion": "List Cloud SQL instance operations",
+      "description_suggestion": "Lists all operations performed on a Cloud SQL instance, sorted in reverse chronological order by start time. Returns operation objects containing status, type, and progress information for each operation.",
+      "reasoning": "Missing summary. Description explains the listing and sorting but lacks context about what information is returned and what constitutes an 'operation' in this API. Improved version adds clarity about return values and helps AI agents understand the response structure.",
+      "batch_index": 8
     }
   },
   {
@@ -17947,7 +18657,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.projects.instances.performDiskShrink' has semantic quality issues: vague_summary, vague_description. The current summary is missing. The description is vague and lacks details about the expected inputs and outputs.",
+    "message": "Operation 'sql.operations.get' has semantic quality issues: vague_summary, vague_description, missing_output_details. Missing summary. Description is repetitive ('instance operation...on an instance') and vague about what information is returned. Improved version clarifies retrieval by operation ID, specifies it's a Cloud SQL operation, and lists the key fields returned for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -17958,18 +18668,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "sql.projects.instances.performDiskShrink",
+      "operation_id": "sql.operations.get",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Perform Disk Shrink on primary instance.",
-      "summary_suggestion": "Perform disk shrink on a primary Cloud SQL instance.",
-      "description_suggestion": "Performs a disk shrink operation on the primary Cloud SQL instance. This operation reduces the size of the disk while preserving data integrity.",
-      "reasoning": "The current summary is missing. The description is vague and lacks details about the expected inputs and outputs.",
-      "batch_index": 4
+      "current_description": "Retrieves an instance operation that has been performed on an instance.",
+      "summary_suggestion": "Retrieve a Cloud SQL operation",
+      "description_suggestion": "Retrieves details of a specific Cloud SQL operation by operation ID. Returns the operation object containing status, type, progress, errors, and timestamps for the requested operation.",
+      "reasoning": "Missing summary. Description is repetitive ('instance operation...on an instance') and vague about what information is returned. Improved version clarifies retrieval by operation ID, specifies it's a Cloud SQL operation, and lists the key fields returned for better AI agent understanding.",
+      "batch_index": 8
     }
   },
   {
@@ -17983,7 +18694,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.instances.acquireSsrsLease' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing. Added a concise summary and detailed the input parameters and the operation's purpose for better clarity and AI agent interpretability.",
+    "message": "Operation 'sql.operations.cancel' has semantic quality issues: vague_summary, missing_side_effects, missing_output_details. Missing summary. Description lacks information about side effects (what happens when cancelled), constraints (which operations can be cancelled), and what is returned. Improved version clarifies the action, indicates the response, and warns about cancellation limitations for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -17994,18 +18705,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "sql.instances.acquireSsrsLease",
+      "operation_id": "sql.operations.cancel",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_side_effects",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Acquire a lease for the setup of SQL Server Reporting Services (SSRS).",
-      "summary_suggestion": "Acquire lease for SQL Server Reporting Services setup",
-      "description_suggestion": "Acquire a lease for the setup of SQL Server Reporting Services (SSRS). This operation requires the project and instance identifiers as input parameters. Upon successful completion, the lease is granted, allowing the setup of SSRS.",
-      "reasoning": "The current summary is missing. Added a concise summary and detailed the input parameters and the operation's purpose for better clarity and AI agent interpretability.",
-      "batch_index": 1
+      "current_description": "Cancels an instance operation that has been performed on an instance.",
+      "summary_suggestion": "Cancel a Cloud SQL operation",
+      "description_suggestion": "Cancels a running Cloud SQL operation by operation ID. The operation must be in a cancellable state. Returns the operation object with updated status. Note: Some operations cannot be cancelled and will return an error.",
+      "reasoning": "Missing summary. Description lacks information about side effects (what happens when cancelled), constraints (which operations can be cancelled), and what is returned. Improved version clarifies the action, indicates the response, and warns about cancellation limitations for AI agent decision-making.",
+      "batch_index": 8
     }
   },
   {
@@ -18019,7 +18731,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.backupRuns.list' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary that captures the operation's purpose without altering the detailed description.",
+    "message": "Operation 'sql.tiers.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description provides examples and external reference but lacks clarity about what is returned in the response. Improved version adds summary, clarifies the response structure (tier objects with specifications), and maintains the helpful external reference.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -18030,16 +18742,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "sql.backupRuns.list",
+      "operation_id": "sql.tiers.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Lists all backup runs associated with the project or a given instance and configuration in the reverse chronological order of the backup initiation time.",
-      "summary_suggestion": "List all backup runs for a project or instance",
-      "reasoning": "The current summary is missing. Added a concise summary that captures the operation's purpose without altering the detailed description.",
-      "batch_index": 1
+      "current_description": "Lists all available machine types (tiers) for Cloud SQL, for example, `db-custom-1-3840`. For more information, see https://cloud.google.com/sql/pricing.",
+      "summary_suggestion": "List available Cloud SQL machine types",
+      "description_suggestion": "Lists all available machine types (tiers) for Cloud SQL instances, such as `db-custom-1-3840`. Returns tier objects containing specifications including vCPU count, memory, and pricing information. See https://cloud.google.com/sql/pricing for detailed pricing.",
+      "reasoning": "Missing summary. Description provides examples and external reference but lacks clarity about what is returned in the response. Improved version adds summary, clarifies the response structure (tier objects with specifications), and maintains the helpful external reference.",
+      "batch_index": 8
     }
   },
   {
@@ -18053,7 +18767,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.backupRuns.insert' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary that captures the operation's purpose without altering the detailed description.",
+    "message": "Operation 'sql.instances.clone' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks details about what gets cloned, input requirements, and return value. Added clarity about cloned content, restart warning context, input/output details, and operation tracking for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -18064,16 +18778,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "sql.backupRuns.insert",
+      "operation_id": "sql.instances.clone",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Creates a new backup run on demand.",
-      "summary_suggestion": "Create a new backup run on demand",
-      "reasoning": "The current summary is missing. Added a concise summary that captures the operation's purpose without altering the detailed description.",
-      "batch_index": 1
+      "current_description": "Creates a Cloud SQL instance as a clone of the source instance. Using this operation might cause your instance to restart.",
+      "summary_suggestion": "Clone a Cloud SQL database instance",
+      "description_suggestion": "Creates a new Cloud SQL instance as a clone of the specified source instance, including all databases, users, and configurations. The source instance may restart during the cloning process. Requires the InstancesCloneRequest body specifying the clone configuration. Returns an Operation resource that can be used to track the cloning progress.",
+      "reasoning": "Missing summary entirely. Description lacks details about what gets cloned, input requirements, and return value. Added clarity about cloned content, restart warning context, input/output details, and operation tracking for better AI agent understanding.",
+      "batch_index": 2
     }
   },
   {
@@ -18087,7 +18804,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.backupRuns.delete' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary that captures the operation's purpose without altering the detailed description.",
+    "message": "Operation 'sql.connect.get' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description is too vague about what connection settings are returned. Added specific examples of returned data (IP addresses, DNS names, SSL info) and clarified the purpose for AI agents to understand when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -18098,16 +18815,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "sql.backupRuns.delete",
+      "operation_id": "sql.connect.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Deletes the backup taken by a backup run.",
-      "summary_suggestion": "Delete a backup run",
-      "reasoning": "The current summary is missing. Added a concise summary that captures the operation's purpose without altering the detailed description.",
-      "batch_index": 1
+      "current_description": "Retrieves connect settings about a Cloud SQL instance.",
+      "summary_suggestion": "Retrieve Cloud SQL instance connection settings",
+      "description_suggestion": "Retrieves connection settings and metadata for a Cloud SQL instance, including IP addresses, DNS names, and SSL certificate information needed to establish database connections. Returns connection configuration details that can be used by clients to connect to the instance.",
+      "reasoning": "Missing summary. Description is too vague about what connection settings are returned. Added specific examples of returned data (IP addresses, DNS names, SSL info) and clarified the purpose for AI agents to understand when to use this operation.",
+      "batch_index": 2
     }
   },
   {
@@ -18121,7 +18841,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.backupRuns.get' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary that captures the operation's purpose without altering the detailed description.",
+    "message": "Operation 'sql.databases.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks detail about return value structure. Added summary and clarified what information is returned in the Database resources for better AI agent understanding of available data.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -18132,16 +18852,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "sql.backupRuns.get",
+      "operation_id": "sql.databases.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Retrieves a resource containing information about a backup run.",
-      "summary_suggestion": "Retrieve information about a backup run",
-      "reasoning": "The current summary is missing. Added a concise summary that captures the operation's purpose without altering the detailed description.",
-      "batch_index": 1
+      "current_description": "Lists databases in the specified Cloud SQL instance.",
+      "summary_suggestion": "List databases in a Cloud SQL instance",
+      "description_suggestion": "Lists all databases in the specified Cloud SQL instance. Returns a collection of Database resources containing metadata for each database including name, character set, and collation settings.",
+      "reasoning": "Missing summary. Description lacks detail about return value structure. Added summary and clarified what information is returned in the Database resources for better AI agent understanding of available data.",
+      "batch_index": 2
     }
   },
   {
@@ -18155,7 +18877,117 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.databases.patch' has semantic quality issues: vague_summary, vague_description. The current summary is missing. The description is vague and lacks details about authentication and return value.",
+    "message": "Operation 'sql.databases.insert' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description uses 'inserts' which is less clear than 'creates' for AI agents. Missing details about request body requirements, return value, and asynchronous nature. Added clarity about what's required, constraints, and operation tracking.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.databases.insert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Inserts a resource containing information about a database inside a Cloud SQL instance. **Note:** You can't modify the default character set and collation.",
+      "summary_suggestion": "Create a new database in a Cloud SQL instance",
+      "description_suggestion": "Creates a new database in the specified Cloud SQL instance. Requires a Database resource in the request body specifying the database name, character set, and collation. Note: Default character set and collation cannot be modified after creation. Returns an Operation resource tracking the database creation. The operation completes asynchronously.",
+      "reasoning": "Missing summary. Description uses 'inserts' which is less clear than 'creates' for AI agents. Missing details about request body requirements, return value, and asynchronous nature. Added clarity about what's required, constraints, and operation tracking.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.databases.delete' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks critical information about data loss, return value, and asynchronous operation. Added warning about irreversibility, clarified return type, and operation tracking for AI agents to understand the destructive nature and async behavior.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.databases.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes a database from a Cloud SQL instance.",
+      "summary_suggestion": "Delete a database from a Cloud SQL instance",
+      "description_suggestion": "Deletes the specified database from a Cloud SQL instance. This operation is irreversible and will permanently remove all data in the database. Returns an Operation resource that can be used to track the deletion progress. The operation completes asynchronously.",
+      "reasoning": "Missing summary. Description lacks critical information about data loss, return value, and asynchronous operation. Added warning about irreversibility, clarified return type, and operation tracking for AI agents to understand the destructive nature and async behavior.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.databases.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is vague about what information is returned. Added summary and specified what Database resource properties are available (name, character set, collation, configuration) for better AI agent understanding of available data.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.databases.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves a resource containing information about a database inside a Cloud SQL instance.",
+      "summary_suggestion": "Retrieve database information from a Cloud SQL instance",
+      "description_suggestion": "Retrieves detailed information about a specific database in a Cloud SQL instance. Returns a Database resource containing metadata including database name, character set, collation, and other configuration details.",
+      "reasoning": "Missing summary. Description is vague about what information is returned. Added summary and specified what Database resource properties are available (name, character set, collation, configuration) for better AI agent understanding of available data.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.databases.patch' has semantic quality issues: vague_summary, missing_output_details, poor_ai_interpretability. Missing summary entirely. Description lacks clarity about what fields can be updated, the partial update behavior, and return value. Added specifics about patch semantics behavior and return value to improve AI agent understanding of when to use PATCH vs PUT.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -18170,13 +19002,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Partially updates a resource containing information about a database inside a Cloud SQL instance. This method supports patch semantics.",
-      "summary_suggestion": "Partially update a database in a Cloud SQL instance",
-      "description_suggestion": "Partially updates a resource containing information about a database inside a Cloud SQL instance. This method supports patch semantics. Requires authentication. Returns the updated database object.",
-      "reasoning": "The current summary is missing. The description is vague and lacks details about authentication and return value.",
+      "summary_suggestion": "Partially update database configuration",
+      "description_suggestion": "Partially updates a database resource within a Cloud SQL instance using patch semantics. Only provided fields in the Database schema will be modified; omitted fields retain their current values. Returns the updated Database object with all current field values. Requires project, instance, and database identifiers.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about what fields can be updated, the partial update behavior, and return value. Added specifics about patch semantics behavior and return value to improve AI agent understanding of when to use PATCH vs PUT.",
       "batch_index": 3
     }
   },
@@ -18191,7 +19024,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.databases.update' has semantic quality issues: vague_summary, vague_description. The current summary is missing. The description is vague and lacks details about authentication and return value.",
+    "message": "Operation 'sql.databases.update' has semantic quality issues: vague_summary, missing_output_details, poor_ai_interpretability. Missing summary entirely. Description is vague about update semantics and doesn't clarify the difference from PATCH or specify return value. Added context about full replacement semantics and return value to help AI agents distinguish between PUT and PATCH operations.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -18206,13 +19039,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Updates a resource containing information about a database inside a Cloud SQL instance.",
-      "summary_suggestion": "Update a database in a Cloud SQL instance",
-      "description_suggestion": "Updates a resource containing information about a database inside a Cloud SQL instance. Requires authentication. Returns the updated database object.",
-      "reasoning": "The current summary is missing. The description is vague and lacks details about authentication and return value.",
+      "summary_suggestion": "Update database configuration",
+      "description_suggestion": "Updates a database resource within a Cloud SQL instance using full replacement semantics. All fields in the Database schema must be provided; this is a full update operation. Returns the updated Database object. Requires project, instance, and database identifiers.",
+      "reasoning": "Missing summary entirely. Description is vague about update semantics and doesn't clarify the difference from PATCH or specify return value. Added context about full replacement semantics and return value to help AI agents distinguish between PUT and PATCH operations.",
       "batch_index": 3
     }
   },
@@ -18227,7 +19061,155 @@
         "character": 0
       }
     },
-    "message": "Operation 'sql.projects.instances.getDiskShrinkConfig' has semantic quality issues: vague_summary, vague_description. The current summary is missing. The description is vague and lacks details about authentication and return value.",
+    "message": "Operation 'sql.instances.demote' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description lacks context about the external database configuration requirement, return value (Operation), and asynchronous nature. Added details about request parameters, operation tracking, and async behavior for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.demote",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Demotes an existing standalone instance to be a Cloud SQL read replica for an external database server.",
+      "summary_suggestion": "Demote instance to external read replica",
+      "description_suggestion": "Demotes an existing standalone Cloud SQL instance to become a read replica for an external database server. The instance will be reconfigured to replicate data from the external source specified in the InstancesDemoteRequest. Returns an Operation resource tracking the demotion process. This is an asynchronous operation.",
+      "reasoning": "Missing summary entirely. Description lacks context about the external database configuration requirement, return value (Operation), and asynchronous nature. Added details about request parameters, operation tracking, and async behavior for better AI agent interpretability.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.instances.demoteMaster' has semantic quality issues: vague_summary, missing_context, missing_output_details, inconsistent_terminology. Missing summary entirely. Description uses inconsistent terminology ('stand-alone' vs 'primary'). Lacks context about external database configuration, return value (Operation), and asynchronous nature. Added clarification about terminology, operation tracking, and async behavior.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.demoteMaster",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details",
+        "inconsistent_terminology"
+      ],
+      "current_summary": "",
+      "current_description": "Demotes the stand-alone instance to be a Cloud SQL read replica for an external database server.",
+      "summary_suggestion": "Demote primary instance to external read replica",
+      "description_suggestion": "Demotes a primary Cloud SQL instance to become a read replica for an external database server. The instance will be reconfigured to replicate data from the external source specified in the InstancesDemoteMasterRequest. Returns an Operation resource tracking the demotion process. This is an asynchronous operation. Note: This operation is typically used for high-availability instances.",
+      "reasoning": "Missing summary entirely. Description uses inconsistent terminology ('stand-alone' vs 'primary'). Lacks context about external database configuration, return value (Operation), and asynchronous nature. Added clarification about terminology, operation tracking, and async behavior.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.instances.export' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary entirely. Description lacks information about return value (Operation), asynchronous nature, and side effects (file written to Cloud Storage). Added details about operation tracking, async behavior, and storage outcome for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.export",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Exports data from a Cloud SQL instance to a Cloud Storage bucket as a SQL dump or CSV file.",
+      "summary_suggestion": "Export instance data to Cloud Storage",
+      "description_suggestion": "Exports data from a Cloud SQL instance to a Cloud Storage bucket in SQL dump or CSV format. The export destination and format are specified in the InstancesExportRequest. Returns an Operation resource tracking the export process. This is an asynchronous operation. The exported file will be written to the specified Cloud Storage location.",
+      "reasoning": "Missing summary entirely. Description lacks information about return value (Operation), asynchronous nature, and side effects (file written to Cloud Storage). Added details about operation tracking, async behavior, and storage outcome for better AI agent understanding.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.instances.failover' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description is lengthy with external documentation reference but lacks return value information and clarity about operation tracking. Condensed description while preserving key information about HA types and added Operation return value and async nature for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.failover",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Initiates a manual failover of a high availability (HA) primary instance to a standby instance, which becomes the primary instance. Users are then rerouted to the new primary. For more information, see the [Overview of high availability](https://cloud.google.com/sql/docs/mysql/high-availability) page in the Cloud SQL documentation. If using Legacy HA (MySQL only), this causes the instance to failover to its failover replica instance.",
+      "summary_suggestion": "Initiate manual failover to standby instance",
+      "description_suggestion": "Initiates a manual failover of a high availability (HA) primary instance to its standby instance. The standby becomes the new primary, and client connections are automatically rerouted. For Legacy HA (MySQL only), failover occurs to the designated failover replica. Returns an Operation resource tracking the failover process. This is an asynchronous operation. Requires the instance to be configured for high availability.",
+      "reasoning": "Missing summary entirely. Description is lengthy with external documentation reference but lacks return value information and clarity about operation tracking. Condensed description while preserving key information about HA types and added Operation return value and async nature for AI agent clarity.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.projects.instances.getDiskShrinkConfig' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description is too terse and lacks context about what disk shrink configuration contains, return value details, and the purpose of retrieving this information. Added context about configuration details, return value, and use case to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -18242,14 +19224,270 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Get Disk Shrink Config for a given instance.",
-      "summary_suggestion": "Get disk shrink configuration for a Cloud SQL instance",
-      "description_suggestion": "Gets the disk shrink configuration for a given Cloud SQL instance. Requires authentication. Returns the disk shrink configuration object.",
-      "reasoning": "The current summary is missing. The description is vague and lacks details about authentication and return value.",
+      "summary_suggestion": "Retrieve disk shrink configuration",
+      "description_suggestion": "Retrieves the disk shrink configuration for a Cloud SQL instance. Returns configuration details about disk shrinking capabilities and constraints for the specified instance. This read-only operation provides information needed to determine if and how disk shrinking can be performed on the instance.",
+      "reasoning": "Missing summary entirely. Description is too terse and lacks context about what disk shrink configuration contains, return value details, and the purpose of retrieving this information. Added context about configuration details, return value, and use case to improve AI agent interpretability.",
       "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.flags.list' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is minimal and lacks context about what flag metadata is returned and the use case for this operation. Enhanced description clarifies the return value structure and practical use case for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.flags.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all available database flags for Cloud SQL instances.",
+      "summary_suggestion": "List all available database flags",
+      "description_suggestion": "Retrieves a list of all database flags that can be configured on Cloud SQL instances. Returns flag metadata including name, type, allowed values, and applicability to different database engines. Useful for understanding configuration options before creating or updating instances.",
+      "reasoning": "Missing summary entirely. Description is minimal and lacks context about what flag metadata is returned and the use case for this operation. Enhanced description clarifies the return value structure and practical use case for AI agents.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.instances.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks detail about parameters (filtering, pagination), return structure, and required inputs. Enhanced version clarifies what DatabaseInstance objects are returned and how to use pagination/filtering for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists instances under a given project.",
+      "summary_suggestion": "List Cloud SQL instances in project",
+      "description_suggestion": "Retrieves a list of all Cloud SQL database instances in the specified project. Supports filtering and pagination through query parameters. Returns an array of DatabaseInstance resources containing instance metadata, configuration, and current state. Requires the project ID as a path parameter.",
+      "reasoning": "Missing summary. Description lacks detail about parameters (filtering, pagination), return structure, and required inputs. Enhanced version clarifies what DatabaseInstance objects are returned and how to use pagination/filtering for AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.instances.insert' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Missing summary. Description lacks input details (what DatabaseInstance fields are required), output details (Operation resource), and side effects (asynchronous operation, time to availability). Enhanced version provides complete context for AI agents to understand the operation's full lifecycle.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.insert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new Cloud SQL instance.",
+      "summary_suggestion": "Create a new Cloud SQL instance",
+      "description_suggestion": "Creates a new Cloud SQL database instance in the specified project. Accepts a DatabaseInstance resource in the request body containing configuration such as instance name, database engine, tier, and region. Returns an Operation resource representing the asynchronous creation process. The instance may take several minutes to become available. Requires appropriate IAM permissions.",
+      "reasoning": "Missing summary. Description lacks input details (what DatabaseInstance fields are required), output details (Operation resource), and side effects (asynchronous operation, time to availability). Enhanced version provides complete context for AI agents to understand the operation's full lifecycle.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.instances.delete' has semantic quality issues: vague_summary, missing_side_effects, missing_output_details. Missing summary. Description lacks critical side effects (data loss, irreversibility), output details (Operation resource), and clarity about what gets deleted. Enhanced version emphasizes the destructive nature and permanent consequences for AI agent safety.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes a Cloud SQL instance.",
+      "summary_suggestion": "Delete a Cloud SQL instance",
+      "description_suggestion": "Deletes a Cloud SQL database instance and all associated data. This action is irreversible. Requires the project ID and instance name as path parameters. Returns an Operation resource representing the asynchronous deletion process. All databases, users, and backups associated with the instance will be permanently removed.",
+      "reasoning": "Missing summary. Description lacks critical side effects (data loss, irreversibility), output details (Operation resource), and clarity about what gets deleted. Enhanced version emphasizes the destructive nature and permanent consequences for AI agent safety.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.instances.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is vague about what information is returned. Enhanced version specifies the DatabaseInstance schema and provides examples of what data is available (configuration, state, IPs, backups) to help AI agents understand the operation's output.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves a resource containing information about a Cloud SQL instance.",
+      "summary_suggestion": "Get Cloud SQL instance details",
+      "description_suggestion": "Retrieves detailed information about a specific Cloud SQL instance. Requires the project ID and instance name as path parameters. Returns a DatabaseInstance resource containing the instance's configuration, current state, IP addresses, backup status, and other metadata. Use this to monitor instance health and configuration.",
+      "reasoning": "Missing summary. Description is vague about what information is returned. Enhanced version specifies the DatabaseInstance schema and provides examples of what data is available (configuration, state, IPs, backups) to help AI agents understand the operation's output.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.instances.patch' has semantic quality issues: vague_summary, missing_context. Missing summary. Description mentions patch semantics but lacks clarity about which fields can be updated, the return value (Operation), and potential side effects (restart). Enhanced version clarifies the merge behavior and operational consequences for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Partially updates settings of a Cloud SQL instance by merging the request with the current configuration. This method supports patch semantics.",
+      "summary_suggestion": "Partially update Cloud SQL instance settings",
+      "description_suggestion": "Partially updates settings of a Cloud SQL instance using patch semantics. Only provided fields in the DatabaseInstance request body are modified; omitted fields retain their current values. Requires the project ID and instance name as path parameters. Returns an Operation resource representing the asynchronous update. May cause instance restart depending on the settings changed.",
+      "reasoning": "Missing summary. Description mentions patch semantics but lacks clarity about which fields can be updated, the return value (Operation), and potential side effects (restart). Enhanced version clarifies the merge behavior and operational consequences for AI agents.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'sql.instances.update' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description lacks input details (full replacement semantics vs patch, required fields) and output details (Operation resource). Enhanced version clarifies the difference from PATCH, specifies the return value, and emphasizes the restart side effect for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "sql.instances.update",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates settings of a Cloud SQL instance. Using this operation might cause your instance to restart.",
+      "summary_suggestion": "Update Cloud SQL instance settings",
+      "description_suggestion": "Updates settings of a Cloud SQL instance using full replacement semantics. The complete DatabaseInstance resource must be provided in the request body; all fields are replaced with the provided values. Requires the project ID and instance name as path parameters. Returns an Operation resource representing the asynchronous update. This operation may cause the instance to restart, resulting in temporary unavailability.",
+      "reasoning": "Missing summary. Description lacks input details (full replacement semantics vs patch, required fields) and output details (Operation resource). Enhanced version clarifies the difference from PATCH, specifies the return value, and emphasizes the restart side effect for AI agent decision-making.",
+      "batch_index": 0
     }
   },
   {
@@ -18263,7 +19501,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 68 operations analyzed, 27 quality issues found",
+    "message": "Semantic analysis completed: 68 operations analyzed, 59 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -18275,7 +19513,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 68,
-      "total_issues_found": 27,
+      "total_issues_found": 59,
       "batches_processed": 10
     }
   }

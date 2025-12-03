@@ -5277,7 +5277,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'bigqueryreservation.projects.locations.searchAssignments' has semantic quality issues: vague_summary, vague_description, missing_context, unclear_purpose, missing_input_details, missing_output_details, inconsistent_terminology. The original summary was missing, and the description was vague and lacked clarity on inputs, outputs, and side effects. The suggestion provides a clear action-oriented summary and a detailed description that includes the purpose, expected inputs, outputs, and side effects, using domain-appropriate terminology.",
+    "message": "Operation 'bigqueryreservation.projects.locations.searchAssignments' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_output_details, poor_ai_interpretability. Original lacks summary entirely and description is dense, difficult to parse, and unclear about inputs/outputs. Issues include: (1) No summary provided; (2) Hierarchical lookup logic buried in numbered list format; (3) Missing clarity on what 'specified resource' means; (4) Comparison to ListAssignments creates confusion rather than clarity; (5) Deprecation status not prominently stated; (6) Parameter format constraints unclear. Improved version: adds concise summary, restructures hierarchy logic for clarity, explicitly states resource types, clarifies return behavior, highlights deprecation status upfront, and clarifies parameter format requirements for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5292,18 +5292,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description",
         "missing_context",
-        "unclear_purpose",
         "missing_input_details",
         "missing_output_details",
-        "inconsistent_terminology"
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Deprecated: Looks up assignments for a specified resource for a particular region. If the request is about a project: 1. Assignments created on the project will be returned if they exist. 2. Otherwise assignments created on the closest ancestor will be returned. 3. Assignments for different JobTypes will all be returned. The same logic applies if the request is about a folder. If the request is about an organization, then assignments created on the organization will be returned (organization doesn't have ancestors). Comparing to ListAssignments, there are some behavior differences: 1. permission on the assignee will be verified in this API. 2. Hierarchy lookup (project->folder->organization) happens in this API. 3. Parent here is `projects/*/locations/*`, instead of `projects/*/locations/*reservations/*`. **Note** \"-\" cannot be used for projects nor locations.",
-      "summary_suggestion": "Search assignments for a specified resource in a region",
-      "description_suggestion": "Searches for assignments related to a specified resource in a particular region. If the resource is a project, it returns assignments created on the project or its closest ancestor. If the resource is a folder, it returns assignments created on the folder. For an organization, it returns assignments created on the organization. This operation verifies permissions on the assignee and performs a hierarchy lookup. The parent path is `projects/*/locations/*`. Note: '-' cannot be used for projects or locations.",
-      "reasoning": "The original summary was missing, and the description was vague and lacked clarity on inputs, outputs, and side effects. The suggestion provides a clear action-oriented summary and a detailed description that includes the purpose, expected inputs, outputs, and side effects, using domain-appropriate terminology.",
+      "summary_suggestion": "Search assignments across resource hierarchy",
+      "description_suggestion": "Searches for reservation assignments applicable to a specified resource (project, folder, or organization) within a location. This operation performs hierarchical lookup: for projects and folders, it returns assignments created on the resource or its closest ancestor; for organizations, it returns only organization-level assignments. Returns all assignments regardless of JobType. Requires permission verification on the assignee. **Deprecated:** Use ListAssignments for new implementations. **Note:** Parent must be in format `projects/*/locations/*` (wildcards \"-\" are not supported for projects or locations).",
+      "reasoning": "Original lacks summary entirely and description is dense, difficult to parse, and unclear about inputs/outputs. Issues include: (1) No summary provided; (2) Hierarchical lookup logic buried in numbered list format; (3) Missing clarity on what 'specified resource' means; (4) Comparison to ListAssignments creates confusion rather than clarity; (5) Deprecation status not prominently stated; (6) Parameter format constraints unclear. Improved version: adds concise summary, restructures hierarchy logic for clarity, explicitly states resource types, clarifies return behavior, highlights deprecation status upfront, and clarifies parameter format requirements for AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -5318,7 +5316,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'bigqueryreservation.projects.locations.capacityCommitments.get' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary and description are clear and provide the necessary context for AI agents.",
+    "message": "Operation 'bigqueryreservation.projects.locations.capacityCommitments.delete' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is clear about the action and error condition, but lacks context about permissions and when the operation can succeed. Added summary and clarified the precondition for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigqueryreservation.projects.locations.capacityCommitments.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes a capacity commitment. Attempting to delete capacity commitment before its commitment_end_time will fail with the error code `google.rpc.Code.FAILED_PRECONDITION`.",
+      "summary_suggestion": "Delete a capacity commitment",
+      "description_suggestion": "Deletes a capacity commitment. The operation will fail with error code `google.rpc.Code.FAILED_PRECONDITION` if attempted before the commitment's `commitment_end_time`. Requires appropriate permissions on the capacity commitment resource.",
+      "reasoning": "Missing summary entirely. Description is clear about the action and error condition, but lacks context about permissions and when the operation can succeed. Added summary and clarified the precondition for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigqueryreservation.projects.locations.capacityCommitments.get' has semantic quality issues: vague_summary. Missing summary. Description is clear and complete about the operation's purpose and return value. Added concise, action-oriented summary.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5336,9 +5370,8 @@
       ],
       "current_summary": "",
       "current_description": "Returns information about the capacity commitment.",
-      "summary_suggestion": "Get information about a capacity commitment",
-      "description_suggestion": "Retrieves detailed information about a specified capacity commitment.",
-      "reasoning": "The current summary is missing. The suggested summary and description are clear and provide the necessary context for AI agents.",
+      "summary_suggestion": "Retrieve capacity commitment details",
+      "reasoning": "Missing summary. Description is clear and complete about the operation's purpose and return value. Added concise, action-oriented summary.",
       "batch_index": 0
     }
   },
@@ -5353,7 +5386,225 @@
         "character": 0
       }
     },
-    "message": "Operation 'bigqueryreservation.projects.locations.capacityCommitments.list' has semantic quality issues: vague_summary, missing_context. The current summary is missing, and the description could be more detailed. Adding a summary and expanding the description improves clarity and completeness.",
+    "message": "Operation 'bigqueryreservation.projects.locations.capacityCommitments.patch' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description clearly explains constraints but lacks explicit mention of the return value. Added summary and clarified return value for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigqueryreservation.projects.locations.capacityCommitments.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates an existing capacity commitment. Only `plan` and `renewal_plan` fields can be updated. Plan can only be changed to a plan of a longer commitment period. Attempting to change to a plan with shorter commitment period will fail with the error code `google.rpc.Code.FAILED_PRECONDITION`.",
+      "summary_suggestion": "Update capacity commitment plan",
+      "description_suggestion": "Updates an existing capacity commitment. Only `plan` and `renewal_plan` fields can be modified. The plan can only be changed to a longer commitment period; attempting to downgrade to a shorter period will fail with error code `google.rpc.Code.FAILED_PRECONDITION`. Returns the updated capacity commitment object.",
+      "reasoning": "Missing summary entirely. Description clearly explains constraints but lacks explicit mention of the return value. Added summary and clarified return value for better AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigqueryreservation.projects.locations.reservations.failoverReservation' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description explains the operation and precondition but lacks clarity on return value and the transactional nature of the operation. Added summary and clarified return value for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigqueryreservation.projects.locations.reservations.failoverReservation",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Fail over a reservation to the secondary location. The operation should be done in the current secondary location, which will be promoted to the new primary location for the reservation. Attempting to failover a reservation in the current primary location will fail with the error code `google.rpc.Code.FAILED_PRECONDITION`.",
+      "summary_suggestion": "Failover reservation to secondary location",
+      "description_suggestion": "Fails over a reservation to the secondary location, promoting it to the new primary location. This operation must be executed in the current secondary location. Attempting to failover from the current primary location will fail with error code `google.rpc.Code.FAILED_PRECONDITION`. Returns the updated reservation object.",
+      "reasoning": "Missing summary entirely. Description explains the operation and precondition but lacks clarity on return value and the transactional nature of the operation. Added summary and clarified return value for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigqueryreservation.projects.locations.reservations.assignments.move' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description explains the benefit but lacks clarity on return value and the transactional guarantee. Added summary and clarified return value for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigqueryreservation.projects.locations.reservations.assignments.move",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Moves an assignment under a new reservation. This differs from removing an existing assignment and recreating a new one by providing a transactional change that ensures an assignee always has an associated reservation.",
+      "summary_suggestion": "Move assignment to new reservation",
+      "description_suggestion": "Moves an assignment to a new reservation in a single transactional operation. Unlike removing and recreating an assignment, this ensures the assignee always maintains an associated reservation without interruption. Returns the updated assignment object.",
+      "reasoning": "Missing summary entirely. Description explains the benefit but lacks clarity on return value and the transactional guarantee. Added summary and clarified return value for better AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigqueryreservation.projects.locations.capacityCommitments.split' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description provides good context and examples but lacks explicit mention of return value. Added summary and clarified return value for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigqueryreservation.projects.locations.capacityCommitments.split",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Splits capacity commitment to two commitments of the same plan and `commitment_end_time`. A common use case is to enable downgrading commitments. For example, in order to downgrade from 10000 slots to 8000, you might split a 10000 capacity commitment into commitments of 2000 and 8000. Then, you delete the first one after the commitment end time passes.",
+      "summary_suggestion": "Split capacity commitment into two",
+      "description_suggestion": "Splits a capacity commitment into two commitments with the same plan and `commitment_end_time`. This enables downgrading by splitting into smaller commitments and deleting the unwanted portion after the commitment period ends. For example, split 10000 slots into 2000 and 8000 slots, then delete the 2000-slot commitment. Returns the split capacity commitment response containing both new commitments.",
+      "reasoning": "Missing summary entirely. Description provides good context and examples but lacks explicit mention of return value. Added summary and clarified return value for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigqueryreservation.projects.locations.reservations.assignments.list' has semantic quality issues: vague_summary, vague_description, poor_ai_interpretability. Missing summary entirely. Description is overly complex with unclear examples and scattered information about wildcard behavior. Simplified to focus on core functionality, return value, and key constraints for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigqueryreservation.projects.locations.reservations.assignments.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Lists assignments. Only explicitly created assignments will be returned. Example: * Organization `organizationA` contains two projects, `project1` and `project2`. * Reservation `res1` exists and was created previously. * CreateAssignment was used previously to define the following associations between entities and reservations: `` and `` In this example, ListAssignments will just return the above two assignments for reservation `res1`, and no expansion/merge will happen. The wildcard \"-\" can be used for reservations in the request. In that case all assignments belongs to the specified project and location will be listed. **Note** \"-\" cannot be used for projects nor locations.",
+      "summary_suggestion": "List reservation assignments",
+      "description_suggestion": "Lists all explicitly created assignments for a reservation. Returns only assignments that were directly created via CreateAssignment, without expansion or merging. Use the wildcard \"-\" for the reservation parameter to list all assignments in a project and location. The wildcard cannot be used for project or location parameters. Returns a list of assignment objects with pagination support.",
+      "reasoning": "Missing summary entirely. Description is overly complex with unclear examples and scattered information about wildcard behavior. Simplified to focus on core functionality, return value, and key constraints for better AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigqueryreservation.projects.locations.reservations.assignments.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary is missing entirely. Description is comprehensive but dense and difficult for AI agents to parse quickly. Improved summary provides clear action and context. Improved description reorganizes information hierarchically: purpose, key constraints, behavior, permissions, return value, and error conditions for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigqueryreservation.projects.locations.reservations.assignments.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates an assignment object which allows the given project to submit jobs of a certain type using slots from the specified reservation. Currently a resource (project, folder, organization) can only have one assignment per each (job_type, location) combination, and that reservation will be used for all jobs of the matching type. Different assignments can be created on different levels of the projects, folders or organization hierarchy. During query execution, the assignment is looked up at the project, folder and organization levels in that order. The first assignment found is applied to the query. When creating assignments, it does not matter if other assignments exist at higher levels. Example: * The organization `organizationA` contains two projects, `project1` and `project2`. * Assignments for all three entities (`organizationA`, `project1`, and `project2`) could all be created and mapped to the same or different reservations. \"None\" assignments represent an absence of the assignment. Projects assigned to None use on-demand pricing. To create a \"None\" assignment, use \"none\" as a reservation_id in the parent. Example parent: `projects/myproject/locations/US/reservations/none`. Returns `google.rpc.Code.PERMISSION_DENIED` if user does not have 'bigquery.admin' permissions on the project using the reservation and the project that owns this reservation. Returns `google.rpc.Code.INVALID_ARGUMENT` when location of the assignment does not match location of the reservation.",
+      "summary_suggestion": "Create assignment for reservation slot usage",
+      "description_suggestion": "Creates an assignment that allows a project, folder, or organization to submit BigQuery jobs of a specified type using slots from a designated reservation. Each resource can have one assignment per (job_type, location) combination. Assignments are evaluated hierarchically during query execution (project → folder → organization), with the first match applied. Supports \"None\" assignments for on-demand pricing. Requires 'bigquery.admin' permissions on both the project using the reservation and the project owning the reservation. Returns the created Assignment object. Fails with INVALID_ARGUMENT if assignment location does not match reservation location.",
+      "reasoning": "Original summary is missing entirely. Description is comprehensive but dense and difficult for AI agents to parse quickly. Improved summary provides clear action and context. Improved description reorganizes information hierarchically: purpose, key constraints, behavior, permissions, return value, and error conditions for better AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigqueryreservation.projects.locations.capacityCommitments.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Summary is missing. Description is too vague about scope and return format. Improved summary clarifies the action and scope. Improved description specifies location context, return type, and mentions pagination support for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5368,13 +5619,196 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists all the capacity commitments for the admin project.",
-      "summary_suggestion": "List all capacity commitments for a project",
-      "description_suggestion": "Lists all the capacity commitments for the specified project in the given location. Each capacity commitment represents a commitment to a specific amount of compute capacity for a certain period.",
-      "reasoning": "The current summary is missing, and the description could be more detailed. Adding a summary and expanding the description improves clarity and completeness.",
+      "summary_suggestion": "List capacity commitments in location",
+      "description_suggestion": "Lists all capacity commitments for the specified location within the admin project. Returns a paginated list of CapacityCommitment objects. Supports filtering and pagination through optional parameters.",
+      "reasoning": "Summary is missing. Description is too vague about scope and return format. Improved summary clarifies the action and scope. Improved description specifies location context, return type, and mentions pagination support for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigqueryreservation.projects.locations.capacityCommitments.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Summary is missing and description is too generic. Improved summary adds domain context (slots, commitment). Improved description clarifies what a capacity commitment is, what inputs are expected, and what is returned for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigqueryreservation.projects.locations.capacityCommitments.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new capacity commitment resource.",
+      "summary_suggestion": "Create capacity commitment for slots",
+      "description_suggestion": "Creates a new capacity commitment resource to purchase BigQuery slots with a committed usage period. Accepts a CapacityCommitment object specifying the plan type, slot capacity, and commitment duration. Returns the created CapacityCommitment object with assigned resource name and status.",
+      "reasoning": "Summary is missing and description is too generic. Improved summary adds domain context (slots, commitment). Improved description clarifies what a capacity commitment is, what inputs are expected, and what is returned for AI agent clarity.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigqueryreservation.projects.locations.capacityCommitments.merge' has semantic quality issues: vague_summary, missing_output_details. Summary is missing. Description lacks clarity on return value and input requirements. Improved summary clarifies the merge constraint. Improved description specifies input requirements, return value, and error conditions more clearly for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigqueryreservation.projects.locations.capacityCommitments.merge",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Merges capacity commitments of the same plan into a single commitment. The resulting capacity commitment has the greater commitment_end_time out of the to-be-merged capacity commitments. Attempting to merge capacity commitments of different plan will fail with the error code `google.rpc.Code.FAILED_PRECONDITION`.",
+      "summary_suggestion": "Merge capacity commitments with same plan",
+      "description_suggestion": "Merges multiple capacity commitments of the same plan into a single commitment. The resulting commitment retains the later commitment_end_time from the merged commitments. Requires all commitments to have the same plan type. Returns the merged CapacityCommitment object. Fails with FAILED_PRECONDITION if attempting to merge commitments with different plans.",
+      "reasoning": "Summary is missing. Description lacks clarity on return value and input requirements. Improved summary clarifies the merge constraint. Improved description specifies input requirements, return value, and error conditions more clearly for AI agent decision-making.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigqueryreservation.projects.locations.reservations.list' has semantic quality issues: vague_summary, missing_output_details. Summary is missing. Description lacks information about return format and pagination. Improved summary provides concise action. Improved description clarifies return type and pagination support for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigqueryreservation.projects.locations.reservations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all the reservations for the project in the specified location.",
+      "summary_suggestion": "List reservations in location",
+      "description_suggestion": "Lists all reservations for the project in the specified location. Returns a paginated list of Reservation objects. Supports filtering and pagination through optional parameters.",
+      "reasoning": "Summary is missing. Description lacks information about return format and pagination. Improved summary provides concise action. Improved description clarifies return type and pagination support for AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigqueryreservation.projects.locations.reservations.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Summary is missing and description is too generic. Improved summary adds domain context (slots, allocation). Improved description clarifies the purpose of a reservation, expected inputs, and return value for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigqueryreservation.projects.locations.reservations.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new reservation resource.",
+      "summary_suggestion": "Create reservation for slot allocation",
+      "description_suggestion": "Creates a new reservation resource to guarantee BigQuery slots for users. Accepts a Reservation object specifying the slot capacity and other configuration. Returns the created Reservation object with assigned resource name and status.",
+      "reasoning": "Summary is missing and description is too generic. Improved summary adds domain context (slots, allocation). Improved description clarifies the purpose of a reservation, expected inputs, and return value for better AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigqueryreservation.projects.locations.searchAllAssignments' has semantic quality issues: vague_summary, missing_output_details. Summary is missing. Description is comprehensive but difficult for AI agents to parse due to dense formatting and comparison to another operation. Improved summary clarifies the search scope. Improved description reorganizes information for clarity: purpose, hierarchy logic, return value, and key differences for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigqueryreservation.projects.locations.searchAllAssignments",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Looks up assignments for a specified resource for a particular region. If the request is about a project: 1. Assignments created on the project will be returned if they exist. 2. Otherwise assignments created on the closest ancestor will be returned. 3. Assignments for different JobTypes will all be returned. The same logic applies if the request is about a folder. If the request is about an organization, then assignments created on the organization will be returned (organization doesn't have ancestors). Comparing to ListAssignments, there are some behavior differences: 1. permission on the assignee will be verified in this API. 2. Hierarchy lookup (project->folder->organization) happens in this API. 3. Parent here is `projects/*/locations/*`, instead of `projects/*/locations/*reservations/*`.",
+      "summary_suggestion": "Search assignments across resource hierarchy",
+      "description_suggestion": "Searches for assignments applicable to a specified resource (project, folder, or organization) in a particular location. Uses hierarchical lookup: for projects/folders, searches the resource then ancestors (folder → organization); for organizations, returns only organization-level assignments. Returns all assignments regardless of job type. Verifies permissions on the assignee. Returns a paginated list of Assignment objects. Differs from ListAssignments in hierarchy traversal and permission verification.",
+      "reasoning": "Summary is missing. Description is comprehensive but difficult for AI agents to parse due to dense formatting and comparison to another operation. Improved summary clarifies the search scope. Improved description reorganizes information for clarity: purpose, hierarchy logic, return value, and key differences for better AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -5389,7 +5823,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 15 operations analyzed, 3 quality issues found",
+    "message": "Semantic analysis completed: 15 operations analyzed, 15 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -5401,7 +5835,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 15,
-      "total_issues_found": 3,
+      "total_issues_found": 15,
       "batches_processed": 3
     }
   }

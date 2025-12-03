@@ -2797,7 +2797,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'safebrowsing.encodedFullHashes.get' has semantic quality issues: vague_summary, vague_description, missing_input_details. The original summary and description were missing. The suggestion provides a clear and concise summary and description, including the required input and output.",
+    "message": "Operation 'safebrowsing.encodedFullHashes.get' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, poor_ai_interpretability. Operation has no summary or description, making it impossible for AI agents to understand its purpose. Added context about encoding format (Rice-Golomb), the matching operation, and use case for client-side threat detection.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2813,13 +2813,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Retrieve encoded full hashes",
-      "description_suggestion": "Retrieves the encoded full hashes that match the provided encoded request. Requires an encoded request parameter. Returns the encoded full hashes.",
-      "reasoning": "The original summary and description were missing. The suggestion provides a clear and concise summary and description, including the required input and output.",
+      "summary_suggestion": "Retrieve full hashes from encoded request",
+      "description_suggestion": "Retrieves the full hashes that match the provided encoded hash prefix request. This operation accepts a Rice-Golomb encoded request containing hash prefixes and returns the corresponding full hashes from Safe Browsing threat lists. Used for efficient hash matching in client applications. Requires proper encoding of the request parameter.",
+      "reasoning": "Operation has no summary or description, making it impossible for AI agents to understand its purpose. Added context about encoding format (Rice-Golomb), the matching operation, and use case for client-side threat detection.",
       "batch_index": 0
     }
   },
@@ -2834,7 +2837,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'safebrowsing.encodedUpdates.get' has semantic quality issues: vague_summary, vague_description, missing_input_details. The original summary and description were missing. The suggestion provides a clear and concise summary and description, including the required input and output.",
+    "message": "Operation 'safebrowsing.encodedUpdates.get' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, poor_ai_interpretability. Operation lacks any summary or description. Added explanation of encoding format, the update retrieval purpose, and how clients use the response for local database maintenance.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2850,13 +2853,200 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Get encoded updates",
-      "description_suggestion": "Retrieves the encoded updates that match the provided encoded request. Requires an encoded request parameter. Returns the encoded updates.",
-      "reasoning": "The original summary and description were missing. The suggestion provides a clear and concise summary and description, including the required input and output.",
+      "summary_suggestion": "Retrieve encoded threat list updates",
+      "description_suggestion": "Retrieves the most recent threat list updates in Rice-Golomb encoded format. This operation accepts an encoded request containing client state and threat list preferences, returning compressed updates that clients can apply to their local threat databases. Enables efficient bandwidth usage for threat list synchronization.",
+      "reasoning": "Operation lacks any summary or description. Added explanation of encoding format, the update retrieval purpose, and how clients use the response for local database maintenance.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'safebrowsing.fullHashes.find' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Summary is missing entirely. Description is too brief and lacks input/output details. Enhanced to explain request structure, response contents (cache durations), and the operation's role in the threat detection workflow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "safebrowsing.fullHashes.find",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Finds the full hashes that match the requested hash prefixes.",
+      "summary_suggestion": "Find full hashes matching provided prefixes",
+      "description_suggestion": "Finds the full hashes that match the requested hash prefixes. Accepts a FindFullHashesRequest containing hash prefixes and client metadata, returning matching full hashes from Safe Browsing threat lists along with cache duration and negative cache duration. Used to verify suspected threats after prefix matching.",
+      "reasoning": "Summary is missing entirely. Description is too brief and lacks input/output details. Enhanced to explain request structure, response contents (cache durations), and the operation's role in the threat detection workflow.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'safebrowsing.threatHits.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Summary is missing. Description lacks input/output details and context about the threat hit structure. Enhanced to clarify what information is submitted, the visibility requirement, response format, and the operation's role in improving threat detection.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "safebrowsing.threatHits.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Reports a Safe Browsing threat list hit to Google. Only projects with TRUSTED_REPORTER visibility can use this method.",
+      "summary_suggestion": "Report detected threat to Safe Browsing",
+      "description_suggestion": "Reports a Safe Browsing threat list hit to Google for analysis and list updates. Accepts a ThreatHit object containing details about the detected threat, client information, and user action. Only projects with TRUSTED_REPORTER visibility can use this method. Returns an empty response on successful submission. Used to improve threat detection accuracy.",
+      "reasoning": "Summary is missing. Description lacks input/output details and context about the threat hit structure. Enhanced to clarify what information is submitted, the visibility requirement, response format, and the operation's role in improving threat detection.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'safebrowsing.threatListUpdates.fetch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Summary is missing. Description mentions multi-list support but lacks details about request structure, response format, and cache management. Enhanced to clarify the synchronization purpose, request/response schemas, and how clients use cache duration.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "safebrowsing.threatListUpdates.fetch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Fetches the most recent threat list updates. A client can request updates for multiple lists at once.",
+      "summary_suggestion": "Fetch latest threat list updates",
+      "description_suggestion": "Fetches the most recent threat list updates for client-side threat database synchronization. Accepts a FetchThreatListUpdatesRequest containing client state and list preferences, allowing clients to request updates for multiple threat lists simultaneously. Returns threat list updates with additions/removals and cache duration information for each list.",
+      "reasoning": "Summary is missing. Description mentions multi-list support but lacks details about request structure, response format, and cache management. Enhanced to clarify the synchronization purpose, request/response schemas, and how clients use cache duration.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'safebrowsing.threatLists.list' has semantic quality issues: vague_summary, missing_output_details. Summary is missing. Description is incomplete regarding response structure and use case. Enhanced to explain the response format and how clients use this information for threat list discovery and management.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "safebrowsing.threatLists.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the Safe Browsing threat lists available for download.",
+      "summary_suggestion": "List available Safe Browsing threat lists",
+      "description_suggestion": "Lists all Safe Browsing threat lists available for download and synchronization. Returns a ListThreatListsResponse containing metadata for each available threat list, including list name, threat type, and platform information. Used by clients to discover which threat lists they should monitor and maintain locally.",
+      "reasoning": "Summary is missing. Description is incomplete regarding response structure and use case. Enhanced to explain the response format and how clients use this information for threat list discovery and management.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'safebrowsing.threatMatches.find' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Summary is missing. Description is vague about input/output. Enhanced to clarify the request structure (threat types supported), response format (ThreatMatch objects with metadata), and the operation's primary role in threat checking workflows.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "safebrowsing.threatMatches.find",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Finds the threat entries that match the Safe Browsing lists.",
+      "summary_suggestion": "Find threat matches in Safe Browsing lists",
+      "description_suggestion": "Finds threat entries that match the Safe Browsing threat lists. Accepts a FindThreatMatchesRequest containing threat information (URLs, hashes, etc.) and client metadata, returning ThreatMatch objects for any entries found in the threat lists. Provides threat type, platform, and cache duration for each match. Primary operation for checking resources against Safe Browsing lists.",
+      "reasoning": "Summary is missing. Description is vague about input/output. Enhanced to clarify the request structure (threat types supported), response format (ThreatMatch objects with metadata), and the operation's primary role in threat checking workflows.",
       "batch_index": 0
     }
   },
@@ -2871,7 +3061,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 7 operations analyzed, 2 quality issues found",
+    "message": "Semantic analysis completed: 7 operations analyzed, 7 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -2883,7 +3073,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 7,
-      "total_issues_found": 2,
+      "total_issues_found": 7,
       "batches_processed": 1
     }
   }

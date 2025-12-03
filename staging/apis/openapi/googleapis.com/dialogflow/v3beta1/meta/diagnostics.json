@@ -40899,7 +40899,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.sessions.submitAnswerFeedback' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing, and the description lacks details about the input parameters and the response schema.",
+    "message": "Operation 'dialogflow.projects.locations.agents.sessions.submitAnswerFeedback' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Original description lacks critical details for AI agent interpretation. Missing: (1) empty summary makes operation discovery difficult, (2) no explanation of what feedback data is expected or how it's used, (3) no indication of return value or confirmation, (4) no mention of side effects on session state or downstream processes. Improved version clarifies the operation's purpose in the conversational context, explains the input (user feedback), output (confirmation), and important side effects (metrics updates, potential retraining), enabling AI agents to understand when and why to invoke this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -40914,13 +40914,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Updates the feedback received from the user for a single turn of the bot response.",
-      "summary_suggestion": "Submit user feedback for a bot response.",
-      "description_suggestion": "Updates the feedback received from the user for a single turn of the bot response. Accepts a GoogleCloudDialogflowCxV3beta1SubmitAnswerFeedbackRequest object as input. Returns a response indicating the success of the feedback submission.",
-      "reasoning": "The current summary is missing, and the description lacks details about the input parameters and the response schema.",
+      "summary_suggestion": "Submit user feedback for bot response turn",
+      "description_suggestion": "Records user feedback for a specific bot response turn within a conversation session. Accepts feedback data indicating user satisfaction or dissatisfaction with the bot's answer. This feedback is used to improve agent performance and training. Returns confirmation of the feedback submission. Side effects: Updates session feedback metrics and may trigger model retraining pipelines if feedback thresholds are met.",
+      "reasoning": "Original description lacks critical details for AI agent interpretation. Missing: (1) empty summary makes operation discovery difficult, (2) no explanation of what feedback data is expected or how it's used, (3) no indication of return value or confirmation, (4) no mention of side effects on session state or downstream processes. Improved version clarifies the operation's purpose in the conversational context, explains the input (user feedback), output (confirmation), and important side effects (metrics updates, potential retraining), enabling AI agents to understand when and why to invoke this operation.",
       "batch_index": 10
     }
   },
@@ -40935,43 +40938,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.securitySettings.create' has semantic quality issues: vague_summary, missing_output_details. The original summary was missing and the description lacked details about the output. Both have been improved for clarity and completeness.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "dialogflow.projects.locations.securitySettings.create",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "Create security settings in the specified location.",
-      "summary_suggestion": "Create security settings in the specified location.",
-      "description_suggestion": "Creates security settings in the specified location. Requires authentication. Returns the created security settings object.",
-      "reasoning": "The original summary was missing and the description lacked details about the output. Both have been improved for clarity and completeness.",
-      "batch_index": 7
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'dialogflow.projects.locations.agents.entityTypes.import' has semantic quality issues: vague_summary, missing_context. The current summary is missing. Added a concise summary and expanded the description to include the authentication requirement and return value.",
+    "message": "Operation 'dialogflow.projects.locations.agents.entityTypes.import' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description lacks context about batch processing, operation type (long-running), return value, and behavior with duplicate names. Added these details for AI agent clarity on what to expect and when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -40986,13 +40953,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Imports the specified entitytypes into the agent.",
-      "summary_suggestion": "Import entity types into the agent.",
-      "description_suggestion": "Imports the specified entity types into the specified agent. Requires authentication. Returns the imported entity types.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include the authentication requirement and return value.",
+      "summary_suggestion": "Import entity types into agent",
+      "description_suggestion": "Imports the specified entity types into the agent. This operation accepts a batch of entity types and adds them to the agent's entity type collection. Returns a long-running operation that completes when all entity types have been imported. Existing entity types with the same names will be overwritten.",
+      "reasoning": "Missing summary entirely. Description lacks context about batch processing, operation type (long-running), return value, and behavior with duplicate names. Added these details for AI agent clarity on what to expect and when to use this operation.",
       "batch_index": 4
     }
   },
@@ -41007,7 +40975,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.environments.list' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary to improve clarity.",
+    "message": "Operation 'dialogflow.projects.locations.agents.environments.list' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description is basic but lacks information about pagination support and filtering capabilities that are indicated by the 3+ parameters. Added context about pagination and parameter usage for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -41021,12 +40989,14 @@
       "operation_id": "dialogflow.projects.locations.agents.environments.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Returns the list of all environments in the specified Agent.",
-      "summary_suggestion": "List all environments in the agent.",
-      "reasoning": "The current summary is missing. Added a concise summary to improve clarity.",
+      "summary_suggestion": "List all agent environments",
+      "description_suggestion": "Returns a paginated list of all environments in the specified agent. Supports filtering and sorting via query parameters. Each environment represents a deployment target for agent versions.",
+      "reasoning": "Missing summary. Description is basic but lacks information about pagination support and filtering capabilities that are indicated by the 3+ parameters. Added context about pagination and parameter usage for better AI agent understanding.",
       "batch_index": 4
     }
   },
@@ -41041,7 +41011,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.playbooks.examples.list' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary to improve clarity.",
+    "message": "Operation 'dialogflow.projects.locations.agents.playbooks.examples.list' has semantic quality issues: vague_summary, missing_context, missing_input_details. Missing summary. Description is minimal and lacks context about what examples are (sample executions), their purpose (training/validation), and pagination/filtering capabilities indicated by 4 parameters. Enhanced with domain context and parameter information.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -41055,12 +41025,15 @@
       "operation_id": "dialogflow.projects.locations.agents.playbooks.examples.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Returns a list of examples in the specified playbook.",
-      "summary_suggestion": "List examples in the specified playbook.",
-      "reasoning": "The current summary is missing. Added a concise summary to improve clarity.",
+      "summary_suggestion": "List playbook examples",
+      "description_suggestion": "Returns a paginated list of examples in the specified playbook. Examples represent sample executions of playbook actions and are used for training and validation. Supports filtering and sorting via query parameters.",
+      "reasoning": "Missing summary. Description is minimal and lacks context about what examples are (sample executions), their purpose (training/validation), and pagination/filtering capabilities indicated by 4 parameters. Enhanced with domain context and parameter information.",
       "batch_index": 4
     }
   },
@@ -41075,7 +41048,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.playbooks.examples.create' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary to improve clarity.",
+    "message": "Operation 'dialogflow.projects.locations.agents.playbooks.examples.create' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks context about what examples represent, their purpose, and what is returned. Added domain context about examples being sample executions and clarified the return value for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -41089,12 +41062,15 @@
       "operation_id": "dialogflow.projects.locations.agents.playbooks.examples.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Creates an example in the specified playbook.",
-      "summary_suggestion": "Create an example in the specified playbook.",
-      "reasoning": "The current summary is missing. Added a concise summary to improve clarity.",
+      "summary_suggestion": "Create playbook example",
+      "description_suggestion": "Creates a new example in the specified playbook. The example represents a sample execution of playbook actions and is used for training and validation purposes. Returns the created Example resource with a system-generated unique identifier.",
+      "reasoning": "Missing summary. Description lacks context about what examples represent, their purpose, and what is returned. Added domain context about examples being sample executions and clarified the return value for AI agent understanding.",
       "batch_index": 4
     }
   },
@@ -41109,7 +41085,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.environments.experiments.list' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary to improve clarity.",
+    "message": "Operation 'dialogflow.projects.locations.agents.environments.experiments.list' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description lacks context about pagination and filtering capabilities (indicated by 3+ parameters) and what experiments are used for. Added these details for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -41123,12 +41099,14 @@
       "operation_id": "dialogflow.projects.locations.agents.environments.experiments.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Returns the list of all experiments in the specified Environment.",
-      "summary_suggestion": "List all experiments in the specified environment.",
-      "reasoning": "The current summary is missing. Added a concise summary to improve clarity.",
+      "summary_suggestion": "List environment experiments",
+      "description_suggestion": "Returns a paginated list of all experiments in the specified environment. Experiments are used to test and validate agent behavior changes. Supports filtering and sorting via query parameters.",
+      "reasoning": "Missing summary. Description lacks context about pagination and filtering capabilities (indicated by 3+ parameters) and what experiments are used for. Added these details for better AI agent interpretability.",
       "batch_index": 4
     }
   },
@@ -41143,7 +41121,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.environments.experiments.create' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary to improve clarity.",
+    "message": "Operation 'dialogflow.projects.locations.agents.environments.experiments.create' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks context about experiment purpose, return value, and initial state. Added domain context about experiments being used for testing/validation and clarified the return value for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -41157,12 +41135,15 @@
       "operation_id": "dialogflow.projects.locations.agents.environments.experiments.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Creates an Experiment in the specified Environment.",
-      "summary_suggestion": "Create an experiment in the specified environment.",
-      "reasoning": "The current summary is missing. Added a concise summary to improve clarity.",
+      "summary_suggestion": "Create environment experiment",
+      "description_suggestion": "Creates a new experiment in the specified environment. Experiments allow testing and validating agent behavior changes in isolation before deploying to production. Returns the created Experiment resource with a system-generated unique identifier and initial status.",
+      "reasoning": "Missing summary. Description lacks context about experiment purpose, return value, and initial state. Added domain context about experiments being used for testing/validation and clarified the return value for AI agent understanding.",
       "batch_index": 4
     }
   },
@@ -41177,7 +41158,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.testCases.calculateCoverage' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. Added a specific summary and detailed description to clarify the operation's purpose and expected inputs/outputs.",
+    "message": "Operation 'dialogflow.projects.locations.agents.testCases.import' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description is detailed but could be more structured for AI agent clarity. Added explicit mention of what is required (parent agent path, import source) and clarified the non-destructive nature of the operation for better agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -41188,18 +41169,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "dialogflow.projects.locations.agents.testCases.calculateCoverage",
+      "operation_id": "dialogflow.projects.locations.agents.testCases.import",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Calculates the test coverage for an agent.",
-      "summary_suggestion": "Calculate test coverage for an agent",
-      "description_suggestion": "Calculates the test coverage for the specified agent. This includes metrics such as the number of test cases executed, passed, and failed. Requires authentication and returns a coverage report object.",
-      "reasoning": "The current summary and description are vague. Added a specific summary and detailed description to clarify the operation's purpose and expected inputs/outputs.",
-      "batch_index": 0
+      "current_description": "Imports the test cases from a Cloud Storage bucket or a local file. It always creates new test cases and won't overwrite any existing ones. The provided ID in the imported test case is neglected. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: ImportTestCasesMetadata - `response`: ImportTestCasesResponse",
+      "summary_suggestion": "Import test cases from Cloud Storage or local file",
+      "description_suggestion": "Imports test cases from a Cloud Storage bucket or local file into the specified agent. Creates new test cases without overwriting existing ones; provided test case IDs are ignored. This is a long-running operation that returns an Operation object with metadata (ImportTestCasesMetadata) and response (ImportTestCasesResponse). Requires the parent agent resource path and import source configuration.",
+      "reasoning": "Missing summary entirely. Description is detailed but could be more structured for AI agent clarity. Added explicit mention of what is required (parent agent path, import source) and clarified the non-destructive nature of the operation for better agent decision-making.",
+      "batch_index": 8
     }
   },
   {
@@ -41213,7 +41195,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.flows.versions.compareVersions' has semantic quality issues: vague_summary, missing_input_details. The current summary and description are vague. Added a specific summary and detailed description to clarify the operation's purpose and required inputs.",
+    "message": "Operation 'dialogflow.projects.locations.agents.tools.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is minimal and lacks context about what Tools are and pagination support. Enhanced with domain context about Tools' role in Playbooks and pagination capabilities for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -41224,18 +41206,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "dialogflow.projects.locations.agents.flows.versions.compareVersions",
+      "operation_id": "dialogflow.projects.locations.agents.tools.list",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Compares the specified base version with target version.",
-      "summary_suggestion": "Compare specified base version with target version",
-      "description_suggestion": "Compares the specified base version with the target version of a flow. Requires authentication and a request body containing the target version. Returns a comparison report detailing differences between versions.",
-      "reasoning": "The current summary and description are vague. Added a specific summary and detailed description to clarify the operation's purpose and required inputs.",
-      "batch_index": 0
+      "current_description": "Returns a list of Tools in the specified agent.",
+      "summary_suggestion": "List all tools in the agent",
+      "description_suggestion": "Returns a paginated list of all Tools available in the specified agent. Tools provide actions that Playbooks can use to attain their goals. Supports filtering and pagination parameters to control the results returned.",
+      "reasoning": "Missing summary. Description is minimal and lacks context about what Tools are and pagination support. Enhanced with domain context about Tools' role in Playbooks and pagination capabilities for better AI agent understanding.",
+      "batch_index": 8
     }
   },
   {
@@ -41249,7 +41231,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.tools.patch' has semantic quality issues: vague_summary. The current description is clear and complete. Added a concise summary to improve readability.",
+    "message": "Operation 'dialogflow.projects.locations.agents.tools.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks input requirements and return value details. Added context about Tool purpose, required inputs (parent path and Tool configuration), and what is returned to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -41260,16 +41242,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "dialogflow.projects.locations.agents.tools.patch",
+      "operation_id": "dialogflow.projects.locations.agents.tools.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Update the specified Tool.",
-      "summary_suggestion": "Update the specified tool",
-      "reasoning": "The current description is clear and complete. Added a concise summary to improve readability.",
-      "batch_index": 0
+      "current_description": "Creates a Tool in the specified agent.",
+      "summary_suggestion": "Create a new tool in the agent",
+      "description_suggestion": "Creates a new Tool in the specified agent. A Tool provides a list of actions available to Playbooks to attain their goals. Requires the parent agent resource path and Tool configuration including description and action definitions. Returns the created Tool resource with a system-generated name.",
+      "reasoning": "Missing summary. Description lacks input requirements and return value details. Added context about Tool purpose, required inputs (parent path and Tool configuration), and what is returned to improve AI agent interpretability.",
+      "batch_index": 8
     }
   },
   {
@@ -41283,7 +41268,154 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.flows.list' has semantic quality issues: vague_summary. The current summary is missing, making it unclear for an AI agent. A suggested summary is provided.",
+    "message": "Operation 'dialogflow.projects.locations.agents.tools.export' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Missing summary and vague description. Original doesn't specify export destination, what inputs are needed, or what is returned. Enhanced with details about Cloud Storage destination, required parameters, and return value for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.tools.export",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Exports the selected tools.",
+      "summary_suggestion": "Export tools to Cloud Storage",
+      "description_suggestion": "Exports the specified tools from the agent to a Cloud Storage destination. Requires the parent agent resource path and export configuration specifying which tools to export and the target Cloud Storage location. Returns an Operation object containing the export result with the Cloud Storage URI of the exported tools.",
+      "reasoning": "Missing summary and vague description. Original doesn't specify export destination, what inputs are needed, or what is returned. Enhanced with details about Cloud Storage destination, required parameters, and return value for better AI agent decision-making.",
+      "batch_index": 8
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.transitionRouteGroups.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is basic and lacks context about what TransitionRouteGroups are and pagination support. Added domain context about their reusable nature and pagination capabilities for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.transitionRouteGroups.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns the list of all transition route groups in the specified flow.",
+      "summary_suggestion": "List transition route groups in flow",
+      "description_suggestion": "Returns a paginated list of all TransitionRouteGroups in the specified flow. TransitionRouteGroups define reusable sets of transition routes that can be referenced across multiple pages. Supports filtering and pagination parameters to control the results returned.",
+      "reasoning": "Missing summary. Description is basic and lacks context about what TransitionRouteGroups are and pagination support. Added domain context about their reusable nature and pagination capabilities for better AI agent understanding.",
+      "batch_index": 8
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.transitionRouteGroups.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description mentions training requirement but lacks input/output details. Enhanced with explicit input requirements (parent path, configuration), return value, and clarified the training requirement's timing for better AI agent guidance.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.transitionRouteGroups.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates an TransitionRouteGroup in the specified flow. Note: You should always train a flow prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).",
+      "summary_suggestion": "Create a transition route group in flow",
+      "description_suggestion": "Creates a new TransitionRouteGroup in the specified flow. A TransitionRouteGroup defines a reusable set of transition routes that can be referenced across multiple pages. Requires the parent flow resource path and TransitionRouteGroup configuration including transition route definitions. Returns the created TransitionRouteGroup resource. Note: Train the flow after creating or modifying transition route groups before sending queries.",
+      "reasoning": "Missing summary. Description mentions training requirement but lacks input/output details. Enhanced with explicit input requirements (parent path, configuration), return value, and clarified the training requirement's timing for better AI agent guidance.",
+      "batch_index": 8
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.tools.versions.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is minimal and lacks context about what versions represent and pagination support. Enhanced with domain context about versions being configuration snapshots and pagination capabilities for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.tools.versions.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "List versions of the specified Tool.",
+      "summary_suggestion": "List all versions of a tool",
+      "description_suggestion": "Returns a paginated list of all versions of the specified Tool. Each version represents a snapshot of the Tool's configuration at a point in time. Supports filtering and pagination parameters to control the results returned.",
+      "reasoning": "Missing summary. Description is minimal and lacks context about what versions represent and pagination support. Enhanced with domain context about versions being configuration snapshots and pagination capabilities for better AI agent understanding.",
+      "batch_index": 8
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.flows.list' has semantic quality issues: vague_summary, missing_input_details. Missing summary entirely. Description lacks context about pagination support, filtering capabilities, and what flows represent in the Dialogflow domain. Added domain terminology and parameter context for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -41297,12 +41429,14 @@
       "operation_id": "dialogflow.projects.locations.agents.flows.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Returns the list of all flows in the specified agent.",
-      "summary_suggestion": "List all flows in the specified agent.",
-      "reasoning": "The current summary is missing, making it unclear for an AI agent. A suggested summary is provided.",
+      "summary_suggestion": "List all flows in an agent",
+      "description_suggestion": "Retrieves a paginated list of all flows configured in the specified agent. Flows represent conversation flows that define how the agent handles user interactions. Requires the parent agent resource name. Supports filtering and pagination parameters.",
+      "reasoning": "Missing summary entirely. Description lacks context about pagination support, filtering capabilities, and what flows represent in the Dialogflow domain. Added domain terminology and parameter context for better AI agent understanding.",
       "batch_index": 5
     }
   },
@@ -41317,7 +41451,80 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.generators.list' has semantic quality issues: vague_summary. The current summary is missing, making it unclear for an AI agent. A suggested summary is provided.",
+    "message": "Operation 'dialogflow.projects.locations.agents.flows.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description mentions training requirement but lacks clarity on inputs (request schema), outputs (response structure), and what flows accomplish. Enhanced with schema references and explicit mention of return value for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.flows.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a flow in the specified agent. Note: You should always train a flow prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).",
+      "summary_suggestion": "Create a new flow in agent",
+      "description_suggestion": "Creates a new flow in the specified agent. Flows define conversation paths and state transitions for handling user interactions. Accepts a GoogleCloudDialogflowCxV3beta1Flow object with flow configuration. Returns the created flow resource with assigned resource name. Important: The created flow must be trained before it can process user queries. See training documentation for details.",
+      "reasoning": "Missing summary. Description mentions training requirement but lacks clarity on inputs (request schema), outputs (response structure), and what flows accomplish. Enhanced with schema references and explicit mention of return value for AI agent clarity.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.flows.import' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description is verbose and unclear about input requirements. Reorganized to clarify: operation type (long-running), input schema (ImportFlowRequest), output structure (Operation with ImportFlowResponse), and post-import training requirement. Better structured for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.flows.import",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Imports the specified flow to the specified agent from a binary file. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: ImportFlowResponse Note: You should always train a flow prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).",
+      "summary_suggestion": "Import flow from binary file",
+      "description_suggestion": "Imports a flow configuration from a binary file into the specified agent. This is a long-running operation that returns a GoogleLongrunningOperation. The operation metadata is an empty Struct, and the response contains an ImportFlowResponse with the imported flow details. Accepts ImportFlowRequest specifying the binary file content and import options. After import completes, the flow must be trained before processing queries.",
+      "reasoning": "Missing summary. Description is verbose and unclear about input requirements. Reorganized to clarify: operation type (long-running), input schema (ImportFlowRequest), output structure (Operation with ImportFlowResponse), and post-import training requirement. Better structured for AI agent decision-making.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.generators.list' has semantic quality issues: vague_summary, missing_context, missing_input_details. Missing summary. Description lacks domain context about what generators are and their purpose. Added explanation of generators as tools for fulfillments, and noted pagination/filtering support for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -41331,12 +41538,15 @@
       "operation_id": "dialogflow.projects.locations.agents.generators.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Returns the list of all generators in the specified agent.",
-      "summary_suggestion": "List all generators in the specified agent.",
-      "reasoning": "The current summary is missing, making it unclear for an AI agent. A suggested summary is provided.",
+      "summary_suggestion": "List all generators in agent",
+      "description_suggestion": "Retrieves a paginated list of all generators configured in the specified agent. Generators are tools that provide reusable actions and capabilities for fulfillments. Requires the parent agent resource name. Supports filtering and pagination parameters.",
+      "reasoning": "Missing summary. Description lacks domain context about what generators are and their purpose. Added explanation of generators as tools for fulfillments, and noted pagination/filtering support for better AI agent understanding.",
       "batch_index": 5
     }
   },
@@ -41351,7 +41561,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.intents.list' has semantic quality issues: vague_summary. The current summary is missing, making it unclear for an AI agent. A suggested summary is provided.",
+    "message": "Operation 'dialogflow.projects.locations.agents.generators.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is minimal and lacks input/output details and domain context. Enhanced with explanation of generator purpose, request schema reference, and return value for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.generators.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a generator in the specified agent.",
+      "summary_suggestion": "Create a new generator in agent",
+      "description_suggestion": "Creates a new generator in the specified agent. Generators provide reusable actions and capabilities that can be invoked during fulfillments. Accepts a GoogleCloudDialogflowCxV3beta1Generator object with generator configuration including name, description, and action definitions. Returns the created generator resource with assigned resource name.",
+      "reasoning": "Missing summary. Description is minimal and lacks input/output details and domain context. Enhanced with explanation of generator purpose, request schema reference, and return value for AI agent clarity.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.intents.list' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description lacks domain context about intent purpose and pagination/filtering capabilities. Added explanation of intents as user goals/actions and noted parameter support for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -41365,12 +41612,14 @@
       "operation_id": "dialogflow.projects.locations.agents.intents.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Returns the list of all intents in the specified agent.",
-      "summary_suggestion": "List all intents in the specified agent.",
-      "reasoning": "The current summary is missing, making it unclear for an AI agent. A suggested summary is provided.",
+      "summary_suggestion": "List all intents in agent",
+      "description_suggestion": "Retrieves a paginated list of all intents configured in the specified agent. Intents represent user goals or actions that the agent can recognize and respond to. Requires the parent agent resource name. Supports filtering and pagination parameters.",
+      "reasoning": "Missing summary. Description lacks domain context about intent purpose and pagination/filtering capabilities. Added explanation of intents as user goals/actions and noted parameter support for better AI agent understanding.",
       "batch_index": 5
     }
   },
@@ -41385,7 +41634,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.intents.export' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestions provide a clear action-oriented summary and a more detailed description that includes the method-specific fields of the `Operation` type.",
+    "message": "Operation 'dialogflow.projects.locations.agents.intents.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description mentions training but lacks clarity on inputs (request schema), outputs (response structure), and intent purpose. Enhanced with domain context about intents, schema references, and explicit return value for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -41396,18 +41645,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "dialogflow.projects.locations.agents.intents.export",
+      "operation_id": "dialogflow.projects.locations.agents.intents.create",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Exports the selected intents. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: ExportIntentsMetadata - `response`: ExportIntentsResponse",
-      "summary_suggestion": "Export the specified intents from the agent",
-      "description_suggestion": "Exports the specified intents from the agent. This method is a long-running operation that returns an `Operation` type with method-specific fields: `metadata` of type `ExportIntentsMetadata` and `response` of type `ExportIntentsResponse`.",
-      "reasoning": "The current summary and description are vague. The suggestions provide a clear action-oriented summary and a more detailed description that includes the method-specific fields of the `Operation` type.",
-      "batch_index": 6
+      "current_description": "Creates an intent in the specified agent. Note: You should always train a flow prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).",
+      "summary_suggestion": "Create a new intent in agent",
+      "description_suggestion": "Creates a new intent in the specified agent. Intents represent user goals or actions that the agent can recognize and respond to. Accepts a GoogleCloudDialogflowCxV3beta1Intent object with intent configuration including display name and training phrases. Returns the created intent resource with assigned resource name. Important: Containing flows must be trained before the intent can be used to process queries.",
+      "reasoning": "Missing summary. Description mentions training but lacks clarity on inputs (request schema), outputs (response structure), and intent purpose. Enhanced with domain context about intents, schema references, and explicit return value for AI agent clarity.",
+      "batch_index": 5
     }
   },
   {
@@ -41421,398 +41671,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.intents.import' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestions provide a clear action-oriented summary and a more detailed description that includes the method-specific fields of the `Operation` type.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "dialogflow.projects.locations.agents.intents.import",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description"
-      ],
-      "current_summary": "",
-      "current_description": "Imports the specified intents into the agent. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: ImportIntentsMetadata - `response`: ImportIntentsResponse",
-      "summary_suggestion": "Import the specified intents into the agent",
-      "description_suggestion": "Imports the specified intents into the agent. This method is a long-running operation that returns an `Operation` type with method-specific fields: `metadata` of type `ImportIntentsMetadata` and `response` of type `ImportIntentsResponse`.",
-      "reasoning": "The current summary and description are vague. The suggestions provide a clear action-oriented summary and a more detailed description that includes the method-specific fields of the `Operation` type.",
-      "batch_index": 6
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'dialogflow.projects.locations.agents.flows.pages.list' has semantic quality issues: vague_summary. The current summary is missing. The suggestion provides a clear action-oriented summary.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "dialogflow.projects.locations.agents.flows.pages.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Returns the list of all pages in the specified flow.",
-      "summary_suggestion": "List all pages in the specified flow",
-      "reasoning": "The current summary is missing. The suggestion provides a clear action-oriented summary.",
-      "batch_index": 6
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'dialogflow.projects.locations.agents.playbooks.list' has semantic quality issues: vague_summary. The current summary is missing. The suggestion provides a clear action-oriented summary.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "dialogflow.projects.locations.agents.playbooks.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Returns a list of playbooks in the specified agent.",
-      "summary_suggestion": "List all playbooks in the specified agent",
-      "reasoning": "The current summary is missing. The suggestion provides a clear action-oriented summary.",
-      "batch_index": 6
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'dialogflow.projects.locations.agents.testCases.results.list' has semantic quality issues: vague_summary. The current summary is missing. The suggestion provides a clear action-oriented summary.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "dialogflow.projects.locations.agents.testCases.results.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Fetches the list of run results for the given test case. A maximum of 100 results are kept for each test case.",
-      "summary_suggestion": "List run results for the specified test case",
-      "reasoning": "The current summary is missing. The suggestion provides a clear action-oriented summary.",
-      "batch_index": 6
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'dialogflow.projects.locations.agents.changelogs.list' has semantic quality issues: vague_summary, missing_context, missing_input_details. The current summary and description are vague and lack details about the input parameters and context. The suggestions provide clarity and context for AI agent interpretability.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "dialogflow.projects.locations.agents.changelogs.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_context",
-        "missing_input_details"
-      ],
-      "current_summary": "",
-      "current_description": "Returns the list of Changelogs.",
-      "summary_suggestion": "List all changelogs for a specified agent",
-      "description_suggestion": "Returns the list of Changelogs for the specified agent. Requires a parent resource path. Input parameters include page size and page token for pagination. Returns a list of Changelogs.",
-      "reasoning": "The current summary and description are vague and lack details about the input parameters and context. The suggestions provide clarity and context for AI agent interpretability.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'dialogflow.projects.locations.agents.environments.continuousTestResults.list' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing, and the description lacks details about the input parameters. The suggestions provide clarity and context for AI agent interpretability.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "dialogflow.projects.locations.agents.environments.continuousTestResults.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_input_details"
-      ],
-      "current_summary": "",
-      "current_description": "Fetches a list of continuous test results for a given environment.",
-      "summary_suggestion": "List continuous test results for a specified environment",
-      "description_suggestion": "Fetches a list of continuous test results for the specified environment. Requires a parent resource path. Input parameters include page size and page token for pagination. Returns a list of continuous test results.",
-      "reasoning": "The current summary is missing, and the description lacks details about the input parameters. The suggestions provide clarity and context for AI agent interpretability.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'dialogflow.projects.locations.agents.conversations.list' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing, and the description lacks details about the input parameters. The suggestions provide clarity and context for AI agent interpretability.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "dialogflow.projects.locations.agents.conversations.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_input_details"
-      ],
-      "current_summary": "",
-      "current_description": "Returns the list of all conversations.",
-      "summary_suggestion": "List all conversations for a specified agent",
-      "description_suggestion": "Returns the list of all conversations for the specified agent. Requires a parent resource path. Input parameters include page size and page token for pagination. Returns a list of conversations.",
-      "reasoning": "The current summary is missing, and the description lacks details about the input parameters. The suggestions provide clarity and context for AI agent interpretability.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'dialogflow.projects.locations.agents.environments.deployments.list' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing, and the description lacks details about the input parameters. The suggestions provide clarity and context for AI agent interpretability.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "dialogflow.projects.locations.agents.environments.deployments.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_input_details"
-      ],
-      "current_summary": "",
-      "current_description": "Returns the list of all deployments in the specified Environment.",
-      "summary_suggestion": "List all deployments for a specified environment",
-      "description_suggestion": "Returns the list of all deployments in the specified environment. Requires a parent resource path. Input parameters include page size and page token for pagination. Returns a list of deployments.",
-      "reasoning": "The current summary is missing, and the description lacks details about the input parameters. The suggestions provide clarity and context for AI agent interpretability.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'dialogflow.projects.locations.agents.environments.sessions.entityTypes.list' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing, and the description lacks details about the input parameters. The suggestions provide clarity and context for AI agent interpretability.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "dialogflow.projects.locations.agents.environments.sessions.entityTypes.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_input_details"
-      ],
-      "current_summary": "",
-      "current_description": "Returns the list of all session entity types in the specified session.",
-      "summary_suggestion": "List all session entity types for a specified session",
-      "description_suggestion": "Returns the list of all session entity types in the specified session. Requires a parent resource path. Input parameters include page size and page token for pagination. Returns a list of session entity types.",
-      "reasoning": "The current summary is missing, and the description lacks details about the input parameters. The suggestions provide clarity and context for AI agent interpretability.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'dialogflow.projects.locations.agents.environments.sessions.entityTypes.create' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing, and the description lacks details about the input parameters. The suggestions provide clarity and context for AI agent interpretability.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "dialogflow.projects.locations.agents.environments.sessions.entityTypes.create",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_input_details"
-      ],
-      "current_summary": "",
-      "current_description": "Creates a session entity type.",
-      "summary_suggestion": "Create a session entity type for a specified session",
-      "description_suggestion": "Creates a session entity type for the specified session. Requires a parent resource path and a request body containing the session entity type details. Returns the created session entity type.",
-      "reasoning": "The current summary is missing, and the description lacks details about the input parameters. The suggestions provide clarity and context for AI agent interpretability.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'dialogflow.projects.locations.agents.entityTypes.export' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing, and the description lacks details about the input parameters. The suggestions provide clarity and context for AI agent interpretability.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "dialogflow.projects.locations.agents.entityTypes.export",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_input_details"
-      ],
-      "current_summary": "",
-      "current_description": "Exports the selected entity types.",
-      "summary_suggestion": "Export selected entity types for a specified agent",
-      "description_suggestion": "Exports the selected entity types for the specified agent. Requires a parent resource path and a request body containing the entity types to export. Returns the exported entity types.",
-      "reasoning": "The current summary is missing, and the description lacks details about the input parameters. The suggestions provide clarity and context for AI agent interpretability.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'dialogflow.projects.locations.agents.tools.versions.create' has semantic quality issues: vague_summary. The current summary is missing, making it difficult to quickly understand the operation's purpose. The description is clear but could be enhanced by specifying the request body details and the response content.",
+    "message": "Operation 'dialogflow.projects.locations.agents.tools.versions.create' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description lacks context about what Tool versions are used for and what is returned. Added explanation of version purpose and return value for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -41826,13 +41685,14 @@
       "operation_id": "dialogflow.projects.locations.agents.tools.versions.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Creates a version for the specified Tool.",
-      "summary_suggestion": "Create a new version for the specified Tool.",
-      "description_suggestion": "Creates a new version for the specified Tool. This operation requires the tool's configuration details to be provided in the request body. Upon successful creation, the response will include the details of the newly created version.",
-      "reasoning": "The current summary is missing, making it difficult to quickly understand the operation's purpose. The description is clear but could be enhanced by specifying the request body details and the response content.",
+      "summary_suggestion": "Create a new Tool version",
+      "description_suggestion": "Creates a new version for the specified Tool. Tool versions allow you to maintain multiple iterations of a Tool's configuration and actions. Returns the created ToolVersion resource with a system-generated version identifier.",
+      "reasoning": "Missing summary entirely. Description lacks context about what Tool versions are used for and what is returned. Added explanation of version purpose and return value for better AI agent understanding.",
       "batch_index": 9
     }
   },
@@ -41847,7 +41707,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.webhooks.list' has semantic quality issues: vague_summary. The current summary is missing, making it difficult to quickly understand the operation's purpose. The description is clear but could be enhanced by specifying that no request body is required.",
+    "message": "Operation 'dialogflow.projects.locations.agents.webhooks.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is minimal and doesn't explain webhook purpose, pagination support, or return format. Enhanced with context about webhook functionality and pagination capabilities for AI agents.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -41861,13 +41721,15 @@
       "operation_id": "dialogflow.projects.locations.agents.webhooks.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Returns the list of all webhooks in the specified agent.",
-      "summary_suggestion": "List all webhooks in the specified agent.",
-      "description_suggestion": "Returns a list of all webhooks configured for the specified agent. This operation does not require any request body and simply returns the list of webhooks in the response.",
-      "reasoning": "The current summary is missing, making it difficult to quickly understand the operation's purpose. The description is clear but could be enhanced by specifying that no request body is required.",
+      "summary_suggestion": "List all webhooks in an agent",
+      "description_suggestion": "Returns a paginated list of all webhooks configured in the specified agent. Webhooks enable the agent to call external services during conversation flows. Supports filtering and pagination through query parameters. Returns a list of Webhook resources.",
+      "reasoning": "Missing summary. Description is minimal and doesn't explain webhook purpose, pagination support, or return format. Enhanced with context about webhook functionality and pagination capabilities for AI agents.",
       "batch_index": 9
     }
   },
@@ -41882,7 +41744,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.webhooks.create' has semantic quality issues: vague_summary. The current summary is missing, making it difficult to quickly understand the operation's purpose. The description is clear but could be enhanced by specifying the request body details and the response content.",
+    "message": "Operation 'dialogflow.projects.locations.agents.webhooks.create' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks context about webhook purpose and what configuration is required. Added explanation of webhook functionality, required inputs, and return value for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -41896,13 +41758,15 @@
       "operation_id": "dialogflow.projects.locations.agents.webhooks.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Creates a webhook in the specified agent.",
-      "summary_suggestion": "Create a new webhook in the specified agent.",
-      "description_suggestion": "Creates a new webhook in the specified agent. This operation requires the webhook's configuration details to be provided in the request body. Upon successful creation, the response will include the details of the newly created webhook.",
-      "reasoning": "The current summary is missing, making it difficult to quickly understand the operation's purpose. The description is clear but could be enhanced by specifying the request body details and the response content.",
+      "summary_suggestion": "Create a new webhook in an agent",
+      "description_suggestion": "Creates a new webhook in the specified agent. Webhooks enable the agent to call external services and integrate with backend systems during conversation flows. Requires a valid webhook configuration including URL and optional authentication details. Returns the created Webhook resource with a system-generated identifier.",
+      "reasoning": "Missing summary. Description lacks context about webhook purpose and what configuration is required. Added explanation of webhook functionality, required inputs, and return value for better AI agent interpretability.",
       "batch_index": 9
     }
   },
@@ -41917,7 +41781,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.environments.sessions.fulfillIntent' has semantic quality issues: vague_summary, missing_context. The current summary is missing, making it difficult to quickly understand the operation's purpose. The description is clear but could be enhanced by specifying the required sequence and input details.",
+    "message": "Operation 'dialogflow.projects.locations.agents.environments.sessions.fulfillIntent' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks context about what fulfillment does and what is returned. Added explanation of fulfillment execution, required input relationship, return value, and consequences of misuse for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -41932,13 +41796,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Fulfills a matched intent returned by MatchIntent. Must be called after MatchIntent, with input from MatchIntentResponse. Otherwise, the behavior is undefined.",
-      "summary_suggestion": "Fulfill a matched intent in a session.",
-      "description_suggestion": "Fulfills a matched intent returned by the MatchIntent operation. This operation must be called after MatchIntent and requires the input from the MatchIntentResponse. If called out of order, the behavior is undefined.",
-      "reasoning": "The current summary is missing, making it difficult to quickly understand the operation's purpose. The description is clear but could be enhanced by specifying the required sequence and input details.",
+      "summary_suggestion": "Fulfill a matched intent",
+      "description_suggestion": "Fulfills a matched intent returned by MatchIntent operation. This operation executes the fulfillment logic (webhooks, parameter setting, response generation) for the matched intent. Must be called after MatchIntent with the MatchIntentResponse as input. Returns a FulfillIntentResponse containing the agent's response and any parameter updates. Calling without prior MatchIntent results in undefined behavior.",
+      "reasoning": "Missing summary. Description lacks context about what fulfillment does and what is returned. Added explanation of fulfillment execution, required input relationship, return value, and consequences of misuse for better AI agent understanding.",
       "batch_index": 9
     }
   },
@@ -41953,7 +41818,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.environments.sessions.matchIntent' has semantic quality issues: vague_summary. The current description is clear but the summary is missing, making it difficult to quickly understand the operation's purpose.",
+    "message": "Operation 'dialogflow.projects.locations.agents.environments.sessions.matchIntent' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description is vague about what 'preliminary' means and lacks context about use cases. Added explanation of intent matching, confidence scoring, comparison with detectIntent, and typical workflow for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -41967,12 +41832,15 @@
       "operation_id": "dialogflow.projects.locations.agents.environments.sessions.matchIntent",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Returns preliminary intent match results, doesn't change the session status.",
-      "summary_suggestion": "Match intents for a session without changing session status.",
-      "reasoning": "The current description is clear but the summary is missing, making it difficult to quickly understand the operation's purpose.",
+      "summary_suggestion": "Match user input to intents",
+      "description_suggestion": "Returns preliminary intent match results for a user input without modifying session state. This operation identifies which intents match the user's input and returns ranked candidates with confidence scores. Unlike detectIntent, this does not execute fulfillment or update session entities. Returns a MatchIntentResponse containing matched intents and their confidence scores. Typically used before fulfillIntent for more control over intent handling.",
+      "reasoning": "Missing summary. Description is vague about what 'preliminary' means and lacks context about use cases. Added explanation of intent matching, confidence scoring, comparison with detectIntent, and typical workflow for better AI agent interpretability.",
       "batch_index": 9
     }
   },
@@ -41987,7 +41855,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.environments.sessions.serverStreamingDetectIntent' has semantic quality issues: vague_summary. The current description is clear but the summary is missing, making it difficult to quickly understand the operation's purpose.",
+    "message": "Operation 'dialogflow.projects.locations.agents.environments.sessions.serverStreamingDetectIntent' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description explains streaming but lacks context about when to use it versus detectIntent and what partial responses contain. Added comparison with detectIntent, use cases, and clarification about response format for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -42001,12 +41869,15 @@
       "operation_id": "dialogflow.projects.locations.agents.environments.sessions.serverStreamingDetectIntent",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Processes a natural language query and returns structured, actionable data as a result through server-side streaming. Server-side streaming allows Dialogflow to send [partial responses](https://cloud.google.com/dialogflow/cx/docs/concept/fulfillment#partial-response) earlier in a single request.",
-      "summary_suggestion": "Process a natural language query and return structured data via server-side streaming.",
-      "reasoning": "The current description is clear but the summary is missing, making it difficult to quickly understand the operation's purpose.",
+      "summary_suggestion": "Process query with streaming responses",
+      "description_suggestion": "Processes a natural language query and returns structured, actionable data through server-side streaming. Unlike detectIntent, this operation sends partial responses incrementally as they become available, enabling faster perceived response times and progressive fulfillment updates. Useful for long-running operations or progressive UI updates. Returns a stream of DetectIntentResponse messages. Non-idempotent - may update session entity types.",
+      "reasoning": "Missing summary. Description explains streaming but lacks context about when to use it versus detectIntent and what partial responses contain. Added comparison with detectIntent, use cases, and clarification about response format for better AI agent decision-making.",
       "batch_index": 9
     }
   },
@@ -42021,7 +41892,1045 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.testCases.run' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggested summary and description provide clarity on the purpose and details of the operation.",
+    "message": "Operation 'dialogflow.projects.locations.securitySettings.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks details about pagination support, return type specificity, and use case context. AI agents need to understand pagination parameters and what security settings control (e.g., data retention, redaction policies).",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.securitySettings.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns the list of all security settings in the specified location.",
+      "summary_suggestion": "List security settings in a location",
+      "description_suggestion": "Retrieves all security settings configured for the specified location. Supports pagination through page_size and page_token parameters. Returns a list of GoogleCloudDialogflowCxV3beta1SecuritySettings objects. Use this operation to view existing security configurations for compliance and audit purposes.",
+      "reasoning": "Missing summary entirely. Description lacks details about pagination support, return type specificity, and use case context. AI agents need to understand pagination parameters and what security settings control (e.g., data retention, redaction policies).",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.securitySettings.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description is too brief and lacks information about request body structure, return value, and the scope of impact (location-level policies). AI agents need to understand what configuration options are available and how this affects the system.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.securitySettings.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Create security settings in the specified location.",
+      "summary_suggestion": "Create security settings for a location",
+      "description_suggestion": "Creates a new security settings configuration for the specified location. Accepts a GoogleCloudDialogflowCxV3beta1SecuritySettings object in the request body containing policies for data retention, redaction, and compliance. Returns the created security settings object with a generated resource name. This operation establishes security policies that apply to all agents in the location.",
+      "reasoning": "Missing summary. Description is too brief and lacks information about request body structure, return value, and the scope of impact (location-level policies). AI agents need to understand what configuration options are available and how this affects the system.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.testCases.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks pagination details, filtering capabilities, and return type specificity. AI agents need to understand available query parameters and what test cases represent in the Dialogflow CX context.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.testCases.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Fetches a list of test cases for a given agent.",
+      "summary_suggestion": "List test cases for an agent",
+      "description_suggestion": "Retrieves all test cases associated with the specified agent. Supports filtering by test case state and pagination through page_size and page_token parameters. Returns a list of GoogleCloudDialogflowCxV3beta1TestCase objects containing test execution scenarios. Use this to review existing test coverage and test case configurations.",
+      "reasoning": "Missing summary. Description lacks pagination details, filtering capabilities, and return type specificity. AI agents need to understand available query parameters and what test cases represent in the Dialogflow CX context.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.testCases.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks details about request body structure, what test cases contain (conversation scenarios, assertions), and their purpose in agent validation. AI agents need clarity on what constitutes a test case.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.testCases.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a test case for the given agent.",
+      "summary_suggestion": "Create a test case for an agent",
+      "description_suggestion": "Creates a new test case for the specified agent. Accepts a GoogleCloudDialogflowCxV3beta1TestCase object in the request body defining the test scenario, including conversation turns, expected intents, and assertions. Returns the created test case object with a generated resource name. Test cases are used to validate agent behavior and conversation flows.",
+      "reasoning": "Missing summary. Description lacks details about request body structure, what test cases contain (conversation scenarios, assertions), and their purpose in agent validation. AI agents need clarity on what constitutes a test case.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.testCases.batchDelete' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description is too vague about what is being deleted and lacks critical information about destructive nature, request structure, and irreversibility. AI agents must understand this is a permanent operation and what parameters are required.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.testCases.batchDelete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Batch deletes test cases.",
+      "summary_suggestion": "Batch delete test cases from an agent",
+      "description_suggestion": "Deletes multiple test cases in a single operation. Accepts a GoogleCloudDialogflowCxV3beta1BatchDeleteTestCasesRequest containing a list of test case resource names to delete. Returns an empty response on success. This operation permanently removes the specified test cases and cannot be undone. Use with caution as deleted test cases cannot be recovered.",
+      "reasoning": "Missing summary. Description is too vague about what is being deleted and lacks critical information about destructive nature, request structure, and irreversibility. AI agents must understand this is a permanent operation and what parameters are required.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.testCases.batchRun' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description mentions long-running operation details but lacks clarity about what the operation does (executes tests), how to use the request structure, and practical guidance on polling for results. AI agents need to understand this is asynchronous and how to track completion.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.testCases.batchRun",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Kicks off a batch run of test cases. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: BatchRunTestCasesMetadata - `response`: BatchRunTestCasesResponse",
+      "summary_suggestion": "Execute batch test case runs asynchronously",
+      "description_suggestion": "Executes multiple test cases against the agent in a batch operation. Accepts a GoogleCloudDialogflowCxV3beta1BatchRunTestCasesRequest specifying which test cases to run. This is a long-running operation that returns a GoogleLongrunningOperation object. Poll the operation using the returned operation name to check progress. The operation's metadata field contains BatchRunTestCasesMetadata with progress information, and the response field contains BatchRunTestCasesResponse with test execution results including pass/fail status and assertions.",
+      "reasoning": "Missing summary. Description mentions long-running operation details but lacks clarity about what the operation does (executes tests), how to use the request structure, and practical guidance on polling for results. AI agents need to understand this is asynchronous and how to track completion.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.testCases.export' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description mentions filtering and long-running operation details but lacks clarity about request structure, destination options, and how to interpret results. AI agents need to understand supported storage destinations and how to specify export filters.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.testCases.export",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Exports the test cases under the agent to a Cloud Storage bucket or a local file. Filter can be applied to export a subset of test cases. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: ExportTestCasesMetadata - `response`: ExportTestCasesResponse",
+      "summary_suggestion": "Export agent test cases to Cloud Storage",
+      "description_suggestion": "Exports test cases from the specified agent to Cloud Storage or local file storage. Accepts a GoogleCloudDialogflowCxV3beta1ExportTestCasesRequest containing destination URI and optional filter criteria to export a subset of test cases. This is a long-running operation that returns a GoogleLongrunningOperation object. Poll the operation using the returned operation name to track progress. The operation's metadata field contains ExportTestCasesMetadata with export status, and the response field contains ExportTestCasesResponse with the export destination and file information.",
+      "reasoning": "Missing summary. Description mentions filtering and long-running operation details but lacks clarity about request structure, destination options, and how to interpret results. AI agents need to understand supported storage destinations and how to specify export filters.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.changelogs.list' has semantic quality issues: vague_summary, vague_description, missing_context, poor_ai_interpretability. Original description is too generic and lacks context about what changelogs represent in Dialogflow. Missing information about pagination, filtering capabilities, and use cases. AI agents need to understand that changelogs are audit records of agent changes to determine when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.changelogs.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Returns the list of Changelogs.",
+      "summary_suggestion": "List agent changelogs with filtering and pagination",
+      "description_suggestion": "Retrieves a paginated list of changelogs for the specified agent. Changelogs track changes made to agent configuration, flows, intents, and other resources. Supports filtering by date range and other criteria, and pagination through results. Useful for auditing agent modifications and understanding version history.",
+      "reasoning": "Original description is too generic and lacks context about what changelogs represent in Dialogflow. Missing information about pagination, filtering capabilities, and use cases. AI agents need to understand that changelogs are audit records of agent changes to determine when to use this operation.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.environments.continuousTestResults.list' has semantic quality issues: vague_summary, missing_context, poor_ai_interpretability. Missing context about what continuous test results represent and their purpose in the Dialogflow testing workflow. Summary is missing. Description needs clarification about pagination, filtering, and what information results contain to help AI agents understand when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.environments.continuousTestResults.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Fetches a list of continuous test results for a given environment.",
+      "summary_suggestion": "List continuous test results for environment",
+      "description_suggestion": "Retrieves a paginated list of continuous test results for the specified environment. Continuous test results represent automated test executions that validate agent behavior against test cases. Results include test status, execution timestamps, and failure details. Supports filtering and pagination for analyzing test coverage and identifying regressions.",
+      "reasoning": "Missing context about what continuous test results represent and their purpose in the Dialogflow testing workflow. Summary is missing. Description needs clarification about pagination, filtering, and what information results contain to help AI agents understand when to use this operation.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.conversations.list' has semantic quality issues: vague_summary, vague_description, missing_context, poor_ai_interpretability. Original description lacks domain context about what conversations represent in Dialogflow (user sessions). Missing information about pagination, filtering, and what metadata is returned. AI agents need to understand conversations are session records to determine appropriate use cases.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.conversations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Returns the list of all conversations.",
+      "summary_suggestion": "List agent conversations with filtering and pagination",
+      "description_suggestion": "Retrieves a paginated list of conversations for the specified agent. Conversations represent individual user sessions with the agent. Results include conversation metadata such as creation time, last update time, and conversation state. Supports filtering by date range, user, or status, and pagination through results. Useful for monitoring agent interactions and analyzing conversation history.",
+      "reasoning": "Original description lacks domain context about what conversations represent in Dialogflow (user sessions). Missing information about pagination, filtering, and what metadata is returned. AI agents need to understand conversations are session records to determine appropriate use cases.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.environments.deployments.list' has semantic quality issues: vague_summary, missing_context, poor_ai_interpretability. Missing summary and domain context about what deployments represent (published agent versions). Description needs clarification about what deployment information is returned and pagination support to help AI agents understand when to retrieve deployment lists.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.environments.deployments.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Returns the list of all deployments in the specified Environment.",
+      "summary_suggestion": "List environment deployments with pagination",
+      "description_suggestion": "Retrieves a paginated list of deployments for the specified environment. Deployments represent published versions of the agent that are active in the environment. Results include deployment status, creation time, and associated flow versions. Supports pagination for managing multiple deployments. Useful for tracking which agent versions are currently deployed and their status.",
+      "reasoning": "Missing summary and domain context about what deployments represent (published agent versions). Description needs clarification about what deployment information is returned and pagination support to help AI agents understand when to retrieve deployment lists.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.environments.sessions.entityTypes.list' has semantic quality issues: vague_summary, missing_context, poor_ai_interpretability. Missing summary and insufficient context about what session entity types are and how they differ from agent-level entity types. Description needs clarification about their purpose (session-specific overrides) and what information is returned to help AI agents understand when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.environments.sessions.entityTypes.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Returns the list of all session entity types in the specified session.",
+      "summary_suggestion": "List session entity types for conversation",
+      "description_suggestion": "Retrieves a paginated list of session entity types for the specified conversation session. Session entity types are custom entity definitions that override agent-level entity types for a specific session, enabling session-specific entity recognition. Results include entity type name, values, and override settings. Supports pagination. Useful for managing session-specific entity customizations during conversations.",
+      "reasoning": "Missing summary and insufficient context about what session entity types are and how they differ from agent-level entity types. Description needs clarification about their purpose (session-specific overrides) and what information is returned to help AI agents understand when to use this operation.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.environments.sessions.entityTypes.create' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_side_effects, poor_ai_interpretability. Missing summary and insufficient context about session entity types and their purpose. Description lacks input details (what SessionEntityType object contains), output details (what is returned), and side effects (entity becomes available for recognition). AI agents need this information to determine when and how to create session entity types.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.environments.sessions.entityTypes.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_input_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a session entity type.",
+      "summary_suggestion": "Create session entity type for conversation",
+      "description_suggestion": "Creates a new session entity type for the specified conversation session. Session entity types define custom entities that override agent-level entity definitions for the duration of the session. Accepts a SessionEntityType object specifying entity name, values, and override behavior. Returns the created session entity type with generated resource name. The entity type becomes immediately available for entity recognition in the session.",
+      "reasoning": "Missing summary and insufficient context about session entity types and their purpose. Description lacks input details (what SessionEntityType object contains), output details (what is returned), and side effects (entity becomes available for recognition). AI agents need this information to determine when and how to create session entity types.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.entityTypes.export' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_output_details, poor_ai_interpretability. Missing summary and insufficient context about export purpose and functionality. Description lacks input details (what ExportEntityTypesRequest specifies), output details (file format, how to access result), and clarification that this is a long-running operation. AI agents need to understand this is an async operation and what the export contains.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.entityTypes.export",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Exports the selected entity types.",
+      "summary_suggestion": "Export agent entity types to file",
+      "description_suggestion": "Exports selected entity types from the agent to a file for backup or migration purposes. Accepts an ExportEntityTypesRequest specifying which entity types to export and the export format (e.g., JSON, CSV). Returns a long-running operation that, when complete, provides a downloadable file containing the exported entity type definitions and values. Useful for backing up entity types or transferring them between agents.",
+      "reasoning": "Missing summary and insufficient context about export purpose and functionality. Description lacks input details (what ExportEntityTypesRequest specifies), output details (file format, how to access result), and clarification that this is a long-running operation. AI agents need to understand this is an async operation and what the export contains.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.intents.export' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description lacks clarity about what 'selected intents' means, what format they're exported to, and practical use cases. Added context about the export destination, use cases, and clarified the long-running operation pattern for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.intents.export",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Exports the selected intents. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: ExportIntentsMetadata - `response`: ExportIntentsResponse",
+      "summary_suggestion": "Export intents from agent to file",
+      "description_suggestion": "Exports the selected intents from the specified agent to a file. This is a long-running operation that returns an Operation object. The operation metadata contains ExportIntentsMetadata tracking export progress, and the response contains ExportIntentsResponse with the exported intents data and URI. Use this operation to backup intents or migrate them to another agent.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about what 'selected intents' means, what format they're exported to, and practical use cases. Added context about the export destination, use cases, and clarified the long-running operation pattern for better AI agent understanding.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.intents.import' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_side_effects. Missing summary entirely. Description doesn't explain input source format, side effects on existing intents, or practical use cases. Added details about import source, overwrite behavior, and use cases to improve AI agent decision-making about when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.intents.import",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Imports the specified intents into the agent. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: ImportIntentsMetadata - `response`: ImportIntentsResponse",
+      "summary_suggestion": "Import intents into agent from file",
+      "description_suggestion": "Imports intents from a specified source (file or URI) into the target agent. This is a long-running operation that returns an Operation object. The operation metadata contains ImportIntentsMetadata tracking import progress, and the response contains ImportIntentsResponse with results. Imported intents are added to the agent; existing intents with the same name may be overwritten depending on import settings. Use this to restore intents from backup or migrate from another agent.",
+      "reasoning": "Missing summary entirely. Description doesn't explain input source format, side effects on existing intents, or practical use cases. Added details about import source, overwrite behavior, and use cases to improve AI agent decision-making about when to use this operation.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.flows.pages.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is minimal and lacks context about pagination support, what pages represent in Dialogflow CX domain, and what information is returned. Enhanced with domain context about pages as conversation states and pagination details.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.flows.pages.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Returns the list of all pages in the specified flow.",
+      "summary_suggestion": "List all pages in flow",
+      "description_suggestion": "Retrieves a paginated list of all pages in the specified flow. Pages represent conversation states in the flow's state machine. Supports filtering and sorting via query parameters. Returns a list of Page objects containing page definitions, transition routes, and event handlers.",
+      "reasoning": "Missing summary. Description is minimal and lacks context about pagination support, what pages represent in Dialogflow CX domain, and what information is returned. Enhanced with domain context about pages as conversation states and pagination details.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.flows.pages.create' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary. Description lacks domain context about what pages represent, required/optional fields, and side effects. Added explanation of pages as conversation states, input requirements, and clarified that the page is immediately usable.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.flows.pages.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a page in the specified flow.",
+      "summary_suggestion": "Create new page in flow",
+      "description_suggestion": "Creates a new page in the specified flow. A page represents a conversation state in the flow's state machine. Requires a Page object with display name and optional event handlers, transition routes, and fulfillment configuration. Returns the created Page object with a system-generated resource name. The new page is immediately available for use in transition routes.",
+      "reasoning": "Missing summary. Description lacks domain context about what pages represent, required/optional fields, and side effects. Added explanation of pages as conversation states, input requirements, and clarified that the page is immediately usable.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.playbooks.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is minimal and doesn't explain what playbooks are or support pagination. Added domain context about playbooks as reusable conversation flows and clarified pagination support for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.playbooks.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Returns a list of playbooks in the specified agent.",
+      "summary_suggestion": "List all playbooks in agent",
+      "description_suggestion": "Retrieves a paginated list of all playbooks in the specified agent. Playbooks define reusable conversation flows and actions for the agent. Supports filtering and sorting via query parameters. Returns a list of Playbook objects containing playbook definitions, goals, and associated tools.",
+      "reasoning": "Missing summary. Description is minimal and doesn't explain what playbooks are or support pagination. Added domain context about playbooks as reusable conversation flows and clarified pagination support for better AI agent understanding.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.playbooks.create' has semantic quality issues: vague_summary, missing_context, missing_input_details. Missing summary. Description lacks domain context about playbook purpose and required fields. Added explanation of playbooks as reusable conversation flows with goals and tools, and clarified required input fields.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.playbooks.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a playbook in a specified agent.",
+      "summary_suggestion": "Create new playbook in agent",
+      "description_suggestion": "Creates a new playbook in the specified agent. A playbook defines a reusable conversation flow with goals and associated tools for the agent to accomplish specific tasks. Requires a Playbook object with display name, goal description, and optional tool references. Returns the created Playbook object with a system-generated resource name.",
+      "reasoning": "Missing summary. Description lacks domain context about playbook purpose and required fields. Added explanation of playbooks as reusable conversation flows with goals and tools, and clarified required input fields.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.testCases.results.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description mentions the 100-result limit but lacks context about what results contain, pagination support, and automatic purging behavior. Enhanced with details about result contents, retention policy, and pagination for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.testCases.results.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Fetches the list of run results for the given test case. A maximum of 100 results are kept for each test case.",
+      "summary_suggestion": "List test case execution results",
+      "description_suggestion": "Retrieves a paginated list of execution results for the specified test case. Each result represents a single test case run with conversation turns, assertions, and pass/fail status. A maximum of 100 results are retained per test case; older results are automatically purged. Supports filtering and sorting via query parameters. Returns a list of TestCaseResult objects with execution details and outcomes.",
+      "reasoning": "Missing summary. Description mentions the 100-result limit but lacks context about what results contain, pagination support, and automatic purging behavior. Enhanced with details about result contents, retention policy, and pagination for better AI agent understanding.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.list' has semantic quality issues: vague_summary, missing_input_details. Missing summary entirely. Description is minimal and lacks context about what location information is returned and why an agent would use this operation. Added summary and expanded description to clarify the operation's purpose and utility for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists information about the supported locations for this service.",
+      "summary_suggestion": "List supported service locations",
+      "description_suggestion": "Lists all supported locations where Dialogflow services are available. Returns location information including display names and metadata. Useful for determining where to deploy agents and resources.",
+      "reasoning": "Missing summary entirely. Description is minimal and lacks context about what location information is returned and why an agent would use this operation. Added summary and expanded description to clarify the operation's purpose and utility for AI agents.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.operations.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity about what types of operations are listed, what filters are available, and what the response contains. Added summary and expanded description to explain the operation's purpose in the context of Dialogflow's long-running operations (exports, imports, training).",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.operations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
+      "summary_suggestion": "List long-running operations by filter",
+      "description_suggestion": "Lists long-running operations matching the specified filter criteria. Supports filtering by operation name, status, and other attributes. Returns a paginated list of Operation objects with their current status, metadata, and results. Useful for monitoring asynchronous tasks like agent exports, imports, and training operations.",
+      "reasoning": "Missing summary. Description lacks clarity about what types of operations are listed, what filters are available, and what the response contains. Added summary and expanded description to explain the operation's purpose in the context of Dialogflow's long-running operations (exports, imports, training).",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.operations.cancel' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is overly technical and verbose with implementation details. Reorganized to focus on what the operation does, its limitations, and how to verify results. Added context about applicable Dialogflow operations for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.operations.cancel",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of `1`, corresponding to `Code.CANCELLED`.",
+      "summary_suggestion": "Cancel a long-running operation",
+      "description_suggestion": "Initiates asynchronous cancellation of a long-running operation. Success is not guaranteed - the operation may complete before cancellation takes effect. After cancellation, the operation remains queryable with status Code.CANCELLED. Use Operations.GetOperation to verify cancellation status. Applicable to operations like flow exports, imports, and training tasks.",
+      "reasoning": "Missing summary. Description is overly technical and verbose with implementation details. Reorganized to focus on what the operation does, its limitations, and how to verify results. Added context about applicable Dialogflow operations for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.flows.export' has semantic quality issues: vague_summary, missing_context. Missing summary. Description contains technical implementation details that obscure the main purpose. Reorganized to clarify what gets exported, that it's long-running, what to expect in the response, and practical use cases for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.flows.export",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Exports the specified flow to a binary file. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: ExportFlowResponse Note that resources (e.g. intents, entities, webhooks) that the flow references will also be exported.",
+      "summary_suggestion": "Export flow to binary file",
+      "description_suggestion": "Exports the specified flow and all its referenced resources (intents, entities, webhooks) to a binary file. This is a long-running operation that returns an Operation object. The operation's response contains ExportFlowResponse with the exported flow data. Monitor operation status using Operations.GetOperation. Useful for backing up flows or migrating between agents.",
+      "reasoning": "Missing summary. Description contains technical implementation details that obscure the main purpose. Reorganized to clarify what gets exported, that it's long-running, what to expect in the response, and practical use cases for AI agents.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.flows.versions.load' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is unclear about the operation's effect - it doesn't explain that this overwrites the draft with a previous version's resources. Reorganized to clarify the action, its effect on the draft flow, and practical use cases for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.flows.versions.load",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Loads resources in the specified version to the draft flow. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: An [Empty message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)",
+      "summary_suggestion": "Load flow version to draft",
+      "description_suggestion": "Loads all resources from a specified flow version into the draft flow, effectively restoring the draft to that version's state. This is a long-running operation that returns an Operation object with an empty response upon completion. Use Operations.GetOperation to monitor progress. Useful for reverting draft changes or recovering from unwanted modifications.",
+      "reasoning": "Missing summary. Description is unclear about the operation's effect - it doesn't explain that this overwrites the draft with a previous version's resources. Reorganized to clarify the action, its effect on the draft flow, and practical use cases for AI agents.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.environments.lookupEnvironmentHistory' has semantic quality issues: vague_summary, missing_output_details, missing_context. Missing summary. Description is too vague - doesn't explain what 'history' means in this context (deployment history), what information is returned, or why an agent would use it. Added summary and expanded description to clarify the operation returns deployment records with timestamps and version information.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.environments.lookupEnvironmentHistory",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Looks up the history of the specified Environment.",
+      "summary_suggestion": "Retrieve environment deployment history",
+      "description_suggestion": "Retrieves the deployment history of the specified environment, including all versions that have been deployed to it and their deployment timestamps. Returns a paginated list of environment history entries showing which flow versions were active and when. Useful for auditing environment changes and understanding deployment timeline.",
+      "reasoning": "Missing summary. Description is too vague - doesn't explain what 'history' means in this context (deployment history), what information is returned, or why an agent would use it. Added summary and expanded description to clarify the operation returns deployment records with timestamps and version information.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.tools.versions.restore' has semantic quality issues: vague_summary, missing_context, unclear_purpose. Missing summary. Description uses unclear phrasing ('stores it as the current tool draft', 'resources updated') that doesn't clearly convey the restore action. Reorganized to clarify that this overwrites the draft with a previous version, what gets returned, and practical use cases for AI agents working with tool versions.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.tools.versions.restore",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "unclear_purpose"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves the specified version of the Tool and stores it as the current tool draft, returning the tool with resources updated.",
+      "summary_suggestion": "Restore tool version to draft",
+      "description_suggestion": "Restores a specified tool version by loading it as the current draft tool. This overwrites the existing draft with the selected version's configuration and resources. Returns the restored tool object with all resources updated to match the version. Useful for reverting unwanted tool changes or recovering a previous tool configuration.",
+      "reasoning": "Missing summary. Description uses unclear phrasing ('stores it as the current tool draft', 'resources updated') that doesn't clearly convey the restore action. Reorganized to clarify that this overwrites the draft with a previous version, what gets returned, and practical use cases for AI agents working with tool versions.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.testCases.run' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description mentions long-running operation details but lacks clarity on what the operation tests and why. Added summary explaining the action and async nature. Improved description to clarify purpose (validating agent behavior), what gets tested (conversation flows), and the expected outcome for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -42036,13 +42945,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Kicks off a test case run. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: RunTestCaseMetadata - `response`: RunTestCaseResponse",
-      "summary_suggestion": "Run a test case for the specified agent",
-      "description_suggestion": "Initiates a test case run for the specified agent. This method is a long-running operation. The returned `Operation` type has the following method-specific fields: - `metadata`: RunTestCaseMetadata - `response`: RunTestCaseResponse. This operation allows for testing the agent's responses to predefined test cases.",
-      "reasoning": "The current summary and description are vague. The suggested summary and description provide clarity on the purpose and details of the operation.",
+      "summary_suggestion": "Execute a test case run asynchronously",
+      "description_suggestion": "Initiates execution of a specified test case to validate agent behavior. This is a long-running operation that returns a RunTestCaseResponse with execution results and metadata. The operation allows testing conversation flows against predefined test scenarios.",
+      "reasoning": "Missing summary entirely. Description mentions long-running operation details but lacks clarity on what the operation tests and why. Added summary explaining the action and async nature. Improved description to clarify purpose (validating agent behavior), what gets tested (conversation flows), and the expected outcome for better AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -42057,7 +42966,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.environments.experiments.start' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggested summary and description provide clarity on the purpose and details of the operation.",
+    "message": "Operation 'dialogflow.projects.locations.agents.environments.experiments.start' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is minimal and lacks context about what experiments do and why they're started. Added summary with domain context. Enhanced description to explain the purpose (collecting metrics), state transition details, preconditions, and return value for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -42072,13 +42981,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Starts the specified Experiment. This rpc only changes the state of experiment from PENDING to RUNNING.",
-      "summary_suggestion": "Start the specified experiment",
-      "description_suggestion": "Initiates the specified experiment, changing its state from PENDING to RUNNING. This operation is essential for activating experiments to test changes in the agent's behavior.",
-      "reasoning": "The current summary and description are vague. The suggested summary and description provide clarity on the purpose and details of the operation.",
+      "summary_suggestion": "Start an experiment in an environment",
+      "description_suggestion": "Transitions a specified experiment from PENDING to RUNNING state, enabling it to collect traffic and performance metrics. The experiment must exist and be in PENDING state. Returns the updated Experiment resource with RUNNING status.",
+      "reasoning": "Missing summary. Description is minimal and lacks context about what experiments do and why they're started. Added summary with domain context. Enhanced description to explain the purpose (collecting metrics), state transition details, preconditions, and return value for AI agent clarity.",
       "batch_index": 2
     }
   },
@@ -42093,7 +43002,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.environments.experiments.stop' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggested summary and description provide clarity on the purpose and details of the operation.",
+    "message": "Operation 'dialogflow.projects.locations.agents.environments.experiments.stop' has semantic quality issues: vague_summary, missing_context. Missing summary. Description lacks context about experiment purpose and effects of stopping. Added summary clarifying the action. Enhanced description to explain what stopping accomplishes (halting metric collection), state requirements, and return value for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -42108,13 +43017,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Stops the specified Experiment. This rpc only changes the state of experiment from RUNNING to DONE.",
-      "summary_suggestion": "Stop the specified experiment",
-      "description_suggestion": "Terminates the specified experiment, changing its state from RUNNING to DONE. This operation is used to conclude experiments and analyze their outcomes.",
-      "reasoning": "The current summary and description are vague. The suggested summary and description provide clarity on the purpose and details of the operation.",
+      "summary_suggestion": "Stop a running experiment",
+      "description_suggestion": "Terminates a specified experiment by transitioning it from RUNNING to DONE state, halting traffic collection and metric gathering. The experiment must be in RUNNING state. Returns the updated Experiment resource with DONE status and final results.",
+      "reasoning": "Missing summary. Description lacks context about experiment purpose and effects of stopping. Added summary clarifying the action. Enhanced description to explain what stopping accomplishes (halting metric collection), state requirements, and return value for better AI agent interpretability.",
       "batch_index": 2
     }
   },
@@ -42129,7 +43038,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.flows.train' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggested summary and description provide clarity on the purpose and details of the operation.",
+    "message": "Operation 'dialogflow.projects.locations.agents.flows.train' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is verbose with technical details but lacks clarity on why training is needed and what it accomplishes. Added concise summary. Streamlined description to focus on purpose (preparing for queries), constraints (draft environment only), and effects (NLU optimization) while removing excessive technical references for better AI agent usability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -42144,13 +43053,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Trains the specified flow. Note that only the flow in 'draft' environment is trained. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: An empty [Struct message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct) - `response`: An [Empty message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty) Note: You should always train a flow prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).",
-      "summary_suggestion": "Train the specified flow",
-      "description_suggestion": "Initiates the training of the specified flow, which must be in the 'draft' environment. This method is a long-running operation. The returned `Operation` type has the following method-specific fields: - `metadata`: An empty Struct message - `response`: An Empty message. Training the flow is necessary before sending queries. Refer to the training documentation for more details.",
-      "reasoning": "The current summary and description are vague. The suggested summary and description provide clarity on the purpose and details of the operation.",
+      "summary_suggestion": "Train a flow in draft environment",
+      "description_suggestion": "Trains the specified flow to prepare it for handling user queries. Only flows in the 'draft' environment can be trained. This is a long-running operation that optimizes the flow's natural language understanding models. Training must be completed before the flow can process live queries. Returns an empty response upon completion.",
+      "reasoning": "Missing summary. Description is verbose with technical details but lacks clarity on why training is needed and what it accomplishes. Added concise summary. Streamlined description to focus on purpose (preparing for queries), constraints (draft environment only), and effects (NLU optimization) while removing excessive technical references for better AI agent usability.",
       "batch_index": 2
     }
   },
@@ -42165,7 +43074,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.flows.validate' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggested summary and description provide clarity on the purpose and details of the operation.",
+    "message": "Operation 'dialogflow.projects.locations.agents.flows.validate' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks clarity on what validation checks, when to call it relative to training, and what the output contains. Added summary clarifying the action. Enhanced description to explain validation purpose, timing relative to training, and return value (validation results with issues) for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -42180,13 +43089,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Validates the specified flow and creates or updates validation results. Please call this API after the training is completed to get the complete validation results.",
-      "summary_suggestion": "Validate the specified flow",
-      "description_suggestion": "Validates the specified flow and creates or updates validation results. It is recommended to call this API after the training is completed to obtain the complete validation results.",
-      "reasoning": "The current summary and description are vague. The suggested summary and description provide clarity on the purpose and details of the operation.",
+      "summary_suggestion": "Validate a flow configuration",
+      "description_suggestion": "Validates the specified flow configuration and generates or updates validation results. Should be called after training is completed to obtain comprehensive validation results. Returns validation results including any errors, warnings, or issues found in the flow structure and configuration.",
+      "reasoning": "Missing summary. Description lacks clarity on what validation checks, when to call it relative to training, and what the output contains. Added summary clarifying the action. Enhanced description to explain validation purpose, timing relative to training, and return value (validation results with issues) for AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -42201,7 +43111,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.list' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggested summary and description provide clarity on the purpose and details of the operation.",
+    "message": "Operation 'dialogflow.projects.locations.agents.list' has semantic quality issues: vague_summary. Missing summary. Description is clear and complete. Added concise action-oriented summary. Description adequately explains the operation's purpose and return value.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -42215,14 +43125,12 @@
       "operation_id": "dialogflow.projects.locations.agents.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
-        "vague_description"
+        "vague_summary"
       ],
       "current_summary": "",
       "current_description": "Returns the list of all agents in the specified location.",
-      "summary_suggestion": "List all agents in the specified location",
-      "description_suggestion": "Retrieves the list of all agents in the specified location. This operation provides a comprehensive overview of all agents available in the given location.",
-      "reasoning": "The current summary and description are vague. The suggested summary and description provide clarity on the purpose and details of the operation.",
+      "summary_suggestion": "List all agents in a location",
+      "reasoning": "Missing summary. Description is clear and complete. Added concise action-oriented summary. Description adequately explains the operation's purpose and return value.",
       "batch_index": 2
     }
   },
@@ -42237,7 +43145,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dialogflow.projects.locations.agents.create' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggested summary and description provide clarity on the purpose and details of the operation.",
+    "message": "Operation 'dialogflow.projects.locations.agents.create' has semantic quality issues: vague_summary, missing_context. Missing summary. Description mentions training requirement but lacks context about what an agent is and what gets returned. Added summary clarifying the resource being created. Enhanced description to explain agent purpose (container for conversation components), post-creation requirements, and return value for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -42252,14 +43160,237 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Creates an agent in the specified location. Note: You should always train a flow prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).",
-      "summary_suggestion": "Create a new agent in the specified location",
-      "description_suggestion": "Creates a new agent in the specified location. It is recommended to train the flow before sending queries. Refer to the training documentation for more details.",
-      "reasoning": "The current summary and description are vague. The suggested summary and description provide clarity on the purpose and details of the operation.",
+      "summary_suggestion": "Create a new conversational agent",
+      "description_suggestion": "Creates a new conversational agent in the specified location. The agent serves as the container for flows, intents, and other conversation components. After creation, flows must be trained before the agent can process user queries. Returns the created Agent resource with its configuration.",
+      "reasoning": "Missing summary. Description mentions training requirement but lacks context about what an agent is and what gets returned. Added summary clarifying the resource being created. Enhanced description to explain agent purpose (container for conversation components), post-creation requirements, and return value for better AI agent interpretability.",
       "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.testCases.calculateCoverage' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, poor_ai_interpretability. Missing summary entirely. Description is too vague about what coverage metrics are returned and how they're calculated. AI agents need to understand what inputs are required (agent identifier) and what specific metrics are returned to determine if this operation matches their intent.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.testCases.calculateCoverage",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Calculates the test coverage for an agent.",
+      "summary_suggestion": "Calculate agent test case coverage metrics",
+      "description_suggestion": "Calculates the test coverage for an agent by analyzing test cases against intents and flows. Returns coverage metrics including the percentage of intents and flows covered by existing test cases. Helps identify gaps in test case coverage for the specified agent.",
+      "reasoning": "Missing summary entirely. Description is too vague about what coverage metrics are returned and how they're calculated. AI agents need to understand what inputs are required (agent identifier) and what specific metrics are returned to determine if this operation matches their intent.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.flows.versions.compareVersions' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, poor_ai_interpretability. Missing summary. Description lacks clarity about what comparison report is returned and what differences are identified. AI agents need to understand the comparison scope (pages, transitions, intents, etc.) and output format to use this operation effectively.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.flows.versions.compareVersions",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Compares the specified base version with target version.",
+      "summary_suggestion": "Compare two flow versions for differences",
+      "description_suggestion": "Compares a base flow version with a target flow version to identify differences. Requires a comparison request specifying both versions. Returns a detailed comparison report highlighting changes in pages, transitions, intents, and other flow components between the two versions.",
+      "reasoning": "Missing summary. Description lacks clarity about what comparison report is returned and what differences are identified. AI agents need to understand the comparison scope (pages, transitions, intents, etc.) and output format to use this operation effectively.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.environments.deployFlow' has semantic quality issues: vague_summary, missing_context. Missing summary. Description mentions long-running operation details but lacks clarity about the action's purpose and side effects. AI agents need to understand that this activates a flow in an environment and may impact live conversations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.environments.deployFlow",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Deploys a flow to the specified Environment. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: DeployFlowMetadata - `response`: DeployFlowResponse",
+      "summary_suggestion": "Deploy flow to environment (long-running)",
+      "description_suggestion": "Deploys a specified flow to the target environment, making it available for conversations in that environment. This is a long-running operation that returns an Operation object. The operation metadata contains DeployFlowMetadata with deployment progress, and the response contains DeployFlowResponse with deployment details. Side effects: The flow becomes active in the target environment and may affect ongoing conversations.",
+      "reasoning": "Missing summary. Description mentions long-running operation details but lacks clarity about the action's purpose and side effects. AI agents need to understand that this activates a flow in an environment and may impact live conversations.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.environments.runContinuousTest' has semantic quality issues: vague_summary, missing_context, missing_input_details. Missing summary. Description uses informal language ('Kicks off') and lacks clarity about what tests are run and what results are returned. AI agents need to understand the scope of testing and expected output format.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.environments.runContinuousTest",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Kicks off a continuous test under the specified Environment. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: RunContinuousTestMetadata - `response`: RunContinuousTestResponse",
+      "summary_suggestion": "Run continuous test suite on environment",
+      "description_suggestion": "Initiates a continuous test execution against the specified environment, running all configured test cases to validate agent behavior. This is a long-running operation that returns an Operation object. The operation metadata contains RunContinuousTestMetadata with test execution progress, and the response contains RunContinuousTestResponse with test results and coverage metrics. Side effects: Test execution may consume resources and generate test result logs.",
+      "reasoning": "Missing summary. Description uses informal language ('Kicks off') and lacks clarity about what tests are run and what results are returned. AI agents need to understand the scope of testing and expected output format.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.tools.versions.delete' has semantic quality issues: vague_summary, missing_side_effects. Missing summary. Description lacks important context about side effects and whether this affects Tool availability. AI agents need to understand the implications of deletion and whether it impacts active playbooks or flows.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.tools.versions.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes the specified version of the Tool.",
+      "summary_suggestion": "Delete tool version",
+      "description_suggestion": "Deletes the specified version of a Tool. The Tool resource itself remains; only the specified version is removed. Side effects: The deleted version cannot be used in playbooks or flows that reference it. If this is the only version, the Tool becomes unusable.",
+      "reasoning": "Missing summary. Description lacks important context about side effects and whether this affects Tool availability. AI agents need to understand the implications of deletion and whether it impacts active playbooks or flows.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dialogflow.projects.locations.agents.tools.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, not_actionable. Missing summary. Description is too vague about what can be updated and what is returned. AI agents need to understand which Tool fields are updatable, whether partial updates are supported, and the scope of side effects on active conversations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dialogflow.projects.locations.agents.tools.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "not_actionable"
+      ],
+      "current_summary": "",
+      "current_description": "Update the specified Tool.",
+      "summary_suggestion": "Update tool definition and actions",
+      "description_suggestion": "Updates the specified Tool with new or modified configuration. Accepts a Tool resource with updated fields such as description, display name, and action definitions. Supports partial updates - only provided fields are modified. Returns the updated Tool resource with all current configuration. Side effects: Changes take effect immediately for new conversations; existing active conversations may continue using the previous Tool definition.",
+      "reasoning": "Missing summary. Description is too vague about what can be updated and what is returned. AI agents need to understand which Tool fields are updatable, whether partial updates are supported, and the scope of side effects on active conversations.",
+      "batch_index": 0
     }
   },
   {
@@ -42273,7 +43404,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 71 operations analyzed, 39 quality issues found",
+    "message": "Semantic analysis completed: 71 operations analyzed, 68 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -42285,7 +43416,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 71,
-      "total_issues_found": 39,
+      "total_issues_found": 68,
       "batches_processed": 11
     }
   }

@@ -2431,7 +2431,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post-getNotificationConfiguration' has semantic quality issues: vague_description. The current description is vague. The suggested description provides more detail about what the operation returns, making it more actionable and understandable for AI agents.",
+    "message": "Operation 'post-getNotificationConfiguration' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Current description is too vague and lacks specificity about inputs and outputs. Enhanced description clarifies what configuration details are returned, specifies the required input (configuration ID), and references the response schema for better AI agent understanding of available data.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2445,12 +2445,14 @@
       "operation_id": "post-getNotificationConfiguration",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "Get a notification subscription configuration",
       "current_description": "Returns the details of the configuration of a notification subscription.",
-      "description_suggestion": "Returns the details of the configuration of a specific notification subscription, including event types, URL, and other settings.",
-      "reasoning": "The current description is vague. The suggested description provides more detail about what the operation returns, making it more actionable and understandable for AI agents.",
+      "description_suggestion": "Retrieves the complete configuration details of a specific notification subscription, including event types, endpoint URL, and authentication settings. Requires the notification configuration ID as input. Returns the NotificationConfigurationDetails object containing all subscription parameters and current status.",
+      "reasoning": "Current description is too vague and lacks specificity about inputs and outputs. Enhanced description clarifies what configuration details are returned, specifies the required input (configuration ID), and references the response schema for better AI agent understanding of available data.",
       "batch_index": 0
     }
   },
@@ -2465,7 +2467,42 @@
         "character": 0
       }
     },
-    "message": "Operation 'post-updateNotificationConfiguration' has semantic quality issues: vague_description. The current description is vague. The suggested description provides more detail about the return value and the requirement to provide all event types when updating, making it more actionable and understandable for AI agents.",
+    "message": "Operation 'post-getNotificationConfigurationList' has semantic quality issues: vague_description, missing_output_details. Current description is somewhat vague about the scope and return format. Enhanced description clarifies that it returns a list of configuration objects, specifies no input parameters are needed, and provides better context about what data is included in each configuration for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-getNotificationConfigurationList",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Get a list of notification subscription configurations",
+      "current_description": "Returns the details of the configurations of all of the notification subscriptions in the platform of the executing user.",
+      "description_suggestion": "Retrieves all notification subscription configurations for the authenticated user's platform. Returns a list of NotificationConfigurationDetails objects, each containing the complete configuration for a subscription including event types, endpoint URLs, and status. No input parameters required.",
+      "reasoning": "Current description is somewhat vague about the scope and return format. Enhanced description clarifies that it returns a list of configuration objects, specifies no input parameters are needed, and provides better context about what data is included in each configuration for AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-updateNotificationConfiguration' has semantic quality issues: missing_input_details, missing_output_details. Current description mentions the important caveat about event types but lacks clarity on what other fields can be updated and what is returned. Enhanced description clarifies the update scope, explains the event type replacement behavior more clearly, and specifies the response format for better AI agent understanding of operation effects.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2479,12 +2516,13 @@
       "operation_id": "post-updateNotificationConfiguration",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "Update a notification subscription configuration",
       "current_description": "Updates an existing notification subscription configuration. If you are updating the event types, you must provide all event types, otherwise the previous event type configuration will be overwritten.",
-      "description_suggestion": "Updates an existing notification subscription configuration. If updating event types, all event types must be provided; otherwise, the previous event type configuration will be overwritten. Returns the updated configuration details.",
-      "reasoning": "The current description is vague. The suggested description provides more detail about the return value and the requirement to provide all event types when updating, making it more actionable and understandable for AI agents.",
+      "description_suggestion": "Updates an existing notification subscription configuration with new settings. When modifying event types, all desired event types must be provided in the request—partial event type updates will replace the entire previous configuration. Supports updating endpoint URL, authentication credentials, and event type subscriptions. Returns the updated NotificationConfigurationDetails object.",
+      "reasoning": "Current description mentions the important caveat about event types but lacks clarity on what other fields can be updated and what is returned. Enhanced description clarifies the update scope, explains the event type replacement behavior more clearly, and specifies the response format for better AI agent understanding of operation effects.",
       "batch_index": 0
     }
   },
@@ -2499,7 +2537,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 6 operations analyzed, 2 quality issues found",
+    "message": "Semantic analysis completed: 6 operations analyzed, 3 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -2511,7 +2549,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 6,
-      "total_issues_found": 2,
+      "total_issues_found": 3,
       "batches_processed": 1
     }
   }

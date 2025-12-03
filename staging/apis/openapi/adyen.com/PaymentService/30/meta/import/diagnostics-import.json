@@ -3037,7 +3037,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post-adjustAuthorisation' has semantic quality issues: missing_side_effects, poor_ai_interpretability. Added missing side effects and improved clarity for AI agent interpretability.",
+    "message": "Operation 'post-voidPendingRefund' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. The original summary 'Cancel an in-person refund' is vague and domain-specific without clarifying the operation targets pending/unreferenced refunds. The description lacks clarity on output (what is returned) and side effects (state transition from pending to voided). Enhanced summary uses 'void' terminology consistent with the operation name and payment domain. Improved description clarifies the pending state requirement, explains both reference options with recommendation rationale, specifies the state change effect, and indicates what the response contains for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3048,18 +3048,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "post-adjustAuthorisation",
+      "operation_id": "post-voidPendingRefund",
       "has_quality_issues": true,
       "issues_found": [
-        "missing_side_effects",
-        "poor_ai_interpretability"
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
       ],
-      "current_summary": "Change the authorised amount",
-      "current_description": "Allows you to increase or decrease the authorised amount after the initial authorisation has taken place. This functionality enables for example tipping, improving the chances your authorisation will be valid, or charging the shopper when they have already left the merchant premises.\n\n This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). If you have a [newer integration](https://docs.adyen.com/online-payments), and are doing:\n* [Asynchronous adjustments](https://docs.adyen.com/online-payments/adjust-authorisation#asynchronous-or-synchronous-adjustment), use the [`/payments/{paymentPspReference}/amountUpdates`](https://docs.adyen.com/api-explorer/#/CheckoutService/v67/post/payments/{paymentPspReference}/amountUpdates) endpoint on Checkout API.\n* [Synchronous adjustments](https://docs.adyen.com/online-payments/adjust-authorisation#asynchronous-or-synchronous-adjustment), use this endpoint.",
-      "summary_suggestion": "Adjust the authorised amount after initial authorisation",
-      "description_suggestion": "Adjusts the authorised amount after the initial authorisation, enabling actions like tipping or charging the shopper after they have left. This operation returns a unique reference for the adjustment request. Note: For asynchronous adjustments, use the `/payments/{paymentPspReference}/amountUpdates` endpoint on Checkout API.",
-      "reasoning": "Added missing side effects and improved clarity for AI agent interpretability.",
-      "batch_index": 0
+      "current_summary": "Cancel an in-person refund",
+      "current_description": "This endpoint allows you to cancel an unreferenced refund request before it has been completed.\n\nIn your call, you can refer to the original refund request either by using the `tenderReference`, or the `pspReference`. We recommend implementing based on the `tenderReference`, as this is generated for both offline and online transactions.\n\nFor more information, refer to [Cancel an unreferenced refund](https://docs.adyen.com/point-of-sale/refund-payment/cancel-unreferenced).",
+      "summary_suggestion": "Void a pending refund request",
+      "description_suggestion": "Cancels an unreferenced refund request before completion. Refer to the original refund using either the `tenderReference` (recommended for both offline and online transactions) or the `pspReference`. This operation is only applicable to pending refunds that have not yet been processed. Returns a response confirming the void status and any relevant transaction details. The refund request state transitions from pending to voided upon successful completion.",
+      "reasoning": "The original summary 'Cancel an in-person refund' is vague and domain-specific without clarifying the operation targets pending/unreferenced refunds. The description lacks clarity on output (what is returned) and side effects (state transition from pending to voided). Enhanced summary uses 'void' terminology consistent with the operation name and payment domain. Improved description clarifies the pending state requirement, explains both reference options with recommendation rationale, specifies the state change effect, and indicates what the response contains for better AI agent decision-making.",
+      "batch_index": 1
     }
   },
   {

@@ -6371,7 +6371,78 @@
         "character": 0
       }
     },
-    "message": "Operation 'CorporateActions' has semantic quality issues: vague_summary, missing_context. The current summary is too vague. The description is missing details about the required parameters and the format of the returned data.",
+    "message": "Operation 'StockTradeSingle' has semantic quality issues: vague_description, missing_output_details, missing_input_details. Current description is too vague about inputs and outputs. It doesn't specify what parameters are available (date range, limit, pagination), what fields are returned in the response, or how pagination works. AI agents need clarity on these details to construct proper requests and handle responses. Enhanced description includes parameter types, response schema reference, and pagination support.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "StockTradeSingle",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_input_details"
+      ],
+      "current_summary": "Historical trades (single symbol)",
+      "current_description": "The historical stock trades API provides trade data for a stock symbol between the specified dates.",
+      "description_suggestion": "Retrieves historical trade data for a stock symbol within a specified date range. Accepts parameters for start/end dates, limit, and pagination. Returns an array of StockTrade objects containing timestamp, price, size, and exchange information. Supports pagination via page tokens for large result sets.",
+      "reasoning": "Current description is too vague about inputs and outputs. It doesn't specify what parameters are available (date range, limit, pagination), what fields are returned in the response, or how pagination works. AI agents need clarity on these details to construct proper requests and handle responses. Enhanced description includes parameter types, response schema reference, and pagination support.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'StockLatestTradeSingle' has semantic quality issues: vague_description, missing_output_details. Current description lacks specificity about what is returned. It doesn't mention the response structure (StockTrade object) or what fields are included. The phrase 'latest trades' (plural) is ambiguous - it should clarify that this returns a single latest trade. Enhanced description specifies the return type, key fields, and use case to help AI agents understand when to use this versus the historical trades endpoint.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "StockLatestTradeSingle",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Latest trade (single symbol)",
+      "current_description": "The latest trades endpoint provides the latest trade data for a given ticker symbol.",
+      "description_suggestion": "Retrieves the most recent trade data for a given stock symbol. Returns a StockTrade object containing the latest trade's timestamp, price, size, and exchange information. Useful for obtaining real-time trade information without historical data retrieval.",
+      "reasoning": "Current description lacks specificity about what is returned. It doesn't mention the response structure (StockTrade object) or what fields are included. The phrase 'latest trades' (plural) is ambiguous - it should clarify that this returns a single latest trade. Enhanced description specifies the return type, key fields, and use case to help AI agents understand when to use this versus the historical trades endpoint.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CorporateActions' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary is too generic. Description lacks detail about what corporate actions are returned, required parameters, and pagination support. Enhanced version clarifies the types of events, expected inputs, output structure, and pagination mechanism for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6386,13 +6457,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "Corporate actions",
       "current_description": "This endpoint provides data about the corporate actions for each given symbol over a specified time period.",
-      "summary_suggestion": "Retrieve corporate actions for specified symbols",
-      "description_suggestion": "Retrieves data about corporate actions for each given symbol over a specified time period. Requires parameters such as symbol, start date, and end date. Returns a list of corporate actions.",
-      "reasoning": "The current summary is too vague. The description is missing details about the required parameters and the format of the returned data.",
+      "summary_suggestion": "Retrieve corporate actions for symbols",
+      "description_suggestion": "Retrieves corporate action events (dividends, splits, mergers, etc.) for specified symbols within a given time period. Accepts symbol list and date range parameters. Returns corporate action records with process date, ex-date, record date, effective date, and payable date information. Results are paginated using next_page_token.",
+      "reasoning": "Original summary is too generic. Description lacks detail about what corporate actions are returned, required parameters, and pagination support. Enhanced version clarifies the types of events, expected inputs, output structure, and pagination mechanism for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -6407,7 +6479,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'Logos' has semantic quality issues: vague_summary, missing_context. The current summary is too vague. The description is missing details about the required parameters and the format of the returned data.",
+    "message": "Operation 'Logos' has semantic quality issues: vague_summary, missing_output_details. Original summary is too generic and not action-oriented. Description lacks information about output format, optional parameters, and use cases. Enhanced version clarifies the action, mentions the symbol parameter, indicates optional sizing, and provides context for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6422,13 +6494,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "Logos",
       "current_description": "Get the image of the company logo for the given symbol.",
       "summary_suggestion": "Retrieve company logo image",
-      "description_suggestion": "Retrieves the image of the company logo for the given symbol. Requires the symbol parameter. Returns a binary image file.",
-      "reasoning": "The current summary is too vague. The description is missing details about the required parameters and the format of the returned data.",
+      "description_suggestion": "Retrieves the company logo image for a specified symbol. Accepts a symbol parameter and optional size parameter. Returns the logo image in the requested format. Useful for displaying company branding in market data applications.",
+      "reasoning": "Original summary is too generic and not action-oriented. Description lacks information about output format, optional parameters, and use cases. Enhanced version clarifies the action, mentions the symbol parameter, indicates optional sizing, and provides context for AI agent decision-making.",
       "batch_index": 0
     }
   },
@@ -6443,7 +6515,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'StockLatestTrades' has semantic quality issues: vague_summary, missing_context. Original summary is too vague. Added context about sorting and pagination for better AI agent understanding.",
+    "message": "Operation 'News' has semantic quality issues: missing_input_details, missing_output_details. Summary is adequate, but description lacks critical details about input parameters (symbol filtering, date range, sorting), output structure (article fields), and pagination mechanism. Enhanced version clarifies filtering options, return fields, and pagination support for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6454,17 +6526,716 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "StockLatestTrades",
+      "operation_id": "News",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "News articles",
+      "current_description": "Returns latest news articles across stocks and crypto. By default, returns latest 10 news articles.",
+      "description_suggestion": "Retrieves the latest news articles for stocks and crypto assets. Returns up to 10 most recent articles by default. Accepts parameters for filtering by symbol, date range, sort order, and pagination. Each article includes headline, summary, source, publication timestamp, and relevant symbols. Use pagination tokens to retrieve additional articles beyond the default limit.",
+      "reasoning": "Summary is adequate, but description lacks critical details about input parameters (symbol filtering, date range, sorting), output structure (article fields), and pagination mechanism. Enhanced version clarifies filtering options, return fields, and pagination support for better AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'OptionMetaConditions' has semantic quality issues: vague_summary, missing_context, missing_output_details. Original summary is too vague and not action-oriented. Description lacks context about what tick types are supported, output structure, and use case. Enhanced version clarifies the operation retrieves metadata mappings, explains the tick type parameter, indicates the return format, and provides context for when an AI agent should use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "OptionMetaConditions",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Condition codes",
+      "current_description": "Returns the mapping between the condition codes and names.",
+      "summary_suggestion": "Retrieve option condition code mappings",
+      "description_suggestion": "Retrieves the mapping between option trade condition codes and their human-readable names for a specified tick type (trade, quote, etc.). Returns a dictionary or list of condition code objects with code identifiers and descriptions. Use this metadata to interpret condition flags in option trade and quote data.",
+      "reasoning": "Original summary is too vague and not action-oriented. Description lacks context about what tick types are supported, output structure, and use case. Enhanced version clarifies the operation retrieves metadata mappings, explains the tick type parameter, indicates the return format, and provides context for when an AI agent should use this operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CryptoLatestOrderbooks' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary is too generic. Description lacks clarity on input parameters (which symbols, how to specify them), output structure, and use case. Enhanced version specifies input expectations, output content, and practical application for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CryptoLatestOrderbooks",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Latest orderbook",
+      "current_description": "The latest orderbook endpoint returns the latest bid and ask orderbook for the crypto symbols provided.",
+      "summary_suggestion": "Retrieve latest crypto orderbook data",
+      "description_suggestion": "Retrieves the latest bid and ask orderbook data for specified crypto symbols. Accepts a list of crypto symbols as input and returns the most recent orderbook snapshot for each symbol, including bid/ask levels and sizes. Useful for real-time market depth analysis.",
+      "reasoning": "Original summary is too generic. Description lacks clarity on input parameters (which symbols, how to specify them), output structure, and use case. Enhanced version specifies input expectations, output content, and practical application for AI agents.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CryptoLatestQuotes' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Summary is too vague. Description lacks input parameter details and specific output schema information. Enhanced version clarifies input expectations, references the CryptoQuote schema, and explains the real-time nature of the data.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CryptoLatestQuotes",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Latest quotes",
+      "current_description": "The latest quotes endpoint returns the latest bid and ask prices for the crypto symbols provided.",
+      "summary_suggestion": "Retrieve latest crypto bid-ask quotes",
+      "description_suggestion": "Retrieves the latest bid and ask price quotes for specified crypto symbols. Accepts a list of crypto symbols as input and returns the most recent CryptoQuote data for each symbol, including bid price, ask price, and timestamp. Returns real-time market pricing information.",
+      "reasoning": "Summary is too vague. Description lacks input parameter details and specific output schema information. Enhanced version clarifies input expectations, references the CryptoQuote schema, and explains the real-time nature of the data.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CryptoLatestTrades' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Summary lacks specificity about trade data. Description is vague about inputs and outputs. Enhanced version clarifies that it returns trade executions (not just generic 'trade data'), references the CryptoTrade schema, and explains the real-time nature.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CryptoLatestTrades",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "Latest trades",
-      "current_description": "The latest multi-trades endpoint provides the latest historical trade data for the given ticker symbols.",
-      "summary_suggestion": "Get latest historical trades for specified stock symbols",
-      "description_suggestion": "The latest multi-trades endpoint provides the latest historical trade data for the given ticker symbols. The results are sorted by trade timestamp. The endpoint supports pagination using the `next_page_token` for continuous data retrieval.",
-      "reasoning": "Original summary is too vague. Added context about sorting and pagination for better AI agent understanding.",
+      "current_description": "The latest trades endpoint returns the latest trade data for the crypto symbols provided.",
+      "summary_suggestion": "Retrieve latest crypto trade executions",
+      "description_suggestion": "Retrieves the latest trade execution data for specified crypto symbols. Accepts a list of crypto symbols as input and returns the most recent CryptoTrade data for each symbol, including price, size, and timestamp. Provides real-time transaction information for market analysis.",
+      "reasoning": "Summary lacks specificity about trade data. Description is vague about inputs and outputs. Enhanced version clarifies that it returns trade executions (not just generic 'trade data'), references the CryptoTrade schema, and explains the real-time nature.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CryptoSnapshots' has semantic quality issues: vague_summary, missing_output_details. Summary 'Snapshots' is too generic and doesn't indicate it's for crypto or what data is included. Description lists data types but lacks clarity on input parameters and the consolidated nature of the response. Enhanced version clarifies the comprehensive nature and input/output expectations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CryptoSnapshots",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "Snapshots",
+      "current_description": "The snapshots endpoint returns the latest trade, latest quote, latest minute bar, latest daily bar, and previous daily bar data for crypto symbols.",
+      "summary_suggestion": "Retrieve comprehensive crypto market snapshots",
+      "description_suggestion": "Retrieves comprehensive market snapshots for specified crypto symbols, including the latest trade, latest quote, latest minute bar, latest daily bar, and previous daily bar data. Provides a consolidated view of current and recent market activity. Accepts a list of crypto symbols and returns aggregated snapshot data for each symbol.",
+      "reasoning": "Summary 'Snapshots' is too generic and doesn't indicate it's for crypto or what data is included. Description lists data types but lacks clarity on input parameters and the consolidated nature of the response. Enhanced version clarifies the comprehensive nature and input/output expectations.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'OptionMetaExchanges' has semantic quality issues: vague_summary, vague_description, missing_output_details. Original summary 'Exchange codes' is too vague and not action-oriented. Description lacks clarity about the purpose and use case. Enhanced version explains what the mapping contains and why an AI agent would need this data (to understand available exchanges for subsequent queries).",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "OptionMetaExchanges",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Exchange codes",
+      "current_description": "Returns the mapping between the option exchange codes and the corresponding exchanges names.",
+      "summary_suggestion": "Retrieve option exchange code mappings",
+      "description_suggestion": "Returns a mapping of option exchange codes to their corresponding exchange names. This metadata endpoint helps identify which exchanges are available for options trading and their associated codes used in other API calls.",
+      "reasoning": "Original summary 'Exchange codes' is too vague and not action-oriented. Description lacks clarity about the purpose and use case. Enhanced version explains what the mapping contains and why an AI agent would need this data (to understand available exchanges for subsequent queries).",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'OptionLatestQuotes' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Summary is too generic. Description lacks information about input parameters (which symbols to query) and output details (what fields are returned). Enhanced version clarifies the input requirements and specifies the returned quote fields for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "OptionLatestQuotes",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Latest quotes",
+      "current_description": "The latest multi-quotes endpoint provides the latest bid and ask prices for each given contract symbol.",
+      "summary_suggestion": "Retrieve latest option bid-ask quotes",
+      "description_suggestion": "Retrieves the latest bid and ask prices for specified option contract symbols. Accepts one or more contract symbols as input and returns the most recent quote data including bid price, ask price, bid size, and ask size for each symbol.",
+      "reasoning": "Summary is too generic. Description lacks information about input parameters (which symbols to query) and output details (what fields are returned). Enhanced version clarifies the input requirements and specifies the returned quote fields for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'OptionSnapshots' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Summary 'Snapshots' is too vague and not action-oriented. Description lacks clarity about input parameters and what 'greeks' means in context. Enhanced version specifies the input (contract symbols), output components (trades, quotes, greeks), and explains the greek values for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "OptionSnapshots",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Snapshots",
+      "current_description": "The snapshots endpoint provides the latest trade, latest quote and greeks for each given contract symbol.",
+      "summary_suggestion": "Retrieve option snapshots with trades and greeks",
+      "description_suggestion": "Retrieves comprehensive snapshots for specified option contract symbols, including the latest trade data, latest quote (bid/ask), and option greeks (delta, gamma, theta, vega, rho). Accepts one or more contract symbols and returns aggregated market data for each symbol.",
+      "reasoning": "Summary 'Snapshots' is too vague and not action-oriented. Description lacks clarity about input parameters and what 'greeks' means in context. Enhanced version specifies the input (contract symbols), output components (trades, quotes, greeks), and explains the greek values for better AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'OptionChain' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_context. Summary lacks context about what 'option chain' means. Description doesn't explain input parameters (the 12 parameters suggest filtering options) or clarify that it returns multiple contracts for one underlying. Enhanced version explains the relationship between underlying symbol and contracts, mentions key filtering parameters, and clarifies the multi-contract response for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "OptionChain",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Option chain",
+      "current_description": "The option chain endpoint provides the latest trade, latest quote, and greeks for each contract symbol of the underlying symbol.",
+      "summary_suggestion": "Retrieve option chain for underlying symbol",
+      "description_suggestion": "Retrieves the complete option chain for a specified underlying stock symbol, including all available contract symbols with their latest trade data, quotes (bid/ask), and option greeks. Supports filtering by expiration date, strike price range, and option type (call/put). Returns all matching contracts with their current market data.",
+      "reasoning": "Summary lacks context about what 'option chain' means. Description doesn't explain input parameters (the 12 parameters suggest filtering options) or clarify that it returns multiple contracts for one underlying. Enhanced version explains the relationship between underlying symbol and contracts, mentions key filtering parameters, and clarifies the multi-contract response for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'OptionLatestTrades' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Summary is too generic and doesn't distinguish this from other trade endpoints. Description lacks clarity about input parameters and output fields. Enhanced version specifies that it accepts multiple symbols, clarifies it returns the latest (not historical range) trades, and lists key returned fields for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "OptionLatestTrades",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Latest trades",
+      "current_description": "The latest multi-trades endpoint provides the latest historical trade data for multiple given contract symbols.",
+      "summary_suggestion": "Retrieve latest option trades for symbols",
+      "description_suggestion": "Retrieves the most recent trade data for specified option contract symbols. Accepts one or more contract symbols as input and returns the latest trade information including price, size, timestamp, and exchange for each symbol.",
+      "reasoning": "Summary is too generic and doesn't distinguish this from other trade endpoints. Description lacks clarity about input parameters and output fields. Enhanced version specifies that it accepts multiple symbols, clarifies it returns the latest (not historical range) trades, and lists key returned fields for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'MostActives' has semantic quality issues: missing_input_details, missing_output_details. Summary is clear and action-oriented. Description lacks detail about input parameters (how to specify metric and limit) and output format (what fields are returned). Enhanced version clarifies the available ranking metrics, how to customize the limit, and what data is returned for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "MostActives",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Most active stocks",
+      "current_description": "Returns the most active stocks by volume or trade count. By default returns the top 10 symbols by volume.",
+      "description_suggestion": "Returns the most active stocks ranked by trading volume or trade count. Accepts optional parameters to specify the ranking metric (volume or trade count) and result limit. By default returns the top 10 symbols by trading volume. Returns a list of stock symbols with their activity metrics.",
+      "reasoning": "Summary is clear and action-oriented. Description lacks detail about input parameters (how to specify metric and limit) and output format (what fields are returned). Enhanced version clarifies the available ranking metrics, how to customize the limit, and what data is returned for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'StockBars' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary 'Historical bars' is too generic. Description lacks clarity on what OHLC means, expected inputs (timeframe, date format), and output structure. Added specificity about bar types, pagination behavior, and parameter guidance for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "StockBars",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Historical bars",
+      "current_description": "The historical stock bars API provides aggregates for a list of stock symbols between the specified dates.\n\nThe returned results are sorted by symbol first, then by bar timestamp.\nThis means that you are likely to see only one symbol in your first response if there are enough bars for that symbol to hit the limit you requested.\n\nIn these situations, if you keep requesting again with the `next_page_token` from the previous response, you will eventually reach the other symbols if any bars were found for them.",
+      "summary_suggestion": "Retrieve historical OHLC bars for multiple stocks",
+      "description_suggestion": "Retrieves historical OHLC (Open, High, Low, Close) bar aggregates for multiple stock symbols within a specified date range. Accepts parameters for symbols, timeframe (minute/hour/day), start/end dates, and pagination limit. Returns StockBar objects sorted by symbol then timestamp. Results are paginated; use the next_page_token to retrieve additional symbols if the limit is reached. Supports filtering by trade conditions and adjustments.",
+      "reasoning": "Original summary 'Historical bars' is too generic. Description lacks clarity on what OHLC means, expected inputs (timeframe, date format), and output structure. Added specificity about bar types, pagination behavior, and parameter guidance for AI agent decision-making.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'StockLatestBars' has semantic quality issues: vague_summary, missing_input_details. Summary is too vague ('Latest bars'). Description lacks input parameter details and clarity about what 'minute-aggregated' means in context. Added specificity about symbol input, optional parameters, and use case to improve AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "StockLatestBars",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "Latest bars",
+      "current_description": "The latest multi-bars endpoint returns the latest minute-aggregated historical bar data for the ticker symbols provided.",
+      "summary_suggestion": "Retrieve latest minute-aggregated bars for stocks",
+      "description_suggestion": "Retrieves the most recent minute-aggregated OHLC bar data for the specified stock symbols. Accepts a list of symbols and optional feed parameter. Returns the latest StockBar object for each symbol. Useful for obtaining current intraday price aggregates without specifying date ranges.",
+      "reasoning": "Summary is too vague ('Latest bars'). Description lacks input parameter details and clarity about what 'minute-aggregated' means in context. Added specificity about symbol input, optional parameters, and use case to improve AI agent interpretability.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'StockMetaConditions' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Summary is too generic. Description lacks context about what 'condition codes' represent, what the ticktype parameter means, and what the response structure contains. Added domain context about trade vs quote conditions and practical use case for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "StockMetaConditions",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Condition codes",
+      "current_description": "Returns the mapping between the condition codes and names.",
+      "summary_suggestion": "Retrieve trade condition code mappings",
+      "description_suggestion": "Retrieves the mapping between trade condition codes and their human-readable names for a specified tick type (trade or quote). The ticktype parameter determines whether to return trade conditions or quote conditions. Returns a dictionary mapping condition code identifiers to condition names, useful for interpreting condition flags in trade and quote data.",
+      "reasoning": "Summary is too generic. Description lacks context about what 'condition codes' represent, what the ticktype parameter means, and what the response structure contains. Added domain context about trade vs quote conditions and practical use case for AI agents.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'StockMetaExchanges' has semantic quality issues: vague_summary, vague_description, missing_output_details. Summary is too vague. Description lacks specificity about response format and practical use case. Added examples of exchange codes and clarified that this is reference data for interpreting other API responses.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "StockMetaExchanges",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Exchange codes",
+      "current_description": "Returns the mapping between the stock exchange codes and the corresponding exchanges names.",
+      "summary_suggestion": "Retrieve stock exchange code mappings",
+      "description_suggestion": "Retrieves the mapping between stock exchange codes (e.g., NYSE, NASDAQ) and their full exchange names. Returns a dictionary of exchange identifiers to exchange names. This reference data is useful for interpreting exchange information in trade and quote data.",
+      "reasoning": "Summary is too vague. Description lacks specificity about response format and practical use case. Added examples of exchange codes and clarified that this is reference data for interpreting other API responses.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'StockQuotes' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Summary 'Historical quotes' is too generic and doesn't clarify what quotes represent (bid-ask data). Description lacks input parameter details and clarity about quote structure. Added specificity about bid-ask nature, expected parameters, and pagination behavior for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "StockQuotes",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Historical quotes",
+      "current_description": "The historical stock quotes API provides quote data for a list of stock symbols between the specified dates.\n\nThe returned results are sorted by symbol first, then by the quote timestamp.\nThis means that you are likely to see only one symbol in your first response if there are enough quotes for that symbol to hit the limit you requested.\n\nIn these situations, if you keep requesting again with the `next_page_token` from the previous response, you will eventually reach the other symbols if any quotes were found for them.",
+      "summary_suggestion": "Retrieve historical bid-ask quotes for stocks",
+      "description_suggestion": "Retrieves historical bid-ask quote data (best bid/ask prices and sizes) for multiple stock symbols within a specified date range. Accepts parameters for symbols, start/end dates, limit, and pagination token. Returns StockQuote objects sorted by symbol then timestamp. Results are paginated; use next_page_token to retrieve additional symbols if limit is reached. Supports filtering by quote conditions.",
+      "reasoning": "Summary 'Historical quotes' is too generic and doesn't clarify what quotes represent (bid-ask data). Description lacks input parameter details and clarity about quote structure. Added specificity about bid-ask nature, expected parameters, and pagination behavior for better AI agent understanding.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'StockLatestQuotes' has semantic quality issues: vague_summary, missing_input_details. Summary is vague and doesn't clarify bid-ask nature. Description lacks input parameter details and clarity about response structure. Added specificity about symbol input, optional parameters, and quote data components (bid/ask prices and sizes).",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "StockLatestQuotes",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "Latest quotes",
+      "current_description": "The latest multi-quotes endpoint provides the latest bid and ask prices for each given ticker symbols.",
+      "summary_suggestion": "Retrieve latest bid-ask quotes for stocks",
+      "description_suggestion": "Retrieves the most recent bid and ask price data for the specified stock symbols. Accepts a list of symbols and optional feed parameter. Returns the latest StockQuote object for each symbol containing best bid price/size and best ask price/size. Useful for obtaining current market prices without specifying date ranges.",
+      "reasoning": "Summary is vague and doesn't clarify bid-ask nature. Description lacks input parameter details and clarity about response structure. Added specificity about symbol input, optional parameters, and quote data components (bid/ask prices and sizes).",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'StockSnapshots' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Summary 'Snapshots' is too vague and doesn't convey what data is included. Description lacks input parameter details and doesn't explain the practical value of combining multiple data types. Added specificity about included data components, parameters, and use case for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "StockSnapshots",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Snapshots",
+      "current_description": "The snapshot endpoint for multiple tickers provides the latest trade, latest quote, minute bar, daily bar, and previous daily bar data for each given ticker symbol.",
+      "summary_suggestion": "Retrieve comprehensive market snapshots for stocks",
+      "description_suggestion": "Retrieves comprehensive market snapshots for multiple stock symbols, combining the latest trade, latest quote, current minute bar, current daily bar, and previous daily bar data in a single response. Accepts a list of symbols and optional feed parameter. Returns aggregated snapshot data for each symbol, providing a complete view of current and recent market activity. Useful for obtaining multiple data types without separate API calls.",
+      "reasoning": "Summary 'Snapshots' is too vague and doesn't convey what data is included. Description lacks input parameter details and doesn't explain the practical value of combining multiple data types. Added specificity about included data components, parameters, and use case for AI agent decision-making.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'StockTrades' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary 'Historical trades' is too generic. Description lacks clarity on multi-symbol support, pagination behavior, and return value structure. Enhanced version clarifies the operation retrieves data for multiple symbols, explains pagination behavior explicitly, and specifies the return type for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "StockTrades",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Historical trades",
+      "current_description": "The historical stock trades API provides trade data for a list of stock symbols between the specified dates.\n\nThe returned results are sorted by symbol first then by trade timestamp.\nThis means that you are likely to see only one symbol in your first response if there are enough trades for that symbol to hit the limit you requested.\n\nIn these situations, if you keep requesting again with the `next_page_token` from the previous response, you will eventually reach the other symbols if any trades were found for them.",
+      "summary_suggestion": "Retrieve historical stock trades for multiple symbols",
+      "description_suggestion": "Retrieves historical trade data for multiple stock symbols within a specified date range. Results are sorted by symbol first, then by trade timestamp. Due to pagination limits, responses may contain trades for only one symbol initially. Use the next_page_token from the response to retrieve trades for additional symbols. Returns an array of StockTrade objects with timestamp, price, size, and exchange information.",
+      "reasoning": "Original summary 'Historical trades' is too generic. Description lacks clarity on multi-symbol support, pagination behavior, and return value structure. Enhanced version clarifies the operation retrieves data for multiple symbols, explains pagination behavior explicitly, and specifies the return type for better AI agent understanding.",
       "batch_index": 5
     }
   },
@@ -6479,7 +7250,219 @@
         "character": 0
       }
     },
-    "message": "Operation 'CryptoPerpLatestBars' has semantic quality issues: vague_description. The current description is vague and lacks detail about the data returned. The suggestion adds clarity and specifies the OHLC values.",
+    "message": "Operation 'StockLatestTrades' has semantic quality issues: vague_summary, missing_output_details. Summary is too vague and doesn't indicate multi-symbol capability. Description lacks specificity about what 'latest' means and what data is returned. Enhanced version clarifies multi-symbol support, specifies return type (StockTrade), and explains the use case for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "StockLatestTrades",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "Latest trades",
+      "current_description": "The latest multi-trades endpoint provides the latest historical trade data for the given ticker symbols.",
+      "summary_suggestion": "Retrieve latest trades for multiple stock symbols",
+      "description_suggestion": "Retrieves the most recent trade data for multiple specified stock symbols. Returns the latest StockTrade object for each symbol, including timestamp, price, size, and exchange information. Useful for obtaining current market activity without historical date filtering.",
+      "reasoning": "Summary is too vague and doesn't indicate multi-symbol capability. Description lacks specificity about what 'latest' means and what data is returned. Enhanced version clarifies multi-symbol support, specifies return type (StockTrade), and explains the use case for AI agent decision-making.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'StockAuctionSingle' has semantic quality issues: vague_summary, missing_output_details, missing_context. Summary is unclear about what 'auctions' means in market context. Description lacks detail on what auction data contains, pagination support, and return structure. Enhanced version clarifies auction context, specifies data fields, and explains pagination for better AI interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "StockAuctionSingle",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Historical auctions (single)",
+      "current_description": "The historical auctions endpoint provides auction prices for the given stock symbol between the specified dates.",
+      "summary_suggestion": "Retrieve historical auction prices for a stock symbol",
+      "description_suggestion": "Retrieves historical auction price data for a single stock symbol within a specified date range. Auction data includes opening and closing auction prices. Supports pagination through date range filtering and next_page_token. Returns auction records with timestamp and price information for the requested symbol.",
+      "reasoning": "Summary is unclear about what 'auctions' means in market context. Description lacks detail on what auction data contains, pagination support, and return structure. Enhanced version clarifies auction context, specifies data fields, and explains pagination for better AI interpretability.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'StockBarSingle' has semantic quality issues: missing_output_details, missing_input_details. Summary is clear and concise. Description lacks specificity about OHLC data, supported timeframes, return type (StockBar), and pagination support. Enhanced version clarifies data structure and available parameters for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "StockBarSingle",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_input_details"
+      ],
+      "current_summary": "Historical bars (single symbol)",
+      "current_description": "The historical stock bars API provides aggregates for the stock symbol between the specified dates.",
+      "description_suggestion": "Retrieves OHLC (Open, High, Low, Close) bar aggregates for a single stock symbol within a specified date range. Supports multiple timeframe intervals (minute, hour, day, week, month). Returns an array of StockBar objects containing OHLC prices, volume, and timestamp for each interval. Supports pagination through next_page_token.",
+      "reasoning": "Summary is clear and concise. Description lacks specificity about OHLC data, supported timeframes, return type (StockBar), and pagination support. Enhanced version clarifies data structure and available parameters for better AI agent understanding.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'StockLatestBarSingle' has semantic quality issues: missing_output_details, missing_input_details. Summary is clear. Description specifies minute aggregation but lacks clarity on return type and OHLC structure. Enhanced version clarifies return type (StockBar), specifies OHLC fields, and explains the use case for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "StockLatestBarSingle",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_input_details"
+      ],
+      "current_summary": "Latest bar (single symbol)",
+      "current_description": "The latest stock bars endpoint returns the latest minute-aggregated historical bar for the requested security.",
+      "description_suggestion": "Retrieves the most recent minute-aggregated OHLC bar for a single stock symbol. Returns a StockBar object containing the latest open, high, low, close prices, volume, and timestamp. Useful for obtaining current intraday price action without historical date filtering.",
+      "reasoning": "Summary is clear. Description specifies minute aggregation but lacks clarity on return type and OHLC structure. Enhanced version clarifies return type (StockBar), specifies OHLC fields, and explains the use case for AI agent decision-making.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'StockQuoteSingle' has semantic quality issues: missing_output_details, missing_input_details. Summary is clear. Description is too vague about what 'quote data' contains. Enhanced version clarifies that quotes are bid/ask data, specifies return type (StockQuote), explains pagination, and clarifies the meaning of quotes for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "StockQuoteSingle",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_input_details"
+      ],
+      "current_summary": "Historical quotes (single symbol)",
+      "current_description": "The historical stock quotes API provides quote data for a stock symbol between the specified dates.",
+      "description_suggestion": "Retrieves historical bid and ask quote data for a single stock symbol within a specified date range. Returns an array of StockQuote objects containing best bid/ask prices, sizes, and timestamps. Supports pagination through next_page_token. Quotes represent the best available prices at specific points in time.",
+      "reasoning": "Summary is clear. Description is too vague about what 'quote data' contains. Enhanced version clarifies that quotes are bid/ask data, specifies return type (StockQuote), explains pagination, and clarifies the meaning of quotes for AI agent understanding.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'StockLatestQuoteSingle' has semantic quality issues: missing_output_details. Summary is clear and concise. Description adequately explains bid/ask concept but lacks specificity about return type (StockQuote) and data fields. Enhanced version clarifies return structure and fields for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "StockLatestQuoteSingle",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details"
+      ],
+      "current_summary": "Latest quote (single symbol)",
+      "current_description": "The latest quotes endpoint provides the latest bid and ask prices for a given ticker symbol.",
+      "description_suggestion": "Retrieves the most recent bid and ask quote for a single stock symbol. Returns a StockQuote object containing the latest best bid price, bid size, ask price, ask size, and timestamp. Useful for obtaining current market prices without historical date filtering.",
+      "reasoning": "Summary is clear and concise. Description adequately explains bid/ask concept but lacks specificity about return type (StockQuote) and data fields. Enhanced version clarifies return structure and fields for better AI agent understanding.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CryptoPerpLatestBars' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original summary 'Latest bars' is too generic and doesn't specify the asset class or data type. Description lacks specificity about what 'bar data' means (OHLC), input format expectations, output structure, and update frequency. Enhanced version clarifies the OHLC nature, input/output formats, and real-time characteristics for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6493,13 +7476,16 @@
       "operation_id": "CryptoPerpLatestBars",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "Latest bars",
       "current_description": "The latest bars endpoint returns the latest bar data for the crypto perpetual futures symbols provided.",
-      "summary_suggestion": "Get latest crypto perpetual futures bars",
-      "description_suggestion": "The latest bars endpoint returns the latest bar data for the specified crypto perpetual futures symbols, including OHLC (Open, High, Low, Close) values.",
-      "reasoning": "The current description is vague and lacks detail about the data returned. The suggestion adds clarity and specifies the OHLC values.",
+      "summary_suggestion": "Retrieve latest OHLC bars for crypto perpetual futures",
+      "description_suggestion": "Returns the latest OHLC (Open, High, Low, Close) bar data for the specified crypto perpetual futures symbols. Accepts a comma-separated list of symbols as input. Returns an array of CryptoBar objects containing aggregated trade data for the most recent interval. Data is updated in real-time as new trades occur.",
+      "reasoning": "Original summary 'Latest bars' is too generic and doesn't specify the asset class or data type. Description lacks specificity about what 'bar data' means (OHLC), input format expectations, output structure, and update frequency. Enhanced version clarifies the OHLC nature, input/output formats, and real-time characteristics for better AI agent interpretability.",
       "batch_index": 2
     }
   },
@@ -6514,7 +7500,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CryptoPerpLatestOrderbooks' has semantic quality issues: vague_description. The current description is vague and lacks detail about the data returned. The suggestion adds clarity and specifies the depth and price levels.",
+    "message": "Operation 'CryptoPerpLatestOrderbooks' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Summary is too vague and doesn't convey the bid-ask nature of orderbook data. Description lacks clarity on input format, output structure (multiple price levels), and real-time nature. Enhanced version specifies input format, explains orderbook structure with price levels and quantities, and clarifies real-time updates for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6528,13 +7514,16 @@
       "operation_id": "CryptoPerpLatestOrderbooks",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "Latest orderbook",
       "current_description": "The latest orderbook endpoint returns the latest bid and ask orderbook for the crypto perpetual futures symbols provided.",
-      "summary_suggestion": "Get latest crypto perpetual futures orderbook",
-      "description_suggestion": "The latest orderbook endpoint returns the latest bid and ask orderbook for the specified crypto perpetual futures symbols, including depth and price levels.",
-      "reasoning": "The current description is vague and lacks detail about the data returned. The suggestion adds clarity and specifies the depth and price levels.",
+      "summary_suggestion": "Retrieve latest bid-ask orderbook for crypto perpetual futures",
+      "description_suggestion": "Returns the latest bid and ask orderbook data for the specified crypto perpetual futures symbols. Accepts a comma-separated list of symbols as input. Returns an array of orderbook objects containing multiple price levels with bid/ask quantities for each symbol. Data reflects the current market depth and is updated in real-time.",
+      "reasoning": "Summary is too vague and doesn't convey the bid-ask nature of orderbook data. Description lacks clarity on input format, output structure (multiple price levels), and real-time nature. Enhanced version specifies input format, explains orderbook structure with price levels and quantities, and clarifies real-time updates for AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -6549,7 +7538,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CryptoPerpLatestQuotes' has semantic quality issues: vague_description. The current description is vague and lacks detail about the data returned. The suggestion adds clarity.",
+    "message": "Operation 'CryptoPerpLatestQuotes' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Summary lacks specificity about quote type (bid-ask). Description is minimal and doesn't clarify input format, output structure, or what 'associated quantities' means. Enhanced version specifies input format, references the CryptoQuote schema for consistency, explains bid/ask with quantities, and clarifies real-time updates.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6563,13 +7552,16 @@
       "operation_id": "CryptoPerpLatestQuotes",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "Latest quotes",
       "current_description": "The latest quotes endpoint returns the latest bid and ask prices for the crypto perpetual futures symbols provided.",
-      "summary_suggestion": "Get latest crypto perpetual futures quotes",
-      "description_suggestion": "The latest quotes endpoint returns the latest bid and ask prices for the specified crypto perpetual futures symbols.",
-      "reasoning": "The current description is vague and lacks detail about the data returned. The suggestion adds clarity.",
+      "summary_suggestion": "Retrieve latest bid-ask quotes for crypto perpetual futures",
+      "description_suggestion": "Returns the latest bid and ask price quotes for the specified crypto perpetual futures symbols. Accepts a comma-separated list of symbols as input. Returns an array of CryptoQuote objects containing the best bid price, ask price, and associated quantities for each symbol. Data is updated in real-time as market conditions change.",
+      "reasoning": "Summary lacks specificity about quote type (bid-ask). Description is minimal and doesn't clarify input format, output structure, or what 'associated quantities' means. Enhanced version specifies input format, references the CryptoQuote schema for consistency, explains bid/ask with quantities, and clarifies real-time updates.",
       "batch_index": 2
     }
   },
@@ -6584,7 +7576,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CryptoPerpLatestTrades' has semantic quality issues: vague_description. The current description is vague and lacks detail about the data returned. The suggestion adds clarity and specifies the trade details.",
+    "message": "Operation 'CryptoPerpLatestTrades' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Summary is too generic and doesn't indicate these are executed trades. Description lacks input format clarity, output structure details, and what trade data includes. Enhanced version specifies input format, references CryptoTrade schema, explains trade components (price, size, timestamp, side), and clarifies real-time updates for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6598,13 +7590,16 @@
       "operation_id": "CryptoPerpLatestTrades",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "Latest trades",
       "current_description": "The latest trades endpoint returns the latest trade data for the crypto perpetual futures symbols provided.",
-      "summary_suggestion": "Get latest crypto perpetual futures trades",
-      "description_suggestion": "The latest trades endpoint returns the latest trade data for the specified crypto perpetual futures symbols, including trade ID, price, size, and timestamp.",
-      "reasoning": "The current description is vague and lacks detail about the data returned. The suggestion adds clarity and specifies the trade details.",
+      "summary_suggestion": "Retrieve latest executed trades for crypto perpetual futures",
+      "description_suggestion": "Returns the latest executed trade data for the specified crypto perpetual futures symbols. Accepts a comma-separated list of symbols as input. Returns an array of CryptoTrade objects containing trade price, size, timestamp, and side (buy/sell) information for each symbol's most recent trades. Data is updated in real-time as trades execute.",
+      "reasoning": "Summary is too generic and doesn't indicate these are executed trades. Description lacks input format clarity, output structure details, and what trade data includes. Enhanced version specifies input format, references CryptoTrade schema, explains trade components (price, size, timestamp, side), and clarifies real-time updates for AI agent decision-making.",
       "batch_index": 2
     }
   },
@@ -6619,42 +7614,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CryptoBars' has semantic quality issues: vague_description. The current description is vague and lacks detail about the data returned. The suggestion adds clarity and specifies the OHLC values.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CryptoBars",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description"
-      ],
-      "current_summary": "Historical bars",
-      "current_description": "The crypto bars API provides historical aggregates for a list of crypto symbols between the specified dates.",
-      "summary_suggestion": "Get historical crypto bars",
-      "description_suggestion": "The crypto bars API provides historical OHLC (Open, High, Low, Close) aggregates for the specified list of crypto symbols between the specified dates.",
-      "reasoning": "The current description is vague and lacks detail about the data returned. The suggestion adds clarity and specifies the OHLC values.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CryptoLatestBars' has semantic quality issues: vague_description. The current description is vague and lacks detail about the data returned. The suggestion adds clarity and specifies the OHLC values.",
+    "message": "Operation 'CryptoLatestBars' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Summary 'Latest bars' is too generic and doesn't specify the minute aggregation interval. Description mentions 'minute-aggregated' but lacks clarity on OHLC components, input format, output structure, and use cases. Enhanced version specifies minute aggregation in summary, clarifies OHLC data, input/output formats, and provides context about use cases for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6668,13 +7628,16 @@
       "operation_id": "CryptoLatestBars",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "Latest bars",
       "current_description": "The latest multi-bars endpoint returns the latest minute-aggregated historical bar data for each of the crypto symbols provided.",
-      "summary_suggestion": "Get latest crypto minute-aggregated bars",
-      "description_suggestion": "The latest multi-bars endpoint returns the latest minute-aggregated historical bar data for each of the specified crypto symbols, including OHLC (Open, High, Low, Close) values.",
-      "reasoning": "The current description is vague and lacks detail about the data returned. The suggestion adds clarity and specifies the OHLC values.",
+      "summary_suggestion": "Retrieve latest minute-aggregated OHLC bars for crypto",
+      "description_suggestion": "Returns the latest minute-aggregated OHLC bar data for the specified crypto symbols. Accepts a comma-separated list of symbols as input. Returns an array of CryptoBar objects containing the most recent complete minute bar for each symbol, including open, high, low, close prices and trade volume. Useful for real-time technical analysis and price monitoring.",
+      "reasoning": "Summary 'Latest bars' is too generic and doesn't specify the minute aggregation interval. Description mentions 'minute-aggregated' but lacks clarity on OHLC components, input format, output structure, and use cases. Enhanced version specifies minute aggregation in summary, clarifies OHLC data, input/output formats, and provides context about use cases for better AI agent interpretability.",
       "batch_index": 2
     }
   },
@@ -6689,7 +7652,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 45 operations analyzed, 9 quality issues found",
+    "message": "Semantic analysis completed: 45 operations analyzed, 35 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -6701,7 +7664,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 45,
-      "total_issues_found": 9,
+      "total_issues_found": 35,
       "batches_processed": 7
     }
   }

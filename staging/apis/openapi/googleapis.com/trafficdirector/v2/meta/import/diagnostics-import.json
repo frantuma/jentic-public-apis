@@ -2096,7 +2096,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'trafficdirector.discovery.client_status' has semantic quality issues: vague_summary, missing_context, missing_output_details. Original summary and description were missing. Added a summary that is concise and action-oriented. The description now includes details about the request schema, authentication requirement, and the expected response schema for better AI agent interpretability.",
+    "message": "Operation 'trafficdirector.discovery.client_status' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, missing_context, poor_ai_interpretability. Both summary and description are completely empty, making this operation undiscoverable for AI agents. Added a clear, action-oriented summary describing what the operation retrieves. The description now explains: (1) the operation's purpose within the discovery/control plane context, (2) what inputs are expected (NodeMatchers in ClientStatusRequest), (3) what outputs are returned (ClientStatusResponse with client details), (4) the domain context (Envoy clients, xDS configuration, Traffic Director), and (5) practical use cases for monitoring. This enables AI agents to understand when and how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2111,14 +2111,18 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
         "missing_context",
-        "missing_output_details"
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Request client status information",
-      "description_suggestion": "Requests the status information for clients identified by a list of NodeMatchers. Requires authentication. Returns a list of ClientStatusResponse objects with the status of each client.",
-      "reasoning": "Original summary and description were missing. Added a summary that is concise and action-oriented. The description now includes details about the request schema, authentication requirement, and the expected response schema for better AI agent interpretability.",
+      "summary_suggestion": "Retrieve client status for specified nodes",
+      "description_suggestion": "Retrieves the current status of Envoy client instances identified by a list of NodeMatchers. This discovery operation queries the status of dynamically configured clients, including their xDS configuration state and health information. Accepts a ClientStatusRequest containing node matching criteria and returns a ClientStatusResponse with detailed per-client configuration and status details. Useful for monitoring client connectivity and configuration synchronization in the Traffic Director control plane.",
+      "reasoning": "Both summary and description are completely empty, making this operation undiscoverable for AI agents. Added a clear, action-oriented summary describing what the operation retrieves. The description now explains: (1) the operation's purpose within the discovery/control plane context, (2) what inputs are expected (NodeMatchers in ClientStatusRequest), (3) what outputs are returned (ClientStatusResponse with client details), (4) the domain context (Envoy clients, xDS configuration, Traffic Director), and (5) practical use cases for monitoring. This enables AI agents to understand when and how to use this operation.",
       "batch_index": 0
     }
   },

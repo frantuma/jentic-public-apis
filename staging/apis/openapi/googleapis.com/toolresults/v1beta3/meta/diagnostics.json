@@ -12681,7 +12681,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'toolresults.projects.histories.executions.steps.accessibilityClusters' has semantic quality issues: vague_summary, missing_context, poor_ai_interpretability. The original summary was missing, and the description lacked clarity and context. The suggestions provide a clear action, expected inputs, outputs, and potential error codes.",
+    "message": "Operation 'toolresults.projects.histories.executions.steps.accessibilityClusters' has semantic quality issues: vague_summary, missing_output_details, missing_input_details, poor_ai_interpretability. Original summary is empty, making it impossible for AI agents to understand the operation's purpose. Description lacks clarity about what accessibility clusters are, what inputs are required (Step resource name), and what the response contains. Added context about the domain concept (accessibility clusters group related issues), clarified input requirements, specified return value structure, and reorganized error codes for better readability. This improves AI agent interpretability for determining when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12696,14 +12696,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
+        "missing_output_details",
+        "missing_input_details",
         "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Lists accessibility clusters for a given Step May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if an argument in the request happens to be invalid; e.g. if the locale format is incorrect - NOT_FOUND - if the containing Step does not exist",
-      "summary_suggestion": "Retrieve accessibility clusters for a specific step",
-      "description_suggestion": "Retrieves accessibility clusters for a specific step within an execution. Requires appropriate permissions. Returns a list of accessibility clusters. May return PERMISSION_DENIED, INVALID_ARGUMENT, FAILED_PRECONDITION, or NOT_FOUND errors.",
-      "reasoning": "The original summary was missing, and the description lacked clarity and context. The suggestions provide a clear action, expected inputs, outputs, and potential error codes.",
+      "summary_suggestion": "Retrieve accessibility clusters for a Step",
+      "description_suggestion": "Retrieves accessibility clusters associated with a specific Step within an Execution. Accessibility clusters group related accessibility issues or findings detected during test execution. Requires the full resource name of the Step. Returns a list of accessibility cluster resources. Possible errors: PERMISSION_DENIED (user lacks project read access), INVALID_ARGUMENT (malformed request), FAILED_PRECONDITION (invalid argument such as incorrect locale format), NOT_FOUND (Step does not exist).",
+      "reasoning": "Original summary is empty, making it impossible for AI agents to understand the operation's purpose. Description lacks clarity about what accessibility clusters are, what inputs are required (Step resource name), and what the response contains. Added context about the domain concept (accessibility clusters group related issues), clarified input requirements, specified return value structure, and reorganized error codes for better readability. This improves AI agent interpretability for determining when to use this operation.",
       "batch_index": 4
     }
   },
@@ -12718,7 +12719,261 @@
         "character": 0
       }
     },
-    "message": "Operation 'toolresults.projects.histories.executions.clusters.list' has semantic quality issues: vague_summary, missing_context. The current summary is missing. The description is detailed but could be more concise and focused on the action and its effects.",
+    "message": "Operation 'toolresults.projects.histories.list' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is complete but verbose with error codes that are standard. Improved summary provides clear action. Refined description focuses on what the operation does (retrieves paginated list), what it returns (History objects), and key sorting behavior relevant to AI agents determining if this operation matches their intent.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Lists Histories for a given Project. The histories are sorted by modification time in descending order. The history_id key will be used to order the history with the same modification time. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the History does not exist",
+      "summary_suggestion": "List all Histories for a project",
+      "description_suggestion": "Retrieves a paginated list of Histories for a specified project, sorted by modification time in descending order. Histories with identical modification times are ordered by history_id. Returns a collection of History objects representing sorted execution records. Requires read access to the project.",
+      "reasoning": "Missing summary entirely. Description is complete but verbose with error codes that are standard. Improved summary provides clear action. Refined description focuses on what the operation does (retrieves paginated list), what it returns (History objects), and key sorting behavior relevant to AI agents determining if this operation matches their intent.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.create' has semantic quality issues: vague_summary, missing_context. Missing summary. Description lacks context about what a History represents and its purpose in the API domain. Added explanation that History is a container for Executions, clarified that id is system-generated, and emphasized the domain purpose for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a History. The returned History will have the id set. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing project does not exist",
+      "summary_suggestion": "Create a new History for a project",
+      "description_suggestion": "Creates a new History resource for the specified project. Accepts a History object as input and returns the created History with a system-generated id. The History serves as a container for organizing Executions (tool runs). Requires write access to the project.",
+      "reasoning": "Missing summary. Description lacks context about what a History represents and its purpose in the API domain. Added explanation that History is a container for Executions, clarified that id is system-generated, and emphasized the domain purpose for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.get' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is too minimal and lacks context about what is returned. Added clarity about what the operation retrieves (specific History by ID), what it returns (complete History object), and access requirements for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Gets a History. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the History does not exist",
+      "summary_suggestion": "Retrieve a specific History by ID",
+      "description_suggestion": "Retrieves a specific History resource by its ID within a project. Returns the complete History object containing metadata about the execution collection. Requires read access to the project.",
+      "reasoning": "Missing summary. Description is too minimal and lacks context about what is returned. Added clarity about what the operation retrieves (specific History by ID), what it returns (complete History object), and access requirements for AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.executions.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is verbose but lacks domain context about what Executions represent. Added explanation that Executions contain Steps, clarified pagination support, and emphasized the sorting behavior for AI agents to understand the operation's purpose and output structure.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.executions.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Lists Executions for a given History. The executions are sorted by creation_time in descending order. The execution_id key will be used to order the executions with the same creation_time. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing History does not exist",
+      "summary_suggestion": "List all Executions in a History",
+      "description_suggestion": "Retrieves a paginated list of Executions for a specified History, sorted by creation_time in descending order. Executions with identical creation times are ordered by execution_id. Each Execution represents a collection of Steps (tool operations). Returns a collection of Execution objects. Requires read access to the project.",
+      "reasoning": "Missing summary. Description is verbose but lacks domain context about what Executions represent. Added explanation that Executions contain Steps, clarified pagination support, and emphasized the sorting behavior for AI agents to understand the operation's purpose and output structure.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.executions.create' has semantic quality issues: vague_summary, missing_context. Missing summary. Description lacks domain context about Execution's role as a container for Steps. Added clarity about what Execution represents, that id is system-generated, and the hierarchical relationship (History contains Executions which contain Steps) for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.executions.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Creates an Execution. The returned Execution will have the id set. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing History does not exist",
+      "summary_suggestion": "Create a new Execution in a History",
+      "description_suggestion": "Creates a new Execution resource within a specified History. Accepts an Execution object as input and returns the created Execution with a system-generated id. An Execution represents a collection of Steps (individual tool operations or test runs). Requires write access to the project.",
+      "reasoning": "Missing summary. Description lacks domain context about Execution's role as a container for Steps. Added clarity about what Execution represents, that id is system-generated, and the hierarchical relationship (History contains Executions which contain Steps) for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.executions.get' has semantic quality issues: vague_summary, missing_context, not_actionable. Missing summary. Description is minimal and contains error code mentioning 'write' permission for a GET operation (should be 'read'). Added clarity about what is retrieved, what is returned (Execution with Steps), and corrected access requirement context for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.executions.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "not_actionable"
+      ],
+      "current_summary": "",
+      "current_description": "Gets an Execution. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the Execution does not exist",
+      "summary_suggestion": "Retrieve a specific Execution by ID",
+      "description_suggestion": "Retrieves a specific Execution resource by its ID within a History. Returns the complete Execution object containing all Steps and metadata about the tool execution collection. Requires read access to the project.",
+      "reasoning": "Missing summary. Description is minimal and contains error code mentioning 'write' permission for a GET operation (should be 'read'). Added clarity about what is retrieved, what is returned (Execution with Steps), and corrected access requirement context for AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.executions.patch' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary. Description lacks clarity about partial update semantics and state transition validation. Added explanation of partial update behavior, state validation, what is returned, and side effects (state changes) for AI agents to understand when and how to use this operation appropriately.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.executions.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Updates an existing Execution with the supplied partial entity. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the requested state transition is illegal - NOT_FOUND - if the containing History does not exist",
+      "summary_suggestion": "Update an Execution with partial data",
+      "description_suggestion": "Updates an existing Execution resource with supplied partial data. Accepts an Execution object containing only the fields to be modified and returns the updated Execution. Supports partial updates - only provided fields are modified. Validates state transitions and may reject illegal state changes. Requires write access to the project.",
+      "reasoning": "Missing summary. Description lacks clarity about partial update semantics and state transition validation. Added explanation of partial update behavior, state validation, what is returned, and side effects (state changes) for AI agents to understand when and how to use this operation appropriately.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.executions.clusters.list' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is verbose and could be more concise. Added clarity about when clusters are created, how they're organized, and authentication requirements for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12737,9 +12992,9 @@
       ],
       "current_summary": "",
       "current_description": "Lists Screenshot Clusters Returns the list of screenshot clusters corresponding to an execution. Screenshot clusters are created after the execution is finished. Clusters are created from a set of screenshots. Between any two screenshots, a matching score is calculated based off their metadata that determines how similar they are. Screenshots are placed in the cluster that has screens which have the highest matching scores.",
-      "summary_suggestion": "Lists screenshot clusters for an execution",
-      "description_suggestion": "Lists the screenshot clusters for a given execution. Screenshot clusters are created after the execution is finished. Clusters are formed from a set of screenshots, with matching scores calculated based on their metadata to determine similarity. Screenshots are grouped into clusters with the highest matching scores.",
-      "reasoning": "The current summary is missing. The description is detailed but could be more concise and focused on the action and its effects.",
+      "summary_suggestion": "List screenshot clusters for execution",
+      "description_suggestion": "Lists all screenshot clusters for a given execution. Screenshot clusters are automatically generated after execution completion by grouping similar screenshots based on metadata matching scores. Each screenshot is assigned to the cluster with the highest matching score. Requires read access to the project.",
+      "reasoning": "Missing summary entirely. Description is verbose and could be more concise. Added clarity about when clusters are created, how they're organized, and authentication requirements for AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -12754,7 +13009,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'toolresults.projects.histories.executions.clusters.get' has semantic quality issues: vague_summary, missing_context. The current summary is missing. The description could be more concise and focused on the action and its effects.",
+    "message": "Operation 'toolresults.projects.histories.executions.clusters.get' has semantic quality issues: vague_summary. Missing summary. Description is clear and concise. Added action-oriented summary for consistency with other operations.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12768,14 +13023,12 @@
       "operation_id": "toolresults.projects.histories.executions.clusters.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
-        "missing_context"
+        "vague_summary"
       ],
       "current_summary": "",
       "current_description": "Retrieves a single screenshot cluster by its ID",
-      "summary_suggestion": "Retrieves a specific screenshot cluster by ID",
-      "description_suggestion": "Retrieves a single screenshot cluster by its ID. This operation provides detailed information about the specified screenshot cluster.",
-      "reasoning": "The current summary is missing. The description could be more concise and focused on the action and its effects.",
+      "summary_suggestion": "Retrieve screenshot cluster by ID",
+      "reasoning": "Missing summary. Description is clear and concise. Added action-oriented summary for consistency with other operations.",
       "batch_index": 1
     }
   },
@@ -12790,7 +13043,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'toolresults.projects.histories.executions.steps.getPerfMetricsSummary' has semantic quality issues: vague_summary. The summary was missing, making it difficult to quickly understand the operation's purpose.",
+    "message": "Operation 'toolresults.projects.histories.executions.environments.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description includes error codes but lacks context about what Environments represent. Added domain context about Environment purpose and dimensions for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12801,15 +13054,197 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "toolresults.projects.histories.executions.steps.getPerfMetricsSummary",
+      "operation_id": "toolresults.projects.histories.executions.environments.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context"
       ],
       "current_summary": "",
-      "current_description": "Retrieves a PerfMetricsSummary. May return any of the following error code(s): - NOT_FOUND - The specified PerfMetricsSummary does not exist",
-      "summary_suggestion": "Retrieve PerfMetricsSummary for a step",
-      "reasoning": "The summary was missing, making it difficult to quickly understand the operation's purpose.",
+      "current_description": "Lists Environments for a given Execution. The Environments are sorted by display name. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing Execution does not exist",
+      "summary_suggestion": "List environments for execution",
+      "description_suggestion": "Lists all environments configured for a given execution, sorted by display name. Environments represent test run configurations with specific dimensions (model, version, locale, etc.). Requires read access to the project. Returns error codes: PERMISSION_DENIED (unauthorized), INVALID_ARGUMENT (malformed request), NOT_FOUND (execution not found).",
+      "reasoning": "Missing summary. Description includes error codes but lacks context about what Environments represent. Added domain context about Environment purpose and dimensions for better AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.executions.environments.get' has semantic quality issues: vague_summary, missing_context. Missing summary. Description lacks domain context about what an Environment is. Added explanation of Environment purpose and dimensions to help AI agents understand the resource being retrieved.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.executions.environments.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Gets an Environment. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the Environment does not exist",
+      "summary_suggestion": "Retrieve environment by ID",
+      "description_suggestion": "Retrieves a specific environment by ID. An environment represents a test configuration with specific dimensions (model, version, locale, etc.) used for a set of test runs within an execution. Requires read access to the project. Returns error codes: PERMISSION_DENIED (unauthorized), INVALID_ARGUMENT (malformed request), NOT_FOUND (environment not found).",
+      "reasoning": "Missing summary. Description lacks domain context about what an Environment is. Added explanation of Environment purpose and dimensions to help AI agents understand the resource being retrieved.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.executions.steps.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is lengthy with error codes but lacks domain context about what Steps represent. Added explanation of Step purpose and clarified sorting behavior for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.executions.steps.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Lists Steps for a given Execution. The steps are sorted by creation_time in descending order. The step_id key will be used to order the steps with the same creation_time. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if an argument in the request happens to be invalid; e.g. if an attempt is made to list the children of a nonexistent Step - NOT_FOUND - if the containing Execution does not exist",
+      "summary_suggestion": "List steps for execution",
+      "description_suggestion": "Lists all steps for a given execution, sorted by creation_time in descending order (with step_id as secondary sort for same-timestamp steps). Steps represent individual operations performed as part of the execution (e.g., test runs, tool executions). Requires read access to the project. Returns error codes: PERMISSION_DENIED (unauthorized), INVALID_ARGUMENT (malformed request), FAILED_PRECONDITION (invalid argument or nonexistent parent step), NOT_FOUND (execution not found).",
+      "reasoning": "Missing summary. Description is lengthy with error codes but lacks domain context about what Steps represent. Added explanation of Step purpose and clarified sorting behavior for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.executions.steps.create' has semantic quality issues: vague_summary, missing_context. Missing summary. Description lacks domain context about Step purpose and doesn't explain the request body requirement. Added explanation of what Steps represent, size constraints, and clarified that ID is auto-generated for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.executions.steps.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a Step. The returned Step will have the id set. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the step is too large (more than 10Mib) - NOT_FOUND - if the containing Execution does not exist",
+      "summary_suggestion": "Create step in execution",
+      "description_suggestion": "Creates a new step within an execution. A step represents a single operation performed as part of execution (e.g., test run, tool execution). The created step will have an auto-generated ID returned in the response. Maximum step size is 10MB. Requires write access to the project. Returns error codes: PERMISSION_DENIED (unauthorized), INVALID_ARGUMENT (malformed request), FAILED_PRECONDITION (step exceeds 10MB), NOT_FOUND (execution not found).",
+      "reasoning": "Missing summary. Description lacks domain context about Step purpose and doesn't explain the request body requirement. Added explanation of what Steps represent, size constraints, and clarified that ID is auto-generated for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.executions.steps.get' has semantic quality issues: vague_summary, missing_context. Missing summary. Description lacks domain context about what a Step represents. Added explanation of Step purpose to help AI agents understand the resource being retrieved.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.executions.steps.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Gets a Step. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the Step does not exist",
+      "summary_suggestion": "Retrieve step by ID",
+      "description_suggestion": "Retrieves a specific step by ID. A step represents a single operation performed as part of an execution (e.g., test run, tool execution). Requires read access to the project. Returns error codes: PERMISSION_DENIED (unauthorized), INVALID_ARGUMENT (malformed request), NOT_FOUND (step not found).",
+      "reasoning": "Missing summary. Description lacks domain context about what a Step represents. Added explanation of Step purpose to help AI agents understand the resource being retrieved.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.executions.steps.patch' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity about what is returned (the updated Step). Added explicit mention of partial update support and return value to improve AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.executions.steps.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates an existing Step with the supplied partial entity. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to write project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the requested state transition is illegal (e.g try to upload a duplicate xml file), if the updated step is too large (more than 10Mib) - NOT_FOUND - if the containing Execution does not exist",
+      "summary_suggestion": "Update an existing Step with partial data",
+      "description_suggestion": "Updates an existing Step with the supplied partial entity. Supports partial updates - only provided fields will be modified. Returns the updated Step resource. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to write project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the requested state transition is illegal (e.g try to upload a duplicate xml file), if the updated step is too large (more than 10Mib) - NOT_FOUND - if the containing Execution does not exist",
+      "reasoning": "Missing summary entirely. Description lacks clarity about what is returned (the updated Step). Added explicit mention of partial update support and return value to improve AI agent interpretability.",
       "batch_index": 2
     }
   },
@@ -12824,7 +13259,253 @@
         "character": 0
       }
     },
-    "message": "Operation 'toolresults.projects.histories.executions.steps.testCases.list' has semantic quality issues: vague_summary, missing_context. The original summary was missing, and the description lacked specific details about the context and potential error codes. The suggestions provide a clear, concise summary and a more detailed description.",
+    "message": "Operation 'toolresults.projects.histories.executions.steps.getPerfMetricsSummary' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is too minimal and lacks context about what PerfMetricsSummary contains. Added domain context about performance metrics aggregation and explicit return value to help AI agents understand the operation's purpose.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.executions.steps.getPerfMetricsSummary",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves a PerfMetricsSummary. May return any of the following error code(s): - NOT_FOUND - The specified PerfMetricsSummary does not exist",
+      "summary_suggestion": "Retrieve performance metrics summary for a Step",
+      "description_suggestion": "Retrieves the PerfMetricsSummary for a specified Step, containing aggregated performance metrics and environment information. Returns the PerfMetricsSummary resource if it exists. May return any of the following error code(s): - NOT_FOUND - The specified PerfMetricsSummary does not exist",
+      "reasoning": "Missing summary. Description is too minimal and lacks context about what PerfMetricsSummary contains. Added domain context about performance metrics aggregation and explicit return value to help AI agents understand the operation's purpose.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.executions.steps.perfMetricsSummary.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description mentions idempotent behavior but lacks clarity about the return value and the exact conditions for returning existing vs. new resource. Improved clarity for AI agent decision-making about when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.executions.steps.perfMetricsSummary.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a PerfMetricsSummary resource. Returns the existing one if it has already been created. May return any of the following error code(s): - NOT_FOUND - The containing Step does not exist",
+      "summary_suggestion": "Create or retrieve performance metrics summary",
+      "description_suggestion": "Creates a PerfMetricsSummary resource for a Step. If a PerfMetricsSummary already exists for the specified Step, returns the existing resource instead of creating a duplicate. Returns the PerfMetricsSummary resource. May return any of the following error code(s): - NOT_FOUND - The containing Step does not exist",
+      "reasoning": "Missing summary. Description mentions idempotent behavior but lacks clarity about the return value and the exact conditions for returning existing vs. new resource. Improved clarity for AI agent decision-making about when to use this operation.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.executions.steps.perfSampleSeries.list' has semantic quality issues: vague_summary. Missing summary. Description is comprehensive and clear about filtering, sorting, and error handling. Only summary suggestion needed.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.executions.steps.perfSampleSeries.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Lists PerfSampleSeries for a given Step. The request provides an optional filter which specifies one or more PerfMetricsType to include in the result; if none returns all. The resulting PerfSampleSeries are sorted by ids. May return any of the following canonical error codes: - NOT_FOUND - The containing Step does not exist",
+      "summary_suggestion": "List performance sample series for a Step",
+      "reasoning": "Missing summary. Description is comprehensive and clear about filtering, sorting, and error handling. Only summary suggestion needed.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.executions.steps.perfSampleSeries.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks return value information and context about the purpose of PerfSampleSeries. Also corrected error code description (should reference PerfSampleSeries, not PerfMetricSummary). Added clarity about what the operation creates and returns.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.executions.steps.perfSampleSeries.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a PerfSampleSeries. May return any of the following error code(s): - ALREADY_EXISTS - PerfMetricSummary already exists for the given Step - NOT_FOUND - The containing Step does not exist",
+      "summary_suggestion": "Create a performance sample series",
+      "description_suggestion": "Creates a PerfSampleSeries resource for a Step to collect performance sample data. Returns the created PerfSampleSeries resource. May return any of the following error code(s): - ALREADY_EXISTS - PerfSampleSeries already exists for the given Step - NOT_FOUND - The containing Step does not exist",
+      "reasoning": "Missing summary. Description lacks return value information and context about the purpose of PerfSampleSeries. Also corrected error code description (should reference PerfSampleSeries, not PerfMetricSummary). Added clarity about what the operation creates and returns.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.executions.steps.perfSampleSeries.get' has semantic quality issues: vague_summary. Missing summary. Description is clear and concise about the operation's purpose and error handling. Only summary suggestion needed.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.executions.steps.perfSampleSeries.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Gets a PerfSampleSeries. May return any of the following error code(s): - NOT_FOUND - The specified PerfSampleSeries does not exist",
+      "summary_suggestion": "Retrieve a performance sample series",
+      "reasoning": "Missing summary. Description is clear and concise about the operation's purpose and error handling. Only summary suggestion needed.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.executions.steps.perfSampleSeries.samples.list' has semantic quality issues: vague_summary. Missing summary. Description is comprehensive and well-structured with clear information about sorting, pagination, page size limits, and error handling. Only summary suggestion needed.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.executions.steps.perfSampleSeries.samples.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the Performance Samples of a given Sample Series - The list results are sorted by timestamps ascending - The default page size is 500 samples; and maximum size allowed 5000 - The response token indicates the last returned PerfSample timestamp - When the results size exceeds the page size, submit a subsequent request including the page token to return the rest of the samples up to the page limit May return any of the following canonical error codes: - OUT_OF_RANGE - The specified request page_token is out of valid range - NOT_FOUND - The containing PerfSampleSeries does not exist",
+      "summary_suggestion": "List performance samples from a sample series",
+      "reasoning": "Missing summary. Description is comprehensive and well-structured with clear information about sorting, pagination, page size limits, and error handling. Only summary suggestion needed.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.executions.steps.perfSampleSeries.samples.batchCreate' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description is verbose and unclear about what is returned. Improved summary provides concise action. Improved description clarifies partial success behavior, required parameters, and response content for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.executions.steps.perfSampleSeries.samples.batchCreate",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a batch of PerfSamples - a client can submit multiple batches of Perf Samples through repeated calls to this method in order to split up a large request payload - duplicates and existing timestamp entries will be ignored. - the batch operation may partially succeed - the set of elements successfully inserted is returned in the response (omits items which already existed in the database). May return any of the following canonical error codes: - NOT_FOUND - The containing PerfSampleSeries does not exist",
+      "summary_suggestion": "Batch create performance samples for a series",
+      "description_suggestion": "Creates a batch of PerfSamples for a performance sample series. Supports splitting large payloads across multiple calls. Duplicate entries and existing timestamps are ignored. The operation may partially succeed; the response returns only successfully inserted samples, omitting pre-existing entries. Requires valid projectId, historyId, executionId, stepId, and sampleSeriesId. May return NOT_FOUND if the containing PerfSampleSeries does not exist.",
+      "reasoning": "Missing summary entirely. Description is verbose and unclear about what is returned. Improved summary provides concise action. Improved description clarifies partial success behavior, required parameters, and response content for better AI agent understanding.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.executions.steps.testCases.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about what is returned (paginated list) and mentions write permission when read is likely required. Improved summary is action-oriented. Improved description clarifies return type, pagination, permission requirements, and error conditions for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12839,13 +13520,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists Test Cases attached to a Step. Experimental test cases API. Still in active development. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing Step does not exist",
-      "summary_suggestion": "List Test Cases for a Step",
-      "description_suggestion": "Lists all Test Cases associated with a specific Step. This API is experimental and may change. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing Step does not exist",
-      "reasoning": "The original summary was missing, and the description lacked specific details about the context and potential error codes. The suggestions provide a clear, concise summary and a more detailed description.",
+      "summary_suggestion": "List test cases for a step",
+      "description_suggestion": "Lists all TestCase objects attached to a Step. Returns a paginated collection of test cases associated with the specified step. Experimental API still in active development. Requires read permissions on the project. May return PERMISSION_DENIED if unauthorized, INVALID_ARGUMENT if request is malformed, or NOT_FOUND if the step does not exist.",
+      "reasoning": "Missing summary. Description lacks clarity about what is returned (paginated list) and mentions write permission when read is likely required. Improved summary is action-oriented. Improved description clarifies return type, pagination, permission requirements, and error conditions for AI agent clarity.",
       "batch_index": 3
     }
   },
@@ -12860,7 +13541,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'toolresults.projects.histories.executions.steps.testCases.get' has semantic quality issues: vague_summary, missing_context. The original summary was missing, and the description lacked specific details about the context and potential error codes. The suggestions provide a clear, concise summary and a more detailed description.",
+    "message": "Operation 'toolresults.projects.histories.executions.steps.testCases.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about what is returned and mentions write permission when read is likely required. Improved summary is action-oriented. Improved description clarifies return type, what data is included, permission requirements, and error conditions for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12875,13 +13556,157 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets details of a Test Case for a Step. Experimental test cases API. Still in active development. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing Test Case does not exist",
-      "summary_suggestion": "Get details of a Test Case for a Step",
-      "description_suggestion": "Gets the details of a specific Test Case associated with a Step. This API is experimental and may change. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing Test Case does not exist",
-      "reasoning": "The original summary was missing, and the description lacked specific details about the context and potential error codes. The suggestions provide a clear, concise summary and a more detailed description.",
+      "summary_suggestion": "Get test case details for a step",
+      "description_suggestion": "Retrieves detailed information for a specific TestCase within a Step. Returns the TestCase object containing test execution results, assertions, and metadata. Experimental API still in active development. Requires read permissions on the project. May return PERMISSION_DENIED if unauthorized, INVALID_ARGUMENT if request is malformed, or NOT_FOUND if the test case does not exist.",
+      "reasoning": "Missing summary. Description lacks clarity about what is returned and mentions write permission when read is likely required. Improved summary is action-oriented. Improved description clarifies return type, what data is included, permission requirements, and error conditions for better AI agent understanding.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.executions.steps.thumbnails.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about pagination and return type. Improved summary is action-oriented and specific. Improved description clarifies that results are paginated, what is returned (thumbnail references), permission requirements, and error conditions for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.executions.steps.thumbnails.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists thumbnails of images attached to a step. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read from the project, or from any of the images - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the step does not exist, or if any of the images do not exist",
+      "summary_suggestion": "List image thumbnails attached to a step",
+      "description_suggestion": "Lists all image thumbnails attached to a Step. Returns a paginated collection of thumbnail references for images associated with the specified step. Requires read permissions on the project and all referenced images. May return PERMISSION_DENIED if unauthorized to read the project or images, INVALID_ARGUMENT if request is malformed, or NOT_FOUND if the step or any images do not exist.",
+      "reasoning": "Missing summary. Description lacks clarity about pagination and return type. Improved summary is action-oriented and specific. Improved description clarifies that results are paginated, what is returned (thumbnail references), permission requirements, and error conditions for AI agent clarity.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.histories.executions.steps.publishXunitXmlFiles' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is vague about what is published and what is returned. Improved summary specifies XUnit format and test results context. Improved description clarifies input format, constraints (duplicates, size limits), return value, permission requirements, and error conditions for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.histories.executions.steps.publishXunitXmlFiles",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Publish xml files to an existing Step. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to write project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the requested state transition is illegal, e.g. try to upload a duplicate xml file or a file too large. - NOT_FOUND - if the containing Execution does not exist",
+      "summary_suggestion": "Publish XUnit XML test results to a step",
+      "description_suggestion": "Publishes XUnit XML test result files to an existing Step. Accepts one or more XML files containing test execution data in XUnit format. Duplicate files and oversized files are rejected. Returns the updated Step with published results. Requires write permissions on the project. May return PERMISSION_DENIED if unauthorized, INVALID_ARGUMENT if request is malformed, FAILED_PRECONDITION if duplicate or oversized files are submitted, or NOT_FOUND if the execution does not exist.",
+      "reasoning": "Missing summary. Description is vague about what is published and what is returned. Improved summary specifies XUnit format and test results context. Improved description clarifies input format, constraints (duplicates, size limits), return value, permission requirements, and error conditions for better AI agent understanding.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.getSettings' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about what settings are returned. Improved summary is action-oriented. Improved description clarifies what the settings object contains (based on API context), return type, permission requirements, and error conditions for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.getSettings",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the Tool Results settings for a project. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read from project",
+      "summary_suggestion": "Get Tool Results settings for a project",
+      "description_suggestion": "Retrieves the Tool Results settings configuration for a project. Returns a settings object containing project-level configuration such as default storage bucket and retention policies. Requires read permissions on the project. May return PERMISSION_DENIED if the user is not authorized to read from the project.",
+      "reasoning": "Missing summary. Description lacks clarity about what settings are returned. Improved summary is action-oriented. Improved description clarifies what the settings object contains (based on API context), return type, permission requirements, and error conditions for AI agent clarity.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'toolresults.projects.initializeSettings' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is excessively verbose with implementation details that obscure the operation's purpose. Improved summary is concise and action-oriented. Improved description focuses on what the operation does (creates bucket, initializes settings), key behaviors (idempotency, auto-expiration), return value, and error conditions while reducing implementation minutiae for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "toolresults.projects.initializeSettings",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates resources for settings which have not yet been set. Currently, this creates a single resource: a Google Cloud Storage bucket, to be used as the default bucket for this project. The bucket is created in an FTL-own storage project. Except for in rare cases, calling this method in parallel from multiple clients will only create a single bucket. In order to avoid unnecessary storage charges, the bucket is configured to automatically delete objects older than 90 days. The bucket is created with the following permissions: - Owner access for owners of central storage project (FTL-owned) - Writer access for owners/editors of customer project - Reader access for viewers of customer project The default ACL on objects created in the bucket is: - Owner access for owners of central storage project - Reader access for owners/editors/viewers of customer project See Google Cloud Storage documentation for more details. If there is already a default bucket set and the project can access the bucket, this call does nothing. However, if the project doesn't have the permission to access the bucket or the bucket is deleted, a new bucket will be created. May return any canonical error codes, including the following: - PERMISSION_DENIED - if the user is not authorized to write to project - Any error code raised by Google Cloud Storage",
+      "summary_suggestion": "Initialize Tool Results settings and storage bucket",
+      "description_suggestion": "Initializes Tool Results settings for a project by creating a default Google Cloud Storage bucket if not already configured. The bucket is created in FTL-owned storage with automatic 90-day object expiration. Parallel calls from multiple clients typically result in a single bucket creation. Returns the initialized settings object. If a default bucket already exists and is accessible, no action is taken. If the existing bucket is inaccessible or deleted, a new bucket is created. Requires write permissions on the project. May return PERMISSION_DENIED if unauthorized or any error from Google Cloud Storage.",
+      "reasoning": "Missing summary. Description is excessively verbose with implementation details that obscure the operation's purpose. Improved summary is concise and action-oriented. Improved description focuses on what the operation does (creates bucket, initializes settings), key behaviors (idempotency, auto-expiration), return value, and error conditions while reducing implementation minutiae for better AI agent interpretability.",
       "batch_index": 3
     }
   },
@@ -12896,7 +13721,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 29 operations analyzed, 6 quality issues found",
+    "message": "Semantic analysis completed: 29 operations analyzed, 29 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -12908,7 +13733,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 29,
-      "total_issues_found": 6,
+      "total_issues_found": 29,
       "batches_processed": 5
     }
   }

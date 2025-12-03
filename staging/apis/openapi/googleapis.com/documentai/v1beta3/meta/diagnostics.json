@@ -22150,7 +22150,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'documentai.projects.locations.processors.list' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented, providing clarity on the operation's purpose.",
+    "message": "Operation 'documentai.projects.locations.processors.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks details about pagination, return type (Processor resources), and use case context. Enhanced version clarifies what is returned and helps AI agents understand when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22164,12 +22164,14 @@
       "operation_id": "documentai.projects.locations.processors.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists all processors which belong to this project.",
-      "summary_suggestion": "List all processors for a project",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented, providing clarity on the operation's purpose.",
+      "summary_suggestion": "List all processors in a project",
+      "description_suggestion": "Lists all processors that belong to the specified project. Returns a paginated list of Processor resources with their current configuration and status. Useful for discovering available processors for document processing tasks.",
+      "reasoning": "Missing summary entirely. Description lacks details about pagination, return type (Processor resources), and use case context. Enhanced version clarifies what is returned and helps AI agents understand when to use this operation.",
       "batch_index": 3
     }
   },
@@ -22184,7 +22186,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'documentai.projects.locations.fetchProcessorTypes' has semantic quality issues: vague_summary, vague_description. Both the summary and description were missing and vague. The suggested summary and description provide clarity on the operation's purpose and context, improving the operation's clarity and completeness.",
+    "message": "Operation 'documentai.projects.locations.processors.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is verbose but lacks clarity about return value. Reorganized to emphasize what is returned and clarify the permission implications for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "documentai.projects.locations.processors.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a processor from the ProcessorType provided. The processor will be at `ENABLED` state by default after its creation. Note that this method requires the `documentai.processors.create` permission on the project, which is highly privileged. A user or service account with this permission can create new processors that can interact with any gcs bucket in your project.",
+      "summary_suggestion": "Create a new processor from a type",
+      "description_suggestion": "Creates a new processor from the specified ProcessorType. The created processor is automatically enabled and ready for use. Requires the `documentai.processors.create` permission (highly privileged). Returns the newly created Processor resource with its configuration and unique identifier. The processor can process documents from any GCS bucket in the project.",
+      "reasoning": "Missing summary. Description is verbose but lacks clarity about return value. Reorganized to emphasize what is returned and clarify the permission implications for AI agent decision-making.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'documentai.projects.locations.fetchProcessorTypes' has semantic quality issues: vague_summary, missing_output_details, missing_context. Missing summary. Description is unclear about what is returned and why pagination is not used. Enhanced version explains the return type, use case, and clarifies the non-paginated nature for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22199,13 +22237,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Fetches processor types. Note that we don't use ListProcessorTypes here, because it isn't paginated.",
       "summary_suggestion": "Fetch available processor types",
-      "description_suggestion": "Fetches the available processor types for a project. This operation does not use ListProcessorTypes because it is not paginated.",
-      "reasoning": "Both the summary and description were missing and vague. The suggested summary and description provide clarity on the operation's purpose and context, improving the operation's clarity and completeness.",
+      "description_suggestion": "Fetches all available processor types that can be used to create processors in the specified location. Returns a complete list of ProcessorType resources with their capabilities and configurations. This operation returns all types in a single response (non-paginated), making it suitable for discovering processor options before creation.",
+      "reasoning": "Missing summary. Description is unclear about what is returned and why pagination is not used. Enhanced version explains the return type, use case, and clarifies the non-paginated nature for AI agent understanding.",
       "batch_index": 3
     }
   },
@@ -22220,7 +22259,81 @@
         "character": 0
       }
     },
-    "message": "Operation 'documentai.projects.locations.processors.processorVersions.process' has semantic quality issues: vague_summary, vague_description, missing_input_details. The current summary is missing. The description is vague and lacks details about the input and output. The suggestions provide a clearer purpose, input details, and output information.",
+    "message": "Operation 'documentai.projects.locations.processors.processorVersions.evaluateProcessorVersion' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks details about required inputs (annotated documents), what metrics are returned, and the use case. Enhanced version clarifies inputs, outputs, and helps AI agents understand when to use this for processor validation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "documentai.projects.locations.processors.processorVersions.evaluateProcessorVersion",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Evaluates a ProcessorVersion against annotated documents, producing an Evaluation.",
+      "summary_suggestion": "Evaluate processor version performance",
+      "description_suggestion": "Evaluates the performance of a ProcessorVersion against a set of annotated documents. Requires annotated test documents as input to measure accuracy and quality metrics. Returns an Evaluation resource containing performance metrics, precision, recall, and other quality indicators. Useful for validating processor versions before deployment.",
+      "reasoning": "Missing summary. Description lacks details about required inputs (annotated documents), what metrics are returned, and the use case. Enhanced version clarifies inputs, outputs, and helps AI agents understand when to use this for processor validation.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'documentai.projects.locations.processors.setDefaultProcessorVersion' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks clarity about return value and side effects. Enhanced version explicitly states what is returned and clarifies the impact on document processing operations, helping AI agents understand the consequences of this action.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "documentai.projects.locations.processors.setDefaultProcessorVersion",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Set the default (active) version of a Processor that will be used in ProcessDocument and BatchProcessDocuments.",
+      "summary_suggestion": "Set default processor version for operations",
+      "description_suggestion": "Sets the default (active) version of a Processor that will be used for ProcessDocument and BatchProcessDocuments operations. This change affects all subsequent document processing requests using this processor. Returns the updated Processor resource with the new default version. Side effect: existing processing pipelines will use the new version for future requests.",
+      "reasoning": "Missing summary. Description lacks clarity about return value and side effects. Enhanced version explicitly states what is returned and clarifies the impact on document processing operations, helping AI agents understand the consequences of this action.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'documentai.projects.locations.processors.processorVersions.process' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_context. Missing summary entirely. Description is too minimal - lacks details about inputs (document types supported), outputs (structured information extraction), and operation characteristics (synchronous). AI agents need to understand what document formats are accepted and what structured data is returned.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22235,14 +22348,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Processes a single document.",
-      "summary_suggestion": "Process a single document using the specified processor version.",
-      "description_suggestion": "Processes a single document using the specified processor version. Expects a GoogleCloudDocumentaiV1beta3ProcessRequest object as input. Returns a processed document object.",
-      "reasoning": "The current summary is missing. The description is vague and lacks details about the input and output. The suggestions provide a clearer purpose, input details, and output information.",
+      "summary_suggestion": "Process document with processor version",
+      "description_suggestion": "Processes a single document using the specified processor version. Accepts document content (text, image, or PDF) and returns extracted structured information including text, entities, tables, and layout information as defined by the processor's schema. This is a synchronous operation suitable for single document processing.",
+      "reasoning": "Missing summary entirely. Description is too minimal - lacks details about inputs (document types supported), outputs (structured information extraction), and operation characteristics (synchronous). AI agents need to understand what document formats are accepted and what structured data is returned.",
       "batch_index": 2
     }
   },
@@ -22257,7 +22371,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'documentai.projects.locations.processors.processorVersions.undeploy' has semantic quality issues: vague_summary. The current summary is missing. The description is clear but lacks an action-oriented summary. The suggestion provides a concise summary.",
+    "message": "Operation 'documentai.projects.locations.processors.processorVersions.undeploy' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary. Description lacks context about what undeployment means operationally (removes from production), side effects (cannot be used for processing), and that it's a long-running operation. AI agents need to understand the consequences of this action.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22271,12 +22385,15 @@
       "operation_id": "documentai.projects.locations.processors.processorVersions.undeploy",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Undeploys the processor version.",
-      "summary_suggestion": "Undeploy the specified processor version.",
-      "reasoning": "The current summary is missing. The description is clear but lacks an action-oriented summary. The suggestion provides a concise summary.",
+      "summary_suggestion": "Undeploy processor version from production",
+      "description_suggestion": "Undeploys a processor version, removing it from production availability. After undeployment, the processor version cannot be used for document processing. This is a long-running operation. Existing deployments will be terminated and the version becomes unavailable for new processing requests.",
+      "reasoning": "Missing summary. Description lacks context about what undeployment means operationally (removes from production), side effects (cannot be used for processing), and that it's a long-running operation. AI agents need to understand the consequences of this action.",
       "batch_index": 2
     }
   },
@@ -22291,7 +22408,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'documentai.projects.locations.processors.processorVersions.evaluations.list' has semantic quality issues: vague_summary. The current summary is missing. The description is clear but lacks an action-oriented summary. The suggestion provides a concise summary.",
+    "message": "Operation 'documentai.projects.locations.processors.processorVersions.evaluations.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description is vague about what evaluations contain and their purpose. AI agents need to understand that evaluations provide performance metrics and quality assessment data, and that results are paginated.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22305,12 +22422,15 @@
       "operation_id": "documentai.projects.locations.processors.processorVersions.evaluations.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Retrieves a set of evaluations for a given processor version.",
-      "summary_suggestion": "List evaluations for a processor version.",
-      "reasoning": "The current summary is missing. The description is clear but lacks an action-oriented summary. The suggestion provides a concise summary.",
+      "summary_suggestion": "List evaluations for processor version",
+      "description_suggestion": "Lists all evaluations for a specified processor version. Returns evaluation results including metrics, performance data, and test dataset information. Supports pagination through page size and token parameters. Evaluations contain model performance metrics and validation results used to assess processor version quality.",
+      "reasoning": "Missing summary. Description is vague about what evaluations contain and their purpose. AI agents need to understand that evaluations provide performance metrics and quality assessment data, and that results are paginated.",
       "batch_index": 2
     }
   },
@@ -22325,7 +22445,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'documentai.projects.locations.processorTypes.list' has semantic quality issues: vague_summary. The current summary is missing. The description is clear but lacks an action-oriented summary. The suggestion provides a concise summary.",
+    "message": "Operation 'documentai.projects.locations.processorTypes.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks context about what processor types are (AI model categories) and what information is returned. AI agents need to understand processor types represent different document processing capabilities.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22339,12 +22459,15 @@
       "operation_id": "documentai.projects.locations.processorTypes.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists the processor types that exist.",
-      "summary_suggestion": "List available processor types.",
-      "reasoning": "The current summary is missing. The description is clear but lacks an action-oriented summary. The suggestion provides a concise summary.",
+      "summary_suggestion": "List available processor types",
+      "description_suggestion": "Lists all available processor types that can be created in the specified location. Returns processor type information including type identifiers, display names, and supported capabilities. Processor types define the AI models available for document processing (e.g., OCR, form parser, invoice parser). Supports pagination.",
+      "reasoning": "Missing summary. Description lacks context about what processor types are (AI model categories) and what information is returned. AI agents need to understand processor types represent different document processing capabilities.",
       "batch_index": 2
     }
   },
@@ -22359,7 +22482,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'documentai.projects.locations.processors.processorVersions.list' has semantic quality issues: vague_summary. The current summary is missing. The description is clear but lacks an action-oriented summary. The suggestion provides a concise summary.",
+    "message": "Operation 'documentai.projects.locations.processors.processorVersions.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks context about what version information is returned and why versions exist (training iterations). AI agents need to understand versions represent different model states and iterations.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22373,12 +22496,15 @@
       "operation_id": "documentai.projects.locations.processors.processorVersions.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists all versions of a processor.",
-      "summary_suggestion": "List all versions of the specified processor.",
-      "reasoning": "The current summary is missing. The description is clear but lacks an action-oriented summary. The suggestion provides a concise summary.",
+      "summary_suggestion": "List processor versions",
+      "description_suggestion": "Lists all versions of a specified processor. Returns version information including version identifiers, creation timestamps, deployment status, and model state. Each processor can have multiple versions representing different training iterations or model updates. Supports pagination through page size and token parameters.",
+      "reasoning": "Missing summary. Description lacks context about what version information is returned and why versions exist (training iterations). AI agents need to understand versions represent different model states and iterations.",
       "batch_index": 2
     }
   },
@@ -22393,7 +22519,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'documentai.projects.locations.processors.processorVersions.importProcessorVersion' has semantic quality issues: vague_summary. The current summary is missing. The description is clear but lacks an action-oriented summary. The suggestion provides a concise summary.",
+    "message": "Operation 'documentai.projects.locations.processors.processorVersions.importProcessorVersion' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_side_effects. Missing summary. Description is unclear about what 'import' means operationally (copying from source to target). Missing details about what gets copied (model, config, data) and that it's a long-running operation. AI agents need to understand this creates a new version based on an existing one.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22407,12 +22533,16 @@
       "operation_id": "documentai.projects.locations.processors.processorVersions.importProcessorVersion",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_input_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Imports a processor version from source processor version.",
-      "summary_suggestion": "Import a processor version from a source.",
-      "reasoning": "The current summary is missing. The description is clear but lacks an action-oriented summary. The suggestion provides a concise summary.",
+      "summary_suggestion": "Import processor version from source",
+      "description_suggestion": "Imports a processor version from a source processor version, creating a copy in the target processor. This is a long-running operation that clones the model, configuration, and training data from the source version. The imported version becomes available for deployment and processing. Returns operation metadata tracking the import progress.",
+      "reasoning": "Missing summary. Description is unclear about what 'import' means operationally (copying from source to target). Missing details about what gets copied (model, config, data) and that it's a long-running operation. AI agents need to understand this creates a new version based on an existing one.",
       "batch_index": 2
     }
   },
@@ -22427,7 +22557,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'documentai.projects.locations.processors.processorVersions.train' has semantic quality issues: vague_summary. The current summary is missing. The description is clear but lacks an action-oriented summary. The suggestion provides a concise summary.",
+    "message": "Operation 'documentai.projects.locations.processors.processorVersions.train' has semantic quality issues: vague_summary, missing_input_details, missing_context. Missing summary. Description mentions metadata type but lacks clarity about inputs (training data, configuration), operation characteristics (long-running), and what training accomplishes (model improvement). AI agents need to understand this requires training data and produces a new deployable version.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22441,12 +22571,15 @@
       "operation_id": "documentai.projects.locations.processors.processorVersions.train",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Trains a new processor version. Operation metadata is returned as TrainProcessorVersionMetadata.",
-      "summary_suggestion": "Train a new processor version.",
-      "reasoning": "The current summary is missing. The description is clear but lacks an action-oriented summary. The suggestion provides a concise summary.",
+      "summary_suggestion": "Train new processor version",
+      "description_suggestion": "Trains a new processor version using provided training data and configuration. This is a long-running operation that creates an improved model version based on labeled training documents. Requires training dataset specification and optional hyperparameter configuration. Returns operation metadata (TrainProcessorVersionMetadata) tracking training progress, including metrics and completion status.",
+      "reasoning": "Missing summary. Description mentions metadata type but lacks clarity about inputs (training data, configuration), operation characteristics (long-running), and what training accomplishes (model improvement). AI agents need to understand this requires training data and produces a new deployable version.",
       "batch_index": 2
     }
   },
@@ -22461,7 +22594,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'documentai.projects.locations.processors.dataset.batchDeleteDocuments' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are vague. Added a more specific summary and detailed description including context and expected inputs.",
+    "message": "Operation 'documentai.projects.locations.processors.dataset.batchDeleteDocuments' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary entirely. Description is too minimal and lacks context about batch operation nature, permanence of deletion, required inputs, return type (long-running operation), and side effects. Added details about destructive nature and operation tracking for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22476,14 +22609,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes a set of documents.",
-      "summary_suggestion": "Batch delete documents from a dataset.",
-      "description_suggestion": "Deletes a set of documents from the specified dataset in the Cloud Document AI service. Requires dataset identifier and a list of document identifiers to delete. Returns an empty response upon successful deletion.",
-      "reasoning": "The current summary and description are vague. Added a more specific summary and detailed description including context and expected inputs.",
+      "summary_suggestion": "Delete multiple documents from dataset",
+      "description_suggestion": "Deletes a batch of documents from the specified dataset. This operation removes all document records and associated data permanently. Requires the dataset resource path and a list of document identifiers in the request. Returns a long-running operation that tracks the deletion progress. This is a destructive operation with no undo capability.",
+      "reasoning": "Missing summary entirely. Description is too minimal and lacks context about batch operation nature, permanence of deletion, required inputs, return type (long-running operation), and side effects. Added details about destructive nature and operation tracking for AI agent clarity.",
       "batch_index": 0
     }
   },
@@ -22498,7 +22631,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'documentai.projects.locations.processors.dataset.getDocument' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing and the description lacks details about the specific inputs required for the operation.",
+    "message": "Operation 'documentai.projects.locations.processors.dataset.getDocument' has semantic quality issues: vague_summary, vague_description, missing_input_details. Missing summary. Description is vague about what 'relevant fields' means and doesn't clarify input requirements (document ID, dataset path) or full output structure. Added specificity about document ID requirement, comprehensive return fields, field masking support, and existence prerequisite for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22513,13 +22646,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
         "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Returns relevant fields present in the requested document.",
-      "summary_suggestion": "Retrieve specific fields from a document.",
-      "description_suggestion": "Retrieves specific fields present in the requested document from the dataset. Requires dataset identifier and document identifier. Returns the requested fields.",
-      "reasoning": "The current summary is missing and the description lacks details about the specific inputs required for the operation.",
+      "summary_suggestion": "Retrieve document from dataset",
+      "description_suggestion": "Retrieves a specific document from the dataset by document ID. Returns the document resource with all parsed content, including text, entities, pages, and layout information. Supports optional field masking to retrieve only specific document fields. The document must exist in the specified dataset.",
+      "reasoning": "Missing summary. Description is vague about what 'relevant fields' means and doesn't clarify input requirements (document ID, dataset path) or full output structure. Added specificity about document ID requirement, comprehensive return fields, field masking support, and existence prerequisite for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -22534,7 +22668,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'documentai.projects.locations.processors.dataset.importDocuments' has semantic quality issues: vague_summary, missing_context. The current summary is missing and the description lacks context about the expected inputs and the nature of the returned operation.",
+    "message": "Operation 'documentai.projects.locations.processors.dataset.importDocuments' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks context about input sources, asynchronous nature, return type (long-running operation), and the effect of importing documents. Added details about supported input configurations, async processing, operation tracking, and availability of imported documents for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22549,13 +22683,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Import documents into a dataset.",
-      "summary_suggestion": "Import documents into a specified dataset.",
-      "description_suggestion": "Imports documents into a specified dataset in the Cloud Document AI service. Requires dataset identifier and document data. Returns an operation that can be polled for status.",
-      "reasoning": "The current summary is missing and the description lacks context about the expected inputs and the nature of the returned operation.",
+      "summary_suggestion": "Import documents into dataset",
+      "description_suggestion": "Imports a batch of documents into the specified dataset from external sources (Cloud Storage, local files, or other supported input configurations). This is a long-running operation that processes and ingests documents asynchronously. Returns a long-running operation that tracks import progress. Imported documents become available for processing and training within the dataset.",
+      "reasoning": "Missing summary. Description lacks context about input sources, asynchronous nature, return type (long-running operation), and the effect of importing documents. Added details about supported input configurations, async processing, operation tracking, and availability of imported documents for AI agent clarity.",
       "batch_index": 0
     }
   },
@@ -22570,7 +22705,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'documentai.projects.locations.processors.dataset.listDocuments' has semantic quality issues: vague_summary, missing_context. The current summary is missing and the description lacks context about the expected inputs.",
+    "message": "Operation 'documentai.projects.locations.processors.dataset.listDocuments' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description doesn't explain pagination, filtering capabilities, or what fields are returned in the list. Added details about pagination support, request body parameters, returned fields, and page token usage for better AI agent understanding of how to iterate through results.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22585,13 +22720,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Returns a list of documents present in the dataset.",
-      "summary_suggestion": "List documents in a dataset.",
-      "description_suggestion": "Lists documents present in the specified dataset in the Cloud Document AI service. Requires dataset identifier. Returns a list of document identifiers.",
-      "reasoning": "The current summary is missing and the description lacks context about the expected inputs.",
+      "summary_suggestion": "List documents in dataset",
+      "description_suggestion": "Lists all documents in the specified dataset with pagination support. Accepts optional filtering and sorting parameters via the request body. Returns a paginated list of document summaries including document IDs, creation timestamps, and processing status. Use page tokens for efficient pagination through large datasets.",
+      "reasoning": "Missing summary. Description doesn't explain pagination, filtering capabilities, or what fields are returned in the list. Added details about pagination support, request body parameters, returned fields, and page token usage for better AI agent understanding of how to iterate through results.",
       "batch_index": 0
     }
   },
@@ -22606,7 +22741,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'documentai.projects.locations.processors.humanReviewConfig.reviewDocument' has semantic quality issues: vague_summary, missing_context. The current summary is missing and the description lacks context about the expected inputs and the nature of the returned operation.",
+    "message": "Operation 'documentai.projects.locations.processors.humanReviewConfig.reviewDocument' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description mentions processor requirement but lacks context about review workflow, return type (long-running operation), what happens during review, and availability of results. Added details about review queue, validation process, operation tracking, and result availability for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22621,13 +22756,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Send a document for Human Review. The input document should be processed by the specified processor.",
-      "summary_suggestion": "Submit a document for human review.",
-      "description_suggestion": "Submits a document for human review in the Cloud Document AI service. The input document should be processed by the specified processor. Requires human review configuration identifier and document data. Returns an operation that can be polled for status.",
-      "reasoning": "The current summary is missing and the description lacks context about the expected inputs and the nature of the returned operation.",
+      "summary_suggestion": "Submit document for human review",
+      "description_suggestion": "Submits a processed document to the human review queue for manual validation and correction. The document must have been previously processed by the specified processor. Returns a long-running operation that tracks the review workflow. Human reviewers will validate extracted entities, correct parsing errors, and provide feedback. The reviewed document becomes available after review completion.",
+      "reasoning": "Missing summary. Description mentions processor requirement but lacks context about review workflow, return type (long-running operation), what happens during review, and availability of results. Added details about review queue, validation process, operation tracking, and result availability for AI agent clarity.",
       "batch_index": 0
     }
   },
@@ -22642,7 +22778,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'documentai.projects.locations.processors.dataset.updateDatasetSchema' has semantic quality issues: vague_summary, missing_context, unclear_purpose. The current summary is missing. The description lacks details about authentication, return value, and the specific context of the DatasetSchema update.",
+    "message": "Operation 'documentai.projects.locations.processors.processorVersions.delete' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary. Description mentions artifact deletion but lacks context about permanence, impact on deployments, return type (long-running operation), and precautions needed. Added details about irreversibility, deployment impact, operation tracking, and prerequisite checks for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "documentai.projects.locations.processors.processorVersions.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes the processor version, all artifacts under the processor version will be deleted.",
+      "summary_suggestion": "Delete processor version and artifacts",
+      "description_suggestion": "Deletes a specific processor version and all associated artifacts including trained models, configurations, and deployment data. This is a permanent, irreversible operation. Existing deployments using this version will be affected. Returns a long-running operation tracking the deletion. Ensure no active processing pipelines depend on this version before deletion.",
+      "reasoning": "Missing summary. Description mentions artifact deletion but lacks context about permanence, impact on deployments, return type (long-running operation), and precautions needed. Added details about irreversibility, deployment impact, operation tracking, and prerequisite checks for AI agent clarity.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'documentai.projects.locations.processors.dataset.updateDatasetSchema' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details. Original description is minimal and lacks context. Missing summary entirely. Added clarity about what a DatasetSchema is in the Document AI context, what inputs are expected, what is returned, and the side effect of affecting document parsing behavior. This helps AI agents understand when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22657,14 +22830,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
         "missing_context",
-        "unclear_purpose"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Updates a `DatasetSchema`.",
-      "summary_suggestion": "Update a DatasetSchema for a processor.",
-      "description_suggestion": "Updates the specified DatasetSchema for a processor. This operation modifies the schema used by the processor to interpret document data. Requires authentication and returns the updated DatasetSchema.",
-      "reasoning": "The current summary is missing. The description lacks details about authentication, return value, and the specific context of the DatasetSchema update.",
+      "summary_suggestion": "Update dataset schema configuration",
+      "description_suggestion": "Updates the schema configuration for a dataset used in document processing. Accepts a DatasetSchema object with updated field definitions and validation rules. Returns the updated DatasetSchema resource. Supports partial updates - only provided fields will be modified. This operation affects how documents in the dataset are parsed and validated.",
+      "reasoning": "Original description is minimal and lacks context. Missing summary entirely. Added clarity about what a DatasetSchema is in the Document AI context, what inputs are expected, what is returned, and the side effect of affecting document parsing behavior. This helps AI agents understand when to use this operation.",
       "batch_index": 1
     }
   },
@@ -22679,7 +22854,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'documentai.projects.locations.processors.processorVersions.batchProcess' has semantic quality issues: vague_summary, missing_context. The current summary is missing. The description lacks details about authentication and the return value.",
+    "message": "Operation 'documentai.projects.locations.processors.processorVersions.batchProcess' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_output_details, missing_side_effects. Original description mentions LRO and output format but lacks critical details. Missing summary entirely. Added clarity about: the asynchronous nature and LRO pattern, input/output specifications, the BatchProcessRequest schema context, return value (LRO object), and side effects (output creation). This enables AI agents to understand this is a long-running operation requiring monitoring and output location configuration.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22694,13 +22869,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "LRO endpoint to batch process many documents. The output is written to Cloud Storage as JSON in the [Document] format.",
-      "summary_suggestion": "Batch process multiple documents.",
-      "description_suggestion": "Batch processes multiple documents using the specified processor version. The output is written to Cloud Storage as JSON in the Document format. Requires authentication and returns the operation metadata.",
-      "reasoning": "The current summary is missing. The description lacks details about authentication and the return value.",
+      "summary_suggestion": "Batch process multiple documents asynchronously",
+      "description_suggestion": "Initiates a long-running operation (LRO) to batch process multiple documents using a processor version. Accepts a BatchProcessRequest containing input documents from Cloud Storage and output configuration. Processes documents asynchronously and writes results to the specified Cloud Storage location in Document JSON format. Returns a long-running operation that can be monitored for completion status. Side effects: Creates processed document outputs in Cloud Storage and generates processing metadata.",
+      "reasoning": "Original description mentions LRO and output format but lacks critical details. Missing summary entirely. Added clarity about: the asynchronous nature and LRO pattern, input/output specifications, the BatchProcessRequest schema context, return value (LRO object), and side effects (output creation). This enables AI agents to understand this is a long-running operation requiring monitoring and output location configuration.",
       "batch_index": 1
     }
   },
@@ -22715,7 +22893,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'documentai.projects.locations.processors.processorVersions.deploy' has semantic quality issues: vague_summary, missing_context. The current summary is missing. The description lacks details about authentication and the return value.",
+    "message": "Operation 'documentai.projects.locations.processors.processorVersions.deploy' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details, missing_side_effects. Original description is too minimal. Missing summary entirely. Added context about: what deployment means in Document AI (making version available for processing), the request schema context, the resulting state (version becomes active), return type (LRO), and side effects (availability change and potential version replacement). This helps AI agents understand the operational impact of deployment.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22730,13 +22908,17 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deploys the processor version.",
-      "summary_suggestion": "Deploy a processor version.",
-      "description_suggestion": "Deploys the specified processor version. This operation makes the processor version available for use. Requires authentication and returns the operation metadata.",
-      "reasoning": "The current summary is missing. The description lacks details about authentication and the return value.",
+      "summary_suggestion": "Deploy processor version to production",
+      "description_suggestion": "Deploys a processor version to make it available for document processing requests. Accepts a DeployProcessorVersionRequest specifying the target processor version. Upon successful deployment, the processor version becomes active and can process documents. Returns a long-running operation that tracks the deployment progress. Side effects: The deployed processor version becomes available for inference and may replace the previously active version.",
+      "reasoning": "Original description is too minimal. Missing summary entirely. Added context about: what deployment means in Document AI (making version available for processing), the request schema context, the resulting state (version becomes active), return type (LRO), and side effects (availability change and potential version replacement). This helps AI agents understand the operational impact of deployment.",
       "batch_index": 1
     }
   },
@@ -22751,7 +22933,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'documentai.projects.locations.processors.disable' has semantic quality issues: vague_summary, missing_context. The current summary is missing. The description lacks details about authentication and the return value.",
+    "message": "Operation 'documentai.projects.locations.processors.disable' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details, missing_side_effects. Original description is incomplete. Missing summary entirely. Added clarity about: what disabling means (stops accepting requests), the request schema context, the resulting state (processor unavailable), return type (LRO), and side effects (rejection of new requests and existing operation handling). This helps AI agents understand the operational consequences of disabling a processor.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22766,13 +22948,17 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Disables a processor",
-      "summary_suggestion": "Disable a processor.",
-      "description_suggestion": "Disables the specified processor. This operation stops the processor from processing new documents. Requires authentication and returns the operation metadata.",
-      "reasoning": "The current summary is missing. The description lacks details about authentication and the return value.",
+      "summary_suggestion": "Disable document processor",
+      "description_suggestion": "Disables a processor, preventing it from processing new document requests. Accepts a DisableProcessorRequest. Upon successful disabling, the processor stops accepting new processing jobs. Returns a long-running operation tracking the disable process. Side effects: The processor becomes unavailable for document processing; existing operations may continue but new requests will be rejected.",
+      "reasoning": "Original description is incomplete. Missing summary entirely. Added clarity about: what disabling means (stops accepting requests), the request schema context, the resulting state (processor unavailable), return type (LRO), and side effects (rejection of new requests and existing operation handling). This helps AI agents understand the operational consequences of disabling a processor.",
       "batch_index": 1
     }
   },
@@ -22787,7 +22973,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'documentai.projects.locations.processors.enable' has semantic quality issues: vague_summary, missing_context. The current summary is missing. The description lacks details about authentication and the return value.",
+    "message": "Operation 'documentai.projects.locations.processors.enable' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details, missing_side_effects. Original description is too brief. Missing summary entirely. Added clarity about: what enabling means (makes processor active), the request schema context, the resulting state (processor ready for processing), return type (LRO), and side effects (availability for processing). This helps AI agents understand when and why to enable a processor.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -22802,13 +22988,17 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Enables a processor",
-      "summary_suggestion": "Enable a processor.",
-      "description_suggestion": "Enables the specified processor. This operation makes the processor available for processing documents. Requires authentication and returns the operation metadata.",
-      "reasoning": "The current summary is missing. The description lacks details about authentication and the return value.",
+      "summary_suggestion": "Enable document processor",
+      "description_suggestion": "Enables a processor to accept document processing requests. Accepts an EnableProcessorRequest. Upon successful enabling, the processor becomes active and ready to process documents. Returns a long-running operation tracking the enable process. Side effects: The processor becomes available for document processing; it can now accept and process new document requests.",
+      "reasoning": "Original description is too brief. Missing summary entirely. Added clarity about: what enabling means (makes processor active), the request schema context, the resulting state (processor ready for processing), return type (LRO), and side effects (availability for processing). This helps AI agents understand when and why to enable a processor.",
       "batch_index": 1
     }
   },
@@ -22823,7 +23013,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 26 operations analyzed, 19 quality issues found",
+    "message": "Semantic analysis completed: 26 operations analyzed, 23 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -22835,7 +23025,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 26,
-      "total_issues_found": 19,
+      "total_issues_found": 23,
       "batches_processed": 4
     }
   }

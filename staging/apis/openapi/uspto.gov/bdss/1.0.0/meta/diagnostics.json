@@ -2081,7 +2081,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'getProductsByName' has semantic quality issues: vague_summary, vague_description, missing_context. Original summary and description are vague and lack context. The suggestions provide clearer and more complete information.",
+    "message": "Operation 'getProductsWithLatestProductFiles' has semantic quality issues: vague_summary, missing_output_details. Original summary is vague ('Latest Files' is unclear). Description lacks clarity about the one-file-per-product constraint and doesn't explain the use case. Improved version clarifies the bulk data context, explains the 1:1 file relationship, and helps AI agents understand when to use this operation for product discovery.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getProductsWithLatestProductFiles",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "Returns all products with Latest Files.",
+      "current_description": "Use this GET to retrieve latest released bulk data products. Note that there is one file per product. The response includes product fields such as title, description, frequency, and level.",
+      "summary_suggestion": "Retrieve all bulk data products with latest files",
+      "description_suggestion": "Retrieves all available bulk data products with their latest released files. Each product is associated with exactly one file. Returns product metadata including title, description, update frequency, and hierarchical level. Useful for discovering the complete product catalog with current data.",
+      "reasoning": "Original summary is vague ('Latest Files' is unclear). Description lacks clarity about the one-file-per-product constraint and doesn't explain the use case. Improved version clarifies the bulk data context, explains the 1:1 file relationship, and helps AI agents understand when to use this operation for product discovery.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getProductsByName' has semantic quality issues: vague_summary, missing_output_details, poor_ai_interpretability. Original summary doesn't mention search capability or date filtering. Description is poorly organized with default values buried at the end, making it hard for AI agents to understand the full operation scope. Reorganized to lead with search functionality, clarify date filtering options, and explain default behaviors upfront for better AI interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2096,14 +2132,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description",
-        "missing_context"
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Returns files associated with products (of level PRODUCT) based on their full or partial names.",
-      "current_description": "Use this GET to search for bulk data services by product name or description. An error message will be returned if the product cannot be found by name. Note that product name is not case sensitive. You can enter full or partial name of an existing product to receive bulk data services. Default values for field names are as follows\n- if both years are not defined, toYear will be set equal to current year, fromYear will be set equal to previous year\n- if fromYear is defined, toYear will be set equal to fromYear+1\n- if fromMonth not defined, current month will be used\n- if toMonth not defined, it will be set equal to fromMonth\n- if fromDay is not defined, it will be set to current day (today)\n- if toDay is not defined, it will be set to the last day of toMonth/toYear",
-      "summary_suggestion": "Search for products by name or description",
-      "description_suggestion": "Search for bulk data products by their full or partial name or description. The search is not case sensitive. If the product name is not found, an error message will be returned. Default values for date fields are applied if not provided. The response includes product fields such as title, description, frequency, and level.",
-      "reasoning": "Original summary and description are vague and lack context. The suggestions provide clearer and more complete information.",
+      "current_description": "Use this GET to search for bulk data services by product name or description. An error message will be returned if the product cannot be found by name. Note that product name is not case sensitive. You can enter full or partial name of an existing product to receive bulk data services. Default values for field names are as follows\n- if both years are not defined, toYear will be set equal to current year, fromYear will be set equal to previous year\n- if fromYear is defined, toYear will be set equal to fromYear+1\n- if fromMonth not defined, current month will be used\n- if toMonth not defined, it will be set equal to fromMonth\n- if fromDay is not defined, it will be set equal to current day (today)\n- if toDay is not defined, it will be set to the last day of toMonth/toYear",
+      "summary_suggestion": "Search bulk data products by name with optional date filtering",
+      "description_suggestion": "Searches for bulk data products by full or partial product name (case-insensitive). Supports optional date range filtering using year/month/day parameters. Returns product files and metadata matching the search criteria. Default date behavior: if not specified, toYear defaults to current year and fromYear to previous year; if only fromYear provided, toYear becomes fromYear+1; month defaults to current month; day defaults to today. Returns error if no products match the search criteria.",
+      "reasoning": "Original summary doesn't mention search capability or date filtering. Description is poorly organized with default values buried at the end, making it hard for AI agents to understand the full operation scope. Reorganized to lead with search functionality, clarify date filtering options, and explain default behaviors upfront for better AI interpretability.",
       "batch_index": 0
     }
   },
@@ -2118,7 +2154,80 @@
         "character": 0
       }
     },
-    "message": "Operation 'getProductsByShortName' has semantic quality issues: vague_description, missing_context. Original description is vague and lacks context. The suggestion provides clearer and more complete information.",
+    "message": "Operation 'getProductsTree' has semantic quality issues: vague_summary, missing_output_details, poor_ai_interpretability. Original summary is too generic. Description has redundant sentences and doesn't clearly explain the output structure or use case. Improved version clarifies that this returns the complete hierarchy, explains short names are unique identifiers needed for other operations, and helps AI agents understand this is for initial exploration and taxonomy understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getProductsTree",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Returns products' hierarchical tree.",
+      "current_description": "Use this GET to retrieve short name and parent/child relationships for bulk data products. Short names are unique IDs of the products and should be used in other GETs where {shortName} parameter is required\nUse this GET to perform initial exploration of the existing products hierarchy\nShort names are unique IDs of the products and should be used in other GETs where {shortName} parameter is required",
+      "summary_suggestion": "Retrieve complete product hierarchy with short names",
+      "description_suggestion": "Retrieves the complete hierarchical tree of all bulk data products with their parent/child relationships. Returns short names (unique product identifiers) and structural metadata. Short names are required parameters for other product-specific operations. Useful for initial product catalog exploration and understanding the product taxonomy structure.",
+      "reasoning": "Original summary is too generic. Description has redundant sentences and doesn't clearly explain the output structure or use case. Improved version clarifies that this returns the complete hierarchy, explains short names are unique identifiers needed for other operations, and helps AI agents understand this is for initial exploration and taxonomy understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getProductSubTree' has semantic quality issues: vague_summary, missing_output_details. Original summary doesn't clarify that it retrieves a subtree starting from a specific node. Description is wordy and uses vague comparisons ('almost like'). Improved version clearly states it retrieves a subtree from a specific node, explains the exact-match requirement, clarifies case-insensitivity, and helps AI agents understand when to use this for exploring product families.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getProductSubTree",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "Returns products' hierarchical subtree.",
+      "current_description": "Use this GET to search for bulk data products by their short names. This works almost like products/tree GET, the difference is that it returns subtree data starting from a particular tree node (i.e. the GET returns all children if parent short name is entered). If a product cannot be found by its short name (has to be exact match and is not case sensitive), then an error message will appear in response body.",
+      "summary_suggestion": "Retrieve product subtree and children by short name",
+      "description_suggestion": "Retrieves the hierarchical subtree for a specified bulk data product using its short name. Returns the product node and all its child products. Short name matching is case-insensitive but requires exact match. Returns error if the specified short name is not found. Useful for exploring product families and related products within the hierarchy.",
+      "reasoning": "Original summary doesn't clarify that it retrieves a subtree starting from a specific node. Description is wordy and uses vague comparisons ('almost like'). Improved version clearly states it retrieves a subtree from a specific node, explains the exact-match requirement, clarifies case-insensitivity, and helps AI agents understand when to use this for exploring product families.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getProductsByShortName' has semantic quality issues: vague_summary, missing_output_details, poor_ai_interpretability. Original summary doesn't mention date filtering capability. Description references external documentation and doesn't clearly explain date input options or priority rules. Improved version clarifies date filtering options upfront, explains the priority mechanism, and provides complete context without requiring external reference, enabling AI agents to understand all operation capabilities.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2132,14 +2241,52 @@
       "operation_id": "getProductsByShortName",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description",
-        "missing_context"
+        "vague_summary",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Returns products along with their associated files by short names.",
       "current_description": "Use this GET to search for bulk data products by their short names and description. Note that \"From\" and \"To\" dates can be inputted separately as year/month/day values or as a single date string in format \"YYYY-MM-DD\".\nIf all values are entered, single date strings have a higher priority\nFor the list of default values rules, see GET /products/byname/{productName} above",
-      "summary_suggestion": "Search for products by short names and description",
-      "description_suggestion": "Search for bulk data products by their short names and description. Dates can be provided as separate values or a single date string in 'YYYY-MM-DD' format. If all values are provided, single date strings have higher priority. Default values for date fields are applied if not provided. The response includes product fields such as title, description, frequency, and level.",
-      "reasoning": "Original description is vague and lacks context. The suggestion provides clearer and more complete information.",
+      "summary_suggestion": "Retrieve bulk data products and files by short name with date filtering",
+      "description_suggestion": "Retrieves bulk data products and their associated files by short name. Supports optional date range filtering using either separate year/month/day parameters or single date strings in YYYY-MM-DD format. When both formats are provided, date strings take priority. Returns product metadata and file information for the specified product. For default date value rules, refer to the /products/byname/{productName} operation. Returns error if product short name is not found.",
+      "reasoning": "Original summary doesn't mention date filtering capability. Description references external documentation and doesn't clearly explain date input options or priority rules. Improved version clarifies date filtering options upfront, explains the priority mechanism, and provides complete context without requiring external reference, enabling AI agents to understand all operation capabilities.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getLatestProductFilesByProductIdAndTime' has semantic quality issues: vague_summary, missing_output_details, poor_ai_interpretability. Original summary doesn't clarify the year-based filtering. Description is vague about what 'latest' means and doesn't clearly explain the year parameter's role. Improved version clarifies that it retrieves latest files within a specific year, explains required inputs, clarifies the error conditions, and helps AI agents understand when to use this for time-specific product file retrieval.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getLatestProductFilesByProductIdAndTime",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Returns products along with their latest files by short names.",
+      "current_description": "Use this GET to search for latest released bulk data products by their short names and release year. The return response will include the latest files within the year specified.  An error message will be returned if product(s) cannot be found for the year specified",
+      "summary_suggestion": "Retrieve latest bulk data files for a product by year",
+      "description_suggestion": "Retrieves the latest released bulk data files for a specified product within a given year. Requires product short name and release year as inputs. Returns the most recent product files released during the specified year. Returns error if the product is not found or no files exist for the specified year. Useful for accessing current-year data for a specific product.",
+      "reasoning": "Original summary doesn't clarify the year-based filtering. Description is vague about what 'latest' means and doesn't clearly explain the year parameter's role. Improved version clarifies that it retrieves latest files within a specific year, explains required inputs, clarifies the error conditions, and helps AI agents understand when to use this for time-specific product file retrieval.",
       "batch_index": 0
     }
   },
@@ -2154,7 +2301,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 7 operations analyzed, 2 quality issues found",
+    "message": "Semantic analysis completed: 7 operations analyzed, 6 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -2166,7 +2313,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 7,
-      "total_issues_found": 2,
+      "total_issues_found": 6,
       "batches_processed": 1
     }
   }

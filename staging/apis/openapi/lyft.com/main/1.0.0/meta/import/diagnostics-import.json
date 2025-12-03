@@ -3676,7 +3676,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'GetProfile' has semantic quality issues: missing_input_details, missing_output_details. The current description lacks details about the input parameters and the output schema. The suggestions add clarity and completeness.",
+    "message": "Operation 'SetRideTypes' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Original summary is vague ('Preset types') and lacks action clarity. Description omits critical details: what parameters are required (latitude/longitude), what the request body contains, what is returned, and that this modifies sandbox state. Enhanced version clarifies the action (configure), specifies inputs (SandboxRideType, location), outputs (confirmation), and side effects (affects subsequent requests). Better AI agent interpretability for sandbox testing scenarios.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3687,17 +3687,95 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "GetProfile",
+      "operation_id": "SetRideTypes",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Preset types of rides for sandbox",
+      "current_description": "The sandbox-ridetypes endpoint allows you to preset the ridetypes in the region surrounding the specified latitude and longitude to allow testing different scenarios",
+      "summary_suggestion": "Configure available ride types for sandbox testing",
+      "description_suggestion": "Configures the available ride types in the sandbox environment for a specified geographic region (latitude and longitude). This operation allows testing different ride type scenarios by presetting which ride types are available in the target region. Requires sandbox credentials. Accepts a SandboxRideType object specifying the ride types to enable. Returns confirmation of the configured ride types. This affects all subsequent ride requests in the sandbox for the specified location.",
+      "reasoning": "Original summary is vague ('Preset types') and lacks action clarity. Description omits critical details: what parameters are required (latitude/longitude), what the request body contains, what is returned, and that this modifies sandbox state. Enhanced version clarifies the action (configure), specifies inputs (SandboxRideType, location), outputs (confirmation), and side effects (affects subsequent requests). Better AI agent interpretability for sandbox testing scenarios.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'SetRideTypeAvailability' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects, unclear_purpose. Original summary is misleading - it suggests a read operation ('Driver availability for processing') rather than a configuration action. Description lacks specificity about the ride_type parameter, what SandboxDriverAvailability contains, what is returned, and the side effects on sandbox behavior. Enhanced version clarifies: the action (configure), the path parameter (ride_type with examples), request body requirements, return value, and state changes. Significantly improves AI agent ability to determine when to use this operation and what to expect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "SetRideTypeAvailability",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "unclear_purpose"
+      ],
+      "current_summary": "Driver availability for processing ride request",
+      "current_description": "Set driver availability for the provided ride_type in the city/region surrounding the specified location",
+      "summary_suggestion": "Configure driver availability for ride type in sandbox",
+      "description_suggestion": "Configures driver availability for a specific ride type in the sandbox environment at a specified geographic location. This operation allows testing different driver availability scenarios by setting whether drivers are available for the given ride_type. The ride_type path parameter specifies which ride type to configure (e.g., 'lyft', 'lyft_plus'). Requires sandbox credentials and a SandboxDriverAvailability object in the request body specifying availability settings. Returns confirmation of the updated driver availability. This affects all subsequent ride requests for that ride type in the sandbox region.",
+      "reasoning": "Original summary is misleading - it suggests a read operation ('Driver availability for processing') rather than a configuration action. Description lacks specificity about the ride_type parameter, what SandboxDriverAvailability contains, what is returned, and the side effects on sandbox behavior. Enhanced version clarifies: the action (configure), the path parameter (ride_type with examples), request body requirements, return value, and state changes. Significantly improves AI agent ability to determine when to use this operation and what to expect.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'GetCost' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary is too generic. Description lacks detail about required inputs (coordinates), what the Cost response contains, and clarifies this is estimation-only. Added specificity for AI agent to understand when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "GetCost",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
         "missing_input_details",
         "missing_output_details"
       ],
-      "current_summary": "The user's general info",
-      "current_description": "The v1 of this endpoint returns the user's ID, v2 will return more general info about the user. We require authentication for this endpoint, so we extract the user ID from the access token.",
-      "summary_suggestion": "Get the user's profile information",
-      "description_suggestion": "Retrieve the authenticated user's profile information, including ID and other general details. Requires authentication. Returns the user profile object.",
-      "reasoning": "The current description lacks details about the input parameters and the output schema. The suggestions add clarity and completeness.",
+      "current_summary": "Cost estimates",
+      "current_description": "Estimate the cost of taking a Lyft between two points.",
+      "summary_suggestion": "Estimate Lyft ride cost between locations",
+      "description_suggestion": "Estimates the cost of a Lyft ride between two specified locations. Requires pickup and dropoff coordinates as input parameters. Returns a Cost object containing the estimated fare breakdown, including base fare, distance charges, and time charges. No ride is created by this operation.",
+      "reasoning": "Original summary is too generic. Description lacks detail about required inputs (coordinates), what the Cost response contains, and clarifies this is estimation-only. Added specificity for AI agent to understand when to use this operation.",
       "batch_index": 0
     }
   },
@@ -3712,7 +3790,191 @@
         "character": 0
       }
     },
-    "message": "Operation 'CancelRide' has semantic quality issues: vague_description, missing_side_effects. The current description is vague and does not mention the state of the ride or potential side effects like cancellation penalties.",
+    "message": "Operation 'GetDrivers' has semantic quality issues: vague_summary, missing_output_details, missing_context. Summary is vague about the action. Description uses awkward phrasing ('drivers' lat and lng') and lacks clarity about what data is returned and the operation's purpose. Enhanced to clarify inputs, outputs, and that this is for availability checking only.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "GetDrivers",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Available drivers nearby",
+      "current_description": "The drivers endpoint returns a list of nearby drivers' lat and lng at a given location.",
+      "summary_suggestion": "Get nearby available drivers",
+      "description_suggestion": "Returns a list of drivers currently available near a specified location. Requires location coordinates as input. Returns driver information including latitude, longitude, and driver ID. This endpoint provides real-time driver availability for a given area without requesting a ride.",
+      "reasoning": "Summary is vague about the action. Description uses awkward phrasing ('drivers' lat and lng') and lacks clarity about what data is returned and the operation's purpose. Enhanced to clarify inputs, outputs, and that this is for availability checking only.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'GetETA' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Summary is incomplete and doesn't indicate the action clearly. Description is informal and lacks specifics about inputs (location, ride type), outputs (ETA format), and use case. Improved for AI agent clarity on when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "GetETA",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Pickup ETAs",
+      "current_description": "The ETA endpoint lets you know how quickly a Lyft driver can come get you",
+      "summary_suggestion": "Get estimated driver pickup time",
+      "description_suggestion": "Retrieves the estimated time of arrival (ETA) for a Lyft driver to reach a specified pickup location. Requires location coordinates and ride type as input parameters. Returns ETA information in seconds. Useful for determining driver availability and expected wait times before requesting a ride.",
+      "reasoning": "Summary is incomplete and doesn't indicate the action clearly. Description is informal and lacks specifics about inputs (location, ride type), outputs (ETA format), and use case. Improved for AI agent clarity on when and how to use this operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'GetProfile' has semantic quality issues: vague_summary, missing_output_details, missing_context. Summary is too vague and doesn't indicate action. Description contains implementation details (version notes) irrelevant to API consumers and lacks clarity about what profile data is returned. Refocused on what the operation does, authentication requirements, and expected outputs.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "GetProfile",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "The user's general info",
+      "current_description": "The v1 of this endpoint returns the user's ID, v2 will return more general info about the user. We require authentication for this endpoint, so we extract the user ID from the access token.",
+      "summary_suggestion": "Retrieve authenticated user profile",
+      "description_suggestion": "Retrieves the authenticated user's profile information. Requires User Authentication via OAuth 2.0. Returns the user's ID and general profile information extracted from the access token. This endpoint requires an active user session and cannot be called without valid user credentials.",
+      "reasoning": "Summary is too vague and doesn't indicate action. Description contains implementation details (version notes) irrelevant to API consumers and lacks clarity about what profile data is returned. Refocused on what the operation does, authentication requirements, and expected outputs.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'GetRides' has semantic quality issues: vague_summary, missing_output_details, missing_context. Summary is too generic. Description lacks information about authentication requirements, pagination/filtering support, and what RideDetail objects contain. Enhanced to clarify inputs, outputs, and that this includes both historical and active rides.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "GetRides",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "List rides",
+      "current_description": "Get a list of past & current rides for this passenger.",
+      "summary_suggestion": "Retrieve passenger ride history",
+      "description_suggestion": "Retrieves a list of past and current rides for the authenticated user. Requires User Authentication. Supports filtering and pagination via optional parameters. Returns an array of RideDetail objects containing ride status, driver information, vehicle details, and pricing for each ride. Includes both completed and in-progress rides.",
+      "reasoning": "Summary is too generic. Description lacks information about authentication requirements, pagination/filtering support, and what RideDetail objects contain. Enhanced to clarify inputs, outputs, and that this includes both historical and active rides.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'GetRide' has semantic quality issues: vague_summary, missing_output_details. Summary is awkwardly phrased and redundant. Description lacks clarity about authentication, the RideDetail response structure, and that it works for both active and completed rides. Improved summary for conciseness and enhanced description with complete input/output details.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "GetRide",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "Get the ride detail of a given ride ID",
+      "current_description": "Get the status of a ride along with information about the driver, vehicle and price of a given ride ID",
+      "summary_suggestion": "Retrieve ride details by ID",
+      "description_suggestion": "Retrieves detailed information for a specific ride using its ride ID. Requires User Authentication and the ride ID as a path parameter. Returns a RideDetail object containing the ride status, driver information (name, rating, vehicle details), passenger information, pickup/dropoff locations, and pricing breakdown. Applicable to both active and completed rides.",
+      "reasoning": "Summary is awkwardly phrased and redundant. Description lacks clarity about authentication, the RideDetail response structure, and that it works for both active and completed rides. Improved summary for conciseness and enhanced description with complete input/output details.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CancelRide' has semantic quality issues: vague_summary, vague_description, missing_output_details, missing_side_effects. Original summary has grammatical issues ('a ongoing'). Description lacks clarity on what constitutes an 'active' ride, missing information about cancellation penalties (side effects), and doesn't specify the response. Added details about state requirements, potential fees, and return value for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3726,14 +3988,16 @@
       "operation_id": "CancelRide",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
+        "missing_output_details",
         "missing_side_effects"
       ],
       "current_summary": "Cancel a ongoing requested ride",
       "current_description": "Cancel a ongoing ride which was requested earlier by providing the ride id.",
-      "summary_suggestion": "Cancel an ongoing ride",
-      "description_suggestion": "Cancel an ongoing ride by providing the ride ID. The ride must be in a cancellable state. Upon successful cancellation, the ride status will be updated, and a cancellation penalty may apply if applicable.",
-      "reasoning": "The current description is vague and does not mention the state of the ride or potential side effects like cancellation penalties.",
+      "summary_suggestion": "Cancel an active ride request",
+      "description_suggestion": "Cancels an active ride that was previously requested. Requires the ride ID as a path parameter and a cancellation request body. The ride must be in an active state (not already dropped off or canceled). Cancellation may incur a penalty fee depending on the ride status and cancellation policy. Returns the updated ride details with canceled status.",
+      "reasoning": "Original summary has grammatical issues ('a ongoing'). Description lacks clarity on what constitutes an 'active' ride, missing information about cancellation penalties (side effects), and doesn't specify the response. Added details about state requirements, potential fees, and return value for better AI agent decision-making.",
       "batch_index": 1
     }
   },
@@ -3748,7 +4012,41 @@
         "character": 0
       }
     },
-    "message": "Operation 'GetRideReceipt' has semantic quality issues: vague_summary. The current summary is vague. The suggested summary is more specific and action-oriented.",
+    "message": "Operation 'SetRideDestination' has semantic quality issues: missing_output_details. Summary is clear and actionable. Description provides good context about constraints but lacks information about the response. Added explicit return value information to help AI agents understand what data they'll receive after the operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "SetRideDestination",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details"
+      ],
+      "current_summary": "Update the destination of the ride",
+      "current_description": "Add or update the ride's destination. Note that the ride must still be active (not droppedOff or canceled), and that destinations on Lyft Line rides can not be changed.",
+      "description_suggestion": "Add or update the ride's destination by providing a new location. The ride must be in an active state (not droppedOff or canceled). Destinations cannot be changed for Lyft Line rides. Returns the updated ride details with the new destination information.",
+      "reasoning": "Summary is clear and actionable. Description provides good context about constraints but lacks information about the response. Added explicit return value information to help AI agents understand what data they'll receive after the operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'GetRideReceipt' has semantic quality issues: vague_summary, missing_output_details. Original summary is grammatically awkward ('receipt of the rides'). Description explains availability constraints well but doesn't specify what data is returned. Added clarity on what constitutes a 'processed ride', explicit return value details, and corrected grammar for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3762,12 +4060,14 @@
       "operation_id": "GetRideReceipt",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "Get the receipt of the rides.",
       "current_description": "Get the receipt information of a processed ride by providing the ride id. Receipts will only be available to view once the payment has been processed. In the case of canceled ride, cancellation penalty is included if applicable.",
-      "summary_suggestion": "Retrieve the receipt for a ride",
-      "reasoning": "The current summary is vague. The suggested summary is more specific and action-oriented.",
+      "summary_suggestion": "Retrieve the receipt for a completed ride",
+      "description_suggestion": "Retrieves the receipt information for a processed ride by providing the ride ID. Receipts are only available after payment processing is complete. For canceled rides, the receipt includes any applicable cancellation penalties. Returns a receipt object containing itemized charges, total cost, payment method, and transaction details.",
+      "reasoning": "Original summary is grammatically awkward ('receipt of the rides'). Description explains availability constraints well but doesn't specify what data is returned. Added clarity on what constitutes a 'processed ride', explicit return value details, and corrected grammar for better AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -3782,7 +4082,82 @@
         "character": 0
       }
     },
-    "message": "Operation 'SetRideStatus' has semantic quality issues: vague_description, missing_side_effects. The current description is vague and does not mention possible side effects of changing the ride status.",
+    "message": "Operation 'GetRideTypes' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary is too generic ('Types of rides'). Description lacks specificity about required parameters and response structure. Added details about location-based filtering, optional parameters, and explicit return value structure to help AI agents understand when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "GetRideTypes",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Types of rides",
+      "current_description": "The ride types endpoint returns information about what kinds of Lyft rides you can request at a given location.",
+      "summary_suggestion": "Get available ride types at a location",
+      "description_suggestion": "Retrieves the available Lyft ride types that can be requested at a specified location. Requires location parameters (latitude and longitude) and optionally a ride type ID to filter results. Returns a list of ride type objects containing details such as ride type ID, display name, description, pricing information, and availability status at the requested location.",
+      "reasoning": "Original summary is too generic ('Types of rides'). Description lacks specificity about required parameters and response structure. Added details about location-based filtering, optional parameters, and explicit return value structure to help AI agents understand when and how to use this operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'SetPrimeTime' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Original summary lacks context that this is a sandbox operation. Description doesn't explain what inputs are needed, what the operation affects, or what is returned. Added clarity about sandbox context, input requirements, side effects (overrides existing settings), and return value for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "SetPrimeTime",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Preset Prime Time percentage",
+      "current_description": "Preset a Prime Time percentage in the region surrounding the specified location. This Prime Time percentage will be applied when requesting cost, or when requesting a ride in sandbox mode.",
+      "summary_suggestion": "Set Prime Time percentage for sandbox testing",
+      "description_suggestion": "Sets a Prime Time percentage for the region surrounding a specified location in sandbox mode. This percentage will be applied to cost estimates and ride requests in the sandbox environment. Requires a location and Prime Time percentage value in the request body. Overrides any existing Prime Time setting for that region. Returns confirmation of the updated Prime Time configuration.",
+      "reasoning": "Original summary lacks context that this is a sandbox operation. Description doesn't explain what inputs are needed, what the operation affects, or what is returned. Added clarity about sandbox context, input requirements, side effects (overrides existing settings), and return value for better AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'SetRideStatus' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, not_actionable. Original summary and description are vague and lack actionable details. 'Propagate through various ride status' is unclear about what action is performed. Missing information about valid status values, input requirements, and response structure. Added clarity about sandbox context, explicit status transitions, valid status values, and return information for AI agents to understand this testing utility.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3796,14 +4171,17 @@
       "operation_id": "SetRideStatus",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_side_effects"
+        "missing_input_details",
+        "missing_output_details",
+        "not_actionable"
       ],
       "current_summary": "Propagate ride through ride status",
       "current_description": "Propagate a sandbox-ride through various ride status",
-      "summary_suggestion": "Set the status of a sandbox ride",
-      "description_suggestion": "Set the status of a sandbox ride by providing the ride ID and the desired status. The ride status will be updated accordingly. Possible side effects include changes in ride availability and cost estimates.",
-      "reasoning": "The current description is vague and does not mention possible side effects of changing the ride status.",
+      "summary_suggestion": "Update sandbox ride status for testing",
+      "description_suggestion": "Updates the status of a sandbox ride to simulate ride lifecycle progression for testing purposes. Requires the ride ID and a target ride status value (e.g., requested, accepted, in_progress, droppedOff, canceled). Transitions the ride through the specified status state. Returns the updated ride details with the new RideStatusEnum value and associated metadata reflecting the status change.",
+      "reasoning": "Original summary and description are vague and lack actionable details. 'Propagate through various ride status' is unclear about what action is performed. Missing information about valid status values, input requirements, and response structure. Added clarity about sandbox context, explicit status transitions, valid status values, and return information for AI agents to understand this testing utility.",
       "batch_index": 1
     }
   },
@@ -3818,7 +4196,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 16 operations analyzed, 4 quality issues found",
+    "message": "Semantic analysis completed: 16 operations analyzed, 14 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -3830,7 +4208,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 16,
-      "total_issues_found": 4,
+      "total_issues_found": 14,
       "batches_processed": 3
     }
   }

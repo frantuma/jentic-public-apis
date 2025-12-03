@@ -2179,7 +2179,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'kmsinventory.projects.cryptoKeys.list' has semantic quality issues: vague_summary, missing_context. The original summary was missing, and the description lacked context about authentication and permissions. The suggestions provide a clear action-oriented summary and a more complete description.",
+    "message": "Operation 'kmsinventory.projects.locations.keyRings.cryptoKeys.getProtectedResourcesSummary' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity about return value structure (ProtectedResourcesSummary schema) and doesn't mention snapshot-based data sourcing, which is important for AI agents to understand data freshness expectations. Added explicit return schema reference and data freshness context for better AI interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "kmsinventory.projects.locations.keyRings.cryptoKeys.getProtectedResourcesSummary",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns aggregate information about the resources protected by the given Cloud KMS CryptoKey. Only resources within the same Cloud organization as the key will be returned. The project that holds the key must be part of an organization in order for this call to succeed.",
+      "summary_suggestion": "Get aggregate protected resources summary for CryptoKey",
+      "description_suggestion": "Retrieves aggregate information about resources protected by a specified Cloud KMS CryptoKey. Returns a ProtectedResourcesSummary containing counts and metadata of protected resources. Only resources within the same Cloud organization as the key are included. The project containing the key must be part of an organization for this operation to succeed. Data is sourced from snapshots and may not reflect real-time state.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about return value structure (ProtectedResourcesSummary schema) and doesn't mention snapshot-based data sourcing, which is important for AI agents to understand data freshness expectations. Added explicit return schema reference and data freshness context for better AI interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'kmsinventory.projects.cryptoKeys.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description doesn't specify return value structure (ListCryptoKeysResponse) or mention pagination/filtering capabilities, which are critical for AI agents to understand how to retrieve large result sets. Added explicit return type reference and pagination context.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2194,13 +2230,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Returns cryptographic keys managed by Cloud KMS in a given Cloud project. Note that this data is sourced from snapshots, meaning it may not completely reflect the actual state of key metadata at call time.",
-      "summary_suggestion": "List cryptographic keys managed by Cloud KMS in a project",
-      "description_suggestion": "Lists cryptographic keys managed by Cloud KMS in a specified Cloud project. The data is sourced from snapshots, so it may not reflect the current state of key metadata. Requires appropriate authentication and permissions.",
-      "reasoning": "The original summary was missing, and the description lacked context about authentication and permissions. The suggestions provide a clear action-oriented summary and a more complete description.",
+      "summary_suggestion": "List Cloud KMS CryptoKeys in project",
+      "description_suggestion": "Lists all cryptographic keys managed by Cloud KMS within a specified Cloud project. Returns a paginated list of CryptoKey resources with their metadata. Data is sourced from snapshots and may not reflect real-time state at call time. Supports filtering and pagination parameters to control result set size and scope.",
+      "reasoning": "Missing summary entirely. Description doesn't specify return value structure (ListCryptoKeysResponse) or mention pagination/filtering capabilities, which are critical for AI agents to understand how to retrieve large result sets. Added explicit return type reference and pagination context.",
       "batch_index": 0
     }
   },
@@ -2215,7 +2251,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'kmsinventory.organizations.protectedResources.search' has semantic quality issues: vague_summary, missing_context. The original summary was missing, and the description lacked context about authentication and permissions. The suggestions provide a clear action-oriented summary and a more complete description.",
+    "message": "Operation 'kmsinventory.organizations.protectedResources.search' has semantic quality issues: vague_summary, missing_output_details, missing_input_details. Missing summary entirely. Description is too generic and doesn't explain search capabilities, filtering options, or return value structure (SearchProtectedResourcesResponse). Doesn't clarify the difference from getProtectedResourcesSummary or explain use cases. Added search/filtering context and explicit return type for better AI agent decision-making about when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2230,13 +2266,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Returns metadata about the resources protected by the given Cloud KMS CryptoKey in the given Cloud organization.",
-      "summary_suggestion": "Search for metadata about protected resources by a Cloud KMS CryptoKey in an organization",
-      "description_suggestion": "Searches for metadata about the resources protected by a specified Cloud KMS CryptoKey in a given Cloud organization. Requires appropriate authentication and permissions. The search results are based on the provided parameters.",
-      "reasoning": "The original summary was missing, and the description lacked context about authentication and permissions. The suggestions provide a clear action-oriented summary and a more complete description.",
+      "summary_suggestion": "Search protected resources by CryptoKey in organization",
+      "description_suggestion": "Searches for resources protected by a specified Cloud KMS CryptoKey within a given Cloud organization. Returns a SearchProtectedResourcesResponse containing metadata about matching ProtectedResource objects. Supports filtering by resource type, location, and other criteria through query parameters. Useful for discovering which resources depend on a specific encryption key across the organization.",
+      "reasoning": "Missing summary entirely. Description is too generic and doesn't explain search capabilities, filtering options, or return value structure (SearchProtectedResourcesResponse). Doesn't clarify the difference from getProtectedResourcesSummary or explain use cases. Added search/filtering context and explicit return type for better AI agent decision-making about when to use this operation.",
       "batch_index": 0
     }
   },
@@ -2251,7 +2288,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 3 operations analyzed, 2 quality issues found",
+    "message": "Semantic analysis completed: 3 operations analyzed, 3 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -2263,7 +2300,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 3,
-      "total_issues_found": 2,
+      "total_issues_found": 3,
       "batches_processed": 1
     }
   }

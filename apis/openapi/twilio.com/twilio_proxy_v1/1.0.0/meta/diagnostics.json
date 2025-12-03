@@ -5939,7 +5939,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchShortCode' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks details about the required parameters and the response structure.",
+    "message": "Operation 'FetchShortCode' has semantic quality issues: vague_description, missing_context, missing_output_details, poor_ai_interpretability. Original description is identical to summary and lacks essential context. Added information about required identifiers (Service SID, Short Code SID), what the operation returns (Short Code object with specific fields), and clarified it's a read-only operation. This helps AI agents understand the operation's purpose, inputs, and outputs for proper decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5954,13 +5954,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Fetch a specific Short Code.",
       "current_description": "Fetch a specific Short Code.",
-      "summary_suggestion": "Retrieve details of a specific Short Code.",
-      "description_suggestion": "Retrieves the details of a specific Short Code associated with a service. Requires the Service Sid and Short Code Sid. Returns a JSON object containing the Short Code details.",
-      "reasoning": "The current description is too vague and lacks details about the required parameters and the response structure.",
+      "summary_suggestion": "Retrieve a short code resource",
+      "description_suggestion": "Retrieves a specific Short Code resource associated with a Proxy Service. Requires the Service SID and Short Code SID as identifiers. Returns the Short Code object containing configuration details such as the phone number, friendly name, and ISO country code. This operation is read-only and does not modify any resources.",
+      "reasoning": "Original description is identical to summary and lacks essential context. Added information about required identifiers (Service SID, Short Code SID), what the operation returns (Short Code object with specific fields), and clarified it's a read-only operation. This helps AI agents understand the operation's purpose, inputs, and outputs for proper decision-making.",
       "batch_index": 4
     }
   },
@@ -5975,7 +5977,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateShortCode' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks details about the required parameters, request schema, and the response structure.",
+    "message": "Operation 'UpdateShortCode' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Original description is too vague and identical to summary. Added clarity about what can be modified, required identifiers, expected inputs and outputs, and importantly, the side effect that changes affect all sessions using this Short Code. This enables AI agents to understand when to use this operation and what consequences it has.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5990,13 +5992,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Update a specific Short Code.",
       "current_description": "Update a specific Short Code.",
-      "summary_suggestion": "Modify details of a specific Short Code.",
-      "description_suggestion": "Updates the details of a specific Short Code associated with a service. Requires the Service Sid and Short Code Sid. Accepts a JSON object containing the updated Short Code details. Returns the updated Short Code object.",
-      "reasoning": "The current description is too vague and lacks details about the required parameters, request schema, and the response structure.",
+      "summary_suggestion": "Update short code configuration",
+      "description_suggestion": "Updates configuration for a specific Short Code resource within a Proxy Service. Requires the Service SID and Short Code SID. Accepts request body parameters to modify Short Code properties such as friendly name or other configuration settings. Returns the updated Short Code object reflecting the applied changes. This operation modifies the Short Code resource state and affects all sessions using this Short Code.",
+      "reasoning": "Original description is too vague and identical to summary. Added clarity about what can be modified, required identifiers, expected inputs and outputs, and importantly, the side effect that changes affect all sessions using this Short Code. This enables AI agents to understand when to use this operation and what consequences it has.",
       "batch_index": 4
     }
   },
@@ -6011,362 +6016,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteSession' has semantic quality issues: vague_summary, vague_description, missing_side_effects. Original summary and description are too vague. Added details about the action's effect and the return value for better clarity and AI agent interpretability.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteSession",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_side_effects"
-      ],
-      "current_summary": "Delete a specific Session.",
-      "current_description": "Delete a specific Session.",
-      "summary_suggestion": "Delete a specific Session from the specified Service.",
-      "description_suggestion": "Delete a specific Session identified by {Sid} from the Service identified by {ServiceSid}. This action will terminate the session and any associated resources. Returns a success message upon deletion.",
-      "reasoning": "Original summary and description are too vague. Added details about the action's effect and the return value for better clarity and AI agent interpretability.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'UpdateSession' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original summary and description are too vague. Added details about the input and output for better clarity and AI agent interpretability.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "UpdateSession",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_input_details",
-        "missing_output_details"
-      ],
-      "current_summary": "Update a specific Session.",
-      "current_description": "Update a specific Session.",
-      "summary_suggestion": "Update a specific Session in the specified Service.",
-      "description_suggestion": "Update a specific Session identified by {Sid} in the Service identified by {ServiceSid}. The request body should contain the updated session details. Returns the updated session object.",
-      "reasoning": "Original summary and description are too vague. Added details about the input and output for better clarity and AI agent interpretability.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateSession' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original summary and description are too vague. Added details about the input and output for better clarity and AI agent interpretability.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateSession",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_input_details",
-        "missing_output_details"
-      ],
-      "current_summary": "Create a new Session",
-      "current_description": "Create a new Session",
-      "summary_suggestion": "Create a new Session in the specified Service.",
-      "description_suggestion": "Create a new Session in the Service identified by {ServiceSid}. The request body should contain the details for the new session. Returns the newly created session object.",
-      "reasoning": "Original summary and description are too vague. Added details about the input and output for better clarity and AI agent interpretability.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateShortCode' has semantic quality issues: vague_description, missing_output_details. Description is too vague. Added details about the output for better clarity and AI agent interpretability.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateShortCode",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_output_details"
-      ],
-      "current_summary": "Add a Short Code to the Proxy Number Pool for the Service.",
-      "current_description": "Add a Short Code to the Proxy Number Pool for the Service.",
-      "description_suggestion": "Add a Short Code to the Proxy Number Pool for the Service identified by {ServiceSid}. The request body should contain the details for the new Short Code. Returns the newly created Short Code object.",
-      "reasoning": "Description is too vague. Added details about the output for better clarity and AI agent interpretability.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeleteShortCode' has semantic quality issues: vague_description, missing_side_effects. Description is too vague. Added details about the action's effect and the return value for better clarity and AI agent interpretability.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteShortCode",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_side_effects"
-      ],
-      "current_summary": "Delete a specific Short Code from a Service.",
-      "current_description": "Delete a specific Short Code from a Service.",
-      "description_suggestion": "Delete a specific Short Code identified by {Sid} from the Service identified by {ServiceSid}. This action will remove the Short Code from the Proxy Number Pool. Returns a success message upon deletion.",
-      "reasoning": "Description is too vague. Added details about the action's effect and the return value for better clarity and AI agent interpretability.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListParticipant' has semantic quality issues: vague_description. The description is vague and lacks detail about the operation's purpose and expected output. The suggested description provides more clarity.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListParticipant",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description"
-      ],
-      "current_summary": "Retrieve a list of all Participants in a Session.",
-      "current_description": "Retrieve a list of all Participants in a Session.",
-      "description_suggestion": "Retrieve a list of all Participants in a specified Session. This operation returns a list of all Participants associated with the given Session.",
-      "reasoning": "The description is vague and lacks detail about the operation's purpose and expected output. The suggested description provides more clarity.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateParticipant' has semantic quality issues: vague_description, missing_input_details. The description is vague and missing details about the required input parameters. The suggested description provides more clarity and includes input details.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateParticipant",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_input_details"
-      ],
-      "current_summary": "Add a new Participant to the Session",
-      "current_description": "Add a new Participant to the Session",
-      "description_suggestion": "Add a new Participant to the specified Session. This operation requires the Session SID and additional participant details to create a new Participant.",
-      "reasoning": "The description is vague and missing details about the required input parameters. The suggested description provides more clarity and includes input details.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreatePhoneNumber' has semantic quality issues: vague_description, missing_input_details. The description is vague and missing details about the required input parameters. The suggested description provides more clarity and includes input details.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreatePhoneNumber",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_input_details"
-      ],
-      "current_summary": "Add a Phone Number to a Service's Proxy Number Pool.",
-      "current_description": "Add a Phone Number to a Service's Proxy Number Pool.",
-      "description_suggestion": "Add a new Phone Number to a Service's Proxy Number Pool. This operation requires the Service SID and additional phone number details to create a new Phone Number.",
-      "reasoning": "The description is vague and missing details about the required input parameters. The suggested description provides more clarity and includes input details.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeletePhoneNumber' has semantic quality issues: vague_description. The description is vague and missing details about the required input parameters. The suggested description provides more clarity and includes input details.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeletePhoneNumber",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description"
-      ],
-      "current_summary": "Delete a specific Phone Number from a Service.",
-      "current_description": "Delete a specific Phone Number from a Service.",
-      "description_suggestion": "Delete a specific Phone Number from a Service's Proxy Number Pool. This operation requires the Service SID and Phone Number SID to delete the specified Phone Number.",
-      "reasoning": "The description is vague and missing details about the required input parameters. The suggested description provides more clarity and includes input details.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchPhoneNumber' has semantic quality issues: vague_description. The description is vague and missing details about the required input parameters. The suggested description provides more clarity and includes input details.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchPhoneNumber",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description"
-      ],
-      "current_summary": "Fetch a specific Phone Number.",
-      "current_description": "Fetch a specific Phone Number.",
-      "description_suggestion": "Fetch details of a specific Phone Number from a Service's Proxy Number Pool. This operation requires the Service SID and Phone Number SID to retrieve the specified Phone Number.",
-      "reasoning": "The description is vague and missing details about the required input parameters. The suggested description provides more clarity and includes input details.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'UpdatePhoneNumber' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The current description is too vague. Added details about the required parameters and the return value for better clarity and AI agent interpretability.",
+    "message": "Operation 'UpdatePhoneNumber' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is too minimal. Added clarity about what can be updated, what the operation returns, and side effects on active sessions. Improved terminology consistency with 'Proxy Number' and 'Service' context from the API domain.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6382,12 +6032,14 @@
       "issues_found": [
         "vague_description",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Update a specific Proxy Number.",
       "current_description": "Update a specific Proxy Number.",
-      "description_suggestion": "Updates a specific Proxy Number associated with a Twilio Proxy Service. Requires the Service SID and the Proxy Number SID. Returns the updated Proxy Number object.",
-      "reasoning": "The current description is too vague. Added details about the required parameters and the return value for better clarity and AI agent interpretability.",
+      "summary_suggestion": "Update proxy number configuration",
+      "description_suggestion": "Updates configuration for a specific Proxy Number within a Service. Allows modification of proxy number properties such as in-use status or other settings. Returns the updated proxy number object with all current properties. Changes take effect immediately for active sessions using this proxy number.",
+      "reasoning": "Original description is too minimal. Added clarity about what can be updated, what the operation returns, and side effects on active sessions. Improved terminology consistency with 'Proxy Number' and 'Service' context from the API domain.",
       "batch_index": 2
     }
   },
@@ -6402,7 +6054,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchService' has semantic quality issues: vague_description, missing_output_details. The current description is too vague. Added details about the Service SID requirement and the return value for better clarity and AI agent interpretability.",
+    "message": "Operation 'FetchService' has semantic quality issues: vague_description, missing_output_details. Summary is adequate, but description lacks detail about what information is returned. Added clarity about the Service object structure and key properties to help AI agents understand the response.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6421,8 +6073,8 @@
       ],
       "current_summary": "Fetch a specific Service.",
       "current_description": "Fetch a specific Service.",
-      "description_suggestion": "Fetches details of a specific Twilio Proxy Service. Requires the Service SID. Returns the Service object with its attributes.",
-      "reasoning": "The current description is too vague. Added details about the Service SID requirement and the return value for better clarity and AI agent interpretability.",
+      "description_suggestion": "Retrieves detailed information about a specific Proxy Service by its Service SID. Returns the complete Service object including configuration settings such as geo-match level, number selection behavior, and other service properties.",
+      "reasoning": "Summary is adequate, but description lacks detail about what information is returned. Added clarity about the Service object structure and key properties to help AI agents understand the response.",
       "batch_index": 2
     }
   },
@@ -6437,7 +6089,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteService' has semantic quality issues: vague_description, missing_side_effects. The current description is too vague. Added details about the Service SID requirement and the side effects of the operation for better clarity and AI agent interpretability.",
+    "message": "Operation 'DeleteService' has semantic quality issues: vague_description, missing_side_effects. Summary is clear, but description needs to explain the cascading effects of deletion and any prerequisites. Critical for AI agents to understand the destructive nature and scope of this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6456,8 +6108,8 @@
       ],
       "current_summary": "Delete a specific Service.",
       "current_description": "Delete a specific Service.",
-      "description_suggestion": "Deletes a specific Twilio Proxy Service. Requires the Service SID. This action is irreversible and will remove the Service and its associated resources.",
-      "reasoning": "The current description is too vague. Added details about the Service SID requirement and the side effects of the operation for better clarity and AI agent interpretability.",
+      "description_suggestion": "Permanently deletes a specific Proxy Service and all associated resources including sessions, participants, and phone numbers. This action cannot be undone. The Service must be in a valid state for deletion (typically with no active sessions).",
+      "reasoning": "Summary is clear, but description needs to explain the cascading effects of deletion and any prerequisites. Critical for AI agents to understand the destructive nature and scope of this operation.",
       "batch_index": 2
     }
   },
@@ -6472,7 +6124,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateService' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The current description is too vague. Added details about the Service SID requirement, the updated attributes, and the return value for better clarity and AI agent interpretability.",
+    "message": "Operation 'UpdateService' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Summary is adequate, but description lacks specificity about updatable fields and return value. Added clarity about partial update support and what the response contains for better AI agent guidance.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6492,8 +6144,8 @@
       ],
       "current_summary": "Update a specific Service.",
       "current_description": "Update a specific Service.",
-      "description_suggestion": "Updates a specific Twilio Proxy Service. Requires the Service SID and the updated attributes. Returns the updated Service object.",
-      "reasoning": "The current description is too vague. Added details about the Service SID requirement, the updated attributes, and the return value for better clarity and AI agent interpretability.",
+      "description_suggestion": "Updates configuration settings for a specific Proxy Service. Supports partial updates to properties such as geo-match level, number selection behavior, and other service parameters. Returns the updated Service object with all current configuration values.",
+      "reasoning": "Summary is adequate, but description lacks specificity about updatable fields and return value. Added clarity about partial update support and what the response contains for better AI agent guidance.",
       "batch_index": 2
     }
   },
@@ -6508,7 +6160,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateService' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The current description is too vague. Added details about the Service attributes requirement and the return value for better clarity and AI agent interpretability.",
+    "message": "Operation 'CreateService' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Summary is adequate, but description lacks detail about required/optional inputs and what the response contains. Added clarity about the Service SID generation and configuration options for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6528,8 +6180,8 @@
       ],
       "current_summary": "Create a new Service for Twilio Proxy",
       "current_description": "Create a new Service for Twilio Proxy",
-      "description_suggestion": "Creates a new Twilio Proxy Service. Requires the Service attributes. Returns the newly created Service object with its SID.",
-      "reasoning": "The current description is too vague. Added details about the Service attributes requirement and the return value for better clarity and AI agent interpretability.",
+      "description_suggestion": "Creates a new Proxy Service with specified configuration parameters. Requires service name and optional settings such as geo-match level and number selection behavior. Returns the newly created Service object with a unique Service SID and default configuration values.",
+      "reasoning": "Summary is adequate, but description lacks detail about required/optional inputs and what the response contains. Added clarity about the Service SID generation and configuration options for better AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -6544,7 +6196,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchSession' has semantic quality issues: vague_description, missing_output_details. The current description is too vague. Added details about the Service SID and Session SID requirements and the return value for better clarity and AI agent interpretability.",
+    "message": "Operation 'FetchSession' has semantic quality issues: vague_description, missing_output_details. Summary is clear, but description lacks detail about the Session object structure and key properties. Added clarity about session modes and status information to help AI agents understand the response content.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6563,8 +6215,8 @@
       ],
       "current_summary": "Fetch a specific Session.",
       "current_description": "Fetch a specific Session.",
-      "description_suggestion": "Fetches details of a specific Twilio Proxy Session. Requires the Service SID and the Session SID. Returns the Session object with its attributes.",
-      "reasoning": "The current description is too vague. Added details about the Service SID and Session SID requirements and the return value for better clarity and AI agent interpretability.",
+      "description_suggestion": "Retrieves detailed information about a specific Session within a Service. Returns the complete Session object including status, mode (message-only, voice-only, or voice-and-message), participants, and other session properties.",
+      "reasoning": "Summary is clear, but description lacks detail about the Session object structure and key properties. Added clarity about session modes and status information to help AI agents understand the response content.",
       "batch_index": 2
     }
   },
@@ -6579,7 +6231,198 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchInteraction' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague as they imply retrieving a list of interactions, but the path suggests a specific interaction is being fetched.",
+    "message": "Operation 'ListParticipant' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original summary and description are overly simplistic. Added clarity about pagination support (mentioned in context), filtering capabilities, and what the response contains. This helps AI agents understand available filtering options and response structure for better decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListParticipant",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a list of all Participants in a Session.",
+      "current_description": "Retrieve a list of all Participants in a Session.",
+      "summary_suggestion": "List all Participants in a Session",
+      "description_suggestion": "Retrieves a paginated list of all Participants associated with a specific Session. Supports filtering and pagination parameters. Returns an array of Participant objects containing identifiers, contact information, and session association details.",
+      "reasoning": "Original summary and description are overly simplistic. Added clarity about pagination support (mentioned in context), filtering capabilities, and what the response contains. This helps AI agents understand available filtering options and response structure for better decision-making.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateParticipant' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description lacks essential details about required inputs, state requirements, and what happens as a result of creation. Enhanced version clarifies that participants receive proxy identifiers and explains the side effect of session association, enabling AI agents to understand the operation's full impact.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateParticipant",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Add a new Participant to the Session",
+      "current_description": "Add a new Participant to the Session",
+      "summary_suggestion": "Create a new Participant in a Session",
+      "description_suggestion": "Creates and adds a new Participant to an existing Session. Requires the Session to be in an appropriate state. The Participant will be assigned proxy identifiers for communication within the session. Returns the created Participant object with assigned identifiers and session association details.",
+      "reasoning": "Original description lacks essential details about required inputs, state requirements, and what happens as a result of creation. Enhanced version clarifies that participants receive proxy identifiers and explains the side effect of session association, enabling AI agents to understand the operation's full impact.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreatePhoneNumber' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is minimal and lacks input requirements and side effects. Enhanced version specifies the required phone number format (E.164), explains the side effect of availability for session assignment, and references the Service's number selection behavior for consistency with API context.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreatePhoneNumber",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Add a Phone Number to a Service's Proxy Number Pool.",
+      "current_description": "Add a Phone Number to a Service's Proxy Number Pool.",
+      "summary_suggestion": "Add a Phone Number to Proxy Pool",
+      "description_suggestion": "Adds a phone number to a Service's Proxy Number Pool, making it available for participant communication. Requires a valid phone number in E.164 format. The phone number becomes available for assignment to sessions based on the Service's number selection behavior. Returns the created PhoneNumber resource with pool assignment details.",
+      "reasoning": "Original description is minimal and lacks input requirements and side effects. Enhanced version specifies the required phone number format (E.164), explains the side effect of availability for session assignment, and references the Service's number selection behavior for consistency with API context.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeletePhoneNumber' has semantic quality issues: vague_summary, vague_description, missing_context, missing_side_effects. Original description lacks critical side effect information. Enhanced version clarifies that deletion is permanent, explains the impact on future assignments versus active sessions, and specifies the response code. This helps AI agents understand the operation's scope and potential implications.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeletePhoneNumber",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete a specific Phone Number from a Service.",
+      "current_description": "Delete a specific Phone Number from a Service.",
+      "summary_suggestion": "Remove a Phone Number from Proxy Pool",
+      "description_suggestion": "Removes a phone number from a Service's Proxy Number Pool, making it unavailable for future session assignments. The phone number is permanently deleted from the pool. Any active sessions using this number are not affected, but new sessions cannot be assigned this number. Returns a 204 No Content response on successful deletion.",
+      "reasoning": "Original description lacks critical side effect information. Enhanced version clarifies that deletion is permanent, explains the impact on future assignments versus active sessions, and specifies the response code. This helps AI agents understand the operation's scope and potential implications.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchPhoneNumber' has semantic quality issues: vague_summary, vague_description, missing_output_details. Original description is too generic. Enhanced version clarifies the context (within a Service's Proxy Pool), specifies what information is returned, and helps AI agents understand what data they can expect from this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchPhoneNumber",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Fetch a specific Phone Number.",
+      "current_description": "Fetch a specific Phone Number.",
+      "summary_suggestion": "Retrieve a specific Phone Number",
+      "description_suggestion": "Retrieves detailed information about a specific Phone Number in a Service's Proxy Number Pool. Returns the PhoneNumber resource including its identifier, phone number value, pool status, and assignment history.",
+      "reasoning": "Original description is too generic. Enhanced version clarifies the context (within a Service's Proxy Pool), specifies what information is returned, and helps AI agents understand what data they can expect from this operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchInteraction' has semantic quality issues: vague_summary, vague_description, not_actionable, poor_ai_interpretability. The current description incorrectly states 'list' when this is a GET operation for a single resource (indicated by the {Sid} path parameter). The summary and description are misleading for AI agents. Clarified that this fetches a single Interaction and added details about what the response contains.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6594,13 +6437,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "vague_description",
+        "not_actionable",
+        "poor_ai_interpretability"
       ],
-      "current_summary": "Retrieve a list of Interactions for a given [Session](https://www.twilio.com/docs/proxy/api/session).",
-      "current_description": "Retrieve a list of Interactions for a given [Session](https://www.twilio.com/docs/proxy/api/session).",
-      "summary_suggestion": "Retrieve a specific Interaction for a given Session.",
-      "description_suggestion": "Retrieve a specific Interaction for a given [Session](https://www.twilio.com/docs/proxy/api/session). Requires the Interaction SID. Returns the details of the specified Interaction.",
-      "reasoning": "The current summary and description are vague as they imply retrieving a list of interactions, but the path suggests a specific interaction is being fetched.",
+      "current_summary": "Retrieve a list of Interactions for a given Session.",
+      "current_description": "Retrieve a list of Interactions for a given Session.",
+      "summary_suggestion": "Retrieve a specific Interaction by ID",
+      "description_suggestion": "Fetches a single Interaction resource for a given Service, Session, and Interaction ID. Returns the Interaction object containing details about the communication exchange (message or voice) between participants, including type, status, inbound/outbound properties, and timestamps.",
+      "reasoning": "The current description incorrectly states 'list' when this is a GET operation for a single resource (indicated by the {Sid} path parameter). The summary and description are misleading for AI agents. Clarified that this fetches a single Interaction and added details about what the response contains.",
       "batch_index": 0
     }
   },
@@ -6615,7 +6460,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteInteraction' has semantic quality issues: vague_summary, vague_description, missing_side_effects. The current description is vague and does not mention the side effects of the operation.",
+    "message": "Operation 'DeleteInteraction' has semantic quality issues: vague_description, missing_context, missing_side_effects. Summary is adequate, but description lacks context about what deletion means in this domain and the permanence of the action. Added clarification about the scope of deletion and its irreversible nature to help AI agents understand the consequences.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6629,14 +6474,14 @@
       "operation_id": "DeleteInteraction",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
         "vague_description",
+        "missing_context",
         "missing_side_effects"
       ],
       "current_summary": "Delete a specific Interaction.",
       "current_description": "Delete a specific Interaction.",
-      "description_suggestion": "Delete a specific Interaction for a given [Session](https://www.twilio.com/docs/proxy/api/session). Requires the Interaction SID. This action is irreversible and will remove the Interaction from the system.",
-      "reasoning": "The current description is vague and does not mention the side effects of the operation.",
+      "description_suggestion": "Deletes a specific Interaction resource identified by its Interaction ID within a given Service and Session. This operation removes the Interaction record and its associated data. The deletion is permanent and cannot be undone.",
+      "reasoning": "Summary is adequate, but description lacks context about what deletion means in this domain and the permanence of the action. Added clarification about the scope of deletion and its irreversible nature to help AI agents understand the consequences.",
       "batch_index": 0
     }
   },
@@ -6651,43 +6496,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListInteraction' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague and do not specify the details of the returned interactions.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListInteraction",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description"
-      ],
-      "current_summary": "Retrieve a list of all Interactions for a Session. A maximum of 100 records will be returned per page.",
-      "current_description": "Retrieve a list of all Interactions for a Session. A maximum of 100 records will be returned per page.",
-      "summary_suggestion": "Retrieve a list of all Interactions for a given Session.",
-      "description_suggestion": "Retrieve a list of all Interactions for a given [Session](https://www.twilio.com/docs/proxy/api/session). Returns a paginated list of Interaction details. A maximum of 100 records will be returned per page.",
-      "reasoning": "The current summary and description are vague and do not specify the details of the returned interactions.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateMessageInteraction' has semantic quality issues: vague_description. The current description is vague and does not specify the details of the returned interaction.",
+    "message": "Operation 'CreateMessageInteraction' has semantic quality issues: missing_output_details, missing_context. Summary is clear and actionable. Description needs clarification about the outbound nature of the operation, what it means for inbound properties to be empty, and what the response contains. Added context about the operation's effect and return value for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6701,12 +6510,13 @@
       "operation_id": "CreateMessageInteraction",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "missing_output_details",
+        "missing_context"
       ],
-      "current_summary": "Create a new message Interaction to send directly from your system to one [Participant](https://www.twilio.com/docs/proxy/api/participant).  The `inbound` properties for the Interaction will always be empty.",
-      "current_description": "Create a new message Interaction to send directly from your system to one [Participant](https://www.twilio.com/docs/proxy/api/participant).  The `inbound` properties for the Interaction will always be empty.",
-      "description_suggestion": "Create a new message Interaction to send directly from your system to one [Participant](https://www.twilio.com/docs/proxy/api/participant). The `inbound` properties for the Interaction will always be empty. Requires the Participant SID and message details. Returns the details of the created Interaction.",
-      "reasoning": "The current description is vague and does not specify the details of the returned interaction.",
+      "current_summary": "Create a new message Interaction to send directly from your system to one Participant.  The `inbound` properties for the Interaction will always be empty.",
+      "current_description": "Create a new message Interaction to send directly from your system to one Participant.  The `inbound` properties for the Interaction will always be empty.",
+      "description_suggestion": "Creates a new outbound message Interaction to send directly from your system to a specific Participant within a Session. This operation initiates a message delivery to the participant through the proxy service. The `inbound` properties will always be empty since this is an outbound-only operation. Returns the created MessageInteraction object with status and delivery details.",
+      "reasoning": "Summary is clear and actionable. Description needs clarification about the outbound nature of the operation, what it means for inbound properties to be empty, and what the response contains. Added context about the operation's effect and return value for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -6721,7 +6531,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListMessageInteraction' has semantic quality issues: vague_summary, vague_description. Both the summary and description are missing.",
+    "message": "Operation 'ListMessageInteraction' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_context. Operation has no summary or description, making it impossible for AI agents to understand its purpose. Added clear, actionable summary and comprehensive description explaining what data is returned and pagination behavior.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6736,13 +6546,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "vague_description",
+        "unclear_purpose",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Retrieve a list of all Message Interactions for a Participant.",
-      "description_suggestion": "Retrieve a list of all Message Interactions for a given Participant. Returns a paginated list of Message Interaction details. A maximum of 100 records will be returned per page.",
-      "reasoning": "Both the summary and description are missing.",
+      "summary_suggestion": "Retrieve all message Interactions for a Participant",
+      "description_suggestion": "Retrieves a paginated list of all message Interactions for a specific Participant within a Session. Returns MessageInteraction records containing details about messages sent to or from the participant, including type, status, content, and timestamps. Supports pagination with a maximum of 100 records per page.",
+      "reasoning": "Operation has no summary or description, making it impossible for AI agents to understand its purpose. Added clear, actionable summary and comprehensive description explaining what data is returned and pagination behavior.",
       "batch_index": 0
     }
   },
@@ -6757,7 +6569,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchMessageInteraction' has semantic quality issues: vague_summary, vague_description. Both the summary and description are missing.",
+    "message": "Operation 'FetchMessageInteraction' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_context. Operation has no summary or description, creating significant ambiguity for AI agents. Added clear summary indicating this fetches a single resource and description explaining the scope and response content.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6772,13 +6584,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "vague_description",
+        "unclear_purpose",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Retrieve a specific Message Interaction for a Participant.",
-      "description_suggestion": "Retrieve a specific Message Interaction for a given Participant. Requires the Message Interaction SID. Returns the details of the specified Message Interaction.",
-      "reasoning": "Both the summary and description are missing.",
+      "summary_suggestion": "Retrieve a specific message Interaction",
+      "description_suggestion": "Fetches a single MessageInteraction resource for a given Service, Session, Participant, and MessageInteraction ID. Returns the MessageInteraction object containing details about a specific message exchange, including type, status, content, inbound/outbound properties, and timestamps.",
+      "reasoning": "Operation has no summary or description, creating significant ambiguity for AI agents. Added clear summary indicating this fetches a single resource and description explaining the scope and response content.",
       "batch_index": 0
     }
   },
@@ -6793,7 +6607,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchParticipant' has semantic quality issues: vague_summary, vague_description. The current description is vague and does not specify the details of the returned participant.",
+    "message": "Operation 'FetchParticipant' has semantic quality issues: vague_description, missing_context, missing_output_details. Summary is clear and actionable. Description is too minimal and lacks context about what information is returned. Added details about the response content and the hierarchical relationship (Service > Session > Participant) to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6807,14 +6621,165 @@
       "operation_id": "FetchParticipant",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "Fetch a specific Participant.",
       "current_description": "Fetch a specific Participant.",
-      "description_suggestion": "Fetch a specific Participant for a given Session. Requires the Participant SID. Returns the details of the specified Participant.",
-      "reasoning": "The current description is vague and does not specify the details of the returned participant.",
+      "description_suggestion": "Retrieves a specific Participant resource identified by its Participant ID within a given Service and Session. Returns the Participant object containing details such as identifier, proxy number assignment, status, and interaction history metadata.",
+      "reasoning": "Summary is clear and actionable. Description is too minimal and lacks context about what information is returned. Added details about the response content and the hierarchical relationship (Service > Session > Participant) to improve AI agent interpretability.",
       "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteSession' has semantic quality issues: vague_description, missing_context, missing_side_effects. Original description is minimal and lacks context about what deletion means operationally (terminating connections, irreversibility). Added information about required parameters, side effects (closing connections), and state changes for better AI agent understanding of when this operation should be used.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteSession",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete a specific Session.",
+      "current_description": "Delete a specific Session.",
+      "summary_suggestion": "Delete a specific Session",
+      "description_suggestion": "Deletes a specific Session identified by its Sid within a Service. This operation terminates the session and closes any active proxy connections. Once deleted, the session cannot be recovered. Requires the ServiceSid and Session Sid as identifiers.",
+      "reasoning": "Original description is minimal and lacks context about what deletion means operationally (terminating connections, irreversibility). Added information about required parameters, side effects (closing connections), and state changes for better AI agent understanding of when this operation should be used.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateSession' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_context. Original description provides no detail about what can be updated or what is returned. Added information about updateable fields (status, configuration), return value, and support for partial updates. This helps AI agents understand the operation's scope and effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateSession",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Update a specific Session.",
+      "current_description": "Update a specific Session.",
+      "summary_suggestion": "Update Session configuration and status",
+      "description_suggestion": "Updates a specific Session identified by its Sid within a Service. Allows modification of session properties such as status (open, closed, in-progress) and other configuration parameters. Returns the updated Session object with all current properties. Partial updates are supported - only provided fields will be modified.",
+      "reasoning": "Original description provides no detail about what can be updated or what is returned. Added information about updateable fields (status, configuration), return value, and support for partial updates. This helps AI agents understand the operation's scope and effects.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateSession' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_context. Original description lacks all operational context. Added information about what a Session does (establishes proxy communication), configurable parameters (mode options from schema context), return value (Session object with Sid and status), and initial state. This enables AI agents to understand when and why to create sessions.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateSession",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Create a new Session",
+      "current_description": "Create a new Session",
+      "summary_suggestion": "Create a new proxy Session",
+      "description_suggestion": "Creates a new Session within a Service to establish proxy communication between participants. The session can be configured with mode (message-only, voice-only, or voice-and-message) and other parameters. Returns the newly created Session object with a unique Sid, status, and assigned proxy identifiers. The session starts in 'open' status and is ready to route communications.",
+      "reasoning": "Original description lacks all operational context. Added information about what a Session does (establishes proxy communication), configurable parameters (mode options from schema context), return value (Session object with Sid and status), and initial state. This enables AI agents to understand when and why to create sessions.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteShortCode' has semantic quality issues: vague_description, missing_context, missing_side_effects. Original description lacks operational context about what deletion means for the proxy pool. Added information about the effect on proxy routing (removal from availability), impact on new sessions, and irreversibility. This helps AI agents understand the consequences of this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteShortCode",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete a specific Short Code from a Service.",
+      "current_description": "Delete a specific Short Code from a Service.",
+      "summary_suggestion": "Remove a Short Code from the proxy pool",
+      "description_suggestion": "Deletes a specific Short Code identified by its Sid from the Proxy Number Pool of a Service. This operation removes the short code from availability for proxy communication routing. Once deleted, the short code cannot be used for new sessions and will no longer be assigned to participants. Requires the ServiceSid and Short Code Sid as identifiers.",
+      "reasoning": "Original description lacks operational context about what deletion means for the proxy pool. Added information about the effect on proxy routing (removal from availability), impact on new sessions, and irreversibility. This helps AI agents understand the consequences of this operation.",
+      "batch_index": 3
     }
   },
   {
@@ -6828,7 +6793,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 30 operations analyzed, 25 quality issues found",
+    "message": "Semantic analysis completed: 30 operations analyzed, 23 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -6840,7 +6805,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 30,
-      "total_issues_found": 25,
+      "total_issues_found": 23,
       "batches_processed": 5
     }
   }

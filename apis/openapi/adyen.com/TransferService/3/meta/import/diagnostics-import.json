@@ -2786,7 +2786,81 @@
         "character": 0
       }
     },
-    "message": "Operation 'get-grants' has semantic quality issues: vague_summary, missing_context. The current summary is vague. The description is missing context about the account holder for which the grants are being retrieved.",
+    "message": "Operation 'post-transfers-cancel' has semantic quality issues: missing_output_details, missing_side_effects. The current summary is vague about the transfer state. The description lacks clarity on what inputs are expected (list of transfer IDs), what the immediate response contains, and the asynchronous nature of the operation. Added specificity about transfer status requirements, input format, and webhook-based outcome delivery for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-transfers-cancel",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Cancel initiated transfers",
+      "current_description": "Initiates the cancellation of a list of transfers that triggered an additional [review](https://docs.adyen.com/api-explorer/transfers/latest/post/transfers#request-review). Adyen sends the outcome of the cancel request through webhooks.\n\nTo use this endpoint:\n- Your API credential must have the **TransferService Approve** [role](https://docs.adyen.com/platforms/manage-access/webservice-roles/?tab=transfers_3).\n - The account holder must have the required [capabilities](https://docs.adyen.com/platforms/verification-overview/capabilities).\n \nReach out to your Adyen contact to set up these permissions.",
+      "summary_suggestion": "Cancel transfers pending review",
+      "description_suggestion": "Initiates cancellation of transfers that are pending additional review. Accepts a list of transfer identifiers to cancel. The cancellation request is processed asynchronously, and Adyen sends the outcome through webhooks. Requires the TransferService Approve role and appropriate account holder capabilities. Only transfers in review status can be cancelled.",
+      "reasoning": "The current summary is vague about the transfer state. The description lacks clarity on what inputs are expected (list of transfer IDs), what the immediate response contains, and the asynchronous nature of the operation. Added specificity about transfer status requirements, input format, and webhook-based outcome delivery for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-transfers-transferId-returns' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. The current description is too brief and lacks essential details. It doesn't explain what inputs are required (transfer ID path parameter, request body details), what the response contains, or the asynchronous processing nature. Added clarity on parameter requirements, response structure, and processing behavior to help AI agents understand when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-transfers-transferId-returns",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Return a transfer",
+      "current_description": "Initiates the return of previously transferred funds without creating a new `transferId`.",
+      "summary_suggestion": "Return transferred funds to source",
+      "description_suggestion": "Initiates the return of previously transferred funds back to the source balance account without creating a new transfer identifier. Requires the transfer ID as a path parameter and return reason details in the request body. Returns the return transfer object with status and reference information. The return is processed asynchronously and may be subject to review depending on the transfer amount and account configuration.",
+      "reasoning": "The current description is too brief and lacks essential details. It doesn't explain what inputs are required (transfer ID path parameter, request body details), what the response contains, or the asynchronous processing nature. Added clarity on parameter requirements, response structure, and processing behavior to help AI agents understand when and how to use this operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'get-grants' has semantic quality issues: vague_summary, missing_context. The summary incorrectly refers to 'capital account' (singular) when the operation returns a list of grants. The description is minimal and lacks context about the operation's purpose. Improved summary clarifies it returns multiple grants, and description adds context about the operation's role in capital management.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2805,9 +2879,9 @@
       ],
       "current_summary": "Get a capital account",
       "current_description": "Returns a list of grants with status and outstanding balances.",
-      "summary_suggestion": "Retrieve a list of grants",
-      "description_suggestion": "Returns a list of grants with their status and outstanding balances for a specified account holder.",
-      "reasoning": "The current summary is vague. The description is missing context about the account holder for which the grants are being retrieved.",
+      "summary_suggestion": "Get list of capital grants with balances",
+      "description_suggestion": "Returns a list of all capital grants available on the platform, including their current status and outstanding balances. This endpoint is used to retrieve grant information for capital management purposes.",
+      "reasoning": "The summary incorrectly refers to 'capital account' (singular) when the operation returns a list of grants. The description is minimal and lacks context about the operation's purpose. Improved summary clarifies it returns multiple grants, and description adds context about the operation's role in capital management.",
       "batch_index": 0
     }
   },
@@ -2822,7 +2896,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get-grants-id' has semantic quality issues: vague_summary, missing_context. The current summary is vague. The description is missing context about the specific details of the grant that are being returned.",
+    "message": "Operation 'get-grants-id' has semantic quality issues: vague_summary, inconsistent_terminology. Summary uses 'grant reference details' which is vague and inconsistent with API terminology. Description incorrectly refers to 'capital account' when it should refer to 'capital grant'. Improved version clarifies the operation retrieves a specific grant by ID and what information is returned.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2837,13 +2911,84 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "inconsistent_terminology"
       ],
       "current_summary": "Get grant reference details",
       "current_description": "Returns the details of a capital account specified in the path.",
-      "summary_suggestion": "Retrieve grant details",
-      "description_suggestion": "Returns the details of the specified grant, including its status and outstanding balances.",
-      "reasoning": "The current summary is vague. The description is missing context about the specific details of the grant that are being returned.",
+      "summary_suggestion": "Get capital grant details by ID",
+      "description_suggestion": "Returns detailed information for a specific capital grant identified by its ID, including status, terms, and outstanding balance information.",
+      "reasoning": "Summary uses 'grant reference details' which is vague and inconsistent with API terminology. Description incorrectly refers to 'capital account' when it should refer to 'capital grant'. Improved version clarifies the operation retrieves a specific grant by ID and what information is returned.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'get-transactions' has semantic quality issues: vague_summary, missing_input_details. Summary is too generic ('Get all transactions'). The description is actually comprehensive and well-structured, clearly explaining required parameters, pagination support, and response format. Only the summary needs improvement to better reflect that filtering by account/holder is required and to improve AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "get-transactions",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "Get all transactions",
+      "current_description": ">Versions 1 and 2 of the Transfers API are deprecated. If you are just starting your implementation, use the latest version.\n\nReturns all the transactions related to a balance account, account holder, or balance platform.\n\nWhen making this request, you must include at least one of the following:\n- `balanceAccountId`\n- `accountHolderId`\n- `balancePlatform`.\n \nThis endpoint supports cursor-based pagination. The response returns the first page of results, and returns links to the next and previous pages when applicable. You can use the links to page through the results.",
+      "summary_suggestion": "Retrieve transactions for balance account or holder",
+      "reasoning": "Summary is too generic ('Get all transactions'). The description is actually comprehensive and well-structured, clearly explaining required parameters, pagination support, and response format. Only the summary needs improvement to better reflect that filtering by account/holder is required and to improve AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'get-transactions-id' has semantic quality issues: vague_summary, vague_description. Both summary and description are overly minimal. Summary lacks specificity about the ID parameter. Description provides almost no useful information beyond stating it returns a transaction. Improved versions add clarity about what information is returned and how the operation is invoked.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "get-transactions-id",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description"
+      ],
+      "current_summary": "Get a transaction",
+      "current_description": ">Versions 1 and 2 of the Transfers API are deprecated. If you are just starting your implementation, use the latest version.\n\nReturns a transaction.",
+      "summary_suggestion": "Retrieve transaction details by ID",
+      "description_suggestion": "Returns detailed information for a specific transaction identified by its ID, including amount, parties, status, and timestamps.",
+      "reasoning": "Both summary and description are overly minimal. Summary lacks specificity about the ID parameter. Description provides almost no useful information beyond stating it returns a transaction. Improved versions add clarity about what information is returned and how the operation is invoked.",
       "batch_index": 0
     }
   },
@@ -2858,7 +3003,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 9 operations analyzed, 2 quality issues found",
+    "message": "Semantic analysis completed: 9 operations analyzed, 6 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -2870,7 +3015,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 9,
-      "total_issues_found": 2,
+      "total_issues_found": 6,
       "batches_processed": 2
     }
   }

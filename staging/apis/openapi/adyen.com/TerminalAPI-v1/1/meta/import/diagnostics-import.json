@@ -7129,7 +7129,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_/diagnosis' has semantic quality issues: vague_description, missing_context. The current description is vague and lacks context about the expected inputs and outputs. The improved description clarifies the purpose, mentions the request message, and describes the expected response.",
+    "message": "Operation 'post_/diagnosis' has semantic quality issues: vague_summary, vague_description, missing_output_details, not_actionable. Original summary 'Diagnosis Request' is too generic and passive. Description lacks clarity on purpose, what diagnostic data is retrieved, and what the response contains. Added action-oriented language, specified that it targets a POI terminal, clarified the diagnostic purpose, and explained the expected response for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7143,14 +7143,16 @@
       "operation_id": "post_/diagnosis",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_output_details",
+        "not_actionable"
       ],
       "current_summary": "Diagnosis Request",
-      "current_description": "It conveys Information related to the target POI for which the diagnosis is requested. Content of the Diagnosis Request message.",
-      "summary_suggestion": "Request diagnosis for a specific POI",
-      "description_suggestion": "Requests a diagnosis for the specified Point of Interaction (POI) by sending a Diagnosis Request message. It includes details about the POI for which the diagnosis is needed. The response will contain diagnostic information.",
-      "reasoning": "The current description is vague and lacks context about the expected inputs and outputs. The improved description clarifies the purpose, mentions the request message, and describes the expected response.",
+      "current_description": "It conveys Information related to the target POI for which the diagnosis is requested.\nContent of the Diagnosis Request message.",
+      "summary_suggestion": "Request diagnostic information from POI terminal",
+      "description_suggestion": "Sends a diagnostic request to a specified POI terminal to retrieve system health and status information. The request identifies the target POI system for diagnosis. Returns diagnostic results including terminal status, configuration, and any detected issues. Used for troubleshooting and monitoring terminal operations.",
+      "reasoning": "Original summary 'Diagnosis Request' is too generic and passive. Description lacks clarity on purpose, what diagnostic data is retrieved, and what the response contains. Added action-oriented language, specified that it targets a POI terminal, clarified the diagnostic purpose, and explained the expected response for better AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -7165,7 +7167,45 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_/input' has semantic quality issues: vague_description, missing_context. The current description is vague and lacks context about the expected inputs and outputs. The improved description clarifies the purpose, mentions the request message, and describes the potential response content.",
+    "message": "Operation 'post_/display' has semantic quality issues: vague_summary, vague_description, missing_output_details, not_actionable. Original summary is passive and unclear. Description is vague about purpose and lacks information about response. Added action-oriented language, clarified device types using API context (CashierInterface, CustomerInterface), explained the purpose of display operations, and specified the response behavior for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post_/display",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details",
+        "not_actionable"
+      ],
+      "current_summary": "Display Request",
+      "current_description": "It conveys the data to display and the way to process the display. It contains the complete content to display. It might contain an operation (the DisplayOutput element) per Display Device type.\nContent of the Display Request message.",
+      "summary_suggestion": "Send content to display on terminal device",
+      "description_suggestion": "Sends content to be displayed on one or more POI terminal display devices. The request specifies the display data, formatting, and device-specific operations through DisplayOutput elements for each device type (e.g., CashierInterface, CustomerInterface). Returns confirmation of successful display rendering. Used to present information, prompts, or transaction details to cashiers or customers.",
+      "reasoning": "Original summary is passive and unclear. Description is vague about purpose and lacks information about response. Added action-oriented language, clarified device types using API context (CashierInterface, CustomerInterface), explained the purpose of display operations, and specified the response behavior for AI agent clarity.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post_/input' has semantic quality issues: vague_summary, vague_description, missing_output_details, not_actionable. Original summary is passive and doesn't indicate input collection. Description lacks clarity on purpose, what input is expected, and what is returned. Added action-oriented language, clarified that this collects user input, explained the optional display component, and specified the response contains collected input for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7179,14 +7219,16 @@
       "operation_id": "post_/input",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_output_details",
+        "not_actionable"
       ],
       "current_summary": "Input Request",
       "current_description": "Content of the `InputRequest` message. It conveys the data to display and how to process it. In addition to the display on the Input Device, it might contain an operation (the `DisplayOutput` element) per Display Device type.",
-      "summary_suggestion": "Request input processing",
-      "description_suggestion": "Requests input processing by sending an Input Request message. It includes data to display and instructions for processing it. The response might include operations for different display devices.",
-      "reasoning": "The current description is vague and lacks context about the expected inputs and outputs. The improved description clarifies the purpose, mentions the request message, and describes the potential response content.",
+      "summary_suggestion": "Request input from terminal with display prompt",
+      "description_suggestion": "Requests input from a POI terminal's input device while optionally displaying prompts or information. The request specifies the input data to collect and display content through DisplayOutput elements for each device type. Returns the user input collected from the terminal. Used to gather shopper information, confirmations, or selections during transactions.",
+      "reasoning": "Original summary is passive and doesn't indicate input collection. Description lacks clarity on purpose, what input is expected, and what is returned. Added action-oriented language, clarified that this collects user input, explained the optional display component, and specified the response contains collected input for better AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -7201,7 +7243,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_/print' has semantic quality issues: vague_description, missing_context. The current description is vague and lacks context about the expected inputs and outputs. The improved description clarifies the purpose, mentions the request message, and describes the expected response.",
+    "message": "Operation 'post_/print' has semantic quality issues: vague_summary, vague_description, missing_output_details, not_actionable. Original summary is passive and generic. Description lacks specificity about what gets printed, purpose, and response information. Added action-oriented language, clarified the printer context, explained the purpose (receipts and transaction records), and specified the response behavior for improved AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7215,14 +7257,16 @@
       "operation_id": "post_/print",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_output_details",
+        "not_actionable"
       ],
       "current_summary": "Print Request",
-      "current_description": "Content of the Print Request message. It conveys the complete data to print and how to process the print.",
-      "summary_suggestion": "Request print processing",
-      "description_suggestion": "Requests print processing by sending a Print Request message. It includes the complete data to print and the processing instructions. The response will contain the print result.",
-      "reasoning": "The current description is vague and lacks context about the expected inputs and outputs. The improved description clarifies the purpose, mentions the request message, and describes the expected response.",
+      "current_description": "Content of the Print Request message.\nIt conveys the complete data to print and how to process the print.",
+      "summary_suggestion": "Send content to print on terminal printer",
+      "description_suggestion": "Sends content to be printed on a POI terminal's printer device. The request specifies the complete print data, formatting instructions, and print processing parameters. Returns confirmation of successful print job submission. Used to generate receipts, transaction records, or other printed documentation during payment processing.",
+      "reasoning": "Original summary is passive and generic. Description lacks specificity about what gets printed, purpose, and response information. Added action-oriented language, clarified the printer context, explained the purpose (receipts and transaction records), and specified the response behavior for improved AI agent interpretability.",
       "batch_index": 2
     }
   },
@@ -7237,7 +7281,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_/cardreaderapdu' has semantic quality issues: vague_description, missing_context. The current description is vague and lacks context about the expected inputs and outputs. The improved description clarifies the purpose, mentions the request message, and describes the expected response.",
+    "message": "Operation 'post_/cardreaderapdu' has semantic quality issues: vague_summary, vague_description, missing_output_details, not_actionable. Original summary uses technical acronym without context. Description lacks clarity on purpose, what response is expected, and when this operation is used. Added action-oriented language, explained APDU purpose, clarified the optional display messages using API context, specified the response contains card chip data, and explained the use case for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7251,14 +7295,16 @@
       "operation_id": "post_/cardreaderapdu",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_output_details",
+        "not_actionable"
       ],
       "current_summary": "CardReaderAPDU Request",
-      "current_description": "It contains the APDU request to send to the chip of the card, and a possible invitation message to display on the CashierInterface or the CustomerInterface. Content of the Card Reader APDU Request message.",
-      "summary_suggestion": "Request card reader APDU processing",
-      "description_suggestion": "Requests card reader APDU processing by sending a Card Reader APDU Request message. It includes the APDU request for the card chip and an optional invitation message for the CashierInterface or CustomerInterface. The response will contain the result of the APDU processing.",
-      "reasoning": "The current description is vague and lacks context about the expected inputs and outputs. The improved description clarifies the purpose, mentions the request message, and describes the expected response.",
+      "current_description": "It contains the APDU request to send to the chip of the card, and a possible invitation message to display on the CashierInterface or the CustomerInterface.\nContent of the Card Reader APDU Request message.",
+      "summary_suggestion": "Send APDU command to card reader chip",
+      "description_suggestion": "Sends an APDU (Application Protocol Data Unit) command to a payment card's chip through the POI terminal's card reader. The request includes the APDU command bytes and optional display messages for CashierInterface or CustomerInterface. Returns the APDU response from the card chip. Used for low-level card communication during payment processing or card data acquisition.",
+      "reasoning": "Original summary uses technical acronym without context. Description lacks clarity on purpose, what response is expected, and when this operation is used. Added action-oriented language, explained APDU purpose, clarified the optional display messages using API context, specified the response contains card chip data, and explained the use case for AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -7273,7 +7319,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_/storedvalue' has semantic quality issues: vague_description, missing_context. The description was vague and lacked context. The suggestion provides clarity on what the operation does and what it returns.",
+    "message": "Operation 'post_/storedvalue' has semantic quality issues: vague_summary, vague_description, not_actionable, poor_ai_interpretability. Original summary is a generic noun phrase lacking action orientation. Description is vague about what the operation actually does and lacks context about transaction types and expected outcomes. Improved version uses action verb, clarifies purpose, and provides domain context about stored value operations for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7287,14 +7333,16 @@
       "operation_id": "post_/storedvalue",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "not_actionable",
+        "poor_ai_interpretability"
       ],
       "current_summary": "StoredValue Request",
-      "current_description": "It conveys Information related to the Stored Value transaction to process. Content of the Stored Value Request message.",
-      "summary_suggestion": "Initiate Stored Value transaction",
-      "description_suggestion": "Initiates a Stored Value transaction to process. Requires a StoredValueRequest object containing details of the transaction. Returns a response indicating the transaction status.",
-      "reasoning": "The description was vague and lacked context. The suggestion provides clarity on what the operation does and what it returns.",
+      "current_description": "It conveys Information related to the Stored Value transaction to process.\nContent of the Stored Value Request message.",
+      "summary_suggestion": "Process a stored value transaction",
+      "description_suggestion": "Processes a stored value transaction on the payment terminal. Accepts a StoredValueRequest containing transaction details and returns a response with the transaction result. Used for operations such as loading, unloading, or checking balance on stored value cards or accounts.",
+      "reasoning": "Original summary is a generic noun phrase lacking action orientation. Description is vague about what the operation actually does and lacks context about transaction types and expected outcomes. Improved version uses action verb, clarifies purpose, and provides domain context about stored value operations for better AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -7309,7 +7357,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_/reversal' has semantic quality issues: vague_description, missing_context. The description was vague and lacked context. The suggestion provides clarity on the operation's purpose and the required input.",
+    "message": "Operation 'post_/reversal' has semantic quality issues: vague_summary, vague_description, not_actionable, missing_side_effects. Original summary lacks action verb and is too generic. Description doesn't clearly explain what reversal accomplishes or its effects. Improved version uses action-oriented language, clarifies the reversal scope (payment or loyalty), and explicitly states the side effect (undoing transaction effects) for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7323,14 +7371,16 @@
       "operation_id": "post_/reversal",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "not_actionable",
+        "missing_side_effects"
       ],
       "current_summary": "Reversal Request",
-      "current_description": "It conveys Information related to the reversal of a previous payment or a loyalty transaction. Content of the Reversal Request message.",
-      "summary_suggestion": "Request reversal of a transaction",
-      "description_suggestion": "Requests the reversal of a previous payment or loyalty transaction. Requires a ReversalRequest object containing details of the transaction to be reversed. Returns a response indicating the reversal status.",
-      "reasoning": "The description was vague and lacked context. The suggestion provides clarity on the operation's purpose and the required input.",
+      "current_description": "It conveys Information related to the reversal of a previous payment or a loyalty transaction.\nContent of the Reversal Request message.",
+      "summary_suggestion": "Reverse a previous payment or loyalty transaction",
+      "description_suggestion": "Reverses a previous payment or loyalty transaction on the payment terminal. Accepts a ReversalRequest containing the original transaction reference and returns a response confirming the reversal. This operation undoes the effects of a prior transaction, returning funds or loyalty points to the customer.",
+      "reasoning": "Original summary lacks action verb and is too generic. Description doesn't clearly explain what reversal accomplishes or its effects. Improved version uses action-oriented language, clarifies the reversal scope (payment or loyalty), and explicitly states the side effect (undoing transaction effects) for better AI agent decision-making.",
       "batch_index": 1
     }
   },
@@ -7345,7 +7395,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_/reconciliation' has semantic quality issues: vague_description, missing_context. The description was vague and lacked context. The suggestion provides clarity on the operation's purpose and the required input.",
+    "message": "Operation 'post_/reconciliation' has semantic quality issues: vague_summary, vague_description, not_actionable, missing_context. Original summary is a noun phrase without action orientation. Description lacks clarity about reconciliation purpose and scope. Improved version uses action verb, explains the reconciliation purpose (consistency verification), clarifies the systems involved (Sale System and POI), and describes the outcome for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7359,14 +7409,16 @@
       "operation_id": "post_/reconciliation",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
+        "not_actionable",
         "missing_context"
       ],
       "current_summary": "Reconciliation Request",
-      "current_description": "Content of the Reconciliation Request message. It conveys Information related to the Reconciliation requested by the Sale System.",
-      "summary_suggestion": "Request reconciliation information",
-      "description_suggestion": "Requests reconciliation information from the Sale System. Requires a ReconciliationRequest object containing details of the reconciliation request. Returns a response with the requested reconciliation data.",
-      "reasoning": "The description was vague and lacked context. The suggestion provides clarity on the operation's purpose and the required input.",
+      "current_description": "Content of the Reconciliation Request message.\nIt conveys Information related to the Reconciliation requested by the Sale System.",
+      "summary_suggestion": "Reconcile terminal transactions with sale system",
+      "description_suggestion": "Reconciles transactions between the Sale System and the POI (payment terminal) to ensure consistency. Accepts a ReconciliationRequest and returns reconciliation results. This operation verifies that all transactions processed on the terminal match the Sale System records and identifies any discrepancies.",
+      "reasoning": "Original summary is a noun phrase without action orientation. Description lacks clarity about reconciliation purpose and scope. Improved version uses action verb, explains the reconciliation purpose (consistency verification), clarifies the systems involved (Sale System and POI), and describes the outcome for better AI agent interpretability.",
       "batch_index": 1
     }
   },
@@ -7381,7 +7433,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_/gettotals' has semantic quality issues: vague_description, missing_context. The description was vague and lacked context. The suggestion provides clarity on the operation's purpose and the required input.",
+    "message": "Operation 'post_/gettotals' has semantic quality issues: vague_summary, vague_description, not_actionable, missing_output_details. Original summary uses technical naming convention without action clarity. Description is passive and doesn't explain what totals are returned or why this operation is used. Improved version uses action verb, clarifies the POI context, explains input parameters and output, and provides use case context for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7395,14 +7447,16 @@
       "operation_id": "post_/gettotals",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "not_actionable",
+        "missing_output_details"
       ],
       "current_summary": "GetTotals Request",
-      "current_description": "It conveys information from the Sale System related to the scope and the format of the totals to be computed by the POI System. Content of the Get Totals Request message.",
-      "summary_suggestion": "Request totals computation",
-      "description_suggestion": "Requests totals computation from the Sale System. Requires a GetTotalsRequest object containing details of the totals to be computed. Returns a response with the computed totals.",
-      "reasoning": "The description was vague and lacked context. The suggestion provides clarity on the operation's purpose and the required input.",
+      "current_description": "It conveys information from the Sale System related to the scope and the format of the totals to be computed by the POI System.\nContent of the Get Totals Request message.",
+      "summary_suggestion": "Retrieve computed transaction totals from terminal",
+      "description_suggestion": "Retrieves computed transaction totals from the POI (payment terminal) based on specified scope and format parameters. Accepts a GetTotalsRequest defining the totals scope and format requirements, and returns aggregated transaction totals. Used to obtain summary financial data for reconciliation or reporting purposes.",
+      "reasoning": "Original summary uses technical naming convention without action clarity. Description is passive and doesn't explain what totals are returned or why this operation is used. Improved version uses action verb, clarifies the POI context, explains input parameters and output, and provides use case context for better AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -7417,7 +7471,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_/balanceinquiry' has semantic quality issues: vague_description, missing_context. The description was vague and lacked context. The suggestion provides clarity on the operation's purpose and the required input.",
+    "message": "Operation 'post_/balanceinquiry' has semantic quality issues: vague_summary, vague_description, not_actionable, missing_output_details. Original summary lacks action verb and is too generic. Description doesn't explain what balance information is returned or the use case. Improved version uses action verb, clarifies what balance is being checked, explains the request and response, and provides context about when this operation is used for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7431,14 +7485,16 @@
       "operation_id": "post_/balanceinquiry",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "not_actionable",
+        "missing_output_details"
       ],
       "current_summary": "BalanceInquiry Request",
-      "current_description": "It conveys Information related to the account for which a Balance Inquiry is requested. Content of the Balance Inquiry Request message.",
-      "summary_suggestion": "Request balance inquiry",
-      "description_suggestion": "Requests a balance inquiry for a specified account. Requires a BalanceInquiryRequest object containing details of the account. Returns a response with the account balance.",
-      "reasoning": "The description was vague and lacked context. The suggestion provides clarity on the operation's purpose and the required input.",
+      "current_description": "It conveys Information related to the account for which a Balance Inquiry is requested.\nContent of the Balance Inquiry Request message.",
+      "summary_suggestion": "Check account balance on payment terminal",
+      "description_suggestion": "Checks the account balance for a specified payment instrument or stored value account on the payment terminal. Accepts a BalanceInquiryRequest containing account identification details and returns the current balance. Used to verify available funds before processing transactions or to provide balance information to customers.",
+      "reasoning": "Original summary lacks action verb and is too generic. Description doesn't explain what balance information is returned or the use case. Improved version uses action verb, clarifies what balance is being checked, explains the request and response, and provides context about when this operation is used for better AI agent decision-making.",
       "batch_index": 1
     }
   },
@@ -7453,7 +7509,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_/transactionstatus' has semantic quality issues: vague_description, missing_context. The description was vague and lacked context. The suggestion provides clarity on the operation's purpose and the required input.",
+    "message": "Operation 'post_/transactionstatus' has semantic quality issues: vague_summary, vague_description, not_actionable, missing_output_details. Original summary lacks action verb and is too generic. Description doesn't clearly explain what status information is returned or when this operation should be used. Improved version uses action verb, clarifies transaction types supported, explains the request/response, and provides context about use cases (checking completion status) for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7467,14 +7523,16 @@
       "operation_id": "post_/transactionstatus",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "not_actionable",
+        "missing_output_details"
       ],
       "current_summary": "TransactionStatus Request",
-      "current_description": "Content of the TransactionStatus Request message. It conveys Information requested for status of the last or current Payment, Loyalty or Reversal transaction.",
-      "summary_suggestion": "Request transaction status",
-      "description_suggestion": "Requests the status of the last or current payment, loyalty, or reversal transaction. Requires a TransactionStatusRequest object containing details of the transaction. Returns a response with the transaction status.",
-      "reasoning": "The description was vague and lacked context. The suggestion provides clarity on the operation's purpose and the required input.",
+      "current_description": "Content of the TransactionStatus Request message.\nIt conveys Information requested for status of the last or current Payment, Loyalty or Reversal transaction.",
+      "summary_suggestion": "Query status of a payment or loyalty transaction",
+      "description_suggestion": "Queries the status of a payment, loyalty, or reversal transaction on the payment terminal. Accepts a TransactionStatusRequest containing the transaction reference and returns the current transaction status and details. Used to check if a transaction completed successfully, is still in progress, or failed.",
+      "reasoning": "Original summary lacks action verb and is too generic. Description doesn't clearly explain what status information is returned or when this operation should be used. Improved version uses action verb, clarifies transaction types supported, explains the request/response, and provides context about use cases (checking completion status) for better AI agent interpretability.",
       "batch_index": 1
     }
   },
@@ -7489,7 +7547,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_/abort' has semantic quality issues: vague_description, missing_context. The description was vague and lacked context. The suggestion provides clarity on the operation's purpose and the required input.",
+    "message": "Operation 'post_/abort' has semantic quality issues: vague_summary, vague_description, not_actionable, missing_output_details. Original summary lacks action verb and is too generic. Description is convoluted and doesn't clearly explain the abort operation's purpose or effects. Improved version uses action verb, clarifies what is being aborted, explains both required and optional parameters, describes the response, and clarifies the optional display functionality for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7503,14 +7561,16 @@
       "operation_id": "post_/abort",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "not_actionable",
+        "missing_output_details"
       ],
       "current_summary": "Abort Request",
-      "current_description": "Body of the Abort Request message. It conveys Information requested for identification of the message request carrying the transaction to abort. A message to display on the CustomerError Device could be sent by the Sale System (DisplayOutput).",
-      "summary_suggestion": "Request to abort a transaction",
-      "description_suggestion": "Requests to abort a transaction. Requires an AbortRequest object containing details of the transaction to abort. Returns a response indicating the abort status.",
-      "reasoning": "The description was vague and lacked context. The suggestion provides clarity on the operation's purpose and the required input.",
+      "current_description": "Body of the Abort Request message.\nIt conveys Information requested for identification of the message request carrying the transaction to abort. A message to display on the CustomerError Device could be sent by the Sale System (DisplayOutput).",
+      "summary_suggestion": "Cancel an in-progress terminal transaction",
+      "description_suggestion": "Cancels an in-progress transaction on the payment terminal. Accepts an AbortRequest containing the transaction reference to abort and optional DisplayOutput for customer messaging. Returns confirmation of the abort operation. Optionally displays a message on the customer-facing device to inform the customer of the cancellation.",
+      "reasoning": "Original summary lacks action verb and is too generic. Description is convoluted and doesn't clearly explain the abort operation's purpose or effects. Improved version uses action verb, clarifies what is being aborted, explains both required and optional parameters, describes the response, and clarifies the optional display functionality for better AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -7525,7 +7585,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_login' has semantic quality issues: vague_description, missing_side_effects. The description was vague and lacked details about the side effects of the operation. Added information about session token establishment and return value.",
+    "message": "Operation 'post_/login' has semantic quality issues: vague_summary, vague_description, missing_output_details, missing_side_effects. Original summary is too generic. Description lacks clarity on authentication purpose, expected inputs (credentials), outputs (session confirmation), and side effects (session establishment). Added specificity about terminal authentication, session lifecycle, and readiness for subsequent operations to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7536,16 +7596,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "post_login",
+      "operation_id": "post_/login",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
+        "missing_output_details",
         "missing_side_effects"
       ],
       "current_summary": "Login Request",
       "current_description": "It conveys information related to the session (period between a Login and the following Logout) to process.\nContent of the `LoginRequest` message.",
-      "description_suggestion": "Initiates a user session by processing the login request. It verifies the credentials and establishes a session token. Content of the `LoginRequest` message. Returns a session token upon successful login.",
-      "reasoning": "The description was vague and lacked details about the side effects of the operation. Added information about session token establishment and return value.",
+      "summary_suggestion": "Authenticate terminal and establish session",
+      "description_suggestion": "Authenticates the terminal and establishes a session for subsequent Terminal API operations. Accepts a LoginRequest containing terminal credentials and configuration. Returns a response confirming successful authentication and session initialization. Upon success, the terminal is ready to process payment and other transactions until logout.",
+      "reasoning": "Original summary is too generic. Description lacks clarity on authentication purpose, expected inputs (credentials), outputs (session confirmation), and side effects (session establishment). Added specificity about terminal authentication, session lifecycle, and readiness for subsequent operations to improve AI agent interpretability.",
       "batch_index": 0
     }
   },
@@ -7560,7 +7623,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_logout' has semantic quality issues: vague_description, missing_side_effects. The description was empty and lacked details about the side effects of the operation. Added information about session token invalidation and return value.",
+    "message": "Operation 'post_/logout' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, missing_side_effects. Original summary is too vague and description is empty. Added context about session termination, graceful closure, and state changes (disconnection requiring re-authentication). Clarified that this ends the session lifecycle initiated by login, improving AI agent understanding of when and why to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7571,16 +7634,20 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "post_logout",
+      "operation_id": "post_/logout",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
+        "missing_context",
+        "missing_output_details",
         "missing_side_effects"
       ],
       "current_summary": "Logout Request",
       "current_description": "Empty.\nContent of the Logout Request message.",
-      "description_suggestion": "Ends the user session by processing the logout request. It invalidates the session token. Content of the `LogoutRequest` message. Returns a confirmation message upon successful logout.",
-      "reasoning": "The description was empty and lacked details about the side effects of the operation. Added information about session token invalidation and return value.",
+      "summary_suggestion": "Terminate terminal session and close connection",
+      "description_suggestion": "Terminates the authenticated terminal session and closes the connection to the Terminal API. Accepts a LogoutRequest to gracefully end the session established during login. Returns a response confirming successful logout. Upon completion, the terminal is disconnected and must re-authenticate with a new login request to resume operations.",
+      "reasoning": "Original summary is too vague and description is empty. Added context about session termination, graceful closure, and state changes (disconnection requiring re-authentication). Clarified that this ends the session lifecycle initiated by login, improving AI agent understanding of when and why to use this operation.",
       "batch_index": 0
     }
   },
@@ -7595,7 +7662,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_enableservice' has semantic quality issues: vague_description. The description was vague and lacked details about the return value. Added information about the return value.",
+    "message": "Operation 'post_/enableservice' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original summary uses 'Request' which is redundant. Description is unclear about what services are, what inputs are expected, and what the outputs represent. Added clarity on service activation, optional customer prompts, return confirmation, and service persistence to help AI agents understand the operation's purpose and effects.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7606,50 +7673,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "post_enableservice",
+      "operation_id": "post_/enableservice",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
-      ],
-      "current_summary": "EnableService Request",
-      "current_description": "It conveys the services that will be enabled for the POI Terminal without the request of the Sale System, and a possible invitation for the Customer to start the services.\nContent of the Enable Service Request message.",
-      "description_suggestion": "Enables specified services for the POI Terminal. It informs the terminal about available services and may invite the customer to start them. Content of the `EnableServiceRequest` message. Returns a confirmation message upon successful service enablement.",
-      "reasoning": "The description was vague and lacked details about the return value. Added information about the return value.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'post_admin' has semantic quality issues: vague_description, missing_side_effects. The description was empty and lacked details about the side effects of the operation. Added information about the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "post_admin",
-      "has_quality_issues": true,
-      "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_side_effects"
+        "missing_input_details",
+        "missing_output_details"
       ],
-      "current_summary": "Admin Request",
-      "current_description": "Empty.\nContent of the Custom Admin Request message.",
-      "description_suggestion": "Processes a custom admin request. It performs administrative actions based on the content of the request. Content of the `AdminRequest` message. Returns a confirmation message upon successful processing.",
-      "reasoning": "The description was empty and lacked details about the side effects of the operation. Added information about the return value.",
+      "current_summary": "Enable services on terminal",
+      "current_description": "Enables services on the POI terminal without requiring a Sale System request. Accepts an EnableServiceRequest specifying which services to activate and optional customer prompts. Returns a response confirming service activation status. Services are enabled independently of transaction processing and remain active until explicitly disabled.",
+      "summary_suggestion": "Enable services on POI terminal",
+      "description_suggestion": "Enables specified services on the POI terminal without requiring a Sale System request. Accepts an EnableServiceRequest containing service identifiers and optional customer invitation prompts. Returns a response confirming which services were successfully enabled. Enabled services remain active for subsequent transactions until explicitly disabled or the session ends.",
+      "reasoning": "Original summary uses 'Request' which is redundant. Description is unclear about what services are, what inputs are expected, and what the outputs represent. Added clarity on service activation, optional customer prompts, return confirmation, and service persistence to help AI agents understand the operation's purpose and effects.",
       "batch_index": 0
     }
   },
@@ -7664,7 +7700,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_payment' has semantic quality issues: vague_description. The description was vague and lacked details about the return value. Added information about the return value.",
+    "message": "Operation 'post_/admin' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details. Original summary and description are too vague and lack context. Description is empty, providing no guidance on purpose or usage. Added clarity about administrative operations, custom/vendor-specific nature, configuration/maintenance context, and distinction from standard transaction flows to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7675,15 +7711,57 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "post_payment",
+      "operation_id": "post_/admin",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Send custom admin command",
+      "current_description": "Sends a custom administrative command to the POI terminal. Accepts an AdminRequest containing vendor-specific or custom administrative operations. Returns a response with the result of the administrative operation. Used for terminal configuration, maintenance, or custom operations not covered by standard Terminal API requests.",
+      "summary_suggestion": "Execute custom admin command",
+      "description_suggestion": "Executes a custom administrative command on the POI terminal for configuration, maintenance, or vendor-specific operations. Accepts an AdminRequest containing the admin operation details and parameters. Returns a response with the operation result and any relevant status information. Intended for operations outside standard Terminal API transaction flows.",
+      "reasoning": "Original summary and description are too vague and lack context. Description is empty, providing no guidance on purpose or usage. Added clarity about administrative operations, custom/vendor-specific nature, configuration/maintenance context, and distinction from standard transaction flows to improve AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post_/payment' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Original summary is too generic. Description lacks specificity about inputs (amount, currency, payment method), outputs (authorization status, payment details), and side effects (fund authorization, transaction logging). Enhanced with concrete details about transaction parameters and outcomes to enable AI agents to understand when and how to use this critical operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post_/payment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Payment Request",
       "current_description": "Request sent to terminal to initiate payment.\nIt conveys Information related to the Payment transaction to process.\nContent of the `PaymentRequest` message.",
-      "description_suggestion": "Initiates a payment transaction by processing the payment request. It sends payment information to the terminal. Content of the `PaymentRequest` message. Returns a confirmation message upon successful payment initiation.",
-      "reasoning": "The description was vague and lacked details about the return value. Added information about the return value.",
+      "summary_suggestion": "Initiate payment transaction on terminal",
+      "description_suggestion": "Initiates a payment transaction on the POI terminal. Accepts a PaymentRequest containing transaction amount, currency, payment method preferences, and optional customer/merchant data. Returns a PaymentResponse with transaction result, authorization status, and payment instrument details. Upon success, funds are authorized and the transaction is recorded in the terminal's transaction log.",
+      "reasoning": "Original summary is too generic. Description lacks specificity about inputs (amount, currency, payment method), outputs (authorization status, payment details), and side effects (fund authorization, transaction logging). Enhanced with concrete details about transaction parameters and outcomes to enable AI agents to understand when and how to use this critical operation.",
       "batch_index": 0
     }
   },
@@ -7698,7 +7776,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_cardacquisition' has semantic quality issues: vague_description. The description was vague and lacked details about the return value. Added information about the return value.",
+    "message": "Operation 'post_/cardacquisition' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Original summary uses 'Request' suffix. Description is unclear about inputs (card types, analysis parameters), outputs (card data, validation results), and the relationship to subsequent transactions. Added clarity about card type specification, data capture, storage, and the typical transaction flow pattern where this precedes payment/loyalty operations.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7709,15 +7787,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "post_cardacquisition",
+      "operation_id": "post_/cardacquisition",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
-      "current_summary": "CardAcquisition Request",
-      "current_description": "It conveys Information related to the payment and loyalty cards to read and analyse. This message pair is usually followed by a message pair (e.g. payment or loyalty) which refers to this Card Acquisition message pair.\nContent of the Card Acquisition Request message.",
-      "description_suggestion": "Reads and analyzes payment and loyalty cards by processing the card acquisition request. It sends card information to the terminal. Content of the `CardAcquisitionRequest` message. Returns a confirmation message upon successful card acquisition.",
-      "reasoning": "The description was vague and lacked details about the return value. Added information about the return value.",
+      "current_summary": "Acquire and analyze payment card",
+      "current_description": "Acquires and analyzes payment and loyalty card information from the cardholder. Accepts a CardAcquisitionRequest specifying card types to read and analysis parameters. Returns a CardAcquisitionResponse containing card data and analysis results. Card information is captured and stored for use in subsequent payment or loyalty transactions. This operation typically precedes payment or loyalty requests that reference the acquired card.",
+      "summary_suggestion": "Read and analyze payment/loyalty card",
+      "description_suggestion": "Reads and analyzes payment and loyalty card information from the cardholder. Accepts a CardAcquisitionRequest specifying which card types to acquire and analysis requirements. Returns a CardAcquisitionResponse with card data and validation results. Captured card information is stored for reference in subsequent payment or loyalty transactions via OriginalPOITransaction references.",
+      "reasoning": "Original summary uses 'Request' suffix. Description is unclear about inputs (card types, analysis parameters), outputs (card data, validation results), and the relationship to subsequent transactions. Added clarity about card type specification, data capture, storage, and the typical transaction flow pattern where this precedes payment/loyalty operations.",
       "batch_index": 0
     }
   },
@@ -7732,7 +7814,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_loyalty' has semantic quality issues: vague_description. The description was vague and lacked details about the return value. Added information about the return value.",
+    "message": "Operation 'post_/loyalty' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Original summary is too generic. Description lacks specificity about inputs (loyalty program ID, transaction type, customer references), outputs (account status, points balance), and side effects (account updates, history recording). Enhanced with concrete details about loyalty operations and their effects on customer accounts to improve AI agent understanding of when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7743,15 +7825,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "post_loyalty",
+      "operation_id": "post_/loyalty",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Loyalty Request",
-      "current_description": "It conveys Information related to the Loyalty transaction to process.\nContent of the Loyalty Request message.",
-      "description_suggestion": "Processes a loyalty transaction by sending the loyalty request. It sends loyalty information to the terminal. Content of the `LoyaltyRequest` message. Returns a confirmation message upon successful loyalty processing.",
-      "reasoning": "The description was vague and lacked details about the return value. Added information about the return value.",
+      "current_description": "It conveys Information related to the Loyalty transaction to process.\n Content of the Loyalty Request message.",
+      "summary_suggestion": "Process loyalty transaction on terminal",
+      "description_suggestion": "Processes a loyalty transaction on the POI terminal. Accepts a LoyaltyRequest containing loyalty program identifiers, transaction type (inquiry, enrollment, points redemption), and optional card or customer references. Returns a LoyaltyResponse with loyalty account status, points balance, and transaction result. Loyalty transactions may update customer account balances and transaction history in the loyalty system.",
+      "reasoning": "Original summary is too generic. Description lacks specificity about inputs (loyalty program ID, transaction type, customer references), outputs (account status, points balance), and side effects (account updates, history recording). Enhanced with concrete details about loyalty operations and their effects on customer accounts to improve AI agent understanding of when to use this operation.",
       "batch_index": 0
     }
   },
@@ -7766,7 +7852,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 19 operations analyzed, 18 quality issues found",
+    "message": "Semantic analysis completed: 19 operations analyzed, 19 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -7778,7 +7864,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 19,
-      "total_issues_found": 18,
+      "total_issues_found": 19,
       "batches_processed": 3
     }
   }

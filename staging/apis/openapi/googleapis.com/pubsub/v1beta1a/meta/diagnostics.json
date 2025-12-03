@@ -3172,7 +3172,81 @@
         "character": 0
       }
     },
-    "message": "Operation 'pubsub.subscriptions.get' has semantic quality issues: vague_summary. The current description is clear but lacks a concise summary.",
+    "message": "Operation 'pubsub.topics.get' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, poor_ai_interpretability. The operation lacks a summary entirely, making it difficult for AI agents to quickly understand its purpose. The current description is somewhat unclear about the primary use case and doesn't explicitly state what the required input parameter is or what the response contains. The phrase 'only useful to check the existence' is unnecessarily limiting and doesn't reflect the operation's full utility. The improved version provides a clear action-oriented summary, specifies the input parameter format consistent with Cloud Pub/Sub naming conventions, explicitly states the response type (Topic object), and clarifies the operation's purpose for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "pubsub.topics.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the configuration of a topic. Since the topic only has the name attribute, this method is only useful to check the existence of a topic. If other attributes are added in the future, they will be returned here.",
+      "summary_suggestion": "Retrieve topic configuration and verify existence",
+      "description_suggestion": "Retrieves the configuration details of a specified topic resource. This operation verifies the topic exists and returns its current configuration. The topic resource is identified by its full resource name in the format 'projects/{project}/topics/{topic}'. Returns the Topic object containing the topic's metadata. Useful for checking topic existence and retrieving topic properties.",
+      "reasoning": "The operation lacks a summary entirely, making it difficult for AI agents to quickly understand its purpose. The current description is somewhat unclear about the primary use case and doesn't explicitly state what the required input parameter is or what the response contains. The phrase 'only useful to check the existence' is unnecessarily limiting and doesn't reflect the operation's full utility. The improved version provides a clear action-oriented summary, specifies the input parameter format consistent with Cloud Pub/Sub naming conventions, explicitly states the response type (Topic object), and clarifies the operation's purpose for AI agent decision-making.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'pubsub.subscriptions.delete' has semantic quality issues: vague_summary, missing_input_details. Missing summary entirely. Description is good but lacks clarity on input requirements (subscription resource name parameter). Added explicit mention of input parameter requirement for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "pubsub.subscriptions.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes an existing subscription. All pending messages in the subscription are immediately dropped. Calls to Pull after deletion will return NOT_FOUND.",
+      "summary_suggestion": "Delete a subscription and drop pending messages",
+      "description_suggestion": "Deletes an existing subscription resource. All pending messages in the subscription are immediately dropped. Subsequent Pull requests on the deleted subscription will return NOT_FOUND. Requires the subscription resource name as input.",
+      "reasoning": "Missing summary entirely. Description is good but lacks clarity on input requirements (subscription resource name parameter). Added explicit mention of input parameter requirement for AI agent clarity.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'pubsub.subscriptions.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is vague about what is returned. Added explicit mention of return type (Subscription object) and key fields to help AI agents understand the response structure.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3186,12 +3260,14 @@
       "operation_id": "pubsub.subscriptions.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets the configuration details of a subscription.",
-      "summary_suggestion": "Get subscription configuration details",
-      "reasoning": "The current description is clear but lacks a concise summary.",
+      "summary_suggestion": "Retrieve subscription configuration details",
+      "description_suggestion": "Retrieves the configuration details of a subscription resource. Returns the Subscription object containing the subscription's name, topic, push configuration, and other settings. Requires the subscription resource name as input.",
+      "reasoning": "Missing summary. Description is vague about what is returned. Added explicit mention of return type (Subscription object) and key fields to help AI agents understand the response structure.",
       "batch_index": 1
     }
   },
@@ -3206,7 +3282,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'pubsub.topics.list' has semantic quality issues: vague_summary. The current description is clear but lacks a concise summary.",
+    "message": "Operation 'pubsub.topics.list' has semantic quality issues: vague_summary, vague_description, missing_output_details. Missing summary and vague description. 'Matching topics' is unclear without context. Added explicit mention of return type (ListTopicsResponse), pagination support, and filtering capabilities to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3220,12 +3296,15 @@
       "operation_id": "pubsub.topics.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists matching topics.",
-      "summary_suggestion": "List all matching topics",
-      "reasoning": "The current description is clear but lacks a concise summary.",
+      "summary_suggestion": "List topics with optional filtering",
+      "description_suggestion": "Lists all topics in the project, with optional filtering and pagination. Returns a ListTopicsResponse containing an array of Topic resources and a pagination token for retrieving additional results. Supports filtering by topic name pattern and pagination through optional parameters.",
+      "reasoning": "Missing summary and vague description. 'Matching topics' is unclear without context. Added explicit mention of return type (ListTopicsResponse), pagination support, and filtering capabilities to improve AI agent interpretability.",
       "batch_index": 1
     }
   },
@@ -3240,7 +3319,153 @@
         "character": 0
       }
     },
-    "message": "Operation 'pubsub.subscriptions.list' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides more context about what the operation returns.",
+    "message": "Operation 'pubsub.topics.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is minimal and doesn't clarify input format or return value. Added explicit mention of request schema (Topic object), return type, and error handling for duplicate topics.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "pubsub.topics.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates the given topic with the given name.",
+      "summary_suggestion": "Create a new topic resource",
+      "description_suggestion": "Creates a new topic resource with the specified name. Accepts a Topic object in the request body. Returns the created Topic resource. If a topic with the same name already exists, returns an error.",
+      "reasoning": "Missing summary. Description is minimal and doesn't clarify input format or return value. Added explicit mention of request schema (Topic object), return type, and error handling for duplicate topics.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'pubsub.topics.publish' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity on input format (PublishRequest) and return value (message ID). Added explicit mention of request schema and response content for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "pubsub.topics.publish",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Adds a message to the topic. Returns NOT_FOUND if the topic does not exist.",
+      "summary_suggestion": "Publish a message to a topic",
+      "description_suggestion": "Publishes a single message to a topic. Accepts a PublishRequest containing the topic name and message data. Returns a message ID upon successful publication. Returns NOT_FOUND error if the specified topic does not exist.",
+      "reasoning": "Missing summary. Description lacks clarity on input format (PublishRequest) and return value (message ID). Added explicit mention of request schema and response content for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'pubsub.topics.publishBatch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity on input format (batch request structure) and return value (batch response with message IDs). Added explicit mention of request/response schemas and batch nature for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "pubsub.topics.publishBatch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Adds one or more messages to the topic. Returns NOT_FOUND if the topic does not exist.",
+      "summary_suggestion": "Publish multiple messages to a topic",
+      "description_suggestion": "Publishes one or more messages to a topic in a single batch request. Accepts a PullBatchRequest containing the topic name and array of messages. Returns a PullBatchResponse with message IDs for each published message. Returns NOT_FOUND error if the specified topic does not exist.",
+      "reasoning": "Missing summary. Description lacks clarity on input format (batch request structure) and return value (batch response with message IDs). Added explicit mention of request/response schemas and batch nature for AI agent clarity.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'pubsub.topics.delete' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description is good but could clarify input requirement (topic resource name parameter) and add context about subscription impact. Enhanced for better AI agent understanding of prerequisites and side effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "pubsub.topics.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes the topic with the given name. Returns NOT_FOUND if the topic does not exist. After a topic is deleted, a new topic may be created with the same name.",
+      "summary_suggestion": "Delete a topic resource by name",
+      "description_suggestion": "Deletes a topic resource by name. Requires the topic resource name as input. Returns NOT_FOUND error if the topic does not exist. After deletion, a new topic with the same name can be created. All subscriptions to the deleted topic will be affected.",
+      "reasoning": "Missing summary. Description is good but could clarify input requirement (topic resource name parameter) and add context about subscription impact. Enhanced for better AI agent understanding of prerequisites and side effects.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'pubsub.subscriptions.list' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Missing summary entirely. Description is too minimal and lacks context about filtering, pagination, and return value structure. AI agents need to understand what filtering options are available and how to handle paginated results.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3255,13 +3480,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists matching subscriptions.",
-      "summary_suggestion": "List all subscriptions.",
-      "description_suggestion": "Lists all subscriptions in the project. It returns a list of subscription resources. The list may be empty if there are no subscriptions.",
-      "reasoning": "The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides more context about what the operation returns.",
+      "summary_suggestion": "List subscriptions matching filter criteria",
+      "description_suggestion": "Lists all subscriptions in the project that match the specified filter criteria. Supports pagination through optional parameters. Returns a ListSubscriptionsResponse containing matching subscription resources and pagination tokens for retrieving additional results.",
+      "reasoning": "Missing summary entirely. Description is too minimal and lacks context about filtering, pagination, and return value structure. AI agents need to understand what filtering options are available and how to handle paginated results.",
       "batch_index": 0
     }
   },
@@ -3276,7 +3503,79 @@
         "character": 0
       }
     },
-    "message": "Operation 'pubsub.subscriptions.modifyAckDeadline' has semantic quality issues: vague_summary, missing_context. The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides more context about the operation's parameters and potential failure cases.",
+    "message": "Operation 'pubsub.subscriptions.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description covers error cases well but lacks explicit mention of the return value (Subscription resource). Added clarity about what is returned to help AI agents understand the operation's output.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "pubsub.subscriptions.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a subscription on a given topic for a given subscriber. If the subscription already exists, returns ALREADY_EXISTS. If the corresponding topic doesn't exist, returns NOT_FOUND. If the name is not provided in the request, the server will assign a random name for this subscription on the same project as the topic.",
+      "summary_suggestion": "Create a new subscription to a topic",
+      "description_suggestion": "Creates a subscription on a given topic for a given subscriber. If the subscription already exists, returns ALREADY_EXISTS. If the corresponding topic doesn't exist, returns NOT_FOUND. If the name is not provided in the request, the server will assign a random name for this subscription on the same project as the topic. Returns the created Subscription resource with assigned name and configuration.",
+      "reasoning": "Missing summary. Description covers error cases well but lacks explicit mention of the return value (Subscription resource). Added clarity about what is returned to help AI agents understand the operation's output.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'pubsub.subscriptions.acknowledge' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is comprehensive but lacks explicit mention of return value. Added clarity that this returns an empty response and that multiple messages can be acknowledged in one call for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "pubsub.subscriptions.acknowledge",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Acknowledges a particular received message: the Pub/Sub system can remove the given message from the subscription. Acknowledging a message whose Ack deadline has expired may succeed, but the message could have been already redelivered. Acknowledging a message more than once will not result in an error. This is only used for messages received via pull.",
+      "summary_suggestion": "Acknowledge receipt of pulled messages",
+      "description_suggestion": "Acknowledges one or more received messages, allowing the Pub/Sub system to remove them from the subscription. Acknowledging a message whose Ack deadline has expired may succeed, but the message could have been already redelivered. Acknowledging a message more than once will not result in an error. This operation is only used for messages received via pull. Returns an empty response on success.",
+      "reasoning": "Missing summary. Description is comprehensive but lacks explicit mention of return value. Added clarity that this returns an empty response and that multiple messages can be acknowledged in one call for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'pubsub.subscriptions.modifyAckDeadline' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description is too brief and lacks context about what modifying the deadline means (extending processing time), what the operation returns, and the immediate effect on messages. AI agents need to understand the purpose and side effects of this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3291,13 +3590,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Modifies the Ack deadline for a message received from a pull request.",
-      "summary_suggestion": "Modify the Ack deadline for a message.",
-      "description_suggestion": "Modifies the Ack deadline for a message received from a pull request. The new Ack deadline must be a non-negative integer. If the message has already been acknowledged, this operation will fail.",
-      "reasoning": "The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides more context about the operation's parameters and potential failure cases.",
+      "summary_suggestion": "Extend or modify message acknowledgment deadline",
+      "description_suggestion": "Modifies the acknowledgment deadline for one or more messages received from a pull request. This allows extending the time available to process and acknowledge messages before they are redelivered. Returns an empty response on success. The new deadline applies immediately to the specified messages.",
+      "reasoning": "Missing summary. Description is too brief and lacks context about what modifying the deadline means (extending processing time), what the operation returns, and the immediate effect on messages. AI agents need to understand the purpose and side effects of this operation.",
       "batch_index": 0
     }
   },
@@ -3312,7 +3612,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'pubsub.subscriptions.pull' has semantic quality issues: vague_summary, missing_context. The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides more context about the operation's parameters and potential failure cases.",
+    "message": "Operation 'pubsub.subscriptions.modifyPushConfig' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description explains the operation well but lacks explicit mention of return value. Added clarity about what PushConfig controls (delivery endpoint and settings) and that it returns an empty response for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "pubsub.subscriptions.modifyPushConfig",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Modifies the PushConfig for a specified subscription. This method can be used to suspend the flow of messages to an endpoint by clearing the PushConfig field in the request. Messages will be accumulated for delivery even if no push configuration is defined or while the configuration is modified.",
+      "summary_suggestion": "Update push delivery configuration for subscription",
+      "description_suggestion": "Modifies the PushConfig for a specified subscription, changing the push delivery endpoint and settings. This method can be used to suspend the flow of messages to an endpoint by clearing the PushConfig field in the request. Messages will be accumulated for delivery even if no push configuration is defined or while the configuration is modified. Returns an empty response on success.",
+      "reasoning": "Missing summary. Description explains the operation well but lacks explicit mention of return value. Added clarity about what PushConfig controls (delivery endpoint and settings) and that it returns an empty response for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'pubsub.subscriptions.pull' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description covers error conditions but lacks explicit mention of the return value (PullResponse). Added clarity about what the operation returns to help AI agents understand the response structure.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3327,13 +3663,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Pulls a single message from the server. If return_immediately is true, and no messages are available in the subscription, this method returns FAILED_PRECONDITION. The system is free to return UNAVAILABLE error if no messages are available in a reasonable amount of time (to reduce system load).",
-      "summary_suggestion": "Pull a single message from the server.",
-      "description_suggestion": "Pulls a single message from the server. If return_immediately is true and no messages are available, the method returns FAILED_PRECONDITION. If no messages are available in a reasonable amount of time, the system may return an UNAVAILABLE error to reduce system load.",
-      "reasoning": "The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides more context about the operation's parameters and potential failure cases.",
+      "current_description": "Pulls a single message from the server. If return_immediately is true, and no messages are available in the subscription, this method returns FAILED_PRECONDITION. The system is free to return an UNAVAILABLE error if no messages are available in a reasonable amount of time (to reduce system load).",
+      "summary_suggestion": "Pull a single message from subscription",
+      "description_suggestion": "Pulls a single message from the subscription. If return_immediately is true and no messages are available, returns FAILED_PRECONDITION. The system may return UNAVAILABLE if no messages are available in a reasonable amount of time (to reduce system load). Returns a PullResponse containing either a PubsubMessage or a truncation event.",
+      "reasoning": "Missing summary. Description covers error conditions but lacks explicit mention of the return value (PullResponse). Added clarity about what the operation returns to help AI agents understand the response structure.",
       "batch_index": 0
     }
   },
@@ -3348,7 +3684,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'pubsub.subscriptions.pullBatch' has semantic quality issues: vague_summary, missing_context. The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides more context about the operation's parameters and potential failure cases.",
+    "message": "Operation 'pubsub.subscriptions.pullBatch' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks explicit mention of the return value structure (PullBatchResponse with list of PullResponse objects). Added clarity about batch behavior and response format to help AI agents understand how to process the results.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3363,13 +3699,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Pulls messages from the server. Returns an empty list if there are no messages available in the backlog. The system is free to return UNAVAILABLE if there are too many pull requests outstanding for the given subscription.",
-      "summary_suggestion": "Pull messages from the server.",
-      "description_suggestion": "Pulls messages from the server. Returns an empty list if there are no messages available in the backlog. If there are too many pull requests outstanding for the given subscription, the system may return an UNAVAILABLE error.",
-      "reasoning": "The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides more context about the operation's parameters and potential failure cases.",
+      "summary_suggestion": "Pull multiple messages from subscription",
+      "description_suggestion": "Pulls multiple messages from the subscription in a single batch request. Returns a PullBatchResponse containing a list of PullResponse objects, one per requested message. Returns an empty list if there are no messages available in the backlog. The system may return UNAVAILABLE if there are too many pull requests outstanding for the given subscription.",
+      "reasoning": "Missing summary. Description lacks explicit mention of the return value structure (PullBatchResponse with list of PullResponse objects). Added clarity about batch behavior and response format to help AI agents understand how to process the results.",
       "batch_index": 0
     }
   },
@@ -3384,7 +3720,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 15 operations analyzed, 6 quality issues found",
+    "message": "Semantic analysis completed: 15 operations analyzed, 15 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -3396,7 +3732,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 15,
-      "total_issues_found": 6,
+      "total_issues_found": 15,
       "batches_processed": 3
     }
   }

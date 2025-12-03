@@ -2257,7 +2257,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'licensing.licenseAssignments.insert' has semantic quality issues: vague_summary, vague_description, missing_input_details. The current summary and description are vague. The suggestion provides a clear action and includes details about the required inputs and the return value.",
+    "message": "Operation 'licensing.licenseAssignments.insert' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Original description is too minimal. Missing summary entirely. Added clarity on what inputs are required (product ID, SKU ID, user email), what is returned (LicenseAssignment object), and the side effect (license becomes available to user). This helps AI agents understand when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2272,14 +2272,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Assign a license.",
-      "summary_suggestion": "Assign a license to a user.",
-      "description_suggestion": "Assigns a license to a specific user for a given product SKU. Requires the product ID, SKU ID, and user ID. Returns the newly created license assignment.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action and includes details about the required inputs and the return value.",
+      "summary_suggestion": "Assign a license to a user",
+      "description_suggestion": "Assigns a license for a specific product SKU to a user. Requires the product ID, SKU ID, and user email address. Returns the created LicenseAssignment object containing the assignment details. This operation creates a new license assignment and makes the product available to the specified user.",
+      "reasoning": "Original description is too minimal. Missing summary entirely. Added clarity on what inputs are required (product ID, SKU ID, user email), what is returned (LicenseAssignment object), and the side effect (license becomes available to user). This helps AI agents understand when to use this operation and what to expect.",
       "batch_index": 0
     }
   },
@@ -2294,7 +2295,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'licensing.licenseAssignments.delete' has semantic quality issues: vague_summary, missing_side_effects. The current summary and description are vague. The suggestion provides a clear action and includes details about the required inputs, return value, and side effects.",
+    "message": "Operation 'licensing.licenseAssignments.delete' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Original description lacks context. Missing summary entirely. Added clarity on required parameters (product ID, SKU ID, user ID), return value (empty response), and side effect (license removal and product unavailability). Helps AI agents understand the destructive nature of this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2309,13 +2310,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Revoke a license.",
-      "summary_suggestion": "Revoke a license from a user.",
-      "description_suggestion": "Revokes a license from a specific user for a given product SKU. Requires the product ID, SKU ID, and user ID. Returns a success message upon revocation.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action and includes details about the required inputs, return value, and side effects.",
+      "summary_suggestion": "Revoke a user's license",
+      "description_suggestion": "Revokes a license assignment for a specific product SKU from a user. Requires the product ID, SKU ID, and user ID. Returns an empty response on successful revocation. This operation removes the license assignment and the product becomes unavailable to the specified user.",
+      "reasoning": "Original description lacks context. Missing summary entirely. Added clarity on required parameters (product ID, SKU ID, user ID), return value (empty response), and side effect (license removal and product unavailability). Helps AI agents understand the destructive nature of this operation.",
       "batch_index": 0
     }
   },
@@ -2330,43 +2333,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'licensing.licenseAssignments.get' has semantic quality issues: vague_summary, missing_output_details. The current summary and description are clear but lack details about the return value. The suggestion includes the return value for better clarity.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "licensing.licenseAssignments.get",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "Get a specific user's license by product SKU.",
-      "summary_suggestion": "Get a specific user's license by product SKU.",
-      "description_suggestion": "Retrieves a specific user's license details for a given product SKU. Requires the product ID, SKU ID, and user ID. Returns the license assignment details.",
-      "reasoning": "The current summary and description are clear but lack details about the return value. The suggestion includes the return value for better clarity.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'licensing.licenseAssignments.patch' has semantic quality issues: vague_summary, missing_input_details. The current summary and description are vague. The suggestion provides a clear action and includes details about the required inputs and the return value.",
+    "message": "Operation 'licensing.licenseAssignments.patch' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description mentions patch semantics but lacks clarity on inputs and outputs. Added summary, clarified that only provided fields are updated (patch semantics behavior), and specified the return value (updated LicenseAssignment object). This improves AI agent understanding of when to use PATCH vs PUT.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2381,13 +2348,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Reassign a user's product SKU with a different SKU in the same product. This method supports patch semantics.",
-      "summary_suggestion": "Reassign a user's product SKU with a different SKU.",
-      "description_suggestion": "Reassigns a user's product SKU with a different SKU in the same product. Requires the product ID, SKU ID, and user ID. Supports partial updates. Returns the updated license assignment.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action and includes details about the required inputs and the return value.",
+      "summary_suggestion": "Reassign user license to different SKU",
+      "description_suggestion": "Reassigns a user's license from one SKU to a different SKU within the same product using patch semantics. Requires the product ID, current SKU ID, and user ID. Only provided fields in the request are updated. Returns the updated LicenseAssignment object reflecting the new SKU assignment.",
+      "reasoning": "Missing summary entirely. Description mentions patch semantics but lacks clarity on inputs and outputs. Added summary, clarified that only provided fields are updated (patch semantics behavior), and specified the return value (updated LicenseAssignment object). This improves AI agent understanding of when to use PATCH vs PUT.",
       "batch_index": 0
     }
   },
@@ -2402,7 +2369,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'licensing.licenseAssignments.update' has semantic quality issues: vague_summary, missing_input_details. The current summary and description are vague. The suggestion provides a clear action and includes details about the required inputs and the return value.",
+    "message": "Operation 'licensing.licenseAssignments.update' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity on return value and the difference from PATCH (full replacement semantics). Added summary and clarified that this is a full replacement operation (PUT semantics) versus partial update. Specifies return value to help AI agents distinguish between PUT and PATCH operations.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2417,13 +2384,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Reassign a user's product SKU with a different SKU in the same product.",
-      "summary_suggestion": "Reassign a user's product SKU with a different SKU.",
-      "description_suggestion": "Reassigns a user's product SKU with a different SKU in the same product. Requires the product ID, SKU ID, and user ID. Returns the updated license assignment.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action and includes details about the required inputs and the return value.",
+      "summary_suggestion": "Reassign user license to different SKU",
+      "description_suggestion": "Reassigns a user's license from one SKU to a different SKU within the same product. Requires the product ID, current SKU ID, and user ID. All fields in the request must be provided for a complete replacement. Returns the updated LicenseAssignment object reflecting the new SKU assignment.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on return value and the difference from PATCH (full replacement semantics). Added summary and clarified that this is a full replacement operation (PUT semantics) versus partial update. Specifies return value to help AI agents distinguish between PUT and PATCH operations.",
       "batch_index": 0
     }
   },
@@ -2438,7 +2405,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'licensing.licenseAssignments.listForProductAndSku' has semantic quality issues: vague_summary, missing_output_details. The current summary and description are clear but lack details about the return value. The suggestion includes the return value for better clarity.",
+    "message": "Operation 'licensing.licenseAssignments.listForProductAndSku' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description is clear about the scope but lacks information about pagination support and return type. Added summary and clarified pagination capability and return type (LicenseAssignmentList) to help AI agents understand filtering and result handling.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2457,9 +2424,9 @@
       ],
       "current_summary": "",
       "current_description": "List all users assigned licenses for a specific product SKU.",
-      "summary_suggestion": "List all users assigned licenses for a specific product SKU.",
-      "description_suggestion": "Lists all users assigned licenses for a specific product SKU. Requires the product ID and SKU ID. Returns a list of license assignments.",
-      "reasoning": "The current summary and description are clear but lack details about the return value. The suggestion includes the return value for better clarity.",
+      "summary_suggestion": "List users with licenses for SKU",
+      "description_suggestion": "Lists all users who have been assigned licenses for a specific product SKU. Requires the product ID and SKU ID. Supports pagination through optional parameters. Returns a LicenseAssignmentList containing all matching license assignments for the specified product SKU.",
+      "reasoning": "Missing summary entirely. Description is clear about the scope but lacks information about pagination support and return type. Added summary and clarified pagination capability and return type (LicenseAssignmentList) to help AI agents understand filtering and result handling.",
       "batch_index": 0
     }
   },
@@ -2474,7 +2441,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'licensing.licenseAssignments.listForProduct' has semantic quality issues: vague_summary, missing_output_details. The current summary and description are clear but lack details about the return value. The suggestion includes the return value for better clarity.",
+    "message": "Operation 'licensing.licenseAssignments.listForProduct' has semantic quality issues: vague_summary, missing_output_details, inconsistent_terminology. Missing summary entirely. Description incorrectly mentions 'product SKU' when this operation lists licenses for an entire product (not a specific SKU). This is inconsistent with the operation name and path. Added summary and corrected terminology to clarify this lists across all SKUs for a product. Added pagination and return type information.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2489,13 +2456,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
+        "missing_output_details",
+        "inconsistent_terminology"
       ],
       "current_summary": "",
       "current_description": "List all users assigned licenses for a specific product SKU.",
-      "summary_suggestion": "List all users assigned licenses for a specific product.",
-      "description_suggestion": "Lists all users assigned licenses for a specific product. Requires the product ID. Returns a list of license assignments.",
-      "reasoning": "The current summary and description are clear but lack details about the return value. The suggestion includes the return value for better clarity.",
+      "summary_suggestion": "List users with licenses for product",
+      "description_suggestion": "Lists all users who have been assigned licenses for a specific product across all SKUs. Requires the product ID. Supports pagination through optional parameters. Returns a LicenseAssignmentList containing all license assignments for the specified product.",
+      "reasoning": "Missing summary entirely. Description incorrectly mentions 'product SKU' when this operation lists licenses for an entire product (not a specific SKU). This is inconsistent with the operation name and path. Added summary and corrected terminology to clarify this lists across all SKUs for a product. Added pagination and return type information.",
       "batch_index": 0
     }
   },
@@ -2510,7 +2478,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 7 operations analyzed, 7 quality issues found",
+    "message": "Semantic analysis completed: 7 operations analyzed, 6 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -2522,7 +2490,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 7,
-      "total_issues_found": 7,
+      "total_issues_found": 6,
       "batches_processed": 1
     }
   }

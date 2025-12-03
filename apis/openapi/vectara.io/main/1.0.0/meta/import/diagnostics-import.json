@@ -7913,7 +7913,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ReadConversations' has semantic quality issues: vague_summary. The current summary is missing. A concise summary is needed to clearly state the operation's purpose.",
+    "message": "Operation 'FileUpload' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description contains helpful tips but lacks clarity on core operation details. Reorganized description to clearly state: (1) what the operation does (uploads and indexes files), (2) supported inputs (file types, metadata), (3) authentication requirements, (4) expected outputs (document ID, status), and (5) key constraints (text-based PDFs only). This structure improves AI agent interpretability for determining when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7924,16 +7924,20 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "ReadConversations",
+      "operation_id": "FileUpload",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
-      "current_description": "Retrieves detailed information about specific conversations. This information enables developers to analyze the flow of user chats and understand the context of interactions, which helps in refining chatbot responses. You can read up to 100 conversations.",
-      "summary_suggestion": "Retrieve detailed conversation information",
-      "reasoning": "The current summary is missing. A concise summary is needed to clearly state the operation's purpose.",
-      "batch_index": 3
+      "current_description": "The File Upload API can be used to index binary files like PDFs, Word Documents, and similar.\nVectara will attempt to automatically extract the text and any metadata from the document like\nauthor or title, though you can provide additional metadata as well.\n\nSome tips for this API:\n* This operation authenticates with either the Personal API Key, Index API Key, or OAuth 2.0 (in a JWT \"Bearer Token\"). You can find details of how to set up an API key or use OAuth 2.0 [here](https://docs.vectara.com/docs/console-ui/manage-api-access).\n* You can find a full list of supported file formats [here](https://docs.vectara.com/docs/api-reference/indexing-apis/file-upload/file-upload-filetypes).\n* To provide additional metadata, set the `doc_metadata` field.  You can find some additional details [here](https://docs.vectara.com/docs/api-reference/indexing-apis/file-upload/file-upload#attach-additional-metadata)\n* PDFs must contain text: Vectara does not currently support indexing scanned images via OCR.\n* There is a known issue with the OpenAPI plugin where the generated Python script for file uploads incorrectly uses placeholder values for the file path and filename. Manually replace '/path/to/file' and 'file' in the files array with the actual file path and filename.",
+      "summary_suggestion": "Upload and index binary documents to corpus",
+      "description_suggestion": "Uploads a binary file (PDF, Word Document, or other supported format) to a specified corpus for indexing. Vectara automatically extracts text and metadata (author, title, etc.) from the document. You can provide additional metadata via the `doc_metadata` field. Requires authentication with Personal API Key, Index API Key, or OAuth 2.0 Bearer Token. Returns a document ID and indexing status. Note: PDFs must contain extractable text; scanned images without OCR are not supported. Supported file formats are documented in the API reference.",
+      "reasoning": "Missing summary entirely. Description contains helpful tips but lacks clarity on core operation details. Reorganized description to clearly state: (1) what the operation does (uploads and indexes files), (2) supported inputs (file types, metadata), (3) authentication requirements, (4) expected outputs (document ID, status), and (5) key constraints (text-based PDFs only). This structure improves AI agent interpretability for determining when to use this operation and what to expect.",
+      "batch_index": 4
     }
   },
   {
@@ -7947,7 +7951,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'Delete' has semantic quality issues: vague_summary, vague_description, missing_context. The original summary and description were vague and lacked context. The suggestions provide more clarity and detail about the operation's purpose, authentication requirements, and expected outcomes.",
+    "message": "Operation 'Delete' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description is too brief and lacks critical details about inputs (document IDs), outputs (deletion confirmation), authentication requirements, and side effects (permanent removal). Added specifics about what parameters are needed, what is returned, and clarified the permanent nature of deletion to help AI agents understand the operation's impact.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7962,14 +7966,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Delete documents from a corpus.",
-      "summary_suggestion": "Delete documents from a corpus.",
-      "description_suggestion": "Deletes documents from a specified corpus using the provided document IDs. Requires authentication with Personal API Key, Index API Key, or OAuth 2.0. Returns a success status upon deletion.",
-      "reasoning": "The original summary and description were vague and lacked context. The suggestions provide more clarity and detail about the operation's purpose, authentication requirements, and expected outcomes.",
+      "summary_suggestion": "Delete documents from a corpus",
+      "description_suggestion": "Removes one or more documents from a specified corpus. Requires authentication with Personal API Key, Index API Key, or OAuth 2.0 Bearer Token. Accepts document IDs to identify which documents to delete. Returns confirmation of deletion status. Deleted documents are permanently removed and cannot be recovered. For bulk deletion of all corpus documents, use the Reset Corpus operation instead.",
+      "reasoning": "Missing summary entirely. Description is too brief and lacks critical details about inputs (document IDs), outputs (deletion confirmation), authentication requirements, and side effects (permanent removal). Added specifics about what parameters are needed, what is returned, and clarified the permanent nature of deletion to help AI agents understand the operation's impact.",
       "batch_index": 1
     }
   },
@@ -7984,7 +7989,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteTurns' has semantic quality issues: vague_summary, missing_context. The original summary was vague. The suggestion provides a more concise and clear summary of the operation's purpose.",
+    "message": "Operation 'DeleteTurns' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description explains the purpose well but lacks input details (conversation ID, turn IDs), output details (what confirmation is returned), and explicit statement about permanent deletion. Enhanced to clarify required parameters, return value, and irreversible nature of the operation for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7999,12 +8004,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Deletes specific turns from a conversation within the chat history corpus. This enables developers to remove inaccurate or inappropriate responses from the conversation history.",
-      "summary_suggestion": "Delete specific turns from a chat history.",
-      "reasoning": "The original summary was vague. The suggestion provides a more concise and clear summary of the operation's purpose.",
+      "summary_suggestion": "Delete specific conversation turns from chat history",
+      "description_suggestion": "Removes specified turns (query-response exchanges) from a conversation in the chat history corpus. Requires authentication with API Key or OAuth 2.0 Bearer Token. Accepts conversation ID and turn IDs to identify which turns to delete. Returns confirmation of deletion status. Deleted turns are permanently removed from the conversation history and cannot be recovered. This operation is useful for removing inaccurate or inappropriate responses.",
+      "reasoning": "Missing summary. Description explains the purpose well but lacks input details (conversation ID, turn IDs), output details (what confirmation is returned), and explicit statement about permanent deletion. Enhanced to clarify required parameters, return value, and irreversible nature of the operation for better AI agent decision-making.",
       "batch_index": 1
     }
   },
@@ -8019,7 +8026,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DisableTurns' has semantic quality issues: vague_summary, missing_context. The original summary was vague. The suggestion provides a more concise and clear summary of the operation's purpose.",
+    "message": "Operation 'DisableTurns' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, unclear_purpose. Missing summary. Description is vague about the distinction between 'disable' and 'delete' operations, lacks input/output details, and doesn't clarify that disabled turns are preserved (not deleted). Enhanced to explain the key difference from deletion, specify required parameters, clarify the return value, and help AI agents understand when to use disable versus delete.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8034,12 +8041,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details",
+        "unclear_purpose"
       ],
       "current_summary": "",
       "current_description": "Disables specific turns from a conversation within the chat history corpus. This is useful for excluding specific turns from a conversation.",
-      "summary_suggestion": "Disable specific turns from a chat history.",
-      "reasoning": "The original summary was vague. The suggestion provides a more concise and clear summary of the operation's purpose.",
+      "summary_suggestion": "Disable specific conversation turns from chat history",
+      "description_suggestion": "Disables specified turns (query-response exchanges) in a conversation within the chat history corpus, excluding them from retrieval and processing without permanent deletion. Requires authentication with API Key or OAuth 2.0 Bearer Token. Accepts conversation ID and turn IDs to identify which turns to disable. Returns confirmation of disabled status. Unlike deletion, disabled turns remain in the corpus but are excluded from active use. This is useful for temporarily removing inaccurate or inappropriate responses while preserving the record.",
+      "reasoning": "Missing summary. Description is vague about the distinction between 'disable' and 'delete' operations, lacks input/output details, and doesn't clarify that disabled turns are preserved (not deleted). Enhanced to explain the key difference from deletion, specify required parameters, clarify the return value, and help AI agents understand when to use disable versus delete.",
       "batch_index": 1
     }
   },
@@ -8054,7 +8064,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'EnableApiKey' has semantic quality issues: vague_summary, vague_description. The original summary and description were vague. The suggestions provide more clarity and detail about the operation's purpose, authentication requirements, and expected outcomes.",
+    "message": "Operation 'EnableApiKey' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, not_actionable. Missing summary. Description is extremely vague - it doesn't specify what inputs are needed (API key ID, enabled flag), what is returned (updated key object), or the implications of disabling a key. Enhanced to clarify the toggle mechanism, required parameters, return value, and the reversible nature of disabling to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8069,13 +8079,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "not_actionable"
       ],
       "current_summary": "",
       "current_description": "Enables or disables a specific API key.",
-      "summary_suggestion": "Enable or disable a specific API key.",
-      "description_suggestion": "Enables or disables a specific API key. Requires authentication with Personal API Key or OAuth 2.0. Returns a success status upon enabling or disabling.",
-      "reasoning": "The original summary and description were vague. The suggestions provide more clarity and detail about the operation's purpose, authentication requirements, and expected outcomes.",
+      "summary_suggestion": "Enable or disable an API key",
+      "description_suggestion": "Toggles the enabled/disabled status of a specific API key. Requires authentication with Personal API Key or OAuth 2.0 Bearer Token. Accepts API key ID and a boolean flag to set the desired state (enabled or disabled). Returns the updated API key object with its new status. Disabled API keys cannot be used for authentication but remain associated with their corpora and can be re-enabled. This operation is useful for temporarily revoking access without deleting the key.",
+      "reasoning": "Missing summary. Description is extremely vague - it doesn't specify what inputs are needed (API key ID, enabled flag), what is returned (updated key object), or the implications of disabling a key. Enhanced to clarify the toggle mechanism, required parameters, return value, and the reversible nature of disabling to improve AI agent interpretability.",
       "batch_index": 1
     }
   },
@@ -8090,7 +8103,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'Index' has semantic quality issues: vague_summary, missing_context. The original summary and description were vague and lacked context. The suggestions provide more clarity and detail about the operation's purpose, authentication requirements, and expected outcomes.",
+    "message": "Operation 'Index' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks critical input details (document format requirements, metadata structure), output details (what is returned), and doesn't clarify the corpus target. Enhanced to specify required authentication, input format requirements, return values, and the immediate searchability of indexed documents. Added context about custom dimensions availability to help AI agents understand feature limitations.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8105,13 +8118,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "This is the \"standard\" Indexing API for indexing semi-structured, text-heavy \"documents.\" Indexing data into Vectara is typically very fast: within a few seconds.",
-      "summary_suggestion": "Index semi-structured documents into Vectara.",
-      "description_suggestion": "Indexes semi-structured, text-heavy documents into Vectara. Requires authentication with Personal API Key, Index API Key, or OAuth 2.0. Returns a success status upon indexing. Note that JSON objects must be formatted correctly and custom dimensions are available for Scale accounts.",
-      "reasoning": "The original summary and description were vague and lacked context. The suggestions provide more clarity and detail about the operation's purpose, authentication requirements, and expected outcomes.",
+      "current_description": "This is the \"standard\" Indexing API for indexing semi-structured, text-heavy \"documents.\"  Indexing data into Vectara is typically very fast: within a few seconds.",
+      "summary_suggestion": "Index documents into a corpus",
+      "description_suggestion": "Indexes semi-structured, text-heavy documents into a specified corpus using the standard indexing API. Requires authentication with Personal API Key, Index API Key, or OAuth 2.0 Bearer Token. Accepts documents in Vectara's required JSON format with metadata and optional custom dimensions (Scale accounts only). Returns indexing status and document IDs. Indexing typically completes within seconds. Documents must follow Vectara's data structuring guidelines, and metadataJson fields must be properly escaped. Indexed documents become immediately searchable.",
+      "reasoning": "Missing summary. Description lacks critical input details (document format requirements, metadata structure), output details (what is returned), and doesn't clarify the corpus target. Enhanced to specify required authentication, input format requirements, return values, and the immediate searchability of indexed documents. Added context about custom dimensions availability to help AI agents understand feature limitations.",
       "batch_index": 1
     }
   },
@@ -8126,7 +8140,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'ComputeAccountSize' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The summary was missing, and the description lacked details about authentication methods.",
+    "message": "Operation 'ListApiKeys' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too brief and lacks input details (filter parameters mentioned in tips), output structure (array of objects with specific fields), and authentication requirements. Enhanced to clarify authentication methods, explain the optional filter feature, specify the return structure, and help AI agents understand how to use filtering for more targeted results.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListApiKeys",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the API keys and the associated corpora names and IDs.",
+      "summary_suggestion": "List API keys with associated corpora",
+      "description_suggestion": "Retrieves a list of all API keys in the account along with their associated corpus names and IDs. Requires authentication with Personal API Key or OAuth 2.0 Bearer Token. Accepts optional filter parameters to search by corpus name or description. Returns an array of API key objects, each containing the key identifier, type, status, and associated corpus information. Supports filtering to narrow results by corpus attributes.",
+      "reasoning": "Missing summary. Description is too brief and lacks input details (filter parameters mentioned in tips), output structure (array of objects with specific fields), and authentication requirements. Enhanced to clarify authentication methods, explain the optional filter feature, specify the return structure, and help AI agents understand how to use filtering for more targeted results.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ComputeAccountSize' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity about what metrics are returned and authentication requirements. Added summary and expanded description to include return value details and authentication context for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8141,13 +8192,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Computes the amount of quota consumed across the entire Vectara account.",
-      "summary_suggestion": "Compute Vectara account quota usage",
-      "description_suggestion": "Computes the amount of quota consumed across the entire Vectara account. This operation requires authentication using either Personal API Key or OAuth 2.0 JWT Bearer Token.",
-      "reasoning": "The current summary and description are vague. The summary was missing, and the description lacked details about authentication methods.",
+      "summary_suggestion": "Calculate total quota consumption for account",
+      "description_suggestion": "Computes the total amount of quota consumed across the entire Vectara account. This operation helps administrators monitor overall account usage and resource consumption. Requires Personal API Key or OAuth 2.0 authentication. Returns account-level quota metrics including storage and processing usage.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about what metrics are returned and authentication requirements. Added summary and expanded description to include return value details and authentication context for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -8162,7 +8213,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ComputeCorpusSize' has semantic quality issues: vague_summary, missing_context. The current summary was missing, and the description lacked details about authentication methods and the 'filter' feature.",
+    "message": "Operation 'ComputeCorpusSize' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description explains purpose but lacks input parameter details and specific output information. Added summary and expanded description to clarify expected inputs (corpus ID, filters) and outputs (quota metrics) for improved AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8177,13 +8228,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Computes the amount of quota consumed by a corpus. This capability is useful for administrators to track and monitor the amount of usage for specific corpora.",
-      "summary_suggestion": "Compute quota usage for a specific corpus",
-      "description_suggestion": "Computes the amount of quota consumed by a specific corpus. This operation requires authentication using either Personal API Key or OAuth 2.0 JWT Bearer Token. The 'filter' feature applies to either the corpus name or description.",
-      "reasoning": "The current summary was missing, and the description lacked details about authentication methods and the 'filter' feature.",
+      "summary_suggestion": "Calculate quota consumption for specific corpus",
+      "description_suggestion": "Computes the amount of quota consumed by a specific corpus, enabling administrators to track and monitor usage for individual corpora. Accepts a corpus ID and optional filter parameters. Requires Personal API Key or OAuth 2.0 authentication. Returns corpus-level quota metrics including storage and document count.",
+      "reasoning": "Missing summary entirely. Description explains purpose but lacks input parameter details and specific output information. Added summary and expanded description to clarify expected inputs (corpus ID, filters) and outputs (quota metrics) for improved AI agent interpretability.",
       "batch_index": 0
     }
   },
@@ -8198,7 +8249,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateApiKey' has semantic quality issues: vague_summary, missing_context. The current summary was missing, and the description lacked details about the required authentication method.",
+    "message": "Operation 'CreateApiKey' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description explains key types but lacks clarity about return value and doesn't mention OAuth-only authentication requirement. Added summary and improved description to clarify authentication requirement, key types using domain terminology, and return value for better AI agent guidance.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8213,13 +8264,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Creates an API key that you bind with a specific corpus or multiple corpora. You can create an API key that only gives access to query data (read-only) or an API key that gives access to both querying and serving (read-write).",
-      "summary_suggestion": "Create a new API key for a corpus",
-      "description_suggestion": "Creates an API key that you bind with a specific corpus or multiple corpora. This operation requires authentication using OAuth 2.0 JWT Bearer Token. You can create an API key that only gives access to query data (read-only) or an API key that gives access to both querying and serving (read-write).",
-      "reasoning": "The current summary was missing, and the description lacked details about the required authentication method.",
+      "summary_suggestion": "Create API key with corpus-specific access control",
+      "description_suggestion": "Creates an API key bound to one or more corpora with configurable access levels. Supports two key types: Query API Keys (read-only access for querying) and Index API Keys (read-write access for indexing and querying). Requires OAuth 2.0 authentication. Returns the newly created API key with its type and associated corpus bindings.",
+      "reasoning": "Missing summary entirely. Description explains key types but lacks clarity about return value and doesn't mention OAuth-only authentication requirement. Added summary and improved description to clarify authentication requirement, key types using domain terminology, and return value for better AI agent guidance.",
       "batch_index": 0
     }
   },
@@ -8234,7 +8285,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateCorpus' has semantic quality issues: vague_summary, missing_context. The current summary was missing, and the description lacked details about authentication methods, required fields, and additional features.",
+    "message": "Operation 'CreateCorpus' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description is overly simplistic and lacks input/output details. Added summary and significantly expanded description to include required/optional parameters (name, filter attributes, custom dimensions), feature availability (Scale accounts), return value, and reference to related operations for comprehensive AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8249,13 +8300,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Creates a corpus, which is a container to store data in.",
-      "summary_suggestion": "Create a new corpus to store data",
-      "description_suggestion": "Creates a corpus, which is a container to store data in. This operation requires authentication using either Personal API Key or OAuth 2.0 JWT Bearer Token. The 'name' of the corpus is the only required field. Filter attributes tell Vectara which metadata fields you'd like to run SQL-style filters against. 'textless' and 'customDimensions' are features available to Scale accounts.",
-      "reasoning": "The current summary was missing, and the description lacked details about authentication methods, required fields, and additional features.",
+      "summary_suggestion": "Create new corpus for document storage",
+      "description_suggestion": "Creates a new corpus, a container for storing and indexing documents. Requires a corpus name (mandatory) and optionally accepts filter attributes for metadata-based filtering and custom dimensions for Scale accounts. Supports textless indexing for Scale tier users. Returns the created corpus object with its ID and configuration. Filter attributes can be modified later using the Replace Filter Attributes API.",
+      "reasoning": "Missing summary entirely. Description is overly simplistic and lacks input/output details. Added summary and significantly expanded description to include required/optional parameters (name, filter attributes, custom dimensions), feature availability (Scale accounts), return value, and reference to related operations for comprehensive AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -8270,7 +8322,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteApiKey' has semantic quality issues: vague_summary, missing_context. The current summary was missing, and the description lacked details about the required authentication method.",
+    "message": "Operation 'DeleteApiKey' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary entirely. Description lacks specificity about what happens after deletion and authentication requirements. Added summary and expanded description to clarify OAuth-only authentication, side effects (immediate access revocation), and impact on applications for better AI agent understanding of operation consequences.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8285,13 +8337,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes API keys to help you manage the security and lifecycle of API keys in your application.",
-      "summary_suggestion": "Delete an existing API key",
-      "description_suggestion": "Deletes API keys to help you manage the security and lifecycle of API keys in your application. This operation requires authentication using OAuth 2.0 JWT Bearer Token.",
-      "reasoning": "The current summary was missing, and the description lacked details about the required authentication method.",
+      "summary_suggestion": "Delete API key and revoke access",
+      "description_suggestion": "Deletes an API key, immediately revoking all access granted by that key. This operation is essential for security management and lifecycle control of API keys. Requires OAuth 2.0 authentication (API Keys cannot be used). Accepts the API key ID to delete. Returns confirmation of successful deletion. Any applications using the deleted key will lose access.",
+      "reasoning": "Missing summary entirely. Description lacks specificity about what happens after deletion and authentication requirements. Added summary and expanded description to clarify OAuth-only authentication, side effects (immediate access revocation), and impact on applications for better AI agent understanding of operation consequences.",
       "batch_index": 0
     }
   },
@@ -8306,7 +8359,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteConversations' has semantic quality issues: vague_summary, missing_context. The current summary was missing, and the description lacked details about the required authentication methods.",
+    "message": "Operation 'DeleteConversations' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description explains purpose but lacks input parameters and specific output information. Added summary and expanded description to clarify what inputs are required (conversation IDs), authentication options, return value, and permanent deletion side effect for improved AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8321,13 +8374,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Delete conversations from the chat history corpus. This is useful for data management to help ensure that you maintain data hygiene and support compliance with data retention policies.",
       "summary_suggestion": "Delete conversations from chat history",
-      "description_suggestion": "Deletes conversations from the chat history corpus. This is useful for data management to help ensure that you maintain data hygiene and support compliance with data retention policies. This operation requires authentication using either an API Key or OAuth 2.0 JWT Bearer Token.",
-      "reasoning": "The current summary was missing, and the description lacked details about the required authentication methods.",
+      "description_suggestion": "Deletes one or more conversations from the chat history corpus, supporting data hygiene and compliance with retention policies. Accepts conversation IDs to delete. Supports both API Key and OAuth 2.0 authentication. Returns confirmation of deleted conversations. Deleted conversations cannot be recovered.",
+      "reasoning": "Missing summary entirely. Description explains purpose but lacks input parameters and specific output information. Added summary and expanded description to clarify what inputs are required (conversation IDs), authentication options, return value, and permanent deletion side effect for improved AI agent interpretability.",
       "batch_index": 0
     }
   },
@@ -8342,7 +8396,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteCorpus' has semantic quality issues: vague_summary, missing_context. The current summary was missing, and the description lacked details about authentication methods and the potential delay in deletion.",
+    "message": "Operation 'DeleteCorpus' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description is incomplete regarding inputs and lacks critical side effect information. Added summary and expanded description to clarify required input (corpus ID), authentication methods, return value, permanent deletion consequences, and potential latency for comprehensive AI agent understanding of this destructive operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8357,14 +8411,526 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes a corpus and all of the data contained inside of the corpus.",
-      "summary_suggestion": "Delete a corpus and its data",
-      "description_suggestion": "Deletes a corpus and all of the data contained inside of the corpus. This operation requires authentication using either Personal API Key or OAuth 2.0 JWT Bearer Token. It can take a few seconds to completely delete the corpus if there's heavy system load.",
-      "reasoning": "The current summary was missing, and the description lacked details about authentication methods and the potential delay in deletion.",
+      "summary_suggestion": "Delete corpus and all contained documents",
+      "description_suggestion": "Deletes a corpus and permanently removes all documents and data contained within it. Accepts a corpus ID as input. Requires Personal API Key or OAuth 2.0 authentication. Returns confirmation of deletion. This operation is irreversible - all indexed documents and metadata are permanently deleted. Deletion may take several seconds under heavy system load.",
+      "reasoning": "Missing summary entirely. Description is incomplete regarding inputs and lacks critical side effect information. Added summary and expanded description to clarify required input (corpus ID), authentication methods, return value, permanent deletion consequences, and potential latency for comprehensive AI agent understanding of this destructive operation.",
       "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ReadConversations' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks clarity on input parameters (conversation IDs), output structure (turns, metadata fields), and the 100-conversation limit context. Added specific details about what constitutes a conversation (turns), input requirements, and output structure for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ReadConversations",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves detailed information about specific conversations. This information enables developers to analyze the flow of user chats and understand the context of interactions, which helps in refining chatbot responses. You can read up to 100 conversations.\n\nSome tips for this API:\n* This operation authenticates with either an API Key or OAuth 2.0 (in a JWT \"Bearer Token\"). You can find details of how to set up an API key or use OAuth 2.0 [here](https://docs.vectara.com/docs/console-ui/manage-api-access).",
+      "summary_suggestion": "Retrieve detailed conversation history and metadata",
+      "description_suggestion": "Retrieves detailed information about specific conversations including all turns (exchanges of queries and answers) and metadata. This enables developers to analyze chat flow, understand interaction context, and refine chatbot responses. Accepts conversation IDs as input and returns up to 100 conversations per request with full turn history. Requires authentication via API Key or OAuth 2.0 Bearer Token.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on input parameters (conversation IDs), output structure (turns, metadata fields), and the 100-conversation limit context. Added specific details about what constitutes a conversation (turns), input requirements, and output structure for better AI agent understanding.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ReadCorpus' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description mentions filtering capability but doesn't clearly explain input parameters or what specific fields are returned. Added clarity on filter behavior, return values (configuration, size, admin details), and use case for quota monitoring.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ReadCorpus",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Displays detailed information about corpora within your account including basic information, metadata, and whether it is enabled or disabled.\nThis endpoint can help administrators monitor the amount of quota consumed by tenants.\n\nSome tips for this API:\n* This operation works with the Personal API Key and OAuth 2.0 (in a JWT \"Bearer Token\") authentication. You can find details of how to set up and use OAuth 2.0 [here](https://docs.vectara.com/docs/learn/authentication/oauth-2).\n* The `filter` feature applies to either the name *or* the description of a corpus.",
+      "summary_suggestion": "Retrieve corpus details including metadata and status",
+      "description_suggestion": "Retrieves detailed information about corpora in your account including basic metadata, enablement status, and quota consumption. Supports filtering by corpus name or description. Returns corpus configuration, size information, and administrative details useful for monitoring tenant resource usage. Requires Personal API Key or OAuth 2.0 Bearer Token authentication.",
+      "reasoning": "Missing summary. Description mentions filtering capability but doesn't clearly explain input parameters or what specific fields are returned. Added clarity on filter behavior, return values (configuration, size, admin details), and use case for quota monitoring.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ReplaceCorpusFilterAttrs' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Missing summary. Description lacks clarity on what inputs are expected (filter attribute definitions) and what the operation returns (job ID). Reorganized tips into main description to highlight critical side effects: asynchronous processing, job tracking requirement, and existing filter persistence during update.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ReplaceCorpusFilterAttrs",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Updates the filterable metadata fields for the corpus.\n\nSee our documentation on [filterable metadata fields](https://docs.vectara.com/docs/learn/metadata-search-filtering/filter-overview) for more details on how these are used.\n\nSome tips for this API:\n* This operation works with the Personal API Key and OAuth 2.0 (in a JWT \"Bearer Token\") authentication. You can find details of how to set up and use OAuth 2.0 [here](https://docs.vectara.com/docs/learn/authentication/oauth-2).\n* Each request to replace the corpus filter attributes kicks off a background [job](https://docs.vectara.com/docs/rest-api/list-jobs).  The job ID is returned when you kick off a metadata filter update job so you can track it later.\n* Existing filters will continue to apply until the update job completes.\n* The time that update filter jobs take is roughly proportional to the size of the corpus.  Updates on small corpora generally take a few minutes at most, but updates on large corpora can take many minutes to hours to complete.",
+      "summary_suggestion": "Replace corpus filterable metadata field definitions",
+      "description_suggestion": "Replaces the filterable metadata field definitions for a corpus, enabling or modifying which document metadata can be used in predicate queries. This operation initiates an asynchronous background job and returns a job ID for tracking progress. Existing filters remain active until the job completes. Processing time scales with corpus size (minutes for small corpora, hours for large ones). Requires Personal API Key or OAuth 2.0 Bearer Token authentication.",
+      "reasoning": "Missing summary. Description lacks clarity on what inputs are expected (filter attribute definitions) and what the operation returns (job ID). Reorganized tips into main description to highlight critical side effects: asynchronous processing, job tracking requirement, and existing filter persistence during update.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ResetCorpus' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Missing summary. Description lacks input parameter clarity and critical side effect information (permanent deletion, no undo). Added emphasis on destructiveness and that corpus structure persists. Clarified that filtering applies to corpus selection, not document selection.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ResetCorpus",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Resets a corpus by removing all of the documents inside of it.\n\nSome tips for this API:\n* This operation works with the Personal API Key and OAuth 2.0 (in a JWT \"Bearer Token\") authentication. You can find details of how to set up and use OAuth 2.0 [here](https://docs.vectara.com/docs/learn/authentication/oauth-2).\n* The `filter` feature applies to either the name *or* the description of a corpus.\n* If you want to delete individual documents instead of all documents in the corpus, you can use the [Delete API](https://docs.vectara.com/docs/rest-api/delete).",
+      "summary_suggestion": "Remove all documents from a corpus",
+      "description_suggestion": "Permanently removes all documents from a specified corpus, effectively resetting it to an empty state. The corpus itself remains intact and enabled. Accepts corpus identifier as input and supports filtering by corpus name or description. This is a destructive operation with no undo capability. For selective document deletion, use the Delete API instead. Requires Personal API Key or OAuth 2.0 Bearer Token authentication.",
+      "reasoning": "Missing summary. Description lacks input parameter clarity and critical side effect information (permanent deletion, no undo). Added emphasis on destructiveness and that corpus structure persists. Clarified that filtering applies to corpus selection, not document selection.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'StreamQuery' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description mentions streaming order but lacks clarity on input structure (query array format), output format details, and feature availability. Added explicit mention of array input/output correspondence and clarified feature availability (Scale accounts, optional features).",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "StreamQuery",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Stream responses as you search for relevant results, highlight relevant snippets, and do\n[Retrieval Augmented Generation](https://docs.vectara.com/docs/learn/grounded-generation/grounded-generation-overview) (RAG).\n\nInstead of receiving a complete response like with the Standard Query API, you receive partial responses in this order:\n1. Search results.\n2. If summarization is enabled, you get chunks of the summary, like \"This\", \"is\", \"a\", \"summary\".\n3. If FCS is enabled, then the FCS is the final response.\n\nSome tips for this API:\n* This operation authenticates with either an API Key or OAuth 2.0 (in a JWT \"Bearer Token\"). You can find details of how to set up an API key or use OAuth 2.0 [here](https://docs.vectara.com/docs/console-ui/manage-api-access).\n* The Query API takes an *array* of queries, since you can have Vectara perform more than 1 query in a single API call.  The results that are returned are thus in an array as well, with each element in the response array corresponding to the input query array.\n* Custom dimensions (the `dim` array) is a feature that is only available to [Scale](https://vectara.com/pricing/) accounts.\n* Reranking enhances search accuracy and variety and more details can be found [here](https://docs.vectara.com/docs/api-reference/search-apis/reranking).",
+      "summary_suggestion": "Stream search results and RAG responses incrementally",
+      "description_suggestion": "Executes semantic search and Retrieval Augmented Generation (RAG) with streaming responses. Accepts an array of queries and returns results incrementally in order: search results, optional summary chunks (if summarization enabled), and optional Factuality Consistency Score (if FCS enabled). Each input query produces a corresponding output in the response array. Supports custom dimensions (Scale accounts only) and reranking for improved accuracy. Requires API Key or OAuth 2.0 Bearer Token authentication.",
+      "reasoning": "Missing summary. Description mentions streaming order but lacks clarity on input structure (query array format), output format details, and feature availability. Added explicit mention of array input/output correspondence and clarified feature availability (Scale accounts, optional features).",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateCorpusEnablement' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks input parameters (enablement state), output information (updated status), and clarification on what happens to disabled corpora (cannot query but data persists). Added these details for AI agent clarity on operation effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateCorpusEnablement",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lets you enable or disable a corpus. This is useful when you need to take the corpus offline without having to delete the corpus.\n\nSome tips for this API:\n* This operation works with the Personal API Key and OAuth 2.0 (in a JWT \"Bearer Token\") authentication. You can find details of how to set up and use OAuth 2.0 [here](https://docs.vectara.com/docs/learn/authentication/oauth-2).\n* The `filter` feature applies to either the name *or* the description of a corpus.",
+      "summary_suggestion": "Enable or disable a corpus without deletion",
+      "description_suggestion": "Toggles the enablement status of a corpus, allowing you to take it offline or bring it back online without deleting data or corpus configuration. Accepts corpus identifier and desired enablement state as input. Supports filtering by corpus name or description. Returns updated corpus status. Disabled corpora cannot be queried but retain all documents and metadata. Requires Personal API Key or OAuth 2.0 Bearer Token authentication.",
+      "reasoning": "Missing summary. Description lacks input parameters (enablement state), output information (updated status), and clarification on what happens to disabled corpora (cannot query but data persists). Added these details for AI agent clarity on operation effects.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CoreIndex' has semantic quality issues: vague_summary, missing_input_details, missing_context. Missing summary. Description lacks clarity on what inputs are expected (parts structure, document format), what is returned (document ID, confirmation), and why it's expert-only (complexity of chunking control). Added specific input/output details and clarified the expertise requirement context.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CoreIndex",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "This API is intended to be used by experts.  It gives you fine-grained control over chunking\nstrategies by using the `parts`.  Most users will want to use the [File Upload API](https://docs.vectara.com/docs/rest-api/file-upload) or the \"standard\" [Index API](https://docs.vectara.com/docs/rest-api/index).\n\nSome tips for this API:\n* This operation authenticates with either the Personal API Key, Index API Key, or OAuth 2.0 (in a JWT \"Bearer Token\"). You can find details of how to set up an API key or use OAuth 2.0 [here](https://docs.vectara.com/docs/console-ui/manage-api-access).\n* The `metadataJson` object needs the JSON to be escaped so that it's not confused with other parts of the request JSON.\n* [Custom dimensions](https://docs.vectara.com/docs/learn/semantic-search/add-custom-dimensions) (`customDims`) is a feature that is only available to [Scale](https://vectara.com/pricing/) accounts.",
+      "summary_suggestion": "Index documents with fine-grained chunking control",
+      "description_suggestion": "Advanced indexing operation providing fine-grained control over document chunking strategies through the `parts` parameter. Accepts structured document requests with custom section definitions, escaped metadata JSON, and optional custom dimensions (Scale accounts only). Returns indexing confirmation with document ID. Intended for expert users; most users should use the File Upload API or standard Index API instead. Requires Personal API Key, Index API Key, or OAuth 2.0 Bearer Token authentication.",
+      "reasoning": "Missing summary. Description lacks clarity on what inputs are expected (parts structure, document format), what is returned (document ID, confirmation), and why it's expert-only (complexity of chunking control). Added specific input/output details and clarified the expertise requirement context.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListConversations' has semantic quality issues: vague_summary, missing_input_details. Missing summary entirely. Description lacks clarity on required inputs (corpus ID) and response structure. Added summary and enhanced description to specify required parameters, return format, and authentication methods for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListConversations",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "List all the conversations in a specific corpus. This data enables developers to monitor chatbot interactions and understand how users engage with the data. Pagination lets developers navigate through large datasets.\n\nSome tips for this API:\n* This operation authenticates with either an API Key or OAuth 2.0 (in a JWT \"Bearer Token\"). You can find details of how to set up an API key or use OAuth 2.0 [here](https://docs.vectara.com/docs/console-ui/manage-api-access).",
+      "summary_suggestion": "List conversations in a corpus with pagination",
+      "description_suggestion": "Retrieves all conversations in a specific corpus, enabling monitoring of chatbot interactions and user engagement patterns. Supports pagination for navigating large conversation datasets. Requires corpus ID as input. Returns a paginated list of conversation objects with metadata. Authenticates with either API Key or OAuth 2.0 Bearer Token.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on required inputs (corpus ID) and response structure. Added summary and enhanced description to specify required parameters, return format, and authentication methods for better AI agent interpretability.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListCorpora' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks details about return values and filtering capabilities. Added summary and enhanced description to clarify filter behavior, return structure, and authentication requirements for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListCorpora",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all corpora accessible to the OAuth client.\n\nSome tips for this API:\n* This operation works with the Personal API Key and OAuth 2.0 (in a JWT \"Bearer Token\") authentication. You can find details of how to set up and use OAuth 2.0 [here](https://docs.vectara.com/docs/learn/authentication/oauth-2).\n* The `filter` feature applies to either the name *or* the description of a corpus.",
+      "summary_suggestion": "List all accessible corpora with optional filtering",
+      "description_suggestion": "Retrieves all corpora accessible to the authenticated user or OAuth client. Supports optional filtering by corpus name or description. Returns a list of corpus objects containing corpus ID, name, description, and metadata. Requires Personal API Key or OAuth 2.0 Bearer Token authentication.",
+      "reasoning": "Missing summary. Description lacks details about return values and filtering capabilities. Added summary and enhanced description to clarify filter behavior, return structure, and authentication requirements for AI agent clarity.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListDocuments' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description lacks clarity on required inputs (corpus ID). Added summary and enhanced description to specify required parameters and improve AI agent understanding of when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListDocuments",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists information about each document ingested into the corpus including the Document ID and metadata. This is useful for managing the lifecycle of documents and a quick way to check which documents are already in the index.\n\nSome tips for this API:\n* This operation works with the Personal API Key and OAuth 2.0 (in a JWT \"Bearer Token\") authentication. You can find details of how to set up and use OAuth 2.0 [here](https://docs.vectara.com/docs/learn/authentication/oauth-2).",
+      "summary_suggestion": "List documents in a corpus with metadata",
+      "description_suggestion": "Retrieves a list of all documents ingested into a specific corpus, including Document ID and associated metadata. Useful for document lifecycle management and verifying document indexing status. Requires corpus ID as input. Returns document objects with IDs and metadata. Authenticates with Personal API Key or OAuth 2.0 Bearer Token.",
+      "reasoning": "Missing summary. Description lacks clarity on required inputs (corpus ID). Added summary and enhanced description to specify required parameters and improve AI agent understanding of when to use this operation.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListJobs' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity on return values and filtering options. Added summary and enhanced description to clarify available filters, return structure, and best practices for AI agent usability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListJobs",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "List the jobs associated with this account.  Jobs are background processes like [replacing the filterable metadata attributes](https://docs.vectara.com/docs/rest-api/replace-corpus-filter-attrs).\n\nSome tips for this API:\n* This operation works with the Personal API Key and OAuth 2.0 (in a JWT \"Bearer Token\") authentication. You can find details of how to set up and use OAuth 2.0 [here](https://docs.vectara.com/docs/learn/authentication/oauth-2).\n* It's best practice to filter as much as possible (by date, by status, and/or by job ID) to make job lists as easy to interpret as possible, as there can be many for a given time window.",
+      "summary_suggestion": "List background jobs with optional filtering",
+      "description_suggestion": "Retrieves a list of background jobs associated with the account, such as corpus filter attribute updates. Supports filtering by date, status, and job ID to manage large job lists. Returns job objects with state, ID, and metadata. Requires Personal API Key or OAuth 2.0 Bearer Token authentication. Filtering is recommended for better performance.",
+      "reasoning": "Missing summary. Description lacks clarity on return values and filtering options. Added summary and enhanced description to clarify available filters, return structure, and best practices for AI agent usability.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListUsers' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity on return values and related operations. Added summary and enhanced description to specify return structure, authentication requirements, and reference to related ManageUser operation for better AI agent guidance.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListUsers",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the users in your account along with their corpus access and customer-level authorizations. \nSome tips for this API:\n* This operation only works with OAuth 2.0 (in a JWT \"Bearer Token\") authentication. It does not work with API Keys. You can find details of how to set up and use OAuth 2.0 [here](https://docs.vectara.com/docs/learn/authentication/oauth-2).\n* Use this API to view the members on your team. If you need to manage their access, use the Manage User endpoint.",
+      "summary_suggestion": "List account users with access permissions",
+      "description_suggestion": "Retrieves a list of all users in the account with their corpus access levels and customer-level authorizations. Returns user objects containing user information, roles, and permissions. Requires OAuth 2.0 Bearer Token authentication (API Keys not supported). Use ManageUser endpoint to modify user access or roles.",
+      "reasoning": "Missing summary. Description lacks clarity on return values and related operations. Added summary and enhanced description to specify return structure, authentication requirements, and reference to related ManageUser operation for better AI agent guidance.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ManageUser' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity on batch operation support and return values. Added summary and enhanced description to clarify batch operation capability, return structure, and authentication requirements for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ManageUser",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lets you manage users in your account by adding, deleting, enabling, or disabling users. You can also reset their passwords and edit user roles. This endpoint can help you streamline your onboarding process by programmatically adding new users, assigning appropriate roles, and setting up permissions.\nSome tips for this API:\n* This operation only works with OAuth 2.0 (in a JWT \"Bearer Token\") authentication. It does not work with API Keys. You can find details of how to set up and use OAuth 2.0 [here](https://docs.vectara.com/docs/learn/authentication/oauth-2).\n* Add multiple users by including additional \"user\" objects into the userAction array.",
+      "summary_suggestion": "Add, delete, or modify user accounts and roles",
+      "description_suggestion": "Manages user accounts in the system by adding, deleting, enabling, disabling users, resetting passwords, and editing user roles. Supports batch operations via userAction array for managing multiple users in a single request. Returns confirmation of user management actions. Requires OAuth 2.0 Bearer Token authentication (API Keys not supported). Useful for onboarding workflows and access control management.",
+      "reasoning": "Missing summary. Description lacks clarity on batch operation support and return values. Added summary and enhanced description to clarify batch operation capability, return structure, and authentication requirements for better AI agent interpretability.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'Query' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description scattered across tips without clear operation overview. Added summary and reorganized description to clarify batch query support, key features (hybrid search, RAG, reranking), required inputs, and return structure for better AI agent understanding of capabilities and usage.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "Query",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Search for relevant results, highlight relevant snippets, and do\n[Retrieval Augmented Generation](https://docs.vectara.com/docs/learn/grounded-generation/grounded-generation-overview) (RAG).\n\nSome tips for this API:\n* This operation authenticates with either an API Key or OAuth 2.0 (in a JWT \"Bearer Token\"). You can find details of how to set up an API key or use OAuth 2.0 [here](https://docs.vectara.com/docs/console-ui/manage-api-access).\n* By default, Vectara only uses its neural/semantic retrieval model, and does not attempt to use keyword matching.  To enable hybrid search with a mix of both keyword and neural results, edit the `lambda` value.  Additional documentation on hybrid search is [here](https://docs.vectara.com/docs/learn/semantic-search/hybrid-search).\n* Vectara can automatically provide a generative summary with the query results for Retrieval Augmented Generation (RAG).  Additional details on RAG in Vectara can be found [here](https://docs.vectara.com/docs/learn/grounded-generation/grounded-generation-overview).\n* The Query API takes an *array* of queries, since you can have Vectara perform more than 1 query in a single API call.  The results that are returned are thus in an array as well, with each element in the response array corresponding to the input query array.\n* Custom dimensions (the `dim` array) is a feature that is only available to [Scale](https://vectara.com/pricing/) accounts.\n* Reranking enhances search accuracy and variety and more details can be found [here](https://docs.vectara.com/docs/api-reference/search-apis/reranking).",
+      "summary_suggestion": "Search corpus and generate retrieval-augmented responses",
+      "description_suggestion": "Performs semantic search across a corpus and optionally generates retrieval-augmented generation (RAG) responses. Accepts an array of queries for batch processing. Supports hybrid search via lambda parameter, reranking for improved accuracy, and custom dimensions (Scale accounts only). Returns array of results with relevant snippets and optional generative summaries. Uses neural/semantic retrieval by default. Requires corpus ID and query text. Authenticates with API Key or OAuth 2.0 Bearer Token.",
+      "reasoning": "Missing summary. Description scattered across tips without clear operation overview. Added summary and reorganized description to clarify batch query support, key features (hybrid search, RAG, reranking), required inputs, and return structure for better AI agent understanding of capabilities and usage.",
+      "batch_index": 2
     }
   },
   {
@@ -8378,7 +8944,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 28 operations analyzed, 13 quality issues found",
+    "message": "Semantic analysis completed: 29 operations analyzed, 28 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -8389,8 +8955,8 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "total_operations_analyzed": 28,
-      "total_issues_found": 13,
+      "total_operations_analyzed": 29,
+      "total_issues_found": 28,
       "batches_processed": 5
     }
   }

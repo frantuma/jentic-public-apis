@@ -3470,7 +3470,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'orgpolicy.folders.policies.list' has semantic quality issues: vague_summary, missing_context. Original summary was missing. Added context about the resource type and permissions required.",
+    "message": "Operation 'orgpolicy.folders.policies.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description lacks context about what is returned (response structure), the resource type being queried (folder), and the use case. Added summary to clarify the action and resource scope. Enhanced description to specify return type, explain the folder context within the resource hierarchy, and provide use case context for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3485,13 +3485,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Retrieves all of the policies that exist on a particular resource.",
-      "summary_suggestion": "List all policies on a specific folder resource",
-      "description_suggestion": "Retrieves all of the policies that exist on a particular folder resource. Requires appropriate permissions. Returns a list of `GoogleCloudOrgpolicyV2Policy` objects.",
-      "reasoning": "Original summary was missing. Added context about the resource type and permissions required.",
+      "summary_suggestion": "List all policies for a folder resource",
+      "description_suggestion": "Retrieves all organization policies that exist on a specified folder resource. Returns a list of GoogleCloudOrgpolicyV2Policy objects representing the policies currently applied to the folder. This operation is useful for auditing governance rules and understanding the constraint configuration at the folder level in the resource hierarchy.",
+      "reasoning": "Missing summary entirely. Description lacks context about what is returned (response structure), the resource type being queried (folder), and the use case. Added summary to clarify the action and resource scope. Enhanced description to specify return type, explain the folder context within the resource hierarchy, and provide use case context for AI agent decision-making.",
       "batch_index": 1
     }
   },
@@ -3506,7 +3507,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'orgpolicy.folders.policies.create' has semantic quality issues: vague_summary. Original summary was missing. Added context about the resource type, permissions, input schema, and possible return values.",
+    "message": "Operation 'orgpolicy.folders.policies.create' has semantic quality issues: vague_summary, missing_input_details, missing_context. Missing summary entirely. Description focuses only on error cases without explaining the primary action or input requirements. Added summary to clarify the create action and resource scope. Enhanced description to specify the request body schema, explain what is returned on success, provide context about the folder's role in the resource hierarchy, and clarify when each error condition occurs for better AI agent understanding of preconditions and outcomes.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3520,13 +3521,15 @@
       "operation_id": "orgpolicy.folders.policies.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Creates a policy. Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the constraint does not exist. Returns a `google.rpc.Status` with `google.rpc.Code.ALREADY_EXISTS` if the policy already exists on the given Google Cloud resource.",
-      "summary_suggestion": "Create a policy for a specific folder resource",
-      "description_suggestion": "Creates a policy for a specific folder resource. Requires appropriate permissions. Accepts a `GoogleCloudOrgpolicyV2Policy` object as input. Returns the created policy if successful, or an error status if the constraint does not exist or the policy already exists.",
-      "reasoning": "Original summary was missing. Added context about the resource type, permissions, input schema, and possible return values.",
+      "summary_suggestion": "Create a new organization policy for folder",
+      "description_suggestion": "Creates a new organization policy on a specified folder resource. Requires a GoogleCloudOrgpolicyV2Policy object in the request body defining the policy constraints and rules. Returns the created policy object on success. Returns a NOT_FOUND error if the referenced constraint does not exist. Returns an ALREADY_EXISTS error if a policy for the same constraint is already applied to the folder. This operation enforces governance rules at the folder level in the resource hierarchy.",
+      "reasoning": "Missing summary entirely. Description focuses only on error cases without explaining the primary action or input requirements. Added summary to clarify the create action and resource scope. Enhanced description to specify the request body schema, explain what is returned on success, provide context about the folder's role in the resource hierarchy, and clarify when each error condition occurs for better AI agent understanding of preconditions and outcomes.",
       "batch_index": 1
     }
   },
@@ -3541,7 +3544,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'orgpolicy.folders.policies.delete' has semantic quality issues: vague_summary, vague_description. The summary was missing, and the description was vague. The suggestions provide a clear action and additional context about the operation's purpose and possible outcomes.",
+    "message": "Operation 'orgpolicy.folders.policies.delete' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Original description lacks a summary entirely and provides minimal context. Added summary to identify the operation clearly. Enhanced description to specify the resource type (folder), clarify the permanent nature of deletion, explain the impact on child resources, and provide the expected input format for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3556,13 +3559,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_input_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes a policy. Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the constraint or organization policy does not exist.",
-      "summary_suggestion": "Delete a policy on a folder resource",
-      "description_suggestion": "Deletes a specified policy on a folder resource. Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the specified constraint or organization policy does not exist.",
-      "reasoning": "The summary was missing, and the description was vague. The suggestions provide a clear action and additional context about the operation's purpose and possible outcomes.",
+      "summary_suggestion": "Delete a folder-level organization policy",
+      "description_suggestion": "Deletes an organization policy from a folder resource. The policy must exist on the specified folder; attempting to delete a non-existent policy returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND`. This operation permanently removes the policy and any constraints it enforces on the folder and its child resources. Requires the policy name in the format `/v2/folders/{folder}/policies/{policy}`.",
+      "reasoning": "Original description lacks a summary entirely and provides minimal context. Added summary to identify the operation clearly. Enhanced description to specify the resource type (folder), clarify the permanent nature of deletion, explain the impact on child resources, and provide the expected input format for AI agent clarity.",
       "batch_index": 0
     }
   },
@@ -3577,7 +3581,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'orgpolicy.folders.policies.get' has semantic quality issues: vague_summary. The summary was missing. The description was clear, but adding a concise summary improves clarity and actionability.",
+    "message": "Operation 'orgpolicy.folders.policies.get' has semantic quality issues: vague_summary, missing_input_details. Missing summary makes operation purpose unclear. Description is vague about resource type and lacks input format guidance. Enhanced to specify folder-level scope, clarify the etag's purpose in concurrency control, and provide context for read-modify-write patterns that AI agents need to understand.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3591,12 +3595,14 @@
       "operation_id": "orgpolicy.folders.policies.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Gets a policy on a resource. If no policy is set on the resource, `NOT_FOUND` is returned. The `etag` value can be used with `UpdatePolicy()` to update a policy during read-modify-write.",
-      "summary_suggestion": "Get a policy on a folder resource",
-      "reasoning": "The summary was missing. The description was clear, but adding a concise summary improves clarity and actionability.",
+      "summary_suggestion": "Retrieve a folder-level organization policy",
+      "description_suggestion": "Retrieves an organization policy from a folder resource. Returns the policy object including its `etag` value, which is required for subsequent update operations to prevent concurrent modification conflicts. If no policy exists on the specified folder, returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND`. The returned `etag` should be included in `PatchPolicy()` requests for read-modify-write operations.",
+      "reasoning": "Missing summary makes operation purpose unclear. Description is vague about resource type and lacks input format guidance. Enhanced to specify folder-level scope, clarify the etag's purpose in concurrency control, and provide context for read-modify-write patterns that AI agents need to understand.",
       "batch_index": 0
     }
   },
@@ -3611,7 +3617,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'orgpolicy.folders.policies.patch' has semantic quality issues: vague_summary. The summary was missing. The description was clear, but adding a concise summary improves clarity and actionability.",
+    "message": "Operation 'orgpolicy.folders.policies.patch' has semantic quality issues: vague_summary, missing_input_details. Missing summary and vague description about resource scope. Description mentions full overwrite but lacks clarity on input requirements and etag handling. Enhanced to specify folder-level scope, clarify the etag's role in optimistic concurrency control, explain the full overwrite behavior, and detail expected input format for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3625,12 +3631,14 @@
       "operation_id": "orgpolicy.folders.policies.patch",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Updates a policy. Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the constraint or the policy do not exist. Returns a `google.rpc.Status` with `google.rpc.Code.ABORTED` if the etag supplied in the request does not match the persisted etag of the policy Note: the supplied policy will perform a full overwrite of all fields.",
-      "summary_suggestion": "Update a policy on a folder resource",
-      "reasoning": "The summary was missing. The description was clear, but adding a concise summary improves clarity and actionability.",
+      "summary_suggestion": "Update a folder-level organization policy",
+      "description_suggestion": "Updates an organization policy on a folder resource. Requires the policy name and a `GoogleCloudOrgpolicyV2Policy` object with the updated configuration. The request must include the current `etag` value; if it does not match the persisted etag, the operation returns `google.rpc.Code.ABORTED` to prevent concurrent modification conflicts. Performs a full overwrite of all policy fields. Returns `google.rpc.Code.NOT_FOUND` if the policy or constraint does not exist.",
+      "reasoning": "Missing summary and vague description about resource scope. Description mentions full overwrite but lacks clarity on input requirements and etag handling. Enhanced to specify folder-level scope, clarify the etag's role in optimistic concurrency control, explain the full overwrite behavior, and detail expected input format for AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -3645,7 +3653,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'orgpolicy.folders.policies.getEffectivePolicy' has semantic quality issues: vague_summary. The summary was missing. The description was clear, but adding a concise summary improves clarity and actionability.",
+    "message": "Operation 'orgpolicy.folders.policies.getEffectivePolicy' has semantic quality issues: vague_summary, missing_context, missing_input_details. Missing summary and vague description about what 'effective' means in this context. Description lacks clarity on hierarchy evaluation and input requirements. Enhanced to explain the hierarchical policy merging process, clarify why etag/condition are absent, and provide context about resource hierarchy evaluation that AI agents need to determine when to use this operation versus the standard get operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3659,12 +3667,15 @@
       "operation_id": "orgpolicy.folders.policies.getEffectivePolicy",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Gets the effective policy on a resource. This is the result of merging policies in the resource hierarchy and evaluating conditions. The returned policy will not have an `etag` or `condition` set because it is an evaluated policy across multiple resources. Subtrees of Resource Manager resource hierarchy with 'under:' prefix will not be expanded.",
-      "summary_suggestion": "Get the effective policy on a folder resource",
-      "reasoning": "The summary was missing. The description was clear, but adding a concise summary improves clarity and actionability.",
+      "summary_suggestion": "Retrieve effective organization policy for a folder",
+      "description_suggestion": "Retrieves the effective organization policy for a folder by evaluating and merging all policies in the resource hierarchy (from organization down to the folder). The returned policy reflects the combined constraints after condition evaluation and inheritance. Note: the returned policy will not include `etag` or `condition` fields since it represents an evaluated state across multiple resources. Resource Manager hierarchy subtrees with 'under:' prefix are not expanded in the result.",
+      "reasoning": "Missing summary and vague description about what 'effective' means in this context. Description lacks clarity on hierarchy evaluation and input requirements. Enhanced to explain the hierarchical policy merging process, clarify why etag/condition are absent, and provide context about resource hierarchy evaluation that AI agents need to determine when to use this operation versus the standard get operation.",
       "batch_index": 0
     }
   },
@@ -3679,7 +3690,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'orgpolicy.folders.constraints.list' has semantic quality issues: vague_summary. The summary was missing. The description was clear, but adding a concise summary improves clarity and actionability.",
+    "message": "Operation 'orgpolicy.folders.constraints.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary and vague description that doesn't specify resource type or return format. Enhanced to clarify folder-level scope, specify the response schema, explain what constraints represent, and mention pagination support for AI agents to understand how to retrieve large result sets.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3693,12 +3704,14 @@
       "operation_id": "orgpolicy.folders.constraints.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists constraints that could be applied on the specified resource.",
-      "summary_suggestion": "List constraints applicable to a folder resource",
-      "reasoning": "The summary was missing. The description was clear, but adding a concise summary improves clarity and actionability.",
+      "summary_suggestion": "List applicable constraints for a folder",
+      "description_suggestion": "Lists all constraints (both managed and custom) that can be applied to a folder resource. Returns a `GoogleCloudOrgpolicyV2ListConstraintsResponse` containing available constraints that can be used to create or update policies on the folder. Constraints define the types of governance rules that can be enforced. Supports pagination through `pageSize` and `pageToken` parameters.",
+      "reasoning": "Missing summary and vague description that doesn't specify resource type or return format. Enhanced to clarify folder-level scope, specify the response schema, explain what constraints represent, and mention pagination support for AI agents to understand how to retrieve large result sets.",
       "batch_index": 0
     }
   },
@@ -3713,7 +3726,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'orgpolicy.organizations.customConstraints.list' has semantic quality issues: vague_summary. The summary was missing. The description was clear, but adding a concise summary improves clarity and actionability.",
+    "message": "Operation 'orgpolicy.organizations.customConstraints.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary and vague description lacking return format and pagination details. Enhanced to add summary, specify the response schema, clarify that custom constraints are organization-specific, and mention pagination support for comprehensive AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3727,12 +3740,14 @@
       "operation_id": "orgpolicy.organizations.customConstraints.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Retrieves all of the custom constraints that exist on a particular organization resource.",
-      "summary_suggestion": "List custom constraints on an organization resource",
-      "reasoning": "The summary was missing. The description was clear, but adding a concise summary improves clarity and actionability.",
+      "summary_suggestion": "List custom constraints for an organization",
+      "description_suggestion": "Lists all custom constraints defined on an organization resource. Returns a `GoogleCloudOrgpolicyV2ListCustomConstraintsResponse` containing custom constraints that have been created for the organization. Custom constraints are organization-specific governance rules that can only be applied to resources within that organization. Supports pagination through `pageSize` and `pageToken` parameters.",
+      "reasoning": "Missing summary and vague description lacking return format and pagination details. Enhanced to add summary, specify the response schema, clarify that custom constraints are organization-specific, and mention pagination support for comprehensive AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -3747,7 +3762,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'orgpolicy.organizations.customConstraints.create' has semantic quality issues: vague_summary. The summary was missing. The description was clear, but adding a concise summary improves clarity and actionability.",
+    "message": "Operation 'orgpolicy.organizations.customConstraints.create' has semantic quality issues: vague_summary, missing_input_details. Missing summary and description lacks input details about what the request body should contain. Enhanced to add summary, specify the request schema and its key fields, clarify the organization-specific scope, and explain error conditions for AI agent understanding of when this operation succeeds or fails.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3761,12 +3776,14 @@
       "operation_id": "orgpolicy.organizations.customConstraints.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Creates a custom constraint. Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the organization does not exist. Returns a `google.rpc.Status` with `google.rpc.Code.ALREADY_EXISTS` if the constraint already exists on the given organization.",
-      "summary_suggestion": "Create a custom constraint on an organization resource",
-      "reasoning": "The summary was missing. The description was clear, but adding a concise summary improves clarity and actionability.",
+      "summary_suggestion": "Create a custom constraint for an organization",
+      "description_suggestion": "Creates a new custom constraint on an organization resource. Requires a `GoogleCloudOrgpolicyV2CustomConstraint` object defining the constraint's name, description, resource types, and enforcement rules. Custom constraints are organization-specific and can only be applied to resources within that organization. Returns `google.rpc.Code.NOT_FOUND` if the organization does not exist. Returns `google.rpc.Code.ALREADY_EXISTS` if a constraint with the same name already exists on the organization.",
+      "reasoning": "Missing summary and description lacks input details about what the request body should contain. Enhanced to add summary, specify the request schema and its key fields, clarify the organization-specific scope, and explain error conditions for AI agent understanding of when this operation succeeds or fails.",
       "batch_index": 0
     }
   },

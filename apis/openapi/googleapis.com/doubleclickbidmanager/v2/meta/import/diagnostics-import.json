@@ -2611,7 +2611,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'doubleclickbidmanager.queries.list' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does. A concise summary was added.",
+    "message": "Operation 'doubleclickbidmanager.queries.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks details about pagination support, filtering capabilities, authentication context, and return structure. AI agents need to understand what parameters are available and what the response contains to use this operation effectively.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2625,12 +2625,15 @@
       "operation_id": "doubleclickbidmanager.queries.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists queries created by the current user.",
-      "summary_suggestion": "List all queries created by the current user.",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. A concise summary was added.",
+      "summary_suggestion": "List all queries for current user",
+      "description_suggestion": "Retrieves a list of all queries created by the authenticated user. Supports pagination and filtering through query parameters. Returns a ListQueriesResponse containing an array of Query objects with their metadata, including query ID, name, and configuration details.",
+      "reasoning": "Missing summary entirely. Description lacks details about pagination support, filtering capabilities, authentication context, and return structure. AI agents need to understand what parameters are available and what the response contains to use this operation effectively.",
       "batch_index": 0
     }
   },
@@ -2645,7 +2648,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'doubleclickbidmanager.queries.create' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing, and the description lacks details about the output. A concise summary and a more detailed description were added.",
+    "message": "Operation 'doubleclickbidmanager.queries.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description is too minimal. Needs clarification on what the Query request body should contain, what the response includes (particularly the queryId), and that the query becomes immediately usable. This helps AI agents understand the full lifecycle of query creation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2660,13 +2663,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Creates a new query.",
-      "summary_suggestion": "Create a new query.",
-      "description_suggestion": "Creates a new query using the provided parameters. Returns the newly created query object.",
-      "reasoning": "The current summary is missing, and the description lacks details about the output. A concise summary and a more detailed description were added.",
+      "summary_suggestion": "Create a new query for reporting",
+      "description_suggestion": "Creates a new query for generating reports. Accepts a Query object in the request body containing query configuration, filters, and scheduling parameters. Returns the created Query object with an assigned queryId. The query is immediately available for execution and report generation.",
+      "reasoning": "Missing summary. Description is too minimal. Needs clarification on what the Query request body should contain, what the response includes (particularly the queryId), and that the query becomes immediately usable. This helps AI agents understand the full lifecycle of query creation.",
       "batch_index": 0
     }
   },
@@ -2681,7 +2686,45 @@
         "character": 0
       }
     },
-    "message": "Operation 'doubleclickbidmanager.queries.get' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does. A concise summary was added.",
+    "message": "Operation 'doubleclickbidmanager.queries.delete' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description mentions side effects (deletion of reports) but lacks clarity on required parameters, response format, and the permanent nature of the operation. AI agents need to understand this is irreversible and affects related resources.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "doubleclickbidmanager.queries.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes an existing query as well as its generated reports.",
+      "summary_suggestion": "Delete query and associated reports",
+      "description_suggestion": "Deletes an existing query and all reports previously generated by that query. Requires the queryId path parameter. This is a destructive operation that cannot be undone. Returns a 204 No Content response on successful deletion. All associated report data is permanently removed.",
+      "reasoning": "Missing summary. Description mentions side effects (deletion of reports) but lacks clarity on required parameters, response format, and the permanent nature of the operation. AI agents need to understand this is irreversible and affects related resources.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'doubleclickbidmanager.queries.get' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too vague about what information is returned and what the queryId parameter is. AI agents need to know what data they'll receive and how to identify which query to retrieve.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2695,12 +2738,15 @@
       "operation_id": "doubleclickbidmanager.queries.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Retrieves a query.",
-      "summary_suggestion": "Retrieve a specific query by its ID.",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. A concise summary was added.",
+      "summary_suggestion": "Retrieve query details by ID",
+      "description_suggestion": "Retrieves the full details of a specific query by its queryId. Requires the queryId path parameter. Returns a Query object containing the query configuration, filters, scheduling settings, and metadata. Use this to inspect query parameters before execution or modification.",
+      "reasoning": "Missing summary. Description is too vague about what information is returned and what the queryId parameter is. AI agents need to know what data they'll receive and how to identify which query to retrieve.",
       "batch_index": 0
     }
   },
@@ -2715,7 +2761,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'doubleclickbidmanager.queries.reports.list' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does. A concise summary was added.",
+    "message": "Operation 'doubleclickbidmanager.queries.reports.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks details about pagination, filtering options, and what information is included in the response. AI agents need to understand how to navigate multiple reports and what data each report object contains.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2729,12 +2775,15 @@
       "operation_id": "doubleclickbidmanager.queries.reports.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists reports generated by the provided query.",
-      "summary_suggestion": "List all reports generated by a specific query.",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. A concise summary was added.",
+      "summary_suggestion": "List reports generated by query",
+      "description_suggestion": "Retrieves a list of all reports generated by a specific query. Requires the queryId path parameter. Supports pagination and filtering through query parameters. Returns a ListReportsResponse containing an array of Report objects with their status, metadata, and generation timestamps. Use this to track report generation history and status.",
+      "reasoning": "Missing summary. Description lacks details about pagination, filtering options, and what information is included in the response. AI agents need to understand how to navigate multiple reports and what data each report object contains.",
       "batch_index": 0
     }
   },
@@ -2749,7 +2798,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'doubleclickbidmanager.queries.reports.get' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does. A concise summary was added.",
+    "message": "Operation 'doubleclickbidmanager.queries.reports.get' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too minimal and doesn't clarify the two required path parameters or what information the response contains. AI agents need to understand both identifiers are required and what data they'll receive.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2763,12 +2812,15 @@
       "operation_id": "doubleclickbidmanager.queries.reports.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Retrieves a report.",
-      "summary_suggestion": "Retrieve a specific report by its ID.",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. A concise summary was added.",
+      "summary_suggestion": "Retrieve specific report details",
+      "description_suggestion": "Retrieves the full details of a specific report generated by a query. Requires both queryId and reportId path parameters. Returns a Report object containing report metadata, status, parameters, and generation details. Use this to access report content, status, and configuration after generation.",
+      "reasoning": "Missing summary. Description is too minimal and doesn't clarify the two required path parameters or what information the response contains. AI agents need to understand both identifiers are required and what data they'll receive.",
       "batch_index": 0
     }
   },
@@ -2783,7 +2835,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'doubleclickbidmanager.queries.run' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing, and the description lacks details about the output. A concise summary and a more detailed description were added.",
+    "message": "Operation 'doubleclickbidmanager.queries.run' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description lacks clarity on the RunQueryRequest parameters, that execution is asynchronous, and how to track completion. AI agents need to understand they should poll for results and what the initial response contains.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2798,13 +2850,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Runs an existing query to generate a report.",
-      "summary_suggestion": "Run an existing query to generate a report.",
-      "description_suggestion": "Runs an existing query using the provided parameters. Returns the generated report.",
-      "reasoning": "The current summary is missing, and the description lacks details about the output. A concise summary and a more detailed description were added.",
+      "summary_suggestion": "Execute query to generate report",
+      "description_suggestion": "Executes an existing query to generate a new report. Requires the queryId path parameter and a RunQueryRequest object specifying execution parameters. Initiates asynchronous report generation and returns a Report object with status information. The report generation may take time; use the returned reportId to poll for completion status.",
+      "reasoning": "Missing summary. Description lacks clarity on the RunQueryRequest parameters, that execution is asynchronous, and how to track completion. AI agents need to understand they should poll for results and what the initial response contains.",
       "batch_index": 0
     }
   },
@@ -2819,7 +2873,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 7 operations analyzed, 6 quality issues found",
+    "message": "Semantic analysis completed: 7 operations analyzed, 7 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -2831,7 +2885,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 7,
-      "total_issues_found": 6,
+      "total_issues_found": 7,
       "batches_processed": 1
     }
   }

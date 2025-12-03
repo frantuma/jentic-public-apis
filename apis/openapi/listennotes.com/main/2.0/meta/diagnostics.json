@@ -6533,7 +6533,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'deletePodcastById' has semantic quality issues: vague_summary, missing_side_effects. Original summary is vague. Added a more specific summary and clarified the side effects and response details.",
+    "message": "Operation 'getPlaylists' has semantic quality issues: vague_description, missing_context, missing_output_details. Current description relies on external reference (listennotes.com/listen) which lacks clarity for AI agents. Missing explicit mention of authentication requirement, return structure, and playlist composition details. Improved description clarifies authentication, pagination, playlist types, and access scope for better AI interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6544,18 +6544,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "deletePodcastById",
+      "operation_id": "getPlaylists",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
-        "missing_side_effects"
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
       ],
-      "current_summary": "Request to delete a podcast",
-      "current_description": "Podcast hosting services can use this endpoint to streamline the process of podcast deletion on behave of their users (podcasters). We will review the deletion request within 12 hours. If the podcast is already deleted, the \"status\" field in the response will be \"deleted\". Otherwise, the status field will be \"in review\". If you want to get a notification once the podcast is deleted, you can configure a webhook url in the dashboard: listennotes.com/api/dashboard/#webhooks",
-      "summary_suggestion": "Delete a podcast by id",
-      "description_suggestion": "Delete a podcast by id. The deletion request will be reviewed within 12 hours. The response includes the status of the deletion request. If the podcast is already deleted, the status will be 'deleted'. Otherwise, the status will be 'in review'. Optionally, configure a webhook URL for deletion notifications.",
-      "reasoning": "Original summary is vague. Added a more specific summary and clarified the side effects and response details.",
-      "batch_index": 1
+      "current_summary": "Fetch a list of your playlists.",
+      "current_description": "This endpoint returns same data as listennotes.com/listen under your account.\nYou can use the **page** parameter to do pagination and fetch more playlists.",
+      "description_suggestion": "Fetch all playlists created by the authenticated user. Returns a paginated list of playlists with their metadata. Use the **page** parameter for pagination. Each playlist can contain episodes or podcasts and may be public, unlisted, or private. This endpoint requires authentication and returns only playlists owned by the authenticated user.",
+      "reasoning": "Current description relies on external reference (listennotes.com/listen) which lacks clarity for AI agents. Missing explicit mention of authentication requirement, return structure, and playlist composition details. Improved description clarifies authentication, pagination, playlist types, and access scope for better AI interpretability.",
+      "batch_index": 3
     }
   },
   {
@@ -6569,7 +6569,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'typeahead' has semantic quality issues: vague_description. The current description is vague. The suggested description clarifies the purpose and provides more context about the typeahead functionality.",
+    "message": "Operation 'getPodcastAudience' has semantic quality issues: vague_description, missing_context, missing_output_details. Current description uses numbered list format that is less clear for AI agents. Missing explicit information about what happens when data is unavailable and what the response structure contains. Improved description clarifies data source, supported dimensions, data availability constraints, and expected behavior when data is missing.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6580,17 +6580,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "typeahead",
+      "operation_id": "getPodcastAudience",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
       ],
-      "current_summary": "Typeahead search",
-      "current_description": "Suggest search terms, podcast genres, and podcasts.",
-      "summary_suggestion": "Suggest search terms",
-      "description_suggestion": "Suggest search terms for episodes, podcasts, and genres. This endpoint provides autocomplete suggestions to enhance the search experience.",
-      "reasoning": "The current description is vague. The suggested description clarifies the purpose and provides more context about the typeahead functionality.",
-      "batch_index": 0
+      "current_summary": "Fetch audience demographics for a podcast",
+      "current_description": "Fetch audience demographics for a podcast - 1) directly measured on the Listen Notes platform; 2) only supports audience breakdown by regions for now; 3) not every podcast has data.",
+      "description_suggestion": "Fetch audience demographic insights for a podcast, including regional breakdown data. Returns audience demographics directly measured on the Listen Notes platform. Note: regional breakdown is currently the only supported demographic dimension, and not all podcasts have available audience data. Returns empty or null if demographic data is unavailable for the requested podcast.",
+      "reasoning": "Current description uses numbered list format that is less clear for AI agents. Missing explicit information about what happens when data is unavailable and what the response structure contains. Improved description clarifies data source, supported dimensions, data availability constraints, and expected behavior when data is missing.",
+      "batch_index": 3
     }
   },
   {
@@ -6604,7 +6605,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'justListen' has semantic quality issues: vague_description, missing_output_details. The current description is too vague and missing details about the output.",
+    "message": "Operation 'justListen' has semantic quality issues: vague_description, missing_output_details, not_actionable. Current description is too informal and lacks specificity about what is returned. AI agents need to understand the response structure and use case. Improved description clarifies the selection bias toward recent episodes, specifies the return value, and explains the operation's purpose for better agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6619,13 +6620,414 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_output_details"
+        "missing_output_details",
+        "not_actionable"
       ],
       "current_summary": "Fetch a random podcast episode",
       "current_description": "Recently published episodes are more likely to be fetched. Good luck!",
-      "description_suggestion": "Fetches a random podcast episode. Recently published episodes are more likely to be fetched. Returns a detailed podcast episode object.",
-      "reasoning": "The current description is too vague and missing details about the output.",
+      "description_suggestion": "Retrieves a random podcast episode from the Listen Notes database, with preference for recently published episodes. Returns a complete episode object including audio URL, metadata, and associated podcast information. Useful for discovery and serendipitous content exploration.",
+      "reasoning": "Current description is too informal and lacks specificity about what is returned. AI agents need to understand the response structure and use case. Improved description clarifies the selection bias toward recent episodes, specifies the return value, and explains the operation's purpose for better agent interpretability.",
       "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getPodcastRecommendations' has semantic quality issues: vague_description, missing_output_details, missing_context. Current description is minimal and lacks context about how recommendations are generated or what the response contains. AI agents need to understand the recommendation logic and response structure. Improved description clarifies the algorithm basis, specifies the return format, and explains the use case.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getPodcastRecommendations",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Fetch recommendations for a podcast",
+      "current_description": "Fetch up to 8 podcast recommendations based on the given podcast id.",
+      "description_suggestion": "Retrieves up to 8 podcast recommendations based on a given podcast ID. Uses similarity algorithms to identify related podcasts with comparable content, audience, or themes. Returns an array of podcast objects with basic metadata. Useful for podcast discovery and content curation.",
+      "reasoning": "Current description is minimal and lacks context about how recommendations are generated or what the response contains. AI agents need to understand the recommendation logic and response structure. Improved description clarifies the algorithm basis, specifies the return format, and explains the use case.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getEpisodeRecommendations' has semantic quality issues: vague_description, missing_output_details, missing_context. Current description is too minimal and lacks context about recommendation methodology or response structure. AI agents need clarity on how recommendations are determined and what data is returned. Improved description explains the recommendation basis, specifies the return format including audio URLs, and clarifies the use case.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getEpisodeRecommendations",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Fetch recommendations for an episode",
+      "current_description": "Fetch up to 8 episode recommendations based on the given episode id.",
+      "description_suggestion": "Retrieves up to 8 episode recommendations based on a given episode ID. Uses similarity algorithms to identify related episodes with comparable topics, speakers, or content themes. Returns an array of episode objects with metadata including audio URLs and podcast information. Useful for episode discovery and personalized content recommendations.",
+      "reasoning": "Current description is too minimal and lacks context about recommendation methodology or response structure. AI agents need clarity on how recommendations are determined and what data is returned. Improved description explains the recommendation basis, specifies the return format including audio URLs, and clarifies the use case.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deletePodcastById' has semantic quality issues: vague_summary, missing_context, not_actionable. Original summary 'Request to delete a podcast' is vague and doesn't clarify that this is an asynchronous review process, not immediate deletion. Description is verbose and unclear about the actual action. Improved summary emphasizes the submission and review nature. Reorganized description for clarity: purpose, expected behavior, response status values, notification options, and intended user type. Better AI agent interpretability regarding when to use this endpoint and what to expect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deletePodcastById",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "not_actionable"
+      ],
+      "current_summary": "Request to delete a podcast",
+      "current_description": "Podcast hosting services can use this endpoint to streamline the process of podcast deletion on behave of their users (podcasters). We will review the deletion request within 12 hours. If the podcast is already deleted, the \"status\" field in the response will be \"deleted\". Otherwise, the status field will be \"in review\". If you want to get a notification once the podcast is deleted, you can configure a webhook url in the dashboard: listennotes.com/api/dashboard/#webhooks",
+      "summary_suggestion": "Submit podcast deletion request for review",
+      "description_suggestion": "Submit a podcast deletion request on behalf of podcasters. The deletion request enters a review process that completes within 12 hours. Returns a status indicating either \"in review\" (pending deletion) or \"deleted\" (already removed). Podcast hosting services can configure webhook notifications in the dashboard to receive updates when deletion is complete. This endpoint is intended for podcast hosting services managing deletions on behalf of their users.",
+      "reasoning": "Original summary 'Request to delete a podcast' is vague and doesn't clarify that this is an asynchronous review process, not immediate deletion. Description is verbose and unclear about the actual action. Improved summary emphasizes the submission and review nature. Reorganized description for clarity: purpose, expected behavior, response status values, notification options, and intended user type. Better AI agent interpretability regarding when to use this endpoint and what to expect.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getEpisodeById' has semantic quality issues: vague_description, missing_output_details. Summary is clear and action-oriented. Description is too minimal and lacks specificity about what metadata is returned. Enhanced description clarifies the return value structure, distinguishes this from batch operations, and helps AI agents understand when to use this endpoint versus alternatives.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getEpisodeById",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Fetch detailed meta data for an episode by id",
+      "current_description": "Fetch detailed meta data for a specific episode.",
+      "description_suggestion": "Fetch comprehensive metadata for a specific episode by its episode id. Returns detailed episode information including title, description, audio URL, publication date, duration, and associated podcast information. Use this endpoint when you need complete episode details; for batch fetching basic metadata for multiple episodes, use POST /episodes instead.",
+      "reasoning": "Summary is clear and action-oriented. Description is too minimal and lacks specificity about what metadata is returned. Enhanced description clarifies the return value structure, distinguishes this from batch operations, and helps AI agents understand when to use this endpoint versus alternatives.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getCuratedPodcastById' has semantic quality issues: vague_summary, missing_context, missing_output_details. Original summary 'Fetch a curated list of podcasts by id' is ambiguous - unclear if fetching the list itself or podcasts within it. Description lacks clarity about what is actually returned and the relationship between the curated list id and podcast results. Improved summary clarifies the action (fetch podcasts from a list). Enhanced description specifies return values, clarifies the data structure, and provides context for when to use this endpoint.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getCuratedPodcastById",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Fetch a curated list of podcasts by id",
+      "current_description": "Get detailed meta data of all podcasts in a specific curated list.\nThis endpoint returns same data as https://www.listennotes.com/curated-podcasts/",
+      "summary_suggestion": "Fetch podcasts from a curated list by id",
+      "description_suggestion": "Retrieve all podcasts and their detailed metadata from a specific curated list by curated list id. Returns comprehensive podcast information for each podcast in the curated collection, matching the data available on ListenNotes.com curated podcasts page. Use this endpoint to access thematic or editorial podcast collections.",
+      "reasoning": "Original summary 'Fetch a curated list of podcasts by id' is ambiguous - unclear if fetching the list itself or podcasts within it. Description lacks clarity about what is actually returned and the relationship between the curated list id and podcast results. Improved summary clarifies the action (fetch podcasts from a list). Enhanced description specifies return values, clarifies the data structure, and provides context for when to use this endpoint.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'search' has semantic quality issues: vague_summary, missing_output_details. Original summary 'Full-text search' is too generic and doesn't specify what is being searched. Description lacks clarity about what data is returned. Enhanced summary to specify search targets and improved description to include return value information and clearer plan-based pagination limits for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "search",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "Full-text search",
+      "current_description": "Full-text search on episodes, podcasts, or curated lists of podcasts.\nUse the `offset` parameter to paginate through search results.\nThe FREE plan allows to see up to 30 search results (or `offset` < 30) per query.\nThe PRO plan allows to see up to 300 search results (or `offset` < 300) per query.\nThe ENTERPRISE plan allows to see up to 10,000 search results (or `offset` < 10000) per query.",
+      "summary_suggestion": "Search podcasts, episodes, and curated lists",
+      "description_suggestion": "Perform full-text search across episodes, podcasts, and curated podcast lists. Supports pagination via the `offset` parameter with plan-dependent limits: FREE plan (up to 30 results), PRO plan (up to 300 results), ENTERPRISE plan (up to 10,000 results). Returns matching podcasts and episodes with metadata including podcast IDs, titles, descriptions, and listen scores.",
+      "reasoning": "Original summary 'Full-text search' is too generic and doesn't specify what is being searched. Description lacks clarity about what data is returned. Enhanced summary to specify search targets and improved description to include return value information and clearer plan-based pagination limits for better AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'typeahead' has semantic quality issues: vague_summary, vague_description, missing_output_details. Original summary and description are too vague and lack specificity about the operation's purpose and output. Enhanced summary to clarify the suggestion nature and improved description to explain the real-time autocomplete functionality and what data is returned for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "typeahead",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Typeahead search",
+      "current_description": "Suggest search terms, podcast genres, and podcasts.",
+      "summary_suggestion": "Get search suggestions and podcast recommendations",
+      "description_suggestion": "Provide real-time search suggestions including search terms, podcast genres, and podcast recommendations as the user types. Returns a list of suggested search terms and matching podcasts to help users discover content and refine their search queries.",
+      "reasoning": "Original summary and description are too vague and lack specificity about the operation's purpose and output. Enhanced summary to clarify the suggestion nature and improved description to explain the real-time autocomplete functionality and what data is returned for better AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getTrendingSearches' has semantic quality issues: vague_summary, missing_output_details. Summary is generic and doesn't convey the 'trending' aspect clearly. Description lacks information about what the returned data represents and how it can be used. Enhanced summary to emphasize 'current' trending nature and added context about return value and use cases for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getTrendingSearches",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "Fetch trending search terms",
+      "current_description": "Fetch up to 10 most recent trending search terms on the Listen Notes platform.",
+      "summary_suggestion": "Retrieve current trending search terms",
+      "description_suggestion": "Retrieve up to 10 most recent trending search terms on the Listen Notes platform. Returns a list of trending search queries that reflect current user interest and search activity, useful for discovering popular podcast topics and content trends.",
+      "reasoning": "Summary is generic and doesn't convey the 'trending' aspect clearly. Description lacks information about what the returned data represents and how it can be used. Enhanced summary to emphasize 'current' trending nature and added context about return value and use cases for AI agents.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getRelatedSearches' has semantic quality issues: vague_summary, missing_context, missing_output_details. Summary is vague about the suggestion nature. Description mentions plan availability but lacks clarity about what 'related' means and what the output contains. Enhanced summary to clarify suggestion functionality and improved description to explain the relationship discovery purpose and explicitly state plan requirements upfront for AI agent filtering.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getRelatedSearches",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Fetch related search terms",
+      "current_description": "Suggest related search terms. The results are more comprehensive than from `GET /typeahead`. This endpoint is available only in the PRO/ENTERPRISE plan.",
+      "summary_suggestion": "Get related search term suggestions",
+      "description_suggestion": "Suggest related search terms based on a given query to help users explore related topics and podcasts. Returns more comprehensive results than the typeahead endpoint, providing better search refinement options. Available only in PRO/ENTERPRISE plans.",
+      "reasoning": "Summary is vague about the suggestion nature. Description mentions plan availability but lacks clarity about what 'related' means and what the output contains. Enhanced summary to clarify suggestion functionality and improved description to explain the relationship discovery purpose and explicitly state plan requirements upfront for AI agent filtering.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spellcheck' has semantic quality issues: vague_summary, missing_output_details, missing_context. Summary is passive and vague. Description lacks clarity about what is returned and how it helps users. Enhanced summary to be action-oriented and improved description to explain the correction purpose, return value, and user benefit. Plan restriction should be stated upfront for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spellcheck",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Spell check on a search term",
+      "current_description": "Suggest a list of words that correct the spelling errors of a search term. This endpoint is available only in the PRO/ENTERPRISE plan.",
+      "summary_suggestion": "Correct spelling errors in search terms",
+      "description_suggestion": "Suggest corrected spelling alternatives for a search term containing spelling errors. Returns a list of properly spelled words and search terms to help users find relevant podcasts despite typos. Available only in PRO/ENTERPRISE plans.",
+      "reasoning": "Summary is passive and vague. Description lacks clarity about what is returned and how it helps users. Enhanced summary to be action-oriented and improved description to explain the correction purpose, return value, and user benefit. Plan restriction should be stated upfront for AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getBestPodcasts' has semantic quality issues: vague_summary, missing_input_details. Summary lacks 'curated' context which is important for understanding the quality and curation aspect. Description is somewhat unclear about required inputs and return values. Enhanced summary to emphasize curation and improved description to clarify that genre ID is required, explain how to obtain it, and specify what podcast metadata is returned for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getBestPodcasts",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "Fetch a list of best podcasts by genre",
+      "current_description": "Get a list of curated best podcasts by genre,\nwhich are curated by Listen Notes staffs based on various signals from the Internet, e.g.,\ntop charts on other podcast platforms, recommendations from mainstream media,\nuser activities on listennotes.com...\nYou can get the genre ids from `GET /genres` endpoint.\nThis endpoint returns same data as https://www.listennotes.com/best-podcasts/",
+      "summary_suggestion": "Retrieve curated best podcasts by genre",
+      "description_suggestion": "Retrieve curated lists of best podcasts organized by genre. Results are curated by Listen Notes staff based on multiple signals including top charts from other platforms, mainstream media recommendations, and user activity on listennotes.com. Requires a genre ID (obtainable from the GET /genres endpoint). Returns podcast metadata including titles, descriptions, listen scores, and artwork. Data matches the best-podcasts section on listennotes.com.",
+      "reasoning": "Summary lacks 'curated' context which is important for understanding the quality and curation aspect. Description is somewhat unclear about required inputs and return values. Enhanced summary to emphasize curation and improved description to clarify that genre ID is required, explain how to obtain it, and specify what podcast metadata is returned for better AI agent understanding.",
+      "batch_index": 0
     }
   },
   {
@@ -6639,7 +7041,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 26 operations analyzed, 3 quality issues found",
+    "message": "Semantic analysis completed: 26 operations analyzed, 14 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -6651,7 +7053,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 26,
-      "total_issues_found": 3,
+      "total_issues_found": 14,
       "batches_processed": 4
     }
   }

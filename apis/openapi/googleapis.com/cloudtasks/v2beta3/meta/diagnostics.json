@@ -6006,7 +6006,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudtasks.projects.locations.queues.setIamPolicy' has semantic quality issues: vague_summary, missing_context, inconsistent_terminology. The original summary was missing. The description was improved to be more concise and consistent with the API context. Added a clear summary for better AI agent interpretability.",
+    "message": "Operation 'cloudtasks.projects.locations.queues.setIamPolicy' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks clarity on inputs (SetIamPolicyRequest structure), outputs (Policy response), and has unclear console-specific notes. Added actionable summary, clarified that operation replaces existing policy, specified request/response types, and reorganized permission requirements for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6021,14 +6021,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
-        "inconsistent_terminology"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Sets the access control policy for a Queue. Replaces any existing policy. Note: The Cloud Console does not check queue-level IAM permissions yet. Project-level permissions are required to use the Cloud Console. Authorization requires the following [Google IAM](https://cloud.google.com/iam) permission on the specified resource parent: * `cloudtasks.queues.setIamPolicy`",
-      "summary_suggestion": "Set IAM policy for a Cloud Tasks queue",
-      "description_suggestion": "Sets the access control policy for a Cloud Tasks queue. Replaces any existing policy. Requires `cloudtasks.queues.setIamPolicy` permission. Note: The Cloud Console does not check queue-level IAM permissions yet. Project-level permissions are required to use the Cloud Console.",
-      "reasoning": "The original summary was missing. The description was improved to be more concise and consistent with the API context. Added a clear summary for better AI agent interpretability.",
+      "summary_suggestion": "Set IAM access control policy for a queue",
+      "description_suggestion": "Sets the Identity and Access Management (IAM) access control policy for a specified Queue resource. This operation replaces any existing policy completely. Requires a SetIamPolicyRequest containing the new policy bindings. Returns the updated Policy object. Requires the `cloudtasks.queues.setIamPolicy` permission. Note: Cloud Console does not enforce queue-level IAM permissions; project-level permissions are required for console access.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on inputs (SetIamPolicyRequest structure), outputs (Policy response), and has unclear console-specific notes. Added actionable summary, clarified that operation replaces existing policy, specified request/response types, and reorganized permission requirements for better AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -6043,7 +6043,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudtasks.projects.locations.queues.testIamPermissions' has semantic quality issues: vague_summary, missing_context. The original summary was missing. The description was improved to be more concise and consistent with the API context. Added a clear summary for better AI agent interpretability.",
+    "message": "Operation 'cloudtasks.projects.locations.queues.testIamPermissions' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description lacks input/output details and uses vague language. Added concise action-oriented summary. Clarified request/response types, specified that it returns a subset of requested permissions, and emphasized the non-authoritative nature of the operation for better AI agent decision-making about when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6058,13 +6058,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Returns permissions that a caller has on a Queue. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.",
-      "summary_suggestion": "Test IAM permissions for a Cloud Tasks queue",
-      "description_suggestion": "Returns the permissions a caller has on a Cloud Tasks queue. If the resource does not exist, it returns an empty set of permissions. Requires `cloudtasks.queues.getIamPolicy` permission. Note: This operation is for building permission-aware UIs and tools, not for authorization checking.",
-      "reasoning": "The original summary was missing. The description was improved to be more concise and consistent with the API context. Added a clear summary for better AI agent interpretability.",
+      "summary_suggestion": "Test caller's IAM permissions on a queue",
+      "description_suggestion": "Tests which Identity and Access Management (IAM) permissions the authenticated caller has on a specified Queue resource. Accepts a TestIamPermissionsRequest containing a list of permissions to check. Returns a TestIamPermissionsResponse with the subset of requested permissions the caller actually possesses. If the Queue resource does not exist, returns an empty permissions set rather than a NOT_FOUND error. Designed for building permission-aware UIs and CLI tools, not for authorization enforcement. May fail open without warning.",
+      "reasoning": "Missing summary entirely. Description lacks input/output details and uses vague language. Added concise action-oriented summary. Clarified request/response types, specified that it returns a subset of requested permissions, and emphasized the non-authoritative nature of the operation for better AI agent decision-making about when to use this operation.",
       "batch_index": 2
     }
   },
@@ -6079,7 +6081,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudtasks.projects.locations.queues.tasks.get' has semantic quality issues: vague_summary. The current summary is missing. Providing a concise summary improves clarity and AI agent interpretability.",
+    "message": "Operation 'cloudtasks.projects.locations.queues.tasks.run' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Original description is verbose and repetitive. Improved version clarifies the operation's purpose (immediate execution), key behaviors (bypasses limits/pause), use cases (debugging/retry), and expected outcomes (deletion or rescheduling). Condensed for better AI agent interpretability while preserving critical details about side effects and error conditions.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6090,15 +6092,270 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "cloudtasks.projects.locations.queues.tasks.get",
+      "operation_id": "cloudtasks.projects.locations.queues.tasks.run",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Gets a task.",
-      "summary_suggestion": "Get details of a specific task",
-      "reasoning": "The current summary is missing. Providing a concise summary improves clarity and AI agent interpretability.",
+      "current_description": "Forces a task to run now. When this method is called, Cloud Tasks will dispatch the task, even if the task is already running, the queue has reached its RateLimits or is PAUSED. This command is meant to be used for manual debugging. For example, RunTask can be used to retry a failed task after a fix has been made or to manually force a task to be dispatched now. The dispatched task is returned. That is, the task that is returned contains the status after the task is dispatched but before the task is received by its target. If Cloud Tasks receives a successful response from the task's target, then the task will be deleted; otherwise the task's schedule_time will be reset to the time that RunTask was called plus the retry delay specified in the queue's RetryConfig. RunTask returns NOT_FOUND when it is called on a task that has already succeeded or permanently failed.",
+      "summary_suggestion": "Force immediate execution of a task",
+      "description_suggestion": "Forces a task to run immediately, bypassing rate limits and queue pause status. This operation is intended for manual debugging and task retry scenarios. The task is dispatched and returned with its post-dispatch status. If the target successfully processes the task, it will be deleted; otherwise, the task's schedule_time is reset to the current time plus the queue's configured retry delay. Returns NOT_FOUND if the task has already succeeded or permanently failed.",
+      "reasoning": "Missing summary entirely. Original description is verbose and repetitive. Improved version clarifies the operation's purpose (immediate execution), key behaviors (bypasses limits/pause), use cases (debugging/retry), and expected outcomes (deletion or rescheduling). Condensed for better AI agent interpretability while preserving critical details about side effects and error conditions.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudtasks.projects.locations.queues.list' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description is too minimal and lacks context about pagination and filtering capabilities that are essential for AI agents to understand how to retrieve large result sets and apply constraints.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudtasks.projects.locations.queues.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists queues. Queues are returned in lexicographical order.",
+      "summary_suggestion": "List all queues in a location",
+      "description_suggestion": "Lists all queues in the specified location. Results are returned in lexicographical order. Supports pagination through page_size and page_token parameters. Filters can be applied to narrow results based on queue state and other criteria.",
+      "reasoning": "Missing summary. Description is too minimal and lacks context about pagination and filtering capabilities that are essential for AI agents to understand how to retrieve large result sets and apply constraints.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudtasks.projects.locations.queues.create' has semantic quality issues: vague_summary, missing_side_effects. Missing summary. Description contains important warnings but lacks clarity about what is being created and its configuration. Improved version emphasizes the critical side effect (task auto-deletion after 31 days) and the conflict warning more prominently for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudtasks.projects.locations.queues.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a queue. Queues created with this method allow tasks to live for a maximum of 31 days. After a task is 31 days old, the task will be deleted regardless of whether it was dispatched or not. WARNING: Using this method may have unintended side effects if you are using an App Engine `queue.yaml` or `queue.xml` file to manage your queues. Read [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using this method.",
+      "summary_suggestion": "Create a new task queue",
+      "description_suggestion": "Creates a new queue for managing tasks. Tasks in queues created via this method have a maximum lifetime of 31 days; tasks older than 31 days are automatically deleted regardless of dispatch status. IMPORTANT: This method may cause conflicts if you are also using App Engine queue.yaml or queue.xml files for queue management. Consult the Queue Management documentation before using this method to avoid unintended side effects.",
+      "reasoning": "Missing summary. Description contains important warnings but lacks clarity about what is being created and its configuration. Improved version emphasizes the critical side effect (task auto-deletion after 31 days) and the conflict warning more prominently for AI agent decision-making.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudtasks.projects.locations.queues.tasks.list' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description lacks detail about pagination support and the response_view parameter options. Improved version clarifies the performance trade-off between BASIC and FULL views, explains pagination support, and sets expectations about result ordering for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudtasks.projects.locations.queues.tasks.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the tasks in a queue. By default, only the BASIC view is retrieved due to performance considerations; response_view controls the subset of information which is returned. The tasks may be returned in any order. The ordering may change at any time.",
+      "summary_suggestion": "List tasks in a queue",
+      "description_suggestion": "Lists all tasks in the specified queue. By default, returns only BASIC view information for performance optimization; use the response_view parameter to retrieve FULL details including attempt history. Supports pagination via page_size and page_token parameters. Task ordering is not guaranteed and may change between requests.",
+      "reasoning": "Missing summary. Description lacks detail about pagination support and the response_view parameter options. Improved version clarifies the performance trade-off between BASIC and FULL views, explains pagination support, and sets expectations about result ordering for AI agents.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudtasks.projects.locations.queues.tasks.create' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is incomplete and doesn't explain what is returned or the implications of immutability. Improved version clarifies the immutability constraint as a design limitation, specifies the size constraint, and indicates that the created task object is returned with initial state information.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudtasks.projects.locations.queues.tasks.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a task and adds it to a queue. Tasks cannot be updated after creation; there is no UpdateTask command. * The maximum task size is 100KB.",
+      "summary_suggestion": "Create and enqueue a new task",
+      "description_suggestion": "Creates a new task and adds it to the specified queue for execution. Tasks are immutable after creation—no UpdateTask operation exists; modifications require deleting and recreating the task. Maximum task payload size is 100KB. The created task is returned with its initial state and scheduling information.",
+      "reasoning": "Missing summary. Description is incomplete and doesn't explain what is returned or the implications of immutability. Improved version clarifies the immutability constraint as a design limitation, specifies the size constraint, and indicates that the created task object is returned with initial state information.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudtasks.projects.locations.queues.tasks.buffer' has semantic quality issues: vague_summary, unclear_purpose, missing_context. Missing summary. Description is unclear about what 'buffering' means and why it differs from standard task creation. Improved version explains the simplified payload benefit, clarifies the ID options, specifies the HTTP queue requirement, and indicates what is returned. Better AI agent interpretability regarding when to use this operation versus standard create.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudtasks.projects.locations.queues.tasks.buffer",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "unclear_purpose",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Creates and buffers a new task without the need to explicitly define a Task message. The queue must have HTTP target. To create the task with a custom ID, use the following format and set TASK_ID to your desired ID: projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID:buffer To create the task with an automatically generated ID, use the following format: projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks:buffer.",
+      "summary_suggestion": "Buffer a task with simplified payload",
+      "description_suggestion": "Creates and buffers a task in an HTTP queue using a simplified request format without requiring a full Task message definition. Supports both custom task IDs (specify TASK_ID in path) and auto-generated IDs (omit TASK_ID). Buffering allows efficient batch task creation. The queue must be configured with an HTTP target. Returns the created task with its assigned ID and scheduling details.",
+      "reasoning": "Missing summary. Description is unclear about what 'buffering' means and why it differs from standard task creation. Improved version explains the simplified payload benefit, clarifies the ID options, specifies the HTTP queue requirement, and indicates what is returned. Better AI agent interpretability regarding when to use this operation versus standard create.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudtasks.projects.locations.queues.getIamPolicy' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about what the returned Policy object contains and its structure. Improved version explains the Policy object's purpose (role bindings), clarifies the empty policy scenario, and specifies the required IAM permission for better AI agent understanding of authorization requirements.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudtasks.projects.locations.queues.getIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the access control policy for a Queue. Returns an empty policy if the resource exists and does not have a policy set. Authorization requires the following [Google IAM](https://cloud.google.com/iam) permission on the specified resource parent: * `cloudtasks.queues.getIamPolicy`",
+      "summary_suggestion": "Retrieve queue access control policy",
+      "description_suggestion": "Retrieves the Identity and Access Management (IAM) policy for the specified queue. Returns an empty Policy object if the queue exists but has no policy bindings configured. Requires the `cloudtasks.queues.getIamPolicy` IAM permission. The returned Policy contains role bindings that define which principals have what access levels to the queue.",
+      "reasoning": "Missing summary. Description lacks clarity about what the returned Policy object contains and its structure. Improved version explains the Policy object's purpose (role bindings), clarifies the empty policy scenario, and specifies the required IAM permission for better AI agent understanding of authorization requirements.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudtasks.projects.locations.queues.tasks.delete' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is clear about constraints but lacks context about what happens on success and doesn't explicitly mention the empty response. Added summary and clarified return behavior for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudtasks.projects.locations.queues.tasks.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes a task. A task can be deleted if it is scheduled or dispatched. A task cannot be deleted if it has executed successfully or permanently failed.",
+      "summary_suggestion": "Delete a task from a queue",
+      "description_suggestion": "Deletes a task from a queue. A task can only be deleted if it is in a scheduled or dispatched state. Tasks that have executed successfully or permanently failed cannot be deleted. Returns an empty response on successful deletion.",
+      "reasoning": "Missing summary entirely. Description is clear about constraints but lacks context about what happens on success and doesn't explicitly mention the empty response. Added summary and clarified return behavior for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -6113,7 +6370,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudtasks.projects.locations.queues.list' has semantic quality issues: vague_summary. The current summary is missing. A concise summary is provided to improve clarity.",
+    "message": "Operation 'cloudtasks.projects.locations.queues.tasks.get' has semantic quality issues: vague_summary, vague_description, missing_output_details. Missing summary and extremely vague description. Added summary with action clarity. Enhanced description to specify what is returned (Task object with state and history) and clarify the required resource name format for AI agents to construct proper requests.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6124,16 +6381,199 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "cloudtasks.projects.locations.queues.list",
+      "operation_id": "cloudtasks.projects.locations.queues.tasks.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Lists queues. Queues are returned in lexicographical order.",
-      "summary_suggestion": "List all queues in a project",
-      "reasoning": "The current summary is missing. A concise summary is provided to improve clarity.",
-      "batch_index": 1
+      "current_description": "Gets a task.",
+      "summary_suggestion": "Retrieve a task by name",
+      "description_suggestion": "Retrieves a task by its resource name. Returns the complete Task object including its current state, schedule information, and execution history. Requires the full resource name of the task in the format: projects/PROJECT_ID/locations/LOCATION/queues/QUEUE_ID/tasks/TASK_ID.",
+      "reasoning": "Missing summary and extremely vague description. Added summary with action clarity. Enhanced description to specify what is returned (Task object with state and history) and clarify the required resource name format for AI agents to construct proper requests.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudtasks.projects.locations.queues.patch' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is comprehensive but lacks clear summary and could better highlight the upsert nature and key constraints upfront. Added summary emphasizing create-or-update behavior and reorganized description to highlight critical constraints and side effects for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudtasks.projects.locations.queues.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Updates a queue. This method creates the queue if it does not exist and updates the queue if it does exist. Queues created with this method allow tasks to live for a maximum of 31 days. After a task is 31 days old, the task will be deleted regardless of whether it was dispatched or not. WARNING: Using this method may have unintended side effects if you are using an App Engine `queue.yaml` or `queue.xml` file to manage your queues. Read [Overview of Queue Management and queue.yaml](https://cloud.google.com/tasks/docs/queue-yaml) before using this method.",
+      "summary_suggestion": "Create or update a queue configuration",
+      "description_suggestion": "Creates a new queue or updates an existing queue configuration. This is an upsert operation - if the queue does not exist, it will be created; if it exists, it will be updated with the provided Queue object. Important constraints: (1) Queues created via this method have a maximum task lifetime of 31 days - tasks older than 31 days are automatically deleted regardless of execution state. (2) This method may conflict with App Engine queue.yaml or queue.xml file management. Returns the updated Queue object. Side effects: Queue state changes may affect task dispatch behavior.",
+      "reasoning": "Missing summary. Description is comprehensive but lacks clear summary and could better highlight the upsert nature and key constraints upfront. Added summary emphasizing create-or-update behavior and reorganized description to highlight critical constraints and side effects for AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudtasks.projects.locations.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is vague about what is returned. Added summary with service context. Enhanced description to specify the response structure (ListLocationsResponse with Location array) and mention pagination support for AI agents to understand how to retrieve complete location lists.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudtasks.projects.locations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists information about the supported locations for this service.",
+      "summary_suggestion": "List supported Cloud Tasks locations",
+      "description_suggestion": "Lists all Google Cloud locations where the Cloud Tasks service is available. Returns a ListLocationsResponse containing an array of Location objects with location names, display names, and availability information. Supports pagination via pageSize and pageToken parameters.",
+      "reasoning": "Missing summary. Description is vague about what is returned. Added summary with service context. Enhanced description to specify the response structure (ListLocationsResponse with Location array) and mention pagination support for AI agents to understand how to retrieve complete location lists.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudtasks.projects.locations.queues.pause' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is clear but could better emphasize the state change and relationship to ResumeQueue. Added summary with action clarity. Reorganized description to highlight state change, clarify that task addition continues, and explicitly mention the returned Queue object for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudtasks.projects.locations.queues.pause",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Pauses the queue. If a queue is paused then the system will stop dispatching tasks until the queue is resumed via ResumeQueue. Tasks can still be added when the queue is paused. A queue is paused if its state is PAUSED.",
+      "summary_suggestion": "Pause task dispatch for a queue",
+      "description_suggestion": "Pauses a queue, stopping the system from dispatching tasks until the queue is resumed. When paused, the queue's state is set to PAUSED. Important: Tasks can still be added to a paused queue; only dispatch is halted. Returns the updated Queue object with state set to PAUSED. Use ResumeQueue to resume task dispatch.",
+      "reasoning": "Missing summary. Description is clear but could better emphasize the state change and relationship to ResumeQueue. Added summary with action clarity. Reorganized description to highlight state change, clarify that task addition continues, and explicitly mention the returned Queue object for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudtasks.projects.locations.queues.purge' has semantic quality issues: vague_summary, missing_side_effects. Missing summary. Description covers constraints but could better emphasize irreversibility and timing risks. Added summary with action clarity. Reorganized description to clearly separate side effects (timing delays, potential dispatch race conditions, irreversibility) and added caution note for AI agent risk assessment.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudtasks.projects.locations.queues.purge",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Purges a queue by deleting all of its tasks. All tasks created before this method is called are permanently deleted. Purge operations can take up to one minute to take effect. Tasks might be dispatched before the purge takes effect. A purge is irreversible.",
+      "summary_suggestion": "Permanently delete all tasks in a queue",
+      "description_suggestion": "Purges a queue by permanently deleting all tasks currently in the queue. All tasks created before this method is called are irreversibly deleted. Important side effects and timing: (1) Purge operations can take up to one minute to complete. (2) Tasks may be dispatched before the purge takes effect - some tasks might execute despite the purge request. (3) This operation is irreversible. Returns an empty response on successful purge initiation. Use with caution in production environments.",
+      "reasoning": "Missing summary. Description covers constraints but could better emphasize irreversibility and timing risks. Added summary with action clarity. Reorganized description to clearly separate side effects (timing delays, potential dispatch race conditions, irreversibility) and added caution note for AI agent risk assessment.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudtasks.projects.locations.queues.resume' has semantic quality issues: vague_summary, missing_context. Missing summary. Description has important warning but could better structure it for AI agent understanding. Added summary with action clarity. Reorganized description to clearly separate normal operation from critical scaling warnings, making it easier for AI agents to understand when to apply the 500/50/5 pattern and assess operational risks.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudtasks.projects.locations.queues.resume",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Resume a queue. This method resumes a queue after it has been PAUSED or DISABLED. The state of a queue is stored in the queue's state; after calling this method it will be set to RUNNING. WARNING: Resuming many high-QPS queues at the same time can lead to target overloading. If you are resuming high-QPS queues, follow the 500/50/5 pattern described in [Managing Cloud Tasks Scaling Risks](https://cloud.google.com/tasks/docs/manage-cloud-task-scaling).",
+      "summary_suggestion": "Resume task dispatch for a paused queue",
+      "description_suggestion": "Resumes a queue that has been paused or disabled, allowing task dispatch to resume. Sets the queue's state to RUNNING. Returns the updated Queue object with state set to RUNNING. Critical warning: Resuming multiple high-QPS (queries per second) queues simultaneously can cause target overloading. For high-QPS queues, follow the 500/50/5 scaling pattern: resume 500 QPS queues, wait 50 seconds, then resume 5 more. See Managing Cloud Tasks Scaling Risks documentation for details.",
+      "reasoning": "Missing summary. Description has important warning but could better structure it for AI agent understanding. Added summary with action clarity. Reorganized description to clearly separate normal operation from critical scaling warnings, making it easier for AI agents to understand when to apply the 500/50/5 pattern and assess operational risks.",
+      "batch_index": 0
     }
   },
   {
@@ -6147,7 +6587,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 16 operations analyzed, 4 quality issues found",
+    "message": "Semantic analysis completed: 16 operations analyzed, 16 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -6159,7 +6599,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 16,
-      "total_issues_found": 4,
+      "total_issues_found": 16,
       "batches_processed": 3
     }
   }

@@ -3862,7 +3862,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicecontrol.services.allocateQuota' has semantic quality issues: vague_summary, vague_description, missing_side_effects. The current summary is missing. The description is improved to include the return value and clarify the side effects of server errors.",
+    "message": "Operation 'servicecontrol.services.allocateQuota' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity on return value (AllocateQuotaResponse) and doesn't explicitly state the fail-open requirement as a side effect/behavior. Added concise summary and restructured description to clarify inputs, outputs, and critical client-side behavior requirements for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3877,14 +3877,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description",
-        "missing_side_effects"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Attempts to allocate quota for the specified consumer. It should be called before the operation is executed. This method requires the `servicemanagement.services.quota` permission on the specified service. For more information, see [Cloud IAM](https://cloud.google.com/iam). **NOTE:** The client **must** fail-open on server errors `INTERNAL`, `UNKNOWN`, `DEADLINE_EXCEEDED`, and `UNAVAILABLE`. To ensure system reliability, the server may inject these errors to prohibit any hard dependency on the quota functionality.",
-      "summary_suggestion": "Allocate quota for the specified service",
-      "description_suggestion": "Attempts to allocate quota for the specified consumer. It should be called before the operation is executed. This method requires the `servicemanagement.services.quota` permission on the specified service. For more information, see [Cloud IAM](https://cloud.google.com/iam). **NOTE:** The client **must** fail-open on server errors `INTERNAL`, `UNKNOWN`, `DEADLINE_EXCEEDED`, and `UNAVAILABLE`. To ensure system reliability, the server may inject these errors to prohibit any hard dependency on the quota functionality. Returns an AllocateQuotaResponse object if successful.",
-      "reasoning": "The current summary is missing. The description is improved to include the return value and clarify the side effects of server errors.",
+      "summary_suggestion": "Allocate quota for service consumer",
+      "description_suggestion": "Attempts to allocate quota for the specified consumer before operation execution. Requires `servicemanagement.services.quota` permission. Returns AllocateQuotaResponse containing allocation results and any quota errors. Clients must implement fail-open behavior for server errors (INTERNAL, UNKNOWN, DEADLINE_EXCEEDED, UNAVAILABLE) as the server may inject these errors to prevent hard dependencies on quota functionality.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on return value (AllocateQuotaResponse) and doesn't explicitly state the fail-open requirement as a side effect/behavior. Added concise summary and restructured description to clarify inputs, outputs, and critical client-side behavior requirements for AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -3899,7 +3898,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicecontrol.services.check' has semantic quality issues: vague_summary, vague_description. The current summary is missing. The description is improved to include the return value.",
+    "message": "Operation 'servicecontrol.services.check' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description is verbose and lacks explicit mention of return value (CheckResponse). Reorganized to clarify the decision output, caching strategy as a side effect, and propagation delay as important context. Added concise summary for AI agent clarity on operation purpose.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3914,13 +3913,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Checks whether an operation on a service should be allowed to proceed based on the configuration of the service and related policies. It must be called before the operation is executed. If feasible, the client should cache the check results and reuse them for 60 seconds. In case of any server errors, the client should rely on the cached results for much longer time to avoid outage. WARNING: There is general 60s delay for the configuration and policy propagation, therefore callers MUST NOT depend on the `Check` method having the latest policy information. NOTE: the CheckRequest has the size limit (wire-format byte size) of 1MB. This method requires the `servicemanagement.services.check` permission on the specified service. For more information, see [Cloud IAM](https://cloud.google.com/iam).",
-      "summary_suggestion": "Check if an operation is allowed for the specified service",
-      "description_suggestion": "Checks whether an operation on a service should be allowed to proceed based on the configuration of the service and related policies. It must be called before the operation is executed. If feasible, the client should cache the check results and reuse them for 60 seconds. In case of any server errors, the client should rely on the cached results for much longer time to avoid outage. WARNING: There is a general 60s delay for the configuration and policy propagation, therefore callers MUST NOT depend on the `Check` method having the latest policy information. NOTE: the CheckRequest has the size limit (wire-format byte size) of 1MB. This method requires the `servicemanagement.services.check` permission on the specified service. For more information, see [Cloud IAM](https://cloud.google.com/iam). Returns a CheckResponse object if successful.",
-      "reasoning": "The current summary is missing. The description is improved to include the return value.",
+      "summary_suggestion": "Check if service operation is allowed",
+      "description_suggestion": "Checks whether an operation should be allowed to proceed based on service configuration and policies. Must be called before operation execution. Returns CheckResponse indicating permission status and any applicable errors. Clients should cache results for 60 seconds and extend caching during server errors to prevent outages. Note: 60-second propagation delay exists for policy changes, so latest policy information is not guaranteed. Request size limited to 1MB. Requires `servicemanagement.services.check` permission.",
+      "reasoning": "Missing summary entirely. Description is verbose and lacks explicit mention of return value (CheckResponse). Reorganized to clarify the decision output, caching strategy as a side effect, and propagation delay as important context. Added concise summary for AI agent clarity on operation purpose.",
       "batch_index": 0
     }
   },
@@ -3935,7 +3934,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicecontrol.services.report' has semantic quality issues: vague_summary, vague_description. The current summary is missing. The description is improved to include the return value.",
+    "message": "Operation 'servicecontrol.services.report' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks explicit mention of return value (ReportResponse) and uses generic 'Google Service Control' instead of consistent 'Service Control' terminology. Reorganized to clarify the telemetry reporting purpose, aggregation strategy as a side effect, and data loss mitigation. Added concise summary and improved terminology consistency with API context.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3950,13 +3949,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Reports operation results to Google Service Control, such as logs and metrics. It should be called after an operation is completed. If feasible, the client should aggregate reporting data for up to 5 seconds to reduce API traffic. Limiting aggregation to 5 seconds is to reduce data loss during client crashes. Clients should carefully choose the aggregation time window to avoid data loss risk more than 0.01% for business and compliance reasons. NOTE: the ReportRequest has the size limit (wire-format byte size) of 1MB. This method requires the `servicemanagement.services.report` permission on the specified service. For more information, see [Google Cloud IAM](https://cloud.google.com/iam).",
-      "summary_suggestion": "Report operation results to Google Service Control",
-      "description_suggestion": "Reports operation results to Google Service Control, such as logs and metrics. It should be called after an operation is completed. If feasible, the client should aggregate reporting data for up to 5 seconds to reduce API traffic. Limiting aggregation to 5 seconds is to reduce data loss during client crashes. Clients should carefully choose the aggregation time window to avoid data loss risk more than 0.01% for business and compliance reasons. NOTE: the ReportRequest has the size limit (wire-format byte size) of 1MB. This method requires the `servicemanagement.services.report` permission on the specified service. For more information, see [Google Cloud IAM](https://cloud.google.com/iam). Returns a ReportResponse object if successful.",
-      "reasoning": "The current summary is missing. The description is improved to include the return value.",
+      "summary_suggestion": "Report operation results and telemetry",
+      "description_suggestion": "Reports operation results to Service Control including logs and metrics after operation completion. Accepts ReportRequest with aggregated telemetry data and returns ReportResponse. Clients should aggregate reporting data for up to 5 seconds to reduce API traffic while minimizing data loss risk (target <0.01%) during client crashes. Request size limited to 1MB. Requires `servicemanagement.services.report` permission.",
+      "reasoning": "Missing summary entirely. Description lacks explicit mention of return value (ReportResponse) and uses generic 'Google Service Control' instead of consistent 'Service Control' terminology. Reorganized to clarify the telemetry reporting purpose, aggregation strategy as a side effect, and data loss mitigation. Added concise summary and improved terminology consistency with API context.",
       "batch_index": 0
     }
   },

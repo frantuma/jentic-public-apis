@@ -3779,7 +3779,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudscheduler.projects.locations.jobs.run' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing. Added a concise summary. The description was improved to include information about side effects and the return value.",
+    "message": "Operation 'cloudscheduler.projects.locations.jobs.run' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Original summary was empty and description lacked critical details. Added: (1) clear action-oriented summary, (2) explanation of concurrent execution behavior (important side effect), (3) input format requirements, (4) return value specification. This helps AI agents understand when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3794,13 +3794,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_output_details",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Forces a job to run now. When this method is called, Cloud Scheduler will dispatch the job, even if the job is already running.",
-      "summary_suggestion": "Force a job to run immediately",
-      "description_suggestion": "Forces a job to run now. This method will dispatch the job, even if it is already running. The job will be executed immediately, and any ongoing execution will be interrupted. Returns the job's current state.",
-      "reasoning": "The current summary is missing. Added a concise summary. The description was improved to include information about side effects and the return value.",
+      "summary_suggestion": "Force a scheduled job to run immediately",
+      "description_suggestion": "Triggers immediate execution of a scheduled job, bypassing the normal schedule. The job will be dispatched even if it is currently running, potentially creating concurrent executions. Requires the job name in the format 'projects/{project}/locations/{location}/jobs/{job}'. Returns an Operation resource representing the job execution.",
+      "reasoning": "Original summary was empty and description lacked critical details. Added: (1) clear action-oriented summary, (2) explanation of concurrent execution behavior (important side effect), (3) input format requirements, (4) return value specification. This helps AI agents understand when to use this operation and what to expect.",
       "batch_index": 1
     }
   },
@@ -3815,7 +3816,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudscheduler.projects.locations.jobs.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. The current summary is missing. Added a concise summary. The description was improved to include context about parameters, return value, and response schema.",
+    "message": "Operation 'cloudscheduler.projects.locations.jobs.list' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original summary was empty and description was extremely vague. Enhanced with: (1) action-oriented summary, (2) pagination support details, (3) required parent parameter format, (4) response structure and pagination handling. This enables AI agents to properly construct requests and handle paginated results.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3830,14 +3831,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
+        "vague_description",
+        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists jobs.",
-      "summary_suggestion": "List all jobs in a location",
-      "description_suggestion": "Lists all jobs in a specified location. Accepts optional parameters to filter and paginate the results. Returns a ListJobsResponse object containing the list of jobs and metadata.",
-      "reasoning": "The current summary is missing. Added a concise summary. The description was improved to include context about parameters, return value, and response schema.",
+      "summary_suggestion": "List all scheduled jobs in a location",
+      "description_suggestion": "Retrieves a list of all jobs in a specified location. Supports pagination through optional 'pageSize' and 'pageToken' parameters. Requires the parent location in the format 'projects/{project}/locations/{location}'. Returns a ListJobsResponse containing an array of Job objects and a nextPageToken for pagination if additional results exist.",
+      "reasoning": "Original summary was empty and description was extremely vague. Enhanced with: (1) action-oriented summary, (2) pagination support details, (3) required parent parameter format, (4) response structure and pagination handling. This enables AI agents to properly construct requests and handle paginated results.",
       "batch_index": 1
     }
   },
@@ -3852,7 +3854,46 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudscheduler.operations.delete' has semantic quality issues: vague_summary, unclear_purpose. The original summary was missing. Added a concise summary and clarified the purpose in the description.",
+    "message": "Operation 'cloudscheduler.projects.locations.jobs.create' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Original summary was empty and description was minimal. Improved with: (1) clear action-oriented summary, (2) Job schema size constraint from API context, (3) required parent parameter format, (4) response details, (5) important side effect that job doesn't auto-execute on creation. This provides AI agents with complete information needed to construct valid requests and understand post-creation behavior.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudscheduler.projects.locations.jobs.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a job.",
+      "summary_suggestion": "Create a new scheduled job",
+      "description_suggestion": "Creates a new scheduled job in the specified location. The job configuration must be provided in the request body as a Job object (maximum 1MB). Requires the parent location in the format 'projects/{project}/locations/{location}'. Returns the created Job object with all fields populated including the generated job name. The job will not execute until its schedule is triggered or manually run.",
+      "reasoning": "Original summary was empty and description was minimal. Improved with: (1) clear action-oriented summary, (2) Job schema size constraint from API context, (3) required parent parameter format, (4) response details, (5) important side effect that job doesn't auto-execute on creation. This provides AI agents with complete information needed to construct valid requests and understand post-creation behavior.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudscheduler.operations.delete' has semantic quality issues: vague_summary, missing_side_effects. Missing summary entirely. Description lacks clarity about the side effect (operation record removal) and what happens to the underlying operation state. Added summary and clarified that deletion removes the record from tracking while not affecting running operations, helping AI agents understand the distinction.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3867,12 +3908,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "unclear_purpose"
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.",
-      "summary_suggestion": "Delete a long-running operation",
-      "reasoning": "The original summary was missing. Added a concise summary and clarified the purpose in the description.",
+      "summary_suggestion": "Delete a long-running operation record",
+      "description_suggestion": "Deletes a long-running operation record from the system. This method indicates that the client is no longer interested in the operation result and removes the operation from tracking. Note: This does not cancel the underlying operation if it is still running. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. The operation record will be removed and no longer accessible via GetOperation.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about the side effect (operation record removal) and what happens to the underlying operation state. Added summary and clarified that deletion removes the record from tracking while not affecting running operations, helping AI agents understand the distinction.",
       "batch_index": 0
     }
   },
@@ -3887,7 +3929,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudscheduler.operations.get' has semantic quality issues: vague_summary. The original summary was missing. Added a concise summary.",
+    "message": "Operation 'cloudscheduler.operations.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks details about what is returned (Operation object with status/progress/result). Added summary and clarified return value structure to help AI agents understand what data they will receive and how to use it for tracking operation progress.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3901,12 +3943,189 @@
       "operation_id": "cloudscheduler.operations.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.",
-      "summary_suggestion": "Get the latest state of a long-running operation",
-      "reasoning": "The original summary was missing. Added a concise summary.",
+      "summary_suggestion": "Get the current state of a long-running operation",
+      "description_suggestion": "Retrieves the latest state of a long-running operation. Returns an Operation object containing the current status, progress, and result (if completed). Clients can use this method to poll the operation result at intervals as recommended by the API service. Useful for tracking asynchronous job execution and determining when operations complete.",
+      "reasoning": "Missing summary entirely. Description lacks details about what is returned (Operation object with status/progress/result). Added summary and clarified return value structure to help AI agents understand what data they will receive and how to use it for tracking operation progress.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudscheduler.projects.locations.jobs.patch' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Missing summary entirely. Description lacks clarity about partial update support, what inputs are expected, and the complete side effects. Added summary and clarified that this is a partial update operation, specified the request/response formats, and explained the UPDATE_FAILED state behavior for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudscheduler.projects.locations.jobs.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Updates a job. If successful, the updated Job is returned. If the job does not exist, `NOT_FOUND` is returned. If UpdateJob does not successfully return, it is possible for the job to be in an Job.State.UPDATE_FAILED state. A job in this state may not be executed. If this happens, retry the UpdateJob request until a successful response is received.",
+      "summary_suggestion": "Update a scheduled job configuration",
+      "description_suggestion": "Updates an existing scheduled job's configuration. Accepts a Job object with fields to be modified. Returns the updated Job object on success. If the job does not exist, returns `NOT_FOUND`. Supports partial updates - only provided fields are modified. If the update fails, the job may enter Job.State.UPDATE_FAILED state and will not execute until successfully updated. Retry the request until a successful response is received. Returns the complete updated Job resource.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about partial update support, what inputs are expected, and the complete side effects. Added summary and clarified that this is a partial update operation, specified the request/response formats, and explained the UPDATE_FAILED state behavior for better AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudscheduler.projects.locations.list' has semantic quality issues: vague_summary. Missing summary entirely. Description is clear and complete about listing supported locations. Added concise, action-oriented summary that specifies this lists Cloud Scheduler locations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudscheduler.projects.locations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Lists information about the supported locations for this service.",
+      "summary_suggestion": "List supported Cloud Scheduler service locations",
+      "reasoning": "Missing summary entirely. Description is clear and complete about listing supported locations. Added concise, action-oriented summary that specifies this lists Cloud Scheduler locations.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudscheduler.operations.cancel' has semantic quality issues: vague_summary, missing_side_effects. Missing summary entirely. Description is detailed but could be clearer about the state transition and that the operation record persists. Added summary and reorganized description to emphasize the best-effort nature, the resulting state change, and how to verify cancellation status for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudscheduler.operations.cancel",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of `1`, corresponding to `Code.CANCELLED`.",
+      "summary_suggestion": "Request cancellation of a long-running operation",
+      "description_suggestion": "Initiates asynchronous cancellation of a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. On successful cancellation, the operation transitions to a cancelled state with Operation.error containing a google.rpc.Status.code of `1` (Code.CANCELLED). The operation record is retained and remains queryable via GetOperation. Use GetOperation to verify whether cancellation succeeded or if the operation completed despite the cancellation request.",
+      "reasoning": "Missing summary entirely. Description is detailed but could be clearer about the state transition and that the operation record persists. Added summary and reorganized description to emphasize the best-effort nature, the resulting state change, and how to verify cancellation status for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudscheduler.projects.locations.jobs.pause' has semantic quality issues: vague_summary. Missing summary entirely. Description is clear and complete about pausing jobs, state transitions, and prerequisites. Added concise, action-oriented summary that specifies this pauses job execution.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudscheduler.projects.locations.jobs.pause",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Pauses a job. If a job is paused then the system will stop executing the job until it is re-enabled via ResumeJob. The state of the job is stored in state; if paused it will be set to Job.State.PAUSED. A job must be in Job.State.ENABLED to be paused.",
+      "summary_suggestion": "Pause a scheduled job execution",
+      "reasoning": "Missing summary entirely. Description is clear and complete about pausing jobs, state transitions, and prerequisites. Added concise, action-oriented summary that specifies this pauses job execution.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudscheduler.projects.locations.jobs.resume' has semantic quality issues: vague_summary. Missing summary entirely. Description is clear and complete about resuming jobs, state transitions, and prerequisites. Added concise, action-oriented summary that specifies this resumes paused jobs.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudscheduler.projects.locations.jobs.resume",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Resume a job. This method reenables a job after it has been Job.State.PAUSED. The state of a job is stored in Job.state; after calling this method it will be set to Job.State.ENABLED. A job must be in Job.State.PAUSED to be resumed.",
+      "summary_suggestion": "Resume a paused scheduled job",
+      "reasoning": "Missing summary entirely. Description is clear and complete about resuming jobs, state transitions, and prerequisites. Added concise, action-oriented summary that specifies this resumes paused jobs.",
       "batch_index": 0
     }
   },
@@ -3921,7 +4140,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 10 operations analyzed, 4 quality issues found",
+    "message": "Semantic analysis completed: 10 operations analyzed, 10 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -3933,7 +4152,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 10,
-      "total_issues_found": 4,
+      "total_issues_found": 10,
       "batches_processed": 2
     }
   }

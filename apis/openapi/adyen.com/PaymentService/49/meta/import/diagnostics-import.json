@@ -3907,7 +3907,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post-adjustAuthorisation' has semantic quality issues: vague_summary, missing_side_effects. The current summary is vague. The description is clear but lacks details about the side effects and return value.",
+    "message": "Operation 'post-donate' has semantic quality issues: vague_summary, missing_output_details, unclear_purpose. Original summary 'Create a donation' is too generic and doesn't clarify that this reuses original payment details. Description lacks clarity on what 'donation' means in payment context and doesn't explain the return value or expected outputs. Added context about recurring nature, return reference, and amount flexibility for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3918,18 +3918,93 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "post-adjustAuthorisation",
+      "operation_id": "post-donate",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_output_details",
+        "unclear_purpose"
       ],
-      "current_summary": "Change the authorised amount",
-      "current_description": "Allows you to increase or decrease the authorised amount after the initial authorisation has taken place. This functionality enables for example tipping, improving the chances your authorisation will be valid, or charging the shopper when they have already left the merchant premises.\n\n This endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). If you have a [newer integration](https://docs.adyen.com/online-payments), and are doing:\n* [Asynchronous adjustments](https://docs.adyen.com/online-payments/adjust-authorisation#asynchronous-or-synchronous-adjustment), use the [`/payments/{paymentPspReference}/amountUpdates`](https://docs.adyen.com/api-explorer/#/CheckoutService/v67/post/payments/{paymentPspReference}/amountUpdates) endpoint on Checkout API.\n* [Synchronous adjustments](https://docs.adyen.com/online-payments/adjust-authorisation#asynchronous-or-synchronous-adjustment), use this endpoint.",
-      "summary_suggestion": "Adjust the authorised payment amount",
-      "description_suggestion": "Adjusts the authorised amount of a payment after the initial authorisation. This action can be used for tipping, improving authorisation validity, or charging a shopper after they have left the premises. Returns a unique reference for the request. Note: For asynchronous adjustments, use the `/payments/{paymentPspReference}/amountUpdates` endpoint on Checkout API.",
-      "reasoning": "The current summary is vague. The description is clear but lacks details about the side effects and return value.",
-      "batch_index": 0
+      "current_summary": "Create a donation",
+      "current_description": "Schedules a new payment to be created (including a new authorisation request) for the specified donation using the payment details of the original payment.\n\nThis endpoint is part of our [classic API integration](https://docs.adyen.com/online-payments/classic-integrations/api-integration-ecommerce). If using a [newer integration](https://docs.adyen.com/online-payments), use the [`/donations`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/donations) endpoint under Checkout API instead.",
+      "summary_suggestion": "Schedule a donation payment using original payment details",
+      "description_suggestion": "Schedules a new payment and authorization request for a donation using the payment details from the original payment. This creates a recurring donation transaction linked to the original payment method. Returns a unique reference for the donation request. Supports full or partial donation amounts based on the original payment's captured amount.",
+      "reasoning": "Original summary 'Create a donation' is too generic and doesn't clarify that this reuses original payment details. Description lacks clarity on what 'donation' means in payment context and doesn't explain the return value or expected outputs. Added context about recurring nature, return reference, and amount flexibility for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-retrieve3ds2Result' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_output_details. Summary lacks specificity about when this is used (after authentication completion). Description is too brief and doesn't explain prerequisites (what reference is needed), context (part of 3DS2 flow), or what the returned result contains. Added details about required inputs, authentication flow context, and output structure to help AI agents understand this is a follow-up operation in a 3DS2 authentication sequence.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-retrieve3ds2Result",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Get the 3DS2 authentication result",
+      "current_description": "Retrieves the `threeDS2Result` after doing a 3D Secure 2 authentication only.",
+      "summary_suggestion": "Retrieve 3D Secure 2 authentication result",
+      "description_suggestion": "Retrieves the 3D Secure 2 (3DS2) authentication result after a customer completes 3DS2 authentication. Requires the authentication reference or transaction identifier from the initial 3DS2 challenge. Returns the `threeDS2Result` object containing the authentication status, cryptogram, and transaction details needed to complete the payment authorization.",
+      "reasoning": "Summary lacks specificity about when this is used (after authentication completion). Description is too brief and doesn't explain prerequisites (what reference is needed), context (part of 3DS2 flow), or what the returned result contains. Added details about required inputs, authentication flow context, and output structure to help AI agents understand this is a follow-up operation in a 3DS2 authentication sequence.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-voidPendingRefund' has semantic quality issues: vague_summary, missing_output_details. Summary 'Cancel an in-person refund' is misleading as this applies to both online and offline refunds, not just in-person. Description lacks clarity on what 'unreferenced' means and doesn't specify the return value or state changes. Added context about the unreferenced nature, clarified that both online and offline transactions are supported, specified the return value, and added the constraint about refund completion status for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-voidPendingRefund",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "Cancel an in-person refund",
+      "current_description": "This endpoint allows you to cancel an unreferenced refund request before it has been completed.\n\nIn your call, you can refer to the original refund request either by using the `tenderReference`, or the `pspReference`. We recommend implementing based on the `tenderReference`, as this is generated for both offline and online transactions.\n\nFor more information, refer to [Cancel an unreferenced refund](https://docs.adyen.com/point-of-sale/refund-payment/cancel-unreferenced).",
+      "summary_suggestion": "Cancel a pending unreferenced refund request",
+      "description_suggestion": "Cancels an unreferenced refund request before it has been completed or processed. Accepts either the `tenderReference` (recommended for both offline and online transactions) or `pspReference` to identify the refund to cancel. Returns confirmation of the cancellation. Only applicable to refunds that have not yet been finalized.",
+      "reasoning": "Summary 'Cancel an in-person refund' is misleading as this applies to both online and offline refunds, not just in-person. Description lacks clarity on what 'unreferenced' means and doesn't specify the return value or state changes. Added context about the unreferenced nature, clarified that both online and offline transactions are supported, specified the return value, and added the constraint about refund completion status for better AI agent understanding.",
+      "batch_index": 1
     }
   },
   {
@@ -3943,7 +4018,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 12 operations analyzed, 1 quality issues found",
+    "message": "Semantic analysis completed: 12 operations analyzed, 3 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -3955,7 +4030,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 12,
-      "total_issues_found": 1,
+      "total_issues_found": 3,
       "batches_processed": 2
     }
   }

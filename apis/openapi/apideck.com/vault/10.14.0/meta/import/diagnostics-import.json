@@ -6381,7 +6381,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'connectionsCallback' has semantic quality issues: vague_summary, missing_context, missing_input_details. The original summary and description were vague and lacked details about the required parameters and the purpose of the endpoint.",
+    "message": "Operation 'connectionsCallback' has semantic quality issues: vague_summary, vague_description, missing_context, unclear_purpose, not_actionable. Original summary 'Callback' is too generic and doesn't indicate the operation's purpose. Description lacks clarity about what happens during the callback, why state/code are needed, and what the outcome is. Added context about OAuth flow, security validation, connection establishment, and parameter purposes to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6396,14 +6396,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
         "missing_context",
-        "missing_input_details"
+        "unclear_purpose",
+        "not_actionable"
       ],
       "current_summary": "Callback",
       "current_description": "This endpoint gets called after the triggering the authorize flow.\n\nCallback links need a state and code parameter to verify the validity of the request.",
-      "summary_suggestion": "Handle OAuth callback for connection verification",
-      "description_suggestion": "This endpoint is invoked after initiating the OAuth authorization flow. It requires 'state' and 'code' parameters to verify the request's validity. It completes the OAuth process and establishes a secure connection for the consumer.",
-      "reasoning": "The original summary and description were vague and lacked details about the required parameters and the purpose of the endpoint.",
+      "summary_suggestion": "Handle OAuth authorization callback",
+      "description_suggestion": "Processes the OAuth authorization callback after a consumer completes authentication with a connector. This endpoint validates the authorization request using the state and code parameters to ensure security and prevent CSRF attacks. Upon successful validation, the connection is established and the consumer is redirected back to your application. Required parameters: state (for CSRF protection) and code (authorization code from the OAuth provider).",
+      "reasoning": "Original summary 'Callback' is too generic and doesn't indicate the operation's purpose. Description lacks clarity about what happens during the callback, why state/code are needed, and what the outcome is. Added context about OAuth flow, security validation, connection establishment, and parameter purposes to improve AI agent interpretability.",
       "batch_index": 4
     }
   },
@@ -6418,7 +6420,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'logsAll' has semantic quality issues: vague_description, missing_context. The original description was too vague and lacked context about what the logs include and their purpose.",
+    "message": "Operation 'logsAll' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details, poor_ai_interpretability. Summary is adequate and action-oriented. However, description is extremely vague - it merely restates the summary without explaining what information logs contain, what they're used for, or how to use the 5 available parameters. Added context about log contents (unified APIs, connectors, Vault API requests), filtering/pagination capabilities, and typical response structure to help AI agents understand the operation's value and how to use it effectively.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6433,12 +6435,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Get all consumer request logs",
       "current_description": "This endpoint includes all consumer request logs.",
-      "description_suggestion": "Retrieves all request logs for a specified consumer. This includes logs for requests made to unified APIs, connectors, and the Vault API. Useful for auditing and debugging purposes.",
-      "reasoning": "The original description was too vague and lacked context about what the logs include and their purpose.",
+      "description_suggestion": "Retrieves all request logs for a consumer, including requests made to unified APIs, connectors, and the Vault API. Logs provide visibility into API usage, authentication flows, and integration activities. Supports filtering and pagination through query parameters to manage large result sets. Returns an array of log entries with timestamps, request details, response status, and error information if applicable.",
+      "reasoning": "Summary is adequate and action-oriented. However, description is extremely vague - it merely restates the summary without explaining what information logs contain, what they're used for, or how to use the 5 available parameters. Added context about log contents (unified APIs, connectors, Vault API requests), filtering/pagination capabilities, and typical response structure to help AI agents understand the operation's value and how to use it effectively.",
       "batch_index": 4
     }
   },
@@ -6453,42 +6458,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'consumersUpdate' has semantic quality issues: missing_input_details, missing_output_details. The current description lacks details about the input and output. Added context for better AI agent understanding.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "consumersUpdate",
-      "has_quality_issues": true,
-      "issues_found": [
-        "missing_input_details",
-        "missing_output_details"
-      ],
-      "current_summary": "Update consumer",
-      "current_description": "Update consumer metadata such as name and email.",
-      "description_suggestion": "Update the metadata of a specific consumer, such as their name and email. Requires the UpdateConsumerRequest schema as input. Returns the updated consumer object.",
-      "reasoning": "The current description lacks details about the input and output. Added context for better AI agent understanding.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'connectionsOne' has semantic quality issues: vague_summary, missing_context. The current summary and description are vague and lack context. The suggestions provide more specific details and clarify the operation's purpose.",
+    "message": "Operation 'connectionsOne' has semantic quality issues: vague_summary, vague_description, missing_output_details. Original summary and description are too generic. Improved version clarifies that this retrieves a specific consumer's connection (not just any connection), specifies the scope (consumer + service + unified API), and explains what data is returned. This helps AI agents understand the operation's purpose and when to use it.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6503,13 +6473,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "vague_description",
+        "missing_output_details"
       ],
       "current_summary": "Get connection",
       "current_description": "Get a connection",
-      "summary_suggestion": "Retrieve a specific connection",
-      "description_suggestion": "Retrieves a specific connection for a given unified API and service ID. Requires authentication. Returns the connection details including credentials and settings.",
-      "reasoning": "The current summary and description are vague and lack context. The suggestions provide more specific details and clarify the operation's purpose.",
+      "summary_suggestion": "Retrieve a consumer's connection for a service",
+      "description_suggestion": "Retrieves the connection details for a specific consumer and service within a unified API. Returns the connection object including authentication state, credentials status, and configuration settings. This operation is scoped to the consumer specified in the request headers.",
+      "reasoning": "Original summary and description are too generic. Improved version clarifies that this retrieves a specific consumer's connection (not just any connection), specifies the scope (consumer + service + unified API), and explains what data is returned. This helps AI agents understand the operation's purpose and when to use it.",
       "batch_index": 1
     }
   },
@@ -6524,7 +6495,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'connectionsAdd' has semantic quality issues: vague_description, missing_input_details. The current description is vague and lacks details about the input and return values. The suggestions provide more specific details and clarify the operation's purpose.",
+    "message": "Operation 'connectionsAdd' has semantic quality issues: vague_description, missing_context, missing_output_details. Summary is adequate, but description lacks critical context about what inputs are expected (auth type variations), what is returned, and when the connection becomes usable. Enhanced description clarifies authentication types, return value, and immediate availability for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6539,13 +6510,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_input_details"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "Create connection",
       "current_description": "Create an authorized connection",
-      "summary_suggestion": "Create a new connection",
-      "description_suggestion": "Creates a new authorized connection for a given unified API and service ID. Requires authentication. Accepts a connection object in the request body. Returns the newly created connection details.",
-      "reasoning": "The current description is vague and lacks details about the input and return values. The suggestions provide more specific details and clarify the operation's purpose.",
+      "description_suggestion": "Creates a new authorized connection for a consumer to a specific service within a unified API. Accepts connection credentials and configuration based on the service's authentication type (API key, OAuth, or basic auth). Returns the created connection object with its current state and authentication status. The connection is immediately available for use in subsequent API requests.",
+      "reasoning": "Summary is adequate, but description lacks critical context about what inputs are expected (auth type variations), what is returned, and when the connection becomes usable. Enhanced description clarifies authentication types, return value, and immediate availability for AI agent decision-making.",
       "batch_index": 1
     }
   },
@@ -6560,7 +6531,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'connectionsUpdate' has semantic quality issues: vague_description, missing_input_details. The current description is vague and lacks details about the input and return values. The suggestions provide more specific details and clarify the operation's purpose.",
+    "message": "Operation 'connectionsUpdate' has semantic quality issues: vague_description, missing_context, missing_output_details. Description is too minimal. Enhanced version clarifies that this modifies existing connections (not creates new ones), explains partial update support, specifies what is returned, and indicates when changes take effect. This helps AI agents understand the operation's scope and effects.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6575,13 +6546,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_input_details"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "Update connection",
       "current_description": "Update a connection",
-      "summary_suggestion": "Update an existing connection",
-      "description_suggestion": "Updates an existing connection for a given unified API and service ID. Requires authentication. Accepts a connection object in the request body. Returns the updated connection details.",
-      "reasoning": "The current description is vague and lacks details about the input and return values. The suggestions provide more specific details and clarify the operation's purpose.",
+      "description_suggestion": "Updates an existing connection's credentials or configuration settings for a consumer. Supports partial updates - only provided fields will be modified. Returns the updated connection object with its current state. Changes take effect immediately for subsequent API requests using this connection.",
+      "reasoning": "Description is too minimal. Enhanced version clarifies that this modifies existing connections (not creates new ones), explains partial update support, specifies what is returned, and indicates when changes take effect. This helps AI agents understand the operation's scope and effects.",
       "batch_index": 1
     }
   },
@@ -6596,7 +6567,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'connectionsDelete' has semantic quality issues: vague_description, missing_side_effects. The current description is vague and lacks details about the side effects. The suggestions provide more specific details and clarify the operation's purpose.",
+    "message": "Operation 'connectionsDelete' has semantic quality issues: vague_description, missing_side_effects. Description lacks critical side effect information. Enhanced version clarifies permanence, explains what is removed (credentials and configuration), indicates the consequence (need to recreate), and warns that deletion is irreversible. This is essential for AI agents to understand the operation's impact.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6615,9 +6586,8 @@
       ],
       "current_summary": "Deletes a connection",
       "current_description": "Deletes a connection",
-      "summary_suggestion": "Delete an existing connection",
-      "description_suggestion": "Deletes an existing connection for a given unified API and service ID. Requires authentication. Returns a success message if the connection is deleted successfully.",
-      "reasoning": "The current description is vague and lacks details about the side effects. The suggestions provide more specific details and clarify the operation's purpose.",
+      "description_suggestion": "Permanently deletes a consumer's connection to a service. This removes all stored credentials and configuration for this connection. After deletion, the consumer will need to create a new connection to use this service again. This operation cannot be undone.",
+      "reasoning": "Description lacks critical side effect information. Enhanced version clarifies permanence, explains what is removed (credentials and configuration), indicates the consequence (need to recreate), and warns that deletion is irreversible. This is essential for AI agents to understand the operation's impact.",
       "batch_index": 1
     }
   },
@@ -6632,7 +6602,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'connectionsImport' has semantic quality issues: vague_description, missing_input_details. The current description is vague and lacks details about the input and return values. The suggestions provide more specific details and clarify the operation's purpose.",
+    "message": "Operation 'connectionsImport' has semantic quality issues: vague_description, missing_context, missing_output_details. Description is too brief and lacks context about the operation's purpose (migration) and use case. Enhanced version explains the migration scenario, clarifies inputs (credentials and tokens), specifies the return value, and indicates the primary use case. This helps AI agents understand when and why to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6647,13 +6617,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_input_details"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "Import connection",
       "current_description": "Import an authorized connection.",
-      "summary_suggestion": "Import an authorized connection",
-      "description_suggestion": "Imports an authorized connection for a given unified API and service ID. Requires authentication. Accepts a connection import data object in the request body. Returns the imported connection details.",
-      "reasoning": "The current description is vague and lacks details about the input and return values. The suggestions provide more specific details and clarify the operation's purpose.",
+      "description_suggestion": "Imports an existing authorized connection into Vault for a consumer. This operation migrates previously stored credentials and access tokens from external systems into Apideck Vault. Accepts connection credentials and token data in the request body. Returns the imported connection object with its current state. Use this to migrate existing integrations without requiring users to re-authenticate.",
+      "reasoning": "Description is too brief and lacks context about the operation's purpose (migration) and use case. Enhanced version explains the migration scenario, clarifies inputs (credentials and tokens), specifies the return value, and indicates the primary use case. This helps AI agents understand when and why to use this operation.",
       "batch_index": 1
     }
   },
@@ -6668,7 +6638,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'validateConnectionState' has semantic quality issues: vague_description, missing_side_effects. The current description is vague and lacks details about the side effects. The suggestions provide more specific details and clarify the operation's purpose.",
+    "message": "Operation 'createCallbackState' has semantic quality issues: vague_description, missing_context, missing_output_details, poor_ai_interpretability. Original description lacks context about OAuth security purpose and doesn't explain what the state is used for or what is returned. AI agents need to understand this is part of OAuth flow security. Added explanation of CSRF protection, return value, and connection scoping for better interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6679,18 +6649,20 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "validateConnectionState",
+      "operation_id": "createCallbackState",
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_side_effects"
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
-      "current_summary": "Validate Connection State",
-      "current_description": "This endpoint validates the current state of a given connection. This will perform different checks based on the connection auth type. For basic and apiKey auth types, the presence of required fields is checked.\nFor connectors that implement OAuth2, this operation forces the refresh flow for an access token regardless of its expiry.\n\nNote:\n  - Do not include any credentials in the request body. This operation does not persist changes, but only triggers the validation of connection state.\n  - If a refresh token flow was performed and successful, the new access token will then be used for subsequent API requests.",
-      "summary_suggestion": "Validate the state of a connection",
-      "description_suggestion": "Validates the current state of a given connection for a given unified API and service ID. This will perform different checks based on the connection auth type. For basic and apiKey auth types, the presence of required fields is checked. For connectors that implement OAuth2, this operation forces the refresh flow for an access token regardless of its expiry. Requires authentication. Returns a success message if the validation is successful.",
-      "reasoning": "The current description is vague and lacks details about the side effects. The suggestions provide more specific details and clarify the operation's purpose.",
-      "batch_index": 1
+      "current_summary": "Create Callback State",
+      "current_description": "This endpoint creates a callback state that can be used to issue requests to the callback endpoint.",
+      "summary_suggestion": "Create callback state for OAuth redirect flow",
+      "description_suggestion": "Creates a callback state token used to secure OAuth redirect flows during connection authentication. This state parameter prevents CSRF attacks by validating the callback request matches the original authorization request. Returns a state token that should be passed to the authorization endpoint and validated upon callback. The state is scoped to the specified connection (unified_api and service_id).",
+      "reasoning": "Original description lacks context about OAuth security purpose and doesn't explain what the state is used for or what is returned. AI agents need to understand this is part of OAuth flow security. Added explanation of CSRF protection, return value, and connection scoping for better interpretability.",
+      "batch_index": 2
     }
   },
   {
@@ -6704,7 +6676,194 @@
         "character": 0
       }
     },
-    "message": "Operation 'connectionsAuthorize' has semantic quality issues: vague_summary, vague_description, missing_context. The original summary and description were vague and lacked specific details about the operation's purpose, inputs, and outputs. The suggestions provide clearer context and actionable information.",
+    "message": "Operation 'connectionSettingsAll' has semantic quality issues: vague_description, missing_context, missing_input_details. Original description is unclear about what 'custom settings' means and doesn't explain the relationship between settings and defaults. Added clarity about resource-specific configuration, return value structure, and use case for AI agents to understand when to call this endpoint.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "connectionSettingsAll",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_input_details"
+      ],
+      "current_summary": "Get resource settings",
+      "current_description": "This endpoint returns custom settings and their defaults required by connection for a given resource.",
+      "summary_suggestion": "Retrieve connection resource configuration settings",
+      "description_suggestion": "Retrieves the configuration settings and their default values required for a specific resource within a connection. Returns both the current settings and available defaults for the resource. This includes any custom fields or configuration options specific to the connector and resource type. Used to understand what settings can be configured for a connection resource.",
+      "reasoning": "Original description is unclear about what 'custom settings' means and doesn't explain the relationship between settings and defaults. Added clarity about resource-specific configuration, return value structure, and use case for AI agents to understand when to call this endpoint.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'connectionSettingsUpdate' has semantic quality issues: vague_description, missing_context, missing_output_details, missing_side_effects. Original description is too brief and doesn't explain scope, partial update support, or effects. Missing information about what is returned and when changes take effect. Added details about partial updates, immediate effect, and return value for better AI agent understanding of operation impact.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "connectionSettingsUpdate",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Update settings",
+      "current_description": "Update default values for a connection's resource settings",
+      "summary_suggestion": "Update connection resource configuration settings",
+      "description_suggestion": "Updates the configuration settings for a specific resource within a connection. Allows modification of resource-specific settings and their default values. Supports partial updates - only provided fields will be modified. Changes take effect immediately and affect how the connection interacts with the specified resource. Returns the updated settings configuration.",
+      "reasoning": "Original description is too brief and doesn't explain scope, partial update support, or effects. Missing information about what is returned and when changes take effect. Added details about partial updates, immediate effect, and return value for better AI agent understanding of operation impact.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'connectionsSchema' has semantic quality issues: vague_description, missing_context, missing_output_details. Original description mentions 'approximate' but doesn't explain why or what that means. Missing context about use cases and that this represents the downstream connector's model. Added clarity about purpose (validation, UI generation, mapping), specificity to connector/resource, and why it's approximate for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "connectionsSchema",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Get resource schema",
+      "current_description": "This endpoint returns an approximate JSONSchema of a given resource.",
+      "summary_suggestion": "Retrieve resource JSONSchema definition",
+      "description_suggestion": "Retrieves the JSONSchema definition for a specific resource within a connection. Returns an approximate schema that describes the structure, data types, and properties of the resource as provided by the connector. This schema represents the downstream connector's data model and can be used for validation, UI generation, or mapping purposes. The schema is specific to the connector and resource type.",
+      "reasoning": "Original description mentions 'approximate' but doesn't explain why or what that means. Missing context about use cases and that this represents the downstream connector's model. Added clarity about purpose (validation, UI generation, mapping), specificity to connector/resource, and why it's approximate for better AI agent decision-making.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'connectionsExample' has semantic quality issues: vague_description, missing_context, missing_output_details. Original description is vague about what 'downstream example' means and doesn't explain use cases. Missing context about whether it's real or representative data and what it's used for. Added clarity about sample data purpose, use cases (testing, UI generation), and specificity to connector/resource.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "connectionsExample",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Get resource example",
+      "current_description": "This endpoint returns a downstream example of a given resource.",
+      "summary_suggestion": "Retrieve example resource data from connector",
+      "description_suggestion": "Retrieves a sample/example data object for a specific resource from the downstream connector. Returns actual or representative data showing what a resource instance looks like when retrieved from the connector. Useful for understanding the connector's data structure, testing mappings, or generating UI previews. The example is specific to the connector and resource type.",
+      "reasoning": "Original description is vague about what 'downstream example' means and doesn't explain use cases. Missing context about whether it's real or representative data and what it's used for. Added clarity about sample data purpose, use cases (testing, UI generation), and specificity to connector/resource.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'customFieldsAll' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original summary and description have grammatical issues ('an custom fields') and lack clarity about what custom fields are. Missing explanation of relationship to unified API schema and what information is returned. Added context about custom fields being connector-specific extensions, return value structure, and use cases for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "customFieldsAll",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Get resource custom fields",
+      "current_description": "This endpoint returns an custom fields on a connection resource.",
+      "summary_suggestion": "List custom fields available for resource",
+      "description_suggestion": "Retrieves all custom fields available for a specific resource within a connection. Custom fields are additional, non-standard properties that the connector supports beyond the standard unified API schema. Returns a list of custom field definitions including their names, types, and configuration. These fields can be used for extended mapping or data capture specific to the connector.",
+      "reasoning": "Original summary and description have grammatical issues ('an custom fields') and lack clarity about what custom fields are. Missing explanation of relationship to unified API schema and what information is returned. Added context about custom fields being connector-specific extensions, return value structure, and use cases for AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'connectionsAuthorize' has semantic quality issues: vague_summary, missing_context, missing_output_details. Original summary 'Authorize' is too vague for AI agents. Description is verbose and unclear about the actual return behavior and when to use this endpoint. Improved summary specifies OAuth authorization initiation. Enhanced description clarifies the OAuth flow type, redirect behavior, state parameter purpose, and when this endpoint should be used, making it more actionable for AI agents.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6719,14 +6878,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "Authorize",
-      "current_description": "In most cases the authorize link is provided in the ``/connections`` endpoint. Normally you don't need to manually generate these links.\n\nUse this endpoint to authenticate a user with a connector. It will return a 301 redirect to the downstream connector endpoints.\n\nAuth links will have a state parameter included to verify the validity of the request. This is the url your users will use to activate OAuth supported integration providers.\n\nVault handles the complete Authorization Code Grant Type Flow for you and will redirect you to the dynamic redirect uri you have appended to the url in case this is missing the default redirect uri you have configured for your Unify application.",
-      "summary_suggestion": "Authorize user with OAuth connector",
-      "description_suggestion": "Authenticates a user with a specified OAuth connector using the Authorization Code Grant Type Flow. Returns a 301 redirect to the connector's OAuth endpoints. The state parameter verifies the request's validity. Vault handles the complete authorization flow and redirects to the specified dynamic redirect URI or the default configured URI.",
-      "reasoning": "The original summary and description were vague and lacked specific details about the operation's purpose, inputs, and outputs. The suggestions provide clearer context and actionable information.",
+      "current_description": "__In most cases the authorize link is provided in the ``/connections`` endpoint. Normally you don't need to manually generate these links.__\n\nUse this endpoint to authenticate a user with a connector. It will return a 301 redirect to the downstream connector endpoints.\n\nAuth links will have a state parameter included to verify the validity of the request. This is the url your users will use to activate OAuth supported integration providers.\n\nVault handles the complete Authorization Code Grant Type Flow for you and will redirect you to the dynamic redirect uri you have appended to the url in case this is missing the default redirect uri you have configured for your Unify application.",
+      "summary_suggestion": "Initiate OAuth authorization flow for connector",
+      "description_suggestion": "Initiates the OAuth 2.0 Authorization Code Grant Type flow for a consumer to authenticate with a connector. Returns a 301 redirect to the connector's authorization endpoint. Includes a state parameter for request validation. Vault handles the complete OAuth flow and redirects to the specified redirect URI (or your configured default) upon completion. This endpoint is typically called automatically via the /connections endpoint.",
+      "reasoning": "Original summary 'Authorize' is too vague for AI agents. Description is verbose and unclear about the actual return behavior and when to use this endpoint. Improved summary specifies OAuth authorization initiation. Enhanced description clarifies the OAuth flow type, redirect behavior, state parameter purpose, and when this endpoint should be used, making it more actionable for AI agents.",
       "batch_index": 3
     }
   },
@@ -6741,7 +6900,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'connectionsRevoke' has semantic quality issues: vague_description, missing_context. The original description was vague and lacked specific details about the operation's purpose, inputs, and outputs. The suggestion provides clearer context and actionable information.",
+    "message": "Operation 'connectionsRevoke' has semantic quality issues: vague_summary, missing_context, missing_output_details, not_actionable. Summary lacks specificity about OAuth context. Description contains misleading information about 'auth links' and 'activate OAuth' which is inconsistent with revocation purpose. Enhanced summary clarifies OAuth revocation. Improved description explains the actual effect (credential invalidation), redirect behavior, and state parameter, making it clear this is a destructive operation that removes connection access.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6755,14 +6914,16 @@
       "operation_id": "connectionsRevoke",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description",
-        "missing_context"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details",
+        "not_actionable"
       ],
       "current_summary": "Revoke connection",
-      "current_description": "In most cases the authorize link is provided in the ``/connections`` endpoint. Normally you don't need to manually generate these links.\n\nUse this endpoint to revoke an existing OAuth connector.\n\nAuth links will have a state parameter included to verify the validity of the request. This is the url your users will use to activate OAuth supported integration providers.\n\nVault handles the complete revoke flow for you and will redirect you to the dynamic redirect uri you have appended to the url.",
-      "summary_suggestion": "Revoke OAuth connector connection",
-      "description_suggestion": "Revokes an existing OAuth connection with a specified connector. The state parameter verifies the request's validity. Vault handles the complete revoke flow and redirects to the specified dynamic redirect URI or the default configured URI.",
-      "reasoning": "The original description was vague and lacked specific details about the operation's purpose, inputs, and outputs. The suggestion provides clearer context and actionable information.",
+      "current_description": "__In most cases the authorize link is provided in the ``/connections`` endpoint. Normally you don't need to manually generate these links.__\n\nUse this endpoint to revoke an existing OAuth connector.\n\nAuth links will have a state parameter included to verify the validity of the request. This is the url your users will use to activate OAuth supported integration providers.\n\nVault handles the complete revoke flow for you and will redirect you to the dynamic redirect uri you have appended to the url.",
+      "summary_suggestion": "Revoke OAuth connection for connector",
+      "description_suggestion": "Revokes an existing OAuth connection for a consumer with a connector, invalidating the stored credentials and access tokens. Returns a 301 redirect to the specified redirect URI (or your configured default). Includes a state parameter for request validation. Vault handles the complete revocation flow and credential cleanup. This endpoint is typically called automatically via the /connections endpoint.",
+      "reasoning": "Summary lacks specificity about OAuth context. Description contains misleading information about 'auth links' and 'activate OAuth' which is inconsistent with revocation purpose. Enhanced summary clarifies OAuth revocation. Improved description explains the actual effect (credential invalidation), redirect behavior, and state parameter, making it clear this is a destructive operation that removes connection access.",
       "batch_index": 3
     }
   },
@@ -6777,7 +6938,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'customMappingsOne' has semantic quality issues: vague_description. The original description was too vague. The suggestion provides a clearer explanation of the operation's purpose and expected output.",
+    "message": "Operation 'customMappingsOne' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details. Original summary and description are extremely vague and lack domain context. No explanation of what a custom mapping is, what parameters are required, or what the response contains. Enhanced version explains the mapping relationship between connector fields and Unified API fields, clarifies the purpose of retrieving a specific mapping, and indicates what information is returned.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6791,12 +6952,17 @@
       "operation_id": "customMappingsOne",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "Get custom mapping",
       "current_description": "Get a custom mapping",
-      "description_suggestion": "Retrieves a specific custom mapping between a Unified API and a service. The custom mapping defines how properties from the service are mapped to the Unified API.",
-      "reasoning": "The original description was too vague. The suggestion provides a clearer explanation of the operation's purpose and expected output.",
+      "summary_suggestion": "Retrieve custom mapping for unified API field",
+      "description_suggestion": "Retrieves a specific custom mapping that defines how a connector's source field maps to a target field in the specified Unified API. Returns the custom mapping configuration including the source field identifier, target field identifier, and any transformation rules applied.",
+      "reasoning": "Original summary and description are extremely vague and lack domain context. No explanation of what a custom mapping is, what parameters are required, or what the response contains. Enhanced version explains the mapping relationship between connector fields and Unified API fields, clarifies the purpose of retrieving a specific mapping, and indicates what information is returned.",
       "batch_index": 3
     }
   },
@@ -6811,7 +6977,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'customMappingsAdd' has semantic quality issues: vague_description. The original description was too vague. The suggestion provides a clearer explanation of the operation's purpose and expected output.",
+    "message": "Operation 'customMappingsAdd' has semantic quality issues: vague_description, missing_context, missing_output_details. Summary is clear and actionable. Description is too minimal and lacks domain context about what custom mappings do and what the request/response contain. Enhanced description explains the mapping relationship, clarifies input requirements, and specifies what is returned.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6825,12 +6991,14 @@
       "operation_id": "customMappingsAdd",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "Create custom mapping",
       "current_description": "Create a custom mapping",
-      "description_suggestion": "Creates a new custom mapping between a Unified API and a service. The custom mapping defines how properties from the service are mapped to the Unified API.",
-      "reasoning": "The original description was too vague. The suggestion provides a clearer explanation of the operation's purpose and expected output.",
+      "description_suggestion": "Creates a new custom mapping that defines how a connector's source field maps to a target field in the specified Unified API. Accepts a mapping configuration specifying the source field identifier and any transformation rules. Returns the created custom mapping object with its unique identifier and configuration details.",
+      "reasoning": "Summary is clear and actionable. Description is too minimal and lacks domain context about what custom mappings do and what the request/response contain. Enhanced description explains the mapping relationship, clarifies input requirements, and specifies what is returned.",
       "batch_index": 3
     }
   },
@@ -6845,7 +7013,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'customMappingsUpdate' has semantic quality issues: vague_description. The original description was too vague. The suggestion provides a clearer explanation of the operation's purpose and expected output.",
+    "message": "Operation 'customMappingsUpdate' has semantic quality issues: vague_description, missing_context, missing_output_details. Summary is clear and actionable. Description lacks domain context and doesn't explain what aspects of a mapping can be updated or whether partial updates are supported. Enhanced description clarifies the mapping context, indicates partial update support, and specifies the return value.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6859,12 +7027,14 @@
       "operation_id": "customMappingsUpdate",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "Update custom mapping",
       "current_description": "Update a custom mapping",
-      "description_suggestion": "Updates an existing custom mapping between a Unified API and a service. The custom mapping defines how properties from the service are mapped to the Unified API.",
-      "reasoning": "The original description was too vague. The suggestion provides a clearer explanation of the operation's purpose and expected output.",
+      "description_suggestion": "Updates an existing custom mapping configuration for a connector's field mapping to a Unified API target field. Supports partial updates - only provided fields will be modified. Returns the updated custom mapping object with the new configuration details.",
+      "reasoning": "Summary is clear and actionable. Description lacks domain context and doesn't explain what aspects of a mapping can be updated or whether partial updates are supported. Enhanced description clarifies the mapping context, indicates partial update support, and specifies the return value.",
       "batch_index": 3
     }
   },
@@ -6879,7 +7049,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'customMappingsDelete' has semantic quality issues: vague_description. The original description was too vague. The suggestion provides a clearer explanation of the operation's purpose and expected output.",
+    "message": "Operation 'customMappingsDelete' has semantic quality issues: vague_description, missing_context, missing_side_effects. Summary is clear but uses passive voice. Description is minimal and lacks domain context. Enhanced description clarifies what is being deleted, emphasizes the destructive nature of the operation, and explains the side effect (field mapping removal) so AI agents understand the consequences.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6893,12 +7063,14 @@
       "operation_id": "customMappingsDelete",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_description",
+        "missing_context",
+        "missing_side_effects"
       ],
       "current_summary": "Deletes a custom mapping",
       "current_description": "Deletes a custom mapping",
-      "description_suggestion": "Deletes an existing custom mapping between a Unified API and a service.",
-      "reasoning": "The original description was too vague. The suggestion provides a clearer explanation of the operation's purpose and expected output.",
+      "description_suggestion": "Deletes a custom mapping for a connector's field mapping to a Unified API target field. This is a destructive operation that removes the mapping configuration. After deletion, the connector's source field will no longer be mapped to the target field in API responses.",
+      "reasoning": "Summary is clear but uses passive voice. Description is minimal and lacks domain context. Enhanced description clarifies what is being deleted, emphasizes the destructive nature of the operation, and explains the side effect (field mapping removal) so AI agents understand the consequences.",
       "batch_index": 3
     }
   },
@@ -6913,7 +7085,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'customMappingsAll' has semantic quality issues: vague_description. The original description was too vague. The suggestion provides a clearer explanation of the operation's purpose and expected output.",
+    "message": "Operation 'customMappingsAll' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details. Summary is clear and actionable. Description is too generic and lacks domain context about what custom mappings represent and what the list contains. Enhanced description clarifies the scope (connector + Unified API), explains what information is returned, and provides context for when this endpoint would be used.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6927,13 +7099,234 @@
       "operation_id": "customMappingsAll",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "List custom mappings",
       "current_description": "This endpoint returns a list of custom mappings.",
-      "description_suggestion": "Retrieves a list of all custom mappings between Unified APIs and services.",
-      "reasoning": "The original description was too vague. The suggestion provides a clearer explanation of the operation's purpose and expected output.",
+      "description_suggestion": "Retrieves all custom mappings for a connector within a specified Unified API. Returns a list of custom mapping configurations showing how the connector's source fields map to Unified API target fields. Useful for reviewing all active field mappings for a connector-API combination.",
+      "reasoning": "Summary is clear and actionable. Description is too generic and lacks domain context about what custom mappings represent and what the list contains. Enhanced description clarifies the scope (connector + Unified API), explains what information is returned, and provides context for when this endpoint would be used.",
       "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'consumersAdd' has semantic quality issues: vague_summary, vague_description, missing_output_details, missing_context. Original description is too minimal. Added context about what a consumer represents in the domain model, clarified that it returns the created consumer object with consumer_id, and explained the consumer_id's role in the system for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "consumersAdd",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Create consumer",
+      "current_description": "Create a consumer",
+      "summary_suggestion": "Create a new consumer account",
+      "description_suggestion": "Creates a new consumer (user, account, team, or machine) in your Unify application. The consumer represents an entity that can have integrations and connections within your system. Returns the created consumer object with a unique consumer_id that will be used for all subsequent API calls and connection management.",
+      "reasoning": "Original description is too minimal. Added context about what a consumer represents in the domain model, clarified that it returns the created consumer object with consumer_id, and explained the consumer_id's role in the system for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'consumersAll' has semantic quality issues: vague_description, missing_output_details. Summary is clear and actionable. Description needed clarification about pagination support, what data is returned for each consumer, and that this provides a complete overview of all consumers in the application for management purposes.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "consumersAll",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Get all consumers",
+      "current_description": "This endpoint includes all application consumers, along with an aggregated count of requests made.",
+      "description_suggestion": "Retrieves all consumers in your Unify application with their metadata and aggregated request counts. Returns a paginated list of consumer objects, each containing consumer details and statistics about API requests made through their connections. Supports filtering and pagination parameters.",
+      "reasoning": "Summary is clear and actionable. Description needed clarification about pagination support, what data is returned for each consumer, and that this provides a complete overview of all consumers in the application for management purposes.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'consumersOne' has semantic quality issues: vague_summary, vague_description, missing_input_details. Original summary was too generic. Description lacked clarity about what 'aggregated counts' means and didn't mention the required consumer_id parameter. Enhanced to clarify that it returns connection statistics and request metrics for a specific consumer.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "consumersOne",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details"
+      ],
+      "current_summary": "Get consumer",
+      "current_description": "Consumer detail including their aggregated counts with the connections they have authorized.",
+      "summary_suggestion": "Retrieve consumer details and connection statistics",
+      "description_suggestion": "Retrieves detailed information for a specific consumer identified by consumer_id, including their metadata and aggregated statistics for all authorized connections. Returns the consumer object with connection counts and request metrics. Requires the consumer_id path parameter.",
+      "reasoning": "Original summary was too generic. Description lacked clarity about what 'aggregated counts' means and didn't mention the required consumer_id parameter. Enhanced to clarify that it returns connection statistics and request metrics for a specific consumer.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'consumersDelete' has semantic quality issues: missing_side_effects, missing_context. Summary is adequate. Description needed stronger emphasis on the destructive nature and irreversibility of this operation, clarification that all connections are removed, and explicit mention of the consumer_id parameter requirement. Important for AI agents to understand the severity of this action.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "consumersDelete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_side_effects",
+        "missing_context"
+      ],
+      "current_summary": "Delete consumer",
+      "current_description": "Delete consumer and all their connections, including credentials.",
+      "description_suggestion": "Permanently deletes a consumer and all associated data including their connections and stored credentials. This is a destructive operation that cannot be undone. All integrations configured for this consumer will be removed, and any stored API keys or OAuth tokens will be deleted. Requires the consumer_id path parameter.",
+      "reasoning": "Summary is adequate. Description needed stronger emphasis on the destructive nature and irreversibility of this operation, clarification that all connections are removed, and explicit mention of the consumer_id parameter requirement. Important for AI agents to understand the severity of this action.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'consumerRequestCountsAll' has semantic quality issues: vague_summary, missing_output_details, missing_input_details. Summary was too vague and not action-oriented. Description lacked details about what metrics are returned, the purpose of the statistics, and which parameters are required. Enhanced to clarify the datetime range parameters and explain the use cases for this data.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "consumerRequestCountsAll",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_input_details"
+      ],
+      "current_summary": "Consumer request counts",
+      "current_description": "Get consumer request counts within a given datetime range.",
+      "summary_suggestion": "Retrieve consumer API request statistics for date range",
+      "description_suggestion": "Retrieves aggregated API request statistics for a specific consumer within a specified datetime range. Returns request count metrics and usage data that can be used for monitoring, billing, or analytics purposes. Requires consumer_id path parameter and datetime range query parameters (start_date and end_date).",
+      "reasoning": "Summary was too vague and not action-oriented. Description lacked details about what metrics are returned, the purpose of the statistics, and which parameters are required. Enhanced to clarify the datetime range parameters and explain the use cases for this data.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'connectionsAll' has semantic quality issues: vague_description, missing_context, missing_output_details. Summary is clear and actionable. Description was confusing about scope (all connections vs. consumer-specific) and lacked clarity about what data is returned. Enhanced to clarify that this returns consumer-specific connections, explain the structure of returned data including OAuth2 links, and mention pagination support for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "connectionsAll",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Get all connections",
+      "current_description": "This endpoint includes all the configured integrations and contains the required assets to build an integrations page where your users can install integrations. OAuth2 supported integrations will contain authorize and revoke links to handle the authentication flows.",
+      "description_suggestion": "Retrieves all available connections and configured integrations for the authenticated consumer. Returns connection objects with authorization status, connector details, and authentication assets (authorize/revoke links for OAuth2 integrations). Use this to display an integrations page where users can manage their connections. Supports filtering and pagination parameters.",
+      "reasoning": "Summary is clear and actionable. Description was confusing about scope (all connections vs. consumer-specific) and lacked clarity about what data is returned. Enhanced to clarify that this returns consumer-specific connections, explain the structure of returned data including OAuth2 links, and mention pagination support for better AI agent understanding.",
+      "batch_index": 0
     }
   },
   {
@@ -6947,7 +7340,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 31 operations analyzed, 16 quality issues found",
+    "message": "Semantic analysis completed: 31 operations analyzed, 26 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -6959,7 +7352,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 31,
-      "total_issues_found": 16,
+      "total_issues_found": 26,
       "batches_processed": 5
     }
   }

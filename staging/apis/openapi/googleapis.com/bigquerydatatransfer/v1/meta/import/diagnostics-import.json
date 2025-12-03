@@ -5172,7 +5172,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'bigquerydatatransfer.projects.locations.dataSources.list' has semantic quality issues: vague_summary, missing_context. The current summary is missing. Added a concise summary and expanded the description to include more context about the operation's purpose and expected output.",
+    "message": "Operation 'bigquerydatatransfer.projects.locations.dataSources.list' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is too brief and lacks context about what data sources are and why an agent would use this operation. Added location context, clarification that this is for transfer configuration setup, and explanation of the returned metadata to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5191,9 +5191,9 @@
       ],
       "current_summary": "",
       "current_description": "Lists supported data sources and returns their settings.",
-      "summary_suggestion": "List supported data sources and their settings",
-      "description_suggestion": "Lists all supported data sources and their metadata settings for the specified project and location.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include more context about the operation's purpose and expected output.",
+      "summary_suggestion": "List available data sources and their configurations",
+      "description_suggestion": "Lists all supported data sources available for creating transfer configurations in the specified location. Returns metadata for each data source including its settings, parameters, and display information. This operation helps identify which external data sources can be connected to BigQuery.",
+      "reasoning": "Missing summary entirely. Description is too brief and lacks context about what data sources are and why an agent would use this operation. Added location context, clarification that this is for transfer configuration setup, and explanation of the returned metadata to improve AI agent interpretability.",
       "batch_index": 1
     }
   },
@@ -5208,7 +5208,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'bigquerydatatransfer.projects.locations.transferConfigs.runs.list' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary to clarify the operation's purpose.",
+    "message": "Operation 'bigquerydatatransfer.projects.locations.transferConfigs.runs.list' has semantic quality issues: vague_summary, missing_context, missing_input_details. Missing summary. Description lacks specificity about what constitutes a 'transfer run' in this domain, which configuration the runs belong to, and what filtering/pagination options are available. Added context about monitoring use cases and error information to help AI agents understand when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5222,12 +5222,15 @@
       "operation_id": "bigquerydatatransfer.projects.locations.transferConfigs.runs.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Returns information about running and completed transfer runs.",
-      "summary_suggestion": "List running and completed transfer runs",
-      "reasoning": "The current summary is missing. Added a concise summary to clarify the operation's purpose.",
+      "summary_suggestion": "List transfer runs for a configuration",
+      "description_suggestion": "Lists all transfer runs (both running and completed) for a specified transfer configuration. Returns detailed information about each run including its status, execution time, and any error messages. Supports filtering and pagination through query parameters. Useful for monitoring data transfer progress and troubleshooting failed transfers.",
+      "reasoning": "Missing summary. Description lacks specificity about what constitutes a 'transfer run' in this domain, which configuration the runs belong to, and what filtering/pagination options are available. Added context about monitoring use cases and error information to help AI agents understand when to use this operation.",
       "batch_index": 1
     }
   },
@@ -5242,7 +5245,80 @@
         "character": 0
       }
     },
-    "message": "Operation 'bigquerydatatransfer.projects.locations.transferConfigs.runs.transferLogs.list' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary to clarify the operation's purpose.",
+    "message": "Operation 'bigquerydatatransfer.projects.locations.transferConfigs.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is adequate but lacks clarity about what information is returned and practical use cases. Added details about returned fields (data source type, destination, schedule, status) and use cases to improve AI agent decision-making about when to invoke this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigquerydatatransfer.projects.locations.transferConfigs.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Returns information about all transfer configs owned by a project in the specified location.",
+      "summary_suggestion": "List transfer configurations in a location",
+      "description_suggestion": "Lists all transfer configurations for a specified project and location. Returns metadata for each configuration including the data source type, destination dataset, schedule, and current status. Supports filtering and pagination. Use this to discover existing data transfer setups or verify configuration details.",
+      "reasoning": "Missing summary. Description is adequate but lacks clarity about what information is returned and practical use cases. Added details about returned fields (data source type, destination, schedule, status) and use cases to improve AI agent decision-making about when to invoke this operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigquerydatatransfer.projects.locations.transferConfigs.create' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary. Description is too minimal and lacks critical details about what the operation does (scheduling transfers), what inputs are required (TransferConfig with specific fields), what is returned (resource name), and side effects (immediate activation and scheduling). Enhanced for AI agent clarity about prerequisites and outcomes.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigquerydatatransfer.projects.locations.transferConfigs.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new data transfer configuration.",
+      "summary_suggestion": "Create a new transfer configuration",
+      "description_suggestion": "Creates a new data transfer configuration that schedules regular data transfers from an external data source to a BigQuery dataset. Requires a TransferConfig object specifying the data source, destination dataset, schedule, and any source-specific parameters. Returns the created configuration with an assigned resource name. The configuration becomes active immediately and will begin executing according to its schedule.",
+      "reasoning": "Missing summary. Description is too minimal and lacks critical details about what the operation does (scheduling transfers), what inputs are required (TransferConfig with specific fields), what is returned (resource name), and side effects (immediate activation and scheduling). Enhanced for AI agent clarity about prerequisites and outcomes.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigquerydatatransfer.projects.locations.transferConfigs.runs.transferLogs.list' has semantic quality issues: vague_summary, missing_context, unclear_purpose. Missing summary. Description is vague about what 'log messages' contain and why an agent would need them. Added context about log types (info, warnings, errors), ordering, pagination support, and practical use cases (troubleshooting, monitoring) to clarify the operation's purpose and improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5256,12 +5332,15 @@
       "operation_id": "bigquerydatatransfer.projects.locations.transferConfigs.runs.transferLogs.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "unclear_purpose"
       ],
       "current_summary": "",
       "current_description": "Returns log messages for the transfer run.",
-      "summary_suggestion": "List log messages for a transfer run",
-      "reasoning": "The current summary is missing. Added a concise summary to clarify the operation's purpose.",
+      "summary_suggestion": "List transfer run log messages",
+      "description_suggestion": "Lists detailed log messages for a specific transfer run, including informational messages, warnings, and errors encountered during execution. Returns chronologically ordered logs that help diagnose transfer failures or monitor transfer progress. Supports pagination for large log sets. Essential for troubleshooting failed or slow transfers.",
+      "reasoning": "Missing summary. Description is vague about what 'log messages' contain and why an agent would need them. Added context about log types (info, warnings, errors), ordering, pagination support, and practical use cases (troubleshooting, monitoring) to clarify the operation's purpose and improve AI agent interpretability.",
       "batch_index": 1
     }
   },
@@ -5276,7 +5355,81 @@
         "character": 0
       }
     },
-    "message": "Operation 'bigquerydatatransfer.projects.locations.transferConfigs.runs.delete' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing, and the description lacks information about the side effects of the operation.",
+    "message": "Operation 'bigquerydatatransfer.projects.locations.transferConfigs.scheduleRuns' has semantic quality issues: vague_summary, missing_context, not_actionable. Missing summary. Description is technical but lacks clarity about the operation's purpose and prominently buries the deprecation notice. Reordered to highlight deprecation status upfront, clarified that this creates historical/backfill runs, and directed agents to the preferred alternative. Improved actionability by making the deprecation status immediately clear.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigquerydatatransfer.projects.locations.transferConfigs.scheduleRuns",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "not_actionable"
+      ],
+      "current_summary": "",
+      "current_description": "Creates transfer runs for a time range [start_time, end_time]. For each date - or whatever granularity the data source supports - in the range, one transfer run is created. Note that runs are created per UTC time in the time range. DEPRECATED: use StartManualTransferRuns instead.",
+      "summary_suggestion": "Schedule transfer runs for a time range (deprecated)",
+      "description_suggestion": "DEPRECATED: Use startManualRuns instead. Creates transfer runs for a specified time range [start_time, end_time]. One transfer run is created for each date (or granularity supported by the data source) within the range, with all times interpreted as UTC. This operation is no longer recommended; use startManualRuns for new implementations.",
+      "reasoning": "Missing summary. Description is technical but lacks clarity about the operation's purpose and prominently buries the deprecation notice. Reordered to highlight deprecation status upfront, clarified that this creates historical/backfill runs, and directed agents to the preferred alternative. Improved actionability by making the deprecation status immediately clear.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigquerydatatransfer.projects.locations.transferConfigs.startManualRuns' has semantic quality issues: vague_summary, missing_context, missing_input_details. Missing summary. Description is confusing about the two execution modes and lacks clarity about when to use this operation. Added explicit mode descriptions, clarified inclusive/exclusive boundaries, specified UTC timezone, explained return value, and provided use cases (backfill, forced execution) to improve AI agent understanding of when and how to invoke this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigquerydatatransfer.projects.locations.transferConfigs.startManualRuns",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Start manual transfer runs to be executed now with schedule_time equal to current time. The transfer runs can be created for a time range where the run_time is between start_time (inclusive) and end_time (exclusive), or for a specific run_time.",
+      "summary_suggestion": "Manually trigger transfer runs immediately",
+      "description_suggestion": "Manually triggers one or more transfer runs for a specified transfer configuration to execute immediately. Supports two modes: (1) create a single run with current timestamp, or (2) create multiple runs for a time range [start_time, end_time) where start_time is inclusive and end_time is exclusive. All times are in UTC. Returns information about the created transfer runs. Use this to backfill data or force immediate execution outside the regular schedule.",
+      "reasoning": "Missing summary. Description is confusing about the two execution modes and lacks clarity about when to use this operation. Added explicit mode descriptions, clarified inclusive/exclusive boundaries, specified UTC timezone, explained return value, and provided use cases (backfill, forced execution) to improve AI agent understanding of when and how to invoke this operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigquerydatatransfer.projects.locations.transferConfigs.runs.delete' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary entirely. Description lacks context about what gets deleted (logs, records), the required input format (resource name), and side effects (permanent deletion). Added these details for AI agent clarity on operation scope and consequences.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5291,13 +5444,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_context",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes the specified transfer run.",
-      "summary_suggestion": "Delete a specified transfer run",
-      "description_suggestion": "Deletes the specified transfer run. This action will remove the transfer run from the system and its associated data will no longer be available.",
-      "reasoning": "The current summary is missing, and the description lacks information about the side effects of the operation.",
+      "summary_suggestion": "Delete a transfer run",
+      "description_suggestion": "Deletes the specified transfer run. This operation removes the transfer run record and its associated logs from the system. The transfer run must be identified by its full resource name. Deletion is permanent and cannot be undone.",
+      "reasoning": "Missing summary entirely. Description lacks context about what gets deleted (logs, records), the required input format (resource name), and side effects (permanent deletion). Added these details for AI agent clarity on operation scope and consequences.",
       "batch_index": 0
     }
   },
@@ -5312,7 +5466,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'bigquerydatatransfer.projects.locations.transferConfigs.runs.get' has semantic quality issues: vague_summary. The current summary is missing, and the description is clear but does not need modification.",
+    "message": "Operation 'bigquerydatatransfer.projects.locations.transferConfigs.runs.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is vague about what information is returned. Added specific details about return content (status, times, errors, statistics) and the response schema (TransferRun object) to help AI agents understand the operation's output.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5326,12 +5480,14 @@
       "operation_id": "bigquerydatatransfer.projects.locations.transferConfigs.runs.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Returns information about the particular transfer run.",
-      "summary_suggestion": "Get information about a specific transfer run",
-      "reasoning": "The current summary is missing, and the description is clear but does not need modification.",
+      "summary_suggestion": "Retrieve transfer run details",
+      "description_suggestion": "Retrieves detailed information about a specific transfer run, including its execution status, start/end times, error messages, and statistics. Returns a TransferRun object containing the run's current state and execution metrics.",
+      "reasoning": "Missing summary. Description is vague about what information is returned. Added specific details about return content (status, times, errors, statistics) and the response schema (TransferRun object) to help AI agents understand the operation's output.",
       "batch_index": 0
     }
   },
@@ -5346,7 +5502,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'bigquerydatatransfer.projects.locations.transferConfigs.patch' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing, and the description lacks information about the side effects of the operation.",
+    "message": "Operation 'bigquerydatatransfer.projects.locations.transferConfigs.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description mentions the all-fields requirement but lacks clarity on what can be updated, what input is expected (TransferConfig schema), how to identify the target configuration (resource name), and what is returned. Enhanced for AI agent understanding of inputs, outputs, and constraints.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5361,13 +5517,163 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Updates a data transfer configuration. All fields must be set, even if they are not updated.",
-      "summary_suggestion": "Update a data transfer configuration",
-      "description_suggestion": "Updates a data transfer configuration. All fields must be set, even if they are not updated. This action will modify the existing configuration and may affect scheduled transfers.",
-      "reasoning": "The current summary is missing, and the description lacks information about the side effects of the operation.",
+      "summary_suggestion": "Update transfer configuration",
+      "description_suggestion": "Updates an existing data transfer configuration. Accepts a TransferConfig object with all fields populated (even unchanged fields must be included). Modifies the configuration's schedule, parameters, and settings. Returns the updated TransferConfig object. Use the resource name to identify which configuration to update.",
+      "reasoning": "Missing summary. Description mentions the all-fields requirement but lacks clarity on what can be updated, what input is expected (TransferConfig schema), how to identify the target configuration (resource name), and what is returned. Enhanced for AI agent understanding of inputs, outputs, and constraints.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigquerydatatransfer.projects.locations.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is generic about what location information is returned. Added context about the response schema (ListLocationsResponse), use case (determining where to create configurations), and that this lists service availability by region.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigquerydatatransfer.projects.locations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists information about the supported locations for this service.",
+      "summary_suggestion": "List supported service locations",
+      "description_suggestion": "Lists all supported locations where the BigQuery Data Transfer Service is available. Returns a ListLocationsResponse containing location metadata and availability information. Useful for determining where to create transfer configurations.",
+      "reasoning": "Missing summary. Description is generic about what location information is returned. Added context about the response schema (ListLocationsResponse), use case (determining where to create configurations), and that this lists service availability by region.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigquerydatatransfer.projects.locations.dataSources.checkValidCreds' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks input details (CheckValidCredsRequest schema, what identifies the data source) and output details (CheckValidCredsResponse structure). Added schema references and use case context for AI agents to understand when to call this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigquerydatatransfer.projects.locations.dataSources.checkValidCreds",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns true if valid credentials exist for the given data source and requesting user.",
+      "summary_suggestion": "Validate data source credentials",
+      "description_suggestion": "Validates whether valid credentials exist for a specified data source and the authenticated user. Accepts a CheckValidCredsRequest identifying the data source. Returns a CheckValidCredsResponse indicating credential validity (true/false) and any validation errors. Useful before creating transfer configurations to verify authentication setup.",
+      "reasoning": "Missing summary. Description lacks input details (CheckValidCredsRequest schema, what identifies the data source) and output details (CheckValidCredsResponse structure). Added schema references and use case context for AI agents to understand when to call this operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigquerydatatransfer.projects.locations.enrollDataSources' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description is verbose with external links and unclear about inputs/outputs. Simplified to focus on: what the operation does (enables data sources), input schema (EnrollDataSourcesRequest), side effects (visibility in UI and ListDataSources), and the resulting capability (creating transfer configs). More concise for AI agent interpretation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigquerydatatransfer.projects.locations.enrollDataSources",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Enroll data sources in a user project. This allows users to create transfer configurations for these data sources. They will also appear in the ListDataSources RPC and as such, will appear in the [BigQuery UI](https://console.cloud.google.com/bigquery), and the documents can be found in the public guide for [BigQuery Web UI](https://cloud.google.com/bigquery/bigquery-web-ui) and [Data Transfer Service](https://cloud.google.com/bigquery/docs/working-with-transfers).",
+      "summary_suggestion": "Enable data sources for project",
+      "description_suggestion": "Enrolls specified data sources in a user project, making them available for creating transfer configurations. Accepts an EnrollDataSourcesRequest listing the data sources to enable. After enrollment, these sources appear in ListDataSources results and become visible in the BigQuery UI Transfer tab. Enrolled sources can then be used to create new transfer configurations.",
+      "reasoning": "Missing summary. Description is verbose with external links and unclear about inputs/outputs. Simplified to focus on: what the operation does (enables data sources), input schema (EnrollDataSourcesRequest), side effects (visibility in UI and ListDataSources), and the resulting capability (creating transfer configs). More concise for AI agent interpretation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigquerydatatransfer.projects.locations.unenrollDataSources' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description is verbose and unclear about inputs/outputs. Clarified: what the operation does (disables data sources), input schema (UnenrollDataSourcesRequest), side effects (removal from UI and ListDataSources, halting scheduled transfers), and impact on existing configurations. Streamlined for AI agent clarity on operation scope and consequences.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigquerydatatransfer.projects.locations.unenrollDataSources",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Unenroll data sources in a user project. This allows users to remove transfer configurations for these data sources. They will no longer appear in the ListDataSources RPC and will also no longer appear in the [BigQuery UI](https://console.cloud.google.com/bigquery). Data transfers configurations of unenrolled data sources will not be scheduled.",
+      "summary_suggestion": "Disable data sources for project",
+      "description_suggestion": "Unenrolls specified data sources from a user project, preventing new transfer configurations from being created. Accepts an UnenrollDataSourcesRequest listing the data sources to disable. After unenrollment, these sources no longer appear in ListDataSources results or the BigQuery UI Transfer tab. Existing transfer configurations for unenrolled sources will not be scheduled for execution.",
+      "reasoning": "Missing summary. Description is verbose and unclear about inputs/outputs. Clarified: what the operation does (disables data sources), input schema (UnenrollDataSourcesRequest), side effects (removal from UI and ListDataSources, halting scheduled transfers), and impact on existing configurations. Streamlined for AI agent clarity on operation scope and consequences.",
       "batch_index": 0
     }
   },
@@ -5382,7 +5688,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 14 operations analyzed, 6 quality issues found",
+    "message": "Semantic analysis completed: 14 operations analyzed, 14 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -5394,7 +5700,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 14,
-      "total_issues_found": 6,
+      "total_issues_found": 14,
       "batches_processed": 2
     }
   }

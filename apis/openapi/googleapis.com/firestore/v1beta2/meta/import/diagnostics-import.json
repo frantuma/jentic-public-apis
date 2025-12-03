@@ -3871,7 +3871,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.collectionGroups.indexes.create' has semantic quality issues: vague_summary, missing_context, poor_ai_interpretability. Original summary was missing. Added context about the collection group and the need for the 'parent' parameter. Improved description to clarify the return type and metadata for better AI agent interpretability.",
+    "message": "Operation 'firestore.projects.databases.collectionGroups.indexes.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. The original description lacks a summary entirely and provides incomplete information for AI agent decision-making. The description mentions the operation is long-running but doesn't explain what a composite index is or why it's needed. Added: (1) clear summary indicating the action and scope, (2) explanation of what composite indexes do, (3) clarification that the operation is asynchronous, (4) details about the request body requirement, (5) side effects (index availability and query performance improvement), and (6) context about the parent resource (collection group). This enables AI agents to understand when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3886,14 +3886,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
         "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Creates a composite index. This returns a google.longrunning.Operation which may be used to track the status of the creation. The metadata for the operation will be the type IndexOperationMetadata.",
       "summary_suggestion": "Create a composite index for a collection group",
-      "description_suggestion": "Creates a composite index for a specified collection group in Cloud Firestore. This operation returns a google.longrunning.Operation which can be used to track the status of the index creation. The metadata for the operation will be of the type IndexOperationMetadata. Requires the 'parent' parameter to specify the collection group. The request body must include the index configuration details.",
-      "reasoning": "Original summary was missing. Added context about the collection group and the need for the 'parent' parameter. Improved description to clarify the return type and metadata for better AI agent interpretability.",
+      "description_suggestion": "Creates a composite index for the specified collection group to enable complex queries. This operation is asynchronous and returns a long-running operation (google.longrunning.Operation) that can be used to track the creation status. The operation metadata will be of type IndexOperationMetadata, containing progress information. The index definition must be provided in the request body. Once created, the index will be available for querying and will improve query performance for the specified field combinations.",
+      "reasoning": "The original description lacks a summary entirely and provides incomplete information for AI agent decision-making. The description mentions the operation is long-running but doesn't explain what a composite index is or why it's needed. Added: (1) clear summary indicating the action and scope, (2) explanation of what composite indexes do, (3) clarification that the operation is asynchronous, (4) details about the request body requirement, (5) side effects (index availability and query performance improvement), and (6) context about the parent resource (collection group). This enables AI agents to understand when to use this operation and what to expect.",
       "batch_index": 1
     }
   },
@@ -3908,7 +3910,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.collectionGroups.indexes.delete' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides more detail about the operation's purpose and parameters.",
+    "message": "Operation 'firestore.projects.databases.collectionGroups.indexes.delete' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Missing summary entirely. Description is too brief and lacks critical details about input requirements (resource name format), side effects (query performance impact), and irreversibility. Added these details for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3923,13 +3925,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_input_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes a composite index.",
       "summary_suggestion": "Delete a composite index",
-      "description_suggestion": "Deletes a specified composite index from the database. Requires the index name as a parameter. Returns an empty response upon successful deletion.",
-      "reasoning": "The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides more detail about the operation's purpose and parameters.",
+      "description_suggestion": "Deletes a composite index by name. The index must be specified by its full resource name. Deletion is immediate and cannot be undone. After deletion, queries that relied on this index may fail or perform less efficiently.",
+      "reasoning": "Missing summary entirely. Description is too brief and lacks critical details about input requirements (resource name format), side effects (query performance impact), and irreversibility. Added these details for better AI agent decision-making.",
       "batch_index": 0
     }
   },
@@ -3944,7 +3947,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.collectionGroups.fields.get' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented, providing clarity on what the operation does.",
+    "message": "Operation 'firestore.projects.databases.collectionGroups.fields.get' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description lacks input specification details (resource name format) that are essential for AI agents to construct proper requests. Added format guidance for clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3958,12 +3961,14 @@
       "operation_id": "firestore.projects.databases.collectionGroups.fields.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Gets the metadata and configuration for a Field.",
-      "summary_suggestion": "Get field metadata and configuration",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented, providing clarity on what the operation does.",
+      "summary_suggestion": "Retrieve field metadata and configuration",
+      "description_suggestion": "Retrieves the metadata and configuration for a specific field, including index configuration and field settings. Requires the full resource name of the field in the format: projects/{project_id}/databases/{database_id}/collectionGroups/{collection_group}/fields/{field_path}.",
+      "reasoning": "Missing summary. Description lacks input specification details (resource name format) that are essential for AI agents to construct proper requests. Added format guidance for clarity.",
       "batch_index": 0
     }
   },
@@ -3978,7 +3983,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.exportDocuments' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented, providing clarity on what the operation does.",
+    "message": "Operation 'firestore.projects.databases.exportDocuments' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description is lengthy but lacks input specification details (what ExportDocumentsRequest contains, required parameters). Reorganized for clarity and added input requirements to help AI agents understand what parameters to provide.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3992,12 +3997,14 @@
       "operation_id": "firestore.projects.databases.exportDocuments",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Exports a copy of all or a subset of documents from Google Cloud Firestore to another storage system, such as Google Cloud Storage. Recent updates to documents may not be reflected in the export. The export occurs in the background and its progress can be monitored and managed via the Operation resource that is created. The output of an export may only be used once the associated operation is done. If an export operation is cancelled before completion it may leave partial data behind in Google Cloud Storage.",
-      "summary_suggestion": "Export documents from Firestore",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented, providing clarity on what the operation does.",
+      "summary_suggestion": "Export Firestore documents to external storage",
+      "description_suggestion": "Exports all or a subset of documents from Cloud Firestore to external storage (e.g., Google Cloud Storage). The operation runs asynchronously and returns a long-running Operation for progress tracking. Recent document updates may not be included in the export. Partial data may remain in storage if the operation is cancelled. Requires ExportDocumentsRequest specifying output URI and optional collection filters.",
+      "reasoning": "Missing summary. Description is lengthy but lacks input specification details (what ExportDocumentsRequest contains, required parameters). Reorganized for clarity and added input requirements to help AI agents understand what parameters to provide.",
       "batch_index": 0
     }
   },
@@ -4012,7 +4019,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.importDocuments' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented, providing clarity on what the operation does.",
+    "message": "Operation 'firestore.projects.databases.importDocuments' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description lacks input specification (what ImportDocumentsRequest contains) and doesn't clarify the source storage system. Added input requirements and source context for better AI agent understanding of operation prerequisites.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4026,12 +4033,14 @@
       "operation_id": "firestore.projects.databases.importDocuments",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Imports documents into Google Cloud Firestore. Existing documents with the same name are overwritten. The import occurs in the background and its progress can be monitored and managed via the Operation resource that is created. If an ImportDocuments operation is cancelled, it is possible that a subset of the data has already been imported to Cloud Firestore.",
       "summary_suggestion": "Import documents into Firestore",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented, providing clarity on what the operation does.",
+      "description_suggestion": "Imports documents into Cloud Firestore from external storage. Existing documents with matching names are overwritten. The operation runs asynchronously and returns a long-running Operation for progress tracking. Partial data may be imported if the operation is cancelled. Requires ImportDocumentsRequest specifying the input URI and optional collection filters.",
+      "reasoning": "Missing summary. Description lacks input specification (what ImportDocumentsRequest contains) and doesn't clarify the source storage system. Added input requirements and source context for better AI agent understanding of operation prerequisites.",
       "batch_index": 0
     }
   },
@@ -4046,7 +4055,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.collectionGroups.fields.list' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented, providing clarity on what the operation does.",
+    "message": "Operation 'firestore.projects.databases.collectionGroups.fields.list' has semantic quality issues: vague_summary, missing_context, missing_input_details. Missing summary. Description is confusing about scope and filtering requirements. Clarified that it lists overridden fields only, added pagination support context, and explained the filter requirement more clearly for AI agents to construct proper requests.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4060,12 +4069,15 @@
       "operation_id": "firestore.projects.databases.collectionGroups.fields.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Lists the field configuration and metadata for this database. Currently, FirestoreAdmin.ListFields only supports listing fields that have been explicitly overridden. To issue this query, call FirestoreAdmin.ListFields with the filter set to `indexConfig.usesAncestorConfig:false`.",
-      "summary_suggestion": "List field configurations and metadata",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented, providing clarity on what the operation does.",
+      "summary_suggestion": "List field configurations in database",
+      "description_suggestion": "Lists field configurations and metadata for a database. Currently only returns fields with explicit configuration overrides (not inherited from ancestor configs). Use filter `indexConfig.usesAncestorConfig:false` to retrieve overridden fields. Supports pagination via pageSize and pageToken parameters. Returns a list of Field resources with their index configurations.",
+      "reasoning": "Missing summary. Description is confusing about scope and filtering requirements. Clarified that it lists overridden fields only, added pagination support context, and explained the filter requirement more clearly for AI agents to construct proper requests.",
       "batch_index": 0
     }
   },
@@ -4080,7 +4092,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.collectionGroups.indexes.list' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented, providing clarity on what the operation does.",
+    "message": "Operation 'firestore.projects.databases.collectionGroups.indexes.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is extremely vague with no context about scope, pagination, or return values. Added details about what composite indexes are used for, pagination support, and what metadata is returned to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4094,12 +4106,15 @@
       "operation_id": "firestore.projects.databases.collectionGroups.indexes.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists composite indexes.",
       "summary_suggestion": "List composite indexes",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented, providing clarity on what the operation does.",
+      "description_suggestion": "Lists all composite indexes for a collection group. Returns index metadata including field definitions, index state, and creation status. Supports pagination via pageSize and pageToken parameters. Composite indexes enable complex queries across multiple fields.",
+      "reasoning": "Missing summary. Description is extremely vague with no context about scope, pagination, or return values. Added details about what composite indexes are used for, pagination support, and what metadata is returned to improve AI agent interpretability.",
       "batch_index": 0
     }
   },

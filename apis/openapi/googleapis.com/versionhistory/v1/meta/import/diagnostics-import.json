@@ -2253,7 +2253,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'versionhistory.platforms.channels.list' has semantic quality issues: vague_summary. The current summary is missing, making it unclear at first glance. A concise action-oriented summary is provided.",
+    "message": "Operation 'versionhistory.platforms.channels.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks clarity about what channels represent, required input parameters, and response structure. Added domain context about channel ownership hierarchy and example channel types to improve AI agent understanding of when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2267,12 +2267,15 @@
       "operation_id": "versionhistory.platforms.channels.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Returns list of channels that are available for a given platform.",
-      "summary_suggestion": "List available channels for the specified platform",
-      "reasoning": "The current summary is missing, making it unclear at first glance. A concise action-oriented summary is provided.",
+      "summary_suggestion": "List available channels for a platform",
+      "description_suggestion": "Retrieves a list of all channels available for the specified platform. Channels are owned by platforms and represent different release tracks (e.g., stable, beta, dev). Requires the parent platform resource identifier as input. Returns a ListChannelsResponse containing the collection of Channel objects for the platform.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about what channels represent, required input parameters, and response structure. Added domain context about channel ownership hierarchy and example channel types to improve AI agent understanding of when to use this operation.",
       "batch_index": 0
     }
   },
@@ -2287,7 +2290,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'versionhistory.platforms.list' has semantic quality issues: vague_summary, missing_context. The current summary is missing, and the description contains an unnecessary context about the product name. The summary is improved, and the description is refined to include domain context.",
+    "message": "Operation 'versionhistory.platforms.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, unclear_purpose. Missing summary. Description is unclear about the product parameter and confusing about resource naming. Clarified the parent parameter represents the product, explained the platform-product-channel hierarchy, and specified the response structure. The note about product resource naming is preserved but contextualized for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2302,13 +2305,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details",
+        "unclear_purpose"
       ],
       "current_summary": "",
       "current_description": "Returns list of platforms that are available for a given product. The resource \"product\" has no resource name in its name.",
-      "summary_suggestion": "List available platforms for the specified product",
-      "description_suggestion": "Returns list of platforms that are available for a given product. The resource 'product' has no resource name in its name. Each platform is owned by a product and owns a collection of channels.",
-      "reasoning": "The current summary is missing, and the description contains an unnecessary context about the product name. The summary is improved, and the description is refined to include domain context.",
+      "summary_suggestion": "List available platforms for a product",
+      "description_suggestion": "Retrieves a list of all platforms available for the specified product. Platforms are owned by products and own collections of channels. The product resource is identified by parent parameter (note: product has no explicit resource name in the API path). Returns a ListPlatformsResponse containing the collection of Platform objects available for the product.",
+      "reasoning": "Missing summary. Description is unclear about the product parameter and confusing about resource naming. Clarified the parent parameter represents the product, explained the platform-product-channel hierarchy, and specified the response structure. The note about product resource naming is preserved but contextualized for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -2323,7 +2328,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'versionhistory.platforms.channels.versions.releases.list' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing, and the description lacks details about what the release information includes. Both are improved for better clarity and AI agent interpretability.",
+    "message": "Operation 'versionhistory.platforms.channels.versions.releases.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_context. Missing summary. Description is too brief and lacks context about the resource hierarchy and what release information contains. Added clarity about the nested resource structure (platform > channel > version > release), explained what releases represent, and specified the response structure to help AI agents understand the full context of this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2338,13 +2343,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Returns list of releases of the given version.",
-      "summary_suggestion": "List releases for the specified version",
-      "description_suggestion": "Returns list of releases of the given version. Each release contains information about the release(s) of its parent version, including when the release began and ended.",
-      "reasoning": "The current summary is missing, and the description lacks details about what the release information includes. Both are improved for better clarity and AI agent interpretability.",
+      "summary_suggestion": "List releases for a version",
+      "description_suggestion": "Retrieves a list of all releases for the specified version. Releases are owned by versions and contain information about when releases began and ended, including platform-specific release intervals. Requires parent version resource identifier (platform, channel, and version must be specified in the path). Returns a ListReleasesResponse containing the collection of Release objects with release timing and status information.",
+      "reasoning": "Missing summary. Description is too brief and lacks context about the resource hierarchy and what release information contains. Added clarity about the nested resource structure (platform > channel > version > release), explained what releases represent, and specified the response structure to help AI agents understand the full context of this operation.",
       "batch_index": 0
     }
   },
@@ -2359,7 +2366,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'versionhistory.platforms.channels.versions.list' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing, and the description lacks details about what the version information includes. Both are improved for better clarity and AI agent interpretability.",
+    "message": "Operation 'versionhistory.platforms.channels.versions.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description has grammatical issues ('version for' should be 'versions for') and lacks detail about version format, the version-release relationship, and response structure. Added clarity about version numbering format, explained the ownership hierarchy, and specified the response structure for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2374,13 +2381,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Returns list of version for the given platform/channel.",
-      "summary_suggestion": "List versions for the specified platform/channel",
-      "description_suggestion": "Returns list of versions for the given platform/channel. Each version is owned by a channel and displays the version number. A version owns a collection of releases.",
-      "reasoning": "The current summary is missing, and the description lacks details about what the version information includes. Both are improved for better clarity and AI agent interpretability.",
+      "summary_suggestion": "List versions for a platform channel",
+      "description_suggestion": "Retrieves a list of all versions available for the specified platform and channel. Versions are owned by channels and display version numbers (e.g., 84.0.4147.38). Each version owns a collection of releases. Requires parent channel resource identifier (platform and channel must be specified in the path). Returns a ListVersionsResponse containing the collection of Version objects for the channel.",
+      "reasoning": "Missing summary. Description has grammatical issues ('version for' should be 'versions for') and lacks detail about version format, the version-release relationship, and response structure. Added clarity about version numbering format, explained the ownership hierarchy, and specified the response structure for better AI agent interpretability.",
       "batch_index": 0
     }
   },

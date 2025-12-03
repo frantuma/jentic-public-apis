@@ -9739,7 +9739,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'authorizedbuyersmarketplace.buyers.proposals.list' has semantic quality issues: vague_summary, missing_context. Added a clear summary and expanded the description to include context about the order of results.",
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.proposals.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks context about what proposals are (negotiation units), what the parent parameter represents (buyer account), and what the response contains. Added domain terminology and clarified AI agent understanding of when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9754,13 +9754,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists proposals. A filter expression using [Cloud API list filtering syntax](https://developers.google.com/authorized-buyers/apis/guides/list-filters) may be specified to filter the results.",
-      "summary_suggestion": "List all buyer proposals",
-      "description_suggestion": "Lists all proposals for the authenticated buyer. A filter expression using [Cloud API list filtering syntax](https://developers.google.com/authorized-buyers/apis/guides/list-filters) may be specified to filter the results. The returned proposals aren't in any defined order.",
-      "reasoning": "Added a clear summary and expanded the description to include context about the order of results.",
+      "summary_suggestion": "List proposals for a buyer account",
+      "description_suggestion": "Retrieves a list of proposals for the specified buyer account. Supports filtering using Cloud API list filtering syntax to narrow results by proposal attributes. Returns a paginated list of Proposal objects representing negotiation units between the buyer and sellers.",
+      "reasoning": "Missing summary entirely. Description lacks context about what proposals are (negotiation units), what the parent parameter represents (buyer account), and what the response contains. Added domain terminology and clarified AI agent understanding of when to use this operation.",
       "batch_index": 3
     }
   },
@@ -9775,7 +9776,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'authorizedbuyersmarketplace.buyers.publisherProfiles.list' has semantic quality issues: vague_summary, missing_context. Added a clear summary and expanded the description to include context about the order of results.",
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.publisherProfiles.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description focuses on ordering behavior rather than purpose. Added context about why this operation exists (inventory discovery), what data is returned, and when an AI agent should use it. Clarified domain context about publisher profiles.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9790,13 +9791,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists publisher profiles. The returned publisher profiles aren't in any defined order. The order of the results might change. A new publisher profile can appear in any place in the list of returned results.",
-      "summary_suggestion": "List all publisher profiles",
-      "description_suggestion": "Lists all publisher profiles for the authenticated buyer. The returned profiles aren't in any defined order and the order of the results might change.",
-      "reasoning": "Added a clear summary and expanded the description to include context about the order of results.",
+      "summary_suggestion": "List available publisher profiles",
+      "description_suggestion": "Retrieves a list of publisher profiles available to the buyer for inventory discovery. Returns PublisherProfile objects containing publisher information supplied by publishers. Results are unordered and may change between requests as new profiles become available. Use this to discover publisher inventory and terms.",
+      "reasoning": "Missing summary. Description focuses on ordering behavior rather than purpose. Added context about why this operation exists (inventory discovery), what data is returned, and when an AI agent should use it. Clarified domain context about publisher profiles.",
       "batch_index": 3
     }
   },
@@ -9811,7 +9813,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'authorizedbuyersmarketplace.buyers.clients.users.list' has semantic quality issues: vague_summary, missing_context. Added a clear summary and expanded the description to include context about the order of results.",
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.clients.users.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about what input is required (ClientUser object) and what is returned (the created ClientUser object). Added request/response details and clarified the state transition workflow for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9822,17 +9824,17 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "authorizedbuyersmarketplace.buyers.clients.users.list",
+      "operation_id": "authorizedbuyersmarketplace.buyers.clients.users.create",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Lists all client users for a specified client.",
-      "summary_suggestion": "List all client users for a specified client",
-      "description_suggestion": "Lists all client users for the specified client. The returned users aren't in any defined order.",
-      "reasoning": "Added a clear summary and expanded the description to include context about the order of results.",
+      "current_description": "Creates a new client user in \"INVITED\" state. An email invitation will be sent to the new user, once accepted the user will become active.",
+      "summary_suggestion": "Create a new client user",
+      "description_suggestion": "Creates a new ClientUser for the specified client in INVITED state. Sends an email invitation to the new user; upon acceptance, the user transitions to active status. Requires ClientUser request body with user details. Returns the newly created ClientUser object with INVITED state.",
+      "reasoning": "Missing summary. Description lacks clarity about what input is required (ClientUser object) and what is returned (the created ClientUser object). Added request/response details and clarified the state transition workflow for AI agent understanding.",
       "batch_index": 3
     }
   },
@@ -9847,7 +9849,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'authorizedbuyersmarketplace.buyers.proposals.addNote' has semantic quality issues: vague_summary, missing_context. Added a clear summary and expanded the description to include context about the unsupported DealType.",
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.proposals.addNote' has semantic quality issues: vague_summary, missing_output_details, missing_context. Missing summary. Description lacks context about the purpose (buyer-seller communication), what input is required (AddNoteRequest), and what is returned (Note object). Added domain context about negotiation workflow and clarified the constraint about PRIVATE_AUCTION proposals.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9862,14 +9864,802 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_output_details",
         "missing_context"
       ],
       "current_summary": "",
       "current_description": "Creates a note for this proposal and sends to the seller. This method is not supported for proposals with DealType set to 'PRIVATE_AUCTION'.",
       "summary_suggestion": "Add a note to a proposal",
-      "description_suggestion": "Creates a note for the specified proposal and sends it to the seller. This method is not supported for proposals with DealType set to 'PRIVATE_AUCTION'.",
-      "reasoning": "Added a clear summary and expanded the description to include context about the unsupported DealType.",
+      "description_suggestion": "Adds a Note to the specified proposal and sends it to the seller for communication during negotiation. Requires AddNoteRequest with note content. Not supported for PRIVATE_AUCTION deal types. Returns the created Note object. Facilitates buyer-seller communication within the proposal negotiation workflow.",
+      "reasoning": "Missing summary. Description lacks context about the purpose (buyer-seller communication), what input is required (AddNoteRequest), and what is returned (Note object). Added domain context about negotiation workflow and clarified the constraint about PRIVATE_AUCTION proposals.",
       "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.proposals.cancelNegotiation' has semantic quality issues: vague_summary, missing_output_details, unclear_purpose. Missing summary. Description is complex and difficult for AI agents to parse. Reorganized to clarify the operation's purpose (cancel negotiation), the conditional state transitions, side effects (revision increment, no serving impact), constraints (PRIVATE_AUCTION), and return value. Improved clarity for AI agent decision-making about when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.proposals.cancelNegotiation",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "unclear_purpose"
+      ],
+      "current_summary": "",
+      "current_description": "Cancels an ongoing negotiation on a proposal. This does not cancel or end serving for the deals if the proposal has been finalized. If the proposal has not been finalized before, calling this method will set the Proposal.state to `TERMINATED` and increment the Proposal.proposal_revision. If the proposal has been finalized before and is under renegotiation now, calling this method will reset the Proposal.state to `FINALIZED` and increment the Proposal.proposal_revision. This method does not support private auction proposals whose Proposal.deal_type is 'PRIVATE_AUCTION'.",
+      "summary_suggestion": "Cancel proposal negotiation",
+      "description_suggestion": "Cancels ongoing negotiation on a proposal. Behavior depends on proposal state: if not previously finalized, sets state to TERMINATED; if finalized and under renegotiation, resets state to FINALIZED. Increments proposal_revision in both cases. Does not affect deal serving if proposal is finalized. Not supported for PRIVATE_AUCTION deal types. Requires CancelNegotiationRequest. Returns the updated Proposal object.",
+      "reasoning": "Missing summary. Description is complex and difficult for AI agents to parse. Reorganized to clarify the operation's purpose (cancel negotiation), the conditional state transitions, side effects (revision increment, no serving impact), constraints (PRIVATE_AUCTION), and return value. Improved clarity for AI agent decision-making about when to use this operation.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.proposals.deals.patch' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is comprehensive but could be more concise and better structured for AI agent interpretation. Clarified the concurrency control mechanism and emphasized the conflict detection behavior. Added explicit return value information.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.proposals.deals.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Updates the given deal at the buyer known revision number. If the server revision has advanced since the passed-in proposal.proposal_revision an ABORTED error message will be returned. The revision number is incremented by the server whenever the proposal or its constituent deals are updated. Note: The revision number is kept at a proposal level. The buyer of the API is expected to keep track of the revision number after the last update operation and send it in as part of the next update request. This way, if there are further changes on the server (for example, seller making new updates), then the server can detect conflicts and reject the proposed changes.",
+      "summary_suggestion": "Update deal with optimistic concurrency control",
+      "description_suggestion": "Updates a deal within a proposal using optimistic concurrency control via revision numbers. The operation requires the current proposal revision number to detect conflicts. If the server revision has advanced since the request was prepared, an ABORTED error is returned. The revision number is maintained at the proposal level and incremented whenever the proposal or its deals are updated. Returns the updated Deal object. This prevents lost updates when both buyer and seller are modifying deals concurrently.",
+      "reasoning": "Missing summary entirely. Description is comprehensive but could be more concise and better structured for AI agent interpretation. Clarified the concurrency control mechanism and emphasized the conflict detection behavior. Added explicit return value information.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.proposals.accept' has semantic quality issues: vague_summary. Description is well-structured and comprehensive, clearly explaining state transitions, revision validation, idempotency behavior, and the semantic meaning of acceptance. However, missing summary. Added action-oriented summary that captures both the operation (accept) and its business meaning (finalize deal terms).",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.proposals.accept",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Accepts the proposal at the given revision number. If the revision number in the request is behind the latest from the server, an error message will be returned. This call updates the Proposal.state from `BUYER_ACCEPTANCE_REQUESTED` to `FINALIZED`; it has no side effect if the Proposal.state is already `FINALIZED` and throws exception if the Proposal.state is not either `BUYER_ACCEPTANCE_REQUESTED` or `FINALIZED`. Accepting a proposal means the buyer understands and accepts the Proposal.terms_and_conditions proposed by the seller.",
+      "summary_suggestion": "Accept proposal and finalize deal terms",
+      "reasoning": "Description is well-structured and comprehensive, clearly explaining state transitions, revision validation, idempotency behavior, and the semantic meaning of acceptance. However, missing summary. Added action-oriented summary that captures both the operation (accept) and its business meaning (finalize deal terms).",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.clients.users.activate' has semantic quality issues: vague_summary. Description is clear and complete, explaining state transitions, idempotency, and error conditions. Missing summary. Added concise, action-oriented summary that specifies the operation and the precondition (inactive state).",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.clients.users.activate",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Activates an existing client user. The state of the client user will be updated from \"INACTIVE\" to \"ACTIVE\". This method has no effect if the client user is already in \"ACTIVE\" state. An error will be returned if the client user to activate is still in \"INVITED\" state.",
+      "summary_suggestion": "Activate an inactive client user",
+      "reasoning": "Description is clear and complete, explaining state transitions, idempotency, and error conditions. Missing summary. Added concise, action-oriented summary that specifies the operation and the precondition (inactive state).",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.clients.users.deactivate' has semantic quality issues: vague_summary. Description is clear and complete, explaining state transitions, idempotency, and error conditions. Missing summary. Added concise, action-oriented summary that specifies the operation and the precondition (active state).",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.clients.users.deactivate",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Deactivates an existing client user. The state of the client user will be updated from \"ACTIVE\" to \"INACTIVE\". This method has no effect if the client user is already in \"INACTIVE\" state. An error will be returned if the client user to deactivate is still in \"INVITED\" state.",
+      "summary_suggestion": "Deactivate an active client user",
+      "reasoning": "Description is clear and complete, explaining state transitions, idempotency, and error conditions. Missing summary. Added concise, action-oriented summary that specifies the operation and the precondition (active state).",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.finalizedDeals.pause' has semantic quality issues: vague_summary. Description is well-structured and clear, explaining the operation's scope (serving status only), idempotency behavior, and applicable deal types. Missing summary. Added action-oriented summary that captures the operation and its scope.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.finalizedDeals.pause",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Pauses serving of the given finalized deal. This call only pauses the serving status, and does not affect other fields of the finalized deal. Calling this method for an already paused deal has no effect. This method only applies to programmatic guaranteed deals and preferred deals.",
+      "summary_suggestion": "Pause serving of a finalized deal",
+      "reasoning": "Description is well-structured and clear, explaining the operation's scope (serving status only), idempotency behavior, and applicable deal types. Missing summary. Added action-oriented summary that captures the operation and its scope.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.finalizedDeals.resume' has semantic quality issues: vague_summary, missing_context. Missing summary. Description has a typo ('an running' should be 'an already running') and lacks explicit return value information. Added summary and corrected description with better clarity and explicit return value for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.finalizedDeals.resume",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Resumes serving of the given finalized deal. Calling this method for an running deal has no effect. If a deal is initially paused by the seller, calling this method will not resume serving of the deal until the seller also resumes the deal. This method only applies to programmatic guaranteed deals and preferred deals.",
+      "summary_suggestion": "Resume serving of a finalized deal",
+      "description_suggestion": "Resumes serving of a finalized deal. Calling this method for an already running deal has no effect. If the deal was paused by the seller, this method will not resume serving until the seller also resumes the deal. This method only applies to programmatic guaranteed deals and preferred deals. Returns the updated FinalizedDeal object.",
+      "reasoning": "Missing summary. Description has a typo ('an running' should be 'an already running') and lacks explicit return value information. Added summary and corrected description with better clarity and explicit return value for AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.auctionPackages.subscribe' has semantic quality issues: vague_summary, missing_context. Missing summary. Description uses unclear terminology ('call out' should be 'callout' or 'bid request') and lacks explicit return value information. Added summary and improved description with clearer terminology, explicit return value, and business context about auction participation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.auctionPackages.subscribe",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Subscribe to the auction package for the specified buyer. Once subscribed, the bidder will receive a call out for inventory matching the auction package targeting criteria with the auction package deal ID and the specified buyer.",
+      "summary_suggestion": "Subscribe buyer to auction package inventory",
+      "description_suggestion": "Subscribes the specified buyer to an auction package. Once subscribed, the buyer's bidder will receive callouts for inventory matching the auction package's targeting criteria, identified by the auction package deal ID. Returns a subscription confirmation. This enables the buyer to participate in auctions for the specified inventory segment.",
+      "reasoning": "Missing summary. Description uses unclear terminology ('call out' should be 'callout' or 'bid request') and lacks explicit return value information. Added summary and improved description with clearer terminology, explicit return value, and business context about auction participation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.auctionPackages.unsubscribe' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description uses unclear phrasing ('call out for the auction package deal ID') and doesn't specify the response. Added clarity on what unsubscription means, improved terminology consistency with domain context, and explicitly stated the response behavior for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.auctionPackages.unsubscribe",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Unsubscribe from the auction package for the specified buyer. Once unsubscribed, the bidder will no longer receive a call out for the auction package deal ID and the specified buyer.",
+      "summary_suggestion": "Unsubscribe bidder from auction package",
+      "description_suggestion": "Unsubscribes a bidder from the specified auction package. After unsubscribing, the bidder will no longer receive callouts for deals associated with this auction package and buyer. Returns an empty response on successful unsubscription.",
+      "reasoning": "Missing summary entirely. Description uses unclear phrasing ('call out for the auction package deal ID') and doesn't specify the response. Added clarity on what unsubscription means, improved terminology consistency with domain context, and explicitly stated the response behavior for AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.bidders.auctionPackages.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is verbose and mixes endpoint path information with functional description. Clarified that this is the bidder-specific endpoint, added information about response format and available query parameters, and separated endpoint guidance for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.bidders.auctionPackages.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "List the auction packages. Buyers can use the URL path \"/v1/buyers/{accountId}/auctionPackages\" to list auction packages for the current buyer and its clients. Bidders can use the URL path \"/v1/bidders/{accountId}/auctionPackages\" to list auction packages for the bidder, its media planners, its buyers, and all their clients.",
+      "summary_suggestion": "List auction packages for bidder account",
+      "description_suggestion": "Lists auction packages accessible to the bidder account. Returns auction packages for the bidder, its media planners, its buyers, and all their clients. Supports filtering and pagination via query parameters. Use the buyers endpoint to list packages for a specific buyer and its clients only.",
+      "reasoning": "Missing summary. Description is verbose and mixes endpoint path information with functional description. Clarified that this is the bidder-specific endpoint, added information about response format and available query parameters, and separated endpoint guidance for better AI agent interpretability.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.clients.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks detail about response format and available query parameters. Added information about return type, pagination support, and what client information is included to improve AI agent understanding of when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.clients.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all the clients for the current buyer.",
+      "summary_suggestion": "List all clients for buyer",
+      "description_suggestion": "Lists all clients associated with the current buyer account. Returns a paginated list of Client objects containing client details such as name, role, and status. Supports filtering and pagination via query parameters.",
+      "reasoning": "Missing summary. Description lacks detail about response format and available query parameters. Added information about return type, pagination support, and what client information is included to improve AI agent understanding of when and how to use this operation.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.clients.create' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description is too minimal and lacks input requirements, output details, and side effects. Added clarity on required fields, return value, and the effect of creation (client availability) to help AI agents understand what inputs are needed and what state changes occur.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.clients.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new client.",
+      "summary_suggestion": "Create new client for buyer",
+      "description_suggestion": "Creates a new client for the current buyer account. Accepts a Client object with required fields (name, role). Returns the newly created Client object with an assigned resource ID. The client becomes immediately available for use in proposals and other marketplace operations.",
+      "reasoning": "Missing summary. Description is too minimal and lacks input requirements, output details, and side effects. Added clarity on required fields, return value, and the effect of creation (client availability) to help AI agents understand what inputs are needed and what state changes occur.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.proposals.deals.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks information about response format and what deal information is included. Added clarity on return type, distinction between this endpoint and FinalizedDeals, and what deal data is available to improve AI agent decision-making about which endpoint to use.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.proposals.deals.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all deals in a proposal. To retrieve only the finalized revision deals regardless if a deal is being renegotiated, see the FinalizedDeals resource.",
+      "summary_suggestion": "List all deals in proposal",
+      "description_suggestion": "Lists all deals within a specified proposal. Returns a list of Deal objects including current deal terms, targeting, and status. Includes deals under negotiation and finalized deals. For finalized deal snapshots only, use the FinalizedDeals resource instead.",
+      "reasoning": "Missing summary. Description lacks information about response format and what deal information is included. Added clarity on return type, distinction between this endpoint and FinalizedDeals, and what deal data is available to improve AI agent decision-making about which endpoint to use.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.proposals.deals.batchUpdate' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description lacks input structure details, output information, and side effects. Added clarity on request format (array of deals), return value, constraint (same proposal), and partial update support to help AI agents understand the operation's scope and effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.proposals.deals.batchUpdate",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Batch updates multiple deals in the same proposal.",
+      "summary_suggestion": "Batch update deals in proposal",
+      "description_suggestion": "Updates multiple deals within the same proposal in a single request. Accepts a BatchUpdateDealsRequest containing an array of deals with updated terms, targeting, or status. Returns the updated Deal objects. All deals must belong to the same proposal. Partial updates are supported - only specified fields are modified.",
+      "reasoning": "Missing summary. Description lacks input structure details, output information, and side effects. Added clarity on request format (array of deals), return value, constraint (same proposal), and partial update support to help AI agents understand the operation's scope and effects.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.bidders.finalizedDeals.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is verbose and mixes endpoint path information with functional description. Clarified this is the bidder-specific endpoint, added information about FinalizedDeal schema and response format, and separated endpoint guidance for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.bidders.finalizedDeals.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists finalized deals. Use the URL path \"/v1/buyers/{accountId}/finalizedDeals\" to list finalized deals for the current buyer and its clients. Bidders can use the URL path \"/v1/bidders/{accountId}/finalizedDeals\" to list finalized deals for the bidder, its buyers and all their clients.",
+      "summary_suggestion": "List finalized deals for bidder",
+      "description_suggestion": "Lists finalized deals accessible to the bidder account. Returns FinalizedDeal snapshots for the bidder, its buyers, and all their clients. FinalizedDeals represent deal snapshots when both buyer and seller accepted terms. Supports filtering and pagination via query parameters. Use the buyers endpoint to list finalized deals for a specific buyer and its clients only.",
+      "reasoning": "Missing summary. Description is verbose and mixes endpoint path information with functional description. Clarified this is the bidder-specific endpoint, added information about FinalizedDeal schema and response format, and separated endpoint guidance for better AI agent interpretability.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.auctionPackages.subscribeClients' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity on return value and output. Added concise summary and enhanced description to specify what clients gain access to, clarify the all-or-nothing behavior on errors, and explicitly state the return value for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.auctionPackages.subscribeClients",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Subscribe the specified clients of the buyer to the auction package. If a client in the list does not belong to the buyer, an error response will be returned, and all of the following clients in the list will not be subscribed. Subscribing an already subscribed client will have no effect.",
+      "summary_suggestion": "Subscribe buyer clients to auction package",
+      "description_suggestion": "Subscribes the specified buyer clients to an auction package, enabling them to access the inventory segment. If any client does not belong to the buyer, an error is returned and no clients in the list are subscribed. Attempting to subscribe an already subscribed client has no effect. Returns the updated auction package subscription status.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on return value and output. Added concise summary and enhanced description to specify what clients gain access to, clarify the all-or-nothing behavior on errors, and explicitly state the return value for AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.auctionPackages.unsubscribeClients' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks output details and clarity on what unsubscribing accomplishes. Added summary and enhanced description to clarify access removal and return value for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.auctionPackages.unsubscribeClients",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Unsubscribe from the auction package for the specified clients of the buyer. Unsubscribing a client that is not subscribed will have no effect.",
+      "summary_suggestion": "Unsubscribe buyer clients from auction package",
+      "description_suggestion": "Unsubscribes the specified buyer clients from an auction package, removing their access to the inventory segment. Attempting to unsubscribe a client that is not currently subscribed has no effect. Returns the updated auction package subscription status.",
+      "reasoning": "Missing summary entirely. Description lacks output details and clarity on what unsubscribing accomplishes. Added summary and enhanced description to clarify access removal and return value for better AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.proposals.sendRfp' has semantic quality issues: vague_summary. Description is comprehensive and well-structured, explaining purpose, inputs (deal type, terms, dates, targeting, message), state transition, and expected publisher response. Only missing summary; description provides excellent AI agent guidance.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.proposals.sendRfp",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Sends a request for proposal (RFP) to a publisher to initiate the negotiation regarding certain inventory. In the RFP, buyers can specify the deal type, deal terms, start and end dates, targeting, and a message to the publisher. Once the RFP is sent, a proposal in `SELLER_REVIEW_REQUESTED` state will be created and returned in the response. The publisher may review your request and respond with detailed deals in the proposal.",
+      "summary_suggestion": "Send request for proposal to publisher",
+      "reasoning": "Description is comprehensive and well-structured, explaining purpose, inputs (deal type, terms, dates, targeting, message), state transition, and expected publisher response. Only missing summary; description provides excellent AI agent guidance.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.finalizedDeals.addCreative' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description is detailed but lacks explicit return value information. Added concise summary and clarified return value while maintaining all important constraints and recommendations for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.finalizedDeals.addCreative",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Add creative to be used in the bidding process for a finalized deal. For programmatic guaranteed deals, it's recommended that you associate at least one approved creative with the deal before calling SetReadyToServe, to help reduce the number of bid responses filtered because they don't contain approved creatives. Creatives successfully added to a deal can be found in the Realtime-bidding Creatives API creative.deal_ids. This method only applies to programmatic guaranteed deals. Maximum number of 1000 creatives can be added to a finalized deal.",
+      "summary_suggestion": "Add creative to finalized deal",
+      "description_suggestion": "Adds a creative to a finalized programmatic guaranteed deal for use in the bidding process. Recommended to associate at least one approved creative before calling setReadyToServe to reduce filtered bid responses. Successfully added creatives are tracked in the Realtime-bidding Creatives API via creative.deal_ids. Maximum of 1000 creatives per deal. Returns the updated finalized deal with the added creative.",
+      "reasoning": "Missing summary entirely. Description is detailed but lacks explicit return value information. Added concise summary and clarified return value while maintaining all important constraints and recommendations for AI agent clarity.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.finalizedDeals.setReadyToServe' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks explicit return value and could be more concise for AI agents. Added summary and restructured description to clarify the opt-in nature, prerequisites, and return value while maintaining all critical context about programmatic guaranteed deals.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.finalizedDeals.setReadyToServe",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Sets the given finalized deal as ready to serve. By default, deals are set as ready to serve as soon as they're finalized. If you want to opt out of the default behavior, and manually indicate that deals are ready to serve, ask your Technical Account Manager to add you to the allowlist. If you choose to use this method, finalized deals belonging to the bidder and its child seats don't start serving until after you call `setReadyToServe`, and after the deals become active. For example, you can use this method to delay receiving bid requests until your creative is ready. This method only applies to programmatic guaranteed deals.",
+      "summary_suggestion": "Mark finalized deal ready to serve",
+      "description_suggestion": "Marks a finalized programmatic guaranteed deal as ready to serve, enabling bid requests. By default, deals are ready to serve immediately upon finalization. To manually control readiness, request allowlist addition from your Technical Account Manager. Once enabled, deals won't serve until this method is called and the deal becomes active. Use this to delay bid requests until creatives are prepared. Returns the updated finalized deal status.",
+      "reasoning": "Missing summary entirely. Description lacks explicit return value and could be more concise for AI agents. Added summary and restructured description to clarify the opt-in nature, prerequisites, and return value while maintaining all critical context about programmatic guaranteed deals.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.clients.users.delete' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity on return value and could be more concise. Added summary and enhanced description to clarify the permanent nature of deletion and the only path to restore access, plus explicit return value for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.clients.users.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes an existing client user. The client user will lose access to the Authorized Buyers UI. Note that if a client user is deleted, the user's access to the UI can't be restored unless a new client user is created and activated.",
+      "summary_suggestion": "Delete client user account",
+      "description_suggestion": "Deletes an existing client user, immediately revoking their access to the Authorized Buyers UI. Deleted users cannot have access restored; a new client user must be created and activated to restore access. Returns confirmation of deletion.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on return value and could be more concise. Added summary and enhanced description to clarify the permanent nature of deletion and the only path to restore access, plus explicit return value for AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'authorizedbuyersmarketplace.buyers.publisherProfiles.get' has semantic quality issues: vague_summary, vague_description, missing_context. Missing summary entirely. Description is too minimal and lacks context about what a publisher profile contains or why it's useful. Added summary and expanded description to explain the profile's content and purpose within the marketplace context for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "authorizedbuyersmarketplace.buyers.publisherProfiles.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the requested publisher profile by name.",
+      "summary_suggestion": "Retrieve publisher profile by name",
+      "description_suggestion": "Retrieves a publisher profile by name. The publisher profile contains publisher-supplied information including contact details, inventory characteristics, and other publisher metadata. Returns the requested PublisherProfile object.",
+      "reasoning": "Missing summary entirely. Description is too minimal and lacks context about what a publisher profile contains or why it's useful. Added summary and expanded description to explain the profile's content and purpose within the marketplace context for better AI agent interpretability.",
+      "batch_index": 0
     }
   },
   {
@@ -9883,7 +10673,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 27 operations analyzed, 4 quality issues found",
+    "message": "Semantic analysis completed: 27 operations analyzed, 26 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -9895,7 +10685,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 27,
-      "total_issues_found": 4,
+      "total_issues_found": 26,
       "batches_processed": 4
     }
   }

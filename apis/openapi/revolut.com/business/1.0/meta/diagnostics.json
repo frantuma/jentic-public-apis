@@ -12569,7 +12569,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'getWebhookV1' has semantic quality issues: vague_summary, vague_description. Both the summary and description are vague. The suggestions provide more clarity and detail.",
+    "message": "Operation 'getFailedWebhookEvents' has semantic quality issues: missing_input_details, missing_output_details. The current description explains pagination mechanics well but lacks clarity on: (1) what constitutes a 'failed' webhook event and why it matters for AI agents, (2) explicit mention of required `webhook_id` path parameter, (3) what specific query parameters are available for filtering, and (4) what the response structure contains. The improved description adds context about what failed events represent, clarifies the pagination cursor mechanism, and better explains the operational purpose for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12580,17 +12580,196 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "getWebhookV1",
+      "operation_id": "getFailedWebhookEvents",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a list of failed webhook events",
+      "current_description": "Get the list of all your failed webhook events, or use the query parameters to filter the results.\n\nThe events are sorted by the `created_at` date in reverse chronological order.\n\nThe returned failed events are **paginated**. \nThe maximum number of events returned per page is specified by the `limit` parameter.\nTo get to the next page, make a new request and use the `created_at` date of the last event returned in the previous response.\n\nFor more information, see the guides: [About webhooks](https://developer.revolut.com/docs/guides/manage-accounts/webhooks/about-webhooks) and [Manage webhooks](https://developer.revolut.com/docs/guides/manage-accounts/webhooks/manage-webhooks#retrieve-a-list-of-failed-webhook-events).",
+      "description_suggestion": "Retrieves a paginated list of failed webhook events for the specified webhook. Events are sorted by `created_at` in reverse chronological order. Supports filtering via query parameters. Returns a paginated response with a maximum of `limit` events per page. To retrieve subsequent pages, use the `created_at` timestamp of the last event from the previous response as the cursor. Failed events indicate webhook delivery attempts that did not receive a successful HTTP response.",
+      "reasoning": "The current description explains pagination mechanics well but lacks clarity on: (1) what constitutes a 'failed' webhook event and why it matters for AI agents, (2) explicit mention of required `webhook_id` path parameter, (3) what specific query parameters are available for filtering, and (4) what the response structure contains. The improved description adds context about what failed events represent, clarifies the pagination cursor mechanism, and better explains the operational purpose for AI agent decision-making.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getRate' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Current description is too brief and lacks clarity about inputs and outputs. It mentions 'sell exchange rate' but doesn't explain what parameters are required (source currency, target currency, amount) or what the response contains. AI agents need to understand the input requirements and response structure to use this operation effectively.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getRate",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Get an exchange rate",
+      "current_description": "Get the sell exchange rate between two currencies.\n\nFor more information, see the guides: [Exchange money](https://developer.revolut.com/docs/guides/manage-accounts/exchange-money).",
+      "description_suggestion": "Retrieve the exchange rate between two currencies for a specified amount. Accepts source currency, target currency, and amount as parameters. Returns the sell exchange rate and the converted amount. Use this to determine exchange rates before executing a currency exchange transaction.",
+      "reasoning": "Current description is too brief and lacks clarity about inputs and outputs. It mentions 'sell exchange rate' but doesn't explain what parameters are required (source currency, target currency, amount) or what the response contains. AI agents need to understand the input requirements and response structure to use this operation effectively.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getExchangeReasons' has semantic quality issues: vague_summary, missing_output_details. Summary 'Get exchange reasons' is vague and doesn't clarify that these are reason codes used for compliance. Improved summary makes it clearer that this retrieves specific codes needed for regulatory compliance. Description is otherwise comprehensive, explaining the purpose, when reasons are required, and how to use the results.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getExchangeReasons",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_output_details"
       ],
-      "current_summary": "Retrieve a webhook",
-      "current_description": "Get your webhook URL.",
-      "summary_suggestion": "Get the URL for your webhook",
-      "description_suggestion": "Retrieve the URL that has been set for your webhook, which is used to receive event notifications.",
-      "reasoning": "Both the summary and description are vague. The suggestions provide more clarity and detail.",
+      "current_summary": "Get exchange reasons",
+      "current_description": "Depending on the country and the amount of funds to be exchanged, you might be required to provide an exchange reason. \nWith this endpoint, you can retrieve all exchange reasons available to your business account.\n \nAfter you retrieve the results, use the appropriate reason code in the `exchange_reason_code` field when [exchanging money](https://developer.revolut.com/docs/business/exchange-money) or [making a payment](https://developer.revolut.com/docs/business/create-payment) that involves foreign currency exchange.",
+      "summary_suggestion": "Retrieve available exchange reason codes",
+      "reasoning": "Summary 'Get exchange reasons' is vague and doesn't clarify that these are reason codes used for compliance. Improved summary makes it clearer that this retrieves specific codes needed for regulatory compliance. Description is otherwise comprehensive, explaining the purpose, when reasons are required, and how to use the results.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deleteWebhookV1' has semantic quality issues: vague_summary, missing_context, inconsistent_terminology. The current summary is generic. The description lacks context about deprecation status and doesn't clarify the side effect (stopping notifications). Added clarity about v1 deprecation, authentication requirement, and response behavior to help AI agents understand this is a legacy operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deleteWebhookV1",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "inconsistent_terminology"
+      ],
+      "current_summary": "Delete a webhook",
+      "current_description": "Delete a webhook so that events are not sent to the specified URL any more.",
+      "summary_suggestion": "Delete webhook and stop event notifications",
+      "description_suggestion": "Delete a webhook (v1) to stop receiving event notifications at the specified URL. This is a deprecated endpoint; use the v2 webhooks API instead. Requires the webhook ID. A successful deletion returns no content.",
+      "reasoning": "The current summary is generic. The description lacks context about deprecation status and doesn't clarify the side effect (stopping notifications). Added clarity about v1 deprecation, authentication requirement, and response behavior to help AI agents understand this is a legacy operation.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'rotateWebhookSigningSecret' has semantic quality issues: vague_description, missing_output_details, missing_side_effects. Summary is adequate, but description lacks critical details about the operation's purpose (security enhancement), what is returned (new secret), and important side effects (previous secret invalidation). Added context about webhook signature validation and the need to update consumer systems for better AI agent understanding of this security operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "rotateWebhookSigningSecret",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Rotate a webhook signing secret",
+      "current_description": "Rotate a signing secret for a specific webhook.\n\nFor more information, see the guides: [About webhooks](https://developer.revolut.com/docs/guides/manage-accounts/webhooks/about-webhooks) and [Manage webhooks](https://developer.revolut.com/docs/guides/manage-accounts/webhooks/manage-webhooks#rotate-a-webhook-signing-secret).",
+      "description_suggestion": "Rotate the signing secret for a specific webhook to enhance security. This operation generates a new signing secret for webhook request verification. The new secret is returned in the response and should be updated in your webhook consumer to validate incoming webhook signatures. The previous secret becomes invalid after rotation.",
+      "reasoning": "Summary is adequate, but description lacks critical details about the operation's purpose (security enhancement), what is returned (new secret), and important side effects (previous secret invalidation). Added context about webhook signature validation and the need to update consumer systems for better AI agent understanding of this security operation.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'createPayment' has semantic quality issues: missing_side_effects, missing_output_details. Summary could be more specific about the payment destination. Description lacks explicit information about the response/return value (transaction object details) and doesn't clearly state the immediate side effect of funds being debited from the source account. Added clarity on what is returned and consolidated the regulatory constraint more concisely for better AI agent understanding of when this operation is applicable.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "createPayment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_side_effects",
+        "missing_output_details"
+      ],
+      "current_summary": "Create a transfer to another account or card",
+      "current_description": "Make a payment to a counterparty. You can choose either a bank transfer or a card transfer. The resulting transaction has the type `transfer`.\n \nIf you make the payment to another Revolut account, either business or personal, the transaction is executed instantly.\n\nIf the counterparty has multiple payment methods available, for example, 2 accounts, or 1 account and 1 card, you **must specify the account or card** to which you want to transfer the money (`receiver.account_id` or `receiver.card_id` respectively) .\n\n:::caution\n Due to PSD2 Strong Customer Authentication regulations, the `/pay` endpoint is only available for customers on Revolut Business Company plans.\nIf you're a freelancer and wish to make payments via our API, we advise that you instead leverage our Payment drafts ([`/payment-drafts`](https://developer.revolut.com/docs/business/create-payment-draft)) endpoint.\n:::\n\nFor more details, see the guides: [Send money via bank transfer](https://developer.revolut.com/docs/guides/manage-accounts/transfers/bank-transfers) and [Card transfers](https://developer.revolut.com/docs/guides/manage-accounts/transfers/card-transfers).",
+      "summary_suggestion": "Create a payment to a counterparty account or card",
+      "description_suggestion": "Make a payment to a counterparty via bank transfer or card transfer. The resulting transaction has the type `transfer`. If the counterparty has multiple payment methods available, you must specify the target account or card using `receiver.account_id` or `receiver.card_id`. Payments to other Revolut accounts execute instantly. Returns the created transaction object with its ID and status. Note: This endpoint is only available for Revolut Business Company plans; freelancers should use the Payment drafts endpoint instead due to PSD2 Strong Customer Authentication regulations.",
+      "reasoning": "Summary could be more specific about the payment destination. Description lacks explicit information about the response/return value (transaction object details) and doesn't clearly state the immediate side effect of funds being debited from the source account. Added clarity on what is returned and consolidated the regulatory constraint more concisely for better AI agent understanding of when this operation is applicable.",
       "batch_index": 5
     }
   },
@@ -12605,7 +12784,288 @@
         "character": 0
       }
     },
-    "message": "Operation 'updateCard' has semantic quality issues: missing_input_details, missing_output_details. Added missing details about input parameters and output response.",
+    "message": "Operation 'createTransfer' has semantic quality issues: missing_context, missing_output_details. Summary is adequate. Description is too brief and lacks critical context: it doesn't explain that this is for internal business transfers only (not external payments), doesn't specify required input parameters, and doesn't describe the response structure. Added clarity on scope, input requirements, and output details to improve AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "createTransfer",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Move money between your accounts",
+      "current_description": "Move money between the Revolut accounts of the business in the same currency.\n\nThe resulting transaction has the type `transfer`.\n\nFor more information, see the guides: [Send money](https://developer.revolut.com/docs/guides/manage-accounts/transfers/send-money).",
+      "description_suggestion": "Move funds between Revolut business accounts in the same currency. The resulting transaction has the type `transfer`. Specify the source account, destination account, and amount in the request. Returns the created transaction object with its ID, status, and timestamp. This operation is used for internal account transfers within your business and does not involve external counterparties.",
+      "reasoning": "Summary is adequate. Description is too brief and lacks critical context: it doesn't explain that this is for internal business transfers only (not external payments), doesn't specify required input parameters, and doesn't describe the response structure. Added clarity on scope, input requirements, and output details to improve AI agent interpretability.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getWebhookV1' has semantic quality issues: vague_description, missing_output_details. Summary is too generic. Description is extremely vague - it doesn't explain what information is returned beyond just the URL, doesn't clarify that this retrieves the current configuration, and doesn't help AI agents understand the operation's purpose or when to use it. Added context about the response structure and the operation's role in webhook management.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getWebhookV1",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a webhook",
+      "current_description": "Get your webhook URL.",
+      "summary_suggestion": "Retrieve your webhook configuration",
+      "description_suggestion": "Retrieve the currently configured webhook URL for your business account. Returns the webhook endpoint URL and any associated metadata. This endpoint allows you to verify your existing webhook configuration without modifying it.",
+      "reasoning": "Summary is too generic. Description is extremely vague - it doesn't explain what information is returned beyond just the URL, doesn't clarify that this retrieves the current configuration, and doesn't help AI agents understand the operation's purpose or when to use it. Added context about the response structure and the operation's role in webhook management.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'setUpWebhook' has semantic quality issues: missing_input_details, missing_output_details, missing_side_effects. Summary is too vague. Description lacks critical details: doesn't specify which events trigger notifications, doesn't explain the retry behavior, doesn't describe the response structure, and doesn't clarify that this replaces existing configuration. Added comprehensive information about supported events, retry logic, response format, and side effects to enable AI agents to understand the full implications of this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "setUpWebhook",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Set a webhook",
+      "current_description": "Set up a webhook URL so that event notifications are pushed to the specified URL. Only HTTPS URLs are supported.",
+      "summary_suggestion": "Configure webhook URL for event notifications",
+      "description_suggestion": "Configure a webhook URL to receive event notifications for your business account. Requires an HTTPS URL endpoint. Supported events include TransactionCreated and TransactionStateChanged. When configured, Revolut will POST event notifications to the specified URL. If the receiver returns an HTTP error response, Revolut will retry the webhook event two more times. Returns the webhook configuration object with the registered URL and event subscription details. This operation replaces any previously configured webhook.",
+      "reasoning": "Summary is too vague. Description lacks critical details: doesn't specify which events trigger notifications, doesn't explain the retry behavior, doesn't describe the response structure, and doesn't clarify that this replaces existing configuration. Added comprehensive information about supported events, retry logic, response format, and side effects to enable AI agents to understand the full implications of this operation.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getPayoutLink' has semantic quality issues: vague_description, missing_output_details. The current description is too generic ('Get the information about a specific link'). It lacks clarity about what information is returned and doesn't explain the payout link's purpose in the context of the API. Enhanced description specifies the types of information returned (status, amount, recipient details, expiration) and clarifies the response structure for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getPayoutLink",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a payout link",
+      "current_description": "Get the information about a specific link by its ID.\n\n:::\nnote\n This feature is available in the UK and the EEA.\n:::\n\nFor more information, see the guides: [Send money via payout link](https://developer.revolut.com/docs/guides/manage-accounts/transfers/payout-links).",
+      "description_suggestion": "Retrieve detailed information about a specific payout link by its ID, including its status, amount, recipient details, and expiration information. Returns the payout link object with current state. This feature is available in the UK and the EEA.",
+      "reasoning": "The current description is too generic ('Get the information about a specific link'). It lacks clarity about what information is returned and doesn't explain the payout link's purpose in the context of the API. Enhanced description specifies the types of information returned (status, amount, recipient details, expiration) and clarifies the response structure for better AI agent understanding.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'simulateTransferStateUpdate' has semantic quality issues: missing_input_details, missing_output_details. Current description lacks clarity about required inputs (transaction ID and action parameter) and what the response contains. Enhanced description specifies the input parameters needed, clarifies valid state transitions, and explains the response structure. This helps AI agents understand exactly what parameters to provide and what to expect in return.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "simulateTransferStateUpdate",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Simulate a transfer state update (Sandbox only)",
+      "current_description": "Simulate a transfer state change in the Sandbox environment. \n \nFor example, after you make a transfer in Sandbox, you can change its state to `completed`. The resulting state is final and cannot be changed.\n\nFor more information, see the guides: [Test your flows with simulations (Sandbox only)](https://developer.revolut.com/docs/guides/manage-accounts/api-usage-and-testing/test-flows-with-simulations).",
+      "description_suggestion": "Simulate a transfer state change in the Sandbox environment by providing the transaction ID and desired action. Supported actions include transitioning a transfer to `completed` or other valid terminal states. The resulting state is final and cannot be changed. Returns the updated transaction object with the new state. Sandbox-only feature for testing payment workflows.",
+      "reasoning": "Current description lacks clarity about required inputs (transaction ID and action parameter) and what the response contains. Enhanced description specifies the input parameters needed, clarifies valid state transitions, and explains the response structure. This helps AI agents understand exactly what parameters to provide and what to expect in return.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'simulateTopUp' has semantic quality issues: missing_input_details, missing_output_details. Current description explains the use case but lacks technical details about inputs and outputs. Enhanced description specifies what parameters are required (amount and currency), what the response contains (updated balance and transaction details), and clarifies the testing context. This enables AI agents to understand exactly what data to provide and what to expect in return.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "simulateTopUp",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Simulate an account top-up (Sandbox only)",
+      "current_description": "Simulate a top-up of your account in the Sandbox environment. \n\nThis is useful during testing, when you run out of money in your test account and need to add more.\n\nFor more information, see the guides: [Test your flows with simulations (Sandbox only)](https://developer.revolut.com/docs/guides/manage-accounts/api-usage-and-testing/test-flows-with-simulations).",
+      "description_suggestion": "Simulate adding funds to your Sandbox account for testing purposes. Requires specifying the amount and currency to top-up. Returns the updated account balance and transaction details reflecting the simulated deposit. Useful when testing payment workflows and running low on test funds. Sandbox-only feature.",
+      "reasoning": "Current description explains the use case but lacks technical details about inputs and outputs. Enhanced description specifies what parameters are required (amount and currency), what the response contains (updated balance and transaction details), and clarifies the testing context. This enables AI agents to understand exactly what data to provide and what to expect in return.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getTeamMembers' has semantic quality issues: missing_output_details. Current description explains pagination and sorting but doesn't specify what information is returned about each team member. Enhanced description clarifies the response structure (team member objects with specific fields like name, email, role, status) and mentions pagination parameter support. This helps AI agents understand what data they'll receive and how to navigate results.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getTeamMembers",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a list of team members",
+      "current_description": "Get information about all the team members of your business.\n \nThe results are paginated and sorted by the `created_at` date in reverse chronological order.\n\n:::\nnote\nThis feature is available in the UK, US and the EEA.  \n\nThis feature is not available in Sandbox.\n:::\n\nTo use the Team Members API, please contact [Revolut API Support](mailto:api-requests@revolut.com).\n \nFor more information, see the guides: [Manage team members](https://developer.revolut.com/docs/guides/manage-accounts/teams/manage-team-members).",
+      "description_suggestion": "Retrieve a paginated list of all team members in your business account, sorted by creation date in reverse chronological order. Returns team member objects containing name, email, role, status, and other profile information. Supports pagination parameters to control result size and offset. Available in the UK, US, and EEA only.",
+      "reasoning": "Current description explains pagination and sorting but doesn't specify what information is returned about each team member. Enhanced description clarifies the response structure (team member objects with specific fields like name, email, role, status) and mentions pagination parameter support. This helps AI agents understand what data they'll receive and how to navigate results.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getRoles' has semantic quality issues: missing_output_details. Current description explains pagination and sorting but doesn't specify what information is contained in each role object. Enhanced description clarifies the response structure (role objects with name, description, permissions) and mentions pagination parameter support. This helps AI agents understand what role data they'll receive and how to use it for team member management.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getRoles",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve team roles",
+      "current_description": "Get the list of roles for your business.\n\nThe results are paginated and sorted by the `created_at` date in reverse chronological order.\n\n:::\nnote\n This feature is available in the UK, US and the EEA.  \n\nThis feature is not available in Sandbox.\n:::\n\nTo use the Team Members API, please contact [Revolut API Support](mailto:api-requests@revolut.com).\n\nFor more information, see the guides: [Manage team members](https://developer.revolut.com/docs/guides/manage-accounts/teams/manage-team-members).",
+      "description_suggestion": "Retrieve a paginated list of all available roles for your business account, sorted by creation date in reverse chronological order. Returns role objects containing role name, description, permissions, and other configuration details. Supports pagination parameters to control result size and offset. Available in the UK, US, and EEA only.",
+      "reasoning": "Current description explains pagination and sorting but doesn't specify what information is contained in each role object. Enhanced description clarifies the response structure (role objects with name, description, permissions) and mentions pagination parameter support. This helps AI agents understand what role data they'll receive and how to use it for team member management.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'updateCard' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original summary is too generic. Description lacks specificity about what can be updated (spending limits, settings), what inputs are expected, and what is returned. Added clarity about partial updates and return value for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12619,15 +13079,297 @@
       "operation_id": "updateCard",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
+        "vague_description",
         "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "Update card details",
       "current_description": "Update details of a specific card, based on its ID.\n\n:::note\n This feature is available in the UK, US and the EEA.  \n\nThis feature is not available in Sandbox.\n:::\n\nTo use the Cards API, please contact [Revolut API Support](mailto:api-requests@revolut.com).\n\nFor more information, see the guides: [Manage cards](https://developer.revolut.com/docs/guides/manage-accounts/teams/manage-cards).",
-      "summary_suggestion": "Update specific card details",
-      "description_suggestion": "Updates details of a specific card based on its ID. Requires the card ID as a path parameter. Specifies the fields to update in the request body. Returns the updated card details upon success.",
-      "reasoning": "Added missing details about input parameters and output response.",
+      "summary_suggestion": "Update card settings and spending limits",
+      "description_suggestion": "Update settings for a specific card identified by its ID, such as spending limits and other card parameters. Accepts partial updates - only provided fields will be modified. Returns the updated card object with all current details. Available in UK, US, and EEA only.",
+      "reasoning": "Original summary is too generic. Description lacks specificity about what can be updated (spending limits, settings), what inputs are expected, and what is returned. Added clarity about partial updates and return value for better AI agent understanding.",
       "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getSensitiveCardDetails' has semantic quality issues: vague_description, missing_output_details. Summary is adequate, but description lacks specificity about what sensitive details are returned (card number, CVV, etc.). Added clarity about the specific sensitive data returned and emphasized the authorization requirement for AI agents to understand access control implications.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getSensitiveCardDetails",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve sensitive card details",
+      "current_description": "Get sensitive details of a specific card, based on its ID.\n\n Requires the `READ_SENSITIVE_CARD_DATA` token scope. For more information, see the **Authorization** section below.\n\n:::note\nThis feature is available in the UK, US and the EEA.  \n\nThis feature is not available in Sandbox.\n :::\n\nTo use the Cards API, please contact [Revolut API Support](mailto:api-requests@revolut.com).\n \nFor more information, see the guides: [Manage cards](https://developer.revolut.com/docs/guides/manage-accounts/teams/manage-cards).",
+      "description_suggestion": "Retrieve sensitive card details (such as card number and CVV) for a specific card identified by its ID. Requires the `READ_SENSITIVE_CARD_DATA` token scope for authorization. Returns the card object with sensitive information included. Available in UK, US, and EEA only.",
+      "reasoning": "Summary is adequate, but description lacks specificity about what sensitive details are returned (card number, CVV, etc.). Added clarity about the specific sensitive data returned and emphasized the authorization requirement for AI agents to understand access control implications.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'addCounterparty' has semantic quality issues: vague_description, missing_output_details. Summary is adequate, but description lacks clarity about what inputs are expected (counterparty details, profile type) and what is returned (counterparty object with ID). Added information about return value, Sandbox testing guidance, and important compliance note about freelancer account approval requirements for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "addCounterparty",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Create a counterparty",
+      "current_description": "Create a new counterparty to transact with. \n\n<details>\n  <summary> \n  <b>Test accounts for Sandbox</b>\n\n  In the Sandbox environment, you cannot add real people and businesses as Revolut counterparties.\n  To help you simulate [Create a counterparty](https://developer.revolut.com/docs/business/add-counterparty) requests for counterparties of profile type `personal`, we created some test accounts.\n  Look inside for test Revtags.\n\n  </summary>\n\n  To add a counterparty via Revtag, use one of these pairs for the `name` and `revtag` fields respectively:\n  - `Test User 1` & `john1pvki`\n  - `Test User 2` & `john2pvki`\n  -    ...\n  - `Test User 9` & `john9pvki`\n    \n</details><br/>\n\nFor more information, see the guides: [Create a counterparty](https://developer.revolut.com/docs/guides/manage-accounts/counterparties/create-a-counterparty).",
+      "description_suggestion": "Create a new counterparty (individual or business) to enable transactions. Accepts counterparty details such as name, banking information, and profile type. Returns the created counterparty object with a unique ID. In Sandbox, use test Revtags (john1pvki through john9pvki) for personal profile counterparties. Note: Freelancer accounts may require manual 2FA approval before making transfers to newly created counterparties.",
+      "reasoning": "Summary is adequate, but description lacks clarity about what inputs are expected (counterparty details, profile type) and what is returned (counterparty object with ID). Added information about return value, Sandbox testing guidance, and important compliance note about freelancer account approval requirements for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getExpenseReceipt' has semantic quality issues: vague_description, missing_output_details. The current description lacks clarity about what is actually returned (binary file content vs metadata) and doesn't specify the output format. Added explicit information about required parameters, return type, and sandbox limitation for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getExpenseReceipt",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a receipt related to an expense",
+      "current_description": "Get the receipt related to an expense by providing the receipt's ID.\n\n:::\nnote\nThis feature is not available in Sandbox.\n:::\n\nFor more information, see the guides: [Retrieve expenses and receipts](https://developer.revolut.com/docs/guides/manage-accounts/accounts-and-transactions/retrieve-expenses).",
+      "description_suggestion": "Retrieves the receipt content associated with a specific expense. Requires both the expense ID and receipt ID as path parameters. Returns the receipt file content in binary format. This feature is not available in Sandbox.",
+      "reasoning": "The current description lacks clarity about what is actually returned (binary file content vs metadata) and doesn't specify the output format. Added explicit information about required parameters, return type, and sandbox limitation for better AI agent understanding.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getPaymentDrafts' has semantic quality issues: missing_output_details, missing_context. Added clarity about what is returned (summaries vs full details), clarified the scope limitation, and provided guidance on how to get full payment details. This helps AI agents understand the difference between this operation and getPaymentDraft.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getPaymentDrafts",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Retrieve a list of payment drafts",
+      "current_description": "Get the list of payment drafts created with the API that haven't been [sent for processing](https://developer.revolut.com/docs/guides/manage-accounts/transfers/payment-drafts#send-drafts-for-processing).\n \n:::\nnote\nPayment drafts created through the [Revolut Business app](https://business.revolut.com/) are not retrieved by the API.\n:::\n\nThe response lists the drafts with their details, such as the number of payments included in the draft, but not the payment details.\n\nFor more information, see the guides: [Payment drafts](https://developer.revolut.com/docs/guides/manage-accounts/transfers/payment-drafts).",
+      "description_suggestion": "Retrieves all payment drafts created via the API that have not yet been sent for processing. Returns a list of draft summaries including draft ID, creation date, payment count, and status, but not individual payment details. Note: Drafts created in the Revolut Business app are not included. Use getPaymentDraft to retrieve full details of a specific draft.",
+      "reasoning": "Added clarity about what is returned (summaries vs full details), clarified the scope limitation, and provided guidance on how to get full payment details. This helps AI agents understand the difference between this operation and getPaymentDraft.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'createPaymentDraft' has semantic quality issues: missing_input_details, missing_output_details. Added clarity about what inputs are expected (payment details in request body), what is returned (draft ID and details), and the complete lifecycle including approval workflow. This helps AI agents understand the full operation flow and when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "createPaymentDraft",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Create a payment draft",
+      "current_description": "Create a payment draft.\n\nWhen you create a payment draft, it stays a draft until you [send it for processing as payment](https://developer.revolut.com/docs/guides/manage-accounts/transfers/payment-drafts#send-drafts-for-processing) in the [Revolut Business app](https://business.revolut.com/).\n\nUntil then, you can [delete](https://developer.revolut.com/docs/business/delete-payment-draft) the draft if you no longer wish to proceed with it.\n\n:::\nnote\nIf you or the payment you're making is subject to an [approval process](https://help.revolut.com/business/help/managing-my-business/users-and-employees/how-can-i-set-payment-approval-rules/), when you send the draft for processing, the payment goes into the `Pending review` state.\nBefore it can be processed, the business owner, administrator, or another team member designated as an approver must approve it in the Revolut Business app.\n:::\n\nFor more information on use cases and other details, see the guides: [Payment drafts](https://developer.revolut.com/docs/guides/manage-accounts/transfers/payment-drafts).",
+      "description_suggestion": "Creates a new payment draft containing one or more payments. The draft remains in draft state until explicitly sent for processing via the Revolut Business app. Returns the created draft with ID and details. Drafts can be modified or deleted before processing. If approval rules are configured, the payment will enter 'Pending review' state when sent for processing, requiring approval from an authorized team member before execution.",
+      "reasoning": "Added clarity about what inputs are expected (payment details in request body), what is returned (draft ID and details), and the complete lifecycle including approval workflow. This helps AI agents understand the full operation flow and when to use this operation.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deletePaymentDraft' has semantic quality issues: missing_output_details, missing_side_effects. Added clarity about the response format (204 No Content), the side effect (permanent removal of draft and payments), and the error condition (cannot delete sent drafts). This helps AI agents understand the operation's consequences and error handling.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deletePaymentDraft",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete a payment draft",
+      "current_description": "Delete a payment draft with the given ID.\n\nYou can delete a payment draft only if it hasn't been [sent for processing](https://developer.revolut.com/docs/guides/manage-accounts/transfers/payment-drafts#send-drafts-for-processing).\n \nFor more information, see the guides: [Payment drafts](https://developer.revolut.com/docs/guides/manage-accounts/transfers/payment-drafts).",
+      "description_suggestion": "Deletes a payment draft by ID. The draft must not have been sent for processing. Returns a 204 No Content response on successful deletion. The draft and all associated payment information are permanently removed. Attempting to delete a draft that has been sent for processing will result in an error.",
+      "reasoning": "Added clarity about the response format (204 No Content), the side effect (permanent removal of draft and payments), and the error condition (cannot delete sent drafts). This helps AI agents understand the operation's consequences and error handling.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'createPayoutLink' has semantic quality issues: missing_input_details, missing_output_details. Added specificity about required inputs (amount, currency, recipient info), what is returned (link object with URL), and the recipient action required (claiming the link). This clarifies the operation's purpose and helps AI agents understand the complete workflow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "createPayoutLink",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Create a payout link",
+      "current_description": "Create a payout link to send money even when you don't have the full banking details of the counterparty.  \nAfter you have created the link, send it to the recipient so that they can claim the payment.\n\n:::\nnote\n This feature is available in the UK and the EEA.\n:::\n\nFor more information, see the guides: [Send money via payout link](https://developer.revolut.com/docs/guides/manage-accounts/transfers/payout-links).",
+      "description_suggestion": "Creates a payout link that allows sending money to a recipient without requiring their full banking details. Requires amount, currency, and recipient information in the request body. Returns a payout link object containing a unique URL that the recipient must claim before the link expires. Available in the UK and EEA only.",
+      "reasoning": "Added specificity about required inputs (amount, currency, recipient info), what is returned (link object with URL), and the recipient action required (claiming the link). This clarifies the operation's purpose and helps AI agents understand the complete workflow.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getPayoutLinks' has semantic quality issues: missing_input_details, missing_output_details. Added clarity about available filter parameters, pagination mechanism (cursor-based using created_at), and what fields are returned in the response. This helps AI agents understand how to construct requests and interpret results.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getPayoutLinks",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a list of payout links",
+      "current_description": "Get all the links that you have created, or use the query parameters to filter the results.\n\nThe links are sorted by the `created_at` date in reverse chronological order.\n\nThe returned links are **paginated**. \nThe maximum number of payout links returned per page is specified by the `limit` parameter.\nTo get to the next page, make a new request and use the `created_at` date of the last payout link returned in the previous response.\n\n:::\nnote\n This feature is available in the UK and the EEA.\n:::\n        \nFor more information, see the guides: [Send money via payout link](https://developer.revolut.com/docs/guides/manage-accounts/transfers/payout-links).",
+      "description_suggestion": "Retrieves all payout links created by the account, sorted by creation date in reverse chronological order. Supports filtering via query parameters (status, recipient, etc.) and pagination via limit and created_at cursor parameters. Returns a paginated list of payout link objects with details including link URL, amount, status, and expiration date. Available in the UK and EEA only.",
+      "reasoning": "Added clarity about available filter parameters, pagination mechanism (cursor-based using created_at), and what fields are returned in the response. This helps AI agents understand how to construct requests and interpret results.",
+      "batch_index": 3
     }
   },
   {
@@ -12641,7 +13383,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 50 operations analyzed, 2 quality issues found",
+    "message": "Semantic analysis completed: 50 operations analyzed, 23 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -12653,7 +13395,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 50,
-      "total_issues_found": 2,
+      "total_issues_found": 23,
       "batches_processed": 8
     }
   }

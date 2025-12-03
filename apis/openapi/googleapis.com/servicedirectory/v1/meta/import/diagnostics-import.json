@@ -4592,7 +4592,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicedirectory.projects.locations.namespaces.services.endpoints.delete' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing. Added a concise summary and expanded the description to include authentication and side effects.",
+    "message": "Operation 'servicedirectory.projects.locations.namespaces.services.endpoints.delete' has semantic quality issues: vague_summary, vague_description, missing_context, missing_side_effects. Original description is too minimal. Added context about resource identification, the effect of deletion on service discovery, and clarified that this is a destructive operation. Summary provides action clarity for AI agents.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4607,13 +4607,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
+        "missing_context",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes an endpoint.",
-      "summary_suggestion": "Delete an endpoint",
-      "description_suggestion": "Deletes an endpoint. The endpoint will be removed from the service directory. Requires authentication.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include authentication and side effects.",
+      "summary_suggestion": "Delete a service endpoint",
+      "description_suggestion": "Deletes a specific endpoint from a service. The endpoint must exist and be identified by its full resource name. Once deleted, the endpoint will no longer be available for service discovery and client connections. This operation cannot be undone.",
+      "reasoning": "Original description is too minimal. Added context about resource identification, the effect of deletion on service discovery, and clarified that this is a destructive operation. Summary provides action clarity for AI agents.",
       "batch_index": 0
     }
   },
@@ -4628,7 +4630,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicedirectory.projects.locations.namespaces.services.endpoints.get' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary.",
+    "message": "Operation 'servicedirectory.projects.locations.namespaces.services.endpoints.get' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description lacks specificity about what is returned and the use case. Enhanced with information about the Endpoint schema properties and practical use cases for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4642,12 +4644,16 @@
       "operation_id": "servicedirectory.projects.locations.namespaces.services.endpoints.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets an endpoint.",
-      "summary_suggestion": "Get an endpoint",
-      "reasoning": "The current summary is missing. Added a concise summary.",
+      "summary_suggestion": "Retrieve a service endpoint",
+      "description_suggestion": "Retrieves the details of a specific endpoint by its resource name. Returns the complete Endpoint object including its address, port, metadata, and other configuration details. This operation is useful for verifying endpoint configuration or retrieving endpoint information for service discovery.",
+      "reasoning": "Original description lacks specificity about what is returned and the use case. Enhanced with information about the Endpoint schema properties and practical use cases for AI agent decision-making.",
       "batch_index": 0
     }
   },
@@ -4662,7 +4668,45 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicedirectory.projects.locations.namespaces.services.resolve' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary.",
+    "message": "Operation 'servicedirectory.projects.locations.namespaces.services.endpoints.patch' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details. Original description is too generic. Added clarity about partial update support, input requirements, and return value. This helps AI agents understand the update semantics and what fields can be modified.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicedirectory.projects.locations.namespaces.services.endpoints.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates an endpoint.",
+      "summary_suggestion": "Update a service endpoint",
+      "description_suggestion": "Updates an existing endpoint with new configuration. Accepts an Endpoint object and supports partial updates - only provided fields will be modified. The endpoint is identified by its resource name. Returns the updated Endpoint object with all current configuration details.",
+      "reasoning": "Original description is too generic. Added clarity about partial update support, input requirements, and return value. This helps AI agents understand the update semantics and what fields can be modified.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicedirectory.projects.locations.namespaces.services.resolve' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, not_actionable. Original description is confusing with the phrase 'not considered an active developer method' which is unclear. Reframed to explain the actual purpose (service discovery/lookup), clarified the request/response schemas, and removed the confusing statement. This helps AI agents understand when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4676,12 +4720,17 @@
       "operation_id": "servicedirectory.projects.locations.namespaces.services.resolve",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details",
+        "not_actionable"
       ],
       "current_summary": "",
       "current_description": "Returns a service and its associated endpoints. Resolving a service is not considered an active developer method.",
-      "summary_suggestion": "Resolve a service",
-      "reasoning": "The current summary is missing. Added a concise summary.",
+      "summary_suggestion": "Resolve a service to its endpoints",
+      "description_suggestion": "Resolves a service by name and returns the service details along with all associated endpoints. This is a lookup operation used for service discovery - it retrieves the complete service configuration and all available endpoints for client connection. Accepts a ResolveServiceRequest with the service name and returns a ResolveServiceResponse containing the Service object and its Endpoint collection.",
+      "reasoning": "Original description is confusing with the phrase 'not considered an active developer method' which is unclear. Reframed to explain the actual purpose (service discovery/lookup), clarified the request/response schemas, and removed the confusing statement. This helps AI agents understand when to use this operation.",
       "batch_index": 0
     }
   },
@@ -4696,7 +4745,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicedirectory.projects.locations.namespaces.services.endpoints.list' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary.",
+    "message": "Operation 'servicedirectory.projects.locations.namespaces.services.endpoints.list' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description is too vague - 'all endpoints' without context. Enhanced to clarify that endpoints are scoped to a service, mentioned pagination support, and described what endpoint information is returned. This provides better context for AI agents to understand the scope and use cases.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4710,12 +4759,16 @@
       "operation_id": "servicedirectory.projects.locations.namespaces.services.endpoints.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists all endpoints.",
-      "summary_suggestion": "List all endpoints",
-      "reasoning": "The current summary is missing. Added a concise summary.",
+      "summary_suggestion": "List service endpoints",
+      "description_suggestion": "Lists all endpoints associated with a service. Returns a collection of Endpoint objects for the specified service parent resource. Supports pagination through optional parameters. Each endpoint includes its address, port, metadata, and configuration details.",
+      "reasoning": "Original description is too vague - 'all endpoints' without context. Enhanced to clarify that endpoints are scoped to a service, mentioned pagination support, and described what endpoint information is returned. This provides better context for AI agents to understand the scope and use cases.",
       "batch_index": 0
     }
   },
@@ -4730,7 +4783,45 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicedirectory.projects.locations.namespaces.list' has semantic quality issues: vague_summary, vague_description. The current summary is missing, and the description is vague. The suggestions provide a clear action and context.",
+    "message": "Operation 'servicedirectory.projects.locations.namespaces.services.endpoints.create' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details. Original description lacks important context about prerequisites and input requirements. Added clarification that the service must pre-exist (per API schema documentation), specified what Endpoint fields are needed, and clarified the return value. This helps AI agents understand the operation's dependencies and requirements.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicedirectory.projects.locations.namespaces.services.endpoints.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates an endpoint, and returns the new endpoint.",
+      "summary_suggestion": "Create a service endpoint",
+      "description_suggestion": "Creates a new endpoint for an existing service. Requires an Endpoint object with address, port, and optional metadata. The service must already exist before endpoints can be added to it. Returns the newly created Endpoint object with all configuration details and a system-generated resource name.",
+      "reasoning": "Original description lacks important context about prerequisites and input requirements. Added clarification that the service must pre-exist (per API schema documentation), specified what Endpoint fields are needed, and clarified the return value. This helps AI agents understand the operation's dependencies and requirements.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicedirectory.projects.locations.namespaces.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description is too minimal - lacks context about location scope, pagination, filtering capabilities, and permission requirements. AI agents need to understand the scope (location-based), pagination behavior, and access control implications.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4745,13 +4836,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists all namespaces.",
-      "summary_suggestion": "List all namespaces in the specified location.",
-      "description_suggestion": "Lists all namespaces under the specified location. Requires a valid parent resource path. Returns a list of namespaces.",
-      "reasoning": "The current summary is missing, and the description is vague. The suggestions provide a clear action and context.",
+      "summary_suggestion": "List all namespaces in a location",
+      "description_suggestion": "Lists all namespaces within a specified location. Returns a paginated list of namespace objects. Supports filtering and sorting via query parameters. Requires appropriate IAM permissions to view namespaces.",
+      "reasoning": "Missing summary entirely. Description is too minimal - lacks context about location scope, pagination, filtering capabilities, and permission requirements. AI agents need to understand the scope (location-based), pagination behavior, and access control implications.",
       "batch_index": 1
     }
   },
@@ -4766,7 +4858,45 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicedirectory.projects.locations.namespaces.services.list' has semantic quality issues: vague_summary, missing_context. The current summary is missing, and the description lacks context about the required parent resource path. The suggestions provide a clear action and context.",
+    "message": "Operation 'servicedirectory.projects.locations.namespaces.create' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_side_effects. Missing summary. Description lacks context about what namespaces are used for, what fields are required vs optional in the request, and permission requirements. AI agents need to understand the purpose of namespaces and their role in the service hierarchy.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicedirectory.projects.locations.namespaces.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a namespace, and returns the new namespace.",
+      "summary_suggestion": "Create a new namespace in a location",
+      "description_suggestion": "Creates a new namespace within a specified location. Accepts a Namespace object with configuration details. Returns the newly created namespace with system-generated identifiers and metadata. Namespaces serve as containers for organizing services and defining access control policies. Requires appropriate IAM permissions to create namespaces.",
+      "reasoning": "Missing summary. Description lacks context about what namespaces are used for, what fields are required vs optional in the request, and permission requirements. AI agents need to understand the purpose of namespaces and their role in the service hierarchy.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicedirectory.projects.locations.namespaces.services.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks pagination context and filtering capabilities. AI agents need to understand pagination behavior and available query parameters for filtering results.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4781,13 +4911,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists all services belonging to a namespace.",
-      "summary_suggestion": "List all services in the specified namespace.",
-      "description_suggestion": "Lists all services belonging to the specified namespace. Requires a valid parent resource path. Returns a list of services.",
-      "reasoning": "The current summary is missing, and the description lacks context about the required parent resource path. The suggestions provide a clear action and context.",
+      "summary_suggestion": "List all services in a namespace",
+      "description_suggestion": "Lists all services within a specified namespace. Returns a paginated list of service objects. Supports filtering and sorting via query parameters. Services are the primary resources for publishing and discovering service endpoints.",
+      "reasoning": "Missing summary. Description lacks pagination context and filtering capabilities. AI agents need to understand pagination behavior and available query parameters for filtering results.",
       "batch_index": 1
     }
   },
@@ -4802,7 +4933,45 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicedirectory.projects.locations.namespaces.services.getIamPolicy' has semantic quality issues: vague_summary, missing_context. The current summary is missing, and the description lacks context about the required resource path. The suggestions provide a clear action and context.",
+    "message": "Operation 'servicedirectory.projects.locations.namespaces.services.create' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_side_effects. Missing summary. Description lacks context about the service lifecycle (must exist before endpoints), required vs optional fields, and the prerequisite that a namespace must already exist. AI agents need to understand these dependencies.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicedirectory.projects.locations.namespaces.services.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a service, and returns the new service.",
+      "summary_suggestion": "Create a new service in a namespace",
+      "description_suggestion": "Creates a new service within a specified namespace. Accepts a Service object with name and optional metadata. Returns the newly created service with system-generated identifiers. Services must be created before endpoints can be added to them. Requires appropriate IAM permissions and a pre-existing namespace.",
+      "reasoning": "Missing summary. Description lacks context about the service lifecycle (must exist before endpoints), required vs optional fields, and the prerequisite that a namespace must already exist. AI agents need to understand these dependencies.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicedirectory.projects.locations.namespaces.services.getIamPolicy' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description mentions resource type restriction but lacks clarity about what the Policy object contains and typical use cases. AI agents need to understand what information is returned and when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4817,13 +4986,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets the IAM Policy for a resource (namespace or service only).",
-      "summary_suggestion": "Get IAM policy for a namespace or service.",
-      "description_suggestion": "Gets the IAM policy for the specified namespace or service. Requires a valid resource path. Returns the IAM policy.",
-      "reasoning": "The current summary is missing, and the description lacks context about the required resource path. The suggestions provide a clear action and context.",
+      "summary_suggestion": "Retrieve IAM policy for a resource",
+      "description_suggestion": "Retrieves the Identity and Access Management (IAM) policy for a specified namespace or service resource. Returns a Policy object containing role bindings that define access controls. Use this operation to audit current permissions before modifying access control settings.",
+      "reasoning": "Missing summary. Description mentions resource type restriction but lacks clarity about what the Policy object contains and typical use cases. AI agents need to understand what information is returned and when to use this operation.",
       "batch_index": 1
     }
   },
@@ -4838,7 +5008,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicedirectory.projects.locations.namespaces.services.setIamPolicy' has semantic quality issues: vague_summary, missing_context. The current summary is missing, and the description lacks context about the required resource path and request object. The suggestions provide a clear action and context.",
+    "message": "Operation 'servicedirectory.projects.locations.namespaces.services.setIamPolicy' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_side_effects. Missing summary. Description lacks critical information about the request format, that this is a replace operation (not merge), and the potential side effects of overwriting existing policies. AI agents need to understand this is a destructive operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4853,13 +5023,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_input_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Sets the IAM Policy for a resource (namespace or service only).",
-      "summary_suggestion": "Set IAM policy for a namespace or service.",
-      "description_suggestion": "Sets the IAM policy for the specified namespace or service. Requires a valid resource path and a SetIamPolicyRequest object. Returns the updated IAM policy.",
-      "reasoning": "The current summary is missing, and the description lacks context about the required resource path and request object. The suggestions provide a clear action and context.",
+      "summary_suggestion": "Set IAM policy for a resource",
+      "description_suggestion": "Sets the Identity and Access Management (IAM) policy for a specified namespace or service resource. Accepts a SetIamPolicyRequest containing the desired Policy object with role bindings. Returns the updated Policy. This operation replaces the entire existing policy - use with caution to avoid unintended permission changes. Requires appropriate IAM permissions to modify policies.",
+      "reasoning": "Missing summary. Description lacks critical information about the request format, that this is a replace operation (not merge), and the potential side effects of overwriting existing policies. AI agents need to understand this is a destructive operation.",
       "batch_index": 1
     }
   },
@@ -4874,7 +5046,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicedirectory.projects.locations.namespaces.services.testIamPermissions' has semantic quality issues: vague_summary, missing_context. The current summary is missing, and the description lacks context about the required resource path and request object. The suggestions provide a clear action and context.",
+    "message": "Operation 'servicedirectory.projects.locations.namespaces.services.testIamPermissions' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_output_details. Missing summary. Description lacks clarity about the request format (list of permissions), response format (subset of requested permissions), and the practical use case (pre-flight checks). AI agents need to understand how to construct the request and interpret the response.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4889,13 +5061,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Tests IAM permissions for a resource (namespace or service only).",
-      "summary_suggestion": "Test IAM permissions for a namespace or service.",
-      "description_suggestion": "Tests IAM permissions for the specified namespace or service. Requires a valid resource path and a TestIamPermissionsRequest object. Returns the result of the permission test.",
-      "reasoning": "The current summary is missing, and the description lacks context about the required resource path and request object. The suggestions provide a clear action and context.",
+      "summary_suggestion": "Test IAM permissions for a resource",
+      "description_suggestion": "Tests whether the authenticated caller has specific Identity and Access Management (IAM) permissions on a specified namespace or service resource. Accepts a TestIamPermissionsRequest with a list of permission strings to check. Returns a TestIamPermissionsResponse containing only the permissions the caller actually has. Useful for determining if an operation will succeed before attempting it.",
+      "reasoning": "Missing summary. Description lacks clarity about the request format (list of permissions), response format (subset of requested permissions), and the practical use case (pre-flight checks). AI agents need to understand how to construct the request and interpret the response.",
       "batch_index": 1
     }
   },
@@ -4910,7 +5084,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 14 operations analyzed, 9 quality issues found",
+    "message": "Semantic analysis completed: 14 operations analyzed, 13 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -4922,7 +5096,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 14,
-      "total_issues_found": 9,
+      "total_issues_found": 13,
       "batches_processed": 2
     }
   }

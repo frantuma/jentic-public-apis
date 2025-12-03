@@ -7025,7 +7025,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'jobs.projects.tenants.create' has semantic quality issues: vague_summary, missing_context, inconsistent_terminology. The current summary and description are vague. The summary was missing, and the description was improved to include more context about the parent project requirement, idempotency, and the return value.",
+    "message": "Operation 'jobs.projects.tenants.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_context. Original description is too minimal and lacks context. Missing: (1) summary was empty, (2) no explanation of what a tenant is in this domain, (3) no mention of authentication requirements, (4) no clarity on input/output schemas, (5) no mention of the assigned tenant ID. Improvements help AI agents understand the operation's purpose, prerequisites, and effects.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7040,14 +7040,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
-        "inconsistent_terminology"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
       ],
-      "current_summary": "Creates a new tenant entity.",
+      "current_summary": "",
       "current_description": "Creates a new tenant entity.",
-      "summary_suggestion": "Create a new tenant entity for a project.",
-      "description_suggestion": "Creates a new Tenant resource for a specified project. Requires the parent project identifier. Returns the newly created Tenant object. This action is idempotent, meaning subsequent identical requests will not create duplicate resources.",
-      "reasoning": "The current summary and description are vague. The summary was missing, and the description was improved to include more context about the parent project requirement, idempotency, and the return value.",
+      "summary_suggestion": "Create a new tenant entity",
+      "description_suggestion": "Creates a new tenant entity within the Cloud Talent Solution service. A tenant is a group or entity that shares common access with specific privileges for resources like jobs and companies. Requires authentication via OAuth 2.0. Accepts a Tenant resource object as input and returns the newly created Tenant resource with an assigned tenant ID.",
+      "reasoning": "Original description is too minimal and lacks context. Missing: (1) summary was empty, (2) no explanation of what a tenant is in this domain, (3) no mention of authentication requirements, (4) no clarity on input/output schemas, (5) no mention of the assigned tenant ID. Improvements help AI agents understand the operation's purpose, prerequisites, and effects.",
       "batch_index": 2
     }
   },
@@ -7062,7 +7063,45 @@
         "character": 0
       }
     },
-    "message": "Operation 'jobs.projects.tenants.jobs.delete' has semantic quality issues: vague_summary, missing_side_effects. Added a summary to clarify the action. Enhanced the description to include the permanent removal of the job.",
+    "message": "Operation 'jobs.projects.tenants.completeQuery' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_context. Original summary was missing entirely. Description mentions the use case but lacks: (1) clarity on input parameters (prefix and optional filters), (2) explanation of what the response contains (suggested keywords, ranking), (3) note that this is a read-only operation with no side effects, (4) context about parameter options. Enhanced version helps AI agents understand when to invoke this operation, what parameters to provide, and how to interpret results.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "jobs.projects.tenants.completeQuery",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Completes the specified prefix with keyword suggestions. Intended for use by a job search auto-complete search box.",
+      "summary_suggestion": "Get keyword suggestions for job search auto-complete",
+      "description_suggestion": "Provides keyword suggestions to complete a specified prefix for job search auto-complete functionality. Accepts a search prefix and optional query parameters (such as language, page size, and scope) to refine suggestions. Returns a list of suggested keywords ranked by relevance and frequency. Useful for implementing real-time search suggestions in job search interfaces. Does not modify any data.",
+      "reasoning": "Original summary was missing entirely. Description mentions the use case but lacks: (1) clarity on input parameters (prefix and optional filters), (2) explanation of what the response contains (suggested keywords, ranking), (3) note that this is a read-only operation with no side effects, (4) context about parameter options. Enhanced version helps AI agents understand when to invoke this operation, what parameters to provide, and how to interpret results.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'jobs.projects.tenants.jobs.delete' has semantic quality issues: vague_summary, missing_input_details. Missing summary entirely. Description lacks clarity about required input (job name parameter) and what 'unsearchable' means in context. Added explicit mention of required parameter and clarified the deletion propagation behavior for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7077,13 +7116,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Deletes the specified job. Typically, the job becomes unsearchable within 10 seconds, but it may take up to 5 minutes.",
-      "summary_suggestion": "Delete a specified job",
-      "description_suggestion": "Deletes the specified job. Typically, the job becomes unsearchable within 10 seconds, but it may take up to 5 minutes. The job will be permanently removed from the system.",
-      "reasoning": "Added a summary to clarify the action. Enhanced the description to include the permanent removal of the job.",
+      "summary_suggestion": "Delete a job posting",
+      "description_suggestion": "Deletes the specified job posting by name. The job becomes unsearchable within 10 seconds, though it may take up to 5 minutes for the deletion to fully propagate. Requires the full resource name of the job to delete.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about required input (job name parameter) and what 'unsearchable' means in context. Added explicit mention of required parameter and clarified the deletion propagation behavior for AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -7098,7 +7137,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'jobs.projects.tenants.jobs.get' has semantic quality issues: vague_summary. Added a summary to clarify the action. The description is already clear and complete.",
+    "message": "Operation 'jobs.projects.tenants.jobs.get' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description doesn't clarify that a job name parameter is required or what the return value is. Added explicit parameter requirement and return value information to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7112,12 +7151,14 @@
       "operation_id": "jobs.projects.tenants.jobs.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Retrieves the specified job, whose status is OPEN or recently EXPIRED within the last 90 days.",
-      "summary_suggestion": "Retrieve a specified job",
-      "reasoning": "Added a summary to clarify the action. The description is already clear and complete.",
+      "summary_suggestion": "Retrieve a job posting",
+      "description_suggestion": "Retrieves a specific job posting by name. Only returns jobs with status OPEN or EXPIRED within the last 90 days. Requires the full resource name of the job. Returns the complete Job resource with all associated details.",
+      "reasoning": "Missing summary. Description doesn't clarify that a job name parameter is required or what the return value is. Added explicit parameter requirement and return value information to improve AI agent interpretability.",
       "batch_index": 0
     }
   },
@@ -7132,7 +7173,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'jobs.projects.tenants.jobs.patch' has semantic quality issues: vague_summary. Added a summary to clarify the action. The description is already clear and complete.",
+    "message": "Operation 'jobs.projects.tenants.jobs.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity about what inputs are expected (Job resource), what is returned, and whether partial updates are supported. Added explicit details about request/response schemas and partial update support for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7146,12 +7187,15 @@
       "operation_id": "jobs.projects.tenants.jobs.patch",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Updates specified job. Typically, updated contents become visible in search results within 10 seconds, but it may take up to 5 minutes.",
-      "summary_suggestion": "Update a specified job",
-      "reasoning": "Added a summary to clarify the action. The description is already clear and complete.",
+      "summary_suggestion": "Update a job posting",
+      "description_suggestion": "Updates a specified job posting with new information. Accepts a Job resource with fields to be updated. Updated content typically becomes visible in search results within 10 seconds, though propagation may take up to 5 minutes. Returns the updated Job resource. Supports partial updates - only provided fields are modified.",
+      "reasoning": "Missing summary. Description lacks clarity about what inputs are expected (Job resource), what is returned, and whether partial updates are supported. Added explicit details about request/response schemas and partial update support for better AI agent decision-making.",
       "batch_index": 0
     }
   },
@@ -7166,7 +7210,45 @@
         "character": 0
       }
     },
-    "message": "Operation 'jobs.projects.tenants.companies.list' has semantic quality issues: vague_summary. Added a summary to clarify the action. The description is already clear and complete.",
+    "message": "Operation 'jobs.projects.tenants.clientEvents.create' has semantic quality issues: vague_summary, unclear_purpose, missing_input_details, missing_output_details. Missing summary. Description is unclear about the operation's primary purpose and lacks specifics about inputs/outputs. Reframed to emphasize event recording, clarified what ClientEvent contains, and added return value information. Removed external links to focus on operation semantics for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "jobs.projects.tenants.clientEvents.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Report events issued when end user interacts with customer's application that uses Cloud Talent Solution. You may inspect the created events in [self service tools](https://console.cloud.google.com/talent-solution/overview). [Learn more](https://cloud.google.com/talent-solution/docs/management-tools) about self service tools.",
+      "summary_suggestion": "Record user interaction event",
+      "description_suggestion": "Records a client event representing an end-user interaction with an application using Cloud Talent Solution. Accepts a ClientEvent resource containing event type, timestamp, and interaction details. Events are used to improve search quality and can be inspected in Cloud Talent Solution self-service tools. Returns the created ClientEvent resource with server-assigned metadata.",
+      "reasoning": "Missing summary. Description is unclear about the operation's primary purpose and lacks specifics about inputs/outputs. Reframed to emphasize event recording, clarified what ClientEvent contains, and added return value information. Removed external links to focus on operation semantics for AI agents.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'jobs.projects.tenants.companies.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is too brief and doesn't mention pagination/filtering capabilities or what is returned. Added context about parameter support and explicit return value information for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7180,12 +7262,14 @@
       "operation_id": "jobs.projects.tenants.companies.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists all companies associated with the project.",
-      "summary_suggestion": "List all companies associated with a project",
-      "reasoning": "Added a summary to clarify the action. The description is already clear and complete.",
+      "summary_suggestion": "List companies in tenant",
+      "description_suggestion": "Lists all companies associated with the specified tenant/project. Supports filtering and pagination through query parameters. Returns a list of Company resources with their details including name, display name, and other company information.",
+      "reasoning": "Missing summary. Description is too brief and doesn't mention pagination/filtering capabilities or what is returned. Added context about parameter support and explicit return value information for AI agent clarity.",
       "batch_index": 0
     }
   },
@@ -7200,7 +7284,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'jobs.projects.tenants.jobs.list' has semantic quality issues: vague_summary. Added a summary to clarify the action. The description is already clear and complete.",
+    "message": "Operation 'jobs.projects.tenants.companies.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too generic and lacks details about what inputs are required or what is returned. Added specificity about Company resource requirements and return value to improve AI agent understanding of when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "jobs.projects.tenants.companies.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new company entity.",
+      "summary_suggestion": "Create a new company",
+      "description_suggestion": "Creates a new company entity within the specified tenant. Accepts a Company resource with required fields such as display name and other company information. Returns the created Company resource with a server-assigned resource name and any default values applied.",
+      "reasoning": "Missing summary. Description is too generic and lacks details about what inputs are required or what is returned. Added specificity about Company resource requirements and return value to improve AI agent understanding of when and how to use this operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'jobs.projects.tenants.jobs.list' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Missing summary. Description is extremely vague - 'by filter' doesn't specify what filters are available or what is returned. Added explicit filter types, pagination support, and return value details. Used domain terminology (SearchJobsResponse) consistent with API schemas for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7214,12 +7335,16 @@
       "operation_id": "jobs.projects.tenants.jobs.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists jobs by filter.",
-      "summary_suggestion": "List jobs by filter",
-      "reasoning": "Added a summary to clarify the action. The description is already clear and complete.",
+      "summary_suggestion": "List job postings with filters",
+      "description_suggestion": "Lists job postings within the specified tenant, filtered by provided criteria. Supports filtering by keywords, location, company, job category, and other parameters. Supports pagination through page size and token parameters. Returns a SearchJobsResponse containing a list of Job resources matching the filters, along with response metadata.",
+      "reasoning": "Missing summary. Description is extremely vague - 'by filter' doesn't specify what filters are available or what is returned. Added explicit filter types, pagination support, and return value details. Used domain terminology (SearchJobsResponse) consistent with API schemas for better AI agent interpretability.",
       "batch_index": 0
     }
   },
@@ -7234,7 +7359,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'jobs.projects.tenants.jobs.create' has semantic quality issues: vague_summary, missing_context. The current summary is missing, and the description lacks details about the request body and return value.",
+    "message": "Operation 'jobs.projects.tenants.jobs.create' has semantic quality issues: vague_summary, missing_input_details. Missing summary entirely. Description lacks clarity about required inputs (parent tenant path, Job object fields), what is returned, and the asynchronous nature of job indexing. Added context about input requirements, return value, and timing expectations for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7249,13 +7374,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Creates a new job. Typically, the job becomes searchable within 10 seconds, but it may take up to 5 minutes.",
       "summary_suggestion": "Create a new job posting",
-      "description_suggestion": "Creates a new job posting. The job becomes searchable within 10 seconds, but it may take up to 5 minutes. Requires a valid Job object in the request body. Returns the created Job object.",
-      "reasoning": "The current summary is missing, and the description lacks details about the request body and return value.",
+      "description_suggestion": "Creates a new job posting in the specified tenant. The job posting is created with the provided Job resource details and becomes searchable within 10 seconds, though indexing may take up to 5 minutes. Returns the created Job resource with all fields populated including the generated job ID.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about required inputs (parent tenant path, Job object fields), what is returned, and the asynchronous nature of job indexing. Added context about input requirements, return value, and timing expectations for better AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -7270,7 +7395,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'jobs.projects.tenants.jobs.batchCreate' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. The current summary is missing, and the description lacks details about the request body and return value.",
+    "message": "Operation 'jobs.projects.tenants.jobs.batchCreate' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description is vague about what 'begins executing' means and lacks critical details about inputs (BatchCreateJobsRequest structure), outputs (Operation resource for polling), and the asynchronous nature. Added clarity about long-running operations, polling mechanism, and indexing timeline for AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7285,14 +7410,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Begins executing a batch create jobs operation.",
       "summary_suggestion": "Batch create multiple job postings",
-      "description_suggestion": "Begins executing a batch create jobs operation. Requires a BatchCreateJobsRequest object in the request body. Returns an Operation object that can be used to track the status of the batch operation.",
-      "reasoning": "The current summary is missing, and the description lacks details about the request body and return value.",
+      "description_suggestion": "Initiates a batch operation to create multiple job postings in the specified tenant. Accepts a BatchCreateJobsRequest containing an array of Job resources. Returns a long-running Operation resource that can be polled to track completion status. Individual job creation results are available once the operation completes. Jobs become searchable within 10 seconds of successful creation, though indexing may take up to 5 minutes.",
+      "reasoning": "Missing summary entirely. Description is vague about what 'begins executing' means and lacks critical details about inputs (BatchCreateJobsRequest structure), outputs (Operation resource for polling), and the asynchronous nature. Added clarity about long-running operations, polling mechanism, and indexing timeline for AI agent interpretability.",
       "batch_index": 1
     }
   },
@@ -7307,7 +7434,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'jobs.projects.tenants.jobs.batchDelete' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. The current summary is missing, and the description lacks details about the request body and return value.",
+    "message": "Operation 'jobs.projects.tenants.jobs.batchDelete' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description is vague and lacks essential details about inputs (BatchDeleteJobsRequest), outputs (Operation resource), and side effects (immediate removal from search). Added clarity about operation type, polling mechanism, and state changes for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7322,14 +7449,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Begins executing a batch delete jobs operation.",
       "summary_suggestion": "Batch delete multiple job postings",
-      "description_suggestion": "Begins executing a batch delete jobs operation. Requires a BatchDeleteJobsRequest object in the request body. Returns an Operation object that can be used to track the status of the batch operation.",
-      "reasoning": "The current summary is missing, and the description lacks details about the request body and return value.",
+      "description_suggestion": "Initiates a batch operation to delete multiple job postings from the specified tenant. Accepts a BatchDeleteJobsRequest containing job IDs or filters to identify jobs for deletion. Returns a long-running Operation resource that can be polled to track completion status. Deleted jobs are immediately removed from search results. Individual deletion results are available once the operation completes.",
+      "reasoning": "Missing summary entirely. Description is vague and lacks essential details about inputs (BatchDeleteJobsRequest), outputs (Operation resource), and side effects (immediate removal from search). Added clarity about operation type, polling mechanism, and state changes for better AI agent decision-making.",
       "batch_index": 1
     }
   },
@@ -7344,7 +7473,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'jobs.projects.tenants.jobs.batchUpdate' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. The current summary is missing, and the description lacks details about the request body and return value.",
+    "message": "Operation 'jobs.projects.tenants.jobs.batchUpdate' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description lacks specificity about inputs (BatchUpdateJobsRequest), outputs (Operation resource), and side effects (search visibility changes). Added clarity about operation type, polling mechanism, indexing timeline, and state changes for improved AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7359,14 +7488,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Begins executing a batch update jobs operation.",
       "summary_suggestion": "Batch update multiple job postings",
-      "description_suggestion": "Begins executing a batch update jobs operation. Requires a BatchUpdateJobsRequest object in the request body. Returns an Operation object that can be used to track the status of the batch operation.",
-      "reasoning": "The current summary is missing, and the description lacks details about the request body and return value.",
+      "description_suggestion": "Initiates a batch operation to update multiple job postings in the specified tenant. Accepts a BatchUpdateJobsRequest containing job IDs and updated Job resource fields. Returns a long-running Operation resource that can be polled to track completion status. Updated jobs reflect changes in search results within 10 seconds, though full indexing may take up to 5 minutes. Individual update results are available once the operation completes.",
+      "reasoning": "Missing summary entirely. Description lacks specificity about inputs (BatchUpdateJobsRequest), outputs (Operation resource), and side effects (search visibility changes). Added clarity about operation type, polling mechanism, indexing timeline, and state changes for improved AI agent interpretability.",
       "batch_index": 1
     }
   },
@@ -7381,7 +7512,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'jobs.projects.tenants.jobs.search' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing, and the description lacks details about the request body and return value.",
+    "message": "Operation 'jobs.projects.tenants.jobs.search' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description mentions permission constraints but lacks details about search inputs (keywords, filters, location), outputs (SearchJobsResponse structure), and use cases. Added clarity about supported search criteria, response structure, and typical use cases for better AI agent understanding of when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7396,13 +7527,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Searches for jobs using the provided SearchJobsRequest. This call constrains the visibility of jobs present in the database, and only returns jobs that the caller has permission to search against.",
-      "summary_suggestion": "Search for jobs using specified criteria",
-      "description_suggestion": "Searches for jobs using the provided SearchJobsRequest. This call constrains the visibility of jobs present in the database, and only returns jobs that the caller has permission to search against. Requires a SearchJobsRequest object in the request body. Returns a SearchJobsResponse object.",
-      "reasoning": "The current summary is missing, and the description lacks details about the request body and return value.",
+      "summary_suggestion": "Search for job postings by criteria",
+      "description_suggestion": "Searches for job postings matching the criteria specified in the SearchJobsRequest. Supports filtering by keywords, location, company, job title, and other attributes. Returns a SearchJobsResponse containing matching Job resources and pagination metadata. Results are constrained by caller permissions and only include jobs the caller is authorized to access. Useful for job seekers and applications performing general job searches.",
+      "reasoning": "Missing summary entirely. Description mentions permission constraints but lacks details about search inputs (keywords, filters, location), outputs (SearchJobsResponse structure), and use cases. Added clarity about supported search criteria, response structure, and typical use cases for better AI agent understanding of when to use this operation.",
       "batch_index": 1
     }
   },
@@ -7417,7 +7549,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'jobs.projects.tenants.jobs.searchForAlert' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. The current summary is missing, and the description lacks details about the request body and return value.",
+    "message": "Operation 'jobs.projects.tenants.jobs.searchForAlert' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description is verbose and unclear about inputs/outputs. The distinction from standard search (algorithmic adjustments for passive seekers) is buried in explanation. Added concise summary highlighting the passive seeker focus, clarified inputs/outputs, and explicitly contrasted with standard search operation for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7437,9 +7569,9 @@
       ],
       "current_summary": "",
       "current_description": "Searches for jobs using the provided SearchJobsRequest. This API call is intended for the use case of targeting passive job seekers (for example, job seekers who have signed up to receive email alerts about potential job opportunities), it has different algorithmic adjustments that are designed to specifically target passive job seekers. This call constrains the visibility of jobs present in the database, and only returns jobs the caller has permission to search against.",
-      "summary_suggestion": "Search for jobs targeting passive job seekers",
-      "description_suggestion": "Searches for jobs using the provided SearchJobsRequest. This API call is intended for targeting passive job seekers with different algorithmic adjustments. Requires a SearchJobsRequest object in the request body. Returns a SearchJobsResponse object.",
-      "reasoning": "The current summary is missing, and the description lacks details about the request body and return value.",
+      "summary_suggestion": "Search jobs optimized for passive job seeker alerts",
+      "description_suggestion": "Searches for job postings using specialized algorithms optimized for passive job seekers (e.g., those subscribed to email alerts). Accepts a SearchJobsRequest with search criteria and returns a SearchJobsResponse with matching Job resources. Results are algorithmically adjusted to prioritize relevance for passive candidates and are constrained by caller permissions. Use this operation instead of the standard search when targeting job seekers through alert notifications.",
+      "reasoning": "Missing summary entirely. Description is verbose and unclear about inputs/outputs. The distinction from standard search (algorithmic adjustments for passive seekers) is buried in explanation. Added concise summary highlighting the passive seeker focus, clarified inputs/outputs, and explicitly contrasted with standard search operation for better AI agent decision-making.",
       "batch_index": 1
     }
   },
@@ -7454,7 +7586,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'jobs.projects.tenants.list' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing, and the description lacks details about the return value.",
+    "message": "Operation 'jobs.projects.tenants.list' has semantic quality issues: vague_summary. Missing summary entirely. Description is clear and complete about purpose, inputs (project parent path), and outputs (list of Tenant resources). Only summary needs improvement for consistency and AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7468,14 +7600,12 @@
       "operation_id": "jobs.projects.tenants.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
-        "missing_output_details"
+        "vague_summary"
       ],
       "current_summary": "",
       "current_description": "Lists all tenants associated with the project.",
-      "summary_suggestion": "List all tenants associated with the project",
-      "description_suggestion": "Lists all tenants associated with the project. Returns a list of Tenant objects.",
-      "reasoning": "The current summary is missing, and the description lacks details about the return value.",
+      "summary_suggestion": "List all project tenants",
+      "reasoning": "Missing summary entirely. Description is clear and complete about purpose, inputs (project parent path), and outputs (list of Tenant resources). Only summary needs improvement for consistency and AI agent clarity.",
       "batch_index": 1
     }
   },
@@ -7490,7 +7620,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 16 operations analyzed, 13 quality issues found",
+    "message": "Semantic analysis completed: 16 operations analyzed, 16 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -7502,7 +7632,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 16,
-      "total_issues_found": 13,
+      "total_issues_found": 16,
       "batches_processed": 3
     }
   }

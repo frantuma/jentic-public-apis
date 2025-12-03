@@ -1951,7 +1951,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudprofiler.projects.profiles.patch' has semantic quality issues: vague_summary, unclear_purpose, missing_side_effects, poor_ai_interpretability. The original summary was missing. The description was improved to clarify the purpose, add missing side effects, and improve AI agent interpretability.",
+    "message": "Operation 'cloudprofiler.projects.profiles.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description is lengthy and mixes operational constraints with deprecation warnings. Improved version clarifies: (1) what can be updated (bytes and labels), (2) mode restrictions (online only), (3) input expectations (Profile object), (4) output (updated Profile), and (5) side effects (resource modification). Better structured for AI agent decision-making about when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1966,15 +1966,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "unclear_purpose",
-        "missing_side_effects",
-        "poor_ai_interpretability"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "UpdateProfile updates the profile bytes and labels on the profile resource created in the online mode. Updating the bytes for profiles created in the offline mode is currently not supported: the profile content must be provided at the time of the profile creation. _Direct use of this API is discouraged, please use a [supported profiler agent](https://cloud.google.com/profiler/docs/about-profiler#profiling_agent) instead for profile collection._",
-      "summary_suggestion": "Update profile bytes and labels",
-      "description_suggestion": "Updates the profile bytes and labels for a profile resource created in the online mode. Profiles created in the offline mode cannot have their bytes updated. Direct use of this API is discouraged. Instead, use a [supported profiler agent](https://cloud.google.com/profiler/docs/about-profiler#profiling_agent) for profile collection. If the profile creation is not available, the request may hang for some time until the next profile session is available. The response will indicate the duration of the backoff the client should take before attempting to create a profile again.",
-      "reasoning": "The original summary was missing. The description was improved to clarify the purpose, add missing side effects, and improve AI agent interpretability.",
+      "summary_suggestion": "Update profile bytes and labels for online profiles",
+      "description_suggestion": "Updates the profile bytes and labels on an existing profile resource created in online mode. Only profiles created in online mode support byte updates; offline profiles must have content provided at creation time. Accepts a Profile object with updated bytes and/or labels. Returns the updated Profile resource. Note: Direct API use is discouraged; use a supported profiler agent instead for profile collection.",
+      "reasoning": "Missing summary entirely. Description is lengthy and mixes operational constraints with deprecation warnings. Improved version clarifies: (1) what can be updated (bytes and labels), (2) mode restrictions (online only), (3) input expectations (Profile object), (4) output (updated Profile), and (5) side effects (resource modification). Better structured for AI agent decision-making about when to use this operation.",
       "batch_index": 0
     }
   },
@@ -1989,7 +1989,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudprofiler.projects.profiles.list' has semantic quality issues: vague_summary, missing_context. The original summary was missing. The description was improved to add context about the types of profiles listed.",
+    "message": "Operation 'cloudprofiler.projects.profiles.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too brief and lacks details about: (1) filtering/scoping (project/deployment context), (2) pagination support, (3) return type (ListProfilesResponse), (4) permission-based filtering. Enhanced version provides AI agents with clear understanding of input parameters, filtering behavior, and response structure for proper operation selection and usage.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2004,13 +2004,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists profiles which have been collected so far and for which the caller has permission to view.",
-      "summary_suggestion": "List collected profiles",
-      "description_suggestion": "Lists all profiles that have been collected and for which the caller has permission to view. This includes profiles created in both online and offline modes.",
-      "reasoning": "The original summary was missing. The description was improved to add context about the types of profiles listed.",
+      "summary_suggestion": "List collected profiles for a project",
+      "description_suggestion": "Lists all profiles that have been collected for a specified project and deployment, filtered by caller permissions. Supports pagination through optional parameters. Returns a ListProfilesResponse containing an array of Profile resources matching the query criteria and pagination tokens for retrieving additional results.",
+      "reasoning": "Missing summary. Description is too brief and lacks details about: (1) filtering/scoping (project/deployment context), (2) pagination support, (3) return type (ListProfilesResponse), (4) permission-based filtering. Enhanced version provides AI agents with clear understanding of input parameters, filtering behavior, and response structure for proper operation selection and usage.",
       "batch_index": 0
     }
   },
@@ -2025,7 +2026,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudprofiler.projects.profiles.create' has semantic quality issues: vague_summary, poor_ai_interpretability. The original summary was missing. The description was improved to clarify the purpose and improve AI agent interpretability.",
+    "message": "Operation 'cloudprofiler.projects.profiles.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description is verbose and technical details about retry behavior are buried. Reorganized to clearly separate: (1) operation purpose (create online profile), (2) input requirements (CreateProfileRequest), (3) side effects (rate limiting, potential blocking), (4) output (Profile resource), (5) error handling (ABORTED with retry info). Improves AI agent understanding of when to use this operation and how to handle responses.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2040,13 +2041,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "poor_ai_interpretability"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "CreateProfile creates a new profile resource in the online mode. _Direct use of this API is discouraged, please use a [supported profiler agent](https://cloud.google.com/profiler/docs/about-profiler#profiling_agent) instead for profile collection._ The server ensures that the new profiles are created at a constant rate per deployment, so the creation request may hang for some time until the next profile session is available. The request may fail with ABORTED error if the creation is not available within ~1m, the response will indicate the duration of the backoff the client should take before attempting creating a profile again. The backoff duration is returned in google.rpc.RetryInfo extension on the response status. To a gRPC client, the extension will be return as a binary-serialized proto in the trailing metadata item named \"google.rpc.retryinfo-bin\".",
-      "summary_suggestion": "Create a new profile resource",
-      "description_suggestion": "Creates a new profile resource in the online mode. Direct use of this API is discouraged. Instead, use a [supported profiler agent](https://cloud.google.com/profiler/docs/about-profiler#profiling_agent) for profile collection. The server ensures that new profiles are created at a constant rate per deployment. If the profile creation is not available, the request may hang for some time until the next profile session is available. The response will indicate the duration of the backoff the client should take before attempting to create a profile again.",
-      "reasoning": "The original summary was missing. The description was improved to clarify the purpose and improve AI agent interpretability.",
+      "summary_suggestion": "Create a new online profile resource",
+      "description_suggestion": "Creates a new profile resource in online mode for a specified deployment. Accepts a CreateProfileRequest with deployment and profile type information. The server enforces a constant creation rate per deployment, so requests may block until the next profile session is available. Returns the created Profile resource. May return ABORTED error if unavailable within ~1m; retry information is provided in google.rpc.RetryInfo extension. Direct API use is discouraged; use a supported profiler agent instead.",
+      "reasoning": "Missing summary. Description is verbose and technical details about retry behavior are buried. Reorganized to clearly separate: (1) operation purpose (create online profile), (2) input requirements (CreateProfileRequest), (3) side effects (rate limiting, potential blocking), (4) output (Profile resource), (5) error handling (ABORTED with retry info). Improves AI agent understanding of when to use this operation and how to handle responses.",
       "batch_index": 0
     }
   },
@@ -2061,7 +2064,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudprofiler.projects.profiles.createOffline' has semantic quality issues: vague_summary, poor_ai_interpretability. The original summary was missing. The description was improved to clarify the purpose and improve AI agent interpretability.",
+    "message": "Operation 'cloudprofiler.projects.profiles.createOffline' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity on: (1) input structure (Profile object with bytes), (2) key difference from online mode (no rate limiting, immutable after creation), (3) return value (Profile resource), (4) side effects (server recording). Enhanced version clarifies the offline mode workflow and constraints, helping AI agents distinguish between create and createOffline operations and understand when each should be used.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2076,13 +2079,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "poor_ai_interpretability"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "CreateOfflineProfile creates a new profile resource in the offline mode. The client provides the profile to create along with the profile bytes, the server records it. _Direct use of this API is discouraged, please use a [supported profiler agent](https://cloud.google.com/profiler/docs/about-profiler#profiling_agent) instead for profile collection._",
       "summary_suggestion": "Create a new offline profile resource",
-      "description_suggestion": "Creates a new profile resource in the offline mode. The client provides the profile to create along with the profile bytes, and the server records it. Direct use of this API is discouraged. Instead, use a [supported profiler agent](https://cloud.google.com/profiler/docs/about-profiler#profiling_agent) for profile collection.",
-      "reasoning": "The original summary was missing. The description was improved to clarify the purpose and improve AI agent interpretability.",
+      "description_suggestion": "Creates a new profile resource in offline mode. Accepts a Profile object containing profile bytes and metadata (deployment, profile type, labels). The server records the provided profile data without rate limiting. Returns the created Profile resource with server-assigned identifiers. Profile content must be provided at creation time; offline profiles cannot be updated later. Direct API use is discouraged; use a supported profiler agent instead.",
+      "reasoning": "Missing summary. Description lacks clarity on: (1) input structure (Profile object with bytes), (2) key difference from online mode (no rate limiting, immutable after creation), (3) return value (Profile resource), (4) side effects (server recording). Enhanced version clarifies the offline mode workflow and constraints, helping AI agents distinguish between create and createOffline operations and understand when each should be used.",
       "batch_index": 0
     }
   },

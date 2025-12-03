@@ -2702,7 +2702,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'leadsAll' has semantic quality issues: vague_description, missing_context. The original description lacks details about pagination and the structure of the returned data.",
+    "message": "Operation 'leadsAll' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, poor_ai_interpretability. Original description is extremely vague with no context about pagination, filtering, or return structure. AI agents need to understand this is a list operation with pagination support, what parameters control the results, and how to navigate pages. Added details about cursor-based pagination which is core to this API's design.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2716,14 +2716,17 @@
       "operation_id": "leadsAll",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "List leads",
       "current_description": "List leads",
-      "summary_suggestion": "List all leads",
-      "description_suggestion": "Lists all leads available in the system. Supports pagination using 'cursor' and 'limit' parameters. Returns a collection of lead objects with metadata.",
-      "reasoning": "The original description lacks details about pagination and the structure of the returned data.",
+      "summary_suggestion": "Retrieve paginated list of leads",
+      "description_suggestion": "Retrieves a paginated list of leads from the connected CRM system. Supports filtering, sorting, and cursor-based pagination. Returns an array of lead objects with metadata including pagination cursors for navigating through results. Use cursor and limit parameters to control pagination.",
+      "reasoning": "Original description is extremely vague with no context about pagination, filtering, or return structure. AI agents need to understand this is a list operation with pagination support, what parameters control the results, and how to navigate pages. Added details about cursor-based pagination which is core to this API's design.",
       "batch_index": 0
     }
   },
@@ -2738,7 +2741,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'leadsAdd' has semantic quality issues: vague_description, missing_input_details. The original description lacks details about the required input and the structure of the returned data.",
+    "message": "Operation 'leadsAdd' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, missing_side_effects, poor_ai_interpretability. Original description lacks any detail about what data is accepted, what is returned, or the side effects of creation. AI agents need to understand the request schema (Lead object), the response structure (includes ID), and that the resource is immediately available. Added context about custom fields and system-generated fields for completeness.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2752,14 +2755,18 @@
       "operation_id": "leadsAdd",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Create lead",
       "current_description": "Create lead",
-      "summary_suggestion": "Create a new lead",
-      "description_suggestion": "Creates a new lead in the system. Requires a 'Lead' object in the request body. Returns the newly created lead object.",
-      "reasoning": "The original description lacks details about the required input and the structure of the returned data.",
+      "summary_suggestion": "Create a new lead record",
+      "description_suggestion": "Creates a new lead record in the connected CRM system. Accepts a Lead object with contact information, company details, and custom fields. Returns the created lead object with a unique identifier and system-generated fields. The lead is immediately available for retrieval and updates after creation.",
+      "reasoning": "Original description lacks any detail about what data is accepted, what is returned, or the side effects of creation. AI agents need to understand the request schema (Lead object), the response structure (includes ID), and that the resource is immediately available. Added context about custom fields and system-generated fields for completeness.",
       "batch_index": 0
     }
   },
@@ -2774,7 +2781,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'leadsOne' has semantic quality issues: vague_description, missing_context. The original description lacks details about the structure of the returned data.",
+    "message": "Operation 'leadsOne' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, poor_ai_interpretability. Original description provides no context about the ID parameter requirement, what data is returned, or how to obtain a lead ID. AI agents need to understand this is a detail retrieval operation, what the response contains, and how it relates to other operations. Added guidance on obtaining lead IDs and what fields are included in the response.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2788,14 +2795,17 @@
       "operation_id": "leadsOne",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Get lead",
       "current_description": "Get lead",
-      "summary_suggestion": "Retrieve a specific lead",
-      "description_suggestion": "Retrieves a specific lead by its ID. Returns the lead object with detailed information.",
-      "reasoning": "The original description lacks details about the structure of the returned data.",
+      "summary_suggestion": "Retrieve a specific lead by ID",
+      "description_suggestion": "Retrieves a single lead record by its unique identifier from the connected CRM system. Returns the complete lead object including contact information, company details, custom fields, and metadata. Use the lead ID from list operations or previous responses to fetch specific lead details.",
+      "reasoning": "Original description provides no context about the ID parameter requirement, what data is returned, or how to obtain a lead ID. AI agents need to understand this is a detail retrieval operation, what the response contains, and how it relates to other operations. Added guidance on obtaining lead IDs and what fields are included in the response.",
       "batch_index": 0
     }
   },
@@ -2810,7 +2820,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'leadsUpdate' has semantic quality issues: vague_description, missing_context. The original description lacks details about the required input and the structure of the returned data.",
+    "message": "Operation 'leadsUpdate' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Original description is completely uninformative. AI agents need to understand: the ID parameter is required, PATCH semantics allow partial updates, what fields can be modified, what is returned, and that changes are immediate. Added explicit mention of partial update support which is critical for understanding PATCH behavior versus PUT.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2824,14 +2834,59 @@
       "operation_id": "leadsUpdate",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Update lead",
       "current_description": "Update lead",
-      "summary_suggestion": "Update a specific lead",
-      "description_suggestion": "Updates a specific lead by its ID with the provided data. Requires a 'Lead' object in the request body. Returns the updated lead object.",
-      "reasoning": "The original description lacks details about the required input and the structure of the returned data.",
+      "summary_suggestion": "Update an existing lead record",
+      "description_suggestion": "Updates an existing lead record in the connected CRM system using PATCH semantics. Accepts a Lead object with fields to update; only provided fields are modified (partial updates supported). Returns the updated lead object with all current field values. Changes are immediately reflected in the system.",
+      "reasoning": "Original description is completely uninformative. AI agents need to understand: the ID parameter is required, PATCH semantics allow partial updates, what fields can be modified, what is returned, and that changes are immediate. Added explicit mention of partial update support which is critical for understanding PATCH behavior versus PUT.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'leadsDelete' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, missing_side_effects, poor_ai_interpretability. Original description lacks critical context about permanence, what happens to the resource, and what is returned. AI agents need to understand: the ID parameter is required, deletion is permanent and irreversible, the resource becomes inaccessible, and what the response contains. Added explicit warning about irreversibility to prevent accidental deletions.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "leadsDelete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Delete lead",
+      "current_description": "Delete lead",
+      "summary_suggestion": "Delete a lead record permanently",
+      "description_suggestion": "Permanently deletes a lead record from the connected CRM system by its unique identifier. The lead is removed and no longer accessible through retrieval operations. Returns a success response with the deleted lead's ID. This action cannot be undone.",
+      "reasoning": "Original description lacks critical context about permanence, what happens to the resource, and what is returned. AI agents need to understand: the ID parameter is required, deletion is permanent and irreversible, the resource becomes inaccessible, and what the response contains. Added explicit warning about irreversibility to prevent accidental deletions.",
       "batch_index": 0
     }
   },
@@ -2846,7 +2901,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 5 operations analyzed, 4 quality issues found",
+    "message": "Semantic analysis completed: 5 operations analyzed, 5 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -2858,7 +2913,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 5,
-      "total_issues_found": 4,
+      "total_issues_found": 5,
       "batches_processed": 1
     }
   }

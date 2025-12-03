@@ -2635,7 +2635,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'essentialcontacts.projects.contacts.delete' has semantic quality issues: vague_summary, vague_description, missing_side_effects. The current summary and description are vague. Added a more specific summary and detailed description, including authentication requirement and side effects.",
+    "message": "Operation 'essentialcontacts.projects.contacts.delete' has semantic quality issues: vague_summary, vague_description, missing_context, missing_side_effects. Original description is too minimal. Added context about what resource the contact is deleted from, clarified the side effect (no longer receives notifications), emphasized permanence, and specified required input. Summary was missing entirely.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2651,13 +2651,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "missing_context",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes a contact.",
-      "summary_suggestion": "Delete a specific contact.",
-      "description_suggestion": "Deletes a specific contact from the specified project. Requires authentication. Upon successful deletion, the contact will no longer receive notifications.",
-      "reasoning": "The current summary and description are vague. Added a more specific summary and detailed description, including authentication requirement and side effects.",
+      "summary_suggestion": "Delete a contact from a project",
+      "description_suggestion": "Deletes a contact from the specified project resource. The contact will no longer receive notifications. This action is permanent and cannot be undone. Requires the contact resource name to be specified.",
+      "reasoning": "Original description is too minimal. Added context about what resource the contact is deleted from, clarified the side effect (no longer receives notifications), emphasized permanence, and specified required input. Summary was missing entirely.",
       "batch_index": 0
     }
   },
@@ -2672,7 +2673,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'essentialcontacts.projects.contacts.get' has semantic quality issues: vague_summary, missing_context, missing_output_details. The current summary and description are vague. Added a more specific summary and detailed description, including authentication requirement and return value.",
+    "message": "Operation 'essentialcontacts.projects.contacts.get' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original description lacks specificity about what is returned and what input is required. Added details about the resource name parameter requirement and clarified the response includes contact details. Summary was missing entirely.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2687,14 +2688,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
+        "vague_description",
+        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets a single contact.",
-      "summary_suggestion": "Get details of a specific contact.",
-      "description_suggestion": "Gets the details of a specific contact from the specified project. Requires authentication. Returns a detailed contact object.",
-      "reasoning": "The current summary and description are vague. Added a more specific summary and detailed description, including authentication requirement and return value.",
+      "summary_suggestion": "Retrieve a contact by resource name",
+      "description_suggestion": "Retrieves a single contact resource by its full resource name. Returns the contact details including email address, notification categories, and language preferences. Requires the contact resource name to be specified.",
+      "reasoning": "Original description lacks specificity about what is returned and what input is required. Added details about the resource name parameter requirement and clarified the response includes contact details. Summary was missing entirely.",
       "batch_index": 0
     }
   },
@@ -2709,7 +2711,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'essentialcontacts.projects.contacts.patch' has semantic quality issues: vague_summary, missing_context, missing_output_details. The current summary and description are vague. Added a more specific summary and detailed description, including authentication requirement and return value.",
+    "message": "Operation 'essentialcontacts.projects.contacts.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original description mentions the email constraint but lacks context about what can be updated, input requirements, and output details. Enhanced to clarify updatable fields, partial update support, return value, and required parameters for better AI agent understanding. Summary was missing entirely.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2724,14 +2726,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
+        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Updates a contact. Note: A contact's email address cannot be changed.",
-      "summary_suggestion": "Update a specific contact's details.",
-      "description_suggestion": "Updates the details of a specific contact in the specified project. Requires authentication. Returns the updated contact object. Note: A contact's email address cannot be changed.",
-      "reasoning": "The current summary and description are vague. Added a more specific summary and detailed description, including authentication requirement and return value.",
+      "summary_suggestion": "Update contact notification preferences",
+      "description_suggestion": "Updates an existing contact's notification categories and language preferences. Note: A contact's email address cannot be changed after creation. Supports partial updates - only provided fields will be modified. Returns the updated contact resource. Requires the contact resource name and updated contact object.",
+      "reasoning": "Original description mentions the email constraint but lacks context about what can be updated, input requirements, and output details. Enhanced to clarify updatable fields, partial update support, return value, and required parameters for better AI agent understanding. Summary was missing entirely.",
       "batch_index": 0
     }
   },
@@ -2746,7 +2748,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'essentialcontacts.projects.contacts.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. The current summary and description are vague. Added a more specific summary and detailed description, including authentication requirement and return value.",
+    "message": "Operation 'essentialcontacts.projects.contacts.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original description is vague about scope and pagination. Added clarity that this lists only direct contacts (not inherited), specified what fields are returned, and documented pagination support. Summary was missing entirely.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2761,14 +2763,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
+        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists the contacts that have been set on a resource.",
-      "summary_suggestion": "List all contacts for a specific resource.",
-      "description_suggestion": "Lists all contacts that have been set on a specific resource in the specified project. Requires authentication. Returns a list of contact objects.",
-      "reasoning": "The current summary and description are vague. Added a more specific summary and detailed description, including authentication requirement and return value.",
+      "summary_suggestion": "List all contacts for a project",
+      "description_suggestion": "Lists all contacts that have been configured for the specified project resource. Returns a paginated list of contact resources with their email addresses, notification categories, and language preferences. Supports pagination through page size and token parameters. Does not include contacts inherited from parent resources.",
+      "reasoning": "Original description is vague about scope and pagination. Added clarity that this lists only direct contacts (not inherited), specified what fields are returned, and documented pagination support. Summary was missing entirely.",
       "batch_index": 0
     }
   },
@@ -2783,7 +2785,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'essentialcontacts.projects.contacts.create' has semantic quality issues: vague_summary, missing_context, missing_output_details. The current summary and description are vague. Added a more specific summary and detailed description, including authentication requirement and return value.",
+    "message": "Operation 'essentialcontacts.projects.contacts.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original description lacks specificity about required inputs and what is returned. Added details about parent resource requirement, required contact fields, and clarified the response includes the assigned resource name. Summary was missing entirely.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2798,14 +2800,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
+        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Adds a new contact for a resource.",
-      "summary_suggestion": "Create a new contact for a specific resource.",
-      "description_suggestion": "Adds a new contact for a specific resource in the specified project. Requires authentication. Returns the newly created contact object.",
-      "reasoning": "The current summary and description are vague. Added a more specific summary and detailed description, including authentication requirement and return value.",
+      "summary_suggestion": "Create a new contact for a project",
+      "description_suggestion": "Creates a new contact for the specified project resource. The contact will receive notifications for the specified notification categories. Requires the parent project resource name and a contact object with email address, notification categories, and language preference. Returns the newly created contact resource with an assigned resource name.",
+      "reasoning": "Original description lacks specificity about required inputs and what is returned. Added details about parent resource requirement, required contact fields, and clarified the response includes the assigned resource name. Summary was missing entirely.",
       "batch_index": 0
     }
   },
@@ -2820,7 +2822,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'essentialcontacts.projects.contacts.compute' has semantic quality issues: vague_summary, missing_context, missing_output_details. The current summary and description are vague. Added a more specific summary and detailed description, including authentication requirement and return value.",
+    "message": "Operation 'essentialcontacts.projects.contacts.compute' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original description is unclear about the distinction between this and list operation. Added 'effective' terminology to clarify inheritance behavior, specified required inputs (resource name and notification categories), and clarified the response. Summary was missing entirely.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2835,14 +2837,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
+        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists all contacts for the resource that are subscribed to the specified notification categories, including contacts inherited from any parent resources.",
-      "summary_suggestion": "Compute and list contacts for a specific resource.",
-      "description_suggestion": "Lists all contacts for the specified resource that are subscribed to the specified notification categories, including inherited contacts. Requires authentication. Returns a list of contact objects.",
-      "reasoning": "The current summary and description are vague. Added a more specific summary and detailed description, including authentication requirement and return value.",
+      "summary_suggestion": "Compute effective contacts with notification filtering",
+      "description_suggestion": "Computes and returns all effective contacts for the specified project resource that are subscribed to the given notification categories. This includes both directly configured contacts and contacts inherited from parent resources (organizations and folders). Requires the parent resource name and notification category filters. Returns a list of contact resources matching the criteria.",
+      "reasoning": "Original description is unclear about the distinction between this and list operation. Added 'effective' terminology to clarify inheritance behavior, specified required inputs (resource name and notification categories), and clarified the response. Summary was missing entirely.",
       "batch_index": 0
     }
   },
@@ -2857,7 +2859,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'essentialcontacts.projects.contacts.sendTestMessage' has semantic quality issues: vague_summary, missing_context, missing_output_details. The current summary and description are vague. Added a more specific summary and detailed description, including authentication requirement and return value.",
+    "message": "Operation 'essentialcontacts.projects.contacts.sendTestMessage' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Original description has grammatical issues and lacks clarity about inputs and outputs. Added specificity about the purpose (validation), clarified it doesn't modify state, specified required request parameters, and documented the empty response. Summary was missing entirely.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2872,14 +2874,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
-        "missing_output_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Allows a contact admin to send a test message to contact to verify that it has been configured correctly.",
-      "summary_suggestion": "Send a test message to a specific contact.",
-      "description_suggestion": "Allows a contact admin to send a test message to a specific contact to verify that it has been configured correctly. Requires authentication. Returns a confirmation message if the test message was sent successfully.",
-      "reasoning": "The current summary and description are vague. Added a more specific summary and detailed description, including authentication requirement and return value.",
+      "summary_suggestion": "Send test notification to verify contact",
+      "description_suggestion": "Sends a test notification message to a contact to verify that the contact has been configured correctly and is receiving notifications. This operation is used for validation purposes and does not affect the contact's configuration. Requires the resource name and a SendTestMessageRequest specifying the contact and notification category. Returns an empty response on success.",
+      "reasoning": "Original description has grammatical issues and lacks clarity about inputs and outputs. Added specificity about the purpose (validation), clarified it doesn't modify state, specified required request parameters, and documented the empty response. Summary was missing entirely.",
       "batch_index": 0
     }
   },

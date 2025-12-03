@@ -1575,7 +1575,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get_/search/v1/fields' has semantic quality issues: vague_summary, vague_description, missing_input_details. The current summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description including the lack of required parameters and the expected output.",
+    "message": "Operation 'get_/search/v1/fields' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details, poor_ai_interpretability. Original description is too minimal and lacks context. Missing summary entirely. AI agents need to understand this is a discovery/metadata operation that returns available fields for search operations. Added clarity about the operation's purpose (field discovery), what it returns (array of fields), and that it requires no authentication.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1591,13 +1591,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Fields that can be requested",
-      "summary_suggestion": "Retrieve list of available search fields",
-      "description_suggestion": "Retrieves a list of fields that can be used in search queries. This operation does not require any parameters. It returns a list of available fields.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description including the lack of required parameters and the expected output.",
+      "summary_suggestion": "Retrieve available search result fields",
+      "description_suggestion": "Returns a list of all available fields that can be requested in search results. This operation helps clients discover which field names are valid for use in search queries and result filtering. No authentication required. Returns an array of Field objects representing queryable and returnable fields in the search API.",
+      "reasoning": "Original description is too minimal and lacks context. Missing summary entirely. AI agents need to understand this is a discovery/metadata operation that returns available fields for search operations. Added clarity about the operation's purpose (field discovery), what it returns (array of fields), and that it requires no authentication.",
       "batch_index": 0
     }
   },
@@ -1612,7 +1615,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get_/search/v1/organic' has semantic quality issues: vague_summary, missing_input_details. The current summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description including the required parameters and the expected output.",
+    "message": "Operation 'get_/search/v1/organic' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_context, poor_ai_interpretability. Original summary is missing and description lacks specificity. AI agents need to understand: (1) this performs actual search queries, (2) what parameters control the search behavior, (3) what the response structure is, (4) how pagination works. Added details about parameter types, response schema, and clarified that this uses offset/limit pagination (not cursor-based like scrape).",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1627,13 +1630,17 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Return relevance-based results from search queries",
-      "summary_suggestion": "Get organic search results based on relevance",
-      "description_suggestion": "Retrieves relevance-based search results from the Internet Archive. This operation requires parameters such as query, sort, and limit. It returns a list of OrganicResult objects.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description including the required parameters and the expected output.",
+      "summary_suggestion": "Search and retrieve relevance-ranked results",
+      "description_suggestion": "Executes a search query and returns results ranked by relevance. Accepts search parameters including query terms, field filters, and result pagination options. Returns an array of OrganicResult objects containing matched items with their field values. Supports filtering by specific fields and limiting result sets. No cursor-based pagination; use offset/limit parameters for result navigation.",
+      "reasoning": "Original summary is missing and description lacks specificity. AI agents need to understand: (1) this performs actual search queries, (2) what parameters control the search behavior, (3) what the response structure is, (4) how pagination works. Added details about parameter types, response schema, and clarified that this uses offset/limit pagination (not cursor-based like scrape).",
       "batch_index": 0
     }
   },
@@ -1648,7 +1655,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get_/search/v1/scrape' has semantic quality issues: vague_summary, missing_input_details. The current summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description including the required parameters and the expected output.",
+    "message": "Operation 'get_/search/v1/scrape' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_context, poor_ai_interpretability. Original summary is missing. Description mentions cursor but lacks clarity about operation purpose and response structure. AI agents need to understand: (1) this is a scraping/bulk retrieval operation, (2) it uses cursor-based pagination (different from organic search), (3) what parameters are expected, (4) what the response contains. Added context about when to use this (large result sets, complete iteration) versus organic search, and clarified the cursor mechanism.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1663,13 +1670,17 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Scrape search results from Internet Archive, allowing a scrolling cursor",
-      "summary_suggestion": "Scrape search results with pagination support",
-      "description_suggestion": "Scrape search results from the Internet Archive, allowing for pagination using a cursor. This operation requires parameters such as query, cursor, and limit. It returns a list of ScrapeResult objects.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description including the required parameters and the expected output.",
+      "summary_suggestion": "Scrape search results with cursor-based pagination",
+      "description_suggestion": "Retrieves search results from Internet Archive using cursor-based pagination for efficient scrolling through large result sets. Accepts search parameters including query terms, field specifications, and cursor tokens for result navigation. Returns a ScrapeResult object containing matched items and a cursor token for fetching the next batch of results. Ideal for iterating through complete result sets without offset limitations.",
+      "reasoning": "Original summary is missing. Description mentions cursor but lacks clarity about operation purpose and response structure. AI agents need to understand: (1) this is a scraping/bulk retrieval operation, (2) it uses cursor-based pagination (different from organic search), (3) what parameters are expected, (4) what the response contains. Added context about when to use this (large result sets, complete iteration) versus organic search, and clarified the cursor mechanism.",
       "batch_index": 0
     }
   },

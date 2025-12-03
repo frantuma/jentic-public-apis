@@ -7068,7 +7068,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateTrunk' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. The original summary and description were missing. Added a clear summary and description that specify the operation's purpose, required authentication, input format, and output.",
+    "message": "Operation 'UpdateTrunk' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, missing_side_effects, not_actionable, poor_ai_interpretability. Operation has no summary or description. Added actionable summary indicating the update operation. Description explains the resource being modified (SIP trunk), what can be updated (properties like transfer settings, recording, credentials), required inputs (Sid), expected output (updated trunk object), and side effects (immediate effect on new calls). Uses domain-appropriate terminology consistent with Twilio Trunking API context.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7084,14 +7084,18 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects",
+        "not_actionable",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Update an existing trunk",
-      "description_suggestion": "Updates an existing trunk identified by its Sid. Requires authentication. Accepts a JSON payload with the fields to update. Returns the updated trunk object.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that specify the operation's purpose, required authentication, input format, and output.",
+      "summary_suggestion": "Update trunk configuration and settings",
+      "description_suggestion": "Updates an existing SIP trunk identified by its Sid. Allows modification of trunk properties such as friendly name, transfer settings, recording configuration, and associated credential lists or IP access control lists. Requires the trunk Sid as a path parameter. Returns the updated trunk object with all current configuration details. Changes take effect immediately for new calls.",
+      "reasoning": "Operation has no summary or description. Added actionable summary indicating the update operation. Description explains the resource being modified (SIP trunk), what can be updated (properties like transfer settings, recording, credentials), required inputs (Sid), expected output (updated trunk object), and side effects (immediate effect on new calls). Uses domain-appropriate terminology consistent with Twilio Trunking API context.",
       "batch_index": 3
     }
   },
@@ -7106,7 +7110,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateTrunk' has semantic quality issues: vague_summary, vague_description, missing_output_details. The original summary and description were missing. Added a clear summary and description that specify the operation's purpose, required authentication, input format, and output.",
+    "message": "Operation 'CreateTrunk' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, missing_side_effects, not_actionable, poor_ai_interpretability. Operation has no summary or description. Added clear, action-oriented summary. Description specifies what is being created (SIP trunk), what inputs are accepted (configuration parameters), what is returned (trunk object with Sid), and side effects (immediate availability). Uses consistent Twilio Trunking terminology and helps AI agents understand when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7122,13 +7126,18 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_output_details"
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "not_actionable",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Create a new trunk",
-      "description_suggestion": "Creates a new trunk. Requires authentication. Accepts a JSON payload with the trunk details. Returns the newly created trunk object and a 201 status code.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that specify the operation's purpose, required authentication, input format, and output.",
+      "summary_suggestion": "Create a new SIP trunk",
+      "description_suggestion": "Creates a new SIP trunk for handling voice calls. Accepts configuration parameters including friendly name, transfer settings, recording preferences, and associations with credential lists or IP access control lists. Returns the newly created trunk object with a unique Sid identifier and default configuration values. The trunk is immediately available for routing calls upon creation.",
+      "reasoning": "Operation has no summary or description. Added clear, action-oriented summary. Description specifies what is being created (SIP trunk), what inputs are accepted (configuration parameters), what is returned (trunk object with Sid), and side effects (immediate availability). Uses consistent Twilio Trunking terminology and helps AI agents understand when to use this operation.",
       "batch_index": 3
     }
   },
@@ -7143,7 +7152,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListTrunk' has semantic quality issues: vague_summary, vague_description, missing_output_details. The original summary and description were missing. Added a clear summary and description that specify the operation's purpose, required authentication, input parameters, and output.",
+    "message": "Operation 'ListTrunk' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, not_actionable, poor_ai_interpretability. Operation has no summary or description. Added concise, action-oriented summary. Description clarifies that this is a retrieval operation returning a list, explains pagination support (limit/offset parameters), specifies what data is returned (trunk objects with Sid and configuration), and provides context for when an AI agent should use this operation. Uses consistent domain terminology.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7159,13 +7168,17 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_output_details"
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "not_actionable",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "List all trunks",
-      "description_suggestion": "Lists all trunks available in the account. Requires authentication. Accepts optional parameters for filtering and pagination. Returns a list of trunk objects.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description that specify the operation's purpose, required authentication, input parameters, and output.",
+      "summary_suggestion": "List all SIP trunks",
+      "description_suggestion": "Retrieves a paginated list of all SIP trunks in the account. Supports filtering and pagination through optional parameters including limit and offset for result set control. Returns a list of trunk objects, each containing the trunk's Sid, friendly name, configuration details, and associated resources. Useful for discovering available trunks or monitoring trunk inventory.",
+      "reasoning": "Operation has no summary or description. Added concise, action-oriented summary. Description clarifies that this is a retrieval operation returning a list, explains pagination support (limit/offset parameters), specifies what data is returned (trunk objects with Sid and configuration), and provides context for when an AI agent should use this operation. Uses consistent domain terminology.",
       "batch_index": 3
     }
   },
@@ -7180,489 +7193,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeletePhoneNumber' has semantic quality issues: vague_summary, vague_description, missing_side_effects. The original summary and description were missing. Added a clear summary and description, including the required parameters and the expected return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeletePhoneNumber",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_side_effects"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Delete a phone number from a trunk",
-      "description_suggestion": "Deletes a specified phone number associated with a trunk. Requires authentication and the TrunkSid and Sid parameters. Returns a success message if the deletion is successful.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description, including the required parameters and the expected return value.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreatePhoneNumber' has semantic quality issues: vague_summary, vague_description, missing_input_details. The original summary and description were missing. Added a clear summary and description, including the required parameters and the expected return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreatePhoneNumber",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_input_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Create a new phone number for a trunk",
-      "description_suggestion": "Creates a new phone number for a specified trunk. Requires authentication and the TrunkSid parameter. Returns the details of the newly created phone number.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description, including the required parameters and the expected return value.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListPhoneNumber' has semantic quality issues: vague_summary, vague_description, missing_output_details. The original summary and description were missing. Added a clear summary and description, including the required parameters and the expected return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListPhoneNumber",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "List phone numbers for a trunk",
-      "description_suggestion": "Lists all phone numbers associated with a specified trunk. Requires authentication and the TrunkSid parameter. Returns a list of phone number details.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description, including the required parameters and the expected return value.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchRecording' has semantic quality issues: vague_summary, vague_description, missing_output_details. The original summary and description were missing. Added a clear summary and description, including the required parameters and the expected return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchRecording",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Fetch a specific recording",
-      "description_suggestion": "Fetches a specific recording from a trunk. Requires authentication and the TrunkSid parameter. Returns the details of the specified recording.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description, including the required parameters and the expected return value.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'UpdateRecording' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. The original summary and description were missing. Added a clear summary and description, including the required parameters and the expected return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "UpdateRecording",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_input_details",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Update a specific recording",
-      "description_suggestion": "Updates a specific recording in a trunk. Requires authentication and the TrunkSid parameter. Returns the details of the updated recording.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description, including the required parameters and the expected return value.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchTrunk' has semantic quality issues: vague_summary, vague_description, missing_output_details. The original summary and description were missing. Added a clear summary and description, including the required parameters and the expected return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchTrunk",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Fetch details of a specific trunk",
-      "description_suggestion": "Fetches the details of a specified trunk. Requires authentication and the Sid parameter. Returns the details of the specified trunk.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description, including the required parameters and the expected return value.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeleteTrunk' has semantic quality issues: vague_summary, vague_description, missing_side_effects. The original summary and description were missing. Added a clear summary and description, including the required parameters and the expected return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteTrunk",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_side_effects"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Delete a specific trunk",
-      "description_suggestion": "Deletes a specified trunk. Requires authentication and the Sid parameter. Returns a success message if the deletion is successful.",
-      "reasoning": "The original summary and description were missing. Added a clear summary and description, including the required parameters and the expected return value.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchOriginationUrl' has semantic quality issues: vague_summary, vague_description, missing_context. The original summary and description were missing. The suggestions provide clarity on the operation's purpose, authentication, and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchOriginationUrl",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Fetch details of a specific Origination URL",
-      "description_suggestion": "Retrieves the details of a specific Origination URL associated with a Trunk. Requires authentication. Returns the Origination URL object.",
-      "reasoning": "The original summary and description were missing. The suggestions provide clarity on the operation's purpose, authentication, and return value.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeleteOriginationUrl' has semantic quality issues: vague_summary, vague_description, missing_context. The original summary and description were missing. The suggestions provide clarity on the operation's purpose, authentication, and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteOriginationUrl",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Delete a specific Origination URL",
-      "description_suggestion": "Deletes a specific Origination URL associated with a Trunk. Requires authentication. Returns a success message if the deletion is successful.",
-      "reasoning": "The original summary and description were missing. The suggestions provide clarity on the operation's purpose, authentication, and return value.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'UpdateOriginationUrl' has semantic quality issues: vague_summary, vague_description, missing_context. The original summary and description were missing. The suggestions provide clarity on the operation's purpose, authentication, and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "UpdateOriginationUrl",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Update a specific Origination URL",
-      "description_suggestion": "Updates a specific Origination URL associated with a Trunk. Requires authentication. Returns the updated Origination URL object.",
-      "reasoning": "The original summary and description were missing. The suggestions provide clarity on the operation's purpose, authentication, and return value.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateOriginationUrl' has semantic quality issues: vague_summary, vague_description, missing_context. The original summary and description were missing. The suggestions provide clarity on the operation's purpose, authentication, and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateOriginationUrl",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Create a new Origination URL",
-      "description_suggestion": "Creates a new Origination URL associated with a Trunk. Requires authentication. Returns the newly created Origination URL object.",
-      "reasoning": "The original summary and description were missing. The suggestions provide clarity on the operation's purpose, authentication, and return value.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListOriginationUrl' has semantic quality issues: vague_summary, vague_description, missing_context. The original summary and description were missing. The suggestions provide clarity on the operation's purpose, authentication, and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListOriginationUrl",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "List all Origination URLs for a Trunk",
-      "description_suggestion": "Retrieves a list of all Origination URLs associated with a specific Trunk. Requires authentication. Returns a list of Origination URL objects.",
-      "reasoning": "The original summary and description were missing. The suggestions provide clarity on the operation's purpose, authentication, and return value.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchPhoneNumber' has semantic quality issues: vague_summary, vague_description, missing_context. The original summary and description were missing. The suggestions provide clarity on the operation's purpose, authentication, and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchPhoneNumber",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Fetch details of a specific Phone Number",
-      "description_suggestion": "Retrieves the details of a specific Phone Number associated with a Trunk. Requires authentication. Returns the Phone Number object.",
-      "reasoning": "The original summary and description were missing. The suggestions provide clarity on the operation's purpose, authentication, and return value.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchCredentialList' has semantic quality issues: vague_summary, vague_description, missing_context. The original summary and description were missing. Added a clear and concise summary and description that include the purpose, authentication requirement, and return value.",
+    "message": "Operation 'FetchCredentialList' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. Operation has no summary or description. Added clear action verb, context about what is being retrieved, required parameters (TrunkSid, Sid), and expected output to help AI agents understand this is a read operation for credential list details.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7678,13 +7209,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "unclear_purpose",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Retrieve the credential list for a Trunk",
-      "description_suggestion": "Fetches the credential list associated with the specified Trunk. Requires authentication. Returns the credential list object.",
-      "reasoning": "The original summary and description were missing. Added a clear and concise summary and description that include the purpose, authentication requirement, and return value.",
+      "summary_suggestion": "Retrieve a credential list for a trunk",
+      "description_suggestion": "Retrieves a specific credential list associated with a trunk by its SID. Returns the credential list object containing authentication credentials configuration for the specified trunk.",
+      "reasoning": "Operation has no summary or description. Added clear action verb, context about what is being retrieved, required parameters (TrunkSid, Sid), and expected output to help AI agents understand this is a read operation for credential list details.",
       "batch_index": 0
     }
   },
@@ -7699,7 +7231,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteCredentialList' has semantic quality issues: vague_summary, vague_description, missing_context. The original summary and description were missing. Added a clear and concise summary and description that include the purpose, authentication requirement, and return value.",
+    "message": "Operation 'DeleteCredentialList' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_side_effects. Operation has no summary or description. Added clear action verb, context about what is being deleted, and side effects (trunk loses credential configuration) to help AI agents understand the impact of this destructive operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7715,13 +7247,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "unclear_purpose",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Remove a credential list from a Trunk",
-      "description_suggestion": "Deletes the specified credential list from the Trunk. Requires authentication. Returns a success message if the deletion is successful.",
-      "reasoning": "The original summary and description were missing. Added a clear and concise summary and description that include the purpose, authentication requirement, and return value.",
+      "summary_suggestion": "Remove a credential list from a trunk",
+      "description_suggestion": "Removes a credential list association from a trunk. Deletes the specified credential list by SID from the trunk configuration. After deletion, the trunk will no longer use these credentials for authentication.",
+      "reasoning": "Operation has no summary or description. Added clear action verb, context about what is being deleted, and side effects (trunk loses credential configuration) to help AI agents understand the impact of this destructive operation.",
       "batch_index": 0
     }
   },
@@ -7736,7 +7269,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateCredentialList' has semantic quality issues: vague_summary, vague_description, missing_context. The original summary and description were missing. Added a clear and concise summary and description that include the purpose, authentication requirement, and return value.",
+    "message": "Operation 'CreateCredentialList' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details. Operation has no summary or description. Added clear action verb, context about required inputs (TrunkSid, credential list reference), and expected output to help AI agents understand this creates a new association between trunk and credentials.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7752,13 +7285,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Create a new credential list for a Trunk",
-      "description_suggestion": "Creates a new credential list for the specified Trunk. Requires authentication. Returns the newly created credential list object.",
-      "reasoning": "The original summary and description were missing. Added a clear and concise summary and description that include the purpose, authentication requirement, and return value.",
+      "summary_suggestion": "Associate a credential list with a trunk",
+      "description_suggestion": "Associates a credential list with a trunk. Requires the trunk SID and credential list SID in the request. Returns the newly created credential list association object with status 201.",
+      "reasoning": "Operation has no summary or description. Added clear action verb, context about required inputs (TrunkSid, credential list reference), and expected output to help AI agents understand this creates a new association between trunk and credentials.",
       "batch_index": 0
     }
   },
@@ -7773,7 +7308,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListCredentialList' has semantic quality issues: vague_summary, vague_description, missing_context. The original summary and description were missing. Added a clear and concise summary and description that include the purpose, authentication requirement, and return value.",
+    "message": "Operation 'ListCredentialList' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. Operation has no summary or description. Added clear action verb, context about what is being listed, and information about pagination support to help AI agents understand this is a collection retrieval operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7789,13 +7324,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "unclear_purpose",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "List all credential lists for a Trunk",
-      "description_suggestion": "Lists all credential lists associated with the specified Trunk. Requires authentication. Returns a list of credential list objects.",
-      "reasoning": "The original summary and description were missing. Added a clear and concise summary and description that include the purpose, authentication requirement, and return value.",
+      "summary_suggestion": "List all credential lists for a trunk",
+      "description_suggestion": "Retrieves all credential lists associated with a specific trunk. Returns a paginated list of credential list objects for the trunk. Supports pagination parameters for controlling result set size and offset.",
+      "reasoning": "Operation has no summary or description. Added clear action verb, context about what is being listed, and information about pagination support to help AI agents understand this is a collection retrieval operation.",
       "batch_index": 0
     }
   },
@@ -7810,7 +7346,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchIpAccessControlList' has semantic quality issues: vague_summary, vague_description, missing_context. The original summary and description were missing. Added a clear and concise summary and description that include the purpose, authentication requirement, and return value.",
+    "message": "Operation 'FetchIpAccessControlList' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. Operation has no summary or description. Added clear action verb, context about what is being retrieved, required parameters, and expected output to help AI agents understand this is a read operation for IP access control configuration.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7826,14 +7362,633 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "unclear_purpose",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Retrieve the IP Access Control List for a Trunk",
-      "description_suggestion": "Fetches the IP Access Control List associated with the specified Trunk. Requires authentication. Returns the IP Access Control List object.",
-      "reasoning": "The original summary and description were missing. Added a clear and concise summary and description that include the purpose, authentication requirement, and return value.",
+      "summary_suggestion": "Retrieve an IP Access Control List for a trunk",
+      "description_suggestion": "Retrieves a specific IP Access Control List associated with a trunk by its SID. Returns the IP Access Control List object containing the IP address rules and access policies configured for the trunk.",
+      "reasoning": "Operation has no summary or description. Added clear action verb, context about what is being retrieved, required parameters, and expected output to help AI agents understand this is a read operation for IP access control configuration.",
       "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteIpAccessControlList' has semantic quality issues: vague_description, missing_side_effects, not_actionable. Summary is clear and action-oriented. Description is repetitive and lacks detail about side effects. Enhanced description to explain what happens after deletion (trunk loses IP access restrictions) and clarifies the operational impact for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteIpAccessControlList",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_side_effects",
+        "not_actionable"
+      ],
+      "current_summary": "Remove an associated IP Access Control List from a Trunk",
+      "current_description": "Remove an associated IP Access Control List from a Trunk",
+      "description_suggestion": "Removes an IP Access Control List association from a trunk. Deletes the specified IP Access Control List by SID from the trunk configuration. After deletion, the trunk will no longer enforce IP-based access restrictions defined in this list.",
+      "reasoning": "Summary is clear and action-oriented. Description is repetitive and lacks detail about side effects. Enhanced description to explain what happens after deletion (trunk loses IP access restrictions) and clarifies the operational impact for AI agents.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateIpAccessControlList' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Summary is clear and action-oriented. Description is repetitive and lacks input/output details. Enhanced description to specify required parameters, expected response status, and the operational effect (trunk enforces IP rules) for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateIpAccessControlList",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Associate an IP Access Control List with a Trunk",
+      "current_description": "Associate an IP Access Control List with a Trunk",
+      "description_suggestion": "Associates an IP Access Control List with a trunk. Requires the trunk SID and IP Access Control List SID in the request. Returns the newly created association object with status 201. The trunk will then enforce IP-based access rules from this list.",
+      "reasoning": "Summary is clear and action-oriented. Description is repetitive and lacks input/output details. Enhanced description to specify required parameters, expected response status, and the operational effect (trunk enforces IP rules) for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListIpAccessControlList' has semantic quality issues: missing_input_details, missing_output_details, missing_context. Original description is repetitive and lacks detail about pagination support, return structure, and use case context. Added information about parameters, response format, and domain context for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListIpAccessControlList",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "List all IP Access Control Lists for a Trunk",
+      "current_description": "List all IP Access Control Lists for a Trunk",
+      "summary_suggestion": "Retrieve IP Access Control Lists for a Trunk",
+      "description_suggestion": "Retrieves all IP Access Control Lists associated with a specified Trunk. Supports pagination through limit and offset parameters. Returns a list of IP Access Control List objects containing their SIDs, friendly names, and metadata. Useful for managing which IP addresses are allowed to connect to the trunk.",
+      "reasoning": "Original description is repetitive and lacks detail about pagination support, return structure, and use case context. Added information about parameters, response format, and domain context for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchOriginationUrl' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details. Operation has no summary or description. Added clear action-oriented summary and comprehensive description explaining required parameters, return value, and use case for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchOriginationUrl",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Retrieve a specific Origination URL",
+      "description_suggestion": "Retrieves details for a specific Origination URL identified by its SID within a Trunk. Requires the TrunkSid and Origination URL Sid as path parameters. Returns the Origination URL object containing the URL, priority, weight, enabled status, and other configuration details. Used to inspect individual origination URL settings.",
+      "reasoning": "Operation has no summary or description. Added clear action-oriented summary and comprehensive description explaining required parameters, return value, and use case for AI agent clarity.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteOriginationUrl' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_side_effects. Operation has no summary or description. Added action-oriented summary and description explaining parameters, response code, side effects (permanent removal), and implications for AI agents to understand the destructive nature of this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteOriginationUrl",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Delete an Origination URL from a Trunk",
+      "description_suggestion": "Deletes a specific Origination URL from a Trunk. Requires the TrunkSid and Origination URL Sid as path parameters. Returns HTTP 204 No Content on successful deletion. After deletion, the origination URL will no longer be available for routing calls through this trunk. This action cannot be undone.",
+      "reasoning": "Operation has no summary or description. Added action-oriented summary and description explaining parameters, response code, side effects (permanent removal), and implications for AI agents to understand the destructive nature of this operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateOriginationUrl' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details. Operation has no summary or description. Added clear action-oriented summary and comprehensive description including parameters, request body expectations, return value, and partial update support for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateOriginationUrl",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Update an Origination URL configuration",
+      "description_suggestion": "Updates configuration for a specific Origination URL within a Trunk. Requires the TrunkSid and Origination URL Sid as path parameters. Accepts request body with updatable fields such as priority, weight, enabled status, and friendly name. Returns the updated Origination URL object with all current settings. Supports partial updates - only provided fields are modified.",
+      "reasoning": "Operation has no summary or description. Added clear action-oriented summary and comprehensive description including parameters, request body expectations, return value, and partial update support for AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateOriginationUrl' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details. Operation has no summary or description. Added action-oriented summary and detailed description explaining required/optional parameters, return value with status code, and immediate availability for AI agent clarity on creation behavior.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateOriginationUrl",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Create a new Origination URL for a Trunk",
+      "description_suggestion": "Creates a new Origination URL for a specified Trunk. Requires the TrunkSid as a path parameter. Accepts request body with required URL and optional configuration fields such as priority, weight, enabled status, and friendly name. Returns the newly created Origination URL object with HTTP 201 Created status. The origination URL will be available for routing calls immediately after creation.",
+      "reasoning": "Operation has no summary or description. Added action-oriented summary and detailed description explaining required/optional parameters, return value with status code, and immediate availability for AI agent clarity on creation behavior.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListOriginationUrl' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details. Operation has no summary or description. Added clear action-oriented summary and comprehensive description including parameters, pagination support, return structure, and use case context for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListOriginationUrl",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "List all Origination URLs for a Trunk",
+      "description_suggestion": "Retrieves all Origination URLs associated with a specified Trunk. Requires the TrunkSid as a path parameter. Supports pagination through limit and offset parameters. Returns a list of Origination URL objects containing their SIDs, URLs, priority, weight, enabled status, and other configuration details. Used to view all available origination endpoints for a trunk.",
+      "reasoning": "Operation has no summary or description. Added clear action-oriented summary and comprehensive description including parameters, pagination support, return structure, and use case context for AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchPhoneNumber' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details. Operation has no summary or description. Added action-oriented summary and comprehensive description explaining required parameters, return value structure, and use case for AI agent clarity on phone number management.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchPhoneNumber",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Retrieve a specific Phone Number",
+      "description_suggestion": "Retrieves details for a specific Phone Number associated with a Trunk. Requires the TrunkSid and Phone Number Sid as path parameters. Returns the Phone Number object containing the phone number, friendly name, address requirements, capabilities, and other provisioning details. Used to inspect individual phone number configuration and status within a trunk.",
+      "reasoning": "Operation has no summary or description. Added action-oriented summary and comprehensive description explaining required parameters, return value structure, and use case for AI agent clarity on phone number management.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeletePhoneNumber' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_side_effects, poor_ai_interpretability. Operation has no summary or description. Added clear action verb, specified what is being deleted and from where, included required parameters, and explained the side effect (permanent removal of association). This helps AI agents understand when to use this operation and what will happen.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeletePhoneNumber",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_side_effects",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Remove phone number from trunk",
+      "description_suggestion": "Deletes a phone number from the specified trunk. Requires the trunk SID and phone number SID. Once deleted, the phone number will no longer be associated with the trunk and cannot be used for routing calls through this trunk. This operation permanently removes the association.",
+      "reasoning": "Operation has no summary or description. Added clear action verb, specified what is being deleted and from where, included required parameters, and explained the side effect (permanent removal of association). This helps AI agents understand when to use this operation and what will happen.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreatePhoneNumber' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, poor_ai_interpretability. Operation lacks summary and description entirely. Added action-oriented summary, explained what the operation does (associates phone number with trunk), specified required inputs (trunk SID and phone number), and described the output (phone number resource). This enables AI agents to understand the operation's purpose and effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreatePhoneNumber",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Add phone number to trunk",
+      "description_suggestion": "Associates a phone number with the specified trunk. Requires the trunk SID and a phone number to add. The phone number will be provisioned for use with this trunk for inbound and outbound call routing. Returns the created phone number resource with its properties including address requirements and capabilities.",
+      "reasoning": "Operation lacks summary and description entirely. Added action-oriented summary, explained what the operation does (associates phone number with trunk), specified required inputs (trunk SID and phone number), and described the output (phone number resource). This enables AI agents to understand the operation's purpose and effects.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListPhoneNumber' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details, poor_ai_interpretability. Missing summary and description. Added clear retrieval action, specified the resource being listed (phone numbers for a trunk), mentioned pagination support, and described the return value. This helps AI agents understand this is a read operation for discovering available phone numbers on a trunk.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListPhoneNumber",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "List phone numbers for trunk",
+      "description_suggestion": "Retrieves a paginated list of all phone numbers associated with the specified trunk. Supports filtering and pagination parameters. Returns a collection of phone number resources with their properties including address requirements, capabilities, and provisioning status.",
+      "reasoning": "Missing summary and description. Added clear retrieval action, specified the resource being listed (phone numbers for a trunk), mentioned pagination support, and described the return value. This helps AI agents understand this is a read operation for discovering available phone numbers on a trunk.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchRecording' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details, poor_ai_interpretability. Operation has no summary or description. Added action verb 'Retrieve', clarified that this fetches recording configuration (not actual recordings), specified the return value includes recording mode and trim settings, and provided context about use case. This helps AI agents understand this retrieves metadata about recording behavior.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchRecording",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Retrieve trunk recording settings",
+      "description_suggestion": "Fetches the recording configuration for the specified trunk. Returns the current recording settings including recording mode and trim settings. Use this to check what recording behavior is currently enabled for calls on this trunk.",
+      "reasoning": "Operation has no summary or description. Added action verb 'Retrieve', clarified that this fetches recording configuration (not actual recordings), specified the return value includes recording mode and trim settings, and provided context about use case. This helps AI agents understand this retrieves metadata about recording behavior.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateRecording' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_side_effects, poor_ai_interpretability. Missing summary and description. Added clear update action, specified what can be configured (recording mode and trim settings), explained the side effect (immediate effect on new calls), and described the return value. This enables AI agents to understand how to modify recording behavior for a trunk.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateRecording",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Update trunk recording configuration",
+      "description_suggestion": "Updates the recording settings for the specified trunk. Accepts recording mode and trim settings to control how calls are recorded. Changes take effect immediately for new calls on this trunk. Returns the updated recording configuration.",
+      "reasoning": "Missing summary and description. Added clear update action, specified what can be configured (recording mode and trim settings), explained the side effect (immediate effect on new calls), and described the return value. This enables AI agents to understand how to modify recording behavior for a trunk.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchTrunk' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details, poor_ai_interpretability. Operation lacks summary and description. Added retrieval action verb, clarified this fetches a specific trunk's configuration, and described the comprehensive return value including all related resources. This helps AI agents understand this is for retrieving detailed trunk information.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchTrunk",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Retrieve trunk configuration details",
+      "description_suggestion": "Fetches the complete configuration for the specified trunk. Returns the trunk resource with all properties including origination URLs, credential lists, IP access control lists, phone numbers, recording settings, and transfer settings.",
+      "reasoning": "Operation lacks summary and description. Added retrieval action verb, clarified this fetches a specific trunk's configuration, and described the comprehensive return value including all related resources. This helps AI agents understand this is for retrieving detailed trunk information.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteTrunk' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_side_effects, poor_ai_interpretability. Missing summary and description. Added clear delete action, specified what is being deleted (trunk and associated configuration), emphasized the permanent nature and inability to undo, and explained the side effect (trunk becomes unavailable). This critical information helps AI agents understand the destructive nature of this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteTrunk",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_side_effects",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Delete trunk and its configuration",
+      "description_suggestion": "Permanently deletes the specified trunk and all its associated configuration including origination URLs, credential lists, IP access control lists, and phone number associations. This operation cannot be undone. The trunk will no longer be available for routing calls.",
+      "reasoning": "Missing summary and description. Added clear delete action, specified what is being deleted (trunk and associated configuration), emphasized the permanent nature and inability to undo, and explained the side effect (trunk becomes unavailable). This critical information helps AI agents understand the destructive nature of this operation.",
+      "batch_index": 2
     }
   },
   {
@@ -7847,7 +8002,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 24 operations analyzed, 21 quality issues found",
+    "message": "Semantic analysis completed: 24 operations analyzed, 24 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -7859,7 +8014,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 24,
-      "total_issues_found": 21,
+      "total_issues_found": 24,
       "batches_processed": 4
     }
   }

@@ -6195,7 +6195,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gkehub.projects.locations.memberships.features.create' has semantic quality issues: vague_summary, missing_context, missing_input_details, poor_ai_interpretability. The current summary is missing. The description lacks details about the required parameters, the request body, and the return value. Added context for better AI agent interpretability.",
+    "message": "Operation 'gkehub.projects.locations.memberships.features.create' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. The original description is too vague and lacks critical context for AI agent interpretation. Issues identified: (1) No summary provided at all; (2) Description doesn't explain what a MembershipFeature is or its purpose in the Fleet context; (3) Missing input details about required parent parameter and feature configuration; (4) Missing output details about the returned MembershipFeature resource; (5) Missing side effects information about asynchronous propagation; (6) Terminology could be more consistent with API context (MembershipFeature, Fleet Feature, Fleet Membership). The improved version provides domain context, clarifies inputs/outputs, explains the asynchronous nature, and helps AI agents understand when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6210,15 +6210,18 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
         "missing_context",
         "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
         "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Creates membershipFeature under a given parent.",
-      "summary_suggestion": "Create a new membership feature under a specified parent.",
-      "description_suggestion": "Creates a new MembershipFeature under a specified parent resource. Requires the parent resource identifier and a MembershipFeature object in the request body. Returns the newly created MembershipFeature.",
-      "reasoning": "The current summary is missing. The description lacks details about the required parameters, the request body, and the return value. Added context for better AI agent interpretability.",
+      "summary_suggestion": "Create a Fleet membership feature configuration",
+      "description_suggestion": "Creates a new MembershipFeature resource that enables and configures a Fleet Feature on a specific Fleet Membership. The operation requires the parent membership path and a MembershipFeature configuration object specifying the feature type and desired settings. Returns the created MembershipFeature resource with its current state and status. This is an asynchronous operation that may take time to propagate the feature configuration to the cluster.",
+      "reasoning": "The original description is too vague and lacks critical context for AI agent interpretation. Issues identified: (1) No summary provided at all; (2) Description doesn't explain what a MembershipFeature is or its purpose in the Fleet context; (3) Missing input details about required parent parameter and feature configuration; (4) Missing output details about the returned MembershipFeature resource; (5) Missing side effects information about asynchronous propagation; (6) Terminology could be more consistent with API context (MembershipFeature, Fleet Feature, Fleet Membership). The improved version provides domain context, clarifies inputs/outputs, explains the asynchronous nature, and helps AI agents understand when to use this operation.",
       "batch_index": 1
     }
   },
@@ -6233,7 +6236,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gkehub.projects.locations.memberships.features.delete' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides more context about the operation's purpose, authentication requirement, and response.",
+    "message": "Operation 'gkehub.projects.locations.memberships.features.delete' has semantic quality issues: vague_summary, vague_description, missing_context, missing_side_effects. Original description is too brief and lacks context about what 'removes' means in this domain. Added clarity about feature disablement, asynchronous nature, and the ability to monitor the operation. Included summary to guide AI agents on when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6248,13 +6251,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_context",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Removes a membershipFeature.",
       "summary_suggestion": "Delete a membership feature",
-      "description_suggestion": "Deletes a specified membershipFeature. Requires authentication. Returns an empty response body on success.",
-      "reasoning": "The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides more context about the operation's purpose, authentication requirement, and response.",
+      "description_suggestion": "Removes a MembershipFeature from a Fleet membership. This operation disables the specified feature on the membership and removes its configuration. The operation is asynchronous and returns a long-running operation that can be monitored for completion. Once deleted, the feature will no longer be active on the membership.",
+      "reasoning": "Original description is too brief and lacks context about what 'removes' means in this domain. Added clarity about feature disablement, asynchronous nature, and the ability to monitor the operation. Included summary to guide AI agents on when to use this operation.",
       "batch_index": 0
     }
   },
@@ -6269,7 +6274,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gkehub.projects.locations.memberships.features.get' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented. The description is already clear, so no changes are needed.",
+    "message": "Operation 'gkehub.projects.locations.memberships.features.get' has semantic quality issues: vague_summary, vague_description, missing_context. Original description has formatting artifacts and lacks detail about what information is returned. Removed the section header formatting and clarified that this returns the full MembershipFeature resource with configuration and status details, helping AI agents understand the response content.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6283,12 +6288,15 @@
       "operation_id": "gkehub.projects.locations.memberships.features.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "vague_description",
+        "missing_context"
       ],
       "current_summary": "",
-      "current_description": "========== MembershipFeature Services ========= Gets details of a membershipFeature.",
-      "summary_suggestion": "Get details of a membership feature",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented. The description is already clear, so no changes are needed.",
+      "current_description": "========= MembershipFeature Services ========= Gets details of a membershipFeature.",
+      "summary_suggestion": "Get membership feature details",
+      "description_suggestion": "Retrieves detailed information about a specific MembershipFeature, including its configuration, status, and current state on a Fleet membership. Returns the complete MembershipFeature resource with all properties and status information.",
+      "reasoning": "Original description has formatting artifacts and lacks detail about what information is returned. Removed the section header formatting and clarified that this returns the full MembershipFeature resource with configuration and status details, helping AI agents understand the response content.",
       "batch_index": 0
     }
   },
@@ -6303,7 +6311,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gkehub.projects.locations.list' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented. The description is already clear, so no changes are needed.",
+    "message": "Operation 'gkehub.projects.locations.memberships.features.patch' has semantic quality issues: vague_summary, missing_context, missing_output_details. Original description lacks detail about partial update support and asynchronous nature. Added information about field mask support, asynchronous operation handling, and return value to help AI agents understand how to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6314,15 +6322,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "gkehub.projects.locations.list",
+      "operation_id": "gkehub.projects.locations.memberships.features.patch",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Lists information about the supported locations for this service.",
-      "summary_suggestion": "List supported locations for a service",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented. The description is already clear, so no changes are needed.",
+      "current_description": "Updates an existing MembershipFeature.",
+      "summary_suggestion": "Update membership feature configuration",
+      "description_suggestion": "Updates the configuration of an existing MembershipFeature on a Fleet membership. Supports partial updates via field masks - only specified fields will be modified. The operation is asynchronous and returns a long-running operation. Returns the updated MembershipFeature resource upon completion.",
+      "reasoning": "Original description lacks detail about partial update support and asynchronous nature. Added information about field mask support, asynchronous operation handling, and return value to help AI agents understand how to use this operation and what to expect.",
       "batch_index": 0
     }
   },
@@ -6337,7 +6348,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gkehub.projects.locations.operations.list' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented. The description is already clear, so no changes are needed.",
+    "message": "Operation 'gkehub.projects.locations.operations.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Original description mentions error handling but lacks context about what operations are being listed and what the response contains. Added clarity about operation filtering, pagination support, and the Operation resource structure to help AI agents understand how to use filters and interpret results.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6351,12 +6362,15 @@
       "operation_id": "gkehub.projects.locations.operations.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
-      "summary_suggestion": "List operations matching a specified filter",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented. The description is already clear, so no changes are needed.",
+      "summary_suggestion": "List long-running operations",
+      "description_suggestion": "Lists long-running operations that match the specified filter criteria in the request. Supports filtering by operation status, name patterns, and other criteria. Returns a paginated list of Operation resources with their current status and metadata. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
+      "reasoning": "Original description mentions error handling but lacks context about what operations are being listed and what the response contains. Added clarity about operation filtering, pagination support, and the Operation resource structure to help AI agents understand how to use filters and interpret results.",
       "batch_index": 0
     }
   },
@@ -6371,7 +6385,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'gkehub.projects.locations.memberships.features.list' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented. The description is already clear, so no changes are needed.",
+    "message": "Operation 'gkehub.projects.locations.operations.cancel' has semantic quality issues: vague_summary, missing_context. Original description is verbose and technical. Added a clear summary and reorganized the description for better readability while preserving important details about best-effort semantics, state transitions, and verification methods. Clarified the return value (Empty response) for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gkehub.projects.locations.operations.cancel",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of `1`, corresponding to `Code.CANCELLED`.",
+      "summary_suggestion": "Cancel a long-running operation",
+      "description_suggestion": "Initiates asynchronous cancellation of a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. The operation is not deleted upon cancellation; instead, it transitions to a cancelled state with an Operation.error containing a CANCELLED status code. Use Operations.GetOperation to verify cancellation status or check if the operation completed despite the cancellation request. Returns an Empty response. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
+      "reasoning": "Original description is verbose and technical. Added a clear summary and reorganized the description for better readability while preserving important details about best-effort semantics, state transitions, and verification methods. Clarified the return value (Empty response) for AI agent clarity.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gkehub.projects.locations.memberships.features.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Original description is minimal and lacks context about pagination, filtering capabilities, and use cases. Added information about pagination support, filtering options, and the practical purpose of this operation to help AI agents understand when and how to use it effectively.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6385,12 +6435,15 @@
       "operation_id": "gkehub.projects.locations.memberships.features.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists MembershipFeatures in a given project and location.",
-      "summary_suggestion": "List membership features in a project and location",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented. The description is already clear, so no changes are needed.",
+      "summary_suggestion": "List membership features",
+      "description_suggestion": "Lists all MembershipFeatures in a specified project and location. Returns a paginated list of MembershipFeature resources with their current configuration and status. Supports filtering and sorting options to help identify specific features. Useful for discovering which Fleet features are enabled on memberships in a given location.",
+      "reasoning": "Original description is minimal and lacks context about pagination, filtering capabilities, and use cases. Added information about pagination support, filtering options, and the practical purpose of this operation to help AI agents understand when and how to use it effectively.",
       "batch_index": 0
     }
   },
@@ -6405,7 +6458,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 8 operations analyzed, 6 quality issues found",
+    "message": "Semantic analysis completed: 8 operations analyzed, 7 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -6417,7 +6470,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 8,
-      "total_issues_found": 6,
+      "total_issues_found": 7,
       "batches_processed": 2
     }
   }

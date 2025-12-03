@@ -3491,7 +3491,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'biglake.projects.locations.catalogs.databases.create' has semantic quality issues: vague_summary, missing_context, missing_input_details. The original summary was missing. Added a concise summary and expanded the description to include context about the required parameters and the return value.",
+    "message": "Operation 'biglake.projects.locations.catalogs.databases.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description is too minimal - lacks context about what a database is in this domain, what inputs are required (parent catalog path, database config), what is returned, and potential failure conditions. Added domain context about database's role as a table container, clarified inputs/outputs, and included error handling information for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3506,14 +3506,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Creates a new database.",
-      "summary_suggestion": "Create a new database in the specified location.",
-      "description_suggestion": "Creates a new database in the specified location. Requires the parent catalog and database information. Returns the newly created database object.",
-      "reasoning": "The original summary was missing. Added a concise summary and expanded the description to include context about the required parameters and the return value.",
+      "summary_suggestion": "Create a new database in a catalog",
+      "description_suggestion": "Creates a new database within the specified catalog. The database acts as a container for tables and inherits the catalog's configuration. Requires the parent catalog path and database configuration details. Returns the newly created Database object with assigned metadata including creation timestamp and resource name. The operation fails if a database with the same name already exists in the catalog.",
+      "reasoning": "Missing summary entirely. Description is too minimal - lacks context about what a database is in this domain, what inputs are required (parent catalog path, database config), what is returned, and potential failure conditions. Added domain context about database's role as a table container, clarified inputs/outputs, and included error handling information for better AI agent decision-making.",
       "batch_index": 1
     }
   },
@@ -3528,7 +3529,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'biglake.projects.locations.catalogs.databases.tables.list' has semantic quality issues: vague_summary, missing_context. The original summary was missing. Added a concise summary and expanded the description to include context about the location and catalog.",
+    "message": "Operation 'biglake.projects.locations.catalogs.databases.tables.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks detail about pagination support, filtering capabilities, and response structure. Added information about pagination parameters, response format (ListTablesResponse), and filtering/sorting capabilities to help AI agents understand how to use this operation for different query scenarios.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3543,13 +3544,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "List all tables in a specified database.",
-      "summary_suggestion": "List all tables in the specified database.",
-      "description_suggestion": "Lists all tables in the specified database within the specified catalog and location. Returns a list of table objects.",
-      "reasoning": "The original summary was missing. Added a concise summary and expanded the description to include context about the location and catalog.",
+      "summary_suggestion": "List all tables in a database",
+      "description_suggestion": "Retrieves a paginated list of all tables within a specified database. Accepts optional filtering and pagination parameters including page size and page token for result navigation. Returns a ListTablesResponse containing an array of Table objects and a next page token for pagination. Supports filtering by table properties and sorting options to help locate specific tables efficiently.",
+      "reasoning": "Missing summary. Description lacks detail about pagination support, filtering capabilities, and response structure. Added information about pagination parameters, response format (ListTablesResponse), and filtering/sorting capabilities to help AI agents understand how to use this operation for different query scenarios.",
       "batch_index": 1
     }
   },
@@ -3564,7 +3566,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'biglake.projects.locations.catalogs.databases.tables.create' has semantic quality issues: vague_summary, missing_context, missing_input_details. The original summary was missing. Added a concise summary and expanded the description to include context about the required parameters and the return value.",
+    "message": "Operation 'biglake.projects.locations.catalogs.databases.tables.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description is overly simplistic and lacks critical details about required inputs (storage descriptor, SerDeInfo, table options), response structure, and error conditions. Added domain-specific terminology (StorageDescriptor, SerDeInfo, HiveTableOptions) consistent with API schemas, clarified required configuration details, and included failure scenarios for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3579,15 +3581,272 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Creates a new table.",
-      "summary_suggestion": "Create a new table in the specified database.",
-      "description_suggestion": "Creates a new table in the specified database within the specified catalog and location. Requires the parent database and table information. Returns the newly created table object.",
-      "reasoning": "The original summary was missing. Added a concise summary and expanded the description to include context about the required parameters and the return value.",
+      "summary_suggestion": "Create a new table in a database",
+      "description_suggestion": "Creates a new table within the specified database. The table definition must include storage descriptor information, serialization format (SerDeInfo), and optional Hive table options for compatibility. Requires the parent database path and complete Table configuration. Returns the newly created Table object with assigned metadata including creation timestamp and full resource name. The operation fails if a table with the same name already exists in the database.",
+      "reasoning": "Missing summary entirely. Description is overly simplistic and lacks critical details about required inputs (storage descriptor, SerDeInfo, table options), response structure, and error conditions. Added domain-specific terminology (StorageDescriptor, SerDeInfo, HiveTableOptions) consistent with API schemas, clarified required configuration details, and included failure scenarios for better AI agent interpretability.",
       "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'biglake.projects.locations.catalogs.databases.tables.delete' has semantic quality issues: vague_summary, missing_side_effects, missing_output_details. Missing summary entirely. Description lacks clarity about permanence of deletion, what resource identifier is needed, and what the response contains. Added context about irreversibility and empty response to help AI agents understand the destructive nature of this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "biglake.projects.locations.catalogs.databases.tables.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes an existing table specified by the table ID.",
+      "summary_suggestion": "Delete a table from the metastore",
+      "description_suggestion": "Deletes an existing table from the BigLake Metastore. Requires the full resource name of the table to be deleted. This operation permanently removes the table metadata and cannot be undone. Returns an empty response on successful deletion.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about permanence of deletion, what resource identifier is needed, and what the response contains. Added context about irreversibility and empty response to help AI agents understand the destructive nature of this operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'biglake.projects.locations.catalogs.databases.tables.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is vague about what 'resource name' means and what data is returned. Enhanced to clarify the input requirement and specify that a Table object is returned with its properties.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "biglake.projects.locations.catalogs.databases.tables.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the table specified by the resource name.",
+      "summary_suggestion": "Retrieve table metadata from metastore",
+      "description_suggestion": "Retrieves the metadata for a specific table from the BigLake Metastore. Requires the full resource name of the table. Returns a Table object containing table properties, storage descriptor, and Hive table options if applicable.",
+      "reasoning": "Missing summary. Description is vague about what 'resource name' means and what data is returned. Enhanced to clarify the input requirement and specify that a Table object is returned with its properties.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'biglake.projects.locations.catalogs.databases.tables.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks detail about what can be updated, whether partial updates are supported, and what is returned. Added clarity about partial update support and return value to help AI agents understand update semantics.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "biglake.projects.locations.catalogs.databases.tables.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates an existing table specified by the table ID.",
+      "summary_suggestion": "Update table metadata in metastore",
+      "description_suggestion": "Updates an existing table in the BigLake Metastore. Accepts a Table object with fields to be modified. Supports partial updates - only provided fields will be updated. Returns the updated Table object with all current properties including any modifications made.",
+      "reasoning": "Missing summary. Description lacks detail about what can be updated, whether partial updates are supported, and what is returned. Added clarity about partial update support and return value to help AI agents understand update semantics.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'biglake.projects.locations.catalogs.databases.tables.rename' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description doesn't explain what input is required (RenameTableRequest) or what is returned. Enhanced to clarify the request structure and return value for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "biglake.projects.locations.catalogs.databases.tables.rename",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Renames an existing table specified by the table ID.",
+      "summary_suggestion": "Rename a table in the metastore",
+      "description_suggestion": "Renames an existing table in the BigLake Metastore. Requires the current table resource name and a RenameTableRequest containing the new table name. Returns the renamed Table object with updated metadata reflecting the new name.",
+      "reasoning": "Missing summary. Description doesn't explain what input is required (RenameTableRequest) or what is returned. Enhanced to clarify the request structure and return value for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'biglake.projects.locations.catalogs.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks information about the response structure and pagination support. Added clarity about ListCatalogsResponse and pagination capabilities to help AI agents understand how to retrieve and iterate through results.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "biglake.projects.locations.catalogs.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "List all catalogs in a specified project.",
+      "summary_suggestion": "List all catalogs in a project",
+      "description_suggestion": "Lists all catalogs in a specified project location. Returns a ListCatalogsResponse containing a collection of Catalog objects. Supports pagination through optional parameters for page size and page token.",
+      "reasoning": "Missing summary. Description lacks information about the response structure and pagination support. Added clarity about ListCatalogsResponse and pagination capabilities to help AI agents understand how to retrieve and iterate through results.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'biglake.projects.locations.catalogs.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too minimal and doesn't explain what input is required or what is returned. Enhanced to clarify that a Catalog object is the input, the location context, and that the response includes the created catalog with assigned metadata.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "biglake.projects.locations.catalogs.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new catalog.",
+      "summary_suggestion": "Create a new catalog in project",
+      "description_suggestion": "Creates a new catalog in the BigLake Metastore within a specified project location. Accepts a Catalog object with catalog configuration. Returns the newly created Catalog object with assigned metadata including creation timestamp and resource name.",
+      "reasoning": "Missing summary. Description is too minimal and doesn't explain what input is required or what is returned. Enhanced to clarify that a Catalog object is the input, the location context, and that the response includes the created catalog with assigned metadata.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'biglake.projects.locations.catalogs.databases.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks information about the response structure and pagination support. Added clarity about ListDatabasesResponse and pagination capabilities to help AI agents understand the response format and how to handle large result sets.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "biglake.projects.locations.catalogs.databases.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "List all databases in a specified catalog.",
+      "summary_suggestion": "List all databases in a catalog",
+      "description_suggestion": "Lists all databases in a specified catalog within the BigLake Metastore. Returns a ListDatabasesResponse containing a collection of Database objects. Supports pagination through optional parameters for page size and page token.",
+      "reasoning": "Missing summary. Description lacks information about the response structure and pagination support. Added clarity about ListDatabasesResponse and pagination capabilities to help AI agents understand the response format and how to handle large result sets.",
+      "batch_index": 0
     }
   },
   {
@@ -3601,7 +3860,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 10 operations analyzed, 3 quality issues found",
+    "message": "Semantic analysis completed: 10 operations analyzed, 10 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -3613,7 +3872,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 10,
-      "total_issues_found": 3,
+      "total_issues_found": 10,
       "batches_processed": 2
     }
   }

@@ -1854,7 +1854,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dataportability.accessType.check' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The summary was missing, and the description was improved to clarify that no input parameters are required and to specify the return value.",
+    "message": "Operation 'dataportability.accessType.check' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description is too brief and lacks context about why this operation matters (authorization verification) and what the response contains. Added clarity about token validation purpose and response content for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1869,13 +1869,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets the access type of the token.",
-      "summary_suggestion": "Check the access type of the token",
-      "description_suggestion": "Checks the access type of the provided OAuth token. This operation requires no input parameters as all required information is derived from the attached OAuth token. Returns the access type of the token.",
-      "reasoning": "The current summary and description are vague. The summary was missing, and the description was improved to clarify that no input parameters are required and to specify the return value.",
+      "summary_suggestion": "Check OAuth token access type",
+      "description_suggestion": "Determines the access type (scope level) of the provided OAuth token. This operation helps verify whether the token has the necessary permissions for data portability operations. Returns the access type classification in the response, enabling your application to determine if additional authorization scopes are required.",
+      "reasoning": "Missing summary entirely. Description is too brief and lacks context about why this operation matters (authorization verification) and what the response contains. Added clarity about token validation purpose and response content for better AI agent decision-making.",
       "batch_index": 0
     }
   },
@@ -1890,7 +1891,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'dataportability.portabilityArchive.initiate' has semantic quality issues: vague_summary. The current summary was missing. A concise summary was added to improve AI agent interpretability.",
+    "message": "Operation 'dataportability.authorization.reset' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is verbose and somewhat unclear about the return value. Reorganized to clarify the operation's purpose, timing constraints, and side effects (garbage collection eligibility). Added explicit mention of response confirmation for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "dataportability.authorization.reset",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Revokes OAuth tokens and resets exhausted scopes for a user/project pair. This method allows you to initiate a request after a new consent is granted. This method also indicates that previous archives can be garbage collected. You should call this method when all jobs are complete and all archives are downloaded. Do not call it only when you start a new job.",
+      "summary_suggestion": "Reset authorization and revoke exhausted OAuth scopes",
+      "description_suggestion": "Revokes OAuth tokens and resets exhausted scopes for a user/project pair, enabling re-authorization with new consent. This operation signals that previous archives can be garbage collected and should only be called after all archive jobs are complete and data has been downloaded. Returns confirmation of the reset operation. Do not call this method when initiating new jobs.",
+      "reasoning": "Missing summary. Description is verbose and somewhat unclear about the return value. Reorganized to clarify the operation's purpose, timing constraints, and side effects (garbage collection eligibility). Added explicit mention of response confirmation for AI agent clarity.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'dataportability.portabilityArchive.initiate' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description lacks critical details about what inputs are required (resources to archive), what is returned (job ID, state), and that this is an asynchronous operation. Added these details to help AI agents understand the operation's workflow and how to track progress.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1904,12 +1941,16 @@
       "operation_id": "dataportability.portabilityArchive.initiate",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Initiates a new Archive job for the Portability API.",
-      "summary_suggestion": "Initiate a new Archive job",
-      "reasoning": "The current summary was missing. A concise summary was added to improve AI agent interpretability.",
+      "summary_suggestion": "Start a new data portability archive job",
+      "description_suggestion": "Initiates a new Archive job to export user data from Google services. Requires specifying the resources to be archived in the request. Returns an InitiatePortabilityArchiveResponse containing the job ID and initial state. The operation creates an asynchronous job that processes the data export request. Monitor the job status using the returned job identifier.",
+      "reasoning": "Missing summary. Description lacks critical details about what inputs are required (resources to archive), what is returned (job ID, state), and that this is an asynchronous operation. Added these details to help AI agents understand the operation's workflow and how to track progress.",
       "batch_index": 0
     }
   },
@@ -1924,7 +1965,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dataportability.archiveJobs.getPortabilityArchiveState' has semantic quality issues: vague_summary. The current summary was missing. A concise summary was added to improve AI agent interpretability.",
+    "message": "Operation 'dataportability.archiveJobs.getPortabilityArchiveState' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks input parameter details (job name required) and output details (what state information is returned). Added parameter requirement and response content details to clarify how to use this operation for job monitoring.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1938,12 +1979,15 @@
       "operation_id": "dataportability.archiveJobs.getPortabilityArchiveState",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Retrieves the state of an Archive job for the Portability API.",
-      "summary_suggestion": "Get the state of an Archive job",
-      "reasoning": "The current summary was missing. A concise summary was added to improve AI agent interpretability.",
+      "summary_suggestion": "Get archive job status and state",
+      "description_suggestion": "Retrieves the current state and status of a specific Archive job. Requires the archive job name/identifier as a path parameter. Returns a PortabilityArchiveState object containing job progress, completion status, and any error information. Use this operation to monitor the progress of data export jobs initiated via the portabilityArchive.initiate operation.",
+      "reasoning": "Missing summary. Description lacks input parameter details (job name required) and output details (what state information is returned). Added parameter requirement and response content details to clarify how to use this operation for job monitoring.",
       "batch_index": 0
     }
   },
@@ -1958,7 +2002,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dataportability.archiveJobs.cancel' has semantic quality issues: vague_summary. The current summary was missing. A concise summary was added to improve AI agent interpretability.",
+    "message": "Operation 'dataportability.archiveJobs.cancel' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description lacks input parameter details and critical side effect information (job cannot be resumed, partial data may be lost). Added these details to help AI agents understand the consequences of cancellation and when this operation should be used.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1972,12 +2016,16 @@
       "operation_id": "dataportability.archiveJobs.cancel",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Cancels a Portability Archive job.",
-      "summary_suggestion": "Cancel a Portability Archive job",
-      "reasoning": "The current summary was missing. A concise summary was added to improve AI agent interpretability.",
+      "summary_suggestion": "Cancel an in-progress archive job",
+      "description_suggestion": "Cancels an in-progress Portability Archive job. Requires the archive job name/identifier as a path parameter. Returns a CancelPortabilityArchiveResponse confirming the cancellation. Once cancelled, the job will stop processing and cannot be resumed. Partial data exports may be discarded depending on the job's current progress state.",
+      "reasoning": "Missing summary. Description lacks input parameter details and critical side effect information (job cannot be resumed, partial data may be lost). Added these details to help AI agents understand the consequences of cancellation and when this operation should be used.",
       "batch_index": 0
     }
   },
@@ -1992,7 +2040,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'dataportability.archiveJobs.retry' has semantic quality issues: vague_summary. The current summary was missing. A concise summary was added to improve AI agent interpretability.",
+    "message": "Operation 'dataportability.archiveJobs.retry' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_context. Missing summary. Description lacks input parameter details, output information, and context about when retry is applicable (failed state only). Added these details to help AI agents determine if a job is eligible for retry and what to expect from the operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2006,12 +2054,16 @@
       "operation_id": "dataportability.archiveJobs.retry",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Retries a failed Portability Archive job.",
-      "summary_suggestion": "Retry a failed Portability Archive job",
-      "reasoning": "The current summary was missing. A concise summary was added to improve AI agent interpretability.",
+      "summary_suggestion": "Retry a failed archive job",
+      "description_suggestion": "Retries a previously failed Portability Archive job. Requires the archive job name/identifier as a path parameter. Returns a RetryPortabilityArchiveResponse containing the retry job details. This operation re-attempts the data export for jobs that encountered errors. Only applicable to jobs in a failed state; cannot retry completed or in-progress jobs.",
+      "reasoning": "Missing summary. Description lacks input parameter details, output information, and context about when retry is applicable (failed state only). Added these details to help AI agents determine if a job is eligible for retry and what to expect from the operation.",
       "batch_index": 0
     }
   },
@@ -2026,7 +2078,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 6 operations analyzed, 5 quality issues found",
+    "message": "Semantic analysis completed: 6 operations analyzed, 6 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -2038,7 +2090,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 6,
-      "total_issues_found": 5,
+      "total_issues_found": 6,
       "batches_processed": 1
     }
   }

@@ -6469,7 +6469,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicemanagement.operations.get' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does. The description is clear, but the summary needs to be improved for better clarity.",
+    "message": "Operation 'servicemanagement.services.configs.create' has semantic quality issues: vague_summary, missing_side_effects. Missing summary entirely. Description is clear but lacks explicit mention of what is returned and could better emphasize the distinction between storage and deployment. Added summary and clarified return value and retention policy for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6480,86 +6480,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "servicemanagement.operations.get",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.",
-      "summary_suggestion": "Retrieve the latest state of a long-running operation",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. The description is clear, but the summary needs to be improved for better clarity.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'servicemanagement.operations.list' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "servicemanagement.operations.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Lists service operations that match the specified filter in the request.",
-      "summary_suggestion": "List all service operations",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'servicemanagement.services.create' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing and the description lacks details about the input required for the operation.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "servicemanagement.services.create",
+      "operation_id": "servicemanagement.services.configs.create",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_side_effects"
       ],
       "current_summary": "",
-      "current_description": "Creates a new managed service. A managed service is immutable, and is subject to mandatory 30-day data retention. You cannot move a service or recreate it within 30 days after deletion. One producer project can own no more than 500 services. For security and reliability purposes, a production service should be hosted in a dedicated producer project. Operation",
-      "summary_suggestion": "Create a new managed service",
-      "description_suggestion": "Creates a new managed service. Requires a `ManagedService` object in the request body. A managed service is immutable, and is subject to mandatory 30-day data retention. You cannot move a service or recreate it within 30 days after deletion. One producer project can own no more than 500 services. For security and reliability purposes, a production service should be hosted in a dedicated producer project.",
-      "reasoning": "The current summary is missing and the description lacks details about the input required for the operation.",
-      "batch_index": 0
+      "current_description": "Creates a new service configuration (version) for a managed service. This method only stores the service configuration. To roll out the service configuration to backend systems please call CreateServiceRollout. Only the 100 most recent service configurations and ones referenced by existing rollouts are kept for each service. The rest will be deleted eventually.",
+      "summary_suggestion": "Create new service configuration version",
+      "description_suggestion": "Creates a new service configuration (version) for a managed service. This method stores the service configuration but does not deploy it to backend systems; use CreateServiceRollout to deploy. Note: Only the 100 most recent service configurations and those referenced by existing rollouts are retained; older configurations are automatically deleted. Returns the created Service configuration object.",
+      "reasoning": "Missing summary entirely. Description is clear but lacks explicit mention of what is returned and could better emphasize the distinction between storage and deployment. Added summary and clarified return value and retention policy for better AI agent understanding.",
+      "batch_index": 1
     }
   },
   {
@@ -6573,7 +6505,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicemanagement.services.configs.get' has semantic quality issues: vague_summary. The current summary is missing. Adding a concise summary improves clarity.",
+    "message": "Operation 'servicemanagement.services.configs.get' has semantic quality issues: vague_summary. Missing summary. Description is concise and clear about the operation's purpose. Added action-oriented summary to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6591,8 +6523,8 @@
       ],
       "current_summary": "",
       "current_description": "Gets a service configuration (version) for a managed service.",
-      "summary_suggestion": "Retrieve a specific service configuration for a managed service",
-      "reasoning": "The current summary is missing. Adding a concise summary improves clarity.",
+      "summary_suggestion": "Retrieve service configuration by version",
+      "reasoning": "Missing summary. Description is concise and clear about the operation's purpose. Added action-oriented summary to improve AI agent interpretability.",
       "batch_index": 1
     }
   },
@@ -6607,7 +6539,113 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicemanagement.services.rollouts.get' has semantic quality issues: vague_summary. The current summary is missing. Adding a concise summary improves clarity.",
+    "message": "Operation 'servicemanagement.services.configs.submit' has semantic quality issues: vague_summary, missing_side_effects. Missing summary. Description has typo ('configurtions') and lacks clarity on return value. Added summary and corrected typo, clarified retention policy, and explicitly stated return value for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicemanagement.services.configs.submit",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new service configuration (version) for a managed service based on user-supplied configuration source files (for example: OpenAPI Specification). This method stores the source configurations as well as the generated service configuration. To rollout the service configuration to other services, please call CreateServiceRollout. Only the 100 most recent configuration sources and ones referenced by existing service configurtions are kept for each service. The rest will be deleted eventually. Operation",
+      "summary_suggestion": "Submit configuration source and generate service config",
+      "description_suggestion": "Creates a new service configuration (version) for a managed service by processing user-supplied configuration source files (e.g., OpenAPI Specification). This method stores both the source configurations and the generated service configuration. To deploy the configuration to backend systems, call CreateServiceRollout. Note: Only the 100 most recent configuration sources and those referenced by existing service configurations are retained; older sources are automatically deleted. Returns the created Service configuration object.",
+      "reasoning": "Missing summary. Description has typo ('configurtions') and lacks clarity on return value. Added summary and corrected typo, clarified retention policy, and explicitly stated return value for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicemanagement.services.rollouts.list' has semantic quality issues: vague_summary. Missing summary. Description clearly explains the operation's purpose and ordering. Added action-oriented summary for improved AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicemanagement.services.rollouts.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the history of the service configuration rollouts for a managed service, from the newest to the oldest.",
+      "summary_suggestion": "List service configuration rollout history",
+      "reasoning": "Missing summary. Description clearly explains the operation's purpose and ordering. Added action-oriented summary for improved AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicemanagement.services.rollouts.create' has semantic quality issues: vague_summary, missing_side_effects. Missing summary. Description is comprehensive but could better emphasize the cancellation of previous rollouts as a critical side effect and clarify the return value. Added summary and reorganized description to highlight side effects and return value for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicemanagement.services.rollouts.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new service configuration rollout. Based on rollout, the Google Service Management will roll out the service configurations to different backend services. For example, the logging configuration will be pushed to Google Cloud Logging. Please note that any previous pending and running Rollouts and associated Operations will be automatically cancelled so that the latest Rollout will not be blocked by previous Rollouts. Only the 100 most recent (in any state) and the last 10 successful (if not already part of the set of 100 most recent) rollouts are kept for each service. The rest will be deleted eventually. Operation",
+      "summary_suggestion": "Deploy service configuration to backend systems",
+      "description_suggestion": "Creates a new service configuration rollout that deploys the service configuration to backend systems (e.g., Google Cloud Logging). Important: Any previous pending or running rollouts and their associated operations are automatically cancelled to prevent blocking. Note: Only the 100 most recent rollouts (in any state) and the last 10 successful rollouts are retained; older rollouts are automatically deleted. Returns an Operation resource representing the rollout deployment.",
+      "reasoning": "Missing summary. Description is comprehensive but could better emphasize the cancellation of previous rollouts as a critical side effect and clarify the return value. Added summary and reorganized description to highlight side effects and return value for better AI agent decision-making.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicemanagement.services.rollouts.get' has semantic quality issues: vague_summary. Missing summary. Description is minimal but clear. Added action-oriented summary to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6625,9 +6663,450 @@
       ],
       "current_summary": "",
       "current_description": "Gets a service configuration rollout.",
-      "summary_suggestion": "Retrieve details of a specific service configuration rollout",
-      "reasoning": "The current summary is missing. Adding a concise summary improves clarity.",
+      "summary_suggestion": "Retrieve service configuration rollout details",
+      "reasoning": "Missing summary. Description is minimal but clear. Added action-oriented summary to improve AI agent interpretability.",
       "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicemanagement.services.undelete' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description lacks clarity on the 30-day window constraint and return value. Added summary and clarified the time constraint and return value for better AI agent understanding of when this operation can be used.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicemanagement.services.undelete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Revives a previously deleted managed service. The method restores the service using the configuration at the time the service was deleted. The target service must exist and must have been deleted within the last 30 days. Operation",
+      "summary_suggestion": "Restore previously deleted managed service",
+      "description_suggestion": "Revives a previously deleted managed service by restoring it with the configuration that was active at the time of deletion. The service must have been deleted within the last 30 days to be recoverable. Returns an Operation resource representing the service restoration.",
+      "reasoning": "Missing summary. Description lacks clarity on the 30-day window constraint and return value. Added summary and clarified the time constraint and return value for better AI agent understanding of when this operation can be used.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicemanagement.services.generateConfigReport' has semantic quality issues: vague_summary, vague_description, missing_output_details, poor_ai_interpretability. Original description is difficult to parse with run-on sentences and unclear structure. Missing summary entirely. Improved version clarifies the comparison logic, explains both comparison modes, and explicitly states what is returned. Better formatted for AI agent interpretation of when to use this operation and what to expect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicemanagement.services.generateConfigReport",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Generates and returns a report (errors, warnings and changes from existing configurations) associated with GenerateConfigReportRequest.new_value If GenerateConfigReportRequest.old_value is specified, GenerateConfigReportRequest will contain a single ChangeReport based on the comparison between GenerateConfigReportRequest.new_value and GenerateConfigReportRequest.old_value. If GenerateConfigReportRequest.old_value is not specified, this method will compare GenerateConfigReportRequest.new_value with the last pushed service configuration.",
+      "summary_suggestion": "Generate service configuration comparison report",
+      "description_suggestion": "Generates a configuration report comparing service configurations and identifying errors, warnings, and changes. If old_value is provided in the request, compares new_value against old_value. If old_value is omitted, compares new_value against the last pushed service configuration. Returns a report containing identified issues and configuration changes.",
+      "reasoning": "Original description is difficult to parse with run-on sentences and unclear structure. Missing summary entirely. Improved version clarifies the comparison logic, explains both comparison modes, and explicitly states what is returned. Better formatted for AI agent interpretation of when to use this operation and what to expect.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicemanagement.services.consumers.getIamPolicy' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity about inputs (resource parameter) and output format. Added explicit mention of IAM terminology for consistency with Policy schema, clarified that empty policy is a valid response, and specified the required resource parameter for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicemanagement.services.consumers.getIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.",
+      "summary_suggestion": "Retrieve IAM access control policy",
+      "description_suggestion": "Retrieves the Identity and Access Management (IAM) policy for the specified resource. Returns the policy object containing role bindings and permissions. If the resource exists but has no policy set, returns an empty policy. Requires the resource parameter identifying the target resource.",
+      "reasoning": "Missing summary. Description lacks clarity about inputs (resource parameter) and output format. Added explicit mention of IAM terminology for consistency with Policy schema, clarified that empty policy is a valid response, and specified the required resource parameter for AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicemanagement.services.consumers.setIamPolicy' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description mentions error cases but lacks clarity about inputs (resource and policy), outputs (updated policy), and side effects (access control changes). Improved version explicitly states what is required, what is returned, and clarifies the state-changing nature of this operation for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicemanagement.services.consumers.setIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.",
+      "summary_suggestion": "Set IAM access control policy",
+      "description_suggestion": "Sets the Identity and Access Management (IAM) policy on the specified resource, replacing any existing policy. Requires the resource parameter and a policy object in the request. Returns the updated policy. Side effects: modifies access control for the resource. May return NOT_FOUND if resource doesn't exist, INVALID_ARGUMENT if policy is malformed, or PERMISSION_DENIED if caller lacks authorization.",
+      "reasoning": "Missing summary. Description mentions error cases but lacks clarity about inputs (resource and policy), outputs (updated policy), and side effects (access control changes). Improved version explicitly states what is required, what is returned, and clarifies the state-changing nature of this operation for better AI agent decision-making.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicemanagement.services.consumers.testIamPermissions' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity about inputs (resource and permissions list) and output format (subset of permissions). Improved version explicitly states required parameters, clarifies the return value, and maintains the important caveats about resource non-existence behavior and fail-open semantics for AI agent understanding of operation behavior and limitations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicemanagement.services.consumers.testIamPermissions",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.",
+      "summary_suggestion": "Test caller permissions on resource",
+      "description_suggestion": "Tests which permissions the caller has on the specified resource. Requires the resource parameter and a list of permissions to test in the request. Returns the subset of requested permissions that the caller actually has. If the resource does not exist, returns an empty permission set rather than an error. Designed for building permission-aware UIs and tools, not for authorization enforcement. Note: May fail open without warning.",
+      "reasoning": "Missing summary. Description lacks clarity about inputs (resource and permissions list) and output format (subset of permissions). Improved version explicitly states required parameters, clarifies the return value, and maintains the important caveats about resource non-existence behavior and fail-open semantics for AI agent understanding of operation behavior and limitations.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicemanagement.operations.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description is too brief and lacks context about what operations are returned, filtering capabilities, pagination, and the Operation resource type. Added details about filtering, pagination, and return type to improve AI agent understanding of when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicemanagement.operations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists service operations that match the specified filter in the request.",
+      "summary_suggestion": "List filtered service management operations",
+      "description_suggestion": "Lists long-running service management operations that match the specified filter criteria. Supports filtering by operation status, service name, and other criteria. Returns a paginated list of Operation resources with their current status and metadata. Useful for tracking asynchronous service management tasks.",
+      "reasoning": "Missing summary entirely. Description is too brief and lacks context about what operations are returned, filtering capabilities, pagination, and the Operation resource type. Added details about filtering, pagination, and return type to improve AI agent understanding of when to use this operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicemanagement.services.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description explains access control but lacks information about pagination, filtering capabilities, and the ManagedService response schema. Enhanced to clarify pagination support and response structure for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicemanagement.services.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists managed services. Returns all public services. For authenticated users, also returns all services the calling user has \"servicemanagement.services.get\" permission for.",
+      "summary_suggestion": "List managed services with permission filtering",
+      "description_suggestion": "Lists managed services accessible to the caller. Returns all public services and, for authenticated users, all services for which the caller has \"servicemanagement.services.get\" permission. Results are paginated and can be filtered by service name or other criteria. Returns a list of ManagedService resources with basic service information.",
+      "reasoning": "Missing summary. Description explains access control but lacks information about pagination, filtering capabilities, and the ManagedService response schema. Enhanced to clarify pagination support and response structure for better AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicemanagement.services.create' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description is incomplete (ends with 'Operation' fragment) and lacks clarity about request/response formats and asynchronous nature. Reorganized to clarify that this is an async operation, specify the request schema (ManagedService), explain the Operation response, and consolidate constraints for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicemanagement.services.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new managed service. A managed service is immutable, and is subject to mandatory 30-day data retention. You cannot move a service or recreate it within 30 days after deletion. One producer project can own no more than 500 services. For security and reliability purposes, a production service should be hosted in a dedicated producer project. Operation",
+      "summary_suggestion": "Create a new managed service",
+      "description_suggestion": "Creates a new managed service in the calling producer project. Accepts a ManagedService object with service configuration. Returns an Operation resource representing the asynchronous creation task. Important constraints: managed services are immutable after creation, subject to 30-day data retention, cannot be recreated within 30 days of deletion, and each producer project is limited to 500 services. For production services, use a dedicated producer project.",
+      "reasoning": "Missing summary. Description is incomplete (ends with 'Operation' fragment) and lacks clarity about request/response formats and asynchronous nature. Reorganized to clarify that this is an async operation, specify the request schema (ManagedService), explain the Operation response, and consolidate constraints for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicemanagement.services.delete' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is incomplete (ends with 'Operation' fragment) and lacks clarity about the asynchronous nature and response format. Added summary emphasizing soft-delete behavior, clarified that this returns an Operation resource, and specified the required serviceName parameter for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicemanagement.services.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes a managed service. This method will change the service to the `Soft-Delete` state for 30 days. Within this period, service producers may call UndeleteService to restore the service. After 30 days, the service will be permanently deleted. Operation",
+      "summary_suggestion": "Soft-delete a managed service",
+      "description_suggestion": "Soft-deletes a managed service by name, transitioning it to the Soft-Delete state for 30 days. During this period, the service can be restored using UndeleteService. After 30 days, the service is permanently deleted and cannot be recovered. Returns an Operation resource representing the asynchronous deletion task. Requires the serviceName path parameter.",
+      "reasoning": "Missing summary. Description is incomplete (ends with 'Operation' fragment) and lacks clarity about the asynchronous nature and response format. Added summary emphasizing soft-delete behavior, clarified that this returns an Operation resource, and specified the required serviceName parameter for AI agent clarity.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicemanagement.services.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is too brief and lacks information about the response schema and required parameters. Added summary with action clarity, specified ManagedService response type, and clarified the serviceName parameter requirement for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicemanagement.services.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets a managed service. Authentication is required unless the service is public.",
+      "summary_suggestion": "Retrieve a managed service by name",
+      "description_suggestion": "Retrieves a managed service by its name. Returns the ManagedService resource containing service metadata and configuration information. Authentication is required unless the service is public. Requires the serviceName path parameter to identify the service.",
+      "reasoning": "Missing summary. Description is too brief and lacks information about the response schema and required parameters. Added summary with action clarity, specified ManagedService response type, and clarified the serviceName parameter requirement for better AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicemanagement.services.getConfig' has semantic quality issues: vague_summary, missing_output_details, missing_input_details. Missing summary. Description is too vague about what configuration data is returned and which parameters are available. Added summary with action clarity, specified the Service response schema, explained version selection options, and clarified both required and optional parameters for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicemanagement.services.getConfig",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets a service configuration (version) for a managed service.",
+      "summary_suggestion": "Retrieve a service configuration version",
+      "description_suggestion": "Retrieves a specific service configuration (version) for a managed service. Returns the Service resource containing the complete service configuration including API definitions, authentication settings, and backend rules. Supports retrieving a specific configuration version by ID or the latest version. Requires serviceName path parameter and optional configId parameter.",
+      "reasoning": "Missing summary. Description is too vague about what configuration data is returned and which parameters are available. Added summary with action clarity, specified the Service response schema, explained version selection options, and clarified both required and optional parameters for AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicemanagement.services.configs.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks information about pagination, response schema, and use cases. Added summary emphasizing version history, clarified that Service resources are returned, mentioned pagination support, explained the practical use case of tracking changes, and specified the required serviceName parameter for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicemanagement.services.configs.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the history of the service configuration for a managed service, from the newest to the oldest.",
+      "summary_suggestion": "List service configuration version history",
+      "description_suggestion": "Lists the complete history of service configurations for a managed service, ordered from newest to oldest. Returns a paginated list of Service resources representing each configuration version with timestamps and metadata. Useful for tracking configuration changes and reverting to previous versions. Requires serviceName path parameter.",
+      "reasoning": "Missing summary. Description lacks information about pagination, response schema, and use cases. Added summary emphasizing version history, clarified that Service resources are returned, mentioned pagination support, explained the practical use case of tracking changes, and specified the required serviceName parameter for better AI agent interpretability.",
+      "batch_index": 0
     }
   },
   {
@@ -6641,7 +7120,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 19 operations analyzed, 5 quality issues found",
+    "message": "Semantic analysis completed: 19 operations analyzed, 18 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -6653,7 +7132,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 19,
-      "total_issues_found": 5,
+      "total_issues_found": 18,
       "batches_processed": 3
     }
   }

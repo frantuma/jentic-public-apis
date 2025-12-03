@@ -5238,7 +5238,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'batch.projects.locations.state.report' has semantic quality issues: vague_summary, missing_context, poor_ai_interpretability. The original summary was missing, making it unclear. The description was improved to include context about the necessity of the operation, authentication requirement, and the detailed nature of the returned status event.",
+    "message": "Operation 'batch.projects.locations.state.report' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_output_details, missing_side_effects, not_actionable. Original summary is empty and description is vague. Added clarity about: (1) what the operation does (reports agent state), (2) input details (ReportAgentStateRequest structure and what it contains), (3) output details (ReportAgentStateResponse), (4) side effects (agent communication/status tracking), (5) domain context (agent-service communication pattern). This helps AI agents understand when to invoke this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5254,13 +5254,16 @@
       "issues_found": [
         "vague_summary",
         "missing_context",
-        "poor_ai_interpretability"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "not_actionable"
       ],
       "current_summary": "",
       "current_description": "Report agent's state, e.g. agent status and tasks information",
-      "summary_suggestion": "Report the current state of the agent",
-      "description_suggestion": "Reports the current state of the agent, including its status and tasks information. This operation is essential for the Batch service to monitor the health and activity of agents. It requires authentication and returns a detailed status event.",
-      "reasoning": "The original summary was missing, making it unclear. The description was improved to include context about the necessity of the operation, authentication requirement, and the detailed nature of the returned status event.",
+      "summary_suggestion": "Report agent state and task information",
+      "description_suggestion": "Reports the current state of a Batch agent, including agent health status and associated task information. Accepts a ReportAgentStateRequest containing agent identification, state details, and task status updates. The request itself implies the agent is healthy. Returns a ReportAgentStateResponse with any pending instructions or configuration updates for the agent. This operation is used by agents to maintain communication with the Batch service and report their operational status.",
+      "reasoning": "Original summary is empty and description is vague. Added clarity about: (1) what the operation does (reports agent state), (2) input details (ReportAgentStateRequest structure and what it contains), (3) output details (ReportAgentStateResponse), (4) side effects (agent communication/status tracking), (5) domain context (agent-service communication pattern). This helps AI agents understand when to invoke this operation and what to expect.",
       "batch_index": 1
     }
   },
@@ -5275,7 +5278,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'batch.projects.locations.jobs.taskGroups.tasks.list' has semantic quality issues: vague_summary, missing_input_details, missing_context. The original summary was missing, making it unclear. The description was improved to include context about the necessity of the operation and the authentication requirement. Input details were also added to clarify the parameters needed for the operation.",
+    "message": "Operation 'batch.projects.locations.jobs.taskGroups.tasks.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary is empty and description lacks actionable details. Enhanced with: (1) clear summary indicating the list action, (2) pagination support details, (3) return value specification, (4) required parent parameter format for clarity. This enables AI agents to properly construct requests and understand the paginated response structure.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5291,13 +5294,13 @@
       "issues_found": [
         "vague_summary",
         "missing_input_details",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "List Tasks associated with a job.",
-      "summary_suggestion": "List all tasks associated with a specific job",
-      "description_suggestion": "Lists all tasks associated with the specified job. This operation allows for the retrieval of task details for a given job, which can be used for monitoring and managing job execution. It requires authentication and returns a list of task objects.",
-      "reasoning": "The original summary was missing, making it unclear. The description was improved to include context about the necessity of the operation and the authentication requirement. Input details were also added to clarify the parameters needed for the operation.",
+      "summary_suggestion": "List tasks for a job",
+      "description_suggestion": "Lists all Tasks associated with a specific job and task group. Supports pagination through optional parameters for page size and page token. Returns a list of Task objects with their current status and details. Requires the parent resource path in the format 'projects/{project}/locations/{location}/jobs/{job}/taskGroups/{taskGroup}'.",
+      "reasoning": "Original summary is empty and description lacks actionable details. Enhanced with: (1) clear summary indicating the list action, (2) pagination support details, (3) return value specification, (4) required parent parameter format for clarity. This enables AI agents to properly construct requests and understand the paginated response structure.",
       "batch_index": 1
     }
   },
@@ -5312,7 +5315,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'batch.projects.locations.jobs.delete' has semantic quality issues: vague_summary, vague_description, missing_side_effects. The original summary and description were vague. Added a more specific summary and detailed description including authentication requirement, response, and side effects.",
+    "message": "Operation 'batch.projects.locations.jobs.delete' has semantic quality issues: vague_summary, vague_description, missing_context, missing_side_effects. Original description is too minimal. Added context about Job state requirements, irreversibility of deletion, resource format requirements, and authentication context. Summary was empty, so provided action-oriented summary. This helps AI agents understand preconditions and consequences of the operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5328,13 +5331,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "missing_context",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Delete a Job.",
-      "summary_suggestion": "Delete a specific Batch Job.",
-      "description_suggestion": "Deletes a specific Batch Job by its name. The operation will remove the job and its associated tasks. Requires authentication. Returns an empty response body if successful.",
-      "reasoning": "The original summary and description were vague. Added a more specific summary and detailed description including authentication requirement, response, and side effects.",
+      "summary_suggestion": "Delete a Cloud Batch Job",
+      "description_suggestion": "Deletes a specified Cloud Batch Job resource. The Job must be in a terminal state (completed, failed, or cancelled) before deletion. Once deleted, the Job and its associated task data cannot be recovered. Requires the job resource name in the format: projects/{project}/locations/{location}/jobs/{job_id}.",
+      "reasoning": "Original description is too minimal. Added context about Job state requirements, irreversibility of deletion, resource format requirements, and authentication context. Summary was empty, so provided action-oriented summary. This helps AI agents understand preconditions and consequences of the operation.",
       "batch_index": 0
     }
   },
@@ -5349,7 +5353,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'batch.projects.locations.jobs.taskGroups.tasks.get' has semantic quality issues: vague_summary, missing_context. The original summary was vague. Added a more specific summary and detailed description including authentication requirement and response details.",
+    "message": "Operation 'batch.projects.locations.jobs.taskGroups.tasks.get' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description lacks context about what information is returned and the resource hierarchy. Added details about the Task object contents, resource naming format, and hierarchical relationship to Job and task group. This improves AI agent understanding of the operation's scope and return value.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5364,13 +5368,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Return a single Task.",
-      "summary_suggestion": "Retrieve a specific Task.",
-      "description_suggestion": "Retrieves details of a specific Task within a Job. Requires authentication. The response includes the Task's status and properties.",
-      "reasoning": "The original summary was vague. Added a more specific summary and detailed description including authentication requirement and response details.",
+      "summary_suggestion": "Retrieve a specific Task from a Job",
+      "description_suggestion": "Retrieves detailed information about a specific Task within a Job's task group. Returns the Task object containing status, execution details, and resource information. Requires the full task resource name in the format: projects/{project}/locations/{location}/jobs/{job_id}/taskGroups/{task_group_id}/tasks/{task_id}.",
+      "reasoning": "Original description lacks context about what information is returned and the resource hierarchy. Added details about the Task object contents, resource naming format, and hierarchical relationship to Job and task group. This improves AI agent understanding of the operation's scope and return value.",
       "batch_index": 0
     }
   },
@@ -5385,7 +5391,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'batch.projects.locations.operations.list' has semantic quality issues: vague_summary, missing_context. The original summary was vague. Added a more specific summary and detailed description including authentication requirement and response details.",
+    "message": "Operation 'batch.projects.locations.operations.list' has semantic quality issues: vague_summary, missing_context, missing_input_details. Added summary and expanded description to clarify that these are long-running operations (consistent with Operation schema), what filtering options are available, pagination support, and the domain context of tracking async Batch operations. This helps AI agents understand when to use this operation for monitoring job creation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5400,13 +5406,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
-      "summary_suggestion": "List operations matching a specified filter.",
-      "description_suggestion": "Lists operations that match the specified filter in the request. Requires authentication. If the server doesn't support this method, it returns `UNIMPLEMENTED`. The response includes a list of matching operations.",
-      "reasoning": "The original summary was vague. Added a more specific summary and detailed description including authentication requirement and response details.",
+      "summary_suggestion": "List long-running operations in a location",
+      "description_suggestion": "Lists long-running operations that match the specified filter criteria in a given location. Supports filtering by operation name, status, and other criteria via the filter parameter. Returns a paginated list of Operation resources. If the server doesn't support this method, it returns `UNIMPLEMENTED`. Useful for tracking asynchronous job creation and management operations.",
+      "reasoning": "Added summary and expanded description to clarify that these are long-running operations (consistent with Operation schema), what filtering options are available, pagination support, and the domain context of tracking async Batch operations. This helps AI agents understand when to use this operation for monitoring job creation.",
       "batch_index": 0
     }
   },
@@ -5421,7 +5428,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'batch.projects.locations.jobs.cancel' has semantic quality issues: vague_summary, missing_context. The original summary was vague. Added a more specific summary and detailed description including authentication requirement and response details.",
+    "message": "Operation 'batch.projects.locations.jobs.cancel' has semantic quality issues: vague_summary, vague_description, missing_context, missing_side_effects. Original description is too minimal. Added context about Job state transitions, what happens to tasks, preconditions (only running/queued jobs), request/response details, and side effects. This helps AI agents understand the operation's impact and when it can be applied.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5436,13 +5443,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "vague_description",
+        "missing_context",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Cancel a Job.",
-      "summary_suggestion": "Cancel a specific Batch Job.",
-      "description_suggestion": "Cancels a specific Batch Job by its name. Requires authentication. The response indicates the status of the cancellation request.",
-      "reasoning": "The original summary was vague. Added a more specific summary and detailed description including authentication requirement and response details.",
+      "summary_suggestion": "Cancel a running Cloud Batch Job",
+      "description_suggestion": "Cancels a running Cloud Batch Job, stopping all associated tasks. The Job transitions to a cancelled state and no further tasks will be executed. Accepts a CancelJobRequest body. Returns the updated Job resource with cancelled status. Only jobs in running or queued states can be cancelled.",
+      "reasoning": "Original description is too minimal. Added context about Job state transitions, what happens to tasks, preconditions (only running/queued jobs), request/response details, and side effects. This helps AI agents understand the operation's impact and when it can be applied.",
       "batch_index": 0
     }
   },
@@ -5457,7 +5466,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'batch.projects.locations.jobs.list' has semantic quality issues: vague_summary, missing_context. The original summary was vague. Added a more specific summary and detailed description including authentication requirement and response details.",
+    "message": "Operation 'batch.projects.locations.jobs.list' has semantic quality issues: vague_summary, missing_context. Added summary and expanded description to clarify pagination support, filtering capabilities, and the response structure (ListJobsResponse). This helps AI agents understand how to retrieve and iterate through jobs, and what information is available.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5476,9 +5485,9 @@
       ],
       "current_summary": "",
       "current_description": "List all Jobs for a project within a region.",
-      "summary_suggestion": "List all Batch Jobs for a project within a region.",
-      "description_suggestion": "Lists all Batch Jobs for a project within a specified region. Requires authentication. The response includes a list of Job details.",
-      "reasoning": "The original summary was vague. Added a more specific summary and detailed description including authentication requirement and response details.",
+      "summary_suggestion": "List Cloud Batch Jobs in a location",
+      "description_suggestion": "Lists all Cloud Batch Jobs for a specified project and location. Supports filtering, sorting, and pagination through query parameters. Returns a ListJobsResponse containing Job resources and pagination tokens. Useful for monitoring job status and retrieving job details across a region.",
+      "reasoning": "Added summary and expanded description to clarify pagination support, filtering capabilities, and the response structure (ListJobsResponse). This helps AI agents understand how to retrieve and iterate through jobs, and what information is available.",
       "batch_index": 0
     }
   },
@@ -5493,7 +5502,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'batch.projects.locations.jobs.create' has semantic quality issues: vague_summary, missing_context. The original summary was vague. Added a more specific summary and detailed description including authentication requirement and response details.",
+    "message": "Operation 'batch.projects.locations.jobs.create' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description is too minimal. Added context about what the request body contains (Job configuration), what is returned (created Job with generated ID), initial state, and authentication requirements. This helps AI agents understand the operation's inputs, outputs, and preconditions for successful execution.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5508,13 +5517,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Create a Job.",
-      "summary_suggestion": "Create a new Batch Job.",
-      "description_suggestion": "Creates a new Batch Job within a specified project and region. The request body must include the Job details. Requires authentication. The response includes the details of the created Job.",
-      "reasoning": "The original summary was vague. Added a more specific summary and detailed description including authentication requirement and response details.",
+      "summary_suggestion": "Create a new Cloud Batch Job",
+      "description_suggestion": "Creates a new Cloud Batch Job resource with the specified configuration. Accepts a Job object in the request body containing task specifications, compute resources, and execution parameters. Returns the created Job resource with a generated job_id and initial status. The Job begins execution according to its scheduling configuration. Requires appropriate IAM permissions and valid project/location context.",
+      "reasoning": "Original description is too minimal. Added context about what the request body contains (Job configuration), what is returned (created Job with generated ID), initial state, and authentication requirements. This helps AI agents understand the operation's inputs, outputs, and preconditions for successful execution.",
       "batch_index": 0
     }
   },

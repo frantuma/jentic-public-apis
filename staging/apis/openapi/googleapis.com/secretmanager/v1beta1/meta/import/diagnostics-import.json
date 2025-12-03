@@ -4648,7 +4648,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'secretmanager.projects.secrets.list' has semantic quality issues: vague_summary, missing_context. The original summary and description were vague. The suggestions provide clarity and context for AI agents.",
+    "message": "Operation 'secretmanager.projects.secrets.testIamPermissions' has semantic quality issues: vague_summary, missing_output_details, missing_context. The operation lacks a summary entirely. The description, while informative, needs clarification about what is returned (the subset of permissions the caller has) and better emphasis on the security implications for AI agents. Added explicit mention of the response format and reinforced the non-authorization-checking nature to prevent misuse by AI agents. Improved terminology consistency with IAM domain context.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4659,18 +4659,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "secretmanager.projects.secrets.list",
+      "operation_id": "secretmanager.projects.secrets.testIamPermissions",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_output_details",
         "missing_context"
       ],
       "current_summary": "",
-      "current_description": "Lists Secrets.",
-      "summary_suggestion": "List all Secrets in a project",
-      "description_suggestion": "Lists all Secrets within a specified project. Returns a list of Secret objects.",
-      "reasoning": "The original summary and description were vague. The suggestions provide clarity and context for AI agents.",
-      "batch_index": 1
+      "current_description": "Returns permissions that a caller has for the specified secret. If the secret does not exist, this call returns an empty set of permissions, not a NOT_FOUND error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.",
+      "summary_suggestion": "Check caller permissions for a secret",
+      "description_suggestion": "Tests whether the caller has the specified permissions on a secret resource. Returns the subset of requested permissions that the caller actually has. If the secret does not exist, returns an empty set of permissions rather than a NOT_FOUND error. This operation is intended for building permission-aware UIs and command-line tools, not for authorization enforcement. Note: This operation may fail open without warning and should not be used as a security boundary.",
+      "reasoning": "The operation lacks a summary entirely. The description, while informative, needs clarification about what is returned (the subset of permissions the caller has) and better emphasis on the security implications for AI agents. Added explicit mention of the response format and reinforced the non-authorization-checking nature to prevent misuse by AI agents. Improved terminology consistency with IAM domain context.",
+      "batch_index": 2
     }
   },
   {
@@ -4684,7 +4685,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'secretmanager.projects.secrets.delete' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing. The description lacks details about the side effects and the return value.",
+    "message": "Operation 'secretmanager.projects.secrets.delete' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_side_effects, poor_ai_interpretability. Original description is too minimal. Added clarity about what gets deleted (secret and versions), permanence of action, required input format, return type, and side effects. This helps AI agents understand the destructive nature and when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4699,13 +4700,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "vague_description",
+        "missing_input_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Deletes a Secret.",
-      "summary_suggestion": "Delete a Secret permanently",
-      "description_suggestion": "Permanently deletes a Secret and its associated SecretVersions. This action is irreversible. The operation returns a generic empty message upon successful deletion.",
-      "reasoning": "The current summary is missing. The description lacks details about the side effects and the return value.",
+      "summary_suggestion": "Delete a secret and all its versions",
+      "description_suggestion": "Permanently deletes a Secret resource and all of its SecretVersions. This operation cannot be undone. Requires the secret resource name (format: projects/{project}/secrets/{secret}). Returns an Empty response on success. All associated secret data is irrevocably destroyed.",
+      "reasoning": "Original description is too minimal. Added clarity about what gets deleted (secret and versions), permanence of action, required input format, return type, and side effects. This helps AI agents understand the destructive nature and when to use this operation.",
       "batch_index": 0
     }
   },
@@ -4720,7 +4724,45 @@
         "character": 0
       }
     },
-    "message": "Operation 'secretmanager.projects.secrets.patch' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing. The description lacks details about the return value.",
+    "message": "Operation 'secretmanager.projects.secrets.versions.get' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, poor_ai_interpretability. Added clarity about what metadata is returned versus what is not (secret data), input format requirements, and the special 'latest' alias behavior. This helps AI agents distinguish between metadata retrieval and data access operations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "secretmanager.projects.secrets.versions.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Gets metadata for a SecretVersion. `projects/*/secrets/*/versions/latest` is an alias to the `latest` SecretVersion.",
+      "summary_suggestion": "Retrieve SecretVersion metadata",
+      "description_suggestion": "Retrieves metadata for a specific SecretVersion without accessing the secret data itself. Accepts the SecretVersion resource name (format: projects/{project}/secrets/{secret}/versions/{version}). The special alias `projects/*/secrets/*/versions/latest` retrieves the most recent SecretVersion. Returns a SecretVersion object containing state, creation time, and other metadata. Does not return the actual secret payload.",
+      "reasoning": "Added clarity about what metadata is returned versus what is not (secret data), input format requirements, and the special 'latest' alias behavior. This helps AI agents distinguish between metadata retrieval and data access operations.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'secretmanager.projects.secrets.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, poor_ai_interpretability. Original description lacks specificity about what can be updated, input requirements, and return value. Added details about resource name format, partial update support, and examples of updatable fields to improve AI agent understanding of operation scope.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4735,13 +4777,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Updates metadata of an existing Secret.",
-      "summary_suggestion": "Update metadata of an existing Secret",
-      "description_suggestion": "Updates metadata of an existing Secret. The operation returns the updated Secret object upon successful update.",
-      "reasoning": "The current summary is missing. The description lacks details about the return value.",
+      "summary_suggestion": "Update Secret metadata and configuration",
+      "description_suggestion": "Updates metadata and configuration of an existing Secret resource. Accepts the Secret resource name (format: projects/{project}/secrets/{secret}) and a Secret object with fields to update. Supports partial updates - only provided fields are modified. Returns the updated Secret object. Common updatable fields include labels, replication policy, and TTL settings.",
+      "reasoning": "Original description lacks specificity about what can be updated, input requirements, and return value. Added details about resource name format, partial update support, and examples of updatable fields to improve AI agent understanding of operation scope.",
       "batch_index": 0
     }
   },
@@ -4756,7 +4800,45 @@
         "character": 0
       }
     },
-    "message": "Operation 'secretmanager.projects.secrets.versions.access' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing. The description lacks details about the return value.",
+    "message": "Operation 'secretmanager.projects.locations.list' has semantic quality issues: vague_summary, missing_context, missing_output_details, poor_ai_interpretability. Added context about what locations represent in the Secret Manager domain, required input format, pagination support, and practical use cases. This helps AI agents understand when to call this operation and how to interpret results.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "secretmanager.projects.locations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Lists information about the supported locations for this service.",
+      "summary_suggestion": "List available Secret Manager service locations",
+      "description_suggestion": "Lists all Google Cloud locations where the Secret Manager service is available. Accepts the parent resource name (format: projects/{project}) and optional pagination parameters (pageSize, pageToken). Returns a ListLocationsResponse containing an array of Location objects with region information and service capabilities. Useful for determining where secrets can be replicated or created.",
+      "reasoning": "Added context about what locations represent in the Secret Manager domain, required input format, pagination support, and practical use cases. This helps AI agents understand when to call this operation and how to interpret results.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'secretmanager.projects.secrets.versions.access' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, poor_ai_interpretability. Clarified distinction between metadata access and data access operations, specified input format, explained the 'latest' alias, and noted permission requirements. This helps AI agents understand when to use this operation versus the metadata-only get operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4771,14 +4853,351 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Accesses a SecretVersion. This call returns the secret data. `projects/*/secrets/*/versions/latest` is an alias to the `latest` SecretVersion.",
-      "summary_suggestion": "Access a SecretVersion",
-      "description_suggestion": "Accesses a SecretVersion and returns the secret data. The operation returns the secret data in the response upon successful access.",
-      "reasoning": "The current summary is missing. The description lacks details about the return value.",
+      "summary_suggestion": "Retrieve secret data from a SecretVersion",
+      "description_suggestion": "Retrieves the actual secret data payload from a specific SecretVersion. Accepts the SecretVersion resource name (format: projects/{project}/secrets/{secret}/versions/{version}). The special alias `projects/*/secrets/*/versions/latest` retrieves data from the most recent SecretVersion. Returns an AccessSecretVersionResponse containing the secret payload and version metadata. Requires appropriate IAM permissions to access secret data.",
+      "reasoning": "Clarified distinction between metadata access and data access operations, specified input format, explained the 'latest' alias, and noted permission requirements. This helps AI agents understand when to use this operation versus the metadata-only get operation.",
       "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'secretmanager.projects.secrets.versions.destroy' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Enhanced clarity about permanence, irreversibility, state transition, input requirements, and what remains after destruction. This critical operation needs clear messaging to prevent accidental data loss by AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "secretmanager.projects.secrets.versions.destroy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Destroys a SecretVersion. Sets the state of the SecretVersion to DESTROYED and irrevocably destroys the secret data.",
+      "summary_suggestion": "Permanently destroy a SecretVersion and its data",
+      "description_suggestion": "Permanently destroys a SecretVersion, rendering it inaccessible and irrevocably deleting its secret data. Accepts the SecretVersion resource name (format: projects/{project}/secrets/{secret}/versions/{version}) and a DestroySecretVersionRequest. Sets the SecretVersion state to DESTROYED. This operation cannot be reversed. Returns a SecretVersion object reflecting the DESTROYED state. The parent Secret resource remains intact.",
+      "reasoning": "Enhanced clarity about permanence, irreversibility, state transition, input requirements, and what remains after destruction. This critical operation needs clear messaging to prevent accidental data loss by AI agents.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'secretmanager.projects.secrets.versions.disable' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Clarified that disable is reversible (unlike destroy), specified input format, explained state transition, and noted that other versions remain accessible. This helps AI agents distinguish between disable and destroy operations and understand the reversibility difference.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "secretmanager.projects.secrets.versions.disable",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Disables a SecretVersion. Sets the state of the SecretVersion to DISABLED.",
+      "summary_suggestion": "Disable a SecretVersion to prevent access",
+      "description_suggestion": "Disables a SecretVersion, preventing it from being accessed while preserving the secret data. Accepts the SecretVersion resource name (format: projects/{project}/secrets/{secret}/versions/{version}) and a DisableSecretVersionRequest. Sets the SecretVersion state to DISABLED. Unlike destroy, this operation is reversible via the enable operation. Returns a SecretVersion object reflecting the DISABLED state. The parent Secret resource remains accessible with other enabled versions.",
+      "reasoning": "Clarified that disable is reversible (unlike destroy), specified input format, explained state transition, and noted that other versions remain accessible. This helps AI agents distinguish between disable and destroy operations and understand the reversibility difference.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'secretmanager.projects.secrets.versions.enable' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is minimal and lacks context about prerequisites, effects, and return value. Added information about state requirements, availability implications, and return value to improve AI agent understanding of when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "secretmanager.projects.secrets.versions.enable",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Enables a SecretVersion. Sets the state of the SecretVersion to ENABLED.",
+      "summary_suggestion": "Enable a secret version",
+      "description_suggestion": "Enables a SecretVersion by setting its state to ENABLED. This makes the secret version available for access. Requires the secret version to exist and be in a disabled state. Returns the updated SecretVersion resource.",
+      "reasoning": "Missing summary entirely. Description is minimal and lacks context about prerequisites, effects, and return value. Added information about state requirements, availability implications, and return value to improve AI agent understanding of when and how to use this operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'secretmanager.projects.secrets.list' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Missing summary and extremely vague description. Added context about scope (project-level), pagination support, return structure, and clarification about what data is excluded. This helps AI agents understand filtering/pagination capabilities and what to expect in the response.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "secretmanager.projects.secrets.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists Secrets.",
+      "summary_suggestion": "List secrets in a project",
+      "description_suggestion": "Lists all Secrets in the specified project. Supports pagination through optional parameters for page size and page token. Returns a ListSecretsResponse containing an array of Secret resources and pagination information. Does not return secret version data or secret payloads.",
+      "reasoning": "Missing summary and extremely vague description. Added context about scope (project-level), pagination support, return structure, and clarification about what data is excluded. This helps AI agents understand filtering/pagination capabilities and what to expect in the response.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'secretmanager.projects.secrets.create' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks context about the creation scope, workflow implications, and return value. Added information about project context, the need for separate version addition, and clarified return value to help AI agents understand the complete secret creation workflow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "secretmanager.projects.secrets.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new Secret containing no SecretVersions.",
+      "summary_suggestion": "Create a new secret",
+      "description_suggestion": "Creates a new Secret resource in the specified project with no initial SecretVersions. The secret is created with metadata but no secret data. Secret versions must be added separately using the addVersion operation. Returns the created Secret resource with its metadata and resource name.",
+      "reasoning": "Missing summary. Description lacks context about the creation scope, workflow implications, and return value. Added information about project context, the need for separate version addition, and clarified return value to help AI agents understand the complete secret creation workflow.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'secretmanager.projects.secrets.versions.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description clarifies what's excluded but lacks information about pagination, return structure, and how to access actual secret data. Added pagination details, return structure, and reference to AccessSecretVersion operation to guide AI agents on the complete workflow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "secretmanager.projects.secrets.versions.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists SecretVersions. This call does not return secret data.",
+      "summary_suggestion": "List versions of a secret",
+      "description_suggestion": "Lists all SecretVersions for a specified Secret. Supports pagination through optional parameters for page size and page token. Returns a ListSecretVersionsResponse containing an array of SecretVersion resources with metadata (state, creation time, etc.) but not the actual secret payload data. Use AccessSecretVersion to retrieve the secret data.",
+      "reasoning": "Missing summary. Description clarifies what's excluded but lacks information about pagination, return structure, and how to access actual secret data. Added pagination details, return structure, and reference to AccessSecretVersion operation to guide AI agents on the complete workflow.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'secretmanager.projects.secrets.addVersion' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks context about prerequisites (secret must exist), return value, and state of the new version. Added information about the requirement for existing secret, return structure, and version state to help AI agents understand the operation's place in the secret management workflow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "secretmanager.projects.secrets.addVersion",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new SecretVersion containing secret data and attaches it to an existing Secret.",
+      "summary_suggestion": "Add a new version to a secret",
+      "description_suggestion": "Creates a new SecretVersion containing secret data and attaches it to an existing Secret. The new version is created with the provided secret payload and becomes available for access. Returns the created SecretVersion resource with its metadata including version name and state. The secret must exist before adding a version.",
+      "reasoning": "Missing summary. Description lacks context about prerequisites (secret must exist), return value, and state of the new version. Added information about the requirement for existing secret, return structure, and version state to help AI agents understand the operation's place in the secret management workflow.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'secretmanager.projects.secrets.getIamPolicy' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is adequate but lacks clarity about return structure and the relationship between secret policies and version access. Added explicit mention of Policy resource structure and clarified the enforcement relationship to improve AI agent understanding of IAM policy scope.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "secretmanager.projects.secrets.getIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the access control policy for a secret. Returns empty policy if the secret exists and does not have a policy set.",
+      "summary_suggestion": "Get IAM policy for a secret",
+      "description_suggestion": "Retrieves the Identity and Access Management (IAM) policy for a specified Secret. Returns the Policy resource containing role bindings that define access controls for the secret. If no policy has been set, returns an empty Policy object. Permissions on SecretVersions are enforced according to the policy set on the associated Secret.",
+      "reasoning": "Missing summary. Description is adequate but lacks clarity about return structure and the relationship between secret policies and version access. Added explicit mention of Policy resource structure and clarified the enforcement relationship to improve AI agent understanding of IAM policy scope.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'secretmanager.projects.secrets.setIamPolicy' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description explains the operation well but lacks information about return value and permission requirements. Added explicit mention of return structure and permission requirements to help AI agents understand what to expect and when they have sufficient permissions to execute this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "secretmanager.projects.secrets.setIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Sets the access control policy on the specified secret. Replaces any existing policy. Permissions on SecretVersions are enforced according to the policy set on the associated Secret.",
+      "summary_suggestion": "Set IAM policy for a secret",
+      "description_suggestion": "Sets the Identity and Access Management (IAM) policy on a specified Secret, replacing any existing policy. The policy defines access controls for the secret and all its versions. Returns the updated Policy resource. Permissions on SecretVersions are enforced according to the policy set on the associated Secret. This operation requires appropriate IAM permissions.",
+      "reasoning": "Missing summary. Description explains the operation well but lacks information about return value and permission requirements. Added explicit mention of return structure and permission requirements to help AI agents understand what to expect and when they have sufficient permissions to execute this operation.",
+      "batch_index": 1
     }
   },
   {
@@ -4792,7 +5211,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 15 operations analyzed, 4 quality issues found",
+    "message": "Semantic analysis completed: 15 operations analyzed, 15 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -4804,7 +5223,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 15,
-      "total_issues_found": 4,
+      "total_issues_found": 15,
       "batches_processed": 3
     }
   }

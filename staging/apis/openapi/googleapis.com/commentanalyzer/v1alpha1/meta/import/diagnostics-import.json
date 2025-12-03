@@ -1480,7 +1480,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'commentanalyzer.comments.analyze' has semantic quality issues: vague_summary, vague_description. The current summary is missing, and the description could be more specific about the types of attributes analyzed.",
+    "message": "Operation 'commentanalyzer.comments.analyze' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_context. Original summary was empty and description lacked critical details. Enhanced version specifies: (1) the domain context (toxicity scoring), (2) input requirements (comment text, optional context, attribute parameters), (3) output structure (AttributeScores with per-span and summary scores), and (4) important side effect control (doNotStore flag). This helps AI agents understand when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1495,13 +1495,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Analyzes the provided text and returns scores for requested attributes.",
-      "summary_suggestion": "Analyze comment text for requested attributes.",
-      "description_suggestion": "Analyzes the provided text and returns scores for requested attributes such as toxicity, identity attack, insult, profanity, and sexually explicit content. Expects an AnalyzeCommentRequest object as input and returns an AnalyzeCommentResponse object.",
-      "reasoning": "The current summary is missing, and the description could be more specific about the types of attributes analyzed.",
+      "summary_suggestion": "Analyze comment for toxicity and attribute scores",
+      "description_suggestion": "Analyzes a comment to generate scores for requested attributes (e.g., toxicity). Accepts a comment text, optional context (such as an article or parent comment), and attribute parameters specifying which attributes to score. Returns AttributeScores for each requested attribute, including per-span scores and overall summary scores. Set the doNotStore flag to ensure the comment is automatically deleted after scoring.",
+      "reasoning": "Original summary was empty and description lacked critical details. Enhanced version specifies: (1) the domain context (toxicity scoring), (2) input requirements (comment text, optional context, attribute parameters), (3) output structure (AttributeScores with per-span and summary scores), and (4) important side effect control (doNotStore flag). This helps AI agents understand when to use this operation and what to expect.",
       "batch_index": 0
     }
   },
@@ -1516,7 +1518,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'commentanalyzer.comments.suggestscore' has semantic quality issues: vague_summary, vague_description. The current summary is missing, and the description could be more specific about the input and output schemas and the 'doNotStore' flag.",
+    "message": "Operation 'commentanalyzer.comments.suggestscore' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects, not_actionable. Original summary and description were too vague and lacked actionability. Enhanced version clarifies: (1) the purpose (model improvement through feedback), (2) inputs (comment text, suggested scores, optional context), (3) the side effect (training data collection for model improvement), (4) output confirmation, and (5) when to use it (correcting inaccurate scores). This helps AI agents understand this is a feedback mechanism distinct from analysis, and when it should be invoked.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1531,13 +1533,17 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "not_actionable"
       ],
       "current_summary": "",
       "current_description": "Suggest comment scores as training data.",
-      "summary_suggestion": "Suggest comment scores for training data.",
-      "description_suggestion": "Submits a suggestion for comment scores as training data to improve the Perspective Comment Analyzer. Expects a SuggestCommentScoreRequest object as input and returns a SuggestCommentScoreResponse object. Users can set the 'doNotStore' flag to ensure that all submitted comments are automatically deleted after scores are returned.",
-      "reasoning": "The current summary is missing, and the description could be more specific about the input and output schemas and the 'doNotStore' flag.",
+      "summary_suggestion": "Submit comment score corrections for model improvement",
+      "description_suggestion": "Submits corrected or suggested scores for a comment to improve the Perspective model over time. Accepts a comment text, suggested attribute scores, and optional context. This feedback is used as training data to enhance scoring accuracy. Returns a response confirming the suggestion was received. Use this operation to correct inaccurate scores or provide ground truth labels for comments the model should learn from.",
+      "reasoning": "Original summary and description were too vague and lacked actionability. Enhanced version clarifies: (1) the purpose (model improvement through feedback), (2) inputs (comment text, suggested scores, optional context), (3) the side effect (training data collection for model improvement), (4) output confirmation, and (5) when to use it (correcting inaccurate scores). This helps AI agents understand this is a feedback mechanism distinct from analysis, and when it should be invoked.",
       "batch_index": 0
     }
   },

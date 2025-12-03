@@ -3196,7 +3196,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'oslogin.users.projects.locations.signSshPublicKey' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary is missing. Added a concise summary. Improved description to include details about expected input and output schemas for better AI agent understanding.",
+    "message": "Operation 'oslogin.users.projects.locations.signSshPublicKey' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Original description lacks a summary entirely and provides minimal context. The description is incomplete - it doesn't explain what inputs are expected (SignSshPublicKeyRequest), what is returned (SignSshPublicKeyResponse), or the authentication requirements. Added summary for quick operation identification, clarified input/output schemas, explained the purpose of the signed key, and noted authentication requirements. This improves AI agent ability to determine when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3212,13 +3212,15 @@
       "issues_found": [
         "vague_summary",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Signs an SSH public key for a user to authenticate to a virtual machine on Google Compute Engine.",
-      "summary_suggestion": "Sign SSH public key for user authentication",
-      "description_suggestion": "Signs an SSH public key for a user to authenticate to a virtual machine on Google Compute Engine. Expects a SignSshPublicKeyRequest object containing the SSH public key. Returns a SignSshPublicKeyResponse object with the signed key and any relevant metadata.",
-      "reasoning": "Original summary is missing. Added a concise summary. Improved description to include details about expected input and output schemas for better AI agent understanding.",
+      "summary_suggestion": "Sign SSH public key for VM authentication",
+      "description_suggestion": "Signs an SSH public key to enable user authentication to Google Compute Engine virtual machines. Accepts a SignSshPublicKeyRequest containing the SSH public key to be signed. Returns a SignSshPublicKeyResponse with the signed key material and metadata. The signed key can then be used for SSH access to GCE instances. Requires authentication via OAuth2.",
+      "reasoning": "Original description lacks a summary entirely and provides minimal context. The description is incomplete - it doesn't explain what inputs are expected (SignSshPublicKeyRequest), what is returned (SignSshPublicKeyResponse), or the authentication requirements. Added summary for quick operation identification, clarified input/output schemas, explained the purpose of the signed key, and noted authentication requirements. This improves AI agent ability to determine when to use this operation and what to expect.",
       "batch_index": 1
     }
   },
@@ -3233,7 +3235,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'oslogin.users.projects.delete' has semantic quality issues: vague_summary, missing_side_effects. Added a summary and clarified the description to include the side effect of the operation.",
+    "message": "Operation 'oslogin.users.projects.delete' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary entirely. Description is too minimal and lacks context about what gets deleted, which project scope, and side effects on VM access. Added clarity about POSIX account removal scope, access revocation, and prerequisites for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3248,13 +3250,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_context",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes a POSIX account.",
-      "summary_suggestion": "Delete a POSIX account.",
-      "description_suggestion": "Deletes a POSIX account. If the account exists, it will be removed. Returns an empty response if successful.",
-      "reasoning": "Added a summary and clarified the description to include the side effect of the operation.",
+      "summary_suggestion": "Delete a POSIX account from a project",
+      "description_suggestion": "Deletes a POSIX account associated with a user in a specific project. This operation removes the POSIX account entry and revokes associated access to VM instances in that project. The operation requires the account to exist and appropriate IAM permissions.",
+      "reasoning": "Missing summary entirely. Description is too minimal and lacks context about what gets deleted, which project scope, and side effects on VM access. Added clarity about POSIX account removal scope, access revocation, and prerequisites for AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -3269,7 +3272,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'oslogin.users.sshPublicKeys.get' has semantic quality issues: vague_summary, missing_output_details. Added a summary and clarified the description to include the return value of the operation.",
+    "message": "Operation 'oslogin.users.sshPublicKeys.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks specificity about what is returned and how the key is identified. Added return type information and clarification about resource name identification for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3288,9 +3291,9 @@
       ],
       "current_summary": "",
       "current_description": "Retrieves an SSH public key.",
-      "summary_suggestion": "Retrieve an SSH public key.",
-      "description_suggestion": "Retrieves an SSH public key associated with the specified user. Returns the SSH public key information.",
-      "reasoning": "Added a summary and clarified the description to include the return value of the operation.",
+      "summary_suggestion": "Retrieve an SSH public key by name",
+      "description_suggestion": "Retrieves the SSH public key information for a specific key identified by its resource name. Returns the SshPublicKey object containing the key data, fingerprint, and metadata.",
+      "reasoning": "Missing summary. Description lacks specificity about what is returned and how the key is identified. Added return type information and clarification about resource name identification for better AI agent interpretability.",
       "batch_index": 0
     }
   },
@@ -3305,7 +3308,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'oslogin.users.projects.provisionPosixAccount' has semantic quality issues: vague_summary, missing_output_details. Added a summary and clarified the description to include the return value of the operation.",
+    "message": "Operation 'oslogin.users.sshPublicKeys.patch' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description mentions 'profile information' ambiguously - clarified that it returns both the updated key and LoginProfile. Added clarity about patch semantics behavior and what fields can be modified for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "oslogin.users.sshPublicKeys.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates an SSH public key and returns the profile information. This method supports patch semantics.",
+      "summary_suggestion": "Update an SSH public key with patch semantics",
+      "description_suggestion": "Updates an SSH public key using patch semantics, allowing partial updates of key properties. Accepts an SshPublicKey object with fields to be modified. Returns the updated SshPublicKey object and the associated LoginProfile containing POSIX account and SSH key information.",
+      "reasoning": "Missing summary. Description mentions 'profile information' ambiguously - clarified that it returns both the updated key and LoginProfile. Added clarity about patch semantics behavior and what fields can be modified for AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'oslogin.users.projects.provisionPosixAccount' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks detail about request/response types, idempotency behavior, and what gets returned. Added clarity about request schema, return type, and idempotent behavior (returns existing if present) for AI agents to understand operation semantics.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3320,13 +3359,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Create a POSIX account if it doesn't exist.",
-      "summary_suggestion": "Create a POSIX account if it doesn't exist.",
-      "description_suggestion": "Creates a POSIX account if it doesn't exist. Returns the POSIX account information if the account was created or updated.",
-      "reasoning": "Added a summary and clarified the description to include the return value of the operation.",
+      "summary_suggestion": "Provision a POSIX account for a project",
+      "description_suggestion": "Provisions a POSIX account for a user in a specific project if one does not already exist. Accepts a ProvisionPosixAccountRequest specifying the desired POSIX account configuration. Returns the created or existing PosixAccount object with assigned UID and GID. If an account already exists, returns the existing account without modification.",
+      "reasoning": "Missing summary. Description lacks detail about request/response types, idempotency behavior, and what gets returned. Added clarity about request schema, return type, and idempotent behavior (returns existing if present) for AI agents to understand operation semantics.",
       "batch_index": 0
     }
   },
@@ -3341,7 +3381,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'oslogin.users.sshPublicKeys.create' has semantic quality issues: vague_summary, missing_output_details. Added a summary and clarified the description to include the return value of the operation.",
+    "message": "Operation 'oslogin.users.sshPublicKeys.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is too minimal and lacks information about request/response types and what metadata is assigned. Added clarity about input schema, return type, and auto-generated fields for better AI agent understanding of operation effects.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3360,9 +3400,9 @@
       ],
       "current_summary": "",
       "current_description": "Create an SSH public key",
-      "summary_suggestion": "Create an SSH public key.",
-      "description_suggestion": "Creates an SSH public key. Returns the SSH public key information.",
-      "reasoning": "Added a summary and clarified the description to include the return value of the operation.",
+      "summary_suggestion": "Create a new SSH public key",
+      "description_suggestion": "Creates a new SSH public key for the authenticated user. Accepts an SshPublicKey object containing the public key data. Returns the created SshPublicKey object with assigned metadata including fingerprint and creation timestamp.",
+      "reasoning": "Missing summary. Description is too minimal and lacks information about request/response types and what metadata is assigned. Added clarity about input schema, return type, and auto-generated fields for better AI agent understanding of operation effects.",
       "batch_index": 0
     }
   },
@@ -3377,7 +3417,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'oslogin.users.importSshPublicKey' has semantic quality issues: vague_summary, missing_output_details. Added a summary and clarified the description to include the return value of the operation.",
+    "message": "Operation 'oslogin.users.importSshPublicKey' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description is unclear about return type (says 'profile information' vaguely) and side effects of POSIX account auto-provisioning. Added clarity about response schema type, automatic POSIX account creation behavior, and what gets returned for AI agents to understand full operation scope and side effects.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3392,13 +3432,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Adds an SSH public key and returns the profile information. Default POSIX account information is set when no username and UID exist as part of the login profile.",
-      "summary_suggestion": "Import an SSH public key.",
-      "description_suggestion": "Adds an SSH public key and returns the profile information. Default POSIX account information is set when no username and UID exist as part of the login profile. Returns the SSH public key information.",
-      "reasoning": "Added a summary and clarified the description to include the return value of the operation.",
+      "summary_suggestion": "Import SSH public key and get login profile",
+      "description_suggestion": "Imports an SSH public key for the authenticated user and returns the complete LoginProfile. Accepts an SshPublicKey object. If no POSIX account exists, automatically provisions default POSIX account information with system-assigned username and UID. Returns ImportSshPublicKeyResponse containing the imported key and updated LoginProfile with POSIX account details.",
+      "reasoning": "Missing summary. Description is unclear about return type (says 'profile information' vaguely) and side effects of POSIX account auto-provisioning. Added clarity about response schema type, automatic POSIX account creation behavior, and what gets returned for AI agents to understand full operation scope and side effects.",
       "batch_index": 0
     }
   },
@@ -3413,7 +3454,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 8 operations analyzed, 6 quality issues found",
+    "message": "Semantic analysis completed: 8 operations analyzed, 7 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -3425,7 +3466,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 8,
-      "total_issues_found": 6,
+      "total_issues_found": 7,
       "batches_processed": 2
     }
   }

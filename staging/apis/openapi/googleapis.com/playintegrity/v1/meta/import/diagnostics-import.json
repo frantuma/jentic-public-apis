@@ -1984,7 +1984,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'playintegrity.deviceRecall.write' has semantic quality issues: vague_summary, missing_context, poor_ai_interpretability. The current summary is missing. The description lacks details about the request schema and the response. Added a summary and expanded the description to include request details and response information for better AI agent interpretability.",
+    "message": "Operation 'playintegrity.deviceRecall.write' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Original summary was empty, making it impossible for AI agents to understand the operation's purpose. Description lacked critical details about inputs (WriteDeviceRecallRequest structure), outputs (WriteDeviceRecallResponse), and side effects (persistent state affecting future tokens). Enhanced version clarifies the action, specifies input/output schemas, explains the persistence and impact on integrity assessments, and maintains domain terminology consistency with the API context.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1999,14 +1999,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
-        "poor_ai_interpretability"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Writes recall bits for the device where Play Integrity API token is obtained. The endpoint is available to select Play partners in an early access program (EAP).",
-      "summary_suggestion": "Write recall bits for the device",
-      "description_suggestion": "Writes recall bits for the device where the Play Integrity API token is obtained. This endpoint is available to select Play partners in an early access program (EAP). The request should include the recall bits to be set. Returns a success message if the operation is successful.",
-      "reasoning": "The current summary is missing. The description lacks details about the request schema and the response. Added a summary and expanded the description to include request details and response information for better AI agent interpretability.",
+      "summary_suggestion": "Write device recall bits for integrity verification",
+      "description_suggestion": "Writes recall bits to the device where the Play Integrity API token was generated. This operation allows developers to set custom recall flags for device tracking and integrity assessment. Requires the package name and WriteDeviceRecallRequest containing the recall bit values to write. Returns a WriteDeviceRecallResponse confirming the write operation. Note: This endpoint is available only to select Play partners in the early access program (EAP). The recall bits persist on the device and affect subsequent integrity token evaluations.",
+      "reasoning": "Original summary was empty, making it impossible for AI agents to understand the operation's purpose. Description lacked critical details about inputs (WriteDeviceRecallRequest structure), outputs (WriteDeviceRecallResponse), and side effects (persistent state affecting future tokens). Enhanced version clarifies the action, specifies input/output schemas, explains the persistence and impact on integrity assessments, and maintains domain terminology consistency with the API context.",
       "batch_index": 0
     }
   },
@@ -2021,7 +2022,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'playintegrity.decodeIntegrityToken' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. The current summary is missing. The description lacks details about the request schema and the response schema. Added a summary and expanded the description to include request and response details for better AI agent interpretability.",
+    "message": "Operation 'playintegrity.decodeIntegrityToken' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary was empty, preventing AI agents from understanding the operation's purpose. Description was overly simplistic and lacked context about what the payload contains and when this operation should be used. Enhanced version specifies the input schema (DecodeIntegrityTokenRequest), output schema (DecodeIntegrityTokenResponse with TokenPayloadExternal), explains the payload contents (device attestation, app integrity, account details), and clarifies the server-side verification use case for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2041,9 +2042,9 @@
       ],
       "current_summary": "",
       "current_description": "Decodes the integrity token and returns the token payload.",
-      "summary_suggestion": "Decode integrity token",
-      "description_suggestion": "Decodes the integrity token and returns the token payload. The request should include the integrity token to be decoded. The response includes the decoded token payload, which contains basic app information and integrity signals like device attestation and licensing details.",
-      "reasoning": "The current summary is missing. The description lacks details about the request schema and the response schema. Added a summary and expanded the description to include request and response details for better AI agent interpretability.",
+      "summary_suggestion": "Decode and extract integrity token payload",
+      "description_suggestion": "Decodes a Play Integrity API token and extracts the integrity payload containing app and device attestation signals. Accepts a DecodeIntegrityTokenRequest with the encoded token string. Returns a DecodeIntegrityTokenResponse containing the TokenPayloadExternal with integrity signals including device attestation, app integrity, account details, and device attributes. This operation is used server-side to verify the authenticity of the integrity token generated by the client application.",
+      "reasoning": "Original summary was empty, preventing AI agents from understanding the operation's purpose. Description was overly simplistic and lacked context about what the payload contains and when this operation should be used. Enhanced version specifies the input schema (DecodeIntegrityTokenRequest), output schema (DecodeIntegrityTokenResponse with TokenPayloadExternal), explains the payload contents (device attestation, app integrity, account details), and clarifies the server-side verification use case for better AI agent interpretability.",
       "batch_index": 0
     }
   },

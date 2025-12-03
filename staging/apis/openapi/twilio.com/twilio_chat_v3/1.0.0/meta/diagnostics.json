@@ -774,7 +774,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateChannel' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Original description is too vague. Added details about authentication, request payload, and return value for better clarity and AI agent interpretability.",
+    "message": "Operation 'UpdateChannel' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects, not_actionable. The original summary and description are identical and overly generic, providing no actionable information for AI agents. The improved version specifies: (1) what is being updated (channel configuration/properties), (2) required inputs (service SID, channel SID, request body), (3) what is returned (updated channel object with properties), and (4) side effects (immediate effect, potential webhook triggers). This enables AI agents to understand when to use this operation and what to expect, while maintaining consistency with the Chat API domain terminology.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -788,15 +788,18 @@
       "operation_id": "UpdateChannel",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects",
+        "not_actionable"
       ],
       "current_summary": "Update a specific Channel.",
       "current_description": "Update a specific Channel.",
-      "summary_suggestion": "Update a specific chat channel.",
-      "description_suggestion": "Updates the attributes of a specific chat channel identified by ServiceSid and Channel Sid. Requires authentication. Accepts JSON payload with channel attributes to update. Returns the updated channel object.",
-      "reasoning": "Original description is too vague. Added details about authentication, request payload, and return value for better clarity and AI agent interpretability.",
+      "summary_suggestion": "Update channel configuration and properties",
+      "description_suggestion": "Updates a specific channel within a Twilio Chat service. Requires the service SID and channel SID as path parameters. Accepts channel configuration updates such as friendly name, attributes, and other channel properties in the request body. Returns the updated channel object with all current properties including channel type, webhook settings, and metadata. Changes take effect immediately and may trigger webhook events if webhooks are enabled for the service.",
+      "reasoning": "The original summary and description are identical and overly generic, providing no actionable information for AI agents. The improved version specifies: (1) what is being updated (channel configuration/properties), (2) required inputs (service SID, channel SID, request body), (3) what is returned (updated channel object with properties), and (4) side effects (immediate effect, potential webhook triggers). This enables AI agents to understand when to use this operation and what to expect, while maintaining consistency with the Chat API domain terminology.",
       "batch_index": 0
     }
   },

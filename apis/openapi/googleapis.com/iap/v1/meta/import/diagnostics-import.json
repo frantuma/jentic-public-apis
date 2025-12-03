@@ -5218,7 +5218,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'iap.testIamPermissions' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing. The description is clear but lacks details about the output. Adding a summary and specifying the output improves clarity and AI agent interpretability.",
+    "message": "Operation 'iap.setIamPolicy' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description lacks clarity on input requirements (SetIamPolicyRequest structure), output format (returns Policy), and critical side effects (overwrites existing policy, potential access revocation). Added specific schema references, permission requirements, and warnings about destructive nature of operation to improve AI agent decision-making about when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5229,17 +5229,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "iap.testIamPermissions",
+      "operation_id": "iap.setIamPolicy",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
-      "current_description": "Returns permissions that a caller has on the Identity-Aware Proxy protected resource. More information about managing access via IAP can be found at: https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api",
-      "summary_suggestion": "Test IAM permissions on IAP resource",
-      "description_suggestion": "Tests the permissions that a caller has on the Identity-Aware Proxy protected resource. Returns the list of permissions the caller has. More information about managing access via IAP can be found at: https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api",
-      "reasoning": "The current summary is missing. The description is clear but lacks details about the output. Adding a summary and specifying the output improves clarity and AI agent interpretability.",
+      "current_description": "Sets the access control policy for an Identity-Aware Proxy protected resource. Replaces any existing policy. More information about managing access via IAP can be found at: https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api",
+      "summary_suggestion": "Set IAP resource access control policy",
+      "description_suggestion": "Sets the Identity and Access Management (IAM) policy for an Identity-Aware Proxy protected resource. This operation replaces any existing policy with the provided policy. Requires the SetIamPolicy permission on the target resource. Accepts a SetIamPolicyRequest containing the new Policy object. Returns the updated Policy object. This operation overwrites all existing bindings - use with caution as it may revoke access for existing principals.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on input requirements (SetIamPolicyRequest structure), output format (returns Policy), and critical side effects (overwrites existing policy, potential access revocation). Added specific schema references, permission requirements, and warnings about destructive nature of operation to improve AI agent decision-making about when to use this operation.",
       "batch_index": 2
     }
   },
@@ -5254,7 +5256,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'iap.projects.brands.identityAwareProxyClients.get' has semantic quality issues: vague_summary. The current summary is missing. Provided a concise action-oriented summary.",
+    "message": "Operation 'iap.testIamPermissions' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks input details (what permissions to test), output details (returns subset of requested permissions), and clarification that this is a read-only operation. Added specifics about request/response schemas, use case context, and state-change information to help AI agents understand when to use this for permission validation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "iap.testIamPermissions",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns permissions that a caller has on the Identity-Aware Proxy protected resource. More information about managing access via IAP can be found at: https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api",
+      "summary_suggestion": "Test caller permissions on IAP resource",
+      "description_suggestion": "Tests which permissions the authenticated caller has on the specified Identity-Aware Proxy protected resource. Accepts a TestIamPermissionsRequest containing a list of permission strings to check. Returns a TestIamPermissionsResponse containing only the permissions the caller actually possesses. Useful for determining if a caller can perform specific actions before attempting them. Does not modify any state.",
+      "reasoning": "Missing summary entirely. Description lacks input details (what permissions to test), output details (returns subset of requested permissions), and clarification that this is a read-only operation. Added specifics about request/response schemas, use case context, and state-change information to help AI agents understand when to use this for permission validation.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'iap.projects.brands.identityAwareProxyClients.get' has semantic quality issues: vague_description, missing_output_details. Original description lacks specificity about what is returned. Added clarification that it returns the IdentityAwareProxyClient object and that the operation uses the resource name as input. This helps AI agents understand the response structure and when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5268,12 +5307,13 @@
       "operation_id": "iap.projects.brands.identityAwareProxyClients.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_description",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Retrieves an Identity Aware Proxy (IAP) OAuth client. Requires that the client is owned by IAP.",
-      "summary_suggestion": "Get an IAP OAuth client",
-      "reasoning": "The current summary is missing. Provided a concise action-oriented summary.",
+      "description_suggestion": "Retrieves an Identity Aware Proxy (IAP) OAuth client by name. Returns the complete IdentityAwareProxyClient object containing client credentials and configuration. Requires that the client is owned by IAP.",
+      "reasoning": "Original description lacks specificity about what is returned. Added clarification that it returns the IdentityAwareProxyClient object and that the operation uses the resource name as input. This helps AI agents understand the response structure and when to use this operation.",
       "batch_index": 0
     }
   },
@@ -5288,7 +5328,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'iap.getIapSettings' has semantic quality issues: vague_summary. The current summary is missing. Provided a concise action-oriented summary.",
+    "message": "Operation 'iap.projects.iap_tunnel.locations.destGroups.patch' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is too minimal. Added context about the request schema (TunnelDestGroup), update_mask behavior for partial updates, return value, and side effects. This enables AI agents to understand how to construct requests and what to expect in responses.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "iap.projects.iap_tunnel.locations.destGroups.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Updates a TunnelDestGroup.",
+      "description_suggestion": "Updates a TunnelDestGroup resource with specified changes. Accepts a TunnelDestGroup object and optional update_mask to specify which fields to modify. Returns the updated TunnelDestGroup. Only fields included in update_mask are modified; omitted fields retain their current values.",
+      "reasoning": "Original description is too minimal. Added context about the request schema (TunnelDestGroup), update_mask behavior for partial updates, return value, and side effects. This enables AI agents to understand how to construct requests and what to expect in responses.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'iap.getIapSettings' has semantic quality issues: vague_description, missing_output_details. Original description lacks clarity about what is returned. Added specificity about the return type (IapSettings object) and what configuration aspects are included. This helps AI agents understand the response structure and when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5302,12 +5379,13 @@
       "operation_id": "iap.getIapSettings",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_description",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets the IAP settings on a particular IAP protected resource.",
-      "summary_suggestion": "Get IAP settings on a resource",
-      "reasoning": "The current summary is missing. Provided a concise action-oriented summary.",
+      "description_suggestion": "Retrieves the IAP configuration settings for a specified IAP-protected resource. Returns the IapSettings object containing access control policies, authentication settings, and other IAP configurations for the resource.",
+      "reasoning": "Original description lacks clarity about what is returned. Added specificity about the return type (IapSettings object) and what configuration aspects are included. This helps AI agents understand the response structure and when to use this operation.",
       "batch_index": 0
     }
   },
@@ -5322,7 +5400,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'iap.projects.brands.list' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does. The description is clear but needs a concise summary.",
+    "message": "Operation 'iap.validateAttributeExpression' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Original description is too vague about inputs and outputs. Added clarification that it validates CEL expressions, accepts an expression string as input, and returns validation results. Specified that errors indicate policy violations. This helps AI agents understand what type of expressions to validate and how to interpret responses.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "iap.validateAttributeExpression",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Validates that a given CEL expression conforms to IAP restrictions.",
+      "description_suggestion": "Validates that a provided CEL (Common Expression Language) expression conforms to IAP attribute restrictions and syntax requirements. Accepts an expression string and returns validation results indicating whether the expression is valid for use in IAP access policies. Returns an error response if the expression violates IAP restrictions.",
+      "reasoning": "Original description is too vague about inputs and outputs. Added clarification that it validates CEL expressions, accepts an expression string as input, and returns validation results. Specified that errors indicate policy violations. This helps AI agents understand what type of expressions to validate and how to interpret responses.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'iap.projects.brands.list' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is minimal and lacks context about what brands are used for and what information is returned. Enhanced version clarifies the purpose (OAuth brand management), return type, and use case for AI agents.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5336,12 +5450,14 @@
       "operation_id": "iap.projects.brands.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Lists the existing brands for the project.",
-      "summary_suggestion": "List existing brands for the project",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. The description is clear but needs a concise summary.",
+      "summary_suggestion": "List OAuth brands for the project",
+      "description_suggestion": "Retrieves all OAuth brands associated with the project. Returns a list of Brand objects containing OAuth brand configuration and status information. Useful for discovering existing brands before creating new OAuth clients.",
+      "reasoning": "Missing summary entirely. Description is minimal and lacks context about what brands are used for and what information is returned. Enhanced version clarifies the purpose (OAuth brand management), return type, and use case for AI agents.",
       "batch_index": 1
     }
   },
@@ -5356,7 +5472,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'iap.projects.iap_tunnel.locations.destGroups.list' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does. The description is clear but needs a concise summary.",
+    "message": "Operation 'iap.projects.iap_tunnel.locations.destGroups.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description includes helpful example but lacks clarity about return type and filtering capabilities. Enhanced version clarifies what TunnelDestGroups are used for, the response structure, and pagination support for better AI agent usability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5370,12 +5486,14 @@
       "operation_id": "iap.projects.iap_tunnel.locations.destGroups.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Lists the existing TunnelDestGroups. To group across all locations, use a `-` as the location ID. For example: `/v1/projects/123/iap_tunnel/locations/-/destGroups`",
-      "summary_suggestion": "List existing TunnelDestGroups",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. The description is clear but needs a concise summary.",
+      "summary_suggestion": "List tunnel destination groups",
+      "description_suggestion": "Retrieves all TunnelDestGroups for the specified location. Returns a list of TunnelDestGroup objects containing tunnel destination configurations. To list destination groups across all locations, use `-` as the location ID (e.g., `/v1/projects/123/iap_tunnel/locations/-/destGroups`). Supports filtering and pagination via query parameters.",
+      "reasoning": "Missing summary. Description includes helpful example but lacks clarity about return type and filtering capabilities. Enhanced version clarifies what TunnelDestGroups are used for, the response structure, and pagination support for better AI agent usability.",
       "batch_index": 1
     }
   },
@@ -5390,7 +5508,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'iap.projects.iap_tunnel.locations.destGroups.create' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does. The description is clear but needs a concise summary.",
+    "message": "Operation 'iap.projects.iap_tunnel.locations.destGroups.create' has semantic quality issues: vague_summary, vague_description, missing_context. Missing summary and extremely vague description. Original provides no context about inputs, outputs, or purpose. Enhanced version explains what the operation creates, what input is expected, what is returned, and the operational purpose for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5404,12 +5522,15 @@
       "operation_id": "iap.projects.iap_tunnel.locations.destGroups.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "vague_description",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Creates a new TunnelDestGroup.",
-      "summary_suggestion": "Create a new TunnelDestGroup",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. The description is clear but needs a concise summary.",
+      "summary_suggestion": "Create a tunnel destination group",
+      "description_suggestion": "Creates a new TunnelDestGroup for the specified location. Accepts a TunnelDestGroup object containing destination configuration. Returns the newly created TunnelDestGroup with a system-generated resource name and creation timestamp. The destination group can be used to organize and manage tunnel destinations for IAP-protected resources.",
+      "reasoning": "Missing summary and extremely vague description. Original provides no context about inputs, outputs, or purpose. Enhanced version explains what the operation creates, what input is expected, what is returned, and the operational purpose for AI agent decision-making.",
       "batch_index": 1
     }
   },
@@ -5424,7 +5545,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'iap.projects.brands.identityAwareProxyClients.list' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does. The description is clear but needs a concise summary.",
+    "message": "Operation 'iap.projects.brands.identityAwareProxyClients.list' has semantic quality issues: vague_summary, missing_context. Missing summary and vague description. 'Clients for the brand' lacks domain context. Enhanced version clarifies these are IAP OAuth clients, explains their purpose, and mentions pagination support for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5438,12 +5559,14 @@
       "operation_id": "iap.projects.brands.identityAwareProxyClients.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Lists the existing clients for the brand.",
-      "summary_suggestion": "List existing IAP OAuth clients for the brand",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. The description is clear but needs a concise summary.",
+      "summary_suggestion": "List Identity-Aware Proxy OAuth clients",
+      "description_suggestion": "Retrieves all IdentityAwareProxyClient objects associated with the specified brand. Returns a list of IAP OAuth clients with their configuration details and credentials. These clients are used for authenticating users to IAP-protected applications. Supports pagination via query parameters.",
+      "reasoning": "Missing summary and vague description. 'Clients for the brand' lacks domain context. Enhanced version clarifies these are IAP OAuth clients, explains their purpose, and mentions pagination support for AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -5458,7 +5581,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'iap.projects.brands.identityAwareProxyClients.create' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does. The description is clear but needs a concise summary.",
+    "message": "Operation 'iap.projects.brands.identityAwareProxyClients.create' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks clarity about return value (client ID and secret) and what inputs are expected. Enhanced version specifies prerequisites clearly, explains what is returned, and clarifies the IAP ownership model for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5472,12 +5595,52 @@
       "operation_id": "iap.projects.brands.identityAwareProxyClients.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Creates an Identity Aware Proxy (IAP) OAuth client. The client is owned by IAP. Requires that the brand for the project exists and that it is set for internal-only use.",
-      "summary_suggestion": "Create an IAP OAuth client for the brand",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. The description is clear but needs a concise summary.",
+      "summary_suggestion": "Create an IAP OAuth client",
+      "description_suggestion": "Creates a new IdentityAwareProxyClient for the specified brand. Accepts an IdentityAwareProxyClient object with client configuration. Returns the newly created client with system-generated client ID and secret credentials. Prerequisites: the brand must exist and be configured for internal-only use. The client is owned and managed by IAP.",
+      "reasoning": "Missing summary. Description lacks clarity about return value (client ID and secret) and what inputs are expected. Enhanced version specifies prerequisites clearly, explains what is returned, and clarifies the IAP ownership model for better AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'iap.getIamPolicy' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description mentions the operation but lacks clarity about inputs (GetIamPolicyRequest structure) and outputs (Policy object structure). Enhanced version specifies request and response types, explains the use case (auditing access), and maintains the documentation link for comprehensive AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "iap.getIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the access control policy for an Identity-Aware Proxy protected resource. More information about managing access via IAP can be found at: https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api",
+      "summary_suggestion": "Get IAP resource access control policy",
+      "description_suggestion": "Retrieves the IAM access control policy for an Identity-Aware Proxy protected resource. Accepts a GetIamPolicyRequest specifying the resource name. Returns a Policy object containing role bindings that define which principals have access to the IAP-protected resource. Used to audit and manage access permissions. See https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api for more details.",
+      "reasoning": "Missing summary. Description mentions the operation but lacks clarity about inputs (GetIamPolicyRequest structure) and outputs (Policy object structure). Enhanced version specifies request and response types, explains the use case (auditing access), and maintains the documentation link for comprehensive AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -5492,7 +5655,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 16 operations analyzed, 8 quality issues found",
+    "message": "Semantic analysis completed: 16 operations analyzed, 12 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -5504,7 +5667,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 16,
-      "total_issues_found": 8,
+      "total_issues_found": 12,
       "batches_processed": 3
     }
   }

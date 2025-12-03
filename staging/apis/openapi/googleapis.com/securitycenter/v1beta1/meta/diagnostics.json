@@ -12652,7 +12652,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'securitycenter.organizations.sources.setIamPolicy' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing, and the description lacks details about the request schema and the return value.",
+    "message": "Operation 'securitycenter.organizations.sources.setIamPolicy' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description lacks detail about what inputs are required (SetIamPolicyRequest structure), what the operation returns (Policy object), and important side effects (policy replacement behavior). Added context about IAM terminology consistency with API domain, permission requirements, and clarified that this replaces the existing policy for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12667,13 +12667,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Sets the access control policy on the specified Source.",
-      "summary_suggestion": "Set IAM policy for a Security Command Center source",
-      "description_suggestion": "Sets the access control policy on the specified Security Command Center source. Requires authentication. The request body should include a `binding` object with `role` and `members` fields. Returns the updated IAM policy.",
-      "reasoning": "The current summary is missing, and the description lacks details about the request schema and the return value.",
+      "summary_suggestion": "Set IAM access control policy on source",
+      "description_suggestion": "Sets the Identity and Access Management (IAM) access control policy on the specified Security Command Center source. This operation replaces the existing policy with the provided policy. Requires the `securitycenter.sources.setIamPolicy` permission. Returns the updated Policy object containing the new bindings and roles assigned to the source.",
+      "reasoning": "Missing summary entirely. Description lacks detail about what inputs are required (SetIamPolicyRequest structure), what the operation returns (Policy object), and important side effects (policy replacement behavior). Added context about IAM terminology consistency with API domain, permission requirements, and clarified that this replaces the existing policy for better AI agent decision-making.",
       "batch_index": 2
     }
   },
@@ -12688,7 +12690,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'securitycenter.organizations.sources.testIamPermissions' has semantic quality issues: vague_summary. The current summary is missing. The description is clear but could be improved by specifying the request schema and expected response format.",
+    "message": "Operation 'securitycenter.organizations.sources.testIamPermissions' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description is incomplete - doesn't explain that it accepts a list of permissions to test (input details), doesn't specify the response format (output details), and lacks context about the practical use case. Enhanced with IAM terminology consistency, clarification that it filters permissions based on caller's actual access, and guidance on when an AI agent should use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12702,12 +12704,15 @@
       "operation_id": "securitycenter.organizations.sources.testIamPermissions",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Returns the permissions that a caller has on the specified source.",
-      "summary_suggestion": "Test IAM permissions for a Security Command Center source",
-      "reasoning": "The current summary is missing. The description is clear but could be improved by specifying the request schema and expected response format.",
+      "summary_suggestion": "Test caller permissions on source",
+      "description_suggestion": "Tests which Identity and Access Management (IAM) permissions the authenticated caller has on the specified Security Command Center source. Accepts a list of permission strings to test via TestIamPermissionsRequest. Returns a TestIamPermissionsResponse containing only the permissions from the input list that the caller actually possesses. Useful for authorization checks before attempting privileged operations.",
+      "reasoning": "Missing summary entirely. Description is incomplete - doesn't explain that it accepts a list of permissions to test (input details), doesn't specify the response format (output details), and lacks context about the practical use case. Enhanced with IAM terminology consistency, clarification that it filters permissions based on caller's actual access, and guidance on when an AI agent should use this operation.",
       "batch_index": 2
     }
   },
@@ -12722,77 +12727,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'securitycenter.organizations.assets.runDiscovery' has semantic quality issues: vague_summary, missing_side_effects. Added a clear summary and expanded the description to include side effects.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "securitycenter.organizations.assets.runDiscovery",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_side_effects"
-      ],
-      "current_summary": "",
-      "current_description": "Runs asset discovery. The discovery is tracked with a long-running operation. This API can only be called with limited frequency for an organization. If it is called too frequently the caller will receive a TOO_MANY_REQUESTS error.",
-      "summary_suggestion": "Initiate asset discovery for an organization",
-      "description_suggestion": "Initiates asset discovery for an organization. The discovery process is tracked with a long-running operation. This API can only be called with limited frequency for an organization. If it is called too frequently, the caller will receive a TOO_MANY_REQUESTS error. Side effects include potential rate limiting and increased resource usage.",
-      "reasoning": "Added a clear summary and expanded the description to include side effects.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'securitycenter.organizations.sources.findings.list' has semantic quality issues: vague_summary. Added a clear summary.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "securitycenter.organizations.sources.findings.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Lists an organization or source's findings. To list across all sources provide a `-` as the source id. Example: /v1beta1/organizations/{organization_id}/sources/-/findings",
-      "summary_suggestion": "List findings for an organization or source",
-      "reasoning": "Added a clear summary.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'securitycenter.organizations.sources.findings.create' has semantic quality issues: vague_summary. Added a clear summary.",
+    "message": "Operation 'securitycenter.organizations.sources.findings.create' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Original description is minimal and lacks context. Added clarity about input requirements (source must exist), input schema reference, output details (returns created finding with identifiers), and side effects (finding becomes available for querying). Summary was missing entirely. These additions help AI agents understand the operation's full lifecycle and when to use it.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12806,12 +12741,15 @@
       "operation_id": "securitycenter.organizations.sources.findings.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Creates a finding. The corresponding source must exist for finding creation to succeed.",
-      "summary_suggestion": "Create a new finding for a source",
-      "reasoning": "Added a clear summary.",
+      "summary_suggestion": "Create a new security finding",
+      "description_suggestion": "Creates a new security finding within a specified source. The source must exist before creating a finding. Accepts a GoogleCloudSecuritycenterV1beta1Finding object as input. Returns the created finding resource with assigned identifiers and timestamps. The finding becomes immediately available for querying and analysis.",
+      "reasoning": "Original description is minimal and lacks context. Added clarity about input requirements (source must exist), input schema reference, output details (returns created finding with identifiers), and side effects (finding becomes available for querying). Summary was missing entirely. These additions help AI agents understand the operation's full lifecycle and when to use it.",
       "batch_index": 1
     }
   },
@@ -12826,75 +12764,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'securitycenter.organizations.sources.findings.group' has semantic quality issues: vague_summary. Added a clear summary.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "securitycenter.organizations.sources.findings.group",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Filters an organization or source's findings and groups them by their specified properties. To group across all sources provide a `-` as the source id. Example: /v1beta1/organizations/{organization_id}/sources/-/findings",
-      "summary_suggestion": "Group findings for an organization or source",
-      "reasoning": "Added a clear summary.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'securitycenter.organizations.sources.list' has semantic quality issues: vague_summary. Added a clear summary.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "securitycenter.organizations.sources.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Lists all sources belonging to an organization.",
-      "summary_suggestion": "List all sources for an organization",
-      "reasoning": "Added a clear summary.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'securitycenter.organizations.sources.create' has semantic quality issues: vague_summary. Added a clear summary.",
+    "message": "Operation 'securitycenter.organizations.sources.create' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is extremely vague and lacks all necessary context. Added clarity about what a source is (container for findings), input requirements (Source object), output details (returns created source with identifiers), and side effects (becomes available for ingesting findings). Summary was missing. These additions are critical for AI agents to understand the operation's purpose and when to use it in the security assessment workflow.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12908,12 +12778,17 @@
       "operation_id": "securitycenter.organizations.sources.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Creates a source.",
-      "summary_suggestion": "Create a new source for an organization",
-      "reasoning": "Added a clear summary.",
+      "summary_suggestion": "Create a new security finding source",
+      "description_suggestion": "Creates a new security finding source within an organization. A source is a container for findings that can produce security assessment data. Accepts a Source object containing source configuration and metadata. Returns the created source resource with assigned identifiers and timestamps. The source becomes immediately available for ingesting findings.",
+      "reasoning": "Original description is extremely vague and lacks all necessary context. Added clarity about what a source is (container for findings), input requirements (Source object), output details (returns created source with identifiers), and side effects (becomes available for ingesting findings). Summary was missing. These additions are critical for AI agents to understand the operation's purpose and when to use it in the security assessment workflow.",
       "batch_index": 1
     }
   },
@@ -12928,7 +12803,81 @@
         "character": 0
       }
     },
-    "message": "Operation 'securitycenter.organizations.sources.get' has semantic quality issues: vague_summary, vague_description. Both the summary and description were vague. The suggestions provide more clarity and context for the operation.",
+    "message": "Operation 'securitycenter.organizations.sources.getIamPolicy' has semantic quality issues: vague_summary, missing_output_details, missing_context. Original description is minimal and lacks context about what is returned and permission requirements. Added clarity about the return value (Policy object with role bindings), the purpose (define access permissions), and authentication context (requires appropriate permissions). Summary was missing. These additions help AI agents understand this is an IAM-related operation and what data structure to expect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "securitycenter.organizations.sources.getIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the access control policy on the specified Source.",
+      "summary_suggestion": "Retrieve IAM policy for source",
+      "description_suggestion": "Retrieves the Identity and Access Management (IAM) policy attached to a specified security finding source. Returns a Policy object containing role bindings that define who has what access permissions to the source. This operation requires appropriate permissions to view IAM policies.",
+      "reasoning": "Original description is minimal and lacks context about what is returned and permission requirements. Added clarity about the return value (Policy object with role bindings), the purpose (define access permissions), and authentication context (requires appropriate permissions). Summary was missing. These additions help AI agents understand this is an IAM-related operation and what data structure to expect.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'securitycenter.organizations.operations.delete' has semantic quality issues: vague_summary, missing_context, poor_ai_interpretability. Original description lacks a summary and could be clearer about the distinction between deletion and cancellation. Added explicit clarification that deletion doesn't affect operation execution, which is critical for AI agents to understand when to use this versus the cancel operation. Improved context about return value and side effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "securitycenter.organizations.operations.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.",
+      "summary_suggestion": "Delete a long-running operation resource",
+      "description_suggestion": "Deletes a long-running operation resource, indicating the client is no longer interested in the operation result. This method does not cancel the operation or affect its execution state. The operation continues running on the server regardless of deletion. Returns an empty response on success. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.",
+      "reasoning": "Original description lacks a summary and could be clearer about the distinction between deletion and cancellation. Added explicit clarification that deletion doesn't affect operation execution, which is critical for AI agents to understand when to use this versus the cancel operation. Improved context about return value and side effects.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'securitycenter.organizations.sources.get' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description is too minimal. Added domain context about what a source is (from API schema), clarified the retrieval action, and specified the return value. This helps AI agents understand the operation's purpose within the security context and when to use it.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12943,13 +12892,169 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets a source.",
-      "summary_suggestion": "Retrieve a security source",
-      "description_suggestion": "Retrieves details of a specified security source within an organization. Requires appropriate permissions.",
-      "reasoning": "Both the summary and description were vague. The suggestions provide more clarity and context for the operation.",
+      "summary_suggestion": "Retrieve a Security Command Center finding source",
+      "description_suggestion": "Retrieves a specific Security Command Center finding source by name. A source is a container of findings that represents an entity or mechanism capable of producing security findings. Returns the complete Source object including its display name, description, and configuration details.",
+      "reasoning": "Original description is too minimal. Added domain context about what a source is (from API schema), clarified the retrieval action, and specified the return value. This helps AI agents understand the operation's purpose within the security context and when to use it.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'securitycenter.organizations.assets.updateSecurityMarks' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description lacks essential context. Added explanation of what security marks are (from API schema), clarified the input schema, specified the return value, and noted partial update support. This enables AI agents to understand the operation's purpose and when to use it for asset annotation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "securitycenter.organizations.assets.updateSecurityMarks",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Updates security marks.",
+      "summary_suggestion": "Update security marks on an asset",
+      "description_suggestion": "Updates user-specified security marks attached to an asset. Security marks are scoped within a Security Command Center organization and allow custom tagging and annotation of assets. Accepts a GoogleCloudSecuritycenterV1beta1SecurityMarks object with the marks to apply. Returns the updated asset with the modified security marks. Supports partial updates - only provided marks will be modified.",
+      "reasoning": "Original description lacks essential context. Added explanation of what security marks are (from API schema), clarified the input schema, specified the return value, and noted partial update support. This enables AI agents to understand the operation's purpose and when to use it for asset annotation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'securitycenter.organizations.sources.findings.setState' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_context. Original description is too vague about what 'state' means and lacks input/output details. Added context about finding states, clarified the request schema, and specified the return value. This helps AI agents understand the operation's purpose in the security findings workflow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "securitycenter.organizations.sources.findings.setState",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Updates the state of a finding.",
+      "summary_suggestion": "Update the state of a security finding",
+      "description_suggestion": "Updates the state of a Security Command Center finding using a SetFindingStateRequest. Allows changing a finding's state (e.g., ACTIVE, INACTIVE) to reflect its current status or resolution. Requires the finding name and desired state in the request. Returns the updated GoogleCloudSecuritycenterV1beta1Finding object with the new state applied.",
+      "reasoning": "Original description is too vague about what 'state' means and lacks input/output details. Added context about finding states, clarified the request schema, and specified the return value. This helps AI agents understand the operation's purpose in the security findings workflow.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'securitycenter.organizations.assets.list' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description lacks context about what assets are and what the operation returns. Added explanation of pagination support, filtering capabilities, and the temporal nature of asset data (from API description). This helps AI agents understand the operation's scope and capabilities.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "securitycenter.organizations.assets.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists an organization's assets.",
+      "summary_suggestion": "List security assets in an organization",
+      "description_suggestion": "Lists all security assets within an organization. Returns a paginated collection of assets with their current security state and properties. Supports filtering, sorting, and pagination through query parameters. Each asset includes temporal views of its security posture and associated findings.",
+      "reasoning": "Original description lacks context about what assets are and what the operation returns. Added explanation of pagination support, filtering capabilities, and the temporal nature of asset data (from API description). This helps AI agents understand the operation's scope and capabilities.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'securitycenter.organizations.assets.group' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original description lacks input/output details and context about the request schema. Added clarification about the GroupAssetsRequest input, the purpose of grouping (aggregation and analysis), and the structure of the response. This helps AI agents understand when and how to use this operation for asset analysis.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "securitycenter.organizations.assets.group",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Filters an organization's assets and groups them by their specified properties.",
+      "summary_suggestion": "Group organization assets by specified properties",
+      "description_suggestion": "Filters an organization's assets and groups them by specified properties using a GroupAssetsRequest. Enables aggregation and analysis of assets based on custom grouping criteria. Accepts a GroupAssetsRequest object specifying the grouping properties and optional filters. Returns grouped asset data organized by the specified properties, facilitating bulk analysis and reporting.",
+      "reasoning": "Original description lacks input/output details and context about the request schema. Added clarification about the GroupAssetsRequest input, the purpose of grouping (aggregation and analysis), and the structure of the response. This helps AI agents understand when and how to use this operation for asset analysis.",
       "batch_index": 0
     }
   },
@@ -12964,7 +13069,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 16 operations analyzed, 9 quality issues found",
+    "message": "Semantic analysis completed: 16 operations analyzed, 11 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -12976,7 +13081,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 16,
-      "total_issues_found": 9,
+      "total_issues_found": 11,
       "batches_processed": 3
     }
   }

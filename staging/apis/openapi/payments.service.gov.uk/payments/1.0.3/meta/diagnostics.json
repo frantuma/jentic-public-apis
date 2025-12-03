@@ -6000,7 +6000,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'Submit a refund for a payment' has semantic quality issues: vague_description, missing_input_details, missing_side_effects. The current description is vague and lacks details about the input and side effects. The suggestion provides clarity on the input, authorization, and side effects.",
+    "message": "Operation 'POST /v1/payments/{paymentId}/refunds' has semantic quality issues: vague_description, missing_output_details, missing_side_effects, not_actionable. Current description is incomplete and misleading - it says 'Return' but this is a POST operation that creates a refund. Missing details about what inputs are required (payment must be refundable), what the operation does (creates a refund), what is returned (refund object details), and side effects (payment state changes). Added clarity about partial refund support and authentication requirements for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6011,90 +6011,304 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "Submit a refund for a payment",
+      "operation_id": "POST /v1/payments/{paymentId}/refunds",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_side_effects",
+        "not_actionable"
+      ],
+      "current_summary": "Submit a refund for a payment",
+      "current_description": "Return issued refund information. The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'",
+      "description_suggestion": "Creates a refund for a previously captured card payment. Requires the payment ID in the path and valid API key authentication via Bearer token in the Authorization header. Returns the created refund object with refund ID, amount, status, and settlement information. The payment must be in a refundable state. Partial refunds are supported by specifying an amount less than the original payment.",
+      "reasoning": "Current description is incomplete and misleading - it says 'Return' but this is a POST operation that creates a refund. Missing details about what inputs are required (payment must be refundable), what the operation does (creates a refund), what is returned (refund object details), and side effects (payment state changes). Added clarity about partial refund support and authentication requirements for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'GET /v1/payments/{paymentId}/refunds/{refundId}' has semantic quality issues: vague_description, missing_output_details. Current description lacks clarity about what information is returned and has a grammatical issue. Added details about required path parameters, authentication method, and specific fields returned (amount, status, created date, settlement summary) to improve AI agent interpretability and help agents understand what data they will receive.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "GET /v1/payments/{paymentId}/refunds/{refundId}",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Find payment refund by ID",
+      "current_description": "Return payment refund information by Refund ID The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'",
+      "description_suggestion": "Retrieves detailed information about a specific refund for a payment. Requires the payment ID and refund ID in the path, and valid API key authentication via Bearer token in the Authorization header. Returns the refund object including refund ID, amount, status, created date, and settlement summary information.",
+      "reasoning": "Current description lacks clarity about what information is returned and has a grammatical issue. Added details about required path parameters, authentication method, and specific fields returned (amount, status, created date, settlement summary) to improve AI agent interpretability and help agents understand what data they will receive.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'GET /v1/refunds' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Current summary is too generic and description is incomplete. Missing information about pagination support (6 parameters suggest pagination), what filters are available beyond dates, what the response structure includes, and how results are ordered. Enhanced summary to indicate filtering capability and added details about pagination, response structure, and result ordering to help AI agents understand how to construct queries and process results.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "GET /v1/refunds",
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
         "missing_input_details",
-        "missing_side_effects"
-      ],
-      "current_summary": "Submit a refund for a payment",
-      "current_description": "Return issued refund information. The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'",
-      "description_suggestion": "Submit a refund for a payment by providing the payment ID and refund details. The Authorisation token must be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'. Returns the issued refund information and updates the payment status accordingly.",
-      "reasoning": "The current description is vague and lacks details about the input and side effects. The suggestion provides clarity on the input, authorization, and side effects.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'Get a payment refund' has semantic quality issues: vague_description, missing_input_details. The current description is vague and lacks details about the input. The suggestion provides clarity on the input and authorization.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "Get a payment refund",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_input_details"
-      ],
-      "current_summary": "Find payment refund by ID",
-      "current_description": "Return payment refund information by Refund ID The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'",
-      "summary_suggestion": "Retrieve payment refund by ID",
-      "description_suggestion": "Retrieve payment refund information by providing the payment ID and refund ID. The Authorisation token must be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'. Returns the payment refund details.",
-      "reasoning": "The current description is vague and lacks details about the input. The suggestion provides clarity on the input and authorization.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'Search refunds' has semantic quality issues: vague_description, missing_input_details. The current description is vague and lacks details about the input. The suggestion provides clarity on the input and authorization.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "Search refunds",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_input_details"
+        "missing_output_details"
       ],
       "current_summary": "Search refunds",
       "current_description": "Search refunds by 'from' and 'to' date. The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'",
-      "summary_suggestion": "Search refunds by date range",
-      "description_suggestion": "Search refunds by providing a date range ('from' and 'to' date). The Authorisation token must be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'. Returns a list of refunds within the specified date range.",
-      "reasoning": "The current description is vague and lacks details about the input. The suggestion provides clarity on the input and authorization.",
+      "summary_suggestion": "Search refunds by date range and filters",
+      "description_suggestion": "Searches refunds across all payments using optional date range and filtering parameters. Requires valid API key authentication via Bearer token in the Authorization header. Supports filtering by 'from' and 'to' dates, and includes pagination parameters for result navigation. Returns a paginated list of refund objects with navigation links to access additional pages. Results are ordered by creation date.",
+      "reasoning": "Current summary is too generic and description is incomplete. Missing information about pagination support (6 parameters suggest pagination), what filters are available beyond dates, what the response structure includes, and how results are ordered. Enhanced summary to indicate filtering capability and added details about pagination, response structure, and result ordering to help AI agents understand how to construct queries and process results.",
       "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'Search payments' has semantic quality issues: missing_output_details, missing_context. Original summary is too generic. Description lacks information about pagination, return format, and how multiple filters interact. Added details about paginated results and simultaneous filter support for better AI agent understanding of capabilities.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "Search payments",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Search payments",
+      "current_description": "Search payments by reference, state, 'from' and 'to' date. The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'",
+      "summary_suggestion": "Search payments by reference, state, and date range",
+      "description_suggestion": "Search for payments using optional filters including reference, payment state, and date range ('from' and 'to'). Returns a paginated list of payments matching the search criteria. Requires Bearer token authentication via the authorization header. Supports filtering by multiple criteria simultaneously.",
+      "reasoning": "Original summary is too generic. Description lacks information about pagination, return format, and how multiple filters interact. Added details about paginated results and simultaneous filter support for better AI agent understanding of capabilities.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'Create a payment' has semantic quality issues: missing_output_details, missing_side_effects. Summary is adequate. Description lacks critical details about request body requirements, return value structure, and initial payment state. Added information about payment lifecycle and what the operation returns to improve AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "Create a payment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Create new payment",
+      "current_description": "Create a new payment for the account associated to the Authorisation token. The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'",
+      "description_suggestion": "Create a new card payment for the account associated with the provided Bearer token. Accepts payment details via the request body including amount, reference, and description. Returns the created payment object with a unique payment ID and initial state. The payment is created in 'created' state and requires subsequent actions (e.g., capture) to complete the transaction.",
+      "reasoning": "Summary is adequate. Description lacks critical details about request body requirements, return value structure, and initial payment state. Added information about payment lifecycle and what the operation returns to improve AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'Get a payment' has semantic quality issues: vague_description, missing_output_details. Summary is clear and actionable. Description is incomplete with missing details about what information is returned and lacks clarity about the response structure. Enhanced to specify the types of data returned (amount, state, card details, settlement info) for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "Get a payment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Find payment by ID",
+      "current_description": "Return information about the payment The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'",
+      "description_suggestion": "Retrieve detailed information about a specific payment using its payment ID. Returns the complete payment object including amount, state, card details, settlement information, and available actions. Requires Bearer token authentication via the authorization header.",
+      "reasoning": "Summary is clear and actionable. Description is incomplete with missing details about what information is returned and lacks clarity about the response structure. Enhanced to specify the types of data returned (amount, state, card details, settlement info) for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'Cancel a payment' has semantic quality issues: missing_output_details, missing_context. Summary is clear. Description lacks specificity about which states allow cancellation and what the response contains. Added clarification about terminal states, return value, and irreversibility to help AI agents understand preconditions and effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "Cancel a payment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Cancel payment",
+      "current_description": "Cancel a payment based on the provided payment ID and the Authorisation token. The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'. A payment can only be cancelled if it's in a state that isn't finished.",
+      "description_suggestion": "Cancel a payment using its payment ID. The payment must be in a non-terminal state (not finished, captured, or failed) to be cancelled. Requires Bearer token authentication via the authorization header. Returns the updated payment object with state changed to 'cancelled'. This action is irreversible.",
+      "reasoning": "Summary is clear. Description lacks specificity about which states allow cancellation and what the response contains. Added clarification about terminal states, return value, and irreversibility to help AI agents understand preconditions and effects.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'Capture a payment' has semantic quality issues: missing_output_details, missing_context. Summary is clear. Description lacks information about the response and the purpose/effect of capturing. Added details about the resulting state, settlement initiation, and return value to clarify the operation's role in the payment lifecycle.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "Capture a payment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Capture payment",
+      "current_description": "Capture a payment based on the provided payment ID and the Authorisation token. The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'. A payment can only be captured if it's in 'submitted' state",
+      "description_suggestion": "Capture a payment using its payment ID to complete the transaction. The payment must be in 'submitted' state to be captured. Requires Bearer token authentication via the authorization header. Returns the updated payment object with state changed to 'success'. Capturing confirms the payment and initiates settlement processing.",
+      "reasoning": "Summary is clear. Description lacks information about the response and the purpose/effect of capturing. Added details about the resulting state, settlement initiation, and return value to clarify the operation's role in the payment lifecycle.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'Get events for a payment' has semantic quality issues: vague_summary, vague_description, missing_output_details. Original summary is awkwardly phrased. Description is vague about what events are and lacks details about event structure and content. Improved summary to be more action-oriented and enhanced description to explain event types and their purpose in tracking payment lifecycle.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "Get events for a payment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Return payment events by ID",
+      "current_description": "Return payment events information about a certain payment The Authorisation token needs to be specified in the 'authorization' header as 'authorization: Bearer YOUR_API_KEY_HERE'",
+      "summary_suggestion": "Retrieve payment lifecycle events by payment ID",
+      "description_suggestion": "Retrieve the event history for a specific payment using its payment ID. Returns a list of events showing state transitions and actions performed on the payment throughout its lifecycle. Events include timestamps and event types (e.g., created, submitted, captured, failed). Requires Bearer token authentication via the authorization header.",
+      "reasoning": "Original summary is awkwardly phrased. Description is vague about what events are and lacks details about event structure and content. Improved summary to be more action-oriented and enhanced description to explain event types and their purpose in tracking payment lifecycle.",
+      "batch_index": 0
     }
   },
   {
@@ -6108,7 +6322,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 10 operations analyzed, 3 quality issues found",
+    "message": "Semantic analysis completed: 10 operations analyzed, 9 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -6120,7 +6334,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 10,
-      "total_issues_found": 3,
+      "total_issues_found": 9,
       "batches_processed": 2
     }
   }

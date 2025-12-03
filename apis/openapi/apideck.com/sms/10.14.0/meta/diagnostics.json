@@ -2377,7 +2377,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'messagesAll' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about pagination support and the type of response returned.",
+    "message": "Operation 'messagesAll' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, poor_ai_interpretability. Original description is identical to summary and provides no actionable information. AI agents need to understand this retrieves multiple messages with pagination support, what parameters control pagination, and what the response structure contains. Added context about cursor-based pagination, return structure, and filtering capabilities consistent with API documentation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2391,14 +2391,17 @@
       "operation_id": "messagesAll",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "List Messages",
       "current_description": "List Messages",
-      "summary_suggestion": "List all SMS messages",
-      "description_suggestion": "Lists all SMS messages available in the system. Supports pagination with cursor and limit parameters. Returns a collection of message objects.",
-      "reasoning": "The current description is too vague. Added context about pagination support and the type of response returned.",
+      "summary_suggestion": "Retrieve paginated list of SMS messages",
+      "description_suggestion": "Retrieves a paginated list of SMS messages for the authenticated consumer. Supports cursor-based pagination via the cursor and limit parameters. Returns a collection of message objects with metadata including pagination cursors for navigating through results. Supports filtering and sorting based on connector capabilities.",
+      "reasoning": "Original description is identical to summary and provides no actionable information. AI agents need to understand this retrieves multiple messages with pagination support, what parameters control pagination, and what the response structure contains. Added context about cursor-based pagination, return structure, and filtering capabilities consistent with API documentation.",
       "batch_index": 0
     }
   },
@@ -2413,7 +2416,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'messagesAdd' has semantic quality issues: vague_description, missing_input_details. The current description is too vague. Added context about the required input and the type of response returned.",
+    "message": "Operation 'messagesAdd' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, missing_side_effects, poor_ai_interpretability. Original description lacks clarity about what 'Create Message' means in SMS context (send vs. draft). AI agents need to understand this sends SMS messages, what the request body should contain, what is returned, and the side effect of message delivery. Added context about message delivery, return value structure, and authentication requirements.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2427,14 +2430,18 @@
       "operation_id": "messagesAdd",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Create Message",
       "current_description": "Create Message",
-      "summary_suggestion": "Create a new SMS message",
-      "description_suggestion": "Creates a new SMS message with the provided details. Requires a valid message object in the request body. Returns the newly created message object.",
-      "reasoning": "The current description is too vague. Added context about the required input and the type of response returned.",
+      "summary_suggestion": "Send or create a new SMS message",
+      "description_suggestion": "Creates and sends a new SMS message through the configured SMS service. Accepts a Message object containing recipient, content, and optional metadata. Returns the created message object with a unique identifier and status. The message is immediately queued for delivery to the SMS provider. Requires valid consumer and app authentication.",
+      "reasoning": "Original description lacks clarity about what 'Create Message' means in SMS context (send vs. draft). AI agents need to understand this sends SMS messages, what the request body should contain, what is returned, and the side effect of message delivery. Added context about message delivery, return value structure, and authentication requirements.",
       "batch_index": 0
     }
   },
@@ -2449,7 +2456,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'messagesOne' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about the expected input and the type of response returned.",
+    "message": "Operation 'messagesOne' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, poor_ai_interpretability. Original description provides no context about what data is returned or how to identify the message. AI agents need to understand the message ID is required, what fields are returned, and error conditions. Added details about required path parameter, response structure, and error handling.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2463,14 +2470,17 @@
       "operation_id": "messagesOne",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Get Message",
       "current_description": "Get Message",
-      "summary_suggestion": "Get details of a specific SMS message",
-      "description_suggestion": "Retrieves the details of a specific SMS message identified by the message ID. Returns a message object with the requested message details.",
-      "reasoning": "The current description is too vague. Added context about the expected input and the type of response returned.",
+      "summary_suggestion": "Retrieve a specific SMS message by ID",
+      "description_suggestion": "Retrieves the details of a specific SMS message by its unique identifier. Returns the complete message object including sender, recipient, content, status, timestamps, and any associated metadata. Requires the message ID as a path parameter. Returns 404 if the message does not exist or is not accessible to the authenticated consumer.",
+      "reasoning": "Original description provides no context about what data is returned or how to identify the message. AI agents need to understand the message ID is required, what fields are returned, and error conditions. Added details about required path parameter, response structure, and error handling.",
       "batch_index": 0
     }
   },
@@ -2485,7 +2495,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'messagesUpdate' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about the required input and the type of response returned.",
+    "message": "Operation 'messagesUpdate' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, missing_side_effects, poor_ai_interpretability. Original description is too vague about what can be updated and whether updates are partial or full. AI agents need to understand this is a PATCH operation supporting partial updates, what fields are typically updatable, what is returned, and potential limitations. Added context about partial update support, typical updatable fields, and provider-specific constraints.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2499,14 +2509,18 @@
       "operation_id": "messagesUpdate",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Update Message",
       "current_description": "Update Message",
-      "summary_suggestion": "Update details of a specific SMS message",
-      "description_suggestion": "Updates the details of a specific SMS message identified by the message ID. Requires a valid message object in the request body. Returns the updated message object.",
-      "reasoning": "The current description is too vague. Added context about the required input and the type of response returned.",
+      "summary_suggestion": "Update an existing SMS message",
+      "description_suggestion": "Updates an existing SMS message identified by its unique ID. Supports partial updates - only provided fields in the Message object will be modified. Typical updatable fields include status, tags, and metadata depending on connector support. Returns the updated message object. Note: Some fields like content or recipient may be immutable after creation depending on the SMS provider.",
+      "reasoning": "Original description is too vague about what can be updated and whether updates are partial or full. AI agents need to understand this is a PATCH operation supporting partial updates, what fields are typically updatable, what is returned, and potential limitations. Added context about partial update support, typical updatable fields, and provider-specific constraints.",
       "batch_index": 0
     }
   },
@@ -2521,7 +2535,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'messagesDelete' has semantic quality issues: vague_description, missing_side_effects. The current description is too vague. Added context about the expected side effects and the type of response returned.",
+    "message": "Operation 'messagesDelete' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, missing_side_effects, poor_ai_interpretability. Original description lacks context about what happens when a message is deleted and what is returned. AI agents need to understand the message ID is required, what the response contains, potential provider limitations, and error conditions. Added details about deletion effects, response structure, provider-specific constraints, and error handling.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2535,14 +2549,18 @@
       "operation_id": "messagesDelete",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_side_effects"
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Delete Message",
       "current_description": "Delete Message",
-      "summary_suggestion": "Delete a specific SMS message",
-      "description_suggestion": "Deletes a specific SMS message identified by the message ID. Returns a success message if the deletion is successful.",
-      "reasoning": "The current description is too vague. Added context about the expected side effects and the type of response returned.",
+      "summary_suggestion": "Delete an SMS message by ID",
+      "description_suggestion": "Deletes an SMS message identified by its unique ID. Removes the message from the system and associated records. Returns a response confirming deletion with the deleted message's ID. Note: Deletion may not be supported by all SMS providers - some may only allow status updates instead. Returns 404 if the message does not exist or is not accessible to the authenticated consumer.",
+      "reasoning": "Original description lacks context about what happens when a message is deleted and what is returned. AI agents need to understand the message ID is required, what the response contains, potential provider limitations, and error conditions. Added details about deletion effects, response structure, provider-specific constraints, and error handling.",
       "batch_index": 0
     }
   },

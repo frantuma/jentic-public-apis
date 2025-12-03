@@ -822,7 +822,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateEventNotification' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The current description is missing. Added details about the required authentication, input parameters, and the return value to improve clarity and completeness.",
+    "message": "Operation 'CreateEventNotification' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details, missing_side_effects, unclear_purpose, poor_ai_interpretability. The operation lacks a description entirely, making it impossible for AI agents to understand its purpose, inputs, outputs, or effects. The summary is generic and doesn't clarify the TPP context. The improved description explains: (1) the operation's purpose within the Event Notification API domain, (2) what inputs are expected (event subject, resource links, metadata), (3) authentication requirements (TPP OAuth2), (4) what is returned (confirmation with status), and (5) side effects (event delivery, state changes). This enables AI agents to determine when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -837,14 +837,18 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_context",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects",
+        "unclear_purpose",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Send an event notification",
       "current_description": "",
-      "summary_suggestion": "Create an event notification",
-      "description_suggestion": "Creates a new event notification for a specified resource. Requires authentication and includes details such as event type, resource ID, and notification details. Returns the created event notification object.",
-      "reasoning": "The current description is missing. Added details about the required authentication, input parameters, and the return value to improve clarity and completeness.",
+      "summary_suggestion": "Create and send event notification to TPP",
+      "description_suggestion": "Creates and sends an event notification to a Third Party Provider (TPP) regarding resource updates. This operation accepts event notification data including the event subject, resource links, and notification metadata. The request requires TPP OAuth2 authentication. Returns confirmation of the notification creation with status details. The operation triggers event delivery to the subscribed TPP endpoint and updates the event notification state in the system.",
+      "reasoning": "The operation lacks a description entirely, making it impossible for AI agents to understand its purpose, inputs, outputs, or effects. The summary is generic and doesn't clarify the TPP context. The improved description explains: (1) the operation's purpose within the Event Notification API domain, (2) what inputs are expected (event subject, resource links, metadata), (3) authentication requirements (TPP OAuth2), (4) what is returned (confirmation with status), and (5) side effects (event delivery, state changes). This enables AI agents to determine when to use this operation and what to expect.",
       "batch_index": 0
     }
   },

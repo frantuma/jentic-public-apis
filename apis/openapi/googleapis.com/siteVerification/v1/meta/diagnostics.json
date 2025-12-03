@@ -1464,7 +1464,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'siteVerification.webResource.getToken' has semantic quality issues: vague_summary, vague_description. The current summary is missing. The description is vague and lacks details about the request and response.",
+    "message": "Operation 'siteVerification.webResource.getToken' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description lacks detail about required inputs (site identifier, verification method), what the token is used for, and the next steps in the verification workflow. AI agents need to understand this is a prerequisite step before verification can be attempted.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1479,13 +1479,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Get a verification token for placing on a website or domain.",
-      "summary_suggestion": "Obtain a verification token for website or domain.",
-      "description_suggestion": "Retrieves a verification token required for placing on a website or domain to verify ownership. Expects a request with the necessary details. Returns a response containing the verification token.",
-      "reasoning": "The current summary is missing. The description is vague and lacks details about the request and response.",
+      "summary_suggestion": "Generate a site verification token",
+      "description_suggestion": "Generates a verification token that can be placed on a website or domain to prove ownership to Google. Requires specifying the site identifier and verification method in the request. Returns a verification token string and associated metadata. This token must be placed on the target site before verification can be completed.",
+      "reasoning": "Missing summary entirely. Description lacks detail about required inputs (site identifier, verification method), what the token is used for, and the next steps in the verification workflow. AI agents need to understand this is a prerequisite step before verification can be attempted.",
       "batch_index": 0
     }
   },
@@ -1500,7 +1502,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'siteVerification.webResource.list' has semantic quality issues: vague_summary. The current summary is missing. The description is clear but could be more actionable.",
+    "message": "Operation 'siteVerification.webResource.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is vague about what data is returned. AI agents need to know the response structure includes verification status and owner details to determine if this operation meets their needs.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1514,12 +1516,14 @@
       "operation_id": "siteVerification.webResource.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Get the list of your verified websites and domains.",
-      "summary_suggestion": "Get list of verified websites and domains.",
-      "reasoning": "The current summary is missing. The description is clear but could be more actionable.",
+      "summary_suggestion": "List all verified websites and domains",
+      "description_suggestion": "Retrieves a list of all websites and domains that have been verified for the authenticated user. Returns an array of site verification resources containing site identifiers, verification status, and owner information. Requires authentication.",
+      "reasoning": "Missing summary. Description is vague about what data is returned. AI agents need to know the response structure includes verification status and owner details to determine if this operation meets their needs.",
       "batch_index": 0
     }
   },
@@ -1534,7 +1538,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'siteVerification.webResource.insert' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing. The description lacks details about the required input.",
+    "message": "Operation 'siteVerification.webResource.insert' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description lacks critical context about prerequisites (token must be generated first), required inputs, what constitutes success, and the state change that occurs. AI agents need to understand this is the completion step of a two-step verification workflow.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1549,13 +1553,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Attempt verification of a website or domain.",
-      "summary_suggestion": "Initiate verification of a website or domain.",
-      "description_suggestion": "Initiates the verification process for a website or domain. Requires details about the website or domain. Returns a response indicating the status of the verification attempt.",
-      "reasoning": "The current summary is missing. The description lacks details about the required input.",
+      "summary_suggestion": "Verify ownership of a website or domain",
+      "description_suggestion": "Attempts to verify ownership of a website or domain by validating the verification token or method provided in the request. Requires a previously generated verification token or alternative verification method. On success, returns the verified site resource with updated verification status. This operation completes the verification process initiated by getToken.",
+      "reasoning": "Missing summary. Description lacks critical context about prerequisites (token must be generated first), required inputs, what constitutes success, and the state change that occurs. AI agents need to understand this is the completion step of a two-step verification workflow.",
       "batch_index": 0
     }
   },
@@ -1570,7 +1576,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'siteVerification.webResource.delete' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing. The description lacks details about the side effects of the operation.",
+    "message": "Operation 'siteVerification.webResource.delete' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks important details about the irreversible nature of the operation, what parameter is required, and that no response body is returned. AI agents need to understand the consequences before executing this destructive operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1585,13 +1591,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_output_details",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Relinquish ownership of a website or domain.",
-      "summary_suggestion": "Relinquish ownership of a website or domain.",
-      "description_suggestion": "Relinquishes ownership of a website or domain. Expects the ID of the website or domain. Returns a response indicating the success of the operation.",
-      "reasoning": "The current summary is missing. The description lacks details about the side effects of the operation.",
+      "summary_suggestion": "Remove verified website or domain",
+      "description_suggestion": "Removes a verified website or domain from your account, relinquishing ownership verification with Google. Requires the site resource ID as a path parameter. This operation is irreversible - the site will need to be re-verified if you wish to claim ownership again. No response body is returned on successful deletion.",
+      "reasoning": "Missing summary. Description lacks important details about the irreversible nature of the operation, what parameter is required, and that no response body is returned. AI agents need to understand the consequences before executing this destructive operation.",
       "batch_index": 0
     }
   },
@@ -1606,7 +1613,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'siteVerification.webResource.get' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing. The description lacks details about the output.",
+    "message": "Operation 'siteVerification.webResource.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is vague about what 'most current data' includes. AI agents need to know the specific fields returned (verification status, methods, owners, timestamps) to determine if this operation provides needed information.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1625,9 +1632,83 @@
       ],
       "current_summary": "",
       "current_description": "Get the most current data for a website or domain.",
-      "summary_suggestion": "Get current data for a website or domain.",
-      "description_suggestion": "Retrieves the most current data for a specified website or domain. Expects the ID of the website or domain. Returns a response containing the current data.",
-      "reasoning": "The current summary is missing. The description lacks details about the output.",
+      "summary_suggestion": "Retrieve current site verification data",
+      "description_suggestion": "Retrieves the current verification status and metadata for a specific website or domain. Requires the site resource ID as a path parameter. Returns the site verification resource including verification status, verification methods used, owner information, and last verification timestamp.",
+      "reasoning": "Missing summary. Description is vague about what 'most current data' includes. AI agents need to know the specific fields returned (verification status, methods, owners, timestamps) to determine if this operation provides needed information.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'siteVerification.webResource.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description mentions patch semantics but lacks clarity on what can be modified beyond owners, what the request body should contain, and what is returned. AI agents need to understand partial update behavior and the difference between patch and put operations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "siteVerification.webResource.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Modify the list of owners for your website or domain. This method supports patch semantics.",
+      "summary_suggestion": "Update site owners using patch semantics",
+      "description_suggestion": "Modifies the owner list for a verified website or domain using patch semantics, allowing partial updates. Requires the site resource ID as a path parameter and an updated site resource in the request body containing only the fields to be modified. Returns the updated site verification resource. Only specified fields are modified; omitted fields retain their current values.",
+      "reasoning": "Missing summary. Description mentions patch semantics but lacks clarity on what can be modified beyond owners, what the request body should contain, and what is returned. AI agents need to understand partial update behavior and the difference between patch and put operations.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'siteVerification.webResource.update' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks detail about full replacement semantics, required request body structure, and what is returned. AI agents need to understand this performs complete replacement (unlike patch) and requires all fields to be provided.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "siteVerification.webResource.update",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Modify the list of owners for your website or domain.",
+      "summary_suggestion": "Replace site owner information",
+      "description_suggestion": "Replaces the owner list for a verified website or domain using full replacement semantics. Requires the site resource ID as a path parameter and a complete site resource in the request body. Returns the updated site verification resource. All fields in the request body will replace existing values; this is a full update operation unlike patch.",
+      "reasoning": "Missing summary. Description lacks detail about full replacement semantics, required request body structure, and what is returned. AI agents need to understand this performs complete replacement (unlike patch) and requires all fields to be provided.",
       "batch_index": 0
     }
   },
@@ -1642,7 +1723,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 7 operations analyzed, 5 quality issues found",
+    "message": "Semantic analysis completed: 7 operations analyzed, 7 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -1654,7 +1735,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 7,
-      "total_issues_found": 5,
+      "total_issues_found": 7,
       "batches_processed": 1
     }
   }

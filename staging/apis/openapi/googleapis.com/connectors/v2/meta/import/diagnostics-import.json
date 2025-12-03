@@ -5949,7 +5949,45 @@
         "character": 0
       }
     },
-    "message": "Operation 'connectors.projects.locations.connections.executeSqlQuery' has semantic quality issues: vague_summary, missing_context. Added a summary to clarify the operation's purpose and added context about the SQL statement compatibility with the database schema.",
+    "message": "Operation 'connectors.projects.locations.connections.entityTypes.list' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_output_details. Original description lacks a summary entirely and provides minimal context. The description is vague about what 'metadata' includes and doesn't explain the purpose for an AI agent. Added: (1) clear summary indicating the action and scope, (2) explanation of what entity type metadata contains, (3) context about the connection requirement, (4) mention of pagination support, (5) explanation of the practical use case for understanding available data structures. This helps AI agents understand when to use this operation (discovering available entity types) and what to expect in the response.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "connectors.projects.locations.connections.entityTypes.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists metadata related to all entity types present in the external system.",
+      "summary_suggestion": "List entity types for a connection",
+      "description_suggestion": "Retrieves metadata for all entity types available in the connected external system. This operation returns a list of entity type definitions including their schemas and properties. Requires a valid connection resource path. Supports pagination through standard list parameters. Returns entity type metadata that can be used to understand the structure of data available through the connection.",
+      "reasoning": "Original description lacks a summary entirely and provides minimal context. The description is vague about what 'metadata' includes and doesn't explain the purpose for an AI agent. Added: (1) clear summary indicating the action and scope, (2) explanation of what entity type metadata contains, (3) context about the connection requirement, (4) mention of pagination support, (5) explanation of the practical use case for understanding available data structures. This helps AI agents understand when to use this operation (discovering available entity types) and what to expect in the response.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'connectors.projects.locations.connections.executeSqlQuery' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary entirely. Description lacks clarity on return value, supported query types, and potential side effects. Added information about query results, connector-specific SQL support, and warning about state-changing operations for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5964,13 +6002,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Executes a SQL statement specified in the body of the request. An example of this SQL statement in the case of Salesforce connector would be 'select * from Account a, Order o where a.Id = o.AccountId'.",
-      "summary_suggestion": "Execute SQL query on a specified connection",
-      "description_suggestion": "Executes a SQL statement specified in the body of the request. The SQL statement should be compatible with the database schema of the specified connection. An example of this SQL statement in the case of a Salesforce connector would be 'select * from Account a, Order o where a.Id = o.AccountId'. Returns the result of the SQL query.",
-      "reasoning": "Added a summary to clarify the operation's purpose and added context about the SQL statement compatibility with the database schema.",
+      "summary_suggestion": "Execute SQL query on connected resource",
+      "description_suggestion": "Executes a SQL statement against the connected resource. The SQL query is provided in the request body. Supports connector-specific SQL dialects (e.g., Salesforce SOQL). Returns query results in the response. Note: Query execution may have side effects on the connected system depending on the SQL statement (e.g., INSERT, UPDATE, DELETE operations).",
+      "reasoning": "Missing summary entirely. Description lacks clarity on return value, supported query types, and potential side effects. Added information about query results, connector-specific SQL support, and warning about state-changing operations for better AI agent decision-making.",
       "batch_index": 0
     }
   },
@@ -5985,7 +6024,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'connectors.projects.locations.connections.entityTypes.entities.deleteEntitiesWithConditions' has semantic quality issues: vague_summary, missing_input_details. Added a summary to clarify the operation's purpose and added details about the conditions that should be specified in the request.",
+    "message": "Operation 'connectors.projects.locations.connections.entityTypes.entities.deleteEntitiesWithConditions' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description is vague about what conditions are expected, what is returned, and the permanent nature of deletion. Enhanced with details about conditional matching, return value (deletion count), and side effects for AI agents to understand the destructive nature of this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6000,13 +6039,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes entities based on conditions specified in the request and not on entity id.",
-      "summary_suggestion": "Delete entities based on specified conditions",
-      "description_suggestion": "Deletes entities based on the conditions specified in the request. The conditions should be defined in the request body and should not rely on entity id. Returns the number of entities deleted.",
-      "reasoning": "Added a summary to clarify the operation's purpose and added details about the conditions that should be specified in the request.",
+      "summary_suggestion": "Delete entities matching specified conditions",
+      "description_suggestion": "Deletes one or more entity rows matching the conditions specified in the request body. Unlike single-entity deletion, this operation uses conditional matching rather than entity IDs. Returns the count of deleted entities. This operation permanently removes matching entities from the connected system.",
+      "reasoning": "Missing summary. Description is vague about what conditions are expected, what is returned, and the permanent nature of deletion. Enhanced with details about conditional matching, return value (deletion count), and side effects for AI agents to understand the destructive nature of this operation.",
       "batch_index": 0
     }
   },
@@ -6021,7 +6062,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'connectors.projects.locations.connections.entityTypes.entities.updateEntitiesWithConditions' has semantic quality issues: vague_summary, missing_input_details. Added a summary to clarify the operation's purpose and added details about the conditions that should be specified in the request.",
+    "message": "Operation 'connectors.projects.locations.connections.entityTypes.entities.updateEntitiesWithConditions' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity on what fields can be updated, what conditions are supported, and what is returned. Added details about field modification, conditional matching distinction, and return value for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6036,13 +6077,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Updates entities based on conditions specified in the request and not on entity id.",
-      "summary_suggestion": "Update entities based on specified conditions",
-      "description_suggestion": "Updates entities based on the conditions specified in the request. The conditions should be defined in the request body and should not rely on entity id. Returns the updated entities.",
-      "reasoning": "Added a summary to clarify the operation's purpose and added details about the conditions that should be specified in the request.",
+      "summary_suggestion": "Update entities matching specified conditions",
+      "description_suggestion": "Updates one or more entity rows matching the conditions specified in the request. The fields to be modified are provided in the request body. Unlike single-entity updates, this operation uses conditional matching rather than entity IDs. Returns the count of updated entities and the updated entity data.",
+      "reasoning": "Missing summary. Description lacks clarity on what fields can be updated, what conditions are supported, and what is returned. Added details about field modification, conditional matching distinction, and return value for better AI agent interpretability.",
       "batch_index": 0
     }
   },
@@ -6057,7 +6099,80 @@
         "character": 0
       }
     },
-    "message": "Operation 'connectors.projects.locations.connections.checkReadiness' has semantic quality issues: vague_summary, missing_context. Added a summary to clarify the operation's purpose and added context about the similarity to the GetStatus operation.",
+    "message": "Operation 'connectors.projects.locations.connections.entityTypes.entities.delete' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description doesn't clarify return value or the permanent nature of deletion. Added information about return value (empty response) and side effects to help AI agents understand this is a destructive operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "connectors.projects.locations.connections.entityTypes.entities.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes an existing entity row matching the entity type and entity id specified in the request.",
+      "summary_suggestion": "Delete entity by ID",
+      "description_suggestion": "Deletes a single entity row identified by the entity type and entity ID specified in the request path. Returns an empty response on successful deletion. This operation permanently removes the entity from the connected system.",
+      "reasoning": "Missing summary. Description doesn't clarify return value or the permanent nature of deletion. Added information about return value (empty response) and side effects to help AI agents understand this is a destructive operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'connectors.projects.locations.connections.entityTypes.entities.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity on what is returned. Added information about return value (complete entity object) for better AI agent understanding of the operation's output.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "connectors.projects.locations.connections.entityTypes.entities.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets a single entity row matching the entity type and entity id specified in the request.",
+      "summary_suggestion": "Retrieve entity by ID",
+      "description_suggestion": "Retrieves a single entity row identified by the entity type and entity ID specified in the request path. Returns the complete entity object with all properties from the connected system.",
+      "reasoning": "Missing summary. Description lacks clarity on what is returned. Added information about return value (complete entity object) for better AI agent understanding of the operation's output.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'connectors.projects.locations.connections.checkReadiness' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details, inconsistent_terminology. Missing summary. Description is unclear about purpose, uses informal language ('to understand'), lacks output details, and inconsistent terminology ('GetStatus' vs standard API naming). Clarified purpose for Kubernetes health checks, specified return value, and improved terminology consistency with API context.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6072,14 +6187,272 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "vague_description",
+        "unclear_purpose",
+        "missing_output_details",
+        "inconsistent_terminology"
       ],
       "current_summary": "",
       "current_description": "Reports readiness status of the connector. Similar logic to GetStatus but modified for kubernetes health check to understand.",
-      "summary_suggestion": "Check readiness status of the connector",
-      "description_suggestion": "Reports the readiness status of the connector. This operation uses similar logic to GetStatus but is modified for Kubernetes health checks to understand. Returns the readiness status of the connector.",
-      "reasoning": "Added a summary to clarify the operation's purpose and added context about the similarity to the GetStatus operation.",
+      "summary_suggestion": "Check connector readiness status",
+      "description_suggestion": "Checks the readiness status of the connector for Kubernetes health probes. Returns a readiness status indicating whether the connector is ready to accept requests. This is a lightweight health check operation distinct from full status reporting, designed for container orchestration platforms.",
+      "reasoning": "Missing summary. Description is unclear about purpose, uses informal language ('to understand'), lacks output details, and inconsistent terminology ('GetStatus' vs standard API naming). Clarified purpose for Kubernetes health checks, specified return value, and improved terminology consistency with API context.",
       "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'connectors.projects.locations.connections.checkStatus' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description is overly technical and focuses on implementation details rather than user intent. Improved version clarifies what the operation returns (CheckStatusResponse), what information is provided, and why the error handling approach matters for AI agents determining connection health.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "connectors.projects.locations.connections.checkStatus",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Reports the status of the connection. Note that when the connection is in a state that is not ACTIVE, the implementation of this RPC method must return a Status with the corresponding State instead of returning a gRPC status code that is not \"OK\", which indicates that ConnectionStatus itself, not the connection, failed.",
+      "summary_suggestion": "Check connection status and readiness",
+      "description_suggestion": "Reports the current status of the connection, including its operational state and readiness. Returns a CheckStatusResponse containing the connection's state and any relevant status information. When the connection is not in an ACTIVE state, the response includes the corresponding State value rather than a gRPC error code, allowing clients to distinguish between connection state issues and API failures.",
+      "reasoning": "Missing summary entirely. Description is overly technical and focuses on implementation details rather than user intent. Improved version clarifies what the operation returns (CheckStatusResponse), what information is provided, and why the error handling approach matters for AI agents determining connection health.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'connectors.projects.locations.connections.exchangeAuthCode' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about inputs and outputs. Improved version specifies the request and response schemas involved, making it clear what data is needed and what will be returned for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "connectors.projects.locations.connections.exchangeAuthCode",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "ExchangeAuthCode exchanges the OAuth authorization code (and other necessary data) for an access token (and associated credentials).",
+      "summary_suggestion": "Exchange OAuth authorization code for access token",
+      "description_suggestion": "Exchanges an OAuth authorization code for an access token and associated credentials. Accepts an ExchangeAuthCodeRequest containing the authorization code and related OAuth data. Returns an ExchangeAuthCodeResponse with the access token, token type, expiration, and other credential information needed for authenticated API calls.",
+      "reasoning": "Missing summary. Description lacks clarity about inputs and outputs. Improved version specifies the request and response schemas involved, making it clear what data is needed and what will be returned for AI agent decision-making.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'connectors.projects.locations.connections.actions.execute' has semantic quality issues: vague_summary, missing_output_details, poor_ai_interpretability. Missing summary. Description is vague about what happens and what is returned. Improved version clarifies the request/response types, explains that outputs vary by action, and references the discovery mechanism (actions.list) to help AI agents understand the full workflow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "connectors.projects.locations.connections.actions.execute",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Executes an action with the name specified in the request. The input parameters for executing the action are passed through the body of the ExecuteAction request.",
+      "summary_suggestion": "Execute a connector action with parameters",
+      "description_suggestion": "Executes a specified action on the connector with the provided input parameters. Accepts an ExecuteActionRequest containing the action name and its required input parameters. Returns an ExecuteActionResponse with the action's output results. The specific parameters and return values depend on the action being executed; use the actions.list operation to discover available actions and their schemas.",
+      "reasoning": "Missing summary. Description is vague about what happens and what is returned. Improved version clarifies the request/response types, explains that outputs vary by action, and references the discovery mechanism (actions.list) to help AI agents understand the full workflow.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'connectors.projects.locations.connections.refreshAccessToken' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks input/output clarity. Improved version specifies the request schema, clarifies the response type (ExchangeAuthCodeResponse), and explains the purpose of token refresh for maintaining authenticated sessions.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "connectors.projects.locations.connections.refreshAccessToken",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "RefreshAccessToken exchanges the OAuth refresh token (and other necessary data) for a new access token (and new associated credentials).",
+      "summary_suggestion": "Refresh OAuth access token using refresh token",
+      "description_suggestion": "Exchanges an OAuth refresh token for a new access token and updated credentials. Accepts a RefreshAccessTokenRequest containing the refresh token and related OAuth data. Returns an ExchangeAuthCodeResponse with the new access token, token type, expiration, and other credential information for continued authenticated access.",
+      "reasoning": "Missing summary. Description lacks input/output clarity. Improved version specifies the request schema, clarifies the response type (ExchangeAuthCodeResponse), and explains the purpose of token refresh for maintaining authenticated sessions.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'connectors.projects.locations.connections.actions.list' has semantic quality issues: vague_summary, unclear_purpose, missing_output_details. Missing summary. Description is too brief and doesn't clarify what 'schema' means in this context or how the results are structured. Improved version explains this is a discovery operation, clarifies the schema contents, and connects it to the execute operation for better workflow understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "connectors.projects.locations.connections.actions.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "unclear_purpose",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the schema of all the actions supported by the connector.",
+      "summary_suggestion": "List all supported connector actions and schemas",
+      "description_suggestion": "Retrieves the schema definitions for all actions supported by the connector. Returns a list of action schemas including action names, descriptions, input parameters, and output formats. Use this operation to discover available actions before calling the actions.execute operation. Supports pagination through standard list parameters.",
+      "reasoning": "Missing summary. Description is too brief and doesn't clarify what 'schema' means in this context or how the results are structured. Improved version explains this is a discovery operation, clarifies the schema contents, and connects it to the execute operation for better workflow understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'connectors.projects.locations.connections.entityTypes.entities.list' has semantic quality issues: vague_summary, missing_output_details, poor_ai_interpretability. Missing summary. Description is overly detailed with implementation caveats that obscure the primary purpose. Improved version clarifies the core functionality (list entities with pagination), consolidates important limitations into a concise note, and helps AI agents understand when this operation is appropriate and what data consistency issues to expect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "connectors.projects.locations.connections.entityTypes.entities.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Lists entity rows of a particular entity type contained in the request. Note: 1. Currently, only max of one 'sort_by' column is supported. 2. If no 'sort_by' column is provided, the primary key of the table is used. If zero or more than one primary key is available, we default to the unpaginated list entities logic which only returns the first page. 3. The values of the 'sort_by' columns must uniquely identify an entity row, otherwise undefined behaviors may be observed during pagination. 4. Since transactions are not supported, any updates, inserts or deletes during pagination can lead to stale data being returned or other unexpected behaviors.",
+      "summary_suggestion": "List entity rows with filtering and pagination",
+      "description_suggestion": "Retrieves a paginated list of entity rows of a specified entity type from the external system. Supports sorting by a single column (which must contain unique values for reliable pagination) and standard pagination parameters. Returns a list of Entity objects. Important: Sorting is limited to one column; if not specified, the primary key is used. Transactions are not supported, so concurrent modifications during pagination may result in stale or inconsistent data.",
+      "reasoning": "Missing summary. Description is overly detailed with implementation caveats that obscure the primary purpose. Improved version clarifies the core functionality (list entities with pagination), consolidates important limitations into a concise note, and helps AI agents understand when this operation is appropriate and what data consistency issues to expect.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'connectors.projects.locations.connections.entityTypes.entities.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description uses awkward phrasing ('The response message contains a `Entity` message object') and doesn't clarify what system-generated fields might be included. Improved version is more direct, clarifies the request/response structure, and explains that the response includes system-assigned values for AI agent workflow planning.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "connectors.projects.locations.connections.entityTypes.entities.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new entity row of the specified entity type in the external system. The field values for creating the row are contained in the body of the request. The response message contains a `Entity` message object returned as a response by the external system.",
+      "summary_suggestion": "Create a new entity row in external system",
+      "description_suggestion": "Creates a new entity row of the specified entity type in the external system. Accepts an Entity object in the request body containing the field values for the new row. Returns the created Entity object as returned by the external system, typically including any system-generated fields (such as IDs or timestamps) assigned during creation.",
+      "reasoning": "Missing summary. Description uses awkward phrasing ('The response message contains a `Entity` message object') and doesn't clarify what system-generated fields might be included. Improved version is more direct, clarifies the request/response structure, and explains that the response includes system-assigned values for AI agent workflow planning.",
+      "batch_index": 1
     }
   },
   {
@@ -6093,7 +6466,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 15 operations analyzed, 4 quality issues found",
+    "message": "Semantic analysis completed: 15 operations analyzed, 14 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -6105,7 +6478,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 15,
-      "total_issues_found": 4,
+      "total_issues_found": 14,
       "batches_processed": 3
     }
   }

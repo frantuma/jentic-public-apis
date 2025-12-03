@@ -5498,7 +5498,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudbilling.billingAccounts.getIamPolicy' has semantic quality issues: vague_summary. The current description is clear but lacks a concise summary. Adding a summary improves clarity and AI agent interpretability.",
+    "message": "Operation 'cloudbilling.billingAccounts.subAccounts.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description is comprehensive but could be reorganized for clarity. Added explicit mention of return value (BillingAccount object) and clearer statement of failure conditions. Improved structure to help AI agents understand prerequisites, action, and outcomes.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5509,15 +5509,17 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "cloudbilling.billingAccounts.getIamPolicy",
+      "operation_id": "cloudbilling.billingAccounts.subAccounts.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Gets the access control policy for a billing account. The caller must have the `billing.accounts.getIamPolicy` permission on the account, which is often given to billing account [viewers](https://cloud.google.com/billing/docs/how-to/billing-access).",
-      "summary_suggestion": "Get the IAM policy for a billing account",
-      "reasoning": "The current description is clear but lacks a concise summary. Adding a summary improves clarity and AI agent interpretability.",
+      "current_description": "This method creates [billing subaccounts](https://cloud.google.com/billing/docs/concepts#subaccounts). Google Cloud resellers should use the Channel Services APIs, [accounts.customers.create](https://cloud.google.com/channel/docs/reference/rest/v1/accounts.customers/create) and [accounts.customers.entitlements.create](https://cloud.google.com/channel/docs/reference/rest/v1/accounts.customers.entitlements/create). When creating a subaccount, the current authenticated user must have the `billing.accounts.update` IAM permission on the parent account, which is typically given to billing account [administrators](https://cloud.google.com/billing/docs/how-to/billing-access). This method will return an error if the parent account has not been provisioned for subaccounts.",
+      "summary_suggestion": "Create a billing subaccount under parent account",
+      "description_suggestion": "Creates a new billing subaccount under the specified parent billing account. Requires the `billing.accounts.update` IAM permission on the parent account. Returns the newly created BillingAccount object. Note: Google Cloud resellers should use Channel Services APIs instead. This method will fail if the parent account has not been provisioned for subaccounts.",
+      "reasoning": "Missing summary entirely. Description is comprehensive but could be reorganized for clarity. Added explicit mention of return value (BillingAccount object) and clearer statement of failure conditions. Improved structure to help AI agents understand prerequisites, action, and outcomes.",
       "batch_index": 2
     }
   },
@@ -5532,7 +5534,336 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudbilling.billingAccounts.list' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The summary was missing, and the description lacked details about the response content.",
+    "message": "Operation 'cloudbilling.billingAccounts.getIamPolicy' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks explicit mention of return value (Policy object). Added domain-appropriate terminology (IAM policy, bindings) and clarified what is returned to improve AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudbilling.billingAccounts.getIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the access control policy for a billing account. The caller must have the `billing.accounts.getIamPolicy` permission on the account, which is often given to billing account [viewers](https://cloud.google.com/billing/docs/how-to/billing-access).",
+      "summary_suggestion": "Retrieve IAM policy for billing account",
+      "description_suggestion": "Retrieves the Identity and Access Management (IAM) policy for a billing account. Requires the `billing.accounts.getIamPolicy` permission, typically granted to billing account viewers. Returns a Policy object containing the access control bindings and rules for the specified billing account.",
+      "reasoning": "Missing summary. Description lacks explicit mention of return value (Policy object). Added domain-appropriate terminology (IAM policy, bindings) and clarified what is returned to improve AI agent interpretability.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudbilling.billingAccounts.setIamPolicy' has semantic quality issues: vague_summary, missing_side_effects. Missing summary. Description mentions policy replacement but lacks explicit warning about side effects and complete replacement behavior. Added clarification about request/response types and emphasized the destructive nature of this operation for AI agent safety.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudbilling.billingAccounts.setIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Sets the access control policy for a billing account. Replaces any existing policy. The caller must have the `billing.accounts.setIamPolicy` permission on the account, which is often given to billing account [administrators](https://cloud.google.com/billing/docs/how-to/billing-access).",
+      "summary_suggestion": "Set IAM policy for billing account",
+      "description_suggestion": "Sets the Identity and Access Management (IAM) policy for a billing account, replacing any existing policy entirely. Requires the `billing.accounts.setIamPolicy` permission, typically granted to billing account administrators. Accepts a SetIamPolicyRequest containing the new policy bindings. Returns the updated Policy object. Warning: This operation completely replaces the existing policy; use with caution to avoid unintended access revocation.",
+      "reasoning": "Missing summary. Description mentions policy replacement but lacks explicit warning about side effects and complete replacement behavior. Added clarification about request/response types and emphasized the destructive nature of this operation for AI agent safety.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudbilling.billingAccounts.testIamPermissions' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is vague about input/output structure. Added explicit mention of request/response schema types (TestIamPermissionsRequest/Response) and clarified the practical use case for AI agents to understand when to invoke this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudbilling.billingAccounts.testIamPermissions",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Tests the access control policy for a billing account. This method takes the resource and a set of permissions as input and returns the subset of the input permissions that the caller is allowed for that resource.",
+      "summary_suggestion": "Test caller permissions on billing account",
+      "description_suggestion": "Tests which permissions the caller has on a specified billing account. Accepts a TestIamPermissionsRequest containing a list of permissions to check. Returns a TestIamPermissionsResponse containing only the subset of requested permissions that the caller is authorized to perform on the billing account. Useful for determining access before attempting privileged operations.",
+      "reasoning": "Missing summary. Description is vague about input/output structure. Added explicit mention of request/response schema types (TestIamPermissionsRequest/Response) and clarified the practical use case for AI agents to understand when to invoke this operation.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudbilling.projects.updateBillingInfo' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Missing summary entirely. Description is comprehensive but verbose and difficult for AI agents to parse. Reorganized to clearly separate: purpose, inputs, outputs, and side effects. Highlighted critical side effects (service shutdown, charge redirection) that are essential for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudbilling.projects.updateBillingInfo",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Sets or updates the billing account associated with a project. You specify the new billing account by setting the `billing_account_name` in the `ProjectBillingInfo` resource to the resource name of a billing account. Associating a project with an open billing account enables billing on the project and allows charges for resource usage. If the project already had a billing account, this method changes the billing account used for resource usage charges. *Note:* Incurred charges that have not yet been reported in the transaction history of the Google Cloud Console might be billed to the new billing account, even if the charge occurred before the new billing account was assigned to the project. The current authenticated user must have ownership privileges for both the [project](https://cloud.google.com/docs/permissions-overview#h.bgs0oxofvnoo ) and the [billing account](https://cloud.google.com/billing/docs/how-to/billing-access). You can disable billing on the project by setting the `billing_account_name` field to empty. This action disassociates the current billing account from the project. Any billable activity of your in-use services will stop, and your application could stop functioning as expected. Any unbilled charges to date will be billed to the previously associated account. The current authenticated user must be either an owner of the project or an owner of the billing account for the project. Note that associating a project with a *closed* billing account will have much the same effect as disabling billing on the project: any paid resources used by the project will be shut down. Thus, unless you wish to disable billing, you should always call this method with the name of an *open* billing account.",
+      "summary_suggestion": "Associate or update project billing account",
+      "description_suggestion": "Sets or updates the billing account associated with a project. Specify the new billing account by providing the `billing_account_name` in the `ProjectBillingInfo` resource. Requires ownership privileges for both the project and billing account. Returns the updated `ProjectBillingInfo` object. Side effects: Associating with an open billing account enables billing and resource charges; setting an empty `billing_account_name` disables billing and stops billable services; associating with a closed billing account disables billing. Unbilled charges are billed to the previously associated account. Charges incurred before reassignment may be billed to the new account.",
+      "reasoning": "Missing summary entirely. Description is comprehensive but verbose and difficult for AI agents to parse. Reorganized to clearly separate: purpose, inputs, outputs, and side effects. Highlighted critical side effects (service shutdown, charge redirection) that are essential for AI agent decision-making.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudbilling.billingAccounts.projects.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about return value and pagination support. Added explicit mention of paginated response to help AI agents understand result handling.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudbilling.billingAccounts.projects.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the projects associated with a billing account. The current authenticated user must have the `billing.resourceAssociations.list` IAM permission, which is often given to billing account [viewers](https://cloud.google.com/billing/docs/how-to/billing-access).",
+      "summary_suggestion": "List projects associated with billing account",
+      "description_suggestion": "Lists all projects associated with a billing account. Requires the `billing.resourceAssociations.list` IAM permission (typically granted to billing account viewers). Returns a paginated list of projects with their billing information.",
+      "reasoning": "Missing summary. Description lacks clarity about return value and pagination support. Added explicit mention of paginated response to help AI agents understand result handling.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudbilling.billingAccounts.move' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Missing summary. Description is too brief and lacks input/output details and side effects. Added clarity about request structure, return value, and important side effects related to permissions and access control changes.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudbilling.billingAccounts.move",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Changes which parent organization a billing account belongs to.",
+      "summary_suggestion": "Move billing account to new organization",
+      "description_suggestion": "Moves a billing account to a different parent organization. Requires the `MoveBillingAccountRequest` with the destination organization specified. Returns the updated `BillingAccount` object. Side effects: Changes the organizational hierarchy and may affect billing permissions and access controls for users in both the source and destination organizations.",
+      "reasoning": "Missing summary. Description is too brief and lacks input/output details and side effects. Added clarity about request structure, return value, and important side effects related to permissions and access control changes.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudbilling.organizations.billingAccounts.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks context about organization scope and return value details. Added organizational context and explicit mention of pagination and filtering by permissions.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudbilling.organizations.billingAccounts.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the billing accounts that the current authenticated user has permission to [view](https://cloud.google.com/billing/docs/how-to/billing-access).",
+      "summary_suggestion": "List billing accounts visible to user",
+      "description_suggestion": "Lists all billing accounts within an organization that the current authenticated user has permission to view. Returns a paginated list of `BillingAccount` objects filtered by user permissions.",
+      "reasoning": "Missing summary. Description lacks context about organization scope and return value details. Added organizational context and explicit mention of pagination and filtering by permissions.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudbilling.organizations.billingAccounts.create' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description mixes guidance for resellers with core functionality. Reorganized to clearly separate: purpose, permissions, inputs, outputs, and error conditions. Highlighted the reseller guidance as a note rather than primary content.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudbilling.organizations.billingAccounts.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "This method creates [billing subaccounts](https://cloud.google.com/billing/docs/concepts#subaccounts). Google Cloud resellers should use the Channel Services APIs, [accounts.customers.create](https://cloud.google.com/channel/docs/reference/rest/v1/accounts.customers/create) and [accounts.customers.entitlements.create](https://cloud.google.com/channel/docs/reference/rest/v1/accounts.customers.entitlements/create). When creating a subaccount, the current authenticated user must have the `billing.accounts.update` IAM permission on the parent account, which is typically given to billing account [administrators](https://cloud.google.com/billing/docs/how-to/billing-access). This method will return an error if the parent account has not been provisioned for subaccounts.",
+      "summary_suggestion": "Create billing subaccount under organization",
+      "description_suggestion": "Creates a billing subaccount under the specified parent organization. Requires the `billing.accounts.update` IAM permission on the parent account (typically granted to billing account administrators). Accepts a `BillingAccount` resource in the request body. Returns the newly created `BillingAccount` object. Note: Resellers should use Channel Services APIs instead. Returns an error if the parent account is not provisioned for subaccounts.",
+      "reasoning": "Missing summary. Description mixes guidance for resellers with core functionality. Reorganized to clearly separate: purpose, permissions, inputs, outputs, and error conditions. Highlighted the reseller guidance as a note rather than primary content.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudbilling.billingAccounts.subAccounts.list' has semantic quality issues: vague_summary, inconsistent_terminology, missing_output_details. Missing summary. Description is generic and doesn't clarify the hierarchical relationship (sub-accounts vs. regular accounts). Terminology inconsistency: uses 'billing accounts' when it should specify 'sub-accounts' to distinguish from parent account. Added clarity about parent-child relationship and pagination.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudbilling.billingAccounts.subAccounts.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "inconsistent_terminology",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the billing accounts that the current authenticated user has permission to [view](https://cloud.google.com/billing/docs/how-to/billing-access).",
+      "summary_suggestion": "List sub-accounts under billing account",
+      "description_suggestion": "Lists all sub-accounts (child billing accounts) under the specified parent billing account that the current authenticated user has permission to view. Returns a paginated list of `BillingAccount` objects.",
+      "reasoning": "Missing summary. Description is generic and doesn't clarify the hierarchical relationship (sub-accounts vs. regular accounts). Terminology inconsistency: uses 'billing accounts' when it should specify 'sub-accounts' to distinguish from parent account. Added clarity about parent-child relationship and pagination.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudbilling.billingAccounts.list' has semantic quality issues: vague_summary, missing_input_details. Missing summary entirely. Description lacks details about pagination support, return type, and parameter context. Added summary and expanded description to clarify inputs (pagination parameters), outputs (BillingAccount list), and permission requirements for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5547,13 +5878,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Lists the billing accounts that the current authenticated user has permission to [view](https://cloud.google.com/billing/docs/how-to/billing-access).",
-      "summary_suggestion": "List all billing accounts accessible by the authenticated user",
-      "description_suggestion": "Lists all billing accounts that the current authenticated user has permission to view. The response includes details of each billing account such as account ID, display name, and associated projects.",
-      "reasoning": "The current summary and description are vague. The summary was missing, and the description lacked details about the response content.",
+      "summary_suggestion": "List billing accounts accessible to user",
+      "description_suggestion": "Lists all billing accounts that the current authenticated user has permission to view. Supports pagination through optional parameters. Returns a list of BillingAccount objects with their associated metadata. Requires appropriate IAM permissions to view billing accounts.",
+      "reasoning": "Missing summary entirely. Description lacks details about pagination support, return type, and parameter context. Added summary and expanded description to clarify inputs (pagination parameters), outputs (BillingAccount list), and permission requirements for AI agent clarity.",
       "batch_index": 0
     }
   },
@@ -5568,7 +5899,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudbilling.billingAccounts.create' has semantic quality issues: vague_summary, missing_output_details. The current summary was missing, and the description lacked details about the response content.",
+    "message": "Operation 'cloudbilling.billingAccounts.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is verbose and mixes guidance for resellers with core functionality. Reorganized to clarify: action (create subaccount), required inputs (parent account context), permissions needed, return value (BillingAccount), and error conditions. Improved AI agent interpretability by separating core functionality from alternative guidance.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5583,13 +5914,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "This method creates [billing subaccounts](https://cloud.google.com/billing/docs/concepts#subaccounts). Google Cloud resellers should use the Channel Services APIs, [accounts.customers.create](https://cloud.google.com/channel/docs/reference/rest/v1/accounts.customers/create) and [accounts.customers.entitlements.create](https://cloud.google.com/channel/docs/reference/rest/v1/accounts.customers.entitlements/create). When creating a subaccount, the current authenticated user must have the `billing.accounts.update` IAM permission on the parent account, which is typically given to billing account [administrators](https://cloud.google.com/billing/docs/how-to/billing-access). This method will return an error if the parent account has not been provisioned for subaccounts.",
-      "summary_suggestion": "Create a new billing subaccount",
-      "description_suggestion": "Creates a new billing subaccount under the specified parent account. The current authenticated user must have the `billing.accounts.update` IAM permission on the parent account. The response includes details of the newly created billing account such as account ID and display name.",
-      "reasoning": "The current summary was missing, and the description lacked details about the response content.",
+      "summary_suggestion": "Create a billing subaccount",
+      "description_suggestion": "Creates a billing subaccount under a parent billing account. The current authenticated user must have the `billing.accounts.update` IAM permission on the parent account (typically granted to billing account administrators). Note: Google Cloud resellers should use Channel Services APIs instead. Returns the newly created BillingAccount object. Fails if the parent account has not been provisioned for subaccounts.",
+      "reasoning": "Missing summary. Description is verbose and mixes guidance for resellers with core functionality. Reorganized to clarify: action (create subaccount), required inputs (parent account context), permissions needed, return value (BillingAccount), and error conditions. Improved AI agent interpretability by separating core functionality from alternative guidance.",
       "batch_index": 0
     }
   },
@@ -5604,7 +5936,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudbilling.services.list' has semantic quality issues: vague_summary. The current summary was missing. The description is clear but could be enhanced with more details about the response content.",
+    "message": "Operation 'cloudbilling.services.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too minimal and lacks details about pagination, return type, and authentication requirements. Added summary and expanded description to clarify inputs (pagination parameters), outputs (Service list), and accessibility for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5618,12 +5950,15 @@
       "operation_id": "cloudbilling.services.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists all public cloud services.",
       "summary_suggestion": "List all public cloud services",
-      "reasoning": "The current summary was missing. The description is clear but could be enhanced with more details about the response content.",
+      "description_suggestion": "Lists all public cloud services available in Google Cloud Platform. Supports pagination through optional parameters. Returns a list of Service objects containing service identifiers, display names, and metadata. No authentication required for this operation.",
+      "reasoning": "Missing summary. Description is too minimal and lacks details about pagination, return type, and authentication requirements. Added summary and expanded description to clarify inputs (pagination parameters), outputs (Service list), and accessibility for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -5638,7 +5973,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudbilling.organizations.billingAccounts.move' has semantic quality issues: vague_summary, missing_side_effects. The current summary was missing, and the description lacked details about the side effects and required permissions.",
+    "message": "Operation 'cloudbilling.organizations.billingAccounts.move' has semantic quality issues: vague_summary, unclear_purpose, missing_input_details, missing_output_details, not_actionable. Missing summary. Description is vague about what 'changes' means and lacks critical details about inputs (billing account name, destination parent), outputs (updated BillingAccount), and permission requirements. Note: Operation uses GET method which is semantically incorrect for a move operation (should be POST/PUT), but description improved for clarity. Enhanced to clarify the action, required parameters, permissions, and return value.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5653,13 +5988,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "not_actionable"
       ],
       "current_summary": "",
       "current_description": "Changes which parent organization a billing account belongs to.",
-      "summary_suggestion": "Move a billing account to a new parent organization",
-      "description_suggestion": "Changes the parent organization of a billing account. The current authenticated user must have the `billing.accounts.update` IAM permission on the billing account. The operation may affect the billing and resource management policies associated with the billing account.",
-      "reasoning": "The current summary was missing, and the description lacked details about the side effects and required permissions.",
+      "summary_suggestion": "Move billing account to new parent organization",
+      "description_suggestion": "Moves a billing account from its current parent organization to a new parent organization. Requires the billing account name and destination parent organization as inputs. The current authenticated user must have appropriate IAM permissions on both the source and destination organizations. Returns the updated BillingAccount object reflecting the new parent organization assignment.",
+      "reasoning": "Missing summary. Description is vague about what 'changes' means and lacks critical details about inputs (billing account name, destination parent), outputs (updated BillingAccount), and permission requirements. Note: Operation uses GET method which is semantically incorrect for a move operation (should be POST/PUT), but description improved for clarity. Enhanced to clarify the action, required parameters, permissions, and return value.",
       "batch_index": 0
     }
   },
@@ -5674,7 +6012,79 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudbilling.projects.getBillingInfo' has semantic quality issues: vague_summary. The current summary was missing. The description is clear and provides sufficient details.",
+    "message": "Operation 'cloudbilling.billingAccounts.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about input parameters and return type. Added summary and expanded description to specify: input (billing account name), permission requirements, and output (BillingAccount object with specific fields) for improved AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudbilling.billingAccounts.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets information about a billing account. The current authenticated user must be a [viewer of the billing account](https://cloud.google.com/billing/docs/how-to/billing-access).",
+      "summary_suggestion": "Get billing account details",
+      "description_suggestion": "Retrieves detailed information about a specific billing account. Requires the billing account name as input. The current authenticated user must have viewer permissions on the billing account. Returns a BillingAccount object containing account metadata, display name, open status, and other account details.",
+      "reasoning": "Missing summary. Description lacks clarity about input parameters and return type. Added summary and expanded description to specify: input (billing account name), permission requirements, and output (BillingAccount object with specific fields) for improved AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudbilling.billingAccounts.patch' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description clearly states the limitation but lacks details about input parameters and return value. Added summary specifying the primary editable field and expanded description to clarify: inputs (account name and BillingAccount object), the partial update behavior, permissions, and return value for better AI agent guidance.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudbilling.billingAccounts.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates a billing account's fields. Currently the only field that can be edited is `display_name`. The current authenticated user must have the `billing.accounts.update` IAM permission, which is typically given to the [administrator](https://cloud.google.com/billing/docs/how-to/billing-access) of the billing account.",
+      "summary_suggestion": "Update billing account display name",
+      "description_suggestion": "Updates a billing account's editable fields. Currently, only the `display_name` field can be modified. Requires the billing account name and a BillingAccount object with updated fields. The current authenticated user must have the `billing.accounts.update` IAM permission (typically granted to billing account administrators). Returns the updated BillingAccount object. Supports partial updates - only provided fields are modified.",
+      "reasoning": "Missing summary. Description clearly states the limitation but lacks details about input parameters and return value. Added summary specifying the primary editable field and expanded description to clarify: inputs (account name and BillingAccount object), the partial update behavior, permissions, and return value for better AI agent guidance.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudbilling.projects.getBillingInfo' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about return type and what specific billing information is returned. Added summary and expanded description to specify: input (project name), permission requirements with role context, and output (ProjectBillingInfo object with specific fields) for improved AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5688,81 +6098,15 @@
       "operation_id": "cloudbilling.projects.getBillingInfo",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets the billing information for a project. The current authenticated user must have the `resourcemanager.projects.get` permission for the project, which can be granted by assigning the [Project Viewer](https://cloud.google.com/iam/docs/understanding-roles#predefined_roles) role.",
-      "summary_suggestion": "Get billing information for a specific project",
-      "reasoning": "The current summary was missing. The description is clear and provides sufficient details.",
+      "summary_suggestion": "Get project billing information",
+      "description_suggestion": "Retrieves billing information for a specific Google Cloud project. Requires the project name as input. The current authenticated user must have the `resourcemanager.projects.get` permission (typically granted via the Project Viewer role). Returns a ProjectBillingInfo object containing the associated billing account, billing status, and project metadata.",
+      "reasoning": "Missing summary. Description lacks clarity about return type and what specific billing information is returned. Added summary and expanded description to specify: input (project name), permission requirements with role context, and output (ProjectBillingInfo object with specific fields) for improved AI agent interpretability.",
       "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'cloudbilling.billingAccounts.projects.list' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented, making it clear and actionable.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "cloudbilling.billingAccounts.projects.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Lists the projects associated with a billing account. The current authenticated user must have the `billing.resourceAssociations.list` IAM permission, which is often given to billing account [viewers](https://cloud.google.com/billing/docs/how-to/billing-access).",
-      "summary_suggestion": "List projects associated with a billing account",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented, making it clear and actionable.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'cloudbilling.billingAccounts.move' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented, making it clear and actionable.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "cloudbilling.billingAccounts.move",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Changes which parent organization a billing account belongs to.",
-      "summary_suggestion": "Move a billing account to a new parent organization",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented, making it clear and actionable.",
-      "batch_index": 1
     }
   },
   {
@@ -5776,7 +6120,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 18 operations analyzed, 8 quality issues found",
+    "message": "Semantic analysis completed: 18 operations analyzed, 17 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -5788,7 +6132,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 18,
-      "total_issues_found": 8,
+      "total_issues_found": 17,
       "batches_processed": 3
     }
   }

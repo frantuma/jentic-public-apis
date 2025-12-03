@@ -15953,7 +15953,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gmail.users.messages.attachments.get' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing. Added a concise summary and clarified the description to include authentication requirement and return value.",
+    "message": "Operation 'gmail.users.settings.delegates.get' has semantic quality issues: vague_summary, missing_output_details. Original summary was empty, making it impossible for AI agents to quickly understand the operation's purpose. Description lacked clarity about the return value (Delegate object) and authentication requirements. Enhanced summary provides concise action-oriented language. Improved description specifies the return schema, clarifies authentication requirements, and maintains domain terminology consistency with the API context.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -15964,18 +15964,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "gmail.users.messages.attachments.get",
+      "operation_id": "gmail.users.settings.delegates.get",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
         "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Gets the specified message attachment.",
-      "summary_suggestion": "Retrieve a specific message attachment",
-      "description_suggestion": "Retrieves the specified message attachment. Requires authentication. Returns the specified attachment data.",
-      "reasoning": "The current summary is missing. Added a concise summary and clarified the description to include authentication requirement and return value.",
-      "batch_index": 3
+      "current_description": "Gets the specified delegate. Note that a delegate user must be referred to by their primary email address, and not an email alias. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "summary_suggestion": "Retrieve delegate settings for specified email",
+      "description_suggestion": "Retrieves the delegate settings for a specified email address. The delegate user must be referred to by their primary email address, not an email alias. Returns a Delegate object containing the delegate's settings. This method requires service account authentication with domain-wide delegation authority.",
+      "reasoning": "Original summary was empty, making it impossible for AI agents to quickly understand the operation's purpose. Description lacked clarity about the return value (Delegate object) and authentication requirements. Enhanced summary provides concise action-oriented language. Improved description specifies the return schema, clarifies authentication requirements, and maintains domain terminology consistency with the API context.",
+      "batch_index": 11
     }
   },
   {
@@ -15989,7 +15989,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gmail.users.labels.create' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing. Added a concise summary and clarified the description to include authentication requirement and return value.",
+    "message": "Operation 'gmail.users.settings.delegates.delete' has semantic quality issues: vague_summary, missing_output_details. Original summary was empty, preventing AI agents from quickly determining operation purpose. Description lacked clarity about the response (likely empty/204 success response) and didn't explicitly state that the operation succeeds for any verification status. Enhanced summary provides clear action-oriented language. Improved description clarifies the side effect (verification revocation), emphasizes the operation's robustness across verification states, and specifies authentication requirements for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -16000,18 +16000,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "gmail.users.labels.create",
+      "operation_id": "gmail.users.settings.delegates.delete",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
         "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Creates a new label.",
-      "summary_suggestion": "Create a new label",
-      "description_suggestion": "Creates a new label for the authenticated user. Requires authentication. Returns the newly created label object.",
-      "reasoning": "The current summary is missing. Added a concise summary and clarified the description to include authentication requirement and return value.",
-      "batch_index": 3
+      "current_description": "Removes the specified delegate (which can be of any verification status), and revokes any verification that may have been required for using it. Note that a delegate user must be referred to by their primary email address, and not an email alias. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "summary_suggestion": "Remove delegate and revoke verification",
+      "description_suggestion": "Removes the specified delegate and revokes any verification associated with that delegate account. The delegate user must be referred to by their primary email address, not an email alias. This operation succeeds regardless of the delegate's verification status. This method requires service account authentication with domain-wide delegation authority.",
+      "reasoning": "Original summary was empty, preventing AI agents from quickly determining operation purpose. Description lacked clarity about the response (likely empty/204 success response) and didn't explicitly state that the operation succeeds for any verification status. Enhanced summary provides clear action-oriented language. Improved description clarifies the side effect (verification revocation), emphasizes the operation's robustness across verification states, and specifies authentication requirements for better AI agent decision-making.",
+      "batch_index": 11
     }
   },
   {
@@ -16025,7 +16025,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gmail.users.labels.list' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary.",
+    "message": "Operation 'gmail.users.settings.sendAs.delete' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is clear but could better emphasize the side effect of verification revocation and clarify the authorization requirement for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -16036,16 +16036,88 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "gmail.users.labels.list",
+      "operation_id": "gmail.users.settings.sendAs.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes the specified send-as alias. Revokes any verification that may have been required for using it. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "summary_suggestion": "Delete a send-as alias",
+      "description_suggestion": "Deletes the specified send-as alias and revokes any associated verification. This operation removes the alias from the user's account and prevents further use for sending emails. Requires service account with domain-wide delegation authority.",
+      "reasoning": "Missing summary entirely. Description is clear but could better emphasize the side effect of verification revocation and clarify the authorization requirement for AI agent decision-making.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.sendAs.verify' has semantic quality issues: vague_summary, missing_context. Missing summary. Description lacks context about why verification is needed and what the outcome enables, which is important for AI agents to understand the operation's purpose in a workflow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.sendAs.verify",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Sends a verification email to the specified send-as alias address. The verification status must be `pending`. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "summary_suggestion": "Send verification email for send-as alias",
+      "description_suggestion": "Sends a verification email to the specified send-as alias address to confirm ownership. The alias must have a `pending` verification status. This operation is required before the alias can be used for sending emails. Requires service account with domain-wide delegation authority.",
+      "reasoning": "Missing summary. Description lacks context about why verification is needed and what the outcome enables, which is important for AI agents to understand the operation's purpose in a workflow.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.sendAs.smimeInfo.list' has semantic quality issues: vague_summary. Missing summary. Description is clear and complete - it explains the operation retrieves S/MIME configurations associated with a specific send-as alias.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.sendAs.smimeInfo.list",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary"
       ],
       "current_summary": "",
-      "current_description": "Lists all labels in the user's mailbox.",
-      "summary_suggestion": "List all user's mailbox labels",
-      "reasoning": "The current summary is missing. Added a concise summary.",
-      "batch_index": 3
+      "current_description": "Lists S/MIME configs for the specified send-as alias.",
+      "summary_suggestion": "List S/MIME configurations for send-as alias",
+      "reasoning": "Missing summary. Description is clear and complete - it explains the operation retrieves S/MIME configurations associated with a specific send-as alias.",
+      "batch_index": 7
     }
   },
   {
@@ -16059,7 +16131,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gmail.users.labels.get' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing. Added a concise summary and clarified the description to include authentication requirement and return value.",
+    "message": "Operation 'gmail.users.settings.sendAs.smimeInfo.insert' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description mentions input format requirement but lacks clarity on what is returned and the operational effect (enabling S/MIME capabilities), which are important for AI agent workflow planning.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -16070,18 +16142,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "gmail.users.labels.get",
+      "operation_id": "gmail.users.settings.sendAs.smimeInfo.insert",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
         "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Gets the specified label.",
-      "summary_suggestion": "Retrieve a specific label",
-      "description_suggestion": "Retrieves the specified label. Requires authentication. Returns the specified label object.",
-      "reasoning": "The current summary is missing. Added a concise summary and clarified the description to include authentication requirement and return value.",
-      "batch_index": 3
+      "current_description": "Insert (upload) the given S/MIME config for the specified send-as alias. Note that pkcs12 format is required for the key.",
+      "summary_suggestion": "Upload S/MIME configuration for send-as alias",
+      "description_suggestion": "Uploads an S/MIME configuration for the specified send-as alias. The S/MIME config must include a private key in PKCS12 format. Returns the created SmimeInfo object with the assigned ID. This enables S/MIME encryption and signing for emails sent from the alias.",
+      "reasoning": "Missing summary. Description mentions input format requirement but lacks clarity on what is returned and the operational effect (enabling S/MIME capabilities), which are important for AI agent workflow planning.",
+      "batch_index": 7
     }
   },
   {
@@ -16095,7 +16167,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gmail.users.labels.update' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing. Added a concise summary and clarified the description to include authentication requirement and return value.",
+    "message": "Operation 'gmail.users.settings.sendAs.smimeInfo.get' has semantic quality issues: vague_summary. Missing summary. Description is clear and complete - it explains the operation retrieves a specific S/MIME configuration by ID for a send-as alias.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -16106,18 +16178,122 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "gmail.users.labels.update",
+      "operation_id": "gmail.users.settings.sendAs.smimeInfo.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the specified S/MIME config for the specified send-as alias.",
+      "summary_suggestion": "Retrieve S/MIME configuration for send-as alias",
+      "reasoning": "Missing summary. Description is clear and complete - it explains the operation retrieves a specific S/MIME configuration by ID for a send-as alias.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.sendAs.smimeInfo.delete' has semantic quality issues: vague_summary. Missing summary. Description is clear and complete - it explains the operation removes a specific S/MIME configuration from a send-as alias.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.sendAs.smimeInfo.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes the specified S/MIME config for the specified send-as alias.",
+      "summary_suggestion": "Delete S/MIME configuration for send-as alias",
+      "reasoning": "Missing summary. Description is clear and complete - it explains the operation removes a specific S/MIME configuration from a send-as alias.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.sendAs.smimeInfo.setDefault' has semantic quality issues: vague_summary, missing_context. Missing summary. Description lacks context about the operational effect (which config is used for signing/encrypting) and the constraint that only one default can exist, which helps AI agents understand the operation's significance.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.sendAs.smimeInfo.setDefault",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Sets the default S/MIME config for the specified send-as alias.",
+      "summary_suggestion": "Set default S/MIME configuration for send-as alias",
+      "description_suggestion": "Sets the specified S/MIME configuration as the default for the send-as alias. When multiple S/MIME configs exist for an alias, the default config will be used for signing and encrypting emails sent from that alias. Only one S/MIME config can be set as default per alias.",
+      "reasoning": "Missing summary. Description lacks context about the operational effect (which config is used for signing/encrypting) and the constraint that only one default can exist, which helps AI agents understand the operation's significance.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.getProfile' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description is too minimal and doesn't explain what profile data is returned, making it difficult for AI agents to understand the operation's value. Added context about return data and profile contents for better interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.getProfile",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
         "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Updates the specified label.",
-      "summary_suggestion": "Update a specified label",
-      "description_suggestion": "Updates the specified label. Requires authentication. Returns the updated label object.",
-      "reasoning": "The current summary is missing. Added a concise summary and clarified the description to include authentication requirement and return value.",
-      "batch_index": 3
+      "current_description": "Gets the current user's Gmail profile.",
+      "summary_suggestion": "Retrieve authenticated user's Gmail profile",
+      "description_suggestion": "Retrieves the Gmail profile information for the authenticated user, including mailbox statistics, thread and message counts, and profile settings. Returns a Profile object containing the user's mailbox metadata.",
+      "reasoning": "Missing summary entirely. Description is too minimal and doesn't explain what profile data is returned, making it difficult for AI agents to understand the operation's value. Added context about return data and profile contents for better interpretability.",
+      "batch_index": 0
     }
   },
   {
@@ -16131,7 +16307,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gmail.users.labels.patch' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing. Added a concise summary and clarified the description to include authentication requirement and return value.",
+    "message": "Operation 'gmail.users.watch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description lacks details about required inputs (WatchRequest), what is returned, and the side effect of replacing existing watches. Added specifics about request payload, response object, and configuration behavior for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -16142,326 +16318,20 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "gmail.users.labels.patch",
+      "operation_id": "gmail.users.watch",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
-      ],
-      "current_summary": "",
-      "current_description": "Patch the specified label.",
-      "summary_suggestion": "Patch a specified label",
-      "description_suggestion": "Patches the specified label. Requires authentication. Returns the patched label object.",
-      "reasoning": "The current summary is missing. Added a concise summary and clarified the description to include authentication requirement and return value.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'gmail.users.drafts.list' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "gmail.users.drafts.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Lists the drafts in the user's mailbox.",
-      "summary_suggestion": "List all drafts in the user's mailbox",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'gmail.users.history.list' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "gmail.users.history.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Lists the history of all changes to the given mailbox. History results are returned in chronological order (increasing `historyId`).",
-      "summary_suggestion": "List all changes in the user's mailbox history",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'gmail.users.settings.getAutoForwarding' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "gmail.users.settings.getAutoForwarding",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Gets the auto-forwarding setting for the specified account.",
-      "summary_suggestion": "Get auto-forwarding settings for a user",
-      "reasoning": "The current summary is missing, making it unclear what the operation does.",
-      "batch_index": 6
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'gmail.users.settings.updateAutoForwarding' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "gmail.users.settings.updateAutoForwarding",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Updates the auto-forwarding setting for the specified account. A verified forwarding address must be specified when auto-forwarding is enabled. This method is only available to service account clients that have been delegated domain-wide authority.",
-      "summary_suggestion": "Update auto-forwarding settings for a user",
-      "reasoning": "The current summary is missing, making it unclear what the operation does.",
-      "batch_index": 6
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'gmail.users.settings.sendAs.list' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "gmail.users.settings.sendAs.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Lists the send-as aliases for the specified account. The result includes the primary send-as address associated with the account as well as any custom \"from\" aliases.",
-      "summary_suggestion": "List send-as aliases for a user",
-      "reasoning": "The current summary is missing, making it unclear what the operation does.",
-      "batch_index": 6
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'gmail.users.settings.sendAs.create' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "gmail.users.settings.sendAs.create",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Creates a custom \"from\" send-as alias. If an SMTP MSA is specified, Gmail will attempt to connect to the SMTP service to validate the configuration before creating the alias. If ownership verification is required for the alias, a message will be sent to the email address and the resource's verification status will be set to `pending`; otherwise, the resource will be created with verification status set to `accepted`. If a signature is provided, Gmail will sanitize the HTML before saving it with the alias. This method is only available to service account clients that have been delegated domain-wide authority.",
-      "summary_suggestion": "Create a new send-as alias for a user",
-      "reasoning": "The current summary is missing, making it unclear what the operation does.",
-      "batch_index": 6
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'gmail.users.settings.sendAs.update' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "gmail.users.settings.sendAs.update",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Updates a send-as alias. If a signature is provided, Gmail will sanitize the HTML before saving it with the alias. Addresses other than the primary address for the account can only be updated by service account clients that have been delegated domain-wide authority.",
-      "summary_suggestion": "Update a specific send-as alias",
-      "reasoning": "The current summary is missing, making it unclear what the operation does.",
-      "batch_index": 6
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'gmail.users.settings.sendAs.patch' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "gmail.users.settings.sendAs.patch",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Patch the specified send-as alias.",
-      "summary_suggestion": "Patch a specific send-as alias",
-      "reasoning": "The current summary is missing, making it unclear what the operation does.",
-      "batch_index": 6
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'gmail.users.settings.filters.delete' has semantic quality issues: vague_summary, missing_side_effects. Added a summary to clarify the action and expanded the description to include side effects and permanence of the action.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "gmail.users.settings.filters.delete",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
         "missing_side_effects"
       ],
       "current_summary": "",
-      "current_description": "Immediately and permanently deletes the specified filter.",
-      "summary_suggestion": "Delete the specified filter permanently",
-      "description_suggestion": "Immediately and permanently deletes the specified filter. This action cannot be undone. The filter will no longer apply to any messages.",
-      "reasoning": "Added a summary to clarify the action and expanded the description to include side effects and permanence of the action.",
-      "batch_index": 10
+      "current_description": "Set up or update a push notification watch on the given user mailbox.",
+      "summary_suggestion": "Configure push notification watch for mailbox",
+      "description_suggestion": "Establishes or updates a push notification watch on the user's mailbox. Requires a WatchRequest payload specifying the topic and optional label filters. When mailbox changes occur, notifications are sent to the configured topic. Returns a Watch object containing the watch ID and expiration time. Replaces any existing watch configuration.",
+      "reasoning": "Missing summary. Description lacks details about required inputs (WatchRequest), what is returned, and the side effect of replacing existing watches. Added specifics about request payload, response object, and configuration behavior for AI agent clarity.",
+      "batch_index": 0
     }
   },
   {
@@ -16475,7 +16345,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gmail.users.settings.forwardingAddresses.list' has semantic quality issues: vague_summary. Added a summary to clarify the action.",
+    "message": "Operation 'gmail.users.stop' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description doesn't clarify what is returned or confirm successful completion. Added information about the response and the effect of terminating the watch for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -16486,86 +16356,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "gmail.users.settings.forwardingAddresses.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Lists the forwarding addresses for the specified account.",
-      "summary_suggestion": "List all forwarding addresses for the account",
-      "reasoning": "Added a summary to clarify the action.",
-      "batch_index": 10
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'gmail.users.settings.forwardingAddresses.get' has semantic quality issues: vague_summary. Added a summary to clarify the action.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "gmail.users.settings.forwardingAddresses.get",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "Gets the specified forwarding address.",
-      "summary_suggestion": "Get details of the specified forwarding address",
-      "reasoning": "Added a summary to clarify the action.",
-      "batch_index": 10
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'gmail.users.settings.forwardingAddresses.delete' has semantic quality issues: vague_summary, missing_side_effects. Added a summary to clarify the action and expanded the description to include side effects and permanence of the action.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "gmail.users.settings.forwardingAddresses.delete",
+      "operation_id": "gmail.users.stop",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Deletes the specified forwarding address and revokes any verification that may have been required. This method is only available to service account clients that have been delegated domain-wide authority.",
-      "summary_suggestion": "Delete the specified forwarding address",
-      "description_suggestion": "Deletes the specified forwarding address and revokes any verification that may have been required. This action cannot be undone. The forwarding address will no longer be active.",
-      "reasoning": "Added a summary to clarify the action and expanded the description to include side effects and permanence of the action.",
-      "batch_index": 10
+      "current_description": "Stop receiving push notifications for the given user mailbox.",
+      "summary_suggestion": "Stop mailbox push notification watch",
+      "description_suggestion": "Stops all push notifications for the user's mailbox by terminating the active watch. After this operation, no further notifications will be sent to the configured topic. Returns an empty response on successful completion.",
+      "reasoning": "Missing summary. Description doesn't clarify what is returned or confirm successful completion. Added information about the response and the effect of terminating the watch for better AI agent understanding.",
+      "batch_index": 0
     }
   },
   {
@@ -16579,7 +16381,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gmail.users.settings.delegates.list' has semantic quality issues: vague_summary. Added a summary to clarify the action.",
+    "message": "Operation 'gmail.users.drafts.delete' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description emphasizes permanence but lacks clarity on what is returned and required parameters. Added summary and clarified return behavior for AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -16590,16 +16392,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "gmail.users.settings.delegates.list",
+      "operation_id": "gmail.users.drafts.delete",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Lists the delegates for the specified account. This method is only available to service account clients that have been delegated domain-wide authority.",
-      "summary_suggestion": "List all delegates for the specified account",
-      "reasoning": "Added a summary to clarify the action.",
-      "batch_index": 10
+      "current_description": "Immediately and permanently deletes the specified draft. Does not simply trash it.",
+      "summary_suggestion": "Permanently delete draft message",
+      "description_suggestion": "Immediately and permanently deletes the specified draft message. This operation bypasses the trash and cannot be undone. Requires the draft ID and user ID. Returns an empty response on successful deletion.",
+      "reasoning": "Missing summary. Description emphasizes permanence but lacks clarity on what is returned and required parameters. Added summary and clarified return behavior for AI agent interpretability.",
+      "batch_index": 0
     }
   },
   {
@@ -16613,7 +16417,367 @@
         "character": 0
       }
     },
-    "message": "Operation 'gmail.users.messages.batchDelete' has semantic quality issues: vague_summary, missing_context. The current summary is missing. The description is clear but lacks context about authentication and input parameters.",
+    "message": "Operation 'gmail.users.drafts.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is too minimal and doesn't explain what data is returned in the Draft object. Added summary and clarified return structure including Message content for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.drafts.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the specified draft.",
+      "summary_suggestion": "Retrieve draft message by ID",
+      "description_suggestion": "Retrieves the specified draft message by its ID. Returns a Draft object containing the draft's metadata and associated Message object with full email content, headers, and attachments.",
+      "reasoning": "Missing summary. Description is too minimal and doesn't explain what data is returned in the Draft object. Added summary and clarified return structure including Message content for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.drafts.update' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks input details about DraftPayload structure and what is returned. Added summary, clarified required request payload structure, and specified return value for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.drafts.update",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Replaces a draft's content.",
+      "summary_suggestion": "Replace draft message content",
+      "description_suggestion": "Replaces the content of an existing draft message. Requires a DraftPayload containing the updated Message object with new email content, recipients, subject, and body. Returns the updated Draft object with the new message content.",
+      "reasoning": "Missing summary. Description lacks input details about DraftPayload structure and what is returned. Added summary, clarified required request payload structure, and specified return value for AI agent clarity.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.drafts.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description mentions DRAFT label but lacks input details about DraftPayload structure and return value. Added summary, clarified required request payload, and specified return object for AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.drafts.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new draft with the `DRAFT` label.",
+      "summary_suggestion": "Create new draft message",
+      "description_suggestion": "Creates a new draft message in the user's mailbox. Requires a DraftPayload containing a Message object with email content, recipients, subject, and body. The draft is automatically labeled with the DRAFT label. Returns the newly created Draft object with its assigned draft ID.",
+      "reasoning": "Missing summary. Description mentions DRAFT label but lacks input details about DraftPayload structure and return value. Added summary, clarified required request payload, and specified return object for AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.cse.identities.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description is comprehensive but lacks explicit mention of return value (CseIdentity object). Added summary and clarified return value for better AI agent understanding of what this operation produces.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.cse.identities.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates and configures a client-side encryption identity that's authorized to send mail from the user account. Google publishes the S/MIME certificate to a shared domain-wide directory so that people within a Google Workspace organization can encrypt and send mail to the identity. For administrators managing identities and keypairs for users in their organization, requests require authorization with a [service account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount) that has [domain-wide delegation authority](https://developers.google.com/identity/protocols/OAuth2ServiceAccount#delegatingauthority) to impersonate users with the `https://www.googleapis.com/auth/gmail.settings.basic` scope. For users managing their own identities and keypairs, requests require [hardware key encryption](https://support.google.com/a/answer/14153163) turned on and configured.",
+      "summary_suggestion": "Create a client-side encryption identity",
+      "description_suggestion": "Creates and configures a client-side encryption (CSE) identity authorized to send encrypted mail from the user account. The S/MIME certificate is published to a shared domain-wide directory, enabling organization members to encrypt messages to this identity. Returns the created CseIdentity object. Requires either service account with domain-wide delegation (for administrators) or hardware key encryption enabled (for users).",
+      "reasoning": "Missing summary entirely. Description is comprehensive but lacks explicit mention of return value (CseIdentity object). Added summary and clarified return value for better AI agent understanding of what this operation produces.",
+      "batch_index": 8
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.cse.identities.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks explicit mention of return value and pagination support. Added summary and clarified what is returned and pagination capabilities for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.cse.identities.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the client-side encrypted identities for an authenticated user. For administrators managing identities and keypairs for users in their organization, requests require authorization with a [service account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount) that has [domain-wide delegation authority](https://developers.google.com/identity/protocols/OAuth2ServiceAccount#delegatingauthority) to impersonate users with the `https://www.googleapis.com/auth/gmail.settings.basic` scope. For users managing their own identities and keypairs, requests require [hardware key encryption](https://support.google.com/a/answer/14153163) turned on and configured.",
+      "summary_suggestion": "List client-side encryption identities",
+      "description_suggestion": "Lists all client-side encryption (CSE) identities configured for the authenticated user. Returns a collection of CseIdentity objects. Supports pagination via optional parameters. Requires either service account with domain-wide delegation (for administrators) or hardware key encryption enabled (for users).",
+      "reasoning": "Missing summary. Description lacks explicit mention of return value and pagination support. Added summary and clarified what is returned and pagination capabilities for AI agent clarity.",
+      "batch_index": 8
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.cse.identities.delete' has semantic quality issues: vague_summary. Missing summary. Description is comprehensive and clearly explains the operation, side effects (identity cannot be restored), and alternative actions. Only summary needs improvement.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.cse.identities.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes a client-side encryption identity. The authenticated user can no longer use the identity to send encrypted messages. You cannot restore the identity after you delete it. Instead, use the CreateCseIdentity method to create another identity with the same configuration. For administrators managing identities and keypairs for users in their organization, requests require authorization with a [service account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount) that has [domain-wide delegation authority](https://developers.google.com/identity/protocols/OAuth2ServiceAccount#delegatingauthority) to impersonate users with the `https://www.googleapis.com/auth/gmail.settings.basic` scope. For users managing their own identities and keypairs, requests require [hardware key encryption](https://support.google.com/a/answer/14153163) turned on and configured.",
+      "summary_suggestion": "Delete a client-side encryption identity",
+      "reasoning": "Missing summary. Description is comprehensive and clearly explains the operation, side effects (identity cannot be restored), and alternative actions. Only summary needs improvement.",
+      "batch_index": 8
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.cse.identities.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks explicit mention of return value and how the identity is identified (by email address). Added summary and clarified return value for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.cse.identities.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves a client-side encryption identity configuration. For administrators managing identities and keypairs for users in their organization, requests require authorization with a [service account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount) that has [domain-wide delegation authority](https://developers.google.com/identity/protocols/OAuth2ServiceAccount#delegatingauthority) to impersonate users with the `https://www.googleapis.com/auth/gmail.settings.basic` scope. For users managing their own identities and keypairs, requests require [hardware key encryption](https://support.google.com/a/answer/14153163) turned on and configured.",
+      "summary_suggestion": "Retrieve a client-side encryption identity",
+      "description_suggestion": "Retrieves the configuration details for a specific client-side encryption (CSE) identity by email address. Returns the CseIdentity object containing the identity's configuration. Requires either service account with domain-wide delegation (for administrators) or hardware key encryption enabled (for users).",
+      "reasoning": "Missing summary. Description lacks explicit mention of return value and how the identity is identified (by email address). Added summary and clarified return value for better AI agent understanding.",
+      "batch_index": 8
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.cse.identities.patch' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks explicit mention of return value. Added summary using domain terminology (CSE) and clarified what is returned for better AI agent understanding of the operation's effect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.cse.identities.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Associates a different key pair with an existing client-side encryption identity. The updated key pair must validate against Google's [S/MIME certificate profiles](https://support.google.com/a/answer/7300887). For administrators managing identities and keypairs for users in their organization, requests require authorization with a [service account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount) that has [domain-wide delegation authority](https://developers.google.com/identity/protocols/OAuth2ServiceAccount#delegatingauthority) to impersonate users with the `https://www.googleapis.com/auth/gmail.settings.basic` scope. For users managing their own identities and keypairs, requests require [hardware key encryption](https://support.google.com/a/answer/14153163) turned on and configured.",
+      "summary_suggestion": "Update CSE identity key pair",
+      "description_suggestion": "Associates a different S/MIME key pair with an existing client-side encryption (CSE) identity. The new key pair must validate against Google's S/MIME certificate profiles. Returns the updated CseIdentity object. Requires either service account with domain-wide delegation (for administrators) or hardware key encryption enabled (for users).",
+      "reasoning": "Missing summary. Description lacks explicit mention of return value. Added summary using domain terminology (CSE) and clarified what is returned for better AI agent understanding of the operation's effect.",
+      "batch_index": 8
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.cse.keypairs.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks explicit mention of return value. Added summary and clarified what is returned (CseKeyPair object) for better AI agent understanding of the operation's output.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.cse.keypairs.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates and uploads a client-side encryption S/MIME public key certificate chain and private key metadata for the authenticated user. For administrators managing identities and keypairs for users in their organization, requests require authorization with a [service account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount) that has [domain-wide delegation authority](https://developers.google.com/identity/protocols/OAuth2ServiceAccount#delegatingauthority) to impersonate users with the `https://www.googleapis.com/auth/gmail.settings.basic` scope. For users managing their own identities and keypairs, requests require [hardware key encryption](https://support.google.com/a/answer/14153163) turned on and configured.",
+      "summary_suggestion": "Create a client-side encryption key pair",
+      "description_suggestion": "Creates and uploads a client-side encryption (CSE) S/MIME key pair, including the public key certificate chain and private key metadata, for the authenticated user. Returns the created CseKeyPair object. Requires either service account with domain-wide delegation (for administrators) or hardware key encryption enabled (for users).",
+      "reasoning": "Missing summary. Description lacks explicit mention of return value. Added summary and clarified what is returned (CseKeyPair object) for better AI agent understanding of the operation's output.",
+      "batch_index": 8
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.cse.keypairs.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks explicit mention of return value and pagination support. Added summary and clarified what is returned and pagination capabilities for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.cse.keypairs.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists client-side encryption key pairs for an authenticated user. For administrators managing identities and keypairs for users in their organization, requests require authorization with a [service account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount) that has [domain-wide delegation authority](https://developers.google.com/identity/protocols/OAuth2ServiceAccount#delegatingauthority) to impersonate users with the `https://www.googleapis.com/auth/gmail.settings.basic` scope. For users managing their own identities and keypairs, requests require [hardware key encryption](https://support.google.com/a/answer/14153163) turned on and configured.",
+      "summary_suggestion": "List client-side encryption key pairs",
+      "description_suggestion": "Lists all client-side encryption (CSE) S/MIME key pairs for the authenticated user. Returns a collection of CseKeyPair objects. Supports pagination via optional parameters. Requires either service account with domain-wide delegation (for administrators) or hardware key encryption enabled (for users).",
+      "reasoning": "Missing summary. Description lacks explicit mention of return value and pagination support. Added summary and clarified what is returned and pagination capabilities for AI agent clarity.",
+      "batch_index": 8
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.messages.batchDelete' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original description lacks a summary and is incomplete. Added clarity about input format (batch of IDs), expected behavior (idempotent, no errors for missing IDs), and output (no response body). This helps AI agents understand the operation's limitations and when to use it appropriately.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -16628,13 +16792,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Deletes many messages by message ID. Provides no guarantees that messages were not already deleted or even existed at all.",
-      "summary_suggestion": "Batch delete multiple messages by ID",
-      "description_suggestion": "Deletes multiple messages by their IDs. Does not guarantee that messages were not already deleted or even existed at all. Requires authentication and message IDs as input.",
-      "reasoning": "The current summary is missing. The description is clear but lacks context about authentication and input parameters.",
+      "summary_suggestion": "Delete multiple messages by ID",
+      "description_suggestion": "Deletes multiple messages from the user's mailbox by their message IDs. Accepts a batch of message IDs in the request body. Does not guarantee successful deletion of all messages - some messages may have already been deleted or may not exist. Returns no response body on success. This operation is idempotent and does not raise errors for non-existent message IDs.",
+      "reasoning": "Original description lacks a summary and is incomplete. Added clarity about input format (batch of IDs), expected behavior (idempotent, no errors for missing IDs), and output (no response body). This helps AI agents understand the operation's limitations and when to use it appropriately.",
       "batch_index": 2
     }
   },
@@ -16649,7 +16814,153 @@
         "character": 0
       }
     },
-    "message": "Operation 'gmail.users.messages.batchModify' has semantic quality issues: vague_summary, missing_context. The current summary is missing. The description is clear but lacks context about authentication and input parameters.",
+    "message": "Operation 'gmail.users.messages.import' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary and incomplete description. Added clarity about input format (message payload), what the operation returns (Message object with IDs), and use cases. Clarified that this is for importing existing messages, not sending new ones, which is critical for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.messages.import",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Imports a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP. This method doesn't perform SPF checks, so it might not work for some spam messages, such as those attempting to perform domain spoofing. This method does not send a message.",
+      "summary_suggestion": "Import message into user mailbox",
+      "description_suggestion": "Imports a message into the authenticated user's mailbox with standard email delivery scanning and classification, similar to receiving via SMTP. Accepts a message payload in the request body. Does not perform SPF checks, which may limit effectiveness on spoofed domain messages. Does not send the message to recipients. Returns the imported Message object with assigned message ID and thread ID. Use this to add external messages to the mailbox while maintaining email classification.",
+      "reasoning": "Missing summary and incomplete description. Added clarity about input format (message payload), what the operation returns (Message object with IDs), and use cases. Clarified that this is for importing existing messages, not sending new ones, which is critical for AI agent decision-making.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.messages.insert' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary and incomplete description. Added clarity about input format, what gets returned (Message object), and differentiation from import (no scanning/classification). Helps AI agents distinguish between insert, import, and send operations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.messages.insert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Directly inserts a message into only this user's mailbox similar to `IMAP APPEND`, bypassing most scanning and classification. Does not send a message.",
+      "summary_suggestion": "Insert message directly into mailbox",
+      "description_suggestion": "Directly inserts a message into the authenticated user's mailbox, similar to IMAP APPEND, bypassing most email scanning and classification. Accepts a message payload in the request body. Does not send the message to recipients or perform delivery scanning. Returns the inserted Message object with assigned message ID and thread ID. Use this for bulk message imports or when you need to preserve message state without classification.",
+      "reasoning": "Missing summary and incomplete description. Added clarity about input format, what gets returned (Message object), and differentiation from import (no scanning/classification). Helps AI agents distinguish between insert, import, and send operations.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.messages.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Summary is too generic. Description lacks specifics about parameters (query syntax, labels, pagination), return format (paginated list of Message objects), and search capabilities. Enhanced to help AI agents understand filtering options and pagination requirements.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.messages.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "List emails",
+      "current_description": "Lists the messages in the user's mailbox. Search, find, browse, query, list, or discover email messages with filtering options. Use for inbox management, email search, and message discovery.",
+      "summary_suggestion": "List messages with optional filtering",
+      "description_suggestion": "Lists messages from the authenticated user's mailbox with support for search queries and filtering. Accepts optional parameters for query strings (using Gmail search syntax), label filtering, pagination, and result ordering. Returns a paginated list of Message objects containing message metadata and IDs. Use for inbox management, email search, message discovery, and browsing conversations. Supports advanced Gmail search operators for complex queries.",
+      "reasoning": "Summary is too generic. Description lacks specifics about parameters (query syntax, labels, pagination), return format (paginated list of Message objects), and search capabilities. Enhanced to help AI agents understand filtering options and pagination requirements.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.messages.modify' has semantic quality issues: missing_input_details, missing_output_details. Summary is good, but description lacks input details (message ID, ModifyMessageRequest structure with add/remove fields) and output details (returns modified Message object). Added clarity about request structure and immediate application of changes for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.messages.modify",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Modify email labels",
+      "current_description": "Modifies the labels on the specified message. Add, remove, update, change, or manage labels on an email. Use to organize email, mark as read/unread, star/unstar, or apply custom labels.",
+      "description_suggestion": "Modifies the labels on the specified message. Accepts a message ID and a ModifyMessageRequest containing labels to add and/or remove. Supports adding custom labels, system labels (like STARRED, UNREAD), and removing labels. Returns the modified Message object with updated label list. Use to organize emails, mark as read/unread, star/unstar, or apply custom labels. Changes are applied immediately to the message.",
+      "reasoning": "Summary is good, but description lacks input details (message ID, ModifyMessageRequest structure with add/remove fields) and output details (returns modified Message object). Added clarity about request structure and immediate application of changes for better AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.messages.batchModify' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary and vague description. Added clarity about batch operation semantics (same changes applied to all messages), input format (BatchModifyMessagesRequest with message IDs and label operations), and output (empty response). Helps AI agents understand this is a bulk operation distinct from single-message modify.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -16664,13 +16975,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Modifies the labels on the specified messages.",
-      "summary_suggestion": "Batch modify labels on multiple messages",
-      "description_suggestion": "Modifies the labels on the specified messages. Requires authentication and message IDs and labels as input.",
-      "reasoning": "The current summary is missing. The description is clear but lacks context about authentication and input parameters.",
+      "summary_suggestion": "Modify labels on multiple messages",
+      "description_suggestion": "Modifies the labels on multiple specified messages in a single batch operation. Accepts a BatchModifyMessagesRequest containing a list of message IDs and labels to add and/or remove. Applies the same label changes to all specified messages. Does not return individual message objects; returns an empty response body on success. Use for bulk label operations like marking multiple messages as read, applying labels to conversations, or organizing large message sets efficiently.",
+      "reasoning": "Missing summary and vague description. Added clarity about batch operation semantics (same changes applied to all messages), input format (BatchModifyMessagesRequest with message IDs and label operations), and output (empty response). Helps AI agents understand this is a bulk operation distinct from single-message modify.",
       "batch_index": 2
     }
   },
@@ -16685,7 +16997,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gmail.users.settings.updateImap' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Original summary is missing. Added context about the required authentication, request body, and potential variant selection for better AI agent understanding.",
+    "message": "Operation 'gmail.users.settings.updateImap' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description is too terse and lacks context about what IMAP settings control, authentication scope, expected input/output, and return value. Added clarity about authenticated user scope, input/output schemas, and return value for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -16701,13 +17013,13 @@
       "issues_found": [
         "vague_summary",
         "missing_context",
-        "missing_side_effects"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Updates IMAP settings.",
-      "summary_suggestion": "Update IMAP settings for a user",
-      "description_suggestion": "Updates the IMAP settings for a specified user. Requires authentication. The request body should include the updated IMAP settings. Returns the updated IMAP settings object. If the requested settings are not supported, Gmail may choose a close variant and save that instead.",
-      "reasoning": "Original summary is missing. Added context about the required authentication, request body, and potential variant selection for better AI agent understanding.",
+      "summary_suggestion": "Update IMAP settings for authenticated user",
+      "description_suggestion": "Updates IMAP settings for the authenticated user's mailbox. Accepts an ImapSettings object with configuration parameters. Returns the updated ImapSettings object reflecting the changes applied to the user's account.",
+      "reasoning": "Missing summary entirely. Description is too terse and lacks context about what IMAP settings control, authentication scope, expected input/output, and return value. Added clarity about authenticated user scope, input/output schemas, and return value for better AI agent understanding.",
       "batch_index": 5
     }
   },
@@ -16722,7 +17034,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gmail.users.settings.getPop' has semantic quality issues: vague_summary, missing_context. Original summary is missing. Added context about the required authentication for better AI agent understanding.",
+    "message": "Operation 'gmail.users.settings.getPop' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description lacks context about authentication scope and return value. Added clarity about authenticated user scope and explicit mention of PopSettings return object for AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -16737,13 +17049,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets POP settings.",
-      "summary_suggestion": "Get POP settings for a user",
-      "description_suggestion": "Retrieves the current POP settings for a specified user. Requires authentication. Returns the current POP settings object.",
-      "reasoning": "Original summary is missing. Added context about the required authentication for better AI agent understanding.",
+      "summary_suggestion": "Retrieve POP settings for authenticated user",
+      "description_suggestion": "Retrieves POP settings for the authenticated user's mailbox. Returns a PopSettings object containing the current POP configuration for the user's account.",
+      "reasoning": "Missing summary entirely. Description lacks context about authentication scope and return value. Added clarity about authenticated user scope and explicit mention of PopSettings return object for AI agent interpretability.",
       "batch_index": 5
     }
   },
@@ -16758,7 +17071,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gmail.users.settings.updatePop' has semantic quality issues: vague_summary, missing_side_effects. Original summary is missing. Added context about the required authentication and potential variant selection for better AI agent understanding.",
+    "message": "Operation 'gmail.users.settings.updatePop' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description is too terse and lacks context about authentication scope, expected input, and return value. Added clarity about authenticated user scope, input/output schemas, and return value for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -16773,13 +17086,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Updates POP settings.",
-      "summary_suggestion": "Update POP settings for a user",
-      "description_suggestion": "Updates the POP settings for a specified user. Requires authentication. The request body should include the updated POP settings. Returns the updated POP settings object. If the requested settings are not supported, Gmail may choose a close variant and save that instead.",
-      "reasoning": "Original summary is missing. Added context about the required authentication and potential variant selection for better AI agent understanding.",
+      "summary_suggestion": "Update POP settings for authenticated user",
+      "description_suggestion": "Updates POP settings for the authenticated user's mailbox. Accepts a PopSettings object with configuration parameters. Returns the updated PopSettings object reflecting the changes applied to the user's account.",
+      "reasoning": "Missing summary entirely. Description is too terse and lacks context about authentication scope, expected input, and return value. Added clarity about authenticated user scope, input/output schemas, and return value for better AI agent understanding.",
       "batch_index": 5
     }
   },
@@ -16794,7 +17108,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gmail.users.settings.getVacation' has semantic quality issues: vague_summary, missing_context. Original summary is missing. Added context about the required authentication for better AI agent understanding.",
+    "message": "Operation 'gmail.users.settings.getVacation' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description lacks context about authentication scope and return value details. Added clarity about authenticated user scope, explicit mention of VacationSettings return object, and key configuration elements for AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -16809,13 +17123,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets vacation responder settings.",
-      "summary_suggestion": "Get vacation responder settings for a user",
-      "description_suggestion": "Retrieves the current vacation responder settings for a specified user. Requires authentication. Returns the current vacation responder settings object.",
-      "reasoning": "Original summary is missing. Added context about the required authentication for better AI agent understanding.",
+      "summary_suggestion": "Retrieve vacation responder settings",
+      "description_suggestion": "Retrieves vacation auto-reply settings for the authenticated user's mailbox. Returns a VacationSettings object containing the current vacation responder configuration, including enabled status, message content, and date ranges.",
+      "reasoning": "Missing summary entirely. Description lacks context about authentication scope and return value details. Added clarity about authenticated user scope, explicit mention of VacationSettings return object, and key configuration elements for AI agent interpretability.",
       "batch_index": 5
     }
   },
@@ -16830,7 +17145,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gmail.users.settings.updateVacation' has semantic quality issues: vague_summary, missing_side_effects. Original summary is missing. Added context about the required authentication and potential variant selection for better AI agent understanding.",
+    "message": "Operation 'gmail.users.settings.updateVacation' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description lacks context about authentication scope, expected input details, and return value. Added clarity about authenticated user scope, input schema details, and explicit return value for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -16845,13 +17160,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Updates vacation responder settings.",
-      "summary_suggestion": "Update vacation responder settings for a user",
-      "description_suggestion": "Updates the vacation responder settings for a specified user. Requires authentication. The request body should include the updated vacation responder settings. Returns the updated vacation responder settings object. If the requested settings are not supported, Gmail may choose a close variant and save that instead.",
-      "reasoning": "Original summary is missing. Added context about the required authentication and potential variant selection for better AI agent understanding.",
+      "summary_suggestion": "Update vacation responder settings",
+      "description_suggestion": "Updates vacation auto-reply settings for the authenticated user's mailbox. Accepts a VacationSettings object with configuration parameters including enabled status, message content, and date ranges. Returns the updated VacationSettings object reflecting the changes applied.",
+      "reasoning": "Missing summary entirely. Description lacks context about authentication scope, expected input details, and return value. Added clarity about authenticated user scope, input schema details, and explicit return value for better AI agent understanding.",
       "batch_index": 5
     }
   },
@@ -16866,7 +17182,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gmail.users.settings.getLanguage' has semantic quality issues: vague_summary, missing_context. Original summary is missing. Added context about the required authentication for better AI agent understanding.",
+    "message": "Operation 'gmail.users.settings.getLanguage' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description lacks context about authentication scope and return value. Added clarity about authenticated user scope, explicit mention of displayLanguage field, and return object type for AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -16881,14 +17197,1506 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets language settings.",
-      "summary_suggestion": "Get language settings for a user",
-      "description_suggestion": "Retrieves the current language settings for a specified user. Requires authentication. Returns the current language settings object.",
-      "reasoning": "Original summary is missing. Added context about the required authentication for better AI agent understanding.",
+      "summary_suggestion": "Retrieve language settings for user",
+      "description_suggestion": "Retrieves the display language setting for the authenticated user's mailbox. Returns a LanguageSettings object containing the displayLanguage currently configured for the user's Gmail interface.",
+      "reasoning": "Missing summary entirely. Description lacks context about authentication scope and return value. Added clarity about authenticated user scope, explicit mention of displayLanguage field, and return object type for AI agent interpretability.",
       "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.updateLanguage' has semantic quality issues: vague_summary, missing_input_details. Missing summary entirely. Description is good but could be more structured for AI agent clarity. Added concise summary and reorganized description to clearly separate input expectations, output behavior, and the important caveat about language variant substitution upfront for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.updateLanguage",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates language settings. If successful, the return object contains the `displayLanguage` that was saved for the user, which may differ from the value passed into the request. This is because the requested `displayLanguage` may not be directly supported by Gmail but have a close variant that is, and so the variant may be chosen and saved instead.",
+      "summary_suggestion": "Update display language settings for user",
+      "description_suggestion": "Updates the display language setting for the authenticated user's mailbox. Accepts a LanguageSettings object with the desired displayLanguage. Returns the updated LanguageSettings object containing the displayLanguage that was actually saved, which may differ from the requested value if Gmail substitutes a supported variant. This substitution occurs when the requested language is not directly supported but a close variant is available.",
+      "reasoning": "Missing summary entirely. Description is good but could be more structured for AI agent clarity. Added concise summary and reorganized description to clearly separate input expectations, output behavior, and the important caveat about language variant substitution upfront for better AI agent decision-making.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.messages.attachments.get' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description is too minimal and lacks context about required parameters, return value, and use case. Added parameter requirements, return information, and practical context for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.messages.attachments.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the specified message attachment.",
+      "summary_suggestion": "Retrieve a message attachment by ID",
+      "description_suggestion": "Retrieves the specified attachment from a message. Requires the user ID, message ID, and attachment ID. Returns the attachment object containing the file data and metadata. This operation is useful for accessing email attachments without downloading the entire message.",
+      "reasoning": "Missing summary entirely. Description is too minimal and lacks context about required parameters, return value, and use case. Added parameter requirements, return information, and practical context for AI agent understanding.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.labels.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks input details (what Label properties are needed), output details (returns Label with ID), and important context (max 10,000 labels limit). Enhanced for AI agent clarity on what to provide and expect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.labels.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new label.",
+      "summary_suggestion": "Create a new label in user's mailbox",
+      "description_suggestion": "Creates a new label in the authenticated user's mailbox. Accepts a Label object with properties such as name, label list visibility, and message list visibility. Returns the created Label object with an assigned ID. Labels can be used to categorize and organize messages and threads. Maximum of 10,000 labels per mailbox.",
+      "reasoning": "Missing summary. Description lacks input details (what Label properties are needed), output details (returns Label with ID), and important context (max 10,000 labels limit). Enhanced for AI agent clarity on what to provide and expect.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.labels.delete' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is good but lacks clarity on parameters required and response behavior. Added parameter requirements and explicit note about no response body to help AI agents understand the complete operation flow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.labels.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Immediately and permanently deletes the specified label and removes it from any messages and threads that it is applied to.",
+      "summary_suggestion": "Permanently delete a label",
+      "description_suggestion": "Permanently and immediately deletes the specified label from the user's mailbox. The label is removed from all messages and threads it was applied to. This action cannot be undone. Requires the user ID and label ID as parameters. No response body is returned on successful deletion.",
+      "reasoning": "Missing summary. Description is good but lacks clarity on parameters required and response behavior. Added parameter requirements and explicit note about no response body to help AI agents understand the complete operation flow.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.labels.get' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is minimal and lacks parameter context and return details. Enhanced to clarify required inputs, what is returned, and practical use case for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.labels.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the specified label.",
+      "summary_suggestion": "Retrieve a label by ID",
+      "description_suggestion": "Retrieves the specified label from the user's mailbox. Requires the user ID and label ID as parameters. Returns the Label object containing properties such as name, ID, message list visibility, and label list visibility. Useful for retrieving label configuration and metadata.",
+      "reasoning": "Missing summary. Description is minimal and lacks parameter context and return details. Enhanced to clarify required inputs, what is returned, and practical use case for AI agents.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.labels.update' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks input details (what Label properties can be updated), output details (returns updated Label), and important context (full replacement semantics vs. partial update). Added clarity on PUT semantics for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.labels.update",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates the specified label.",
+      "summary_suggestion": "Update label properties",
+      "description_suggestion": "Updates the specified label with new values. Requires the user ID and label ID. Accepts a complete Label object with updated properties such as name, message list visibility, and label list visibility. Returns the updated Label object. This is a full replacement operation - all label properties must be provided.",
+      "reasoning": "Missing summary. Description lacks input details (what Label properties can be updated), output details (returns updated Label), and important context (full replacement semantics vs. partial update). Added clarity on PUT semantics for AI agent understanding.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.labels.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_context. Missing summary. Description is too vague and lacks critical context distinguishing PATCH from PUT. Missing input details (partial update semantics), output details (returns updated Label), and important context about which properties can be updated. Enhanced to clarify PATCH semantics and help AI agents choose between PATCH and PUT operations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.labels.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Patch the specified label.",
+      "summary_suggestion": "Partially update label properties",
+      "description_suggestion": "Partially updates the specified label with provided values. Requires the user ID and label ID. Accepts a Label object with only the properties to be updated (e.g., name, message list visibility). Omitted properties retain their current values. Returns the updated Label object. Use this for selective updates instead of full replacement.",
+      "reasoning": "Missing summary. Description is too vague and lacks critical context distinguishing PATCH from PUT. Missing input details (partial update semantics), output details (returns updated Label), and important context about which properties can be updated. Enhanced to clarify PATCH semantics and help AI agents choose between PATCH and PUT operations.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.filters.delete' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description lacks context about the irreversible nature of the action and what it means for message processing. Added clarification about permanence and that the filter will stop applying to messages, which helps AI agents understand the consequences.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.filters.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Immediately and permanently deletes the specified filter.",
+      "summary_suggestion": "Delete a Gmail filter permanently",
+      "description_suggestion": "Immediately and permanently deletes the specified filter. This action cannot be undone. The filter will no longer apply to incoming messages. Requires the filter ID and user ID.",
+      "reasoning": "Missing summary entirely. Description lacks context about the irreversible nature of the action and what it means for message processing. Added clarification about permanence and that the filter will stop applying to messages, which helps AI agents understand the consequences.",
+      "batch_index": 10
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.forwardingAddresses.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks information about what is returned and the structure of the response. Added details about return type and verification status to help AI agents understand the response structure.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.forwardingAddresses.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the forwarding addresses for the specified account.",
+      "summary_suggestion": "List all forwarding addresses for account",
+      "description_suggestion": "Lists all forwarding addresses configured for the specified Gmail account. Returns a collection of ForwardingAddress objects, each containing the forwarding email address and its verification status. Requires the user ID.",
+      "reasoning": "Missing summary. Description lacks information about what is returned and the structure of the response. Added details about return type and verification status to help AI agents understand the response structure.",
+      "batch_index": 10
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.forwardingAddresses.create' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description is detailed but lacks clarity about input requirements (ForwardingAddress schema) and return value. Reorganized for better flow and explicitly stated input/output to improve AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.forwardingAddresses.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a forwarding address. If ownership verification is required, a message will be sent to the recipient and the resource's verification status will be set to `pending`; otherwise, the resource will be created with verification status set to `accepted`. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "summary_suggestion": "Create a new forwarding address",
+      "description_suggestion": "Creates a new forwarding address for the specified Gmail account. Accepts a ForwardingAddress object containing the forwarding email address. If ownership verification is required, a verification message will be sent to the recipient and the resource's verification status will be set to `pending`; otherwise, the resource will be created with verification status set to `accepted`. Returns the created ForwardingAddress object. Requires service account with domain-wide delegation authority.",
+      "reasoning": "Missing summary. Description is detailed but lacks clarity about input requirements (ForwardingAddress schema) and return value. Reorganized for better flow and explicitly stated input/output to improve AI agent interpretability.",
+      "batch_index": 10
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.forwardingAddresses.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is too brief and lacks information about return type and parameters. Added details about what is returned and required parameters for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.forwardingAddresses.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the specified forwarding address.",
+      "summary_suggestion": "Retrieve a specific forwarding address",
+      "description_suggestion": "Retrieves the details of a specific forwarding address for the specified Gmail account. Returns a ForwardingAddress object containing the forwarding email address and its verification status. Requires the user ID and forwarding email address.",
+      "reasoning": "Missing summary. Description is too brief and lacks information about return type and parameters. Added details about what is returned and required parameters for better AI agent understanding.",
+      "batch_index": 10
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.forwardingAddresses.delete' has semantic quality issues: vague_summary, missing_context. Missing summary. Description lacks clarity about the irreversible nature and consequences of deletion. Added context about permanence and that the address will no longer be available, helping AI agents understand the side effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.forwardingAddresses.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes the specified forwarding address and revokes any verification that may have been required. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "summary_suggestion": "Delete a forwarding address",
+      "description_suggestion": "Deletes the specified forwarding address and revokes any verification status associated with it. This action cannot be undone. The forwarding address will no longer be available for use. Requires service account with domain-wide delegation authority and the user ID and forwarding email address.",
+      "reasoning": "Missing summary. Description lacks clarity about the irreversible nature and consequences of deletion. Added context about permanence and that the address will no longer be available, helping AI agents understand the side effects.",
+      "batch_index": 10
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.delegates.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks information about return type and what delegates can do. Added context about delegate permissions and return structure to help AI agents understand the operation's scope and implications.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.delegates.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the delegates for the specified account. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "summary_suggestion": "List all delegates for account",
+      "description_suggestion": "Lists all delegates for the specified Gmail account. Delegates can read, send, and delete messages, as well as view and add contacts on behalf of the account owner. Returns a collection of Delegate objects, each containing the delegate's email address and verification status. Requires service account with domain-wide delegation authority.",
+      "reasoning": "Missing summary. Description lacks information about return type and what delegates can do. Added context about delegate permissions and return structure to help AI agents understand the operation's scope and implications.",
+      "batch_index": 10
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.delegates.create' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description is very long and somewhat disorganized. Reorganized for clarity, explicitly stated input requirements (Delegate schema), and highlighted key constraints and side effects (organizational membership, limits, email address format, activation delay) for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.delegates.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Adds a delegate with its verification status set directly to `accepted`, without sending any verification email. The delegate user must be a member of the same Google Workspace organization as the delegator user. Gmail imposes limitations on the number of delegates and delegators each user in a Google Workspace organization can have. These limits depend on your organization, but in general each user can have up to 25 delegates and up to 10 delegators. Note that a delegate user must be referred to by their primary email address, and not an email alias. Also note that when a new delegate is created, there may be up to a one minute delay before the new delegate is available for use. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "summary_suggestion": "Add a delegate to account",
+      "description_suggestion": "Adds a delegate to the specified Gmail account with verification status set directly to `accepted`, without sending verification email. Accepts a Delegate object containing the delegate's primary email address. The delegate must be a member of the same Google Workspace organization. Delegates can read, send, and delete messages, and view/add contacts. Limits: up to 25 delegates and 10 delegators per user. Use primary email address, not aliases. New delegates may take up to one minute to become available. Returns the created Delegate object. Requires service account with domain-wide delegation authority.",
+      "reasoning": "Missing summary. Description is very long and somewhat disorganized. Reorganized for clarity, explicitly stated input requirements (Delegate schema), and highlighted key constraints and side effects (organizational membership, limits, email address format, activation delay) for better AI agent decision-making.",
+      "batch_index": 10
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.threads.trash' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity about return value and reversibility, which are important for AI agents to understand the operation's effects and alternatives.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.threads.trash",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Moves the specified thread to the trash. Any messages that belong to the thread are also moved to the trash.",
+      "summary_suggestion": "Move thread to trash",
+      "description_suggestion": "Moves the specified thread to the trash folder. All messages belonging to the thread are also moved to the trash. Returns the modified thread object. This operation can be reversed using the untrash operation.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about return value and reversibility, which are important for AI agents to understand the operation's effects and alternatives.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.threads.untrash' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description should clarify that this restores the thread to the mailbox and specify the return value for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.threads.untrash",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Removes the specified thread from the trash. Any messages that belong to the thread are also removed from the trash.",
+      "summary_suggestion": "Restore thread from trash",
+      "description_suggestion": "Removes the specified thread from the trash folder, restoring it to the mailbox. All messages belonging to the thread are also removed from the trash. Returns the modified thread object.",
+      "reasoning": "Missing summary. Description should clarify that this restores the thread to the mailbox and specify the return value for AI agent understanding.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.threads.delete' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description needs clarification about return value and should emphasize the destructive nature more clearly for AI agents to avoid accidental use.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.threads.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Immediately and permanently deletes the specified thread. Any messages that belong to the thread are also deleted. This operation cannot be undone. Prefer `threads.trash` instead.",
+      "summary_suggestion": "Permanently delete thread",
+      "description_suggestion": "Immediately and permanently deletes the specified thread and all messages it contains. This operation cannot be undone and should only be used when permanent deletion is required. The trash operation (threads.trash) is recommended as a safer alternative. Returns an empty response on success.",
+      "reasoning": "Missing summary. Description needs clarification about return value and should emphasize the destructive nature more clearly for AI agents to avoid accidental use.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.threads.get' has semantic quality issues: vague_summary, vague_description, missing_output_details. Missing summary and description is too vague. Should clarify what data is returned (messages, metadata, labels) to help AI agents understand the operation's output.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.threads.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the specified thread.",
+      "summary_suggestion": "Retrieve thread details",
+      "description_suggestion": "Retrieves the specified thread by ID, including all messages and metadata associated with the thread. Returns a Thread object containing the thread ID, messages, and labels applied to the thread.",
+      "reasoning": "Missing summary and description is too vague. Should clarify what data is returned (messages, metadata, labels) to help AI agents understand the operation's output.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.threads.list' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Missing summary and vague description. Should explain filtering capabilities, pagination support, and return format to help AI agents understand how to use parameters and handle results.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.threads.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the threads in the user's mailbox.",
+      "summary_suggestion": "List mailbox threads",
+      "description_suggestion": "Lists all threads in the user's mailbox with support for filtering and pagination. Supports filtering by labels, search queries, and other criteria through query parameters. Returns a paginated list of Thread objects. Use the pageToken parameter to retrieve subsequent pages.",
+      "reasoning": "Missing summary and vague description. Should explain filtering capabilities, pagination support, and return format to help AI agents understand how to use parameters and handle results.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.threads.modify' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description should clarify the request format (ModifyThreadRequest structure), what parameters are expected, and what is returned for better AI agent usability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.threads.modify",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Modifies the labels applied to the thread. This applies to all messages in the thread.",
+      "summary_suggestion": "Modify thread labels",
+      "description_suggestion": "Modifies the labels applied to the specified thread. Changes are applied to all messages in the thread. Accepts a ModifyThreadRequest containing addLabelIds and removeLabelIds arrays. Returns the modified Thread object with updated label assignments.",
+      "reasoning": "Missing summary. Description should clarify the request format (ModifyThreadRequest structure), what parameters are expected, and what is returned for better AI agent usability.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.getImap' has semantic quality issues: vague_summary, vague_description, missing_output_details. Missing summary and description is too vague. Should specify what ImapSettings object contains and what configuration options are available to help AI agents understand the returned data.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.getImap",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets IMAP settings.",
+      "summary_suggestion": "Retrieve IMAP settings",
+      "description_suggestion": "Retrieves the IMAP settings for the authenticated user's account. Returns an ImapSettings object containing IMAP configuration such as enableImap, autoExpunge, expungeBehavior, and maxFolderSize settings.",
+      "reasoning": "Missing summary and description is too vague. Should specify what ImapSettings object contains and what configuration options are available to help AI agents understand the returned data.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.getAutoForwarding' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity about what is returned and authentication requirements. Added summary and expanded description to specify return value and authentication context for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.getAutoForwarding",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the auto-forwarding setting for the specified account.",
+      "summary_suggestion": "Retrieve auto-forwarding settings for account",
+      "description_suggestion": "Retrieves the auto-forwarding configuration for the specified user account. Returns the AutoForwarding object containing the forwarding address and enabled status. Requires authentication.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about what is returned and authentication requirements. Added summary and expanded description to specify return value and authentication context for AI agent clarity.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.updateAutoForwarding' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description has good context about requirements and authorization but lacks clarity about return value. Added summary and clarified return value for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.updateAutoForwarding",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates the auto-forwarding setting for the specified account. A verified forwarding address must be specified when auto-forwarding is enabled. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "summary_suggestion": "Update auto-forwarding settings for account",
+      "description_suggestion": "Updates the auto-forwarding configuration for the specified user account. Requires a verified forwarding address when enabling auto-forwarding. Returns the updated AutoForwarding object. Only available to service account clients with domain-wide delegation authority.",
+      "reasoning": "Missing summary. Description has good context about requirements and authorization but lacks clarity about return value. Added summary and clarified return value for better AI agent understanding.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.sendAs.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description explains what is included but lacks clarity about return format and authentication. Added summary and specified return type (collection of SendAs objects) for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.sendAs.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the send-as aliases for the specified account. The result includes the primary send-as address associated with the account as well as any custom \"from\" aliases.",
+      "summary_suggestion": "List send-as aliases for account",
+      "description_suggestion": "Lists all send-as aliases for the specified user account, including the primary send-as address and any custom \"from\" aliases. Returns a collection of SendAs objects. Requires authentication.",
+      "reasoning": "Missing summary. Description explains what is included but lacks clarity about return format and authentication. Added summary and specified return type (collection of SendAs objects) for AI agent clarity.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.sendAs.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is comprehensive but dense and lacks clarity about inputs and outputs. Added summary and restructured description to clearly separate inputs (SendAs object), processing steps, and outputs (created SendAs object) for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.sendAs.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a custom \"from\" send-as alias. If an SMTP MSA is specified, Gmail will attempt to connect to the SMTP service to validate the configuration before creating the alias. If ownership verification is required for the alias, a message will be sent to the email address and the resource's verification status will be set to `pending`; otherwise, the resource will be created with verification status set to `accepted`. If a signature is provided, Gmail will sanitize the HTML before saving it with the alias. This method is only available to service account clients that have been delegated domain-wide authority.",
+      "summary_suggestion": "Create custom send-as alias",
+      "description_suggestion": "Creates a custom \"from\" send-as alias for the specified account. Accepts a SendAs object with email address, display name, and optional SMTP configuration and signature. If SMTP MSA is provided, Gmail validates the connection. Ownership verification may be required, setting status to `pending` or `accepted`. HTML signatures are sanitized before saving. Returns the created SendAs object. Only available to service account clients with domain-wide delegation authority.",
+      "reasoning": "Missing summary. Description is comprehensive but dense and lacks clarity about inputs and outputs. Added summary and restructured description to clearly separate inputs (SendAs object), processing steps, and outputs (created SendAs object) for better AI agent interpretability.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.sendAs.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description mentions error case but lacks clarity about return value and authentication. Added summary and clarified return type (SendAs object) and authentication requirement for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.sendAs.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the specified send-as alias. Fails with an HTTP 404 error if the specified address is not a member of the collection.",
+      "summary_suggestion": "Retrieve specific send-as alias",
+      "description_suggestion": "Retrieves the specified send-as alias by email address. Returns the SendAs object containing the alias configuration. Returns HTTP 404 if the specified address is not found in the collection. Requires authentication.",
+      "reasoning": "Missing summary. Description mentions error case but lacks clarity about return value and authentication. Added summary and clarified return type (SendAs object) and authentication requirement for AI agent clarity.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.sendAs.update' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description has authorization context but lacks clarity about inputs and outputs. Added summary and clarified that it accepts SendAs object, specifies return value, and consolidates authorization requirements for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.sendAs.update",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates a send-as alias. If a signature is provided, Gmail will sanitize the HTML before saving it with the alias. Addresses other than the primary address for the account can only be updated by service account clients that have been delegated domain-wide authority.",
+      "summary_suggestion": "Update send-as alias configuration",
+      "description_suggestion": "Updates the specified send-as alias with new configuration. Accepts a SendAs object with updated fields. HTML signatures are sanitized before saving. Non-primary addresses require service account clients with domain-wide delegation authority. Returns the updated SendAs object. Requires authentication.",
+      "reasoning": "Missing summary. Description has authorization context but lacks clarity about inputs and outputs. Added summary and clarified that it accepts SendAs object, specifies return value, and consolidates authorization requirements for better AI agent understanding.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.sendAs.patch' has semantic quality issues: vague_summary, vague_description, missing_output_details, not_actionable. Missing summary and extremely vague description. Original description provides no actionable information about inputs, outputs, or behavior. Added summary and comprehensive description explaining partial update semantics, input/output types, and authentication for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.sendAs.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details",
+        "not_actionable"
+      ],
+      "current_summary": "",
+      "current_description": "Patch the specified send-as alias.",
+      "summary_suggestion": "Partially update send-as alias",
+      "description_suggestion": "Partially updates the specified send-as alias with provided fields. Accepts a SendAs object containing only the fields to be modified. HTML signatures are sanitized before saving. Returns the updated SendAs object. Supports partial updates - only provided fields will be modified. Requires authentication.",
+      "reasoning": "Missing summary and extremely vague description. Original description provides no actionable information about inputs, outputs, or behavior. Added summary and comprehensive description explaining partial update semantics, input/output types, and authentication for AI agent clarity.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.drafts.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description is too minimal and doesn't explain pagination support, filtering capabilities, or return structure. AI agents need to understand available parameters and response format to use this effectively.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.drafts.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the drafts in the user's mailbox.",
+      "summary_suggestion": "List all draft messages in mailbox",
+      "description_suggestion": "Lists all draft messages in the authenticated user's mailbox. Supports pagination through optional parameters like maxResults and pageToken. Returns a collection of Draft objects with metadata. Results can be filtered by query parameters to narrow the list.",
+      "reasoning": "Missing summary entirely. Description is too minimal and doesn't explain pagination support, filtering capabilities, or return structure. AI agents need to understand available parameters and response format to use this effectively.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.drafts.send' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about what happens to the draft after sending, the required inputs (draft ID), and what is returned. AI agents need to understand the state change and response format.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.drafts.send",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Sends the specified, existing draft to the recipients in the `To`, `Cc`, and `Bcc` headers.",
+      "summary_suggestion": "Send draft message to recipients",
+      "description_suggestion": "Sends the specified draft message to all recipients listed in the To, Cc, and Bcc headers. Requires the draft ID and authenticated user context. The draft is converted to a sent message and removed from drafts. Returns the sent Message object with delivery confirmation.",
+      "reasoning": "Missing summary. Description lacks clarity about what happens to the draft after sending, the required inputs (draft ID), and what is returned. AI agents need to understand the state change and response format.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.history.list' has semantic quality issues: vague_summary, missing_input_details, missing_context. Missing summary. Description doesn't explain what types of changes are tracked, the purpose of historyId, or how to use startHistoryId for incremental sync. AI agents need context about use cases and filtering capabilities.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.history.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the history of all changes to the given mailbox. History results are returned in chronological order (increasing `historyId`).",
+      "summary_suggestion": "List mailbox change history",
+      "description_suggestion": "Lists the history of all changes to the authenticated user's mailbox, including message additions, deletions, label changes, and thread modifications. Results are returned in chronological order by historyId. Supports pagination and filtering by startHistoryId to retrieve changes since a specific point. Useful for synchronizing mailbox state with external systems.",
+      "reasoning": "Missing summary. Description doesn't explain what types of changes are tracked, the purpose of historyId, or how to use startHistoryId for incremental sync. AI agents need context about use cases and filtering capabilities.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.messages.trash' has semantic quality issues: vague_summary, inconsistent_terminology, missing_output_details. Summary is too generic. Description uses inconsistent terminology ('Delete, remove, discard') that conflicts with the actual operation (soft delete to trash). Clarified that this is reversible and added return value information for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.messages.trash",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "inconsistent_terminology",
+        "missing_output_details"
+      ],
+      "current_summary": "Trash email",
+      "current_description": "Moves the specified message to the trash. Delete, remove, discard, or move an email to trash folder. Soft delete that can be undone with untrash operation.",
+      "summary_suggestion": "Move message to trash",
+      "description_suggestion": "Moves the specified message to the trash folder. This is a soft delete operation that can be reversed using the untrash operation. The message remains in the mailbox but is marked as trashed and hidden from normal views. Returns the updated Message object reflecting the trash state.",
+      "reasoning": "Summary is too generic. Description uses inconsistent terminology ('Delete, remove, discard') that conflicts with the actual operation (soft delete to trash). Clarified that this is reversible and added return value information for AI agent clarity.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.messages.untrash' has semantic quality issues: vague_summary, missing_output_details. Summary is vague ('Restore email' could mean many things). Description lacks clarity about return value and doesn't explicitly state this reverses the trash operation. Added return information and clearer state transition explanation for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.messages.untrash",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "Restore email",
+      "current_description": "Removes the specified message from the trash. Restore, recover, undelete, or retrieve an email from trash folder back to the inbox or original location.",
+      "summary_suggestion": "Restore message from trash",
+      "description_suggestion": "Removes the specified message from the trash folder, restoring it to its previous location or inbox. Reverses a prior trash operation. The message is no longer marked as trashed and returns to normal mailbox visibility. Returns the updated Message object with restored state.",
+      "reasoning": "Summary is vague ('Restore email' could mean many things). Description lacks clarity about return value and doesn't explicitly state this reverses the trash operation. Added return information and clearer state transition explanation for AI agents.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.messages.delete' has semantic quality issues: inconsistent_terminology, missing_output_details, missing_side_effects. Description uses redundant terminology ('Permanently remove, purge, or erase') and lacks clarity about the response. Added explicit distinction from trash operation and clarified that response is empty. Improved consistency with API terminology.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.messages.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "inconsistent_terminology",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete email permanently",
+      "current_description": "Immediately and permanently deletes the specified message. This operation cannot be undone. Prefer `messages.trash` instead. Permanently remove, purge, or erase an email with no recovery option.",
+      "summary_suggestion": "Permanently delete message",
+      "description_suggestion": "Immediately and permanently deletes the specified message from the mailbox. This operation cannot be undone and the message cannot be recovered. This is a hard delete, distinct from the trash operation. Use messages.trash for reversible deletion. Returns an empty response on success with no recovery option.",
+      "reasoning": "Description uses redundant terminology ('Permanently remove, purge, or erase') and lacks clarity about the response. Added explicit distinction from trash operation and clarified that response is empty. Improved consistency with API terminology.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.cse.keypairs.disable' has semantic quality issues: vague_summary, missing_input_details. Missing summary entirely. Description is verbose with repetitive authorization details. Improved summary provides clear action. Refined description focuses on operation effects, related operations, and consolidated authorization requirements for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.cse.keypairs.disable",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Turns off a client-side encryption key pair. The authenticated user can no longer use the key pair to decrypt incoming CSE message texts or sign outgoing CSE mail. To regain access, use the EnableCseKeyPair to turn on the key pair. After 30 days, you can permanently delete the key pair by using the ObliterateCseKeyPair method. For administrators managing identities and keypairs for users in their organization, requests require authorization with a [service account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount) that has [domain-wide delegation authority](https://developers.google.com/identity/protocols/OAuth2ServiceAccount#delegatingauthority) to impersonate users with the `https://www.googleapis.com/auth/gmail.settings.basic` scope. For users managing their own identities and keypairs, requests require [hardware key encryption](https://support.google.com/a/answer/14153163) turned on and configured.",
+      "summary_suggestion": "Disable a client-side encryption key pair",
+      "description_suggestion": "Deactivates a client-side encryption (CSE) key pair for the specified user. Once disabled, the key pair cannot be used to decrypt incoming CSE messages or sign outgoing CSE mail. The key pair can be re-enabled using the EnableCseKeyPair operation, or permanently deleted after 30 days using ObliterateCseKeyPair. Requires either service account authorization with domain-wide delegation for administrators, or hardware key encryption enabled for individual users.",
+      "reasoning": "Missing summary entirely. Description is verbose with repetitive authorization details. Improved summary provides clear action. Refined description focuses on operation effects, related operations, and consolidated authorization requirements for better AI agent understanding.",
+      "batch_index": 9
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.cse.keypairs.enable' has semantic quality issues: vague_summary. Missing summary. Description is clear about the operation's purpose and effects. Added concise, action-oriented summary for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.cse.keypairs.enable",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Turns on a client-side encryption key pair that was turned off. The key pair becomes active again for any associated client-side encryption identities. For administrators managing identities and keypairs for users in their organization, requests require authorization with a [service account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount) that has [domain-wide delegation authority](https://developers.google.com/identity/protocols/OAuth2ServiceAccount#delegatingauthority) to impersonate users with the `https://www.googleapis.com/auth/gmail.settings.basic` scope. For users managing their own identities and keypairs, requests require [hardware key encryption](https://support.google.com/a/answer/14153163) turned on and configured.",
+      "summary_suggestion": "Enable a client-side encryption key pair",
+      "reasoning": "Missing summary. Description is clear about the operation's purpose and effects. Added concise, action-oriented summary for AI agent clarity.",
+      "batch_index": 9
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.cse.keypairs.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks details about what is returned (key pair properties). Added summary and enhanced description to specify return value details for better AI agent understanding of operation output.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.cse.keypairs.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves an existing client-side encryption key pair. For administrators managing identities and keypairs for users in their organization, requests require authorization with a [service account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount) that has [domain-wide delegation authority](https://developers.google.com/identity/protocols/OAuth2ServiceAccount#delegatingauthority) to impersonate users with the `https://www.googleapis.com/auth/gmail.settings.basic` scope. For users managing their own identities and keypairs, requests require [hardware key encryption](https://support.google.com/a/answer/14153163) turned on and configured.",
+      "summary_suggestion": "Retrieve a client-side encryption key pair",
+      "description_suggestion": "Retrieves the details of a specific client-side encryption (CSE) key pair for the authenticated user, including its public key, certificate chain, and metadata. Requires either service account authorization with domain-wide delegation for administrators, or hardware key encryption enabled for individual users.",
+      "reasoning": "Missing summary. Description lacks details about what is returned (key pair properties). Added summary and enhanced description to specify return value details for better AI agent understanding of operation output.",
+      "batch_index": 9
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.cse.keypairs.obliterate' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description is lengthy with repetitive authorization details. Added clear summary. Refined description to emphasize irreversibility and prerequisites, consolidating authorization requirements for improved AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.cse.keypairs.obliterate",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes a client-side encryption key pair permanently and immediately. You can only permanently delete key pairs that have been turned off for more than 30 days. To turn off a key pair, use the DisableCseKeyPair method. Gmail can't restore or decrypt any messages that were encrypted by an obliterated key. Authenticated users and Google Workspace administrators lose access to reading the encrypted messages. For administrators managing identities and keypairs for users in their organization, requests require authorization with a [service account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount) that has [domain-wide delegation authority](https://developers.google.com/identity/protocols/OAuth2ServiceAccount#delegatingauthority) to impersonate users with the `https://www.googleapis.com/auth/gmail.settings.basic` scope. For users managing their own identities and keypairs, requests require [hardware key encryption](https://support.google.com/a/answer/14153163) turned on and configured.",
+      "summary_suggestion": "Permanently delete a client-side encryption key pair",
+      "description_suggestion": "Permanently and immediately deletes a client-side encryption (CSE) key pair. The key pair must have been disabled for more than 30 days before obliteration. This operation is irreversible: all messages encrypted with the obliterated key become unreadable and cannot be recovered. Use DisableCseKeyPair to deactivate a key pair before obliteration. Requires either service account authorization with domain-wide delegation for administrators, or hardware key encryption enabled for individual users.",
+      "reasoning": "Missing summary. Description is lengthy with repetitive authorization details. Added clear summary. Refined description to emphasize irreversibility and prerequisites, consolidating authorization requirements for improved AI agent decision-making.",
+      "batch_index": 9
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.filters.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is too brief and lacks output details. Added summary and expanded description to clarify what is returned and the scope of filters (individual messages vs threads) for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.filters.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the message filters of a Gmail user.",
+      "summary_suggestion": "List all message filters for a user",
+      "description_suggestion": "Retrieves all message filters configured for the authenticated user's mailbox. Returns a collection of Filter objects, each defining criteria and actions for automatic message processing. Filters apply to individual messages rather than entire threads.",
+      "reasoning": "Missing summary. Description is too brief and lacks output details. Added summary and expanded description to clarify what is returned and the scope of filters (individual messages vs threads) for better AI agent understanding.",
+      "batch_index": 9
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.filters.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description mentions constraint but lacks clarity on what is created and returned. Added summary and enhanced description to explain filter purpose, the 1,000-filter limit context, and return value for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.filters.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a filter. Note: you can only create a maximum of 1,000 filters.",
+      "summary_suggestion": "Create a new message filter",
+      "description_suggestion": "Creates a new message filter for the authenticated user's mailbox. Filters automatically apply specified actions to messages matching defined criteria. A maximum of 1,000 filters can be created per user. Returns the newly created Filter object with its assigned identifier.",
+      "reasoning": "Missing summary. Description mentions constraint but lacks clarity on what is created and returned. Added summary and enhanced description to explain filter purpose, the 1,000-filter limit context, and return value for better AI agent understanding.",
+      "batch_index": 9
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmail.users.settings.filters.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is extremely vague with no details about inputs or outputs. Added summary and expanded description to clarify what is retrieved and what is returned for improved AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmail.users.settings.filters.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets a filter.",
+      "summary_suggestion": "Retrieve a specific message filter",
+      "description_suggestion": "Retrieves the details of a specific message filter by its identifier. Returns the Filter object containing the filter's criteria, actions, and configuration for the authenticated user's mailbox.",
+      "reasoning": "Missing summary. Description is extremely vague with no details about inputs or outputs. Added summary and expanded description to clarify what is retrieved and what is returned for improved AI agent interpretability.",
+      "batch_index": 9
     }
   },
   {
@@ -16902,7 +18710,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 79 operations analyzed, 27 quality issues found",
+    "message": "Semantic analysis completed: 79 operations analyzed, 76 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -16914,7 +18722,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 79,
-      "total_issues_found": 27,
+      "total_issues_found": 76,
       "batches_processed": 12
     }
   }

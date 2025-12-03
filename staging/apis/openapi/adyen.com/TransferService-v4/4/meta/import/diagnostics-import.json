@@ -3950,7 +3950,79 @@
         "character": 0
       }
     },
-    "message": "Operation 'get-grants' has semantic quality issues: vague_summary, inconsistent_terminology. The summary was vague and used inconsistent terminology. The term 'capital account' was replaced with 'grants' to align with the domain context.",
+    "message": "Operation 'get-transfers-id' has semantic quality issues: vague_description, missing_output_details, poor_ai_interpretability. Current description is too minimal and lacks context about what information is returned. AI agents need to understand what data they will receive and when this operation is useful. Enhanced description specifies the return value structure, use cases (status checking, reconciliation), and clarifies the operation's purpose in the transfer lifecycle.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "get-transfers-id",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Get a transfer",
+      "current_description": "Returns the details of a specified transfer.",
+      "description_suggestion": "Retrieves the complete details of a specified transfer by its unique identifier. Returns transfer information including amount, currency, source and destination accounts, status, and transaction history. Use this operation to check the current status of a transfer or retrieve transfer details for reconciliation and reporting purposes.",
+      "reasoning": "Current description is too minimal and lacks context about what information is returned. AI agents need to understand what data they will receive and when this operation is useful. Enhanced description specifies the return value structure, use cases (status checking, reconciliation), and clarifies the operation's purpose in the transfer lifecycle.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-transfers-transferId-returns' has semantic quality issues: vague_description, missing_context, missing_output_details. Current description is incomplete and lacks clarity about the operation's purpose and effects. Missing information about asynchronous processing, webhook notifications, and practical use cases. Enhanced description clarifies that this reverses a transfer, explains the mechanism (no new transferId), mentions webhook notification, and provides context about when to use this operation. This helps AI agents understand the operation's role in the transfer lifecycle and its side effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-transfers-transferId-returns",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Return a transfer",
+      "current_description": "Initiates the return of previously transferred funds without creating a new `transferId`.",
+      "description_suggestion": "Initiates the return of previously transferred funds to the source account without creating a new transfer identifier. This operation reverses a completed transfer and returns the funds to their original source. The return is processed asynchronously, and Adyen sends the outcome through webhooks. Use this operation to handle transfer reversals, refunds, or corrections for transfers that have already been executed.",
+      "reasoning": "Current description is incomplete and lacks clarity about the operation's purpose and effects. Missing information about asynchronous processing, webhook notifications, and practical use cases. Enhanced description clarifies that this reverses a transfer, explains the mechanism (no new transferId), mentions webhook notification, and provides context about when to use this operation. This helps AI agents understand the operation's role in the transfer lifecycle and its side effects.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'get-grants' has semantic quality issues: vague_summary, missing_context. The summary is misleading - it says 'Get a capital account' but the operation returns a list of grants, not a single account. The description lacks context about what grants are and their purpose in the Capital domain. Improved summary clarifies it retrieves multiple grants, and description adds context about grant offers and financial state for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3965,13 +4037,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "inconsistent_terminology"
+        "missing_context"
       ],
       "current_summary": "Get a capital account",
       "current_description": "Returns a list of grants with status and outstanding balances.",
-      "summary_suggestion": "Retrieve a list of grants",
-      "description_suggestion": "Returns a list of grants with their status and outstanding balances.",
-      "reasoning": "The summary was vague and used inconsistent terminology. The term 'capital account' was replaced with 'grants' to align with the domain context.",
+      "summary_suggestion": "Retrieve list of capital grants",
+      "description_suggestion": "Returns a list of capital grants available to the account holder, including their status and outstanding balances. This endpoint is used to view all grant offers and their current financial state.",
+      "reasoning": "The summary is misleading - it says 'Get a capital account' but the operation returns a list of grants, not a single account. The description lacks context about what grants are and their purpose in the Capital domain. Improved summary clarifies it retrieves multiple grants, and description adds context about grant offers and financial state for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -3986,7 +4058,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post-grants' has semantic quality issues: vague_description, missing_input_details. The description was vague and lacked details about the input required for the operation. Added information about the required input and the return value.",
+    "message": "Operation 'post-grants' has semantic quality issues: missing_context, missing_output_details. Summary is clear and actionable. Description lacks details about what is required (grant ID), what the operation returns (transfer reference), and the outcome (funds transfer initiation). Enhanced description provides input context and return value information for AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4000,13 +4072,13 @@
       "operation_id": "post-grants",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description",
-        "missing_input_details"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "Request a grant payout",
       "current_description": "Requests the payout of the selected grant offer.",
-      "description_suggestion": "Requests the payout of the selected grant offer. Requires the grant ID as input. Returns the status of the payout request.",
-      "reasoning": "The description was vague and lacked details about the input required for the operation. Added information about the required input and the return value.",
+      "description_suggestion": "Requests the payout of a selected capital grant offer. This initiates a transfer of the grant funds to the specified balance account. The request requires the grant ID and returns a transfer reference for tracking the payout status.",
+      "reasoning": "Summary is clear and actionable. Description lacks details about what is required (grant ID), what the operation returns (transfer reference), and the outcome (funds transfer initiation). Enhanced description provides input context and return value information for AI agent interpretability.",
       "batch_index": 0
     }
   },
@@ -4021,7 +4093,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get-grants-id' has semantic quality issues: vague_summary, inconsistent_terminology. The summary was vague and used inconsistent terminology. The term 'capital account' was replaced with 'grant' to align with the domain context.",
+    "message": "Operation 'get-grants-id' has semantic quality issues: vague_summary, missing_context. Summary uses 'grant reference details' which is vague - unclear if it refers to a reference number or grant details. Description incorrectly says 'capital account' when it should say 'capital grant'. Improved summary clarifies it retrieves grant details, and description specifies what information is returned (status, amount, terms, balance) for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4036,13 +4108,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "inconsistent_terminology"
+        "missing_context"
       ],
       "current_summary": "Get grant reference details",
       "current_description": "Returns the details of a capital account specified in the path.",
-      "summary_suggestion": "Retrieve grant details",
-      "description_suggestion": "Returns the details of the grant specified in the path.",
-      "reasoning": "The summary was vague and used inconsistent terminology. The term 'capital account' was replaced with 'grant' to align with the domain context.",
+      "summary_suggestion": "Retrieve capital grant details",
+      "description_suggestion": "Returns detailed information about a specific capital grant identified by its ID in the path. Includes grant status, amount, terms, and outstanding balance information.",
+      "reasoning": "Summary uses 'grant reference details' which is vague - unclear if it refers to a reference number or grant details. Description incorrectly says 'capital account' when it should say 'capital grant'. Improved summary clarifies it retrieves grant details, and description specifies what information is returned (status, amount, terms, balance) for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -4057,7 +4129,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get-transactions-id' has semantic quality issues: vague_description. The description was vague. Added details about what the operation returns and how it identifies the transaction.",
+    "message": "Operation 'get-transactions-id' has semantic quality issues: vague_summary, vague_description, missing_context. Summary is too generic - 'Get a transaction' doesn't indicate the ID parameter requirement. Description is extremely vague - just 'Returns a transaction' provides no context about what information is included. Improved summary specifies ID-based retrieval, and description details what transaction information is returned for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4071,49 +4143,15 @@
       "operation_id": "get-transactions-id",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_summary",
+        "vague_description",
+        "missing_context"
       ],
       "current_summary": "Get a transaction",
-      "current_description": "Returns a transaction.",
-      "summary_suggestion": "Get a specific transaction",
-      "description_suggestion": "Returns the details of a specific transaction identified by the transaction ID in the path.",
-      "reasoning": "The description was vague. Added details about what the operation returns and how it identifies the transaction.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'post-transfers' has semantic quality issues: vague_description, missing_input_details. The description was vague and lacked details about the input required for the operation. Added information about the required input and the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "post-transfers",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_input_details"
-      ],
-      "current_summary": "Transfer funds",
-      "current_description": "Starts a request to transfer funds to:\n- [Balance accounts](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts)\n- [Transfer instruments](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments)\n- [Third-party bank accounts](https://docs.adyen.com/payouts/payout-service/pay-out-to-bank-accounts)\n- [Third-party cards](https://docs.adyen.com/payouts/payout-service/pay-out-to-cards)\n\nAdyen sends the outcome of the transfer request through webhooks.\n\nTo use this endpoint:\n- Your API credential must have the **TransferService Webservice Initiate** [role](https://docs.adyen.com/platforms/manage-access/webservice-roles/?tab=transfers_3).\n- The account holder must have the required [capabilities](https://docs.adyen.com/platforms/verification-overview/capabilities).\n\nReach out to your Adyen contact to set up these permissions.",
-      "summary_suggestion": "Request a fund transfer",
-      "description_suggestion": "Starts a request to transfer funds to balance accounts, transfer instruments, third-party bank accounts, or third-party cards. Requires the transfer details as input. Returns the status of the transfer request. The outcome of the transfer is sent through webhooks.",
-      "reasoning": "The description was vague and lacked details about the input required for the operation. Added information about the required input and the return value.",
+      "current_description": ">Versions 1 and 2 of the Transfers API are deprecated. If you are just starting your implementation, use the latest version.\n\nReturns a transaction.",
+      "summary_suggestion": "Retrieve transaction details by ID",
+      "description_suggestion": "Returns detailed information about a specific transaction identified by its ID in the path. Includes transaction amount, status, timestamp, source and destination details, and any associated metadata.",
+      "reasoning": "Summary is too generic - 'Get a transaction' doesn't indicate the ID parameter requirement. Description is extremely vague - just 'Returns a transaction' provides no context about what information is included. Improved summary specifies ID-based retrieval, and description details what transaction information is returned for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -4128,7 +4166,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 11 operations analyzed, 5 quality issues found",
+    "message": "Semantic analysis completed: 11 operations analyzed, 6 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -4140,7 +4178,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 11,
-      "total_issues_found": 5,
+      "total_issues_found": 6,
       "batches_processed": 2
     }
   }

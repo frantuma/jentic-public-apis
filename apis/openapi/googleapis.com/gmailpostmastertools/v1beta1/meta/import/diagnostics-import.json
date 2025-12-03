@@ -2057,7 +2057,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'gmailpostmastertools.domains.trafficStats.get' has semantic quality issues: vague_summary, missing_input_details. The summary was missing and the description lacked details about required authentication and the specific input parameter (date).",
+    "message": "Operation 'gmailpostmastertools.domains.list' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description lacks clarity about authentication requirements and return type. Added explicit mention of Domain resources, authentication requirement, and clarified that this returns domain metadata for AI agent decision-making about when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gmailpostmastertools.domains.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the domains that have been registered by the client. The order of domains in the response is unspecified and non-deterministic. Newly created domains will not necessarily be added to the end of this list.",
+      "summary_suggestion": "List registered domains for authenticated client",
+      "description_suggestion": "Retrieves all domains registered by the authenticated client in the Postmaster Tools API. Returns a list of Domain resources with their associated metadata. Note: The response order is unspecified and non-deterministic; newly created domains may not appear at the end of the list. Requires OAuth2 authentication.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about authentication requirements and return type. Added explicit mention of Domain resources, authentication requirement, and clarified that this returns domain metadata for AI agent decision-making about when to use this operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gmailpostmastertools.domains.trafficStats.get' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks specificity about required inputs (domain name, date format), return type (TrafficStats object), and what metrics are included. Enhanced to clarify inputs, outputs, and error conditions for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2072,13 +2108,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Get traffic statistics for a domain on a specific date. Returns PERMISSION_DENIED if user does not have permission to access TrafficStats for the domain.",
-      "summary_suggestion": "Get traffic statistics for a domain on a specific date",
-      "description_suggestion": "Get traffic statistics for a specified domain on a specific date. Requires authentication. Returns PERMISSION_DENIED if the user does not have permission to access TrafficStats for the domain.",
-      "reasoning": "The summary was missing and the description lacked details about required authentication and the specific input parameter (date).",
+      "summary_suggestion": "Retrieve traffic statistics for specific date",
+      "description_suggestion": "Retrieves email traffic statistics (TrafficStats) for a specified domain on a particular date. Requires the domain resource name and date as inputs. Returns a TrafficStats object containing metrics such as spam reports, delivery errors, and IP reputation data for that date. Returns PERMISSION_DENIED error if the authenticated user lacks access to TrafficStats for the specified domain.",
+      "reasoning": "Missing summary. Description lacks specificity about required inputs (domain name, date format), return type (TrafficStats object), and what metrics are included. Enhanced to clarify inputs, outputs, and error conditions for better AI agent interpretability.",
       "batch_index": 0
     }
   },
@@ -2093,7 +2130,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gmailpostmastertools.domains.trafficStats.list' has semantic quality issues: vague_summary, missing_input_details. The summary was missing and the description lacked details about required authentication and the specific input parameters (domain).",
+    "message": "Operation 'gmailpostmastertools.domains.trafficStats.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_context. Missing summary. Description lacks detail about inputs (domain name, available parameters), outputs (ListTrafficStatsResponse structure), and pagination support. Added context about parameter availability, response structure, and pagination to help AI agents understand filtering and result handling capabilities.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2108,13 +2145,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "List traffic statistics for all available days. Returns PERMISSION_DENIED if user does not have permission to access TrafficStats for the domain.",
-      "summary_suggestion": "List traffic statistics for all available days for a domain",
-      "description_suggestion": "List traffic statistics for all available days for a specified domain. Requires authentication. Returns PERMISSION_DENIED if the user does not have permission to access TrafficStats for the domain.",
-      "reasoning": "The summary was missing and the description lacked details about required authentication and the specific input parameters (domain).",
+      "summary_suggestion": "List traffic statistics across available days",
+      "description_suggestion": "Retrieves a list of TrafficStats objects for all available days for a specified domain. Accepts the domain resource name and optional filtering/pagination parameters (up to 9 parameters available for date range, page size, and sorting). Returns a ListTrafficStatsResponse containing TrafficStats records with email metrics including spam reports, delivery errors, and IP reputation data. Returns PERMISSION_DENIED error if the authenticated user lacks access to TrafficStats for the specified domain. Supports pagination for large result sets.",
+      "reasoning": "Missing summary. Description lacks detail about inputs (domain name, available parameters), outputs (ListTrafficStatsResponse structure), and pagination support. Added context about parameter availability, response structure, and pagination to help AI agents understand filtering and result handling capabilities.",
       "batch_index": 0
     }
   },
@@ -2129,7 +2168,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 3 operations analyzed, 2 quality issues found",
+    "message": "Semantic analysis completed: 3 operations analyzed, 3 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -2141,7 +2180,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 3,
-      "total_issues_found": 2,
+      "total_issues_found": 3,
       "batches_processed": 1
     }
   }

@@ -8727,7 +8727,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'domains.projects.locations.registrations.retrieveGoogleDomainsDnsRecords' has semantic quality issues: vague_summary, missing_side_effects. Added a summary to clarify the operation's purpose and added information about the operation's side effects to the description.",
+    "message": "Operation 'domains.projects.locations.registrations.retrieveGoogleDomainsDnsRecords' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description lacks clarity about applicability conditions, return format, and deprecation context. Added summary, clarified when operation applies, specified return value structure, and emphasized deprecation status for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8742,13 +8742,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists the DNS records from the Google Domains DNS zone for domains that use the deprecated `google_domains_dns` in the `Registration`'s `dns_settings`.",
-      "summary_suggestion": "Retrieve DNS records for domains using Google Domains DNS",
-      "description_suggestion": "Lists the DNS records from the Google Domains DNS zone for domains that use the deprecated `google_domains_dns` in the `Registration`'s `dns_settings`. This operation does not affect the domain's current state.",
-      "reasoning": "Added a summary to clarify the operation's purpose and added information about the operation's side effects to the description.",
+      "summary_suggestion": "Retrieve DNS records from Google Domains zone",
+      "description_suggestion": "Retrieves the DNS records from the Google Domains DNS zone for a domain registration that uses the deprecated `google_domains_dns` configuration in its `dns_settings`. This operation is only applicable to registrations with `google_domains_dns` enabled. Returns a list of DNS records currently configured in the Google Domains zone. Note: This operation retrieves data from deprecated Google Domains infrastructure.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about applicability conditions, return format, and deprecation context. Added summary, clarified when operation applies, specified return value structure, and emphasized deprecation status for AI agent decision-making.",
       "batch_index": 3
     }
   },
@@ -8763,7 +8764,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'domains.projects.locations.registrations.retrieveGoogleDomainsForwardingConfig' has semantic quality issues: vague_summary. Added a summary to clarify the operation's purpose.",
+    "message": "Operation 'domains.projects.locations.registrations.retrieveGoogleDomainsForwardingConfig' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description is verbose and unclear about return value. Reorganized for clarity, specified preconditions for data availability, clarified return value, and emphasized deprecation and potential DNS dependency issues for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8777,12 +8778,15 @@
       "operation_id": "domains.projects.locations.registrations.retrieveGoogleDomainsForwardingConfig",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists the deprecated domain and email forwarding configurations you set up in the deprecated Google Domains UI. The configuration is present only for domains with the `google_domains_redirects_data_available` set to `true` in the `Registration`'s `dns_settings`. A forwarding configuration might not work correctly if required DNS records are not present in the domain's authoritative DNS Zone.",
-      "summary_suggestion": "Retrieve deprecated forwarding configurations for domains",
-      "reasoning": "Added a summary to clarify the operation's purpose.",
+      "summary_suggestion": "Retrieve email and domain forwarding configuration",
+      "description_suggestion": "Retrieves the deprecated domain and email forwarding configurations previously configured in the Google Domains UI. This operation only returns data for registrations where `google_domains_redirects_data_available` is set to `true` in the `dns_settings`. Returns the forwarding configuration details. Note: Forwarding may not function correctly if required DNS records are missing from the domain's authoritative DNS zone. This operation accesses deprecated Google Domains infrastructure.",
+      "reasoning": "Missing summary entirely. Description is verbose and unclear about return value. Reorganized for clarity, specified preconditions for data availability, clarified return value, and emphasized deprecation and potential DNS dependency issues for AI agent understanding.",
       "batch_index": 3
     }
   },
@@ -8797,7 +8801,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'domains.projects.locations.registrations.retrieveImportableDomains' has semantic quality issues: vague_summary, missing_context. The summary was missing and the description lacked a clear action-oriented statement. Added a concise summary and clarified the description for better readability and AI agent interpretability.",
+    "message": "Operation 'domains.projects.locations.registrations.setIamPolicy' has semantic quality issues: vague_summary, missing_input_details. Missing summary entirely. Description lacks input details about SetIamPolicyRequest structure and return value. Added summary, clarified input requirements, specified return value, and reorganized error conditions for better AI agent understanding of when and how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8808,18 +8812,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "domains.projects.locations.registrations.retrieveImportableDomains",
+      "operation_id": "domains.projects.locations.registrations.setIamPolicy",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details"
       ],
       "current_summary": "",
-      "current_description": "Deprecated: For more information, see [Cloud Domains feature deprecation](https://cloud.google.com/domains/docs/deprecations/feature-deprecations) Lists domain names from [Google Domains](https://domains.google/) that can be imported to Cloud Domains using the `ImportDomain` method. Since individual users can own domains in Google Domains, the list of domains returned depends on the individual user making the call. Domains already managed by Cloud Domains are not returned.",
-      "summary_suggestion": "List domains available for import from Google Domains",
-      "description_suggestion": "Lists domain names from [Google Domains](https://domains.google/) that can be imported to Cloud Domains. The list depends on the user making the call and excludes domains already managed by Cloud Domains. Note: This feature is deprecated.",
-      "reasoning": "The summary was missing and the description lacked a clear action-oriented statement. Added a concise summary and clarified the description for better readability and AI agent interpretability.",
-      "batch_index": 0
+      "current_description": "Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.",
+      "summary_suggestion": "Set access control policy for registration",
+      "description_suggestion": "Sets the access control policy on the specified registration resource. Replaces any existing policy with the policy provided in the request body. Requires a `SetIamPolicyRequest` containing the new policy bindings. Returns the updated `Policy` object. May return `NOT_FOUND` if the resource does not exist, `INVALID_ARGUMENT` if the policy is malformed, or `PERMISSION_DENIED` if the caller lacks permission to modify the policy.",
+      "reasoning": "Missing summary entirely. Description lacks input details about SetIamPolicyRequest structure and return value. Added summary, clarified input requirements, specified return value, and reorganized error conditions for better AI agent understanding of when and how to use this operation.",
+      "batch_index": 3
     }
   },
   {
@@ -8833,7 +8837,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'domains.projects.locations.registrations.retrieveTransferParameters' has semantic quality issues: vague_summary, missing_context. The summary was missing and the description lacked a clear action-oriented statement. Added a concise summary and clarified the description for better readability and AI agent interpretability.",
+    "message": "Operation 'domains.projects.locations.registrations.testIamPermissions' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks clarity about input format (TestIamPermissionsRequest) and return value structure. Added summary, clarified input requirements, specified return format, and reorganized usage guidance for better AI agent interpretability regarding when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8844,18 +8848,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "domains.projects.locations.registrations.retrieveTransferParameters",
+      "operation_id": "domains.projects.locations.registrations.testIamPermissions",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Deprecated: For more information, see [Cloud Domains feature deprecation](https://cloud.google.com/domains/docs/deprecations/feature-deprecations) Gets parameters needed to transfer a domain name from another registrar to Cloud Domains. For domains already managed by [Google Domains](https://domains.google/), use `ImportDomain` instead. Use the returned values to call `TransferDomain`.",
-      "summary_suggestion": "Get parameters for domain transfer to Cloud Domains",
-      "description_suggestion": "Gets parameters needed to transfer a domain name from another registrar to Cloud Domains. For domains already managed by [Google Domains](https://domains.google/), use `ImportDomain` instead. Note: This feature is deprecated.",
-      "reasoning": "The summary was missing and the description lacked a clear action-oriented statement. Added a concise summary and clarified the description for better readability and AI agent interpretability.",
-      "batch_index": 0
+      "current_description": "Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.",
+      "summary_suggestion": "Test caller permissions on registration",
+      "description_suggestion": "Tests which permissions the authenticated caller has on the specified registration resource. Accepts a `TestIamPermissionsRequest` containing a list of permissions to check. Returns a list of permissions the caller actually has. If the resource does not exist, returns an empty permission list instead of a `NOT_FOUND` error. This operation is designed for building permission-aware UIs and tools, not for authorization enforcement. Note: This operation may fail open without warning in edge cases.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about input format (TestIamPermissionsRequest) and return value structure. Added summary, clarified input requirements, specified return format, and reorganized usage guidance for better AI agent interpretability regarding when to use this operation.",
+      "batch_index": 3
     }
   },
   {
@@ -8869,7 +8874,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'domains.projects.locations.registrations.configureDnsSettings' has semantic quality issues: vague_summary, vague_description. Both the summary and description were vague. The suggested improvements provide clarity on the action and additional context about the process.",
+    "message": "Operation 'domains.projects.locations.registrations.configureContactSettings' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description is verbose and unclear about what is returned. Reorganized description for clarity, separated immediate vs. delayed effects, and explicitly mentioned Operation return type for AI agent understanding of async behavior.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "domains.projects.locations.registrations.configureContactSettings",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates a `Registration`'s contact settings. Some changes require confirmation by the domain's registrant contact . Caution: Please consider carefully any changes to contact privacy settings when changing from `REDACTED_CONTACT_DATA` to `PUBLIC_CONTACT_DATA.` There may be a delay in reflecting updates you make to registrant contact information such that any changes you make to contact privacy (including from `REDACTED_CONTACT_DATA` to `PUBLIC_CONTACT_DATA`) will be applied without delay but changes to registrant contact information may take a limited time to be publicized. This means that changes to contact privacy from `REDACTED_CONTACT_DATA` to `PUBLIC_CONTACT_DATA` may make the previous registrant contact data public until the modified registrant contact details are published.",
+      "summary_suggestion": "Update domain registration contact settings",
+      "description_suggestion": "Updates a Registration's contact settings, including contact information and privacy preferences. Some changes require confirmation from the domain's registrant contact. Note: Changes to contact privacy settings (e.g., from REDACTED_CONTACT_DATA to PUBLIC_CONTACT_DATA) are applied immediately, but updates to registrant contact information may take time to be published. During this delay, privacy changes may expose previous contact data until new details are publicized. Returns an Operation resource representing the long-running update process.",
+      "reasoning": "Missing summary entirely. Description is verbose and unclear about what is returned. Reorganized description for clarity, separated immediate vs. delayed effects, and explicitly mentioned Operation return type for AI agent understanding of async behavior.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'domains.projects.locations.registrations.configureDnsSettings' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too minimal and lacks context about what DNS settings can be configured, what inputs are expected, and what is returned. Added specifics about configurable DNS elements and clarified async Operation return.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8884,13 +8926,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Updates a `Registration`'s DNS settings.",
-      "summary_suggestion": "Update DNS settings for a domain registration",
-      "description_suggestion": "Updates the DNS settings for a domain registration. This includes configuring name servers, DNSSEC, and glue records. The domain must be unlocked before DNS settings can be updated.",
-      "reasoning": "Both the summary and description were vague. The suggested improvements provide clarity on the action and additional context about the process.",
+      "summary_suggestion": "Update domain DNS configuration settings",
+      "description_suggestion": "Updates a Registration's DNS settings, including name servers, DNSSEC configuration, and glue records. Accepts a ConfigureDnsSettingsRequest specifying the desired DNS configuration. Returns an Operation resource representing the long-running update process. DNS changes may take time to propagate across the internet.",
+      "reasoning": "Missing summary. Description is too minimal and lacks context about what DNS settings can be configured, what inputs are expected, and what is returned. Added specifics about configurable DNS elements and clarified async Operation return.",
       "batch_index": 2
     }
   },
@@ -8905,7 +8948,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'domains.projects.locations.registrations.configureManagementSettings' has semantic quality issues: vague_summary, vague_description. Both the summary and description were vague. The suggested improvements provide clarity on the action and additional context about the process.",
+    "message": "Operation 'domains.projects.locations.registrations.configureManagementSettings' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks specificity about what management settings can be configured and what is returned. Added context about configurable management elements and clarified async Operation return for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8920,13 +8963,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Updates a `Registration`'s management settings.",
-      "summary_suggestion": "Update management settings for a domain registration",
-      "description_suggestion": "Updates the management settings for a domain registration. This includes setting renewal, billing, and transfer settings. The domain must be unlocked before management settings can be updated.",
-      "reasoning": "Both the summary and description were vague. The suggested improvements provide clarity on the action and additional context about the process.",
+      "summary_suggestion": "Update domain registration management settings",
+      "description_suggestion": "Updates a Registration's management settings, including renewal preferences, billing settings, and transfer policies. Accepts a ConfigureManagementSettingsRequest specifying the desired management configuration. Returns an Operation resource representing the long-running update process.",
+      "reasoning": "Missing summary. Description lacks specificity about what management settings can be configured and what is returned. Added context about configurable management elements and clarified async Operation return for AI agent clarity.",
       "batch_index": 2
     }
   },
@@ -8941,7 +8985,375 @@
         "character": 0
       }
     },
-    "message": "Operation 'domains.projects.locations.list' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does. A concise summary has been suggested.",
+    "message": "Operation 'domains.projects.locations.registrations.initiatePushTransfer' has semantic quality issues: vague_summary, missing_output_details, missing_context. Missing summary. Description is verbose and unclear about return value. Reorganized for clarity, consolidated prerequisites, and explicitly mentioned Operation return type. Removed redundant documentation link reference.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "domains.projects.locations.registrations.initiatePushTransfer",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Initiates the `Push Transfer` process to transfer the domain to another registrar. The process might complete instantly or might require confirmation or additional work. Check the emails sent to the email address of the registrant. The process is aborted after a timeout if it's not completed. This method is only supported for domains that have the `REQUIRE_PUSH_TRANSFER` property in the list of `domain_properties`. The domain must also be unlocked before it can be transferred to a different registrar. For more information, see [Transfer a registered domain to another registrar](https://cloud.google.com/domains/docs/transfer-domain-to-another-registrar).",
+      "summary_suggestion": "Initiate push transfer to another registrar",
+      "description_suggestion": "Initiates the Push Transfer process to transfer the domain to another registrar. Only supported for domains with the REQUIRE_PUSH_TRANSFER property; the domain must be unlocked. The transfer process may complete immediately or require confirmation via email sent to the registrant's email address. The process will abort if not completed within the timeout period. Returns an Operation resource representing the long-running transfer process. Refer to Cloud Domains documentation for detailed transfer procedures.",
+      "reasoning": "Missing summary. Description is verbose and unclear about return value. Reorganized for clarity, consolidated prerequisites, and explicitly mentioned Operation return type. Removed redundant documentation link reference.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'domains.projects.locations.registrations.renewDomain' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about return value and async nature. Added explicit mention of Operation return type and clarified the renewal timeline calculation for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "domains.projects.locations.registrations.renewDomain",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Renews a recently expired domain. This method can only be called on domains that expired in the previous 30 days. After the renewal, the new expiration time of the domain is one year after the old expiration time and you are charged a `yearly_price` for the renewal.",
+      "summary_suggestion": "Renew an expired domain registration",
+      "description_suggestion": "Renews a domain registration that has recently expired. This method can only be called on domains that expired within the previous 30 days. Upon successful renewal, the domain's expiration time is extended one year from the previous expiration date, and a yearly_price charge is applied. Returns an Operation resource representing the long-running renewal process.",
+      "reasoning": "Missing summary. Description lacks clarity about return value and async nature. Added explicit mention of Operation return type and clarified the renewal timeline calculation for better AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'domains.projects.locations.registrations.resetAuthorizationCode' has semantic quality issues: vague_summary, missing_output_details, missing_context. Missing summary. Description lacks clarity about return value and doesn't explain the purpose of authorization codes. Added explicit Operation return type and clarified the alternative method for incompatible domains.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "domains.projects.locations.registrations.resetAuthorizationCode",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Resets the authorization code of the `Registration` to a new random string. You can call this method only after 60 days have elapsed since the initial domain registration. Domains that have the `REQUIRE_PUSH_TRANSFER` property in the list of `domain_properties` don't support authorization codes and must use the `InitiatePushTransfer` method to initiate the process to transfer the domain to a different registrar.",
+      "summary_suggestion": "Reset domain authorization code",
+      "description_suggestion": "Resets the authorization code of a Registration to a new random string. This method can only be called 60 days after the initial domain registration. Domains with the REQUIRE_PUSH_TRANSFER property do not support authorization codes and must use InitiatePushTransfer instead. Returns an Operation resource representing the long-running reset process.",
+      "reasoning": "Missing summary. Description lacks clarity about return value and doesn't explain the purpose of authorization codes. Added explicit Operation return type and clarified the alternative method for incompatible domains.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'domains.projects.locations.registrations.retrieveAuthorizationCode' has semantic quality issues: vague_summary, missing_output_details, missing_context. Missing summary. Description lacks clarity about what is returned. Added explicit mention of AuthorizationCode return type and clarified the alternative method for incompatible domains to improve AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "domains.projects.locations.registrations.retrieveAuthorizationCode",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the authorization code of the `Registration` for the purpose of transferring the domain to another registrar. You can call this method only after 60 days have elapsed since the initial domain registration. Domains that have the `REQUIRE_PUSH_TRANSFER` property in the list of `domain_properties` don't support authorization codes and must use the `InitiatePushTransfer` method to initiate the process to transfer the domain to a different registrar.",
+      "summary_suggestion": "Retrieve domain authorization code",
+      "description_suggestion": "Retrieves the authorization code of a Registration for transferring the domain to another registrar. This method can only be called 60 days after the initial domain registration. Domains with the REQUIRE_PUSH_TRANSFER property do not support authorization codes and must use InitiatePushTransfer instead. Returns an AuthorizationCode object containing the code needed for domain transfer.",
+      "reasoning": "Missing summary. Description lacks clarity about what is returned. Added explicit mention of AuthorizationCode return type and clarified the alternative method for incompatible domains to improve AI agent interpretability.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'domains.projects.locations.registrations.retrieveImportableDomains' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description lacks clarity on return value structure and user authentication context. Added explicit summary and clarified what is returned to improve AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "domains.projects.locations.registrations.retrieveImportableDomains",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Deprecated: For more information, see [Cloud Domains feature deprecation](https://cloud.google.com/domains/docs/deprecations/feature-deprecations) Lists domain names from [Google Domains](https://domains.google/) that can be imported to Cloud Domains using the `ImportDomain` method. Since individual users can own domains in Google Domains, the list of domains returned depends on the individual user making the call. Domains already managed by Cloud Domains are not returned.",
+      "summary_suggestion": "List importable domains from Google Domains",
+      "description_suggestion": "Deprecated: For more information, see [Cloud Domains feature deprecation](https://cloud.google.com/domains/docs/deprecations/feature-deprecations). Lists domain names from Google Domains that can be imported to Cloud Domains using the ImportDomain method. The returned list is user-specific and depends on the authenticated user's Google Domains account. Domains already managed by Cloud Domains are excluded from results. Returns a list of importable domain names with their current status.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on return value structure and user authentication context. Added explicit summary and clarified what is returned to improve AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'domains.projects.locations.registrations.retrieveRegisterParameters' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description mentions price and availability but lacks detail about what RegisterParameters object contains and its structure. Enhanced to clarify return value and domain-specific context for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "domains.projects.locations.registrations.retrieveRegisterParameters",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets parameters needed to register a new domain name, including price and up-to-date availability. Use the returned values to call `RegisterDomain`.",
+      "summary_suggestion": "Retrieve domain registration parameters and pricing",
+      "description_suggestion": "Retrieves the parameters required to register a new domain name, including current pricing, availability status, and supported registrant contact requirements. Returns a RegisterParameters object containing pricing information and domain availability. Use the returned values with the RegisterDomain method to complete domain registration.",
+      "reasoning": "Missing summary. Description mentions price and availability but lacks detail about what RegisterParameters object contains and its structure. Enhanced to clarify return value and domain-specific context for AI agents.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'domains.projects.locations.registrations.retrieveTransferParameters' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks clarity on return value and transfer requirements. Added explicit summary and enhanced description to specify what parameters are returned and when to use alternative methods.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "domains.projects.locations.registrations.retrieveTransferParameters",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Deprecated: For more information, see [Cloud Domains feature deprecation](https://cloud.google.com/domains/docs/deprecations/feature-deprecations) Gets parameters needed to transfer a domain name from another registrar to Cloud Domains. For domains already managed by [Google Domains](https://domains.google/), use `ImportDomain` instead. Use the returned values to call `TransferDomain`.",
+      "summary_suggestion": "Retrieve domain transfer parameters from another registrar",
+      "description_suggestion": "Deprecated: For more information, see [Cloud Domains feature deprecation](https://cloud.google.com/domains/docs/deprecations/feature-deprecations). Retrieves the parameters required to transfer a domain name from another registrar to Cloud Domains. For domains managed by Google Domains, use ImportDomain instead. Returns transfer requirements including authorization codes, pricing, and domain eligibility. Use the returned values with the TransferDomain method to initiate the transfer.",
+      "reasoning": "Missing summary. Description lacks clarity on return value and transfer requirements. Added explicit summary and enhanced description to specify what parameters are returned and when to use alternative methods.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'domains.projects.locations.registrations.searchDomains' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity on input parameters (query format) and output structure. Enhanced to specify input expectations and clarify return value format for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "domains.projects.locations.registrations.searchDomains",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Searches for available domain names similar to the provided query. Availability results from this method are approximate; call `RetrieveRegisterParameters` on a domain before registering to confirm availability.",
+      "summary_suggestion": "Search for available domain names",
+      "description_suggestion": "Searches for available domain names similar to the provided query string. Returns a list of domain name suggestions with their availability status. Note that availability results are approximate; call RetrieveRegisterParameters on a specific domain before registering to confirm current availability and pricing.",
+      "reasoning": "Missing summary. Description lacks clarity on input parameters (query format) and output structure. Enhanced to specify input expectations and clarify return value format for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'domains.projects.locations.registrations.delete' has semantic quality issues: vague_summary, missing_side_effects, unclear_purpose. Missing summary. Description is lengthy and unclear about preconditions and side effects. Reorganized to clarify deletion preconditions, state requirements, and consequences for domain ownership and management.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "domains.projects.locations.registrations.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects",
+        "unclear_purpose"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes a `Registration` resource. This method works on any `Registration` resource using [Subscription or Commitment billing](/domains/pricing#billing-models), provided that the resource was created at least 1 day in the past. When an active registration is successfully deleted, you can continue to use the domain in [Google Domains](https://domains.google/) until it expires. The calling user becomes the domain's sole owner in Google Domains, and permissions for the domain are subsequently managed there. The domain does not renew automatically unless the new owner sets up billing in Google Domains. After January 2024 you will only be able to delete `Registration` resources when `state` is one of: `EXPORTED`, `EXPIRED`,`REGISTRATION_FAILED` or `TRANSFER_FAILED`. See [Cloud Domains feature deprecation](https://cloud.google.com/domains/docs/deprecations/feature-deprecations) for more details.",
+      "summary_suggestion": "Delete a domain registration resource",
+      "description_suggestion": "Deletes a Registration resource from Cloud Domains. This operation is available for registrations using Subscription or Commitment billing, provided the resource was created at least 1 day ago. After deletion, the domain remains usable in Google Domains until expiration, with the calling user becoming the sole owner. Domain ownership and renewal management transfer to Google Domains. After January 2024, deletion is only permitted when the Registration state is EXPORTED, EXPIRED, REGISTRATION_FAILED, or TRANSFER_FAILED. See Cloud Domains feature deprecation for additional details.",
+      "reasoning": "Missing summary. Description is lengthy and unclear about preconditions and side effects. Reorganized to clarify deletion preconditions, state requirements, and consequences for domain ownership and management.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'domains.projects.locations.registrations.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity on what fields can be updated via PATCH and what is returned. Enhanced to specify updateable fields, clarify partial update support, and indicate return value for better AI agent guidance.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "domains.projects.locations.registrations.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates select fields of a `Registration` resource, notably `labels`. To update other fields, use the appropriate custom update method: * To update management settings, see `ConfigureManagementSettings` * To update DNS configuration, see `ConfigureDnsSettings` * To update contact information, see `ConfigureContactSettings`",
+      "summary_suggestion": "Update Registration resource labels and metadata",
+      "description_suggestion": "Updates select fields of a Registration resource, primarily labels and metadata. Supports partial updates of the Registration object. For updating other Registration fields, use specialized methods: ConfigureManagementSettings for renewal and billing settings, ConfigureDnsSettings for DNS configuration, or ConfigureContactSettings for contact information. Returns the updated Registration resource.",
+      "reasoning": "Missing summary. Description lacks clarity on what fields can be updated via PATCH and what is returned. Enhanced to specify updateable fields, clarify partial update support, and indicate return value for better AI agent guidance.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'domains.projects.locations.list' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is minimal and lacks context about why this information is useful. Enhanced version clarifies the purpose (determining service availability by region) and what information is returned, improving AI agent understanding of when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8955,12 +9367,14 @@
       "operation_id": "domains.projects.locations.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Lists information about the supported locations for this service.",
-      "summary_suggestion": "List supported locations for the service",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. A concise summary has been suggested.",
+      "summary_suggestion": "List supported service locations",
+      "description_suggestion": "Lists all supported geographic locations where Cloud Domains service is available. Returns location metadata including display names and region identifiers. Useful for determining where domain registrations and management operations can be performed.",
+      "reasoning": "Missing summary entirely. Description is minimal and lacks context about why this information is useful. Enhanced version clarifies the purpose (determining service availability by region) and what information is returned, improving AI agent understanding of when to use this operation.",
       "batch_index": 1
     }
   },
@@ -8975,7 +9389,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'domains.projects.locations.operations.list' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does. A concise summary has been suggested.",
+    "message": "Operation 'domains.projects.locations.operations.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity about what operations are being listed (domain-specific operations), what filters are available, and the practical use case. Enhanced version provides domain context, clarifies the types of operations, and explains the value for AI agents tracking async tasks.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8989,12 +9403,15 @@
       "operation_id": "domains.projects.locations.operations.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
-      "summary_suggestion": "List operations matching the specified filter",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. A concise summary has been suggested.",
+      "summary_suggestion": "List long-running domain operations",
+      "description_suggestion": "Lists long-running operations (such as domain registrations, transfers, or exports) that match the specified filter criteria. Supports filtering by operation status, name patterns, and other criteria via request parameters. Returns a paginated list of Operation resources with their current status and progress. Useful for tracking asynchronous domain management tasks.",
+      "reasoning": "Missing summary. Description lacks clarity about what operations are being listed (domain-specific operations), what filters are available, and the practical use case. Enhanced version provides domain context, clarifies the types of operations, and explains the value for AI agents tracking async tasks.",
       "batch_index": 1
     }
   },
@@ -9009,7 +9426,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'domains.projects.locations.registrations.export' has semantic quality issues: vague_summary, poor_ai_interpretability. The current summary is missing, and the description is too verbose and not focused on the action. A concise summary and a more focused description have been suggested to improve AI interpretability.",
+    "message": "Operation 'domains.projects.locations.registrations.export' has semantic quality issues: vague_summary, missing_side_effects. Missing summary. Description is comprehensive but lacks clear organization of side effects. Reorganized to explicitly highlight state changes (ownership transfer, renewal behavior change, permission management shift) which are critical for AI agents to understand the operation's full impact.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9024,13 +9441,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "poor_ai_interpretability"
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deprecated: For more information, see [Cloud Domains feature deprecation](https://cloud.google.com/domains/docs/deprecations/feature-deprecations) Exports a `Registration` resource, such that it is no longer managed by Cloud Domains. When an active domain is successfully exported, you can continue to use the domain in [Google Domains](https://domains.google/) until it expires. The calling user becomes the domain's sole owner in Google Domains, and permissions for the domain are subsequently managed there. The domain does not renew automatically unless the new owner sets up billing in Google Domains.",
-      "summary_suggestion": "Export a domain registration from Cloud Domains",
-      "description_suggestion": "Deprecated: Exports a `Registration` resource, making it unmanaged by Cloud Domains. The domain can still be used in Google Domains until it expires. The calling user becomes the sole owner in Google Domains, and domain renewal is managed there. The domain does not automatically renew unless billing is set up in Google Domains.",
-      "reasoning": "The current summary is missing, and the description is too verbose and not focused on the action. A concise summary and a more focused description have been suggested to improve AI interpretability.",
+      "summary_suggestion": "Export domain from Cloud Domains management",
+      "description_suggestion": "Deprecated: For more information, see [Cloud Domains feature deprecation](https://cloud.google.com/domains/docs/deprecations/feature-deprecations). Exports a Registration resource, removing it from Cloud Domains management while preserving the active domain. Side effects: The calling user becomes the sole owner in Google Domains; domain ownership and permissions transfer to Google Domains; automatic renewal is disabled until billing is configured in Google Domains. The domain remains active and usable until expiration. Returns an Operation resource tracking the export process.",
+      "reasoning": "Missing summary. Description is comprehensive but lacks clear organization of side effects. Reorganized to explicitly highlight state changes (ownership transfer, renewal behavior change, permission management shift) which are critical for AI agents to understand the operation's full impact.",
       "batch_index": 1
     }
   },
@@ -9045,7 +9462,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'domains.projects.locations.registrations.list' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does. A concise summary has been suggested.",
+    "message": "Operation 'domains.projects.locations.registrations.list' has semantic quality issues: vague_summary. Missing summary. Description is clear and concise about listing Registration resources. Added action-oriented summary to complete the documentation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9063,8 +9480,8 @@
       ],
       "current_summary": "",
       "current_description": "Lists the `Registration` resources in a project.",
-      "summary_suggestion": "List domain registrations in a project",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. A concise summary has been suggested.",
+      "summary_suggestion": "List domain registrations in project",
+      "reasoning": "Missing summary. Description is clear and concise about listing Registration resources. Added action-oriented summary to complete the documentation.",
       "batch_index": 1
     }
   },
@@ -9079,7 +9496,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'domains.projects.locations.registrations.import' has semantic quality issues: vague_summary, poor_ai_interpretability. The current summary is missing, and the description is too verbose and not focused on the action. A concise summary and a more focused description have been suggested to improve AI interpretability.",
+    "message": "Operation 'domains.projects.locations.registrations.import' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description lacks input requirements clarity and doesn't specify what is returned. Enhanced version clarifies prerequisites (ownership permission), expected request parameters, distinguishes this from TransferDomain operation, and specifies the return value and resulting Registration state.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9094,13 +9511,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "poor_ai_interpretability"
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Deprecated: For more information, see [Cloud Domains feature deprecation](https://cloud.google.com/domains/docs/deprecations/feature-deprecations) Imports a domain name from [Google Domains](https://domains.google/) for use in Cloud Domains. To transfer a domain from another registrar, use the `TransferDomain` method instead. Since individual users can own domains in Google Domains, the calling user must have ownership permission on the domain.",
-      "summary_suggestion": "Import a domain name from Google Domains",
-      "description_suggestion": "Deprecated: Imports a domain name from Google Domains for use in Cloud Domains. Use `TransferDomain` for domains from other registrars. The calling user must have ownership permission on the domain.",
-      "reasoning": "The current summary is missing, and the description is too verbose and not focused on the action. A concise summary and a more focused description have been suggested to improve AI interpretability.",
+      "summary_suggestion": "Import domain from Google Domains",
+      "description_suggestion": "Deprecated: For more information, see [Cloud Domains feature deprecation](https://cloud.google.com/domains/docs/deprecations/feature-deprecations). Imports a domain name from Google Domains into Cloud Domains management. Requires: domain ownership permission in Google Domains, valid ImportDomainRequest with domain name and optional contact/DNS settings. Note: Use TransferDomain instead for domains registered with other registrars. Returns an Operation resource tracking the import process. Upon completion, creates a Registration resource in ACTIVE state.",
+      "reasoning": "Missing summary. Description lacks input requirements clarity and doesn't specify what is returned. Enhanced version clarifies prerequisites (ownership permission), expected request parameters, distinguishes this from TransferDomain operation, and specifies the return value and resulting Registration state.",
       "batch_index": 1
     }
   },
@@ -9115,7 +9532,41 @@
         "character": 0
       }
     },
-    "message": "Operation 'domains.projects.locations.registrations.transfer' has semantic quality issues: vague_summary, poor_ai_interpretability. The current summary is missing, and the description is too verbose and not focused on the action. A concise summary and a more focused description have been suggested to improve AI interpretability.",
+    "message": "Operation 'domains.projects.locations.registrations.register' has semantic quality issues: vague_summary. Missing summary. Description is comprehensive and well-structured, covering prerequisites (RetrieveRegisterParameters), expected outcomes (REGISTRATION_PENDING → ACTIVE), error handling (REGISTRATION_FAILED), and recovery steps. Added concise action-oriented summary.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "domains.projects.locations.registrations.register",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Registers a new domain name and creates a corresponding `Registration` resource. Call `RetrieveRegisterParameters` first to check availability of the domain name and determine parameters like price that are needed to build a call to this method. A successful call creates a `Registration` resource in state `REGISTRATION_PENDING`, which resolves to `ACTIVE` within 1-2 minutes, indicating that the domain was successfully registered. If the resource ends up in state `REGISTRATION_FAILED`, it indicates that the domain was not registered successfully, and you can safely delete the resource and retry registration.",
+      "summary_suggestion": "Register new domain name",
+      "reasoning": "Missing summary. Description is comprehensive and well-structured, covering prerequisites (RetrieveRegisterParameters), expected outcomes (REGISTRATION_PENDING → ACTIVE), error handling (REGISTRATION_FAILED), and recovery steps. Added concise action-oriented summary.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'domains.projects.locations.registrations.transfer' has semantic quality issues: vague_summary. Missing summary. Description is comprehensive and well-structured, covering prerequisites (unlock domain, get authorization code, call RetrieveTransferParameters), workflow (TRANSFER_PENDING → ACTIVE), error scenarios (TRANSFER_FAILED), and recovery options. Distinguishes from ImportDomain for Google Domains. Added concise action-oriented summary.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9129,14 +9580,12 @@
       "operation_id": "domains.projects.locations.registrations.transfer",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
-        "poor_ai_interpretability"
+        "vague_summary"
       ],
       "current_summary": "",
       "current_description": "Deprecated: For more information, see [Cloud Domains feature deprecation](https://cloud.google.com/domains/docs/deprecations/feature-deprecations) Transfers a domain name from another registrar to Cloud Domains. For domains already managed by [Google Domains](https://domains.google/), use `ImportDomain` instead. Before calling this method, go to the domain's current registrar to unlock the domain for transfer and retrieve the domain's transfer authorization code. Then call `RetrieveTransferParameters` to confirm that the domain is unlocked and to get values needed to build a call to this method. A successful call creates a `Registration` resource in state `TRANSFER_PENDING`. It can take several days to complete the transfer process. The registrant can often speed up this process by approving the transfer through the current registrar, either by clicking a link in an email from the registrar or by visiting the registrar's website. A few minutes after transfer approval, the resource transitions to state `ACTIVE`, indicating that the transfer was successful. If the transfer is rejected or the request expires without being approved, the resource can end up in state `TRANSFER_FAILED`. If transfer fails, you can safely delete the resource and retry the transfer.",
-      "summary_suggestion": "Transfer a domain name to Cloud Domains",
-      "description_suggestion": "Deprecated: Transfers a domain name from another registrar to Cloud Domains. For domains already managed by Google Domains, use `ImportDomain`. Before calling this method, unlock the domain for transfer and retrieve the transfer authorization code. A successful call creates a `Registration` resource in state `TRANSFER_PENDING`. The transfer can take several days. The registrant can speed up the process by approving the transfer through the current registrar. If the transfer is successful, the resource transitions to state `ACTIVE`. If the transfer fails, you can delete the resource and retry.",
-      "reasoning": "The current summary is missing, and the description is too verbose and not focused on the action. A concise summary and a more focused description have been suggested to improve AI interpretability.",
+      "summary_suggestion": "Transfer domain from another registrar",
+      "reasoning": "Missing summary. Description is comprehensive and well-structured, covering prerequisites (unlock domain, get authorization code, call RetrieveTransferParameters), workflow (TRANSFER_PENDING → ACTIVE), error scenarios (TRANSFER_FAILED), and recovery options. Distinguishes from ImportDomain for Google Domains. Added concise action-oriented summary.",
       "batch_index": 1
     }
   },
@@ -9151,7 +9600,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 26 operations analyzed, 12 quality issues found",
+    "message": "Semantic analysis completed: 26 operations analyzed, 24 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -9163,7 +9612,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 26,
-      "total_issues_found": 12,
+      "total_issues_found": 24,
       "batches_processed": 4
     }
   }

@@ -3525,7 +3525,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudscheduler.projects.locations.jobs.list' has semantic quality issues: vague_summary, vague_description, missing_input_details. The current summary and description are too vague. The suggestion provides a clear action-oriented summary and a detailed description including required permissions, accepted parameters, and the response format.",
+    "message": "Operation 'cloudscheduler.projects.locations.jobs.list' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details, poor_ai_interpretability. Original description is extremely vague with no context about scope, filtering, pagination, or return format. Added clarity about location scope, pagination support, return type (ListJobsResponse), and ordering. Summary was empty, so provided action-oriented statement. These improvements help AI agents understand when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3541,13 +3541,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Lists jobs.",
-      "summary_suggestion": "List all jobs in a specified location",
-      "description_suggestion": "Retrieves a list of all jobs in a specified Cloud Scheduler location. Requires the 'cloudscheduler.jobs.list' permission. Accepts parameters such as 'page_size', 'page_token', and 'filter' to customize the list. Returns a ListJobsResponse object containing the list of jobs and pagination tokens.",
-      "reasoning": "The current summary and description are too vague. The suggestion provides a clear action-oriented summary and a detailed description including required permissions, accepted parameters, and the response format.",
+      "summary_suggestion": "List scheduled jobs in a location",
+      "description_suggestion": "Retrieves a list of all jobs configured in the specified location. Supports filtering and pagination through query parameters. Returns a ListJobsResponse containing the jobs array and a next page token for pagination. Jobs are returned in the order they were created.",
+      "reasoning": "Original description is extremely vague with no context about scope, filtering, pagination, or return format. Added clarity about location scope, pagination support, return type (ListJobsResponse), and ordering. Summary was empty, so provided action-oriented statement. These improvements help AI agents understand when to use this operation and what to expect.",
       "batch_index": 1
     }
   },
@@ -3562,7 +3565,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudscheduler.projects.locations.jobs.create' has semantic quality issues: vague_summary, missing_context, missing_output_details. The original summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description including required permissions, input format, and the return value.",
+    "message": "Operation 'cloudscheduler.projects.locations.jobs.create' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Original description lacks essential details about what constitutes a valid job, required fields, target types, initial state, and size constraints. Added specificity about Job schema requirements, target options, default state, return value, and the 1MB size limit mentioned in the Job schema. Summary was empty. These improvements enable AI agents to understand job creation requirements and validate inputs before making requests.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3577,14 +3580,17 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
-        "missing_output_details"
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Creates a job.",
-      "summary_suggestion": "Create a new job in a specified location",
-      "description_suggestion": "Creates a new job in a specified Cloud Scheduler location. Requires the 'cloudscheduler.jobs.create' permission. Accepts a Job object in the request body. Returns the created Job object if successful.",
-      "reasoning": "The original summary and description are vague. The suggestion provides a clear action-oriented summary and a detailed description including required permissions, input format, and the return value.",
+      "summary_suggestion": "Create a new scheduled job",
+      "description_suggestion": "Creates a new job in the specified location. The request body must contain a Job object with required fields including name, schedule (cron format), and a target (AppEngineHttpTarget, HttpTarget, or PubsubTarget). The job will be created in a ENABLED state by default. Returns the created Job object with all fields populated including the server-generated name and creation timestamp. Maximum job size is 1MB.",
+      "reasoning": "Original description lacks essential details about what constitutes a valid job, required fields, target types, initial state, and size constraints. Added specificity about Job schema requirements, target options, default state, return value, and the 1MB size limit mentioned in the Job schema. Summary was empty. These improvements enable AI agents to understand job creation requirements and validate inputs before making requests.",
       "batch_index": 1
     }
   },
@@ -3599,7 +3605,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudscheduler.projects.locations.jobs.delete' has semantic quality issues: vague_summary, vague_description, missing_side_effects. The current summary and description are vague. Added a summary, clarified the description to include the effect of deleting a running job and the error for a non-existing job.",
+    "message": "Operation 'cloudscheduler.projects.locations.jobs.delete' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is too minimal. Added context about required input format, return value (empty response), side effects (job stops executing), and error handling for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3615,13 +3621,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "missing_input_details",
+        "missing_output_details",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes a job.",
       "summary_suggestion": "Delete a scheduled job",
-      "description_suggestion": "Deletes a specified job. If the job is currently running, it will be terminated. If the job does not exist, a `NOT_FOUND` error is returned.",
-      "reasoning": "The current summary and description are vague. Added a summary, clarified the description to include the effect of deleting a running job and the error for a non-existing job.",
+      "description_suggestion": "Deletes a job and removes it from the scheduler. Requires the job name in the format 'projects/{project}/locations/{location}/jobs/{job}'. Returns an empty response on successful deletion. The job will no longer execute after deletion. If the job does not exist, a NOT_FOUND error is returned.",
+      "reasoning": "Original description is too minimal. Added context about required input format, return value (empty response), side effects (job stops executing), and error handling for AI agent clarity.",
       "batch_index": 0
     }
   },
@@ -3636,7 +3644,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudscheduler.projects.locations.jobs.get' has semantic quality issues: vague_summary, missing_output_details. The current summary and description are vague. Added a summary and clarified the description to include the return value and error for a non-existing job.",
+    "message": "Operation 'cloudscheduler.projects.locations.jobs.get' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original description lacks specificity. Added input format requirements, details about what is returned (Job object with schedule, target, state), and error handling for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3651,13 +3659,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
+        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets a job.",
-      "summary_suggestion": "Retrieve details of a scheduled job",
-      "description_suggestion": "Retrieves the details of a specified job. Returns the job configuration if found, otherwise returns a `NOT_FOUND` error.",
-      "reasoning": "The current summary and description are vague. Added a summary and clarified the description to include the return value and error for a non-existing job.",
+      "summary_suggestion": "Retrieve a scheduled job configuration",
+      "description_suggestion": "Retrieves the configuration and current state of a job. Requires the job name in the format 'projects/{project}/locations/{location}/jobs/{job}'. Returns the complete Job object containing schedule, target configuration, state, and execution history. If the job does not exist, a NOT_FOUND error is returned.",
+      "reasoning": "Original description lacks specificity. Added input format requirements, details about what is returned (Job object with schedule, target, state), and error handling for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -3672,7 +3682,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudscheduler.projects.locations.list' has semantic quality issues: vague_summary. The current summary is missing. Added a summary to make it clear and concise.",
+    "message": "Operation 'cloudscheduler.projects.locations.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original description is vague about inputs and outputs. Added context about required parent parameter format, pagination support, and specific return type (ListLocationsResponse) for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3686,12 +3696,15 @@
       "operation_id": "cloudscheduler.projects.locations.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists information about the supported locations for this service.",
-      "summary_suggestion": "List supported locations for the service",
-      "reasoning": "The current summary is missing. Added a summary to make it clear and concise.",
+      "summary_suggestion": "List available Cloud Scheduler locations",
+      "description_suggestion": "Lists all supported locations where Cloud Scheduler jobs can be created and managed. Requires the parent project name in the format 'projects/{project}'. Supports pagination via pageSize and pageToken parameters. Returns a ListLocationsResponse containing an array of Location objects with location details and capabilities.",
+      "reasoning": "Original description is vague about inputs and outputs. Added context about required parent parameter format, pagination support, and specific return type (ListLocationsResponse) for AI agent clarity.",
       "batch_index": 0
     }
   },
@@ -3706,7 +3719,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudscheduler.projects.locations.jobs.run' has semantic quality issues: vague_summary, missing_side_effects. The current summary and description are vague. Added a summary and clarified the description to include the error for a non-existing job.",
+    "message": "Operation 'cloudscheduler.projects.locations.jobs.run' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Original description lacks output details and prerequisite conditions. Added return value (Job object), state requirement (ENABLED), and clarified that concurrent executions are possible. Enhanced for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3721,13 +3734,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_output_details",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Forces a job to run now. When this method is called, Cloud Scheduler will dispatch the job, even if the job is already running.",
-      "summary_suggestion": "Force a scheduled job to run immediately",
-      "description_suggestion": "Forces a specified job to run immediately, even if it is already running. If the job does not exist, a `NOT_FOUND` error is returned.",
-      "reasoning": "The current summary and description are vague. Added a summary and clarified the description to include the error for a non-existing job.",
+      "summary_suggestion": "Trigger immediate job execution",
+      "description_suggestion": "Forces a job to execute immediately, bypassing the normal schedule. When called, Cloud Scheduler dispatches the job even if it is already running, allowing concurrent executions. Requires the job name in the format 'projects/{project}/locations/{location}/jobs/{job}'. Returns the executed Job object. The job must be in Job.State.ENABLED to run.",
+      "reasoning": "Original description lacks output details and prerequisite conditions. Added return value (Job object), state requirement (ENABLED), and clarified that concurrent executions are possible. Enhanced for AI agent decision-making.",
       "batch_index": 0
     }
   },

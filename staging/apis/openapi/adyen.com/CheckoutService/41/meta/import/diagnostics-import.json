@@ -5610,7 +5610,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post-paymentMethods' has semantic quality issues: vague_description. The current summary and description are clear but could be more specific about the context and purpose of the operation.",
+    "message": "Operation 'get-paymentLinks-linkId' has semantic quality issues: vague_description, missing_output_details. Summary is clear and appropriate. Description is too minimal - it only states what parameter is needed but doesn't explain what information is returned or when an AI agent should use this operation. Enhanced description includes return value details and use cases for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5621,16 +5621,16 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "post-paymentMethods",
+      "operation_id": "get-paymentLinks-linkId",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_description",
+        "missing_output_details"
       ],
-      "current_summary": "Get a list of available payment methods",
-      "current_description": "Retrieves the list of available payment methods for the transaction, based on the transaction information like amount, country, and currency.",
-      "summary_suggestion": "Retrieve available payment methods",
-      "description_suggestion": "Retrieves the list of available payment methods for a transaction based on the transaction's amount, country, and currency. This helps in determining the payment options available to the shopper.",
-      "reasoning": "The current summary and description are clear but could be more specific about the context and purpose of the operation.",
+      "current_summary": "Get a payment link",
+      "current_description": "Retrieves the payment link details using the payment link `id`.",
+      "description_suggestion": "Retrieves the complete details of a payment link using its unique identifier. Returns the payment link's current status, expiration time, amount, currency, and other configuration details. Use this to check the payment link's state or verify its configuration.",
+      "reasoning": "Summary is clear and appropriate. Description is too minimal - it only states what parameter is needed but doesn't explain what information is returned or when an AI agent should use this operation. Enhanced description includes return value details and use cases for better AI agent interpretability.",
       "batch_index": 1
     }
   },
@@ -5645,7 +5645,114 @@
         "character": 0
       }
     },
-    "message": "Operation 'post-applePay-sessions' has semantic quality issues: vague_summary, missing_context. The current summary is vague and does not clearly indicate the action. The description is missing context about the expected use of the returned session data.",
+    "message": "Operation 'patch-paymentLinks-linkId' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Summary is adequate but description lacks clarity on what status values are accepted, what the request should contain, and what the response includes. Enhanced description explains the input requirements, output details, and practical use cases for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "patch-paymentLinks-linkId",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Update the status of a payment link",
+      "current_description": "Updates the status of a payment link. Use this endpoint to [force the expiry of a payment link](https://docs.adyen.com/online-payments/pay-by-link#update-payment-link-status).",
+      "description_suggestion": "Updates the status of a payment link, such as forcing its expiration. Accepts a status update request specifying the new status. Returns the updated payment link with its new status and any relevant state changes. Commonly used to expire active payment links or modify their availability to shoppers.",
+      "reasoning": "Summary is adequate but description lacks clarity on what status values are accepted, what the request should contain, and what the response includes. Enhanced description explains the input requirements, output details, and practical use cases for AI agent decision-making.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-paymentMethods-balance' has semantic quality issues: inconsistent_terminology, missing_output_details. Summary is clear but description is repetitive and lacks specificity about return values. The phrase 'gift card's details' is vague - should specify what details are needed. Missing information about what the response contains. Enhanced description clarifies input requirements, output details, and use cases. Also generalizes to 'stored value payment method' for broader applicability consistent with payment method terminology.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-paymentMethods-balance",
+      "has_quality_issues": true,
+      "issues_found": [
+        "inconsistent_terminology",
+        "missing_output_details"
+      ],
+      "current_summary": "Get the balance of a gift card",
+      "current_description": "Retrieves the balance remaining on a shopper's gift card. To check a gift card's balance, make a POST `/paymentMethods/balance` call and include the gift card's details inside a `paymentMethod` object.",
+      "description_suggestion": "Retrieves the remaining balance on a gift card or stored value payment method. Requires the payment method details (such as card number and security code) in the request. Returns the available balance amount and currency. Use this to verify sufficient funds before processing a payment or to display balance information to the shopper.",
+      "reasoning": "Summary is clear but description is repetitive and lacks specificity about return values. The phrase 'gift card's details' is vague - should specify what details are needed. Missing information about what the response contains. Enhanced description clarifies input requirements, output details, and use cases. Also generalizes to 'stored value payment method' for broader applicability consistent with payment method terminology.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-payments-details' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Summary is adequate but description lacks specificity about what 'details' means and what should be submitted. Missing information about what triggers the need for this call (presence of action object), what the request should contain, and what the response includes. Enhanced description clarifies the trigger condition, explains the input requirements, and specifies the output format for better AI agent understanding of the payment flow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-payments-details",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Submit details for a payment",
+      "current_description": "Submits details for a payment created using `/payments`. This step is only needed when no final state has been reached on the `/payments` request, for example when the shopper was redirected to another page to complete the payment.",
+      "description_suggestion": "Submits additional details required to complete a payment that was initiated with `/payments`. Use this endpoint when the initial payment response contained an `action` object requiring shopper interaction (such as 3D Secure authentication or redirect-based payment methods). Include the payment details and any data returned from the shopper's action. Returns the final payment result with `pspReference` and `resultCode` indicating authorization status.",
+      "reasoning": "Summary is adequate but description lacks specificity about what 'details' means and what should be submitted. Missing information about what triggers the need for this call (presence of action object), what the request should contain, and what the response includes. Enhanced description clarifies the trigger condition, explains the input requirements, and specifies the output format for better AI agent understanding of the payment flow.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-applePay-sessions' has semantic quality issues: vague_summary, missing_output_details, not_actionable. Original summary 'Get an Apple Pay session' is passive and vague. Description lacks clarity on what the operation does (creates vs retrieves), expected inputs, and specific output format. Improved version uses action-oriented language, clarifies it's for API-only integrations, specifies input requirements, and explains the purpose in the payment flow for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5660,13 +5767,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details",
+        "not_actionable"
       ],
       "current_summary": "Get an Apple Pay session",
       "current_description": "You need to use this endpoint if you have an API-only integration with Apple Pay which uses Adyen's Apple Pay certificate.\n\nThe endpoint returns the Apple Pay session data which you need to complete the [Apple Pay session validation](https://docs.adyen.com/payment-methods/apple-pay/api-only?tab=adyen-certificate-validation_1#complete-apple-pay-session-validation).",
-      "summary_suggestion": "Initiate an Apple Pay session",
-      "description_suggestion": "Initiates an Apple Pay session for an API-only integration using Adyen's Apple Pay certificate. Returns the session data required to complete the Apple Pay session validation.",
-      "reasoning": "The current summary is vague and does not clearly indicate the action. The description is missing context about the expected use of the returned session data.",
+      "summary_suggestion": "Create an Apple Pay session for certificate validation",
+      "description_suggestion": "Creates an Apple Pay session for API-only integrations using Adyen's Apple Pay certificate. This endpoint generates session data required to complete Apple Pay session validation. The returned session data must be used in the subsequent Apple Pay validation step. Requires a valid ApplePaySessionRequest with domain and display name information.",
+      "reasoning": "Original summary 'Get an Apple Pay session' is passive and vague. Description lacks clarity on what the operation does (creates vs retrieves), expected inputs, and specific output format. Improved version uses action-oriented language, clarifies it's for API-only integrations, specifies input requirements, and explains the purpose in the payment flow for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -5681,7 +5789,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post-cardDetails' has semantic quality issues: vague_summary, missing_context. The current summary is vague and does not clearly indicate the action. The description is missing context about the expected use of the returned card details.",
+    "message": "Operation 'post-cardDetails' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary is passive and incomplete - doesn't mention co-brand detection which is a key use case. Description is verbose and unclear about inputs/outputs. Improved version uses action-oriented language, clearly specifies what inputs are expected (card data, optional supported brands list), what outputs are returned (brand identification, co-brand status, support status), and the primary use case (routing and co-brand handling). Better for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5696,14 +5804,199 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "Get the brands and other details of a card",
-      "current_description": "Use this endpoint to get information about the card or network token that enables you to decideon the routing of the transaction and the eligibility of the card for the type of transaction.\n\nIf you include [your supported brands](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/cardDetails__reqParam_supportedBrands) in the request, the response also tells you if you support each [brand that was identified on the card](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/cardDetails__resParam_details).\n\nIf you have an API-only integration and collect card data, use this endpoint to find out if the shopper's card is co-branded. For co-branded cards, you must let the shopper choose the brand to pay with  if you support both brands.",
-      "summary_suggestion": "Retrieve card details and brand information",
-      "description_suggestion": "Retrieves information about a card or network token, including brand details, to determine transaction routing and eligibility. If supported brands are included in the request, the response indicates which brands are supported. For API-only integrations, this endpoint helps identify co-branded cards.",
-      "reasoning": "The current summary is vague and does not clearly indicate the action. The description is missing context about the expected use of the returned card details.",
+      "current_description": "Use this endpoint to get information about the card or network token that enables you to decideon the routing of the transaction and the eligibility of the card for the type of transaction.\n\nIf you include [your supported brands](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/cardDetails__reqParam_supportedBrands) in the request, the response also tells you if you support each [brand that was identified on the card](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/cardDetails__resParam_details).\n \nIf you have an API-only integration and collect card data, use this endpoint to find out if the shopper's card is co-branded. For co-branded cards, you must let the shopper choose the brand to pay with  if you support both brands.",
+      "summary_suggestion": "Retrieve card brand and co-brand details",
+      "description_suggestion": "Retrieves card or network token information including brand identification and co-brand detection. Accepts card data and optional list of supported brands. Returns identified card brands, co-brand status, and whether each identified brand is supported by your integration. Use this endpoint to determine transaction routing eligibility and enforce brand selection for co-branded cards. Supports API-only integrations with card data collection.",
+      "reasoning": "Original summary is passive and incomplete - doesn't mention co-brand detection which is a key use case. Description is verbose and unclear about inputs/outputs. Improved version uses action-oriented language, clearly specifies what inputs are expected (card data, optional supported brands list), what outputs are returned (brand identification, co-brand status, support status), and the primary use case (routing and co-brand handling). Better for AI agent decision-making.",
       "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-donations' has semantic quality issues: vague_summary, missing_input_details, missing_context. Original summary 'Start a transaction' is vague and doesn't clarify this is a donation-specific operation or that it uses a pre-generated token. Description lacks clarity on the two-step flow, missing input requirements (donation token, account ID), and doesn't explain this is a completion step. Improved version clarifies the operation's role in the donation workflow, specifies required inputs, explains the sequential nature (second step after /payments), and provides better context for AI agents to understand when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-donations",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_context"
+      ],
+      "current_summary": "Start a transaction for donations",
+      "current_description": "Takes in the donation token generated by the `/payments` request and uses it to make the donation for the donation account specified in the request.\n\nFor more information, see [Donations](https://docs.adyen.com/online-payments/donations).",
+      "summary_suggestion": "Process a donation using a donation token",
+      "description_suggestion": "Processes a donation transaction using a donation token previously generated by a `/payments` request. Requires the donation token and target donation account identifier in the request. Completes the donation for the specified account and returns the transaction result. This is the second step in the donation flow after initial payment authorization.",
+      "reasoning": "Original summary 'Start a transaction' is vague and doesn't clarify this is a donation-specific operation or that it uses a pre-generated token. Description lacks clarity on the two-step flow, missing input requirements (donation token, account ID), and doesn't explain this is a completion step. Improved version clarifies the operation's role in the donation workflow, specifies required inputs, explains the sequential nature (second step after /payments), and provides better context for AI agents to understand when to use this operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-orders' has semantic quality issues: missing_output_details, missing_side_effects. Summary is clear and action-oriented. Description explains the purpose (partial payments) and sequencing requirement, but lacks details about what is returned (order reference) and the side effect of reserving the payment amount. Improved description specifies the return value (order object with reference), clarifies how it's used in subsequent calls, and explains the state change (amount reservation) for better AI agent understanding of the operation's role in the payment flow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-orders",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Create an order",
+      "current_description": "Creates an order to be used for partial payments. Make a POST `/orders` call before making a `/payments` call when processing payments with different payment methods.",
+      "description_suggestion": "Creates an order for partial payments with multiple payment methods. Must be called before `/payments` requests when splitting payments across different payment methods. Returns an order object with a unique order reference that should be included in subsequent payment requests. The created order reserves the payment amount and enables multi-method payment processing.",
+      "reasoning": "Summary is clear and action-oriented. Description explains the purpose (partial payments) and sequencing requirement, but lacks details about what is returned (order reference) and the side effect of reserving the payment amount. Improved description specifies the return value (order object with reference), clarifies how it's used in subsequent calls, and explains the state change (amount reservation) for better AI agent understanding of the operation's role in the payment flow.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-originKeys' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_context. Original summary is passive and unclear. Description buries the main functionality with a deprecation notice and lacks clarity on inputs/outputs. Improved version uses action-oriented language, clearly specifies input (list of domains), output (domain-to-key mapping), and the purpose (client-side authentication). Moves deprecation context to the end while maintaining it. Better for AI agents to understand what this operation does and when it's appropriate to use.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-originKeys",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Create originKey values for domains",
+      "current_description": "This operation takes the origin domains and returns a JSON object containing the corresponding origin keys for the domains. \n> If you're still using origin key for your Web Drop-in or Components integration, we recommend [switching to client key](https://docs.adyen.com/development-resources/client-side-authentication/migrate-from-origin-key-to-client-key). This allows you to use a single key for all origins, add or remove origins without generating a new key, and detect the card type from the number entered in your payment form.",
+      "summary_suggestion": "Generate origin keys for specified domains",
+      "description_suggestion": "Generates origin keys for specified domain origins used in Web Drop-in or Components integrations. Accepts a list of origin domains in the request and returns a JSON object mapping each domain to its corresponding origin key. Each origin key is required for client-side payment form authentication on that specific domain. Note: This operation is legacy; consider migrating to client key for improved flexibility and single-key support across all origins.",
+      "reasoning": "Original summary is passive and unclear. Description buries the main functionality with a deprecation notice and lacks clarity on inputs/outputs. Improved version uses action-oriented language, clearly specifies input (list of domains), output (domain-to-key mapping), and the purpose (client-side authentication). Moves deprecation context to the end while maintaining it. Better for AI agents to understand what this operation does and when it's appropriate to use.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-paypal-updateOrder' has semantic quality issues: vague_description, missing_output_details, missing_side_effects. Original description is vague about what is returned and lacks clarity on when to use this operation. Summary is slightly verbose. Improved version clarifies the operation's purpose (update amount and delivery methods), explains the trigger (delivery address change), specifies the output (updated order details), and documents the side effect (PayPal lightbox refresh). This helps AI agents understand the operation's role in the PayPal checkout flow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-paypal-updateOrder",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Updates the order for PayPal Express Checkout",
+      "current_description": "Updates the order for PayPal Express Checkout. This can be used to update the PayPal lightbox with an updated amount and delivery methods based on the delivery address.",
+      "summary_suggestion": "Update PayPal Express Checkout order details",
+      "description_suggestion": "Updates the order details for PayPal Express Checkout, including amount and available delivery methods based on the shopper's delivery address. This operation refreshes the PayPal lightbox display with the updated information. Returns the updated order details. Use this when the shopper's delivery address changes to recalculate shipping costs and available delivery options.",
+      "reasoning": "Original description is vague about what is returned and lacks clarity on when to use this operation. Summary is slightly verbose. Improved version clarifies the operation's purpose (update amount and delivery methods), explains the trigger (delivery address change), specifies the output (updated order details), and documents the side effect (PayPal lightbox refresh). This helps AI agents understand the operation's role in the PayPal checkout flow.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-storedPaymentMethods' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Original description is too brief and lacks context about inputs, outputs, and use cases. Summary is somewhat generic. Improved version clarifies that this creates a reusable token for recurring payments, explains the input requirement (payment method details), specifies the output (unique token reference), and documents the primary use cases (recurring billing, one-click checkout). This helps AI agents understand when and how to use this operation in payment workflows.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-storedPaymentMethods",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Create a token to store payment details",
+      "current_description": "Creates a token to store the shopper's payment details. This token can be used for the shopper's future payments.",
+      "summary_suggestion": "Tokenize shopper payment details for recurring use",
+      "description_suggestion": "Creates a reusable token that stores the shopper's payment details securely. This token enables recurring payments and future transactions without requiring the shopper to re-enter payment information. The request should include the shopper's payment method details. Returns a unique token reference that can be used in subsequent payment requests. This operation is essential for setting up recurring billing or one-click checkout experiences.",
+      "reasoning": "Original description is too brief and lacks context about inputs, outputs, and use cases. Summary is somewhat generic. Improved version clarifies that this creates a reusable token for recurring payments, explains the input requirement (payment method details), specifies the output (unique token reference), and documents the primary use cases (recurring billing, one-click checkout). This helps AI agents understand when and how to use this operation in payment workflows.",
+      "batch_index": 2
     }
   },
   {
@@ -5717,7 +6010,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 21 operations analyzed, 3 quality issues found",
+    "message": "Semantic analysis completed: 21 operations analyzed, 11 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -5729,7 +6022,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 21,
-      "total_issues_found": 3,
+      "total_issues_found": 11,
       "batches_processed": 3
     }
   }

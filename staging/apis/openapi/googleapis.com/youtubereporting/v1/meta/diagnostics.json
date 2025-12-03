@@ -3317,7 +3317,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'youtubereporting.reportTypes.list' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary is missing, and the description is vague. Added context about the operation's purpose, authentication requirement, and response details for better clarity and AI agent interpretability.",
+    "message": "Operation 'youtubereporting.reportTypes.list' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details, poor_ai_interpretability. The current description is extremely vague and lacks essential context. It doesn't explain what report types are, why an agent would use this operation, what parameters are available, or what the response contains. The missing summary makes it harder for AI agents to quickly understand the operation's purpose. The improved version clarifies that this lists available report types for YouTube Analytics, explains the relationship to job creation, specifies the response type, and provides context about when this operation should be used in a workflow.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3333,13 +3333,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Lists report types.",
-      "summary_suggestion": "List available report types",
-      "description_suggestion": "Retrieves a list of available report types for scheduling reporting jobs. This operation does not require authentication. The response includes metadata for each report type, such as the report type ID and name.",
-      "reasoning": "The current summary is missing, and the description is vague. Added context about the operation's purpose, authentication requirement, and response details for better clarity and AI agent interpretability.",
+      "summary_suggestion": "Retrieve available YouTube Analytics report types",
+      "description_suggestion": "Retrieves a list of all available report types that can be used to create reporting jobs. Report types define the structure and metrics included in generated reports. Returns a ListReportTypesResponse containing the available report types and their configurations. This operation helps identify which report types are supported before creating a new reporting job.",
+      "reasoning": "The current description is extremely vague and lacks essential context. It doesn't explain what report types are, why an agent would use this operation, what parameters are available, or what the response contains. The missing summary makes it harder for AI agents to quickly understand the operation's purpose. The improved version clarifies that this lists available report types for YouTube Analytics, explains the relationship to job creation, specifies the response type, and provides context about when this operation should be used in a workflow.",
       "batch_index": 1
     }
   },
@@ -3354,7 +3357,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'youtubereporting.jobs.list' has semantic quality issues: vague_summary, vague_description. The current summary and description are too vague. The suggested summary and description provide clarity on the operation's purpose and expected output.",
+    "message": "Operation 'youtubereporting.jobs.list' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description is too minimal. Added context about what jobs are listed (reporting jobs for YouTube channel), mentioned pagination/filtering support, and clarified the response structure. Summary was missing entirely. These improvements help AI agents understand the operation's purpose and when to use it.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3369,13 +3372,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists jobs.",
-      "summary_suggestion": "List all scheduled jobs",
-      "description_suggestion": "Retrieves a list of all scheduled reporting jobs. Returns a list of job metadata objects.",
-      "reasoning": "The current summary and description are too vague. The suggested summary and description provide clarity on the operation's purpose and expected output.",
+      "summary_suggestion": "List all reporting jobs",
+      "description_suggestion": "Retrieves a list of all reporting jobs that have been created for your YouTube channel. Supports filtering and pagination through query parameters. Returns a ListJobsResponse containing an array of Job objects with their metadata including job ID, report type, and creation status.",
+      "reasoning": "Original description is too minimal. Added context about what jobs are listed (reporting jobs for YouTube channel), mentioned pagination/filtering support, and clarified the response structure. Summary was missing entirely. These improvements help AI agents understand the operation's purpose and when to use it.",
       "batch_index": 0
     }
   },
@@ -3390,7 +3395,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'youtubereporting.jobs.create' has semantic quality issues: vague_summary, missing_input_details. The current summary lacks clarity and the description does not detail the input parameters. The suggested summary and description provide more specific information about the operation's purpose and input requirements.",
+    "message": "Operation 'youtubereporting.jobs.create' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_side_effects. Original description lacks detail about what a job does and what inputs are required. Added explanation of job purpose (generating YouTube Analytics reports), clarified the request body requirement, and explained the side effect (job begins generating reports). Summary was missing. These changes improve AI agent understanding of when and how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3405,13 +3410,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "vague_description",
+        "missing_input_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Creates a job and returns it.",
       "summary_suggestion": "Create a new reporting job",
-      "description_suggestion": "Creates a new reporting job and returns the job object. It requires a Job object in the request body which specifies the job details.",
-      "reasoning": "The current summary lacks clarity and the description does not detail the input parameters. The suggested summary and description provide more specific information about the operation's purpose and input requirements.",
+      "description_suggestion": "Creates a new reporting job that will generate YouTube Analytics reports of a specified type. Accepts a Job object in the request body specifying the report type and other configuration. Returns the created Job object with an assigned job ID. The job will begin generating reports according to its schedule after creation.",
+      "reasoning": "Original description lacks detail about what a job does and what inputs are required. Added explanation of job purpose (generating YouTube Analytics reports), clarified the request body requirement, and explained the side effect (job begins generating reports). Summary was missing. These changes improve AI agent understanding of when and how to use this operation.",
       "batch_index": 0
     }
   },
@@ -3426,7 +3433,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'youtubereporting.jobs.delete' has semantic quality issues: vague_summary, missing_side_effects. The current summary lacks clarity, and the description does not mention the side effects or state changes. The suggested summary and description provide clarity on the operation's purpose and side effects.",
+    "message": "Operation 'youtubereporting.jobs.delete' has semantic quality issues: vague_summary, vague_description, missing_context, missing_side_effects. Original description is too terse. Added context about what deletion means (stops report generation), clarified the required parameter, explained the response, and emphasized the permanent nature of the operation. Summary was missing. These improvements help AI agents understand the consequences of this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3441,13 +3448,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
+        "missing_context",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes a job.",
-      "summary_suggestion": "Delete a scheduled job",
-      "description_suggestion": "Deletes a specified job. The job must be in a terminal state to be deleted. Returns an empty response body.",
-      "reasoning": "The current summary lacks clarity, and the description does not mention the side effects or state changes. The suggested summary and description provide clarity on the operation's purpose and side effects.",
+      "summary_suggestion": "Delete a reporting job",
+      "description_suggestion": "Deletes a reporting job by its ID, stopping the generation of future reports. Requires the job ID as a path parameter. Returns an empty response on successful deletion. This operation permanently removes the job and halts any scheduled report generation.",
+      "reasoning": "Original description is too terse. Added context about what deletion means (stops report generation), clarified the required parameter, explained the response, and emphasized the permanent nature of the operation. Summary was missing. These improvements help AI agents understand the consequences of this operation.",
       "batch_index": 0
     }
   },
@@ -3462,7 +3471,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'youtubereporting.jobs.get' has semantic quality issues: vague_summary, missing_output_details. The current summary lacks clarity and the description does not specify the output details. The suggested summary and description provide more specific information about the operation's purpose and expected output.",
+    "message": "Operation 'youtubereporting.jobs.get' has semantic quality issues: vague_summary, vague_description, missing_context. Original description lacks specificity about what information is returned. Added context about what 'getting' a job means (retrieving metadata and configuration), clarified the required parameter, and specified the response structure. Summary was missing. These changes improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3477,13 +3486,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
+        "vague_description",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Gets a job.",
-      "summary_suggestion": "Retrieve a specific job",
-      "description_suggestion": "Retrieves the metadata of a specified job. Returns the job object which includes details such as job ID, status, and creation time.",
-      "reasoning": "The current summary lacks clarity and the description does not specify the output details. The suggested summary and description provide more specific information about the operation's purpose and expected output.",
+      "summary_suggestion": "Retrieve a specific reporting job",
+      "description_suggestion": "Retrieves the metadata and configuration details of a specific reporting job by its ID. Requires the job ID as a path parameter. Returns a Job object containing the job's report type, creation timestamp, and other configuration information.",
+      "reasoning": "Original description lacks specificity about what information is returned. Added context about what 'getting' a job means (retrieving metadata and configuration), clarified the required parameter, and specified the response structure. Summary was missing. These changes improve AI agent interpretability.",
       "batch_index": 0
     }
   },
@@ -3498,7 +3508,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'youtubereporting.jobs.reports.list' has semantic quality issues: vague_summary, missing_context. The current summary lacks clarity and the description does not provide context about the job's state. The suggested summary and description provide more specific information about the operation's purpose and context.",
+    "message": "Operation 'youtubereporting.jobs.reports.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Original description mentions error handling but lacks detail about what reports are returned and how to access them. Added context about pagination/filtering support, clarified the response structure (Report objects with download URLs), and emphasized the job ID requirement. Summary was missing. These improvements help AI agents understand the operation's full scope.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3513,13 +3523,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists reports created by a specific job. Returns NOT_FOUND if the job does not exist.",
-      "summary_suggestion": "List reports for a specific job",
-      "description_suggestion": "Lists all reports created by a specified job. Returns a list of report metadata objects. If the job does not exist, returns a NOT_FOUND error.",
-      "reasoning": "The current summary lacks clarity and the description does not provide context about the job's state. The suggested summary and description provide more specific information about the operation's purpose and context.",
+      "summary_suggestion": "List reports generated by a job",
+      "description_suggestion": "Retrieves a list of all reports generated by a specific reporting job. Requires the job ID as a path parameter. Supports filtering and pagination through query parameters. Returns a ListReportsResponse containing an array of Report objects with metadata including report URLs for download. Returns NOT_FOUND error if the specified job does not exist.",
+      "reasoning": "Original description mentions error handling but lacks detail about what reports are returned and how to access them. Added context about pagination/filtering support, clarified the response structure (Report objects with download URLs), and emphasized the job ID requirement. Summary was missing. These improvements help AI agents understand the operation's full scope.",
       "batch_index": 0
     }
   },
@@ -3534,7 +3545,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'youtubereporting.jobs.reports.get' has semantic quality issues: vague_summary, missing_output_details. The current summary lacks clarity and the description does not specify the output details. The suggested summary and description provide more specific information about the operation's purpose and expected output.",
+    "message": "Operation 'youtubereporting.jobs.reports.get' has semantic quality issues: vague_summary, missing_context, missing_output_details. Original description is vague about what metadata is included and doesn't mention the download URL which is critical for accessing the report. Added context about required parameters, clarified the response includes download URL, and specified the report format (CSV). Summary was missing. These changes improve AI agent understanding of how to use this operation to access reports.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3549,13 +3560,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_context",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets the metadata of a specific report.",
-      "summary_suggestion": "Retrieve metadata of a specific report",
-      "description_suggestion": "Retrieves the metadata of a specified report. Returns the report metadata object which includes details such as report ID, status, and creation time.",
-      "reasoning": "The current summary lacks clarity and the description does not specify the output details. The suggested summary and description provide more specific information about the operation's purpose and expected output.",
+      "summary_suggestion": "Retrieve report metadata and download URL",
+      "description_suggestion": "Retrieves the metadata of a specific report generated by a reporting job, including the download URL. Requires both the job ID and report ID as path parameters. Returns a Report object containing the report's creation timestamp, status, and the URL from which the CSV report file can be downloaded.",
+      "reasoning": "Original description is vague about what metadata is included and doesn't mention the download URL which is critical for accessing the report. Added context about required parameters, clarified the response includes download URL, and specified the report format (CSV). Summary was missing. These changes improve AI agent understanding of how to use this operation to access reports.",
       "batch_index": 0
     }
   },
@@ -3570,7 +3582,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'youtubereporting.media.download' has semantic quality issues: vague_summary, vague_description. The current summary and description are too vague. The suggested summary and description provide clarity on the operation's purpose and how to perform the download.",
+    "message": "Operation 'youtubereporting.media.download' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, not_actionable. Original description is confusing and not action-oriented. It describes the URI format rather than explaining what the operation does. Added clarity about downloading report files in CSV format, explained where to get the resource name, clarified the response (file content), and explained the alt=media parameter. Summary was missing. These improvements make it clear this operation downloads actual report data, not just metadata.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3585,13 +3597,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "not_actionable"
       ],
       "current_summary": "",
       "current_description": "Method for media download. Download is supported on the URI `/v1/media/{+name}?alt=media`.",
-      "summary_suggestion": "Download media content",
-      "description_suggestion": "Downloads media content specified by the resource name. The media can be downloaded using the URI `/v1/media/{+name}?alt=media`.",
-      "reasoning": "The current summary and description are too vague. The suggested summary and description provide clarity on the operation's purpose and how to perform the download.",
+      "summary_suggestion": "Download a report file",
+      "description_suggestion": "Downloads the actual report file (CSV format) for a specific report. Requires the resource name (report identifier) as a path parameter. The resource name should be obtained from a Report object's download URL. Returns the CSV file content. Use the query parameter `alt=media` to retrieve the file content directly.",
+      "reasoning": "Original description is confusing and not action-oriented. It describes the URI format rather than explaining what the operation does. Added clarity about downloading report files in CSV format, explained where to get the resource name, clarified the response (file content), and explained the alt=media parameter. Summary was missing. These improvements make it clear this operation downloads actual report data, not just metadata.",
       "batch_index": 0
     }
   },

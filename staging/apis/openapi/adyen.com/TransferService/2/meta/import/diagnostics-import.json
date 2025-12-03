@@ -1465,7 +1465,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get-transactions' has semantic quality issues: vague_description, missing_context. The current description is vague and includes deprecated information. The suggestion provides a clearer, more specific description with necessary context and parameters.",
+    "message": "Operation 'get-transactions' has semantic quality issues: missing_input_details, missing_output_details, poor_ai_interpretability. Original summary is too generic ('Get all transactions'). Description buries the requirement to specify at least one filter parameter and lacks clarity on what is returned. Added specificity about required parameters, clarified the filtering requirement, and explicitly stated the response schema type for better AI agent understanding of when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1479,14 +1479,15 @@
       "operation_id": "get-transactions",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Get all transactions",
-      "current_description": "Versions 1 and 2 of the Transfers API are deprecated. If you are just starting your implementation, use the latest version.\n\nReturns all the transactions related to a balance account, account holder, or balance platform.\n\nWhen making this request, you must include at least one of the following:\n- `balanceAccountId`\n- `accountHolderId`\n- `balancePlatform`.\n\nThis endpoint supports cursor-based pagination. The response returns the first page of results, and returns links to the next and previous pages when applicable. You can use the links to page through the results.",
-      "summary_suggestion": "Retrieve all transactions for an account",
-      "description_suggestion": "Retrieves all transactions related to a balance account, account holder, or balance platform. Requires at least one of the following parameters: `balanceAccountId`, `accountHolderId`, or `balancePlatform`. Supports cursor-based pagination for navigating through results.",
-      "reasoning": "The current description is vague and includes deprecated information. The suggestion provides a clearer, more specific description with necessary context and parameters.",
+      "current_description": "Versions 1 and 2 of the Transfers API are deprecated. If you are just starting your implementation, use the latest version.\n\nReturns all the transactions related to a balance account, account holder, or balance platform.\n\nWhen making this request, you must include at least one of the following:\n- `balanceAccountId`\n- `accountHolderId`\n- `balancePlatform`.\n \nThis endpoint supports cursor-based pagination. The response returns the first page of results, and returns links to the next and previous pages when applicable. You can use the links to page through the results.",
+      "summary_suggestion": "Retrieve transactions for a balance account or holder",
+      "description_suggestion": "Retrieves all transactions associated with a specified balance account, account holder, or balance platform. At least one of the following query parameters must be provided: `balanceAccountId`, `accountHolderId`, or `balancePlatform`. The response returns transaction records with pagination support using cursor-based links for navigating through result pages. Returns a TransactionSearchResponse containing an array of Transaction objects and pagination links.",
+      "reasoning": "Original summary is too generic ('Get all transactions'). Description buries the requirement to specify at least one filter parameter and lacks clarity on what is returned. Added specificity about required parameters, clarified the filtering requirement, and explicitly stated the response schema type for better AI agent understanding of when to use this operation and what to expect.",
       "batch_index": 0
     }
   },
@@ -1501,7 +1502,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get-transactions-id' has semantic quality issues: vague_description, missing_context. The current description is vague and includes deprecated information. The suggestion provides a clearer, more specific description with necessary context and parameters.",
+    "message": "Operation 'get-transactions-id' has semantic quality issues: vague_summary, vague_description, missing_output_details, poor_ai_interpretability. Original summary and description are extremely vague. The description provides almost no useful information beyond 'Returns a transaction.' Added context about the path parameter (transaction ID), clarified what information is returned (Transaction object with specific fields), and provided guidance on when to use this operation versus the list endpoint for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1515,14 +1516,16 @@
       "operation_id": "get-transactions-id",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Get a transaction",
       "current_description": "Versions 1 and 2 of the Transfers API are deprecated. If you are just starting your implementation, use the latest version.\n\nReturns a transaction.",
-      "summary_suggestion": "Retrieve a specific transaction",
-      "description_suggestion": "Retrieves a specific transaction by its ID. Requires the `id` parameter to specify the transaction to be retrieved.",
-      "reasoning": "The current description is vague and includes deprecated information. The suggestion provides a clearer, more specific description with necessary context and parameters.",
+      "summary_suggestion": "Retrieve a specific transaction by ID",
+      "description_suggestion": "Retrieves detailed information for a specific transaction identified by its unique transaction ID. Returns a Transaction object containing transaction details including amount, counterparty information, status, and timestamps. Use this endpoint when you need to fetch details about a single transaction rather than searching across multiple transactions.",
+      "reasoning": "Original summary and description are extremely vague. The description provides almost no useful information beyond 'Returns a transaction.' Added context about the path parameter (transaction ID), clarified what information is returned (Transaction object with specific fields), and provided guidance on when to use this operation versus the list endpoint for better AI agent decision-making.",
       "batch_index": 0
     }
   },
@@ -1537,7 +1540,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post-transfers' has semantic quality issues: vague_description, missing_context. The current description is vague and includes deprecated information. The suggestion provides a clearer, more specific description with necessary context and parameters.",
+    "message": "Operation 'post-transfers' has semantic quality issues: missing_output_details, missing_side_effects. Summary is clear and actionable. Description has good context about supported destinations and permission requirements, but lacks clarity on the asynchronous nature of the operation and what the response contains. Added explicit mention of the 202 Accepted status code, clarified that this is asynchronous with webhook delivery, specified the request schema (TransferInfo), and emphasized that 202 means acceptance not completion. This helps AI agents understand they must handle asynchronous callbacks and not treat the response as confirmation of transfer completion.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1551,14 +1554,13 @@
       "operation_id": "post-transfers",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description",
-        "missing_context"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Transfer funds",
-      "current_description": "Versions 1 and 2 of the Transfers API are deprecated. If you are just starting your implementation, use the latest version.\n\nStarts a request to transfer funds to:\n- [Balance accounts](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts)\n - [Transfer instruments](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments)\n - [Third-party bank accounts](https://docs.adyen.com/payouts/payout-service/pay-out-to-bank-accounts)\n - [Third-party cards](https://docs.adyen.com/payouts/payout-service/pay-out-to-cards)\n\nAdyen sends the outcome of the transfer request through webhooks.\n\nTo use this endpoint:\n- Your API credential must have the **TransferService Webservice Initiate** [role](https://docs.adyen.com/platforms/manage-access/webservice-roles/?tab=transfers_3).\n - The account holder must have the required [capabilities](https://docs.adyen.com/platforms/verification-overview/capabilities).\n\nReach out to your Adyen contact to set up these permissions.",
-      "summary_suggestion": "Initiate a fund transfer",
-      "description_suggestion": "Initiates a transfer request to fund balance accounts, transfer instruments, third-party bank accounts, or third-party cards. Requires the `TransferInfo` schema in the request body. The outcome of the transfer request is communicated via webhooks. Ensure your API credential has the necessary role and the account holder has the required capabilities.",
-      "reasoning": "The current description is vague and includes deprecated information. The suggestion provides a clearer, more specific description with necessary context and parameters.",
+      "current_description": "Versions 1 and 2 of the Transfers API are deprecated. If you are just starting your implementation, use the latest version.\n\nStarts a request to transfer funds to:\n- [Balance accounts](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts)\n - [Transfer instruments](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments)\n - [Third-party bank accounts](https://docs.adyen.com/payouts/payout-service/pay-out-to-bank-accounts)\n - [Third-party cards](https://docs.adyen.com/payouts/payout-service/pay-out-to-cards)\n \nAdyen sends the outcome of the transfer request through webhooks.\n\nTo use this endpoint:\n- Your API credential must have the **TransferService Webservice Initiate** [role](https://docs.adyen.com/platforms/manage-access/webservice-roles/?tab=transfers_3).\n - The account holder must have the required [capabilities](https://docs.adyen.com/platforms/verification-overview/capabilities).\n \nReach out to your Adyen contact to set up these permissions.",
+      "description_suggestion": "Initiates an asynchronous transfer request to move funds from a source balance account to a destination (balance account, transfer instrument, third-party bank account, or card). Requires a TransferInfo request body specifying the source, destination, and amount. Returns a 202 Accepted response with a transfer reference. The transfer outcome is delivered asynchronously via webhooks. Requires the TransferService Webservice Initiate role and appropriate account holder capabilities. Note: This is an asynchronous operation; the 202 response indicates the request was accepted, not that the transfer completed.",
+      "reasoning": "Summary is clear and actionable. Description has good context about supported destinations and permission requirements, but lacks clarity on the asynchronous nature of the operation and what the response contains. Added explicit mention of the 202 Accepted status code, clarified that this is asynchronous with webhook delivery, specified the request schema (TransferInfo), and emphasized that 202 means acceptance not completion. This helps AI agents understand they must handle asynchronous callbacks and not treat the response as confirmation of transfer completion.",
       "batch_index": 0
     }
   },

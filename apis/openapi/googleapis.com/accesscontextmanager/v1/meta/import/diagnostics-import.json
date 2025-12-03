@@ -6879,7 +6879,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'accesscontextmanager.accessPolicies.servicePerimeters.testIamPermissions' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing. Added a concise summary. The current description is missing details about the input parameters. Added details about the request schema to improve clarity and AI agent interpretability.",
+    "message": "Operation 'accesscontextmanager.accessPolicies.servicePerimeters.testIamPermissions' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Original summary was empty, making it impossible for AI agents to understand the operation's purpose. Description lacked critical details about inputs (TestIamPermissionsRequest structure and permission strings), outputs (TestIamPermissionsResponse with subset of permissions), and clarification that this is a read-only diagnostic operation. Enhanced version provides complete context for AI agent decision-making about when to invoke this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6894,13 +6894,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Returns the IAM permissions that the caller has on the specified Access Context Manager resource. The resource can be an AccessPolicy, AccessLevel, or ServicePerimeter. This method does not support other resources.",
       "summary_suggestion": "Test IAM permissions on Access Context Manager resource",
-      "description_suggestion": "Returns the IAM permissions that the caller has on the specified Access Context Manager resource. The resource can be an AccessPolicy, AccessLevel, or ServicePerimeter. The request must include the resource name and a set of permissions to test. This method does not support other resources.",
-      "reasoning": "The current summary is missing. Added a concise summary. The current description is missing details about the input parameters. Added details about the request schema to improve clarity and AI agent interpretability.",
+      "description_suggestion": "Tests which IAM permissions the authenticated caller has on the specified Access Context Manager resource. Supports AccessPolicy, AccessLevel, and ServicePerimeter resources. Accepts a list of permission strings to test via TestIamPermissionsRequest. Returns a TestIamPermissionsResponse containing the subset of requested permissions that the caller actually possesses. This is a read-only operation with no side effects.",
+      "reasoning": "Original summary was empty, making it impossible for AI agents to understand the operation's purpose. Description lacked critical details about inputs (TestIamPermissionsRequest structure and permission strings), outputs (TestIamPermissionsResponse with subset of permissions), and clarification that this is a read-only diagnostic operation. Enhanced version provides complete context for AI agent decision-making about when to invoke this operation and what to expect.",
       "batch_index": 3
     }
   },
@@ -6915,7 +6917,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'accesscontextmanager.accessPolicies.list' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'accesscontextmanager.accessPolicies.list' has semantic quality issues: vague_summary, missing_input_details. Missing summary entirely. Description lacks details about pagination support, filtering capabilities, and parameter expectations. Added context about return format and available query parameters for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6929,12 +6931,14 @@
       "operation_id": "accesscontextmanager.accessPolicies.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Lists all access policies in an organization.",
-      "summary_suggestion": "List all access policies in an organization",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
+      "summary_suggestion": "List all access policies in organization",
+      "description_suggestion": "Retrieves all AccessPolicy resources within the specified organization. Returns a paginated list of access policies. Supports filtering and pagination through query parameters.",
+      "reasoning": "Missing summary entirely. Description lacks details about pagination support, filtering capabilities, and parameter expectations. Added context about return format and available query parameters for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -6949,7 +6953,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'accesscontextmanager.accessPolicies.create' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing. Suggested summary is concise and action-oriented. The description was missing information about side effects and was slightly rephrased for clarity.",
+    "message": "Operation 'accesscontextmanager.accessPolicies.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is incomplete regarding input requirements and output format. Clarified that it accepts an AccessPolicy object, returns an Operation resource, and explained the asynchronous nature and error handling for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6964,13 +6968,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Creates an access policy. This method fails if the organization already has an access policy. The long-running operation has a successful status after the access policy propagates to long-lasting storage. Syntactic and basic semantic errors are returned in `metadata` as a BadRequest proto.",
-      "summary_suggestion": "Create a new access policy",
-      "description_suggestion": "Creates a new access policy for an organization. If the organization already has an access policy, the method fails. The long-running operation will have a successful status after the access policy propagates to long-lasting storage. Syntactic and basic semantic errors are returned in `metadata` as a BadRequest proto. Note: Completion of the operation does not guarantee immediate deployment of the policy.",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented. The description was missing information about side effects and was slightly rephrased for clarity.",
+      "summary_suggestion": "Create new access policy for organization",
+      "description_suggestion": "Creates a new AccessPolicy resource for the organization. Fails if an access policy already exists for the organization. Accepts an AccessPolicy object as input. Returns a long-running Operation that completes when the policy propagates to persistent storage. Validation errors are returned in the operation metadata as BadRequest proto messages.",
+      "reasoning": "Missing summary. Description is incomplete regarding input requirements and output format. Clarified that it accepts an AccessPolicy object, returns an Operation resource, and explained the asynchronous nature and error handling for AI agent clarity.",
       "batch_index": 0
     }
   },
@@ -6985,7 +6990,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'accesscontextmanager.services.list' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'accesscontextmanager.services.list' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description is too brief and lacks context about return format and available query parameters. Expanded to clarify that it returns SupportedService objects and supports pagination/filtering for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6999,12 +7004,14 @@
       "operation_id": "accesscontextmanager.services.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Lists all VPC-SC supported services.",
-      "summary_suggestion": "List all VPC-SC supported services",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
+      "summary_suggestion": "List all VPC Service Controls supported services",
+      "description_suggestion": "Retrieves a list of all services supported by VPC Service Controls. Returns a paginated list of SupportedService resources with their properties and capabilities. Supports filtering and pagination through query parameters.",
+      "reasoning": "Missing summary. Description is too brief and lacks context about return format and available query parameters. Expanded to clarify that it returns SupportedService objects and supports pagination/filtering for better AI agent interpretability.",
       "batch_index": 0
     }
   },
@@ -7019,7 +7026,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'accesscontextmanager.services.get' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'accesscontextmanager.services.get' has semantic quality issues: vague_summary. Missing summary. Description is clear and complete - it explains the operation retrieves a specific SupportedService by name. Only summary suggestion needed.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7037,8 +7044,8 @@
       ],
       "current_summary": "",
       "current_description": "Returns a VPC-SC supported service based on the service name.",
-      "summary_suggestion": "Get a VPC-SC supported service by name",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
+      "summary_suggestion": "Get VPC Service Controls supported service details",
+      "reasoning": "Missing summary. Description is clear and complete - it explains the operation retrieves a specific SupportedService by name. Only summary suggestion needed.",
       "batch_index": 0
     }
   },
@@ -7053,7 +7060,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'accesscontextmanager.organizations.gcpUserAccessBindings.delete' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'accesscontextmanager.organizations.gcpUserAccessBindings.delete' has semantic quality issues: vague_summary, missing_side_effects. Missing summary. Description lacks clarity about the asynchronous nature and side effects. Added context about the Operation return type, clarified the eventual consistency behavior, and explained the side effect (access revocation) for AI agents to understand the full impact.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7067,12 +7074,14 @@
       "operation_id": "accesscontextmanager.organizations.gcpUserAccessBindings.delete",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes a GcpUserAccessBinding. Completion of this long-running operation does not necessarily signify that the binding deletion is deployed onto all affected users, which may take more time.",
-      "summary_suggestion": "Delete a GcpUserAccessBinding",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
+      "summary_suggestion": "Delete GCP user access binding",
+      "description_suggestion": "Deletes a GcpUserAccessBinding resource by name. Returns a long-running Operation that completes when the deletion is processed. Note: Completion of the operation does not guarantee the binding deletion has been deployed to all affected users; propagation may take additional time. This action revokes the specified access restrictions for the affected users.",
+      "reasoning": "Missing summary. Description lacks clarity about the asynchronous nature and side effects. Added context about the Operation return type, clarified the eventual consistency behavior, and explained the side effect (access revocation) for AI agents to understand the full impact.",
       "batch_index": 0
     }
   },
@@ -7087,7 +7096,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'accesscontextmanager.organizations.gcpUserAccessBindings.get' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'accesscontextmanager.organizations.gcpUserAccessBindings.get' has semantic quality issues: vague_summary. Missing summary. Description is clear and complete - it explains the operation retrieves a specific GcpUserAccessBinding by name. Only summary suggestion needed.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7105,8 +7114,8 @@
       ],
       "current_summary": "",
       "current_description": "Gets the GcpUserAccessBinding with the given name.",
-      "summary_suggestion": "Get a GcpUserAccessBinding by name",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
+      "summary_suggestion": "Get GCP user access binding by name",
+      "reasoning": "Missing summary. Description is clear and complete - it explains the operation retrieves a specific GcpUserAccessBinding by name. Only summary suggestion needed.",
       "batch_index": 0
     }
   },
@@ -7121,7 +7130,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'accesscontextmanager.organizations.gcpUserAccessBindings.patch' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'accesscontextmanager.organizations.gcpUserAccessBindings.patch' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Missing summary. Description lacks input/output details and side effects. Added context about accepting a GcpUserAccessBinding object, returning an Operation, clarified eventual consistency behavior, and explained the side effect (access restriction modification) for comprehensive AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7135,12 +7144,15 @@
       "operation_id": "accesscontextmanager.organizations.gcpUserAccessBindings.patch",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Updates a GcpUserAccessBinding. Completion of this long-running operation does not necessarily signify that the changed binding is deployed onto all affected users, which may take more time.",
-      "summary_suggestion": "Update a GcpUserAccessBinding",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
+      "summary_suggestion": "Update GCP user access binding",
+      "description_suggestion": "Updates an existing GcpUserAccessBinding resource with the provided changes. Accepts a GcpUserAccessBinding object as input. Returns a long-running Operation that completes when the update is processed. Note: Completion of the operation does not guarantee the binding changes have been deployed to all affected users; propagation may take additional time. This action modifies access restrictions for the affected users.",
+      "reasoning": "Missing summary. Description lacks input/output details and side effects. Added context about accepting a GcpUserAccessBinding object, returning an Operation, clarified eventual consistency behavior, and explained the side effect (access restriction modification) for comprehensive AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -7155,7 +7167,42 @@
         "character": 0
       }
     },
-    "message": "Operation 'accesscontextmanager.accessPolicies.accessLevels.list' has semantic quality issues: vague_summary. The summary was missing and too vague. The suggested summary is more specific and action-oriented.",
+    "message": "Operation 'accesscontextmanager.operations.cancel' has semantic quality issues: vague_summary, poor_ai_interpretability. Missing summary is the primary issue. The description is comprehensive but dense. Added a concise, action-oriented summary that helps AI agents understand this initiates a cancellation request. The description adequately explains best-effort semantics, error handling, and state changes, though an AI agent would benefit from knowing this is a best-effort operation that may not succeed.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "accesscontextmanager.operations.cancel",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of `1`, corresponding to `Code.CANCELLED`.",
+      "summary_suggestion": "Request cancellation of long-running operation",
+      "reasoning": "Missing summary is the primary issue. The description is comprehensive but dense. Added a concise, action-oriented summary that helps AI agents understand this initiates a cancellation request. The description adequately explains best-effort semantics, error handling, and state changes, though an AI agent would benefit from knowing this is a best-effort operation that may not succeed.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'accesscontextmanager.accessPolicies.accessLevels.list' has semantic quality issues: vague_summary, missing_context. Missing summary and minimal description. Added summary for clarity. Enhanced description to explain what AccessLevels are (attributes for service access) and that results are paginated, providing better context for AI agents to understand the operation's purpose and expected output.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7169,12 +7216,14 @@
       "operation_id": "accesscontextmanager.accessPolicies.accessLevels.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Lists all access levels for an access policy.",
-      "summary_suggestion": "List all access levels for an access policy",
-      "reasoning": "The summary was missing and too vague. The suggested summary is more specific and action-oriented.",
+      "summary_suggestion": "List access levels in access policy",
+      "description_suggestion": "Lists all access levels defined within a specified access policy. Returns a paginated list of AccessLevel resources that define the necessary attributes required to access Google Cloud services within this policy.",
+      "reasoning": "Missing summary and minimal description. Added summary for clarity. Enhanced description to explain what AccessLevels are (attributes for service access) and that results are paginated, providing better context for AI agents to understand the operation's purpose and expected output.",
       "batch_index": 1
     }
   },
@@ -7189,7 +7238,79 @@
         "character": 0
       }
     },
-    "message": "Operation 'accesscontextmanager.accessPolicies.authorizedOrgsDescs.list' has semantic quality issues: vague_summary. The summary was missing and too vague. The suggested summary is more specific and action-oriented.",
+    "message": "Operation 'accesscontextmanager.accessPolicies.accessLevels.create' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description lacks clarity about input requirements and operation type. Added summary for immediate clarity. Enhanced description to explicitly state this is an asynchronous operation, clarify that it returns an Operation resource for monitoring, and better explain error handling behavior for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "accesscontextmanager.accessPolicies.accessLevels.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates an access level. The long-running operation from this RPC has a successful status after the access level propagates to long-lasting storage. If access levels contain errors, an error response is returned for the first error encountered.",
+      "summary_suggestion": "Create new access level",
+      "description_suggestion": "Creates a new access level within an access policy. The operation is asynchronous and completes when the access level propagates to persistent storage. Returns an Operation resource that can be monitored for completion. If the access level definition contains errors, an error response is returned immediately for the first error encountered.",
+      "reasoning": "Missing summary. Description lacks clarity about input requirements and operation type. Added summary for immediate clarity. Enhanced description to explicitly state this is an asynchronous operation, clarify that it returns an Operation resource for monitoring, and better explain error handling behavior for AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'accesscontextmanager.accessPolicies.accessLevels.replaceAll' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description is comprehensive but could better highlight the atomic/transactional nature upfront. Added summary emphasizing atomicity. Reorganized description to lead with the transactional guarantee, clarify the asynchronous nature, and explicitly state the constraint about service perimeter references for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "accesscontextmanager.accessPolicies.accessLevels.replaceAll",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Replaces all existing access levels in an access policy with the access levels provided. This is done atomically. The long-running operation from this RPC has a successful status after all replacements propagate to long-lasting storage. If the replacement contains errors, an error response is returned for the first error encountered. Upon error, the replacement is cancelled, and existing access levels are not affected. The Operation.response field contains ReplaceAccessLevelsResponse. Removing access levels contained in existing service perimeters result in an error.",
+      "summary_suggestion": "Atomically replace all access levels",
+      "description_suggestion": "Atomically replaces all existing access levels in an access policy with the provided set. This is a transactional operation that either succeeds completely or fails without modifying existing levels. The operation is asynchronous and completes when changes propagate to persistent storage. Returns an Operation resource with ReplaceAccessLevelsResponse. Fails if any access level is referenced by existing service perimeters. On error, the replacement is cancelled and existing access levels remain unchanged.",
+      "reasoning": "Missing summary. Description is comprehensive but could better highlight the atomic/transactional nature upfront. Added summary emphasizing atomicity. Reorganized description to lead with the transactional guarantee, clarify the asynchronous nature, and explicitly state the constraint about service perimeter references for better AI agent decision-making.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'accesscontextmanager.accessPolicies.authorizedOrgsDescs.list' has semantic quality issues: vague_summary, missing_context. Missing summary and minimal description. The term 'orgs descs' is abbreviated and unclear. Added summary using full terminology 'authorized organizations descriptions'. Enhanced description to clarify what AuthorizedOrgsDesc represents (organization authorization policies) and note pagination for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7203,12 +7324,14 @@
       "operation_id": "accesscontextmanager.accessPolicies.authorizedOrgsDescs.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Lists all authorized orgs descs for an access policy.",
-      "summary_suggestion": "List all authorized orgs descs for an access policy",
-      "reasoning": "The summary was missing and too vague. The suggested summary is more specific and action-oriented.",
+      "summary_suggestion": "List authorized organizations descriptions",
+      "description_suggestion": "Lists all authorized organizations descriptions (AuthorizedOrgsDesc) for a specified access policy. Returns a paginated list of AuthorizedOrgsDesc resources that contain authorization policies for organizations.",
+      "reasoning": "Missing summary and minimal description. The term 'orgs descs' is abbreviated and unclear. Added summary using full terminology 'authorized organizations descriptions'. Enhanced description to clarify what AuthorizedOrgsDesc represents (organization authorization policies) and note pagination for better AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -7223,7 +7346,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'accesscontextmanager.organizations.gcpUserAccessBindings.list' has semantic quality issues: vague_summary. The summary was missing and too vague. The suggested summary is more specific and action-oriented.",
+    "message": "Operation 'accesscontextmanager.accessPolicies.authorizedOrgsDescs.create' has semantic quality issues: vague_summary, inconsistent_terminology, missing_input_details. Missing summary and inconsistent terminology ('orgs desc' vs full 'AuthorizedOrgsDesc'). Description lacks clarity about operation type and return value. Added summary using consistent full terminology. Enhanced description to clarify asynchronous nature, explain that Operation resource is returned for monitoring, note automatic name assignment, and improve error handling clarity for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "accesscontextmanager.accessPolicies.authorizedOrgsDescs.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "inconsistent_terminology",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates an authorized orgs desc. The long-running operation from this RPC has a successful status after the authorized orgs desc propagates to long-lasting storage. If a authorized orgs desc contains errors, an error response is returned for the first error encountered. The name of this `AuthorizedOrgsDesc` will be assigned during creation.",
+      "summary_suggestion": "Create authorized organizations description",
+      "description_suggestion": "Creates a new authorized organizations description (AuthorizedOrgsDesc) within an access policy. The operation is asynchronous and completes when the resource propagates to persistent storage. Returns an Operation resource that can be monitored for completion. The resource name is automatically assigned during creation. If the definition contains errors, an error response is returned immediately for the first error encountered.",
+      "reasoning": "Missing summary and inconsistent terminology ('orgs desc' vs full 'AuthorizedOrgsDesc'). Description lacks clarity about operation type and return value. Added summary using consistent full terminology. Enhanced description to clarify asynchronous nature, explain that Operation resource is returned for monitoring, note automatic name assignment, and improve error handling clarity for AI agents.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'accesscontextmanager.organizations.gcpUserAccessBindings.list' has semantic quality issues: vague_summary, missing_context. Missing summary and minimal description. Added concise, action-oriented summary. Enhanced description to explain what GcpUserAccessBindings do (restrict access via Context-Aware Access), note pagination, and clarify the scope (organization-level) to help AI agents understand the operation's purpose and expected output.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7237,12 +7397,14 @@
       "operation_id": "accesscontextmanager.organizations.gcpUserAccessBindings.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Lists all GcpUserAccessBindings for a Google Cloud organization.",
-      "summary_suggestion": "List all GcpUserAccessBindings for a Google Cloud organization",
-      "reasoning": "The summary was missing and too vague. The suggested summary is more specific and action-oriented.",
+      "summary_suggestion": "List user access bindings for organization",
+      "description_suggestion": "Lists all GcpUserAccessBinding resources for a specified Google Cloud organization. Returns a paginated list of user access bindings that restrict access to Cloud Console and Google Cloud APIs using Context-Aware Access controls.",
+      "reasoning": "Missing summary and minimal description. Added concise, action-oriented summary. Enhanced description to explain what GcpUserAccessBindings do (restrict access via Context-Aware Access), note pagination, and clarify the scope (organization-level) to help AI agents understand the operation's purpose and expected output.",
       "batch_index": 1
     }
   },
@@ -7257,7 +7419,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'accesscontextmanager.organizations.gcpUserAccessBindings.create' has semantic quality issues: vague_summary, missing_side_effects. Added a summary to clarify the operation's purpose and added side effects to the description.",
+    "message": "Operation 'accesscontextmanager.organizations.gcpUserAccessBindings.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks clarity on what inputs are required (group_key, access levels), what the binding does (restricts access), and authentication context. Added domain-specific terminology (Context-Aware Access), clarified the binding's purpose, and noted IAM requirements for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7272,13 +7434,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Creates a GcpUserAccessBinding. If the client specifies a name, the server ignores it. Fails if a resource already exists with the same group_key. Completion of this long-running operation does not necessarily signify that the new binding is deployed onto all affected users, which may take more time.",
-      "summary_suggestion": "Create a GcpUserAccessBinding for an organization",
-      "description_suggestion": "Creates a GcpUserAccessBinding for an organization. If the client specifies a name, the server ignores it. Fails if a resource already exists with the same group_key. Completion of this long-running operation does not necessarily signify that the new binding is deployed onto all affected users, which may take more time. The new binding is added to the list of existing bindings.",
-      "reasoning": "Added a summary to clarify the operation's purpose and added side effects to the description.",
+      "summary_suggestion": "Create a GCP user access binding",
+      "description_suggestion": "Creates a GcpUserAccessBinding to restrict access to Cloud Console and Google Cloud APIs for a set of users using Context-Aware Access. The server ignores any client-specified name. Fails if a resource already exists with the same group_key. Returns a long-running Operation; completion does not guarantee deployment to all affected users, which may take additional time. Requires appropriate IAM permissions on the parent organization.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on what inputs are required (group_key, access levels), what the binding does (restricts access), and authentication context. Added domain-specific terminology (Context-Aware Access), clarified the binding's purpose, and noted IAM requirements for AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -7293,7 +7456,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'accesscontextmanager.accessPolicies.servicePerimeters.list' has semantic quality issues: vague_summary. Added a summary to clarify the operation's purpose.",
+    "message": "Operation 'accesscontextmanager.accessPolicies.servicePerimeters.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too minimal and lacks details about pagination, filtering capabilities, return format, and access requirements. Added context about what service perimeters represent and clarified pagination support for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7307,12 +7470,15 @@
       "operation_id": "accesscontextmanager.accessPolicies.servicePerimeters.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists all service perimeters for an access policy.",
-      "summary_suggestion": "List all service perimeters for an access policy",
-      "reasoning": "Added a summary to clarify the operation's purpose.",
+      "summary_suggestion": "List service perimeters for an access policy",
+      "description_suggestion": "Lists all ServicePerimeter resources within the specified AccessPolicy. Returns a paginated list of service perimeters that define sets of Google Cloud resources which can freely import and export data amongst themselves. Supports filtering and pagination parameters. Requires read access to the access policy.",
+      "reasoning": "Missing summary. Description is too minimal and lacks details about pagination, filtering capabilities, return format, and access requirements. Added context about what service perimeters represent and clarified pagination support for better AI agent decision-making.",
       "batch_index": 2
     }
   },
@@ -7327,7 +7493,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'accesscontextmanager.accessPolicies.servicePerimeters.create' has semantic quality issues: vague_summary. Added a summary to clarify the operation's purpose.",
+    "message": "Operation 'accesscontextmanager.accessPolicies.servicePerimeters.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description lacks clarity on what inputs define a service perimeter (resources, policies), what the operation returns, and access requirements. Added domain context about perimeter purpose, clarified input/output expectations, and noted IAM requirements for AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7341,12 +7507,16 @@
       "operation_id": "accesscontextmanager.accessPolicies.servicePerimeters.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Creates a service perimeter. The long-running operation from this RPC has a successful status after the service perimeter propagates to long-lasting storage. If a service perimeter contains errors, an error response is returned for the first error encountered.",
-      "summary_suggestion": "Create a service perimeter for an access policy",
-      "reasoning": "Added a summary to clarify the operation's purpose.",
+      "summary_suggestion": "Create a service perimeter",
+      "description_suggestion": "Creates a new ServicePerimeter that defines a set of Google Cloud resources which can freely import and export data amongst themselves. Accepts a ServicePerimeter object specifying resources, access levels, and ingress/egress policies. Returns a long-running Operation that completes when the perimeter propagates to persistent storage. Returns an error for the first validation failure encountered. Requires write access to the access policy.",
+      "reasoning": "Missing summary. Description lacks clarity on what inputs define a service perimeter (resources, policies), what the operation returns, and access requirements. Added domain context about perimeter purpose, clarified input/output expectations, and noted IAM requirements for AI agent interpretability.",
       "batch_index": 2
     }
   },
@@ -7361,7 +7531,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'accesscontextmanager.accessPolicies.servicePerimeters.commit' has semantic quality issues: vague_summary, missing_side_effects. Added a summary to clarify the operation's purpose and added side effects to the description.",
+    "message": "Operation 'accesscontextmanager.accessPolicies.servicePerimeters.commit' has semantic quality issues: vague_summary, missing_input_details, unclear_purpose. Missing summary. Description is overly complex and unclear about the operation's purpose (promoting dry-run to active). Reorganized to clarify the workflow (dry-run → spec → status), simplified language, and added access requirements. Better helps AI agents understand when to use this operation in a perimeter lifecycle.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7376,13 +7546,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_input_details",
+        "unclear_purpose"
       ],
       "current_summary": "",
       "current_description": "Commits the dry-run specification for all the service perimeters in an access policy. A commit operation on a service perimeter involves copying its `spec` field to the `status` field of the service perimeter. Only service perimeters with `use_explicit_dry_run_spec` field set to true are affected by a commit operation. The long-running operation from this RPC has a successful status after the dry-run specifications for all the service perimeters have been committed. If a commit fails, it causes the long-running operation to return an error response and the entire commit operation is cancelled. When successful, the Operation.response field contains CommitServicePerimetersResponse. The `dry_run` and the `spec` fields are cleared after a successful commit operation.",
-      "summary_suggestion": "Commit dry-run specifications for service perimeters in an access policy",
-      "description_suggestion": "Commits the dry-run specification for all the service perimeters in an access policy. A commit operation on a service perimeter involves copying its `spec` field to the `status` field of the service perimeter. Only service perimeters with `use_explicit_dry_run_spec` field set to true are affected by a commit operation. The long-running operation from this RPC has a successful status after the dry-run specifications for all the service perimeters have been committed. If a commit fails, it causes the long-running operation to return an error response and the entire commit operation is cancelled. When successful, the `dry_run` and `spec` fields are cleared after a successful commit operation.",
-      "reasoning": "Added a summary to clarify the operation's purpose and added side effects to the description.",
+      "summary_suggestion": "Commit dry-run service perimeter specifications",
+      "description_suggestion": "Commits the dry-run specification for all service perimeters in an access policy that have `use_explicit_dry_run_spec` set to true. This operation copies each perimeter's `spec` field to its `status` field, effectively promoting the dry-run configuration to active. Returns a long-running Operation; on success, the response contains CommitServicePerimetersResponse. On failure, the entire commit is cancelled and no changes are applied. After successful commit, both `dry_run` and `spec` fields are cleared. Requires write access to the access policy.",
+      "reasoning": "Missing summary. Description is overly complex and unclear about the operation's purpose (promoting dry-run to active). Reorganized to clarify the workflow (dry-run → spec → status), simplified language, and added access requirements. Better helps AI agents understand when to use this operation in a perimeter lifecycle.",
       "batch_index": 2
     }
   },
@@ -7397,7 +7568,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'accesscontextmanager.accessPolicies.servicePerimeters.replaceAll' has semantic quality issues: vague_summary, missing_side_effects. Added a summary to clarify the operation's purpose and added side effects to the description.",
+    "message": "Operation 'accesscontextmanager.accessPolicies.servicePerimeters.replaceAll' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity on what inputs are expected (list of perimeters), the atomic nature of the operation, and access requirements. Simplified language, clarified the all-or-nothing semantics, and added IAM context for better AI agent understanding of when to use this destructive operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7412,13 +7583,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Replace all existing service perimeters in an access policy with the service perimeters provided. This is done atomically. The long-running operation from this RPC has a successful status after all replacements propagate to long-lasting storage. Replacements containing errors result in an error response for the first error encountered. Upon an error, replacement are cancelled and existing service perimeters are not affected. The Operation.response field contains ReplaceServicePerimetersResponse.",
-      "summary_suggestion": "Replace all service perimeters in an access policy",
-      "description_suggestion": "Replaces all existing service perimeters in an access policy with the service perimeters provided. This is done atomically. The long-running operation from this RPC has a successful status after all replacements propagate to long-lasting storage. Replacements containing errors result in an error response for the first error encountered. Upon an error, replacements are cancelled and existing service perimeters are not affected. The `spec` field is updated after a successful replacement.",
-      "reasoning": "Added a summary to clarify the operation's purpose and added side effects to the description.",
+      "summary_suggestion": "Replace all service perimeters atomically",
+      "description_suggestion": "Atomically replaces all existing ServicePerimeter resources in an access policy with the provided set of service perimeters. This operation is all-or-nothing: if any perimeter contains errors, the entire operation fails and no changes are applied. Returns a long-running Operation; on success, the response contains ReplaceServicePerimetersResponse. Existing perimeters remain unchanged if the operation fails. Requires write access to the access policy.",
+      "reasoning": "Missing summary. Description lacks clarity on what inputs are expected (list of perimeters), the atomic nature of the operation, and access requirements. Simplified language, clarified the all-or-nothing semantics, and added IAM context for better AI agent understanding of when to use this destructive operation.",
       "batch_index": 2
     }
   },
@@ -7433,7 +7605,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'accesscontextmanager.accessPolicies.getIamPolicy' has semantic quality issues: vague_summary. Added a summary to clarify the operation's purpose.",
+    "message": "Operation 'accesscontextmanager.accessPolicies.getIamPolicy' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is minimal and lacks context about what the returned Policy contains and what it controls. Added clarity about Policy structure (bindings), what permissions it governs, and access requirements for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7447,12 +7619,15 @@
       "operation_id": "accesscontextmanager.accessPolicies.getIamPolicy",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets the IAM policy for the specified Access Context Manager access policy.",
-      "summary_suggestion": "Get IAM policy for an access policy",
-      "reasoning": "Added a summary to clarify the operation's purpose.",
+      "summary_suggestion": "Get IAM policy for access policy",
+      "description_suggestion": "Retrieves the IAM policy for the specified AccessPolicy resource. Returns a Policy object containing the set of bindings that define which principals have which roles on the access policy. The policy controls permissions for managing access levels, service perimeters, and other access policy resources. Requires read access to the access policy.",
+      "reasoning": "Missing summary. Description is minimal and lacks context about what the returned Policy contains and what it controls. Added clarity about Policy structure (bindings), what permissions it governs, and access requirements for AI agent decision-making.",
       "batch_index": 2
     }
   },
@@ -7467,7 +7642,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'accesscontextmanager.accessPolicies.setIamPolicy' has semantic quality issues: vague_summary. Added a summary to clarify the operation's purpose.",
+    "message": "Operation 'accesscontextmanager.accessPolicies.setIamPolicy' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Missing summary. Description lacks details about what the operation expects as input (SetIamPolicyRequest), that it replaces the entire policy, and the scope of permissions affected. Added clarity on input format, immediate effect, and admin requirement for AI agents to understand the impact of this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7481,12 +7656,15 @@
       "operation_id": "accesscontextmanager.accessPolicies.setIamPolicy",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Sets the IAM policy for the specified Access Context Manager access policy. This method replaces the existing IAM policy on the access policy. The IAM policy controls the set of users who can perform specific operations on the Access Context Manager access policy.",
-      "summary_suggestion": "Set IAM policy for an access policy",
-      "reasoning": "Added a summary to clarify the operation's purpose.",
+      "summary_suggestion": "Set IAM policy for access policy",
+      "description_suggestion": "Sets the IAM policy for the specified AccessPolicy resource, replacing the existing policy entirely. Accepts a SetIamPolicyRequest containing the new Policy with bindings that define role assignments for principals. The policy controls permissions for managing access levels, service perimeters, and other access policy resources. Changes take effect immediately. Requires admin access to the access policy.",
+      "reasoning": "Missing summary. Description lacks details about what the operation expects as input (SetIamPolicyRequest), that it replaces the entire policy, and the scope of permissions affected. Added clarity on input format, immediate effect, and admin requirement for AI agents to understand the impact of this operation.",
       "batch_index": 2
     }
   },
@@ -7501,7 +7679,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 22 operations analyzed, 18 quality issues found",
+    "message": "Semantic analysis completed: 22 operations analyzed, 22 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -7513,7 +7691,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 22,
-      "total_issues_found": 18,
+      "total_issues_found": 22,
       "batches_processed": 4
     }
   }

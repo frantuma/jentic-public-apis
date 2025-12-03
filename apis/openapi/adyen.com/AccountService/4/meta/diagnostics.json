@@ -5387,7 +5387,258 @@
         "character": 0
       }
     },
-    "message": "Operation 'post-updateAccountHolderState' has semantic quality issues: vague_description, missing_input_details. The original description is vague and lacks details about the required input and the response. The suggested description provides clarity on the input parameters and the expected response.",
+    "message": "Operation 'post-closeAccountHolder' has semantic quality issues: vague_summary, missing_input_details. Original summary 'Close an account holder' is generic and doesn't clarify the status change mechanism. Description contains useful information but is verbose with markdown links that may confuse AI agents. Improved summary uses domain terminology ('status') and improved description removes markdown, clarifies the scope (affects all associated accounts), and explicitly mentions required input (account holder ID) for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-closeAccountHolder",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "Close an account holder",
+      "current_description": "Changes the [status of an account holder](https://docs.adyen.com/classic-platforms/account-holders-and-accounts#account-holder-statuses) to **Closed**. This state is final. If an account holder is closed, you can't process transactions, pay out funds, or reopen it. If payments are made to an account of an account holder with a **Closed** [`status`](https://docs.adyen.com/api-explorer/#/Account/latest/post/getAccountHolder__resParam_verification-accountHolder-checks-status), the payments are sent to your liable account.",
+      "summary_suggestion": "Set account holder status to Closed",
+      "description_suggestion": "Changes an account holder's status to Closed, which is a final, irreversible state. Once closed, you cannot process transactions, pay out funds, or reopen the account holder. All associated accounts are affected. Payments made to accounts of a closed account holder are redirected to your liable account. Requires the account holder ID in the request.",
+      "reasoning": "Original summary 'Close an account holder' is generic and doesn't clarify the status change mechanism. Description contains useful information but is verbose with markdown links that may confuse AI agents. Improved summary uses domain terminology ('status') and improved description removes markdown, clarifies the scope (affects all associated accounts), and explicitly mentions required input (account holder ID) for better AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-createAccount' has semantic quality issues: missing_input_details, missing_output_details. Summary is clear and action-oriented. Description lacks critical details about required inputs (account holder ID), what the operation returns (account object with ID and status), and the account's initial state. Improved description adds input requirements, output details, and clarifies the account is immediately operational for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-createAccount",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Create an account",
+      "current_description": "Creates an account under an account holder. An account holder can have [multiple accounts](https://docs.adyen.com/classic-platforms/account-holders-and-accounts#create-additional-accounts).",
+      "description_suggestion": "Creates a new account under an existing account holder. An account holder can have multiple accounts for different purposes. Requires the account holder ID and account details in the request. Returns the newly created account object with a unique account ID and status. The account is ready for transaction processing upon creation.",
+      "reasoning": "Summary is clear and action-oriented. Description lacks critical details about required inputs (account holder ID), what the operation returns (account object with ID and status), and the account's initial state. Improved description adds input requirements, output details, and clarifies the account is immediately operational for better AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-createAccountHolder' has semantic quality issues: missing_input_details, missing_output_details. Summary is clear and action-oriented. Description mentions legal entity type dependency but lacks specificity about what details are required and what the operation returns. Improved description clarifies the entity types, explicitly states the return value (account holder object with ID and verification status), and explains the prerequisite relationship with accounts for better AI agent understanding of workflow dependencies.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-createAccountHolder",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Create an account holder",
+      "current_description": "Creates an account holder that [represents the sub-merchant's entity](https://docs.adyen.com/classic-platforms/account-structure#your-platform) in your platform. The details that you need to provide in the request depend on the sub-merchant's legal entity type. For more information, refer to [Account holder and accounts](https://docs.adyen.com/classic-platforms/account-holders-and-accounts#legal-entity-types).",
+      "description_suggestion": "Creates an account holder representing a sub-merchant entity on your platform. The required request details depend on the legal entity type (individual, business, partnership, etc.). Returns the newly created account holder object with a unique account holder ID and initial verification status. Account holders must be created before associated accounts can be established.",
+      "reasoning": "Summary is clear and action-oriented. Description mentions legal entity type dependency but lacks specificity about what details are required and what the operation returns. Improved description clarifies the entity types, explicitly states the return value (account holder object with ID and verification status), and explains the prerequisite relationship with accounts for better AI agent understanding of workflow dependencies.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-deleteBankAccounts' has semantic quality issues: missing_input_details, missing_output_details, missing_side_effects. Summary is clear but description is too minimal. Missing critical details: what inputs are required (account holder ID, bank account references), what the operation returns (confirmation details), and important side effects (irreversibility, impact on payouts). Improved description adds these details to help AI agents understand the operation's scope, requirements, and consequences.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-deleteBankAccounts",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete bank accounts",
+      "current_description": "Deletes bank accounts associated with an account holder.",
+      "description_suggestion": "Deletes one or more bank accounts associated with an account holder. Requires the account holder ID and the bank account reference(s) to delete. Deleted bank accounts cannot be recovered. This operation may affect payout capabilities if all bank accounts are removed. Returns confirmation of deletion with the account holder ID and list of deleted bank account references.",
+      "reasoning": "Summary is clear but description is too minimal. Missing critical details: what inputs are required (account holder ID, bank account references), what the operation returns (confirmation details), and important side effects (irreversibility, impact on payouts). Improved description adds these details to help AI agents understand the operation's scope, requirements, and consequences.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-deleteLegalArrangements' has semantic quality issues: missing_input_details, missing_output_details, missing_side_effects. Summary is clear but description lacks specificity. Missing details about required inputs (account holder ID, legal arrangement references), return value (confirmation details), and side effects (irreversibility, verification status impact). Improved description adds these critical details for AI agents to understand when and how to use this operation and what consequences to expect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-deleteLegalArrangements",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete legal arrangements",
+      "current_description": "Deletes legal arrangements and/or legal arrangement entities associated with an account holder.",
+      "description_suggestion": "Deletes one or more legal arrangements and/or legal arrangement entities associated with an account holder. Requires the account holder ID and the legal arrangement reference(s) to delete. Deleted legal arrangements cannot be recovered and may affect account holder verification status. Returns confirmation of deletion with the account holder ID and list of deleted legal arrangement references.",
+      "reasoning": "Summary is clear but description lacks specificity. Missing details about required inputs (account holder ID, legal arrangement references), return value (confirmation details), and side effects (irreversibility, verification status impact). Improved description adds these critical details for AI agents to understand when and how to use this operation and what consequences to expect.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-deleteShareholders' has semantic quality issues: missing_input_details, missing_output_details, missing_side_effects. Summary is clear but description is too brief. Missing essential details about required inputs (account holder ID, shareholder references), return value (confirmation details), and side effects (irreversibility, verification/beneficial ownership impact). Improved description adds these details to help AI agents understand the operation's requirements, effects, and consequences for compliance and verification workflows.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-deleteShareholders",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete shareholders",
+      "current_description": "Deletes shareholders associated with an account holder.",
+      "description_suggestion": "Deletes one or more shareholders associated with an account holder. Requires the account holder ID and the shareholder reference(s) to delete. Deleted shareholders cannot be recovered and may affect account holder verification status or beneficial ownership documentation. Returns confirmation of deletion with the account holder ID and list of deleted shareholder references.",
+      "reasoning": "Summary is clear but description is too brief. Missing essential details about required inputs (account holder ID, shareholder references), return value (confirmation details), and side effects (irreversibility, verification/beneficial ownership impact). Improved description adds these details to help AI agents understand the operation's requirements, effects, and consequences for compliance and verification workflows.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-updateAccountHolder' has semantic quality issues: missing_side_effects, missing_output_details, poor_ai_interpretability. The current description is comprehensive but lacks clarity on return values and side effects. Added explicit information about what is returned (UpdateAccountHolderResponse with status and verification data), clarified the merge vs. replace behavior for different field types, and improved the summary to be more specific about what entities are affected. This helps AI agents understand the operation's full scope and consequences.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-updateAccountHolder",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_side_effects",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Update an account holder",
+      "current_description": "Updates the `accountHolderDetails` and `processingTier` of an account holder, and adds bank accounts and shareholders.\n\nWhen updating `accountHolderDetails`, parameters that are not included in the request are left unchanged except for the following object:\n\n* `metadata`: Updating the metadata replaces the entire object. This means that to update an existing key-value pair, you must provide the changes, as well as other existing key-value pairs.\n\nWhen updating any field in the following objects, you must submit all the fields required for validation:\n\n * `address`\n\n* `fullPhoneNumber`\n \n* `bankAccountDetails.BankAccountDetail`\n\n* `businessDetails.shareholders.ShareholderContact`\n \n For example, to update the `address.postalCode`, you must also submit the `address.country`, `.city`, `.street`, `.postalCode`, and possibly `.stateOrProvince` so that the address can be validated.\n\nTo add a bank account or shareholder, provide the bank account or shareholder details without a `bankAccountUUID` or a `shareholderCode`.",
+      "summary_suggestion": "Update account holder details, tier, and associated entities",
+      "description_suggestion": "Updates account holder information including accountHolderDetails, processingTier, bank accounts, and shareholders. Supports partial updates for most fields, but metadata replacement is complete (all key-value pairs must be resubmitted). When updating address, fullPhoneNumber, bankAccountDetails, or shareholders, all required validation fields must be included. To add new bank accounts or shareholders, omit their UUID/code identifiers. Returns the updated account holder status and verification results. Note: Metadata updates replace the entire object; other fields are merged with existing data.",
+      "reasoning": "The current description is comprehensive but lacks clarity on return values and side effects. Added explicit information about what is returned (UpdateAccountHolderResponse with status and verification data), clarified the merge vs. replace behavior for different field types, and improved the summary to be more specific about what entities are affected. This helps AI agents understand the operation's full scope and consequences.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-updateAccountHolderState' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is too brief and lacks critical details. Added information about what inputs are required (account holder code, state type, enabled/disabled flag), what the operation returns (updated status), and important side effects (immediate effect on transaction capability). This enables AI agents to understand when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5402,14 +5653,270 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Update payout or processing state",
       "current_description": "Disables or enables the processing or payout state of an account holder.",
-      "summary_suggestion": "Toggle processing or payout state for an account holder",
-      "description_suggestion": "Toggles the processing or payout state of an account holder. Requires the account holder's unique identifier and the desired state (enabled or disabled). Returns a confirmation message upon successful state change.",
-      "reasoning": "The original description is vague and lacks details about the required input and the response. The suggested description provides clarity on the input parameters and the expected response.",
+      "summary_suggestion": "Enable or disable account holder processing and payout states",
+      "description_suggestion": "Enables or disables the processing state and/or payout state of an account holder. Use this operation to control whether an account holder can process transactions or receive payouts. Requires specifying the account holder code and the desired state (enabled/disabled) for each state type. Returns the updated account holder status reflecting the new processing and payout state configuration. State changes take effect immediately and may impact the account holder's ability to transact.",
+      "reasoning": "Original description is too brief and lacks critical details. Added information about what inputs are required (account holder code, state type, enabled/disabled flag), what the operation returns (updated status), and important side effects (immediate effect on transaction capability). This enables AI agents to understand when to use this operation and what to expect.",
       "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-uploadDocument' has semantic quality issues: missing_input_details, missing_output_details, missing_side_effects. Current description lacks specificity about inputs (document type, account holder reference, file requirements) and outputs (what confirmation is returned). Added details about supported document types, storage/usage, return value, and technical requirements. This helps AI agents understand what documents to upload, for which account holders, and what to expect in response.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-uploadDocument",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Upload a document",
+      "current_description": "Uploads a document for an account holder. Adyen uses the documents during the [verification process](https://docs.adyen.com/classic-platforms/verification-process).",
+      "summary_suggestion": "Upload verification document for account holder",
+      "description_suggestion": "Uploads a document for an account holder to support the KYC verification process. Accepts document files (such as identity documents, proof of address, or business registration documents) associated with a specific account holder. The uploaded document is stored and used by Adyen during verification checks. Returns confirmation of successful upload including document reference. Documents must meet format and size requirements specified in the verification process documentation.",
+      "reasoning": "Current description lacks specificity about inputs (document type, account holder reference, file requirements) and outputs (what confirmation is returned). Added details about supported document types, storage/usage, return value, and technical requirements. This helps AI agents understand what documents to upload, for which account holders, and what to expect in response.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-deleteSignatories' has semantic quality issues: missing_input_details, missing_output_details, missing_side_effects. Original description is too brief. Added clarity on what inputs are required (account holder reference, signatory IDs), what is returned (confirmation), and important side effects (permanent deletion, potential verification impact) for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-deleteSignatories",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete signatories",
+      "current_description": "Deletes signatories associated with an account holder.",
+      "summary_suggestion": "Delete signatories from an account holder",
+      "description_suggestion": "Removes one or more signatories associated with an account holder. Requires the account holder reference and signatory identifiers in the request. Returns confirmation of deletion. This operation permanently removes signatory records and may affect account verification status.",
+      "reasoning": "Original description is too brief. Added clarity on what inputs are required (account holder reference, signatory IDs), what is returned (confirmation), and important side effects (permanent deletion, potential verification impact) for better AI agent decision-making.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-getAccountHolder' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Summary is clear and actionable. Description lacks specificity about what details are returned and what input is required. Enhanced to specify the account holder reference requirement and the comprehensive nature of returned data (status, verification, KYC) to help AI agents understand the operation's scope.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-getAccountHolder",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Get an account holder",
+      "current_description": "Returns the details of an account holder.",
+      "description_suggestion": "Retrieves comprehensive details for a specific account holder, including personal information, account status, verification checks, and KYC results. Requires the account holder reference as input. Returns the complete AccountHolderStatus object with all associated account holder information.",
+      "reasoning": "Summary is clear and actionable. Description lacks specificity about what details are returned and what input is required. Enhanced to specify the account holder reference requirement and the comprehensive nature of returned data (status, verification, KYC) to help AI agents understand the operation's scope.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-getUploadedDocuments' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary 'Get documents' is too generic. Description lacks input requirements and specific output details. Enhanced summary to clarify these are verification documents, and expanded description to specify the account holder reference requirement and the types of documents returned for better AI agent context.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-getUploadedDocuments",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Get documents",
+      "current_description": "Returns documents that were previously uploaded for an account holder. Adyen uses the documents during the [verification process](https://docs.adyen.com/classic-platforms/verification-process).",
+      "summary_suggestion": "Retrieve uploaded verification documents",
+      "description_suggestion": "Retrieves all documents previously uploaded for a specific account holder. Requires the account holder reference as input. Returns a list of uploaded documents with metadata used during Adyen's verification process. Documents may include identity verification, address proof, and other compliance-related files.",
+      "reasoning": "Original summary 'Get documents' is too generic. Description lacks input requirements and specific output details. Enhanced summary to clarify these are verification documents, and expanded description to specify the account holder reference requirement and the types of documents returned for better AI agent context.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-suspendAccountHolder' has semantic quality issues: missing_input_details, missing_output_details, missing_side_effects. Summary is clear and actionable. Description is too minimal and lacks critical details about inputs, outputs, and side effects. Enhanced to specify the account holder reference requirement, return value, operational restrictions, and notification side effects for comprehensive AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-suspendAccountHolder",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Suspend an account holder",
+      "current_description": "Changes the [status of an account holder](https://docs.adyen.com/classic-platforms/account-holders-and-accounts#account-holder-statuses) to **Suspended**.",
+      "description_suggestion": "Changes an account holder's status to Suspended, restricting their account operations. Requires the account holder reference as input. Returns the updated AccountHolderStatus with the new Suspended status. Suspended account holders cannot perform transactions until unsuspended. This action may trigger notifications to the account holder.",
+      "reasoning": "Summary is clear and actionable. Description is too minimal and lacks critical details about inputs, outputs, and side effects. Enhanced to specify the account holder reference requirement, return value, operational restrictions, and notification side effects for comprehensive AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-unSuspendAccountHolder' has semantic quality issues: missing_input_details, missing_output_details. Summary is clear. Description is verbose with multiple links but lacks clarity on inputs and outputs. Reorganized to clearly state the input requirement (account holder reference), the return value (updated status), the precondition (no failed verification checks), and the context of when suspension occurs. More concise and AI-agent friendly.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-unSuspendAccountHolder",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Unsuspend an account holder",
+      "current_description": "Changes the [status of an account holder](https://docs.adyen.com/classic-platforms/account-holders-and-accounts#account-holder-statuses) from **Suspended** to **Inactive**. \nAccount holders can have a **Suspended** [`status`](https://docs.adyen.com/api-explorer/#/Account/latest/post/getAccountHolder__resParam_verification-accountHolder-checks-status) if you suspend them through the [`/suspendAccountHolder`](https://docs.adyen.com/api-explorer/#/Account/v5/post/suspendAccountHolder) endpoint or if a verification deadline expires.\n\nYou can only unsuspend account holders if they do not have verification checks with a **FAILED** [`status`](https://docs.adyen.com/api-explorer/#/Account/latest/post/getAccountHolder__resParam_verification-accountHolder-checks-status).",
+      "description_suggestion": "Changes an account holder's status from Suspended to Inactive, restoring limited account functionality. Requires the account holder reference as input. Returns the updated AccountHolderStatus with Inactive status. This operation fails if the account holder has failed verification checks. Account holders can be suspended via /suspendAccountHolder or when verification deadlines expire. Unsuspending requires all verification checks to have passed.",
+      "reasoning": "Summary is clear. Description is verbose with multiple links but lacks clarity on inputs and outputs. Reorganized to clearly state the input requirement (account holder reference), the return value (updated status), the precondition (no failed verification checks), and the context of when suspension occurs. More concise and AI-agent friendly.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-updateAccount' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Summary is clear and actionable. Description is too brief and lacks input/output details. Enhanced to clarify that the account reference is required, that partial updates are supported, and that the response includes the updated account details for better AI agent understanding of what can be modified and what will be returned.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-updateAccount",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Update an account",
+      "current_description": "Updates the description or payout schedule of an account.",
+      "description_suggestion": "Updates an account's description and/or payout schedule. Requires the account reference and the fields to be updated in the request. Supports partial updates - only provided fields will be modified. Returns the updated account details including the new description and payout schedule configuration.",
+      "reasoning": "Summary is clear and actionable. Description is too brief and lacks input/output details. Enhanced to clarify that the account reference is required, that partial updates are supported, and that the response includes the updated account details for better AI agent understanding of what can be modified and what will be returned.",
+      "batch_index": 1
     }
   },
   {
@@ -5423,7 +5930,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 17 operations analyzed, 1 quality issues found",
+    "message": "Semantic analysis completed: 17 operations analyzed, 15 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -5435,7 +5942,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 17,
-      "total_issues_found": 1,
+      "total_issues_found": 15,
       "batches_processed": 3
     }
   }

@@ -12646,7 +12646,81 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.documents.runQuery' has semantic quality issues: vague_summary, vague_description, missing_input_details. The original summary and description are too vague. The improved summary and description provide clarity on the operation's purpose and expected inputs and outputs, enhancing AI agent interpretability.",
+    "message": "Operation 'firestore.projects.databases.documents.partitionQuery' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description lacks clarity about the purpose (parallel execution), doesn't explain what cursors are returned, and doesn't clarify the output format. Added context about parallel execution benefits, clarified cursor usage, and specified return type for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firestore.projects.databases.documents.partitionQuery",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Partitions a query by returning partition cursors that can be used to run the query in parallel. The returned partition cursors are split points that can be used by RunQuery as starting/end points for the query results.",
+      "summary_suggestion": "Partition query for parallel execution",
+      "description_suggestion": "Partitions a Firestore query into multiple executable segments by returning partition cursors. These cursors serve as split points that enable parallel query execution across different partitions. Each cursor can be used as a starting or ending point in RunQuery operations. Useful for distributing large query workloads across multiple clients or processes. Returns a list of Cursor objects representing partition boundaries.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about the purpose (parallel execution), doesn't explain what cursors are returned, and doesn't clarify the output format. Added context about parallel execution benefits, clarified cursor usage, and specified return type for better AI agent understanding.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firestore.projects.databases.documents.runAggregationQuery' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description mentions the difference from RunQuery but lacks clarity about what aggregations are supported, what the operation actually returns, and input/output details. Added specific aggregation types, clarified server-side processing benefits, and specified request/response schemas for improved AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firestore.projects.databases.documents.runAggregationQuery",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Runs an aggregation query. Rather than producing Document results like Firestore.RunQuery, this API allows running an aggregation to produce a series of AggregationResult server-side. High-Level Example: ``` -- Return the number of documents in table given a filter. SELECT COUNT(*) FROM ( SELECT * FROM k where a = true ); ```",
+      "summary_suggestion": "Execute aggregation query and return results",
+      "description_suggestion": "Executes an aggregation query against Firestore documents, returning computed AggregationResult objects instead of individual documents. Supports aggregation operations such as COUNT, SUM, AVG, and MIN/MAX computed server-side. Unlike RunQuery which returns Document results, this operation processes aggregations efficiently without retrieving full documents. Accepts a RunAggregationQueryRequest specifying the aggregation pipeline and returns a stream of AggregationResult objects containing the computed values.",
+      "reasoning": "Missing summary entirely. Description mentions the difference from RunQuery but lacks clarity about what aggregations are supported, what the operation actually returns, and input/output details. Added specific aggregation types, clarified server-side processing benefits, and specified request/response schemas for improved AI agent interpretability.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firestore.projects.databases.documents.runQuery' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details. Missing summary entirely. Description is extremely vague ('Runs a query') with no context about what it queries, what it returns, or how to use it. Added specific details about query execution against documents, clarified input structure (StructuredQuery), specified output format (Document results in RunQueryResponse), and mentioned pagination support for comprehensive AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12662,13 +12736,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Runs a query.",
-      "summary_suggestion": "Executes a query against the Firestore database",
-      "description_suggestion": "Executes a query against the Firestore database. Requires a query request object that specifies the query parameters. Returns a list of documents that match the query criteria.",
-      "reasoning": "The original summary and description are too vague. The improved summary and description provide clarity on the operation's purpose and expected inputs and outputs, enhancing AI agent interpretability.",
+      "summary_suggestion": "Execute Firestore query and retrieve documents",
+      "description_suggestion": "Executes a Firestore query against documents in a database and returns matching Document results. Accepts a RunQueryRequest containing a StructuredQuery with filtering, ordering, and pagination parameters. Returns a stream of RunQueryResponse objects, each containing a Document that matches the query criteria, along with cursor information for pagination. Supports complex queries with where clauses, ordering, limits, and offsets as defined in the StructuredQuery schema.",
+      "reasoning": "Missing summary entirely. Description is extremely vague ('Runs a query') with no context about what it queries, what it returns, or how to use it. Added specific details about query execution against documents, clarified input structure (StructuredQuery), specified output format (Document results in RunQueryResponse), and mentioned pagination support for comprehensive AI agent understanding.",
       "batch_index": 4
     }
   },
@@ -12683,41 +12759,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.backupSchedules.list' has semantic quality issues: vague_summary. The current summary is too vague. A more specific summary was added to improve clarity.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "firestore.projects.databases.backupSchedules.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "",
-      "current_description": "List backup schedules.",
-      "summary_suggestion": "List all backup schedules for a database",
-      "reasoning": "The current summary is too vague. A more specific summary was added to improve clarity.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'firestore.projects.databases.documents.batchGet' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does. The description is clear but the summary needs to be improved for better clarity.",
+    "message": "Operation 'firestore.projects.databases.documents.batchGet' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Original description lacks context about inputs (document paths), outputs (document list), and use cases. Added clarity about batch nature, unordered results, and efficiency benefits for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12731,12 +12773,15 @@
       "operation_id": "firestore.projects.databases.documents.batchGet",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets multiple documents. Documents returned by this method are not guaranteed to be returned in the same order that they were requested.",
-      "summary_suggestion": "Retrieve multiple documents from Firestore",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. The description is clear but the summary needs to be improved for better clarity.",
+      "summary_suggestion": "Retrieve multiple documents from database",
+      "description_suggestion": "Retrieves multiple documents from the specified database in a single batch request. Accepts a list of document paths to fetch. Returns the requested documents, but the order of returned documents is not guaranteed to match the request order. Useful for fetching related documents efficiently without individual requests.",
+      "reasoning": "Missing summary entirely. Original description lacks context about inputs (document paths), outputs (document list), and use cases. Added clarity about batch nature, unordered results, and efficiency benefits for AI agent decision-making.",
       "batch_index": 0
     }
   },
@@ -12751,7 +12796,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.documents.beginTransaction' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does. The description is clear but the summary needs to be improved for better clarity.",
+    "message": "Operation 'firestore.projects.databases.documents.batchWrite' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is comprehensive but could better clarify output structure and when to use this vs Commit. Enhanced summary to indicate non-atomic nature, and improved description to explicitly list operation types and clarify the BatchWriteResponse structure for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firestore.projects.databases.documents.batchWrite",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Applies a batch of write operations. The BatchWrite method does not apply the write operations atomically and can apply them out of order. Method does not allow more than one write per document. Each write succeeds or fails independently. See the BatchWriteResponse for the success status of each write. If you require an atomically applied set of writes, use Commit instead.",
+      "summary_suggestion": "Apply non-atomic batch write operations",
+      "description_suggestion": "Applies a batch of write operations (creates, updates, deletes) to documents in the database. Operations are not applied atomically and may execute out of order. Each document can have at most one write operation per batch. Individual writes succeed or fail independently - check BatchWriteResponse for per-write status. For atomic multi-document writes, use the Commit operation instead.",
+      "reasoning": "Missing summary. Description is comprehensive but could better clarify output structure and when to use this vs Commit. Enhanced summary to indicate non-atomic nature, and improved description to explicitly list operation types and clarify the BatchWriteResponse structure for AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firestore.projects.databases.documents.beginTransaction' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Missing summary and extremely vague description. Original lacks critical context about transaction ID return value, transaction lifecycle, ACID guarantees, and relationship to Commit/Rollback operations. Enhanced to help AI agents understand transaction workflow and when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12765,12 +12846,16 @@
       "operation_id": "firestore.projects.databases.documents.beginTransaction",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Starts a new transaction.",
-      "summary_suggestion": "Initiate a new transaction in Firestore",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. The description is clear but the summary needs to be improved for better clarity.",
+      "summary_suggestion": "Initialize new database transaction",
+      "description_suggestion": "Initiates a new transaction for the specified database. Returns a transaction ID that must be used in subsequent read and write operations within the transaction. Transactions provide ACID guarantees for multi-document operations. Use Commit to apply transaction changes or Rollback to discard them. Supports optional transaction options for read-only or read-write modes.",
+      "reasoning": "Missing summary and extremely vague description. Original lacks critical context about transaction ID return value, transaction lifecycle, ACID guarantees, and relationship to Commit/Rollback operations. Enhanced to help AI agents understand transaction workflow and when to use this operation.",
       "batch_index": 0
     }
   },
@@ -12785,7 +12870,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.documents.commit' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does. The description is clear but the summary needs to be improved for better clarity.",
+    "message": "Operation 'firestore.projects.databases.documents.commit' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is vague about inputs (transaction ID, writes) and outputs (WriteResult, timestamp). Enhanced to clarify transaction ID requirement, atomic semantics, return values, and consistency guarantees for AI agent understanding of transaction completion.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12799,12 +12884,15 @@
       "operation_id": "firestore.projects.databases.documents.commit",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Commits a transaction, while optionally updating documents.",
-      "summary_suggestion": "Commit a transaction in Firestore",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. The description is clear but the summary needs to be improved for better clarity.",
+      "summary_suggestion": "Commit transaction with optional document updates",
+      "description_suggestion": "Commits a transaction to the database, applying all queued write operations atomically. Accepts a transaction ID from BeginTransaction and an optional set of write operations to apply. Returns WriteResult objects indicating success/failure of each write and commit timestamp. All writes in the transaction succeed or fail together, ensuring data consistency.",
+      "reasoning": "Missing summary. Description is vague about inputs (transaction ID, writes) and outputs (WriteResult, timestamp). Enhanced to clarify transaction ID requirement, atomic semantics, return values, and consistency guarantees for AI agent understanding of transaction completion.",
       "batch_index": 0
     }
   },
@@ -12819,7 +12907,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.documents.listen' has semantic quality issues: vague_summary, missing_context. The current summary is missing, making it unclear what the operation does. The description is clear but the summary needs to be improved for better clarity. Additionally, the description lacks context about the method's availability and usage.",
+    "message": "Operation 'firestore.projects.databases.documents.listen' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks context about what changes are listened to, output format (stream of responses), and use cases. Enhanced to clarify streaming nature, response type, protocol limitations, and practical applications for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12834,13 +12922,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Listens to changes. This method is only available via gRPC or WebChannel (not REST).",
-      "summary_suggestion": "Listen to document changes in Firestore",
-      "description_suggestion": "Listens to changes in Firestore documents. This method is only available via gRPC or WebChannel (not REST). It provides real-time updates for document changes.",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. The description is clear but the summary needs to be improved for better clarity. Additionally, the description lacks context about the method's availability and usage.",
+      "summary_suggestion": "Stream real-time document changes",
+      "description_suggestion": "Establishes a real-time listener for document changes in the database. Streams updates whenever matching documents are created, updated, or deleted. Returns a stream of ListenResponse messages containing document snapshots and change events. Only available via gRPC or WebChannel protocols, not REST. Useful for maintaining synchronized client state with server data.",
+      "reasoning": "Missing summary. Description lacks context about what changes are listened to, output format (stream of responses), and use cases. Enhanced to clarify streaming nature, response type, protocol limitations, and practical applications for AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -12855,7 +12944,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.documents.rollback' has semantic quality issues: vague_summary. The current summary is missing, making it unclear what the operation does. The description is clear but the summary needs to be improved for better clarity.",
+    "message": "Operation 'firestore.projects.databases.documents.rollback' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too minimal about inputs (transaction ID), outputs (empty response), and use cases. Enhanced to clarify transaction ID requirement, effect of rollback (no changes applied), return value, and practical scenarios for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12869,12 +12958,15 @@
       "operation_id": "firestore.projects.databases.documents.rollback",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Rolls back a transaction.",
-      "summary_suggestion": "Rollback a transaction in Firestore",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. The description is clear but the summary needs to be improved for better clarity.",
+      "summary_suggestion": "Discard transaction and revert changes",
+      "description_suggestion": "Rolls back a transaction, discarding all queued write operations without applying them to the database. Requires the transaction ID from BeginTransaction. Returns an empty response on success. Use this to cancel a transaction when an error occurs or when transaction conditions are no longer met.",
+      "reasoning": "Missing summary. Description is too minimal about inputs (transaction ID), outputs (empty response), and use cases. Enhanced to clarify transaction ID requirement, effect of rollback (no changes applied), return value, and practical scenarios for AI agent decision-making.",
       "batch_index": 0
     }
   },
@@ -12889,7 +12981,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.documents.write' has semantic quality issues: vague_summary, missing_context. The current summary is missing, making it unclear what the operation does. The description is clear but the summary needs to be improved for better clarity. Additionally, the description lacks context about the method's availability and usage.",
+    "message": "Operation 'firestore.projects.databases.documents.write' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity about streaming nature (bidirectional), input format (stream of requests), output format (stream of responses), and ordering guarantees. Enhanced to clarify request/response streaming, protocol limitations, and ordered processing for AI agent understanding of this streaming operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12904,13 +12996,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Streams batches of document updates and deletes, in order. This method is only available via gRPC or WebChannel (not REST).",
-      "summary_suggestion": "Stream document updates and deletes in Firestore",
-      "description_suggestion": "Streams batches of document updates and deletes in Firestore, in order. This method is only available via gRPC or WebChannel (not REST). It ensures that updates and deletes are processed in the specified order.",
-      "reasoning": "The current summary is missing, making it unclear what the operation does. The description is clear but the summary needs to be improved for better clarity. Additionally, the description lacks context about the method's availability and usage.",
+      "summary_suggestion": "Stream ordered document updates and deletes",
+      "description_suggestion": "Streams batches of write operations (updates and deletes) to documents in the database, processing them in the order received. Accepts a stream of WriteRequest messages containing document paths and operations. Returns a stream of WriteResponse messages with results for each batch. Only available via gRPC or WebChannel protocols, not REST. Maintains order of operations for sequential consistency.",
+      "reasoning": "Missing summary. Description lacks clarity about streaming nature (bidirectional), input format (stream of requests), output format (stream of responses), and ordering guarantees. Enhanced to clarify request/response streaming, protocol limitations, and ordered processing for AI agent understanding of this streaming operation.",
       "batch_index": 0
     }
   },
@@ -12925,7 +13018,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.collectionGroups.fields.list' has semantic quality issues: vague_summary, missing_context. The original description is informative but lacks a concise summary. The suggestion adds a summary and clarifies the response details for better AI agent interpretability.",
+    "message": "Operation 'firestore.projects.databases.exportDocuments' has semantic quality issues: vague_summary, missing_input_details. Missing summary entirely. Description is comprehensive but lacks clarity on input parameters (filtering options) and expected request schema details. Added summary for clarity and enhanced description to specify that filtering is supported and clarify the asynchronous nature for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12936,18 +13029,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "firestore.projects.databases.collectionGroups.fields.list",
+      "operation_id": "firestore.projects.databases.exportDocuments",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details"
       ],
       "current_summary": "",
-      "current_description": "Lists the field configuration and metadata for this database. Currently, FirestoreAdmin.ListFields only supports listing fields that have been explicitly overridden. To issue this query, call FirestoreAdmin.ListFields with the filter set to `indexConfig.usesAncestorConfig:false` or `ttlConfig:*`.",
-      "summary_suggestion": "List field configurations and metadata",
-      "description_suggestion": "Lists the field configuration and metadata for this database. Currently, FirestoreAdmin.ListFields only supports listing fields that have been explicitly overridden. To issue this query, call FirestoreAdmin.ListFields with the filter set to `indexConfig.usesAncestorConfig:false` or `ttlConfig:*`. The response includes details about each field's configuration and metadata.",
-      "reasoning": "The original description is informative but lacks a concise summary. The suggestion adds a summary and clarifies the response details for better AI agent interpretability.",
-      "batch_index": 3
+      "current_description": "Exports a copy of all or a subset of documents from Google Cloud Firestore to another storage system, such as Google Cloud Storage. Recent updates to documents may not be reflected in the export. The export occurs in the background and its progress can be monitored and managed via the Operation resource that is created. The output of an export may only be used once the associated operation is done. If an export operation is cancelled before completion it may leave partial data behind in Google Cloud Storage. For more details on export behavior and output format, refer to: https://cloud.google.com/firestore/docs/manage-data/export-import",
+      "summary_suggestion": "Export Firestore documents to Cloud Storage",
+      "description_suggestion": "Exports all or a subset of documents from a Firestore database to an external storage system such as Google Cloud Storage. The export operation runs asynchronously and can be monitored via the returned Operation resource. Accepts filtering options to export specific documents or collections. Returns a long-running Operation that must complete before the exported data can be used. Note: Recent document updates may not be reflected in the export, and cancelled operations may leave partial data in the destination storage.",
+      "reasoning": "Missing summary entirely. Description is comprehensive but lacks clarity on input parameters (filtering options) and expected request schema details. Added summary for clarity and enhanced description to specify that filtering is supported and clarify the asynchronous nature for AI agent understanding.",
+      "batch_index": 2
     }
   },
   {
@@ -12961,7 +13054,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.collectionGroups.indexes.list' has semantic quality issues: vague_summary, missing_context. The original description is too vague. The suggestion adds a concise summary and clarifies the response details for better AI agent interpretability.",
+    "message": "Operation 'firestore.projects.databases.importDocuments' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Missing summary entirely. Description lacks input details about source specification and return information. Added explicit summary and enhanced description to clarify required inputs (source location, target collection), the destructive nature of overwrites, and potential side effects of cancellation for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -12972,18 +13065,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "firestore.projects.databases.collectionGroups.indexes.list",
+      "operation_id": "firestore.projects.databases.importDocuments",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
-      "current_description": "Lists composite indexes.",
-      "summary_suggestion": "List composite indexes",
-      "description_suggestion": "Lists composite indexes for the specified database. The response includes details about each composite index, such as the index fields and their ordering.",
-      "reasoning": "The original description is too vague. The suggestion adds a concise summary and clarifies the response details for better AI agent interpretability.",
-      "batch_index": 3
+      "current_description": "Imports documents into Google Cloud Firestore. Existing documents with the same name are overwritten. The import occurs in the background and its progress can be monitored and managed via the Operation resource that is created. If an ImportDocuments operation is cancelled, it is possible that a subset of the data has already been imported to Cloud Firestore.",
+      "summary_suggestion": "Import documents into Firestore database",
+      "description_suggestion": "Imports documents from an external source into a Firestore database. Existing documents with matching names are overwritten without warning. The import operation runs asynchronously and can be monitored via the returned Operation resource. Requires specifying the source location and target collection. Returns a long-running Operation. Important side effects: Partial data may be imported if the operation is cancelled, and existing documents will be permanently replaced if they share the same name as imported documents.",
+      "reasoning": "Missing summary entirely. Description lacks input details about source specification and return information. Added explicit summary and enhanced description to clarify required inputs (source location, target collection), the destructive nature of overwrites, and potential side effects of cancellation for better AI agent decision-making.",
+      "batch_index": 2
     }
   },
   {
@@ -12997,7 +13091,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.documents.listDocuments' has semantic quality issues: vague_summary, missing_context. The original description is too vague. The suggestion adds a concise summary and clarifies the response details for better AI agent interpretability.",
+    "message": "Operation 'firestore.projects.databases.backupSchedules.list' has semantic quality issues: vague_summary, vague_description, missing_output_details. Missing summary and description is too minimal. Added summary with context and expanded description to specify return type, constraints (max two schedules), and use cases for AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -13008,18 +13102,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "firestore.projects.databases.documents.listDocuments",
+      "operation_id": "firestore.projects.databases.backupSchedules.list",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "vague_description",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Lists documents.",
-      "summary_suggestion": "List documents in a collection",
-      "description_suggestion": "Lists documents in the specified collection. The response includes details about each document, such as the document ID and its contents.",
-      "reasoning": "The original description is too vague. The suggestion adds a concise summary and clarifies the response details for better AI agent interpretability.",
-      "batch_index": 3
+      "current_description": "List backup schedules.",
+      "summary_suggestion": "List backup schedules for a database",
+      "description_suggestion": "Retrieves all backup schedules configured for a specified Firestore database. Returns a list of GoogleFirestoreAdminV1BackupSchedule objects containing schedule configuration details (frequency, retention policy, etc.). A database can have at most two backup schedules: one daily and one weekly. Useful for auditing backup configurations and monitoring backup strategy.",
+      "reasoning": "Missing summary and description is too minimal. Added summary with context and expanded description to specify return type, constraints (max two schedules), and use cases for AI agent interpretability.",
+      "batch_index": 2
     }
   },
   {
@@ -13033,7 +13128,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.documents.listCollectionIds' has semantic quality issues: vague_summary, missing_context. The original description is too vague. The suggestion adds a concise summary and clarifies the response details for better AI agent interpretability.",
+    "message": "Operation 'firestore.projects.databases.backupSchedules.create' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks output details and explicit side effects. Added summary and enhanced description to clarify request schema usage, return value, constraint enforcement behavior, and the side effect of enabling automatic backups.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -13044,18 +13139,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "firestore.projects.databases.documents.listCollectionIds",
+      "operation_id": "firestore.projects.databases.backupSchedules.create",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
-      "current_description": "Lists all the collection IDs underneath a document.",
-      "summary_suggestion": "List collection IDs under a document",
-      "description_suggestion": "Lists all the collection IDs underneath the specified document. The response includes the collection IDs.",
-      "reasoning": "The original description is too vague. The suggestion adds a concise summary and clarifies the response details for better AI agent interpretability.",
-      "batch_index": 3
+      "current_description": "Creates a backup schedule on a database. At most two backup schedules can be configured on a database, one daily backup schedule and one weekly backup schedule.",
+      "summary_suggestion": "Create a backup schedule for database",
+      "description_suggestion": "Creates a new backup schedule for a Firestore database. Accepts a GoogleFirestoreAdminV1BackupSchedule object specifying the backup frequency (daily or weekly) and retention policy. A database can have at most two backup schedules simultaneously - attempting to create a third will fail. Returns the created GoogleFirestoreAdminV1BackupSchedule object with assigned resource name and metadata. Side effect: Enables automatic periodic backups according to the specified schedule.",
+      "reasoning": "Missing summary. Description lacks output details and explicit side effects. Added summary and enhanced description to clarify request schema usage, return value, constraint enforcement behavior, and the side effect of enabling automatic backups.",
+      "batch_index": 2
     }
   },
   {
@@ -13069,7 +13165,120 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.documents.delete' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggested summary and description provide more clarity and detail.",
+    "message": "Operation 'firestore.projects.locations.backups.list' has semantic quality issues: vague_summary, vague_description, missing_output_details. Missing summary and description is too vague. Added summary with location context and expanded description to specify return type, pagination support, and practical use cases for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firestore.projects.locations.backups.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all the backups.",
+      "summary_suggestion": "List all backups in a location",
+      "description_suggestion": "Retrieves all backup instances in a specified Cloud location. Returns a paginated list of GoogleFirestoreAdminV1Backup objects containing backup metadata including creation time, expiration time, database reference, and backup state. Supports filtering and pagination parameters. Useful for monitoring backup status, retention, and recovery options across all databases in a location.",
+      "reasoning": "Missing summary and description is too vague. Added summary with location context and expanded description to specify return type, pagination support, and practical use cases for AI agents.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firestore.projects.databases.list' has semantic quality issues: vague_summary, vague_description, missing_output_details. Missing summary and description is too minimal. Added summary with project context and expanded description to specify return type, database types, pagination support, and use cases for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firestore.projects.databases.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "List all the databases in the project.",
+      "summary_suggestion": "List all Firestore databases in project",
+      "description_suggestion": "Retrieves all Firestore databases in a specified Google Cloud project. Returns a paginated list of GoogleFirestoreAdminV1Database objects containing database metadata including name, type (Native or Datastore), location, and current state. Supports filtering and pagination parameters. Useful for discovering available databases and their configurations.",
+      "reasoning": "Missing summary and description is too minimal. Added summary with project context and expanded description to specify return type, database types, pagination support, and use cases for better AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firestore.projects.databases.create' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Missing summary and description is too minimal. Added summary and significantly expanded description to clarify request schema usage, database type options, location requirements, return type (long-running Operation), and important side effects (billing, infrastructure provisioning) for comprehensive AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firestore.projects.databases.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Create a database.",
+      "summary_suggestion": "Create a new Firestore database",
+      "description_suggestion": "Creates a new Firestore database in a specified Google Cloud project. Accepts a GoogleFirestoreAdminV1Database object specifying database configuration including name, type (Native or Datastore), location, and optional settings. Returns a long-running Operation that must complete before the database is ready for use. Side effects: Provisions database infrastructure, enables billing for the database, and makes the database available for document operations. The operation can be monitored via the returned Operation resource.",
+      "reasoning": "Missing summary and description is too minimal. Added summary and significantly expanded description to clarify request schema usage, database type options, location requirements, return type (long-running Operation), and important side effects (billing, infrastructure provisioning) for comprehensive AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firestore.projects.databases.documents.delete' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects, poor_ai_interpretability. Original description is too minimal. Added clarity on required input format, return value, and permanent nature of deletion. Summary provides action-oriented context for AI agents to understand when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -13084,13 +13293,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_input_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Deletes a document.",
-      "summary_suggestion": "Delete a specific document",
-      "description_suggestion": "Deletes a specific document from the database. Requires the document name as a parameter. Returns a 200 status code on successful deletion.",
-      "reasoning": "The current summary and description are vague. The suggested summary and description provide more clarity and detail.",
+      "summary_suggestion": "Delete a Firestore document by name",
+      "description_suggestion": "Deletes a single document from the Firestore database. Requires the full document path in the `name` parameter (format: projects/{project}/databases/{database}/documents/{document_path}). Returns an empty response on successful deletion. This operation permanently removes the document and cannot be undone.",
+      "reasoning": "Original description is too minimal. Added clarity on required input format, return value, and permanent nature of deletion. Summary provides action-oriented context for AI agents to understand when to use this operation.",
       "batch_index": 1
     }
   },
@@ -13105,7 +13316,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.documents.get' has semantic quality issues: vague_summary, missing_context. The current summary and description are vague. The suggested summary and description provide more clarity and detail.",
+    "message": "Operation 'firestore.projects.databases.documents.get' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, poor_ai_interpretability. Original description lacks specificity about inputs and outputs. Enhanced with document path format, return type (Document schema), and mention of optional parameters for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -13120,13 +13331,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Gets a single document.",
-      "summary_suggestion": "Get a specific document",
-      "description_suggestion": "Retrieves a single document from the database. Requires the document name as a parameter. Returns the document data if found.",
-      "reasoning": "The current summary and description are vague. The suggested summary and description provide more clarity and detail.",
+      "summary_suggestion": "Retrieve a Firestore document by name",
+      "description_suggestion": "Retrieves a single document from the Firestore database. Requires the full document path in the `name` parameter (format: projects/{project}/databases/{database}/documents/{document_path}). Returns a Document object containing the document's fields and values. Supports optional parameters for transaction consistency and field masking.",
+      "reasoning": "Original description lacks specificity about inputs and outputs. Enhanced with document path format, return type (Document schema), and mention of optional parameters for better AI agent decision-making.",
       "batch_index": 1
     }
   },
@@ -13141,7 +13354,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firestore.projects.databases.documents.patch' has semantic quality issues: vague_summary, missing_input_details. The current summary and description are vague. The suggested summary and description provide more clarity and detail.",
+    "message": "Operation 'firestore.projects.databases.documents.patch' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects, poor_ai_interpretability. Original description is ambiguous about upsert behavior. Clarified that this is an upsert operation, specified input/output types, and mentioned field masks and conditional writes for AI agents to understand update semantics.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -13156,14 +13369,357 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Updates or inserts a document.",
-      "summary_suggestion": "Update or insert a document",
-      "description_suggestion": "Updates or inserts a document in the database. Requires the document name and the updated document data as parameters. Returns the updated document if successful.",
-      "reasoning": "The current summary and description are vague. The suggested summary and description provide more clarity and detail.",
+      "summary_suggestion": "Create or update a Firestore document",
+      "description_suggestion": "Creates a new document or updates an existing document in the Firestore database. Accepts a Document object in the request body containing the document's fields and values. Requires the document path in the `name` parameter. Supports partial updates via field masks and conditional writes. Returns the updated Document object with server-generated timestamps.",
+      "reasoning": "Original description is ambiguous about upsert behavior. Clarified that this is an upsert operation, specified input/output types, and mentioned field masks and conditional writes for AI agents to understand update semantics.",
       "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firestore.projects.databases.operations.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, poor_ai_interpretability. Original description mentions error handling but lacks clarity on inputs, outputs, and use cases. Enhanced with operation types, pagination support, and return schema to help AI agents understand when to use this for monitoring async tasks.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firestore.projects.databases.operations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
+      "summary_suggestion": "List long-running Firestore database operations",
+      "description_suggestion": "Lists long-running operations for a Firestore database that match the specified filter criteria. Accepts filter, page size, and page token parameters to control results. Returns a list of GoogleLongrunningOperation objects representing async operations like backups, deletes, or index creation. Supports pagination for large result sets. Returns UNIMPLEMENTED error if the server doesn't support filtering.",
+      "reasoning": "Original description mentions error handling but lacks clarity on inputs, outputs, and use cases. Enhanced with operation types, pagination support, and return schema to help AI agents understand when to use this for monitoring async tasks.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firestore.projects.databases.bulkDeleteDocuments' has semantic quality issues: vague_summary, missing_input_details, poor_ai_interpretability. Original description is verbose but lacks clarity on inputs and return type. Simplified while preserving important behavioral details. Added input/output schema references and clarified that this returns a long-running operation for AI agents to understand async workflow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firestore.projects.databases.bulkDeleteDocuments",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Bulk deletes a subset of documents from Google Cloud Firestore. Documents created or updated after the underlying system starts to process the request will not be deleted. The bulk delete occurs in the background and its progress can be monitored and managed via the Operation resource that is created. For more details on bulk delete behavior, refer to: https://cloud.google.com/firestore/docs/manage-data/bulk-delete",
+      "summary_suggestion": "Bulk delete documents from Firestore asynchronously",
+      "description_suggestion": "Initiates an asynchronous bulk delete operation to remove multiple documents from Firestore matching specified criteria. Accepts a GoogleFirestoreAdminV1BulkDeleteDocumentsRequest containing the deletion filter. Returns a GoogleLongrunningOperation that can be monitored for progress. Documents created or updated after the operation starts will not be deleted. Use the returned operation resource to track completion and manage the background deletion process.",
+      "reasoning": "Original description is verbose but lacks clarity on inputs and return type. Simplified while preserving important behavioral details. Added input/output schema references and clarified that this returns a long-running operation for AI agents to understand async workflow.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firestore.projects.databases.operations.cancel' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, poor_ai_interpretability. Original description is overly detailed and uses inconsistent terminology. Restructured for clarity, specified input/output types, and clarified the best-effort nature and how to verify results. Helps AI agents understand this is a request operation with uncertain outcome.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firestore.projects.databases.operations.cancel",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of `1`, corresponding to `Code.CANCELLED`.",
+      "summary_suggestion": "Request cancellation of a long-running operation",
+      "description_suggestion": "Requests cancellation of a long-running Firestore operation. Accepts the operation name in the `name` parameter and a GoogleLongrunningCancelOperationRequest. Cancellation is best-effort; success is not guaranteed. Returns an empty response. On successful cancellation, the operation transitions to a CANCELLED state with an error status. Use Operations.GetOperation to verify cancellation status. Returns UNIMPLEMENTED if the server doesn't support this method.",
+      "reasoning": "Original description is overly detailed and uses inconsistent terminology. Restructured for clarity, specified input/output types, and clarified the best-effort nature and how to verify results. Helps AI agents understand this is a request operation with uncertain outcome.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firestore.projects.databases.collectionGroups.fields.list' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description lacks clarity about what is returned and has confusing API reference language. Added explicit explanation of filtering behavior, clarified that only overridden fields are returned, and specified the return type. Added summary to provide immediate operation context for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firestore.projects.databases.collectionGroups.fields.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the field configuration and metadata for this database. Currently, FirestoreAdmin.ListFields only supports listing fields that have been explicitly overridden. To issue this query, call FirestoreAdmin.ListFields with the filter set to `indexConfig.usesAncestorConfig:false` or `ttlConfig:*`.",
+      "summary_suggestion": "List field configurations and metadata for database",
+      "description_suggestion": "Lists the field configuration and metadata for fields in this database. Currently, this operation only returns fields that have been explicitly overridden; inherited field configurations are not included. To retrieve overridden fields, use filters such as `indexConfig.usesAncestorConfig:false` or `ttlConfig:*`. Returns a paginated list of Field objects containing index configuration and TTL settings.",
+      "reasoning": "Original description lacks clarity about what is returned and has confusing API reference language. Added explicit explanation of filtering behavior, clarified that only overridden fields are returned, and specified the return type. Added summary to provide immediate operation context for AI agents.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firestore.projects.databases.collectionGroups.indexes.list' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description is extremely vague with no context about scope, return type, or purpose. Added clarification about what composite indexes are used for, specified the return type, and explained pagination support. This helps AI agents understand when to use this operation and what to expect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firestore.projects.databases.collectionGroups.indexes.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists composite indexes.",
+      "summary_suggestion": "List composite indexes for collection group",
+      "description_suggestion": "Lists all composite indexes defined for the specified collection group. Returns a paginated list of GoogleFirestoreAdminV1Index objects. Composite indexes enable complex queries across multiple fields. The response includes index configuration, state, and metadata for each index.",
+      "reasoning": "Original description is extremely vague with no context about scope, return type, or purpose. Added clarification about what composite indexes are used for, specified the return type, and explained pagination support. This helps AI agents understand when to use this operation and what to expect.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firestore.projects.databases.collectionGroups.indexes.create' has semantic quality issues: vague_summary, missing_context, missing_output_details. Original description lacks summary and is incomplete about outputs and timing. Added summary for immediate context. Enhanced description to clarify asynchronous nature, specify metadata type, explain when the index becomes available, and indicate the final response type. This helps AI agents understand the operation's lifecycle and when results are ready.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firestore.projects.databases.collectionGroups.indexes.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a composite index. This returns a google.longrunning.Operation which may be used to track the status of the creation. The metadata for the operation will be the type IndexOperationMetadata.",
+      "summary_suggestion": "Create a composite index for collection group",
+      "description_suggestion": "Creates a new composite index for the specified collection group. This operation is asynchronous and returns a long-running Operation that can be used to track creation progress. The Operation's metadata field contains IndexOperationMetadata with status details. The response will be a GoogleFirestoreAdminV1Index object upon successful completion. The index will not be available for queries until the operation completes.",
+      "reasoning": "Original description lacks summary and is incomplete about outputs and timing. Added summary for immediate context. Enhanced description to clarify asynchronous nature, specify metadata type, explain when the index becomes available, and indicate the final response type. This helps AI agents understand the operation's lifecycle and when results are ready.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firestore.projects.databases.documents.listDocuments' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description is extremely vague with no context about collection scope, filtering, pagination, or return format. Added summary for clarity. Enhanced description to explain pagination support, query capabilities, ordering behavior, and return type. This helps AI agents understand the operation's capabilities and how to use parameters effectively.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firestore.projects.databases.documents.listDocuments",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists documents.",
+      "summary_suggestion": "List documents in a collection",
+      "description_suggestion": "Lists documents in the specified collection. Supports pagination through page tokens and configurable page sizes. Can filter results using structured queries and order results by field values. Returns a paginated list of Document objects. Documents are returned in the order specified by the query, or by document ID if no ordering is specified.",
+      "reasoning": "Original description is extremely vague with no context about collection scope, filtering, pagination, or return format. Added summary for clarity. Enhanced description to explain pagination support, query capabilities, ordering behavior, and return type. This helps AI agents understand the operation's capabilities and how to use parameters effectively.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firestore.projects.databases.documents.createDocument' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details. Original description is extremely vague with no context about inputs, outputs, or behavior. Added summary for clarity. Enhanced description to explain document ID handling, input format, return value, and error conditions. This helps AI agents understand what data to provide and what to expect in response.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firestore.projects.databases.documents.createDocument",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new document.",
+      "summary_suggestion": "Create a new document in collection",
+      "description_suggestion": "Creates a new document in the specified collection. The document ID can be auto-generated or provided via the documentId parameter. Accepts a Document object containing the document's fields and values. Returns the created Document object with its assigned ID and server-generated metadata (createTime, updateTime). The operation fails if a document with the same ID already exists in the collection.",
+      "reasoning": "Original description is extremely vague with no context about inputs, outputs, or behavior. Added summary for clarity. Enhanced description to explain document ID handling, input format, return value, and error conditions. This helps AI agents understand what data to provide and what to expect in response.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firestore.projects.databases.documents.listCollectionIds' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description lacks summary and is incomplete about return format and pagination. Added summary for immediate context. Enhanced description to clarify what is returned (collection ID strings), explain pagination support, provide use case context, and specify behavior for documents without subcollections. This helps AI agents understand the operation's purpose and output format.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firestore.projects.databases.documents.listCollectionIds",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all the collection IDs underneath a document.",
+      "summary_suggestion": "List collection IDs under a document",
+      "description_suggestion": "Lists all collection IDs that are direct children of the specified document. Returns a paginated list of collection ID strings. This operation is useful for discovering the structure of subcollections within a document. Supports pagination through page tokens and configurable page sizes. Returns an empty list if the document has no subcollections.",
+      "reasoning": "Original description lacks summary and is incomplete about return format and pagination. Added summary for immediate context. Enhanced description to clarify what is returned (collection ID strings), explain pagination support, provide use case context, and specify behavior for documents without subcollections. This helps AI agents understand the operation's purpose and output format.",
+      "batch_index": 3
     }
   },
   {
@@ -13177,7 +13733,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 31 operations analyzed, 15 quality issues found",
+    "message": "Semantic analysis completed: 31 operations analyzed, 29 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -13189,7 +13745,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 31,
-      "total_issues_found": 15,
+      "total_issues_found": 29,
       "batches_processed": 5
     }
   }

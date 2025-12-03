@@ -6596,7 +6596,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'analyticshub.projects.locations.subscriptions.setIamPolicy' has semantic quality issues: vague_summary, vague_description, missing_input_details. The original summary and description were vague. The improved summary is concise and action-oriented, while the improved description provides clarity on the required input, the expected outcome, and the context of the operation.",
+    "message": "Operation 'analyticshub.projects.locations.subscriptions.setIamPolicy' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects, not_actionable, poor_ai_interpretability. Original description is too vague and lacks critical context. Missing: (1) empty summary makes it unclear what action is performed, (2) no explanation of what 'IAM policy' means in this domain context, (3) no input details about what the request contains, (4) no output details about what is returned, (5) no side effects information about permission changes. Added domain-appropriate terminology (Identity and Access Management), clarified the action (replaces existing policy), explained inputs (resource name and policy definition), outputs (updated Policy object), and side effects (modifies access permissions). This helps AI agents understand when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6612,13 +6612,17 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "not_actionable",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Sets the IAM policy.",
-      "summary_suggestion": "Set IAM policy for a subscription",
-      "description_suggestion": "Sets the IAM policy for a specified subscription in the Analytics Hub. Requires the `resource` parameter to identify the subscription. The request body should include the new IAM policy in the form of a `Policy` object. Returns the updated IAM policy.",
-      "reasoning": "The original summary and description were vague. The improved summary is concise and action-oriented, while the improved description provides clarity on the required input, the expected outcome, and the context of the operation.",
+      "summary_suggestion": "Set IAM policy for subscription resource",
+      "description_suggestion": "Sets the Identity and Access Management (IAM) policy for a subscription resource. This operation replaces the existing IAM policy with the policy specified in the request. The request must include the resource name and the new policy definition. Returns the updated Policy object containing the new bindings and access controls. This operation modifies access permissions for the subscription and affects who can perform actions on this resource.",
+      "reasoning": "Original description is too vague and lacks critical context. Missing: (1) empty summary makes it unclear what action is performed, (2) no explanation of what 'IAM policy' means in this domain context, (3) no input details about what the request contains, (4) no output details about what is returned, (5) no side effects information about permission changes. Added domain-appropriate terminology (Identity and Access Management), clarified the action (replaces existing policy), explained inputs (resource name and policy definition), outputs (updated Policy object), and side effects (modifies access permissions). This helps AI agents understand when to use this operation and what to expect.",
       "batch_index": 2
     }
   },
@@ -6633,7 +6637,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'analyticshub.projects.locations.dataExchanges.listings.testIamPermissions' has semantic quality issues: vague_summary, missing_context. The original summary and description were vague. The improved summary is concise and action-oriented, while the improved description provides clarity on the required input, the expected outcome, and the context of the operation.",
+    "message": "Operation 'analyticshub.projects.locations.dataExchanges.listings.testIamPermissions' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_context, not_actionable, poor_ai_interpretability. Original description is too generic and lacks actionable details. Missing: (1) empty summary provides no context, (2) vague 'permissions that a caller has' doesn't explain the testing mechanism, (3) no input details about what permissions are being tested, (4) no output details about the response format, (5) no context about the operation being read-only/non-mutating, (6) inconsistent terminology (should use 'IAM permissions' not just 'permissions'). Added domain terminology (Identity and Access Management), clarified the testing mechanism (checks against requested list), explained inputs (resource and permission list), outputs (response with matching permissions), and side effects (read-only, no state changes). This enables AI agents to understand this is a validation/check operation distinct from policy modification.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6648,13 +6652,18 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context",
+        "not_actionable",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Returns the permissions that a caller has.",
-      "summary_suggestion": "Test IAM permissions for a listing",
-      "description_suggestion": "Tests the IAM permissions for a specified listing in the Analytics Hub. Requires the `resource` parameter to identify the listing. It returns the list of permissions that the caller has on the specified listing.",
-      "reasoning": "The original summary and description were vague. The improved summary is concise and action-oriented, while the improved description provides clarity on the required input, the expected outcome, and the context of the operation.",
+      "summary_suggestion": "Test IAM permissions for listing resource",
+      "description_suggestion": "Tests which Identity and Access Management (IAM) permissions the authenticated caller has on a specific listing resource. The request specifies the resource and a list of permissions to check. Returns a TestIamPermissionsResponse containing only the permissions from the requested list that the caller actually possesses. This operation does not modify any state and is useful for determining if a caller can perform specific actions on the listing before attempting them.",
+      "reasoning": "Original description is too generic and lacks actionable details. Missing: (1) empty summary provides no context, (2) vague 'permissions that a caller has' doesn't explain the testing mechanism, (3) no input details about what permissions are being tested, (4) no output details about the response format, (5) no context about the operation being read-only/non-mutating, (6) inconsistent terminology (should use 'IAM permissions' not just 'permissions'). Added domain terminology (Identity and Access Management), clarified the testing mechanism (checks against requested list), explained inputs (resource and permission list), outputs (response with matching permissions), and side effects (read-only, no state changes). This enables AI agents to understand this is a validation/check operation distinct from policy modification.",
       "batch_index": 2
     }
   },
@@ -6669,7 +6678,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'analyticshub.projects.locations.subscriptions.delete' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides more context about the operation's effects.",
+    "message": "Operation 'analyticshub.projects.locations.subscriptions.delete' has semantic quality issues: vague_summary, missing_side_effects, missing_context. Original description is too minimal. Added context about access revocation, linked dataset removal, and irreversibility to help AI agents understand the operation's full impact and side effects. Added summary for completeness.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6684,13 +6693,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_side_effects",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Deletes a subscription.",
       "summary_suggestion": "Delete a subscription",
-      "description_suggestion": "Deletes a subscription to a data exchange. This operation removes the subscription and any associated linked datasets.",
-      "reasoning": "The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides more context about the operation's effects.",
+      "description_suggestion": "Deletes a subscription and revokes the subscriber's access to the associated data exchange listings. This operation removes all linked datasets created for this subscription. The subscription cannot be recovered after deletion.",
+      "reasoning": "Original description is too minimal. Added context about access revocation, linked dataset removal, and irreversibility to help AI agents understand the operation's full impact and side effects. Added summary for completeness.",
       "batch_index": 0
     }
   },
@@ -6705,7 +6715,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'analyticshub.projects.locations.subscriptions.get' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented.",
+    "message": "Operation 'analyticshub.projects.locations.subscriptions.get' has semantic quality issues: vague_summary, missing_output_details. Original description lacks specificity about what details are returned. Enhanced to clarify the return value (Subscription object) and what information it contains, improving AI agent understanding of the operation's output.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6719,12 +6729,14 @@
       "operation_id": "analyticshub.projects.locations.subscriptions.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets the details of a Subscription.",
-      "summary_suggestion": "Get subscription details",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented.",
+      "summary_suggestion": "Retrieve subscription details",
+      "description_suggestion": "Retrieves the complete details of a subscription, including its status, associated listings, linked resources, and configuration. Returns a Subscription object containing all subscription metadata and state information.",
+      "reasoning": "Original description lacks specificity about what details are returned. Enhanced to clarify the return value (Subscription object) and what information it contains, improving AI agent understanding of the operation's output.",
       "batch_index": 0
     }
   },
@@ -6739,7 +6751,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'analyticshub.projects.locations.dataExchanges.listings.patch' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented.",
+    "message": "Operation 'analyticshub.projects.locations.dataExchanges.listings.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original description is too generic. Added clarity about the Listing schema, partial update support, and return value. Used domain terminology (data exchange, listing) consistently with API context to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6753,12 +6765,15 @@
       "operation_id": "analyticshub.projects.locations.dataExchanges.listings.patch",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Updates an existing listing.",
-      "summary_suggestion": "Update a listing",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented.",
+      "summary_suggestion": "Update a data exchange listing",
+      "description_suggestion": "Updates an existing listing within a data exchange. Accepts a Listing object with fields to be modified. Supports partial updates - only provided fields will be changed. Returns the updated Listing object with all current properties.",
+      "reasoning": "Original description is too generic. Added clarity about the Listing schema, partial update support, and return value. Used domain terminology (data exchange, listing) consistently with API context to improve AI agent interpretability.",
       "batch_index": 0
     }
   },
@@ -6773,7 +6788,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'analyticshub.projects.locations.subscriptions.revoke' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented.",
+    "message": "Operation 'analyticshub.projects.locations.subscriptions.revoke' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Original description lacks critical context about access termination and permanence. Enhanced to clarify side effects (access termination, dataset removal), irreversibility, and input requirements. This helps AI agents understand the operation's significance and consequences.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6787,12 +6802,15 @@
       "operation_id": "analyticshub.projects.locations.subscriptions.revoke",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Revokes a given subscription.",
       "summary_suggestion": "Revoke a subscription",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented.",
+      "description_suggestion": "Revokes a subscription, immediately terminating the subscriber's access to the associated data exchange listings and linked datasets. This operation is permanent and cannot be undone. Requires a RevokeSubscriptionRequest with revocation details.",
+      "reasoning": "Original description lacks critical context about access termination and permanence. Enhanced to clarify side effects (access termination, dataset removal), irreversibility, and input requirements. This helps AI agents understand the operation's significance and consequences.",
       "batch_index": 0
     }
   },
@@ -6807,7 +6825,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'analyticshub.projects.locations.dataExchanges.listings.subscribe' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented.",
+    "message": "Operation 'analyticshub.projects.locations.dataExchanges.listings.subscribe' has semantic quality issues: vague_summary, missing_output_details. Original description contains implementation details ('Currently, with Analytics Hub') that are not essential for operation understanding. Refined to focus on the action and its effects, clarified the return value (Subscription object), and improved domain terminology consistency. Better supports AI agent decision-making about when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6821,12 +6839,14 @@
       "operation_id": "analyticshub.projects.locations.dataExchanges.listings.subscribe",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Subscribes to a listing. Currently, with Analytics Hub, you can create listings that reference only BigQuery datasets. Upon subscription to a listing for a BigQuery dataset, Analytics Hub creates a linked dataset in the subscriber's project.",
-      "summary_suggestion": "Subscribe to a listing",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented.",
+      "summary_suggestion": "Subscribe to a data exchange listing",
+      "description_suggestion": "Subscribes to a listing within a data exchange. For BigQuery dataset listings, this operation creates a linked dataset in the subscriber's project, enabling access to the published data. Accepts a SubscribeListingRequest and returns a Subscription object representing the new subscription.",
+      "reasoning": "Original description contains implementation details ('Currently, with Analytics Hub') that are not essential for operation understanding. Refined to focus on the action and its effects, clarified the return value (Subscription object), and improved domain terminology consistency. Better supports AI agent decision-making about when to use this operation.",
       "batch_index": 0
     }
   },
@@ -6841,7 +6861,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'analyticshub.organizations.locations.dataExchanges.list' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented.",
+    "message": "Operation 'analyticshub.organizations.locations.dataExchanges.list' has semantic quality issues: vague_summary, missing_output_details. Original description lacks information about the response format and pagination support. Enhanced to specify the return type (ListOrgDataExchangesResponse), clarify that it contains DataExchange objects, and mention pagination capability. This provides AI agents with complete information about what to expect from the operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6855,13 +6875,277 @@
       "operation_id": "analyticshub.organizations.locations.dataExchanges.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists all data exchanges from projects in a given organization and location.",
-      "summary_suggestion": "List data exchanges in an organization",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented.",
+      "summary_suggestion": "List organization data exchanges",
+      "description_suggestion": "Lists all data exchanges available in a specified organization and location. Returns a ListOrgDataExchangesResponse containing a collection of DataExchange objects with their metadata. Supports pagination through optional parameters.",
+      "reasoning": "Original description lacks information about the response format and pagination support. Enhanced to specify the return type (ListOrgDataExchangesResponse), clarify that it contains DataExchange objects, and mention pagination capability. This provides AI agents with complete information about what to expect from the operation.",
       "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'analyticshub.projects.locations.dataExchanges.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks details about pagination support, return structure, and filtering capabilities that would help AI agents understand the operation's full scope and how to use pagination parameters.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "analyticshub.projects.locations.dataExchanges.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all data exchanges in a given project and location.",
+      "summary_suggestion": "List data exchanges in a project location",
+      "description_suggestion": "Retrieves all data exchanges available in the specified project and location. Supports pagination through optional parameters. Returns a list of DataExchange objects containing exchange metadata, descriptions, and associated listings.",
+      "reasoning": "Missing summary entirely. Description lacks details about pagination support, return structure, and filtering capabilities that would help AI agents understand the operation's full scope and how to use pagination parameters.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'analyticshub.projects.locations.dataExchanges.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description is too minimal - lacks information about required fields, what gets returned, and the side effect that the exchange becomes available for use. AI agents need to understand the input structure and resulting state.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "analyticshub.projects.locations.dataExchanges.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new data exchange.",
+      "summary_suggestion": "Create a new data exchange",
+      "description_suggestion": "Creates a new data exchange in the specified project and location. Accepts a DataExchange object with required fields including display_name and description. Returns the newly created DataExchange object with a system-generated resource ID. The data exchange becomes immediately available for publishing listings.",
+      "reasoning": "Missing summary. Description is too minimal - lacks information about required fields, what gets returned, and the side effect that the exchange becomes available for use. AI agents need to understand the input structure and resulting state.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'analyticshub.projects.locations.dataExchanges.listings.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks context about pagination, what listings represent (published data assets), and the structure of returned objects. Should clarify that listings are scoped to a specific data exchange.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "analyticshub.projects.locations.dataExchanges.listings.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all listings in a given project and location.",
+      "summary_suggestion": "List listings in a data exchange",
+      "description_suggestion": "Retrieves all listings published in the specified data exchange within a project and location. Supports pagination through optional parameters. Returns a list of Listing objects containing data source references, descriptions, and subscription information.",
+      "reasoning": "Missing summary. Description lacks context about pagination, what listings represent (published data assets), and the structure of returned objects. Should clarify that listings are scoped to a specific data exchange.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'analyticshub.projects.locations.dataExchanges.listings.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description is too vague - doesn't explain that listings are published data assets within exchanges, what required fields are needed, or that the listing becomes discoverable after creation. AI agents need this context to understand the operation's role in the data sharing workflow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "analyticshub.projects.locations.dataExchanges.listings.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new listing.",
+      "summary_suggestion": "Create a new listing in exchange",
+      "description_suggestion": "Creates a new listing within a data exchange to publish a data asset. Accepts a Listing object with required fields including display_name and data source reference. Returns the newly created Listing object with a system-generated resource ID. The listing becomes immediately available for subscribers to discover and subscribe to.",
+      "reasoning": "Missing summary. Description is too vague - doesn't explain that listings are published data assets within exchanges, what required fields are needed, or that the listing becomes discoverable after creation. AI agents need this context to understand the operation's role in the data sharing workflow.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'analyticshub.projects.locations.subscriptions.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity about what subscriptions represent (subscriber access), pagination support, and the structure of returned objects. Should help AI agents understand subscriptions as the mechanism for accessing published data.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "analyticshub.projects.locations.subscriptions.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all subscriptions in a given project and location.",
+      "summary_suggestion": "List subscriptions in a project",
+      "description_suggestion": "Retrieves all subscriptions in the specified project and location, representing subscriber access to published listings. Supports pagination and filtering through optional parameters. Returns a list of Subscription objects containing references to associated listings, data exchanges, and destination datasets.",
+      "reasoning": "Missing summary. Description lacks clarity about what subscriptions represent (subscriber access), pagination support, and the structure of returned objects. Should help AI agents understand subscriptions as the mechanism for accessing published data.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'analyticshub.projects.locations.subscriptions.getIamPolicy' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Missing summary. Description is extremely vague - 'Gets the IAM policy' doesn't specify what resource or context. Should clarify this retrieves access control policies for subscriptions, what the request contains, and what the response structure includes for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "analyticshub.projects.locations.subscriptions.getIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the IAM policy.",
+      "summary_suggestion": "Get subscription IAM policy",
+      "description_suggestion": "Retrieves the Identity and Access Management (IAM) policy for a subscription resource. Accepts a GetIamPolicyRequest specifying the subscription resource. Returns a Policy object containing role bindings that define who has access to the subscription and what permissions they have.",
+      "reasoning": "Missing summary. Description is extremely vague - 'Gets the IAM policy' doesn't specify what resource or context. Should clarify this retrieves access control policies for subscriptions, what the request contains, and what the response structure includes for AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'analyticshub.projects.locations.dataExchanges.listings.listSubscriptions' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity about pagination support, filtering capabilities, and what information is returned about each subscription. Should help AI agents understand how to discover subscriber relationships and their access details.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "analyticshub.projects.locations.dataExchanges.listings.listSubscriptions",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all subscriptions on a given Data Exchange or Listing.",
+      "summary_suggestion": "List subscriptions for exchange or listing",
+      "description_suggestion": "Retrieves all subscriptions associated with a specified data exchange or listing resource. Supports pagination and filtering through optional parameters. Returns a list of Subscription objects showing which subscribers have access to the data exchange or listing, including their destination datasets and subscription status.",
+      "reasoning": "Missing summary. Description lacks clarity about pagination support, filtering capabilities, and what information is returned about each subscription. Should help AI agents understand how to discover subscriber relationships and their access details.",
+      "batch_index": 1
     }
   },
   {
@@ -6875,7 +7159,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 16 operations analyzed, 8 quality issues found",
+    "message": "Semantic analysis completed: 16 operations analyzed, 15 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -6887,7 +7171,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 16,
-      "total_issues_found": 8,
+      "total_issues_found": 15,
       "batches_processed": 3
     }
   }

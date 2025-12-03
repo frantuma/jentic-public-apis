@@ -2494,7 +2494,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'billingbudgets.billingAccounts.budgets.delete' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing, and the description is missing information about side effects, such as what happens if the budget does not exist.",
+    "message": "Operation 'billingbudgets.billingAccounts.budgets.delete' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks clarity on required input (budget name/resource identifier), idempotent behavior explanation, and return value details. Added specific parameter format and clarified that empty response is returned to improve AI agent understanding of when and how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2509,13 +2509,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Deletes a budget. Returns successfully if already deleted.",
       "summary_suggestion": "Delete a budget by name",
-      "description_suggestion": "Deletes a specified budget by its name. Returns successfully if the budget is already deleted or if the deletion is successful.",
-      "reasoning": "The current summary is missing, and the description is missing information about side effects, such as what happens if the budget does not exist.",
+      "description_suggestion": "Deletes a budget associated with a billing account. The operation is idempotent and returns successfully even if the budget has already been deleted or does not exist. Requires the budget resource name in the format 'billingAccounts/{billingAccountId}/budgets/{budgetId}'. Returns an empty response on successful deletion.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on required input (budget name/resource identifier), idempotent behavior explanation, and return value details. Added specific parameter format and clarified that empty response is returned to improve AI agent understanding of when and how to use this operation.",
       "batch_index": 0
     }
   },
@@ -2530,7 +2531,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'billingbudgets.billingAccounts.budgets.get' has semantic quality issues: vague_summary, missing_context. The current summary is missing, and the description could be more concise and clear about the context of missing fields.",
+    "message": "Operation 'billingbudgets.billingAccounts.budgets.get' has semantic quality issues: vague_summary, missing_input_details, missing_context. Missing summary. Description is vague about required input and return value. The warning about Console fields is important but needs better context. Added specific parameter format, clarified return value structure, and repositioned the Console field warning for better readability and AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2545,13 +2546,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_input_details",
         "missing_context"
       ],
       "current_summary": "",
       "current_description": "Returns a budget. WARNING: There are some fields exposed on the Google Cloud Console that aren't available on this API. When reading from the API, you will not see these fields in the return value, though they may have been set in the Cloud Console.",
-      "summary_suggestion": "Get a specific budget by name",
-      "description_suggestion": "Retrieves a specified budget by its name. WARNING: Some fields exposed on the Google Cloud Console are not available on this API. When reading from the API, these fields will not be visible in the return value, even if they have been set in the Cloud Console.",
-      "reasoning": "The current summary is missing, and the description could be more concise and clear about the context of missing fields.",
+      "summary_suggestion": "Retrieve a budget by name",
+      "description_suggestion": "Retrieves a specific budget associated with a billing account. Requires the budget resource name in the format 'billingAccounts/{billingAccountId}/budgets/{budgetId}'. Returns the complete budget object including spending plan, filters, and notification rules. Note: Some fields visible in the Google Cloud Console are not exposed through this API and will not appear in the response, even if set through the Console.",
+      "reasoning": "Missing summary. Description is vague about required input and return value. The warning about Console fields is important but needs better context. Added specific parameter format, clarified return value structure, and repositioned the Console field warning for better readability and AI agent interpretability.",
       "batch_index": 0
     }
   },
@@ -2566,7 +2568,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'billingbudgets.billingAccounts.budgets.patch' has semantic quality issues: vague_summary, missing_context. The current summary is missing, and the description could be more concise and clear about the context of missing fields.",
+    "message": "Operation 'billingbudgets.billingAccounts.budgets.patch' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Missing summary. Description lacks input parameter details and clarity about partial update behavior. The warning about Console fields needs better context. Added specific parameter format, clarified partial update semantics, and explained the side effect of field limitations for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2581,13 +2583,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Updates a budget and returns the updated budget. WARNING: There are some fields exposed on the Google Cloud Console that aren't available on this API. Budget fields that are not exposed in this API will not be changed by this method.",
-      "summary_suggestion": "Update a budget by name",
-      "description_suggestion": "Updates a specified budget by its name and returns the updated budget. WARNING: Some fields exposed on the Google Cloud Console are not available on this API. Budget fields that are not exposed in this API will not be changed by this method.",
-      "reasoning": "The current summary is missing, and the description could be more concise and clear about the context of missing fields.",
+      "summary_suggestion": "Update a budget configuration",
+      "description_suggestion": "Updates an existing budget associated with a billing account. Requires the budget resource name in the format 'billingAccounts/{billingAccountId}/budgets/{budgetId}' and an UpdateBudgetRequest containing the fields to modify. Supports partial updates - only provided fields will be modified. Returns the updated budget object. Note: Fields not exposed in this API cannot be modified through this operation, even if they were previously set through the Google Cloud Console.",
+      "reasoning": "Missing summary. Description lacks input parameter details and clarity about partial update behavior. The warning about Console fields needs better context. Added specific parameter format, clarified partial update semantics, and explained the side effect of field limitations for better AI agent decision-making.",
       "batch_index": 0
     }
   },
@@ -2602,7 +2605,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'billingbudgets.billingAccounts.budgets.list' has semantic quality issues: vague_summary, missing_context. The current summary is missing, and the description could be more concise and clear about the context of missing fields.",
+    "message": "Operation 'billingbudgets.billingAccounts.budgets.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks input parameter details and pagination information. The warning about Console fields needs better context. Added specific parameter format, clarified pagination support, and explained the response structure to help AI agents understand filtering, pagination, and field availability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2617,13 +2620,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Returns a list of budgets for a billing account. WARNING: There are some fields exposed on the Google Cloud Console that aren't available on this API. When reading from the API, you will not see these fields in the return value, though they may have been set in the Cloud Console.",
       "summary_suggestion": "List budgets for a billing account",
-      "description_suggestion": "Retrieves a list of budgets for a specified billing account. WARNING: Some fields exposed on the Google Cloud Console are not available on this API. When reading from the API, these fields will not be visible in the return value, even if they have been set in the Cloud Console.",
-      "reasoning": "The current summary is missing, and the description could be more concise and clear about the context of missing fields.",
+      "description_suggestion": "Lists all budgets associated with a specified billing account. Requires the billing account resource name in the format 'billingAccounts/{billingAccountId}'. Supports pagination through optional parameters for page size and page token. Returns a ListBudgetsResponse containing an array of budget objects and pagination information. Note: Some fields visible in the Google Cloud Console are not exposed through this API and will not appear in the response, even if set through the Console.",
+      "reasoning": "Missing summary. Description lacks input parameter details and pagination information. The warning about Console fields needs better context. Added specific parameter format, clarified pagination support, and explained the response structure to help AI agents understand filtering, pagination, and field availability.",
       "batch_index": 0
     }
   },
@@ -2638,7 +2642,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'billingbudgets.billingAccounts.budgets.create' has semantic quality issues: vague_summary, missing_context. The current summary is missing, and the description could be more concise and clear about the context of quotas and limits.",
+    "message": "Operation 'billingbudgets.billingAccounts.budgets.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity on required inputs (billing account identifier and budget configuration) and return value. The quota reference is useful but needs better integration. Added specific parameter format, clarified required budget configuration fields, explained return value, and integrated quota information more naturally for improved AI agent usability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2653,13 +2657,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Creates a new budget. See [Quotas and limits](https://cloud.google.com/billing/quotas) for more information on the limits of the number of budgets you can create.",
       "summary_suggestion": "Create a new budget for a billing account",
-      "description_suggestion": "Creates a new budget for a specified billing account. See [Quotas and limits](https://cloud.google.com/billing/quotas) for more information on the limits of the number of budgets you can create.",
-      "reasoning": "The current summary is missing, and the description could be more concise and clear about the context of quotas and limits.",
+      "description_suggestion": "Creates a new budget for a specified billing account. Requires the billing account resource name in the format 'billingAccounts/{billingAccountId}' and a CreateBudgetRequest containing the budget configuration including display name, amount, filters, and notification rules. Returns the newly created budget object with a system-generated resource name. Subject to quota limits - see Cloud Billing quotas documentation for maximum budgets per billing account.",
+      "reasoning": "Missing summary. Description lacks clarity on required inputs (billing account identifier and budget configuration) and return value. The quota reference is useful but needs better integration. Added specific parameter format, clarified required budget configuration fields, explained return value, and integrated quota information more naturally for improved AI agent usability.",
       "batch_index": 0
     }
   },

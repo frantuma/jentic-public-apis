@@ -10235,7 +10235,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'tendersAdd' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Original description 'Create Tender' is too vague. Added context about authentication, input details, and return value for better AI agent understanding.",
+    "message": "Operation 'tendersAdd' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details, missing_side_effects. Original description is identical to summary and provides no actionable information. Enhanced version clarifies that this creates a payment tender (domain context), explains what inputs are expected, specifies the return value, and indicates the side effect (tender becomes available for use). This helps AI agents understand when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10249,15 +10249,18 @@
       "operation_id": "tendersAdd",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
+        "missing_context",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Create Tender",
       "current_description": "Create Tender",
-      "summary_suggestion": "Create a new Tender",
-      "description_suggestion": "Creates a new Tender for a POS transaction. Requires authentication and includes tender details. Returns the created Tender object with its unique identifier.",
-      "reasoning": "Original description 'Create Tender' is too vague. Added context about authentication, input details, and return value for better AI agent understanding.",
+      "summary_suggestion": "Create a new payment tender",
+      "description_suggestion": "Creates a new payment tender in the POS system. Accepts tender configuration details such as name, type, and payment method settings. Returns the created tender object with a unique identifier. The tender becomes immediately available for use in payment processing.",
+      "reasoning": "Original description is identical to summary and provides no actionable information. Enhanced version clarifies that this creates a payment tender (domain context), explains what inputs are expected, specifies the return value, and indicates the side effect (tender becomes available for use). This helps AI agents understand when to use this operation and what to expect.",
       "batch_index": 6
     }
   },
@@ -10272,7 +10275,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'tendersOne' has semantic quality issues: vague_description, missing_output_details. Original description 'Get Tender' is too vague. Added context about authentication and return value for better AI agent understanding.",
+    "message": "Operation 'tendersOne' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description lacks specificity and context. Enhanced version clarifies the operation retrieves a specific tender (not a list), explains what information is returned, and specifies the required input parameter. This improves AI agent interpretability by making clear what data will be returned and what input is needed.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10286,14 +10289,16 @@
       "operation_id": "tendersOne",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
+        "missing_context",
         "missing_output_details"
       ],
       "current_summary": "Get Tender",
       "current_description": "Get Tender",
-      "summary_suggestion": "Retrieve Tender details",
-      "description_suggestion": "Retrieves details of a specific Tender by its ID. Requires authentication and returns the Tender object with its details.",
-      "reasoning": "Original description 'Get Tender' is too vague. Added context about authentication and return value for better AI agent understanding.",
+      "summary_suggestion": "Retrieve a specific tender by ID",
+      "description_suggestion": "Retrieves detailed information about a specific payment tender by its unique identifier. Returns the complete tender object including configuration, payment method details, and status. Requires the tender ID as a path parameter.",
+      "reasoning": "Original description lacks specificity and context. Enhanced version clarifies the operation retrieves a specific tender (not a list), explains what information is returned, and specifies the required input parameter. This improves AI agent interpretability by making clear what data will be returned and what input is needed.",
       "batch_index": 6
     }
   },
@@ -10308,7 +10313,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'tendersUpdate' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Original description 'Update Tender' is too vague. Added context about authentication, input details, and return value for better AI agent understanding.",
+    "message": "Operation 'tendersUpdate' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details, missing_side_effects. Original description is too minimal and provides no operational context. Enhanced version clarifies this is a partial update operation (important for API usage), specifies required inputs (ID and body), explains the return value, and indicates the side effect (immediate effect). This helps AI agents understand the update semantics and when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10322,15 +10327,18 @@
       "operation_id": "tendersUpdate",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
+        "missing_context",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Update Tender",
       "current_description": "Update Tender",
-      "summary_suggestion": "Update Tender details",
-      "description_suggestion": "Updates the details of a specific Tender by its ID. Requires authentication and includes new tender details. Returns the updated Tender object.",
-      "reasoning": "Original description 'Update Tender' is too vague. Added context about authentication, input details, and return value for better AI agent understanding.",
+      "summary_suggestion": "Update an existing payment tender",
+      "description_suggestion": "Updates an existing payment tender's configuration and settings. Supports partial updates - only provided fields will be modified. Requires the tender ID as a path parameter and the updated tender details in the request body. Returns the updated tender object. Changes take effect immediately.",
+      "reasoning": "Original description is too minimal and provides no operational context. Enhanced version clarifies this is a partial update operation (important for API usage), specifies required inputs (ID and body), explains the return value, and indicates the side effect (immediate effect). This helps AI agents understand the update semantics and when to use this operation.",
       "batch_index": 6
     }
   },
@@ -10345,7 +10353,303 @@
         "character": 0
       }
     },
-    "message": "Operation 'paymentsAdd' has semantic quality issues: vague_description, missing_context. Original description is very vague. Added details about required parameters and return value for better clarity.",
+    "message": "Operation 'tendersDelete' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, missing_side_effects. Original description lacks context and side effect information. Enhanced version clarifies the operation removes a tender from the system (domain context), specifies the required input, explains the return value, and importantly describes the side effect (tender becomes unavailable). This helps AI agents understand the consequences of this destructive operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "tendersDelete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete Tender",
+      "current_description": "Delete Tender",
+      "summary_suggestion": "Delete a payment tender",
+      "description_suggestion": "Deletes a payment tender from the POS system by its unique identifier. Requires the tender ID as a path parameter. Returns a confirmation of deletion. The tender will no longer be available for use in payment processing after deletion.",
+      "reasoning": "Original description lacks context and side effect information. Enhanced version clarifies the operation removes a tender from the system (domain context), specifies the required input, explains the return value, and importantly describes the side effect (tender becomes unavailable). This helps AI agents understand the consequences of this destructive operation.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'merchantsUpdate' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Current description is a mere repetition of the summary with no actionable details. Added clarity on partial update support, required parameters, authentication, return value, and side effects for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "merchantsUpdate",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Update Merchant",
+      "current_description": "Update Merchant",
+      "description_suggestion": "Updates an existing merchant's information with the provided details. Accepts partial updates - only supplied fields will be modified. Requires the merchant ID in the path and valid authentication credentials. Returns the updated merchant object with all current properties. Changes are immediately reflected in the POS system.",
+      "reasoning": "Current description is a mere repetition of the summary with no actionable details. Added clarity on partial update support, required parameters, authentication, return value, and side effects for AI agent decision-making.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'merchantsDelete' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description lacks essential context about permanence, required inputs, return value, and consequences. Enhanced to clarify destructive nature and help AI agents understand the irreversible impact.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "merchantsDelete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete Merchant",
+      "current_description": "Delete Merchant",
+      "description_suggestion": "Permanently deletes a merchant record from the POS system. Requires the merchant ID in the path and valid authentication credentials. Returns a confirmation of deletion. This action cannot be undone and will remove all associated merchant data.",
+      "reasoning": "Original description lacks essential context about permanence, required inputs, return value, and consequences. Enhanced to clarify destructive nature and help AI agents understand the irreversible impact.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'locationsAll' has semantic quality issues: vague_description, missing_output_details, missing_context. Current description provides no context about pagination, return structure, or authentication. Added details about pagination mechanism (cursor-based), return format, and authentication requirements consistent with API documentation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "locationsAll",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "List Locations",
+      "current_description": "List Locations",
+      "description_suggestion": "Retrieves a paginated list of all locations in the POS system. Supports cursor-based pagination via the cursor and limit parameters. Returns an array of location objects with metadata including pagination cursors for navigating through results. Requires valid authentication credentials.",
+      "reasoning": "Current description provides no context about pagination, return structure, or authentication. Added details about pagination mechanism (cursor-based), return format, and authentication requirements consistent with API documentation.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'locationsAdd' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is incomplete and non-descriptive. Enhanced to explain input requirements, return value including ID and timestamps, and immediate availability for use.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "locationsAdd",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Create Location",
+      "current_description": "Create Location",
+      "description_suggestion": "Creates a new location in the POS system. Accepts a location object with required and optional properties in the request body. Returns the newly created location object with a unique identifier and timestamps. The location is immediately available for use in the POS system.",
+      "reasoning": "Original description is incomplete and non-descriptive. Enhanced to explain input requirements, return value including ID and timestamps, and immediate availability for use.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'locationsOne' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Current description lacks specificity about required inputs and return content. Added clarity on ID requirement, authentication, and comprehensive return data to aid AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "locationsOne",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Get Location",
+      "current_description": "Get Location",
+      "description_suggestion": "Retrieves a specific location's details from the POS system by its unique identifier. Requires the location ID in the path and valid authentication credentials. Returns the complete location object with all properties including configuration, address, and metadata.",
+      "reasoning": "Current description lacks specificity about required inputs and return content. Added clarity on ID requirement, authentication, and comprehensive return data to aid AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'locationsUpdate' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is a bare repetition with no operational context. Enhanced to clarify partial update support, required parameters, authentication, return value, and immediate system-wide effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "locationsUpdate",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Update Location",
+      "current_description": "Update Location",
+      "description_suggestion": "Updates an existing location's information with the provided details. Accepts partial updates - only supplied fields will be modified. Requires the location ID in the path and valid authentication credentials. Returns the updated location object with all current properties. Changes are immediately reflected in the POS system.",
+      "reasoning": "Original description is a bare repetition with no operational context. Enhanced to clarify partial update support, required parameters, authentication, return value, and immediate system-wide effects.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'locationsDelete' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Current description provides no context about destructive nature, requirements, or consequences. Added clarity on permanence, required inputs, return value, and impact to help AI agents understand the irreversible action.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "locationsDelete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete Location",
+      "current_description": "Delete Location",
+      "description_suggestion": "Permanently deletes a location record from the POS system. Requires the location ID in the path and valid authentication credentials. Returns a confirmation of deletion. This action cannot be undone and will remove all associated location data and configurations.",
+      "reasoning": "Current description provides no context about destructive nature, requirements, or consequences. Added clarity on permanence, required inputs, return value, and impact to help AI agents understand the irreversible action.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'paymentsAdd' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, missing_side_effects. Original description is minimal and lacks essential context. Improved version clarifies what a payment creation entails, what inputs are expected (amount, currency, method, order), what is returned (payment object with ID and timestamp), and the side effect (payment recorded and associated with order). This helps AI agents understand when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10359,13 +10663,17 @@
       "operation_id": "paymentsAdd",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Create Payment",
       "current_description": "Create Payment",
-      "description_suggestion": "Creates a new payment record for a transaction. Requires payment details such as amount, currency, and payment method. Returns the newly created payment object with an ID and timestamps.",
-      "reasoning": "Original description is very vague. Added details about required parameters and return value for better clarity.",
+      "summary_suggestion": "Create a new payment transaction",
+      "description_suggestion": "Creates a new payment transaction in the POS system. Accepts payment details including amount, currency, payment method, and associated order information. Returns the created payment object with a unique identifier and timestamp. The payment is immediately recorded in the system and associated with the specified order.",
+      "reasoning": "Original description is minimal and lacks essential context. Improved version clarifies what a payment creation entails, what inputs are expected (amount, currency, method, order), what is returned (payment object with ID and timestamp), and the side effect (payment recorded and associated with order). This helps AI agents understand when to use this operation and what to expect.",
       "batch_index": 1
     }
   },
@@ -10380,7 +10688,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'paymentsOne' has semantic quality issues: vague_description. Original description is too vague. Added details about what the operation retrieves and returns for better understanding.",
+    "message": "Operation 'paymentsOne' has semantic quality issues: vague_summary, vague_description, missing_output_details. Original description lacks specificity about what data is returned and what parameters are required. Enhanced version clarifies the required ID parameter, the comprehensive payment details returned, and the operation's read-only nature. This improves AI agent interpretability for determining when to fetch payment details.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10394,12 +10702,15 @@
       "operation_id": "paymentsOne",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
       ],
       "current_summary": "Get Payment",
       "current_description": "Get Payment",
-      "description_suggestion": "Retrieves details of a specific payment by its ID. Returns the payment object including ID, amount, currency, payment method, and timestamps.",
-      "reasoning": "Original description is too vague. Added details about what the operation retrieves and returns for better understanding.",
+      "summary_suggestion": "Retrieve a specific payment by ID",
+      "description_suggestion": "Retrieves detailed information for a specific payment transaction using its unique identifier. Returns the complete payment object including amount, currency, payment method, status, timestamps, and associated order information. Requires the payment ID as a path parameter.",
+      "reasoning": "Original description lacks specificity about what data is returned and what parameters are required. Enhanced version clarifies the required ID parameter, the comprehensive payment details returned, and the operation's read-only nature. This improves AI agent interpretability for determining when to fetch payment details.",
       "batch_index": 1
     }
   },
@@ -10414,7 +10725,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'paymentsUpdate' has semantic quality issues: vague_description, missing_side_effects. Original description is vague and missing details about side effects. Added details about input fields and side effects for better clarity.",
+    "message": "Operation 'paymentsUpdate' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, missing_side_effects. Original description provides no context about what can be updated, whether partial updates are supported, or what is returned. Improved version explains partial update support, examples of updatable fields, return value, and the persistence side effect. This enables AI agents to understand the operation's scope and effects.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10428,13 +10739,17 @@
       "operation_id": "paymentsUpdate",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
+        "missing_context",
+        "missing_output_details",
         "missing_side_effects"
       ],
       "current_summary": "Update Payment",
       "current_description": "Update Payment",
-      "description_suggestion": "Updates details of an existing payment by its ID. Accepts fields such as amount, currency, and payment method. Returns the updated payment object. Note: Any changes made will update the payment's state.",
-      "reasoning": "Original description is vague and missing details about side effects. Added details about input fields and side effects for better clarity.",
+      "summary_suggestion": "Update an existing payment record",
+      "description_suggestion": "Updates an existing payment transaction using its unique identifier. Supports partial updates - only provided fields will be modified. Commonly updated fields include payment status, notes, and metadata. Returns the updated payment object with modified timestamp. Changes are immediately persisted in the system.",
+      "reasoning": "Original description provides no context about what can be updated, whether partial updates are supported, or what is returned. Improved version explains partial update support, examples of updatable fields, return value, and the persistence side effect. This enables AI agents to understand the operation's scope and effects.",
       "batch_index": 1
     }
   },
@@ -10449,7 +10764,46 @@
         "character": 0
       }
     },
-    "message": "Operation 'merchantsAll' has semantic quality issues: vague_description. Original description is too vague. Added details about what the operation retrieves and returns for better understanding.",
+    "message": "Operation 'paymentsDelete' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, missing_side_effects. Original description is too minimal. Enhanced version clarifies the destructive nature of the operation, what is removed (payment record and history), what is returned (confirmation with ID), and potential restrictions. This helps AI agents understand the consequences of deletion and when it's appropriate to use.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "paymentsDelete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete Payment",
+      "current_description": "Delete Payment",
+      "summary_suggestion": "Delete a payment transaction record",
+      "description_suggestion": "Deletes a payment transaction from the POS system using its unique identifier. Removes the payment record and any associated transaction history. Returns a confirmation response with the deleted payment's ID. This operation may be restricted based on payment status or system configuration.",
+      "reasoning": "Original description is too minimal. Enhanced version clarifies the destructive nature of the operation, what is removed (payment record and history), what is returned (confirmation with ID), and potential restrictions. This helps AI agents understand the consequences of deletion and when it's appropriate to use.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'merchantsAll' has semantic quality issues: vague_summary, vague_description, missing_output_details, missing_context. Original description lacks pagination details and output information. Improved version explains pagination mechanism (cursor-based), parameters (limit, cursor), return structure (array of merchant objects), and how to navigate pages. This is critical for AI agents to properly handle list operations and pagination.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10463,12 +10817,16 @@
       "operation_id": "merchantsAll",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_summary",
+        "vague_description",
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "List Merchants",
       "current_description": "List Merchants",
-      "description_suggestion": "Retrieves a list of all merchants associated with the authenticated user. Returns a paginated list of merchant objects including IDs, names, and locations.",
-      "reasoning": "Original description is too vague. Added details about what the operation retrieves and returns for better understanding.",
+      "summary_suggestion": "Retrieve a paginated list of merchants",
+      "description_suggestion": "Retrieves a paginated list of all merchants in the POS system. Supports cursor-based pagination via limit and cursor parameters. Returns an array of merchant objects containing ID, name, contact information, and configuration details. Use cursor from meta.cursors.next to fetch subsequent pages.",
+      "reasoning": "Original description lacks pagination details and output information. Improved version explains pagination mechanism (cursor-based), parameters (limit, cursor), return structure (array of merchant objects), and how to navigate pages. This is critical for AI agents to properly handle list operations and pagination.",
       "batch_index": 1
     }
   },
@@ -10483,7 +10841,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'merchantsAdd' has semantic quality issues: vague_description. Original description is very vague. Added details about required parameters and return value for better clarity.",
+    "message": "Operation 'merchantsAdd' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, missing_side_effects. Original description is insufficient. Enhanced version specifies what merchant information is required, what is returned (merchant object with ID and timestamp), and the side effect (merchant becomes active and available for associations). This helps AI agents understand the merchant creation workflow.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10497,12 +10855,17 @@
       "operation_id": "merchantsAdd",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Create Merchant",
       "current_description": "Create Merchant",
-      "description_suggestion": "Creates a new merchant record. Requires details such as name, location, and payment settings. Returns the newly created merchant object with an ID and timestamps.",
-      "reasoning": "Original description is very vague. Added details about required parameters and return value for better clarity.",
+      "summary_suggestion": "Create a new merchant account",
+      "description_suggestion": "Creates a new merchant account in the POS system. Accepts merchant details including name, contact information, address, and configuration settings. Returns the created merchant object with a unique identifier and timestamp. The merchant is immediately active in the system and can be associated with locations and payment processing.",
+      "reasoning": "Original description is insufficient. Enhanced version specifies what merchant information is required, what is returned (merchant object with ID and timestamp), and the side effect (merchant becomes active and available for associations). This helps AI agents understand the merchant creation workflow.",
       "batch_index": 1
     }
   },
@@ -10517,7 +10880,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'merchantsOne' has semantic quality issues: vague_description. Original description is too vague. Added details about what the operation retrieves and returns for better understanding.",
+    "message": "Operation 'merchantsOne' has semantic quality issues: vague_summary, vague_description, missing_output_details. Original description lacks specificity about required parameters and returned data. Improved version clarifies the required ID parameter and the comprehensive merchant details returned, enabling AI agents to understand what information is available and how to retrieve it.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10531,12 +10894,15 @@
       "operation_id": "merchantsOne",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
       ],
       "current_summary": "Get Merchant",
       "current_description": "Get Merchant",
-      "description_suggestion": "Retrieves details of a specific merchant by its ID. Returns the merchant object including ID, name, location, and payment settings.",
-      "reasoning": "Original description is too vague. Added details about what the operation retrieves and returns for better understanding.",
+      "summary_suggestion": "Retrieve a specific merchant by ID",
+      "description_suggestion": "Retrieves detailed information for a specific merchant using its unique identifier. Returns the complete merchant object including name, contact details, address, configuration settings, and associated metadata. Requires the merchant ID as a path parameter.",
+      "reasoning": "Original description lacks specificity about required parameters and returned data. Improved version clarifies the required ID parameter and the comprehensive merchant details returned, enabling AI agents to understand what information is available and how to retrieve it.",
       "batch_index": 1
     }
   },
@@ -10551,7 +10917,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'orderTypesAll' has semantic quality issues: vague_description, missing_output_details. The current description is too vague and lacks detail about the expected output. The suggested description adds context about pagination and the structure of the returned data.",
+    "message": "Operation 'ordersAll' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description is minimal and lacks actionable details. Improved version explains pagination support, filtering capabilities, and return structure to help AI agents understand how to retrieve and navigate order data.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10562,17 +10928,20 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "orderTypesAll",
+      "operation_id": "ordersAll",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
+        "missing_context",
         "missing_output_details"
       ],
-      "current_summary": "List Order Types",
-      "current_description": "List Order Types",
-      "description_suggestion": "Retrieves a list of all available order types within the system. Supports pagination via the 'limit' and 'cursor' query parameters. Returns a list of order type objects with relevant metadata.",
-      "reasoning": "The current description is too vague and lacks detail about the expected output. The suggested description adds context about pagination and the structure of the returned data.",
-      "batch_index": 5
+      "current_summary": "List Orders",
+      "current_description": "List Orders",
+      "summary_suggestion": "Retrieve paginated list of orders",
+      "description_suggestion": "Retrieves a paginated list of orders from the POS system. Supports filtering by date range, status, and location. Returns order objects with pagination metadata (cursor, limit). Use cursor-based pagination to navigate through results.",
+      "reasoning": "Original description is minimal and lacks actionable details. Improved version explains pagination support, filtering capabilities, and return structure to help AI agents understand how to retrieve and navigate order data.",
+      "batch_index": 0
     }
   },
   {
@@ -10586,7 +10955,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'tendersAll' has semantic quality issues: vague_description, missing_output_details. The current description is too vague and lacks detail about the expected output. The suggested description adds context about pagination and the structure of the returned data.",
+    "message": "Operation 'ordersAdd' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, missing_side_effects. Original description provides no context about inputs, outputs, or state. Enhanced version clarifies what order data is accepted, what is returned, and the initial state of created orders for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10597,17 +10966,21 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "tendersAll",
+      "operation_id": "ordersAdd",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_output_details"
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects"
       ],
-      "current_summary": "List Tenders",
-      "current_description": "List Tenders",
-      "description_suggestion": "Retrieves a list of all available tender types within the system. Supports pagination via the 'limit' and 'cursor' query parameters. Returns a list of tender objects with relevant metadata.",
-      "reasoning": "The current description is too vague and lacks detail about the expected output. The suggested description adds context about pagination and the structure of the returned data.",
-      "batch_index": 5
+      "current_summary": "Create Order",
+      "current_description": "Create Order",
+      "summary_suggestion": "Create new POS order",
+      "description_suggestion": "Creates a new order in the POS system. Accepts order details including items, customer information, and order type. Returns the created order object with a unique identifier. The order is initially in an open state and can be modified or paid using subsequent operations.",
+      "reasoning": "Original description provides no context about inputs, outputs, or state. Enhanced version clarifies what order data is accepted, what is returned, and the initial state of created orders for better AI agent decision-making.",
+      "batch_index": 0
     }
   },
   {
@@ -10621,7 +10994,160 @@
         "character": 0
       }
     },
-    "message": "Operation 'modifiersOne' has semantic quality issues: vague_summary, vague_description, poor_ai_interpretability. The current summary and description lack specificity and context, making it difficult for an AI agent to understand the operation's purpose and details.",
+    "message": "Operation 'ordersOne' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description lacks specificity about what is returned and use cases. Improved version explains the return structure and typical usage patterns to help AI agents understand when to call this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ordersOne",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Get Order",
+      "current_description": "Get Order",
+      "summary_suggestion": "Retrieve order details by ID",
+      "description_suggestion": "Retrieves detailed information for a specific order by its unique identifier. Returns the complete order object including items, payments, customer details, and status. Use this to fetch current order state before making updates or payments.",
+      "reasoning": "Original description lacks specificity about what is returned and use cases. Improved version explains the return structure and typical usage patterns to help AI agents understand when to call this operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ordersDelete' has semantic quality issues: vague_summary, vague_description, missing_context, missing_side_effects. Original description is too minimal. Enhanced version clarifies the deletion scope, potential restrictions, and return value to help AI agents understand the operation's impact and when it can be used.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ordersDelete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete Order",
+      "current_description": "Delete Order",
+      "summary_suggestion": "Delete order by ID",
+      "description_suggestion": "Deletes an order from the POS system by its unique identifier. Removes the order and all associated data. Note: Deletion may be restricted for orders with certain statuses (e.g., completed, paid). Returns confirmation of deletion.",
+      "reasoning": "Original description is too minimal. Enhanced version clarifies the deletion scope, potential restrictions, and return value to help AI agents understand the operation's impact and when it can be used.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ordersPay' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details. Original description provides no context about payment inputs, order state changes, or return values. Improved version explains what payment data is required, the resulting order state, and the return value for better AI agent understanding of payment workflows.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ordersPay",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Pay Order",
+      "current_description": "Pay Order",
+      "summary_suggestion": "Process payment for order",
+      "description_suggestion": "Processes payment for an open order using the provided payment details. Accepts payment information including tender type, amount, and payment method. Transitions the order to a paid state and returns the updated order with payment confirmation. Use this endpoint to complete order transactions.",
+      "reasoning": "Original description provides no context about payment inputs, order state changes, or return values. Improved version explains what payment data is required, the resulting order state, and the return value for better AI agent understanding of payment workflows.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'paymentsAll' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description is minimal and lacks actionable details. Improved version explains pagination support, filtering capabilities, and return structure consistent with the ordersAll operation pattern to help AI agents understand how to retrieve and navigate payment data.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "paymentsAll",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "List Payments",
+      "current_description": "List Payments",
+      "summary_suggestion": "Retrieve paginated list of payments",
+      "description_suggestion": "Retrieves a paginated list of payments from the POS system. Supports filtering by date range, payment method, and status. Returns payment objects with pagination metadata (cursor, limit). Use cursor-based pagination to navigate through results.",
+      "reasoning": "Original description is minimal and lacks actionable details. Improved version explains pagination support, filtering capabilities, and return structure consistent with the ordersAll operation pattern to help AI agents understand how to retrieve and navigate payment data.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'modifiersOne' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original summary and description are identical and lack specificity. Enhanced version clarifies the retrieval action, explains what is returned, and provides context about the modifier's role in the POS system for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10637,13 +11163,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "poor_ai_interpretability"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "Get Modifier",
       "current_description": "Get Modifier",
       "summary_suggestion": "Retrieve a specific modifier by ID",
-      "description_suggestion": "Retrieves a specific modifier by its unique identifier. Requires the `id` parameter. Returns the requested modifier's details.",
-      "reasoning": "The current summary and description lack specificity and context, making it difficult for an AI agent to understand the operation's purpose and details.",
+      "description_suggestion": "Retrieves a single modifier resource by its unique identifier. Returns the complete modifier object including its name, type, and associated metadata. Use this operation to fetch details about a specific modifier that can be applied to POS items.",
+      "reasoning": "Original summary and description are identical and lack specificity. Enhanced version clarifies the retrieval action, explains what is returned, and provides context about the modifier's role in the POS system for better AI agent understanding.",
       "batch_index": 4
     }
   },
@@ -10658,7 +11185,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'modifiersUpdate' has semantic quality issues: vague_summary, vague_description, missing_input_details, poor_ai_interpretability. The current summary and description are too vague and lack details about the input and the update process, making it hard for an AI agent to interpret the operation's functionality.",
+    "message": "Operation 'modifiersUpdate' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is too minimal. Enhanced version explains partial update support, specifies what can be updated, clarifies the return value, and indicates the immediate effect on the POS system for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10675,13 +11202,14 @@
         "vague_summary",
         "vague_description",
         "missing_input_details",
-        "poor_ai_interpretability"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Update Modifier",
       "current_description": "Update Modifier",
-      "summary_suggestion": "Update a specific modifier by ID",
-      "description_suggestion": "Updates a specific modifier identified by its `id`. Requires the `id` parameter and the update payload. Returns the updated modifier object.",
-      "reasoning": "The current summary and description are too vague and lack details about the input and the update process, making it hard for an AI agent to interpret the operation's functionality.",
+      "summary_suggestion": "Update modifier properties and configuration",
+      "description_suggestion": "Updates an existing modifier resource with new values. Accepts partial updates - only provided fields will be modified. Returns the updated modifier object. Common updates include modifier name, type, pricing adjustments, and availability status. Changes are immediately reflected in the POS system.",
+      "reasoning": "Original description is too minimal. Enhanced version explains partial update support, specifies what can be updated, clarifies the return value, and indicates the immediate effect on the POS system for AI agent decision-making.",
       "batch_index": 4
     }
   },
@@ -10696,7 +11224,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'modifiersDelete' has semantic quality issues: vague_summary, vague_description, missing_side_effects, poor_ai_interpretability. The current summary and description lack details about the parameters and the expected response, making it difficult for an AI agent to understand the operation's purpose and expected outcomes.",
+    "message": "Operation 'modifiersDelete' has semantic quality issues: vague_summary, vague_description, missing_context, missing_side_effects. Original description lacks critical context about deletion consequences. Enhanced version explains the permanent nature of the operation, potential side effects on existing orders, and clarifies the return value to help AI agents understand the implications of this destructive operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10712,14 +11240,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_side_effects",
-        "poor_ai_interpretability"
+        "missing_context",
+        "missing_side_effects"
       ],
       "current_summary": "Delete Modifier",
       "current_description": "Delete Modifier",
-      "summary_suggestion": "Delete a specific modifier by ID",
-      "description_suggestion": "Deletes a specific modifier identified by its `id`. Requires the `id` parameter. Returns a success message if the deletion is successful.",
-      "reasoning": "The current summary and description lack details about the parameters and the expected response, making it difficult for an AI agent to understand the operation's purpose and expected outcomes.",
+      "summary_suggestion": "Remove a modifier from the POS system",
+      "description_suggestion": "Permanently deletes a modifier resource by its unique identifier. Once deleted, the modifier cannot be applied to new orders and may be removed from existing order records depending on system configuration. Returns a confirmation of deletion. This action cannot be undone.",
+      "reasoning": "Original description lacks critical context about deletion consequences. Enhanced version explains the permanent nature of the operation, potential side effects on existing orders, and clarifies the return value to help AI agents understand the implications of this destructive operation.",
       "batch_index": 4
     }
   },
@@ -10734,7 +11262,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'modifierGroupsAll' has semantic quality issues: vague_description, poor_ai_interpretability. The current description lacks specificity and details, making it hard for an AI agent to understand the operation's functionality and expected response.",
+    "message": "Operation 'modifierGroupsAll' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description is too generic. Enhanced version explains what modifier groups are, their purpose in POS systems, clarifies pagination support, and specifies the return structure to help AI agents understand when and how to use this list operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10748,13 +11276,16 @@
       "operation_id": "modifierGroupsAll",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "poor_ai_interpretability"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "List Modifier Groups",
       "current_description": "List Modifier Groups",
-      "description_suggestion": "Lists all available modifier groups. Returns a collection of modifier group objects.",
-      "reasoning": "The current description lacks specificity and details, making it hard for an AI agent to understand the operation's functionality and expected response.",
+      "summary_suggestion": "Retrieve all modifier groups with pagination",
+      "description_suggestion": "Retrieves a paginated list of all modifier groups in the POS system. Modifier groups organize related modifiers (e.g., size options, toppings) for efficient menu management. Supports cursor-based pagination via limit and cursor parameters. Returns an array of modifier group objects with metadata including pagination cursors for retrieving additional pages.",
+      "reasoning": "Original description is too generic. Enhanced version explains what modifier groups are, their purpose in POS systems, clarifies pagination support, and specifies the return structure to help AI agents understand when and how to use this list operation.",
       "batch_index": 4
     }
   },
@@ -10769,7 +11300,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'modifierGroupsAdd' has semantic quality issues: vague_description, missing_input_details, poor_ai_interpretability. The current description lacks details about the required input parameters and the expected response, making it difficult for an AI agent to understand the operation's purpose and required inputs.",
+    "message": "Operation 'modifierGroupsAdd' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original description lacks specificity about inputs and outputs. Enhanced version explains the purpose of modifier groups, clarifies what the request body should contain, specifies the return value, and provides context about typical use cases for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10783,14 +11314,16 @@
       "operation_id": "modifierGroupsAdd",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
         "missing_input_details",
-        "poor_ai_interpretability"
+        "missing_output_details"
       ],
       "current_summary": "Create Modifier Group",
       "current_description": "Create Modifier Group",
-      "description_suggestion": "Creates a new modifier group with the provided details. Requires the `name` and `description` parameters. Returns the created modifier group object.",
-      "reasoning": "The current description lacks details about the required input parameters and the expected response, making it difficult for an AI agent to understand the operation's purpose and required inputs.",
+      "summary_suggestion": "Create a new modifier group for organizing modifiers",
+      "description_suggestion": "Creates a new modifier group resource in the POS system. Modifier groups organize related modifiers (e.g., size options, toppings, condiments) for menu management. Accepts a ModifierGroup object with required fields including name and optional fields for description and display settings. Returns the created modifier group object with its assigned unique identifier.",
+      "reasoning": "Original description lacks specificity about inputs and outputs. Enhanced version explains the purpose of modifier groups, clarifies what the request body should contain, specifies the return value, and provides context about typical use cases for AI agent understanding.",
       "batch_index": 4
     }
   },
@@ -10805,7 +11338,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'modifierGroupsOne' has semantic quality issues: vague_summary, vague_description, poor_ai_interpretability. The current summary and description lack specificity and context, making it difficult for an AI agent to understand the operation's purpose and details.",
+    "message": "Operation 'modifierGroupsOne' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original summary and description are identical and lack detail. Enhanced version clarifies the retrieval action, explains what data is returned, and provides context about the modifier group's role in POS operations for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10821,13 +11354,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "poor_ai_interpretability"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "Get Modifier Group",
       "current_description": "Get Modifier Group",
       "summary_suggestion": "Retrieve a specific modifier group by ID",
-      "description_suggestion": "Retrieves a specific modifier group by its unique identifier. Requires the `id` parameter. Returns the requested modifier group's details.",
-      "reasoning": "The current summary and description lack specificity and context, making it difficult for an AI agent to understand the operation's purpose and details.",
+      "description_suggestion": "Retrieves a single modifier group resource by its unique identifier. Returns the complete modifier group object including its name, description, display settings, and associated modifiers. Use this operation to fetch details about a specific modifier group for menu configuration or order processing.",
+      "reasoning": "Original summary and description are identical and lack detail. Enhanced version clarifies the retrieval action, explains what data is returned, and provides context about the modifier group's role in POS operations for better AI agent interpretability.",
       "batch_index": 4
     }
   },
@@ -10842,7 +11376,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'modifierGroupsUpdate' has semantic quality issues: vague_summary, vague_description, missing_input_details, poor_ai_interpretability. The current summary and description are too vague and lack details about the input and the update process, making it hard for an AI agent to interpret the operation's functionality.",
+    "message": "Operation 'modifierGroupsUpdate' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is too minimal. Enhanced version explains partial update support, clarifies what can be updated, specifies the return value, and indicates the immediate system-wide effects for AI agent decision-making about when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10859,13 +11393,14 @@
         "vague_summary",
         "vague_description",
         "missing_input_details",
-        "poor_ai_interpretability"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Update Modifier Group",
       "current_description": "Update Modifier Group",
-      "summary_suggestion": "Update a specific modifier group by ID",
-      "description_suggestion": "Updates a specific modifier group identified by its `id`. Requires the `id` parameter and the update payload. Returns the updated modifier group object.",
-      "reasoning": "The current summary and description are too vague and lack details about the input and the update process, making it hard for an AI agent to interpret the operation's functionality.",
+      "summary_suggestion": "Update modifier group properties and settings",
+      "description_suggestion": "Updates an existing modifier group resource with new values. Accepts partial updates - only provided fields will be modified. Returns the updated modifier group object. Common updates include group name, description, display order, and modifier associations. Changes are immediately reflected in the POS system and affect how modifiers are presented in orders.",
+      "reasoning": "Original description is too minimal. Enhanced version explains partial update support, clarifies what can be updated, specifies the return value, and indicates the immediate system-wide effects for AI agent decision-making about when to use this operation.",
       "batch_index": 4
     }
   },
@@ -10880,7 +11415,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ordersAll' has semantic quality issues: vague_description, missing_context. Original description is too vague. Added context about pagination support and what is returned.",
+    "message": "Operation 'modifierGroupsDelete' has semantic quality issues: vague_description, missing_context, missing_side_effects, poor_ai_interpretability. Current description is identical to summary and lacks essential context. Added clarity about what gets deleted, required parameters, return value, and important side effects about cascading impacts. This helps AI agents understand the destructive nature of the operation and when it's appropriate to use.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10891,288 +11426,7 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "ordersAll",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "List Orders",
-      "current_description": "List Orders",
-      "description_suggestion": "Retrieves a list of orders. Supports pagination with `cursor` and `limit` parameters. Returns a collection of order objects with metadata and pagination links.",
-      "reasoning": "Original description is too vague. Added context about pagination support and what is returned.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ordersAdd' has semantic quality issues: vague_description, missing_input_details. Original description is too vague. Added context about authentication, request body requirement, and what is returned.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ordersAdd",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_input_details"
-      ],
-      "current_summary": "Create Order",
-      "current_description": "Create Order",
-      "description_suggestion": "Creates a new order by submitting the provided order details. Requires authentication. The request body must include the order schema. Returns the newly created order object.",
-      "reasoning": "Original description is too vague. Added context about authentication, request body requirement, and what is returned.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ordersOne' has semantic quality issues: vague_description, missing_output_details. Original description is too vague. Added context about authentication and what is returned.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ordersOne",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_output_details"
-      ],
-      "current_summary": "Get Order",
-      "current_description": "Get Order",
-      "description_suggestion": "Retrieves the details of a specific order identified by its unique ID. Requires authentication. Returns the order object including order metadata, items, and payment details.",
-      "reasoning": "Original description is too vague. Added context about authentication and what is returned.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ordersUpdate' has semantic quality issues: vague_description, missing_context. Original description is somewhat clear but can be improved by adding context about authentication and the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ordersUpdate",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Update Order",
-      "current_description": "Updates an open order by adding, replacing, or deleting fields. Square-only: Orders with a `completed` or `canceled` status cannot be updated. To pay for an order, use the [payments endpoint](#tag/Payments).",
-      "description_suggestion": "Updates the details of an open order by adding, replacing, or deleting fields. Square-only: Orders with a `completed` or `canceled` status cannot be updated. Requires authentication. Returns the updated order object.",
-      "reasoning": "Original description is somewhat clear but can be improved by adding context about authentication and the return value.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ordersDelete' has semantic quality issues: vague_description, missing_side_effects. Original description is too vague. Added context about authentication, return value, and side effects of deletion.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ordersDelete",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_side_effects"
-      ],
-      "current_summary": "Delete Order",
-      "current_description": "Delete Order",
-      "description_suggestion": "Deletes an existing order identified by its unique ID. Requires authentication. Upon successful deletion, returns a success message and status code. Note: Deleted orders cannot be recovered.",
-      "reasoning": "Original description is too vague. Added context about authentication, return value, and side effects of deletion.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ordersPay' has semantic quality issues: vague_description, missing_input_details. Original description is too vague. Added context about authentication, request body requirement, and what is returned.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ordersPay",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_input_details"
-      ],
-      "current_summary": "Pay Order",
-      "current_description": "Pay Order",
-      "description_suggestion": "Completes payment for an existing order identified by its unique ID. Requires authentication. The request body must include the payment details. Returns the payment status and order details.",
-      "reasoning": "Original description is too vague. Added context about authentication, request body requirement, and what is returned.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'paymentsAll' has semantic quality issues: vague_description, missing_context. Original description is too vague. Added context about pagination support and what is returned.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "paymentsAll",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "List Payments",
-      "current_description": "List Payments",
-      "description_suggestion": "Retrieves a list of payments associated with orders. Supports pagination with `cursor` and `limit` parameters. Returns a collection of payment objects with metadata and pagination links.",
-      "reasoning": "Original description is too vague. Added context about pagination support and what is returned.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'merchantsUpdate' has semantic quality issues: vague_description, missing_context, poor_ai_interpretability. The current description is too vague and lacks context. The improved description provides details on authentication, parameters required, and what the operation returns.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "merchantsUpdate",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context",
-        "poor_ai_interpretability"
-      ],
-      "current_summary": "Update Merchant",
-      "current_description": "Update Merchant",
-      "description_suggestion": "Updates the details of an existing merchant. Requires authentication and the merchant's unique identifier. Returns the updated merchant object. Any unspecified fields will retain their current values.",
-      "reasoning": "The current description is too vague and lacks context. The improved description provides details on authentication, parameters required, and what the operation returns.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'merchantsDelete' has semantic quality issues: vague_description, missing_context, missing_side_effects, poor_ai_interpretability. The current description is vague and lacks details about authentication, side effects, and what is returned. The improved description provides these details for better AI agent understanding.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "merchantsDelete",
+      "operation_id": "modifierGroupsDelete",
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
@@ -11180,11 +11434,12 @@
         "missing_side_effects",
         "poor_ai_interpretability"
       ],
-      "current_summary": "Delete Merchant",
-      "current_description": "Delete Merchant",
-      "description_suggestion": "Deletes a specified merchant. Requires authentication and the merchant's unique identifier. If successful, returns a confirmation message. Deleting a merchant will result in the loss of all associated data.",
-      "reasoning": "The current description is vague and lacks details about authentication, side effects, and what is returned. The improved description provides these details for better AI agent understanding.",
-      "batch_index": 2
+      "current_summary": "Delete Modifier Group",
+      "current_description": "Delete Modifier Group",
+      "summary_suggestion": "Delete a modifier group by ID",
+      "description_suggestion": "Removes a modifier group from the POS system by its unique identifier. This operation permanently deletes the modifier group and its associations. Requires the modifier group ID as a path parameter. Returns a confirmation of deletion with the deleted resource ID. Note: Deleting a modifier group may affect existing items or orders that reference it.",
+      "reasoning": "Current description is identical to summary and lacks essential context. Added clarity about what gets deleted, required parameters, return value, and important side effects about cascading impacts. This helps AI agents understand the destructive nature of the operation and when it's appropriate to use.",
+      "batch_index": 5
     }
   },
   {
@@ -11198,7 +11453,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'locationsAll' has semantic quality issues: vague_description, missing_context, poor_ai_interpretability. The current description is too vague and lacks context. The improved description includes details about optional filtering, pagination, authentication, and what is returned.",
+    "message": "Operation 'orderTypesAll' has semantic quality issues: vague_description, missing_context, missing_output_details, poor_ai_interpretability. Original description lacks actionable context. Enhanced with pagination details (consistent with API documentation), return value structure, and use case guidance. This helps AI agents understand when to call this operation and how to handle paginated results.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11209,18 +11464,20 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "locationsAll",
+      "operation_id": "orderTypesAll",
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
         "missing_context",
+        "missing_output_details",
         "poor_ai_interpretability"
       ],
-      "current_summary": "List Locations",
-      "current_description": "List Locations",
-      "description_suggestion": "Retrieves a list of all locations. Optionally, you can filter and paginate the results. Requires authentication. Returns a collection of location objects with metadata for pagination.",
-      "reasoning": "The current description is too vague and lacks context. The improved description includes details about optional filtering, pagination, authentication, and what is returned.",
-      "batch_index": 2
+      "current_summary": "List Order Types",
+      "current_description": "List Order Types",
+      "summary_suggestion": "Retrieve all available order types",
+      "description_suggestion": "Retrieves a paginated list of all order types configured in the POS system. Supports cursor-based pagination via the cursor and limit parameters. Returns an array of order type objects with their configurations. Use this operation to discover available order types (e.g., dine-in, takeout, delivery) for order creation or filtering.",
+      "reasoning": "Original description lacks actionable context. Enhanced with pagination details (consistent with API documentation), return value structure, and use case guidance. This helps AI agents understand when to call this operation and how to handle paginated results.",
+      "batch_index": 5
     }
   },
   {
@@ -11234,7 +11491,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'locationsOne' has semantic quality issues: vague_description, missing_context, poor_ai_interpretability. The current description is too vague and lacks context. The improved description provides details about authentication, parameters required, and what is returned.",
+    "message": "Operation 'orderTypesAdd' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details, poor_ai_interpretability. Current description is too minimal. Added details about request body structure, what fields are expected, return value including the ID assignment, and practical context about order type categories. This enables AI agents to understand what data to provide and what to expect in response.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11245,18 +11502,21 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "locationsOne",
+      "operation_id": "orderTypesAdd",
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
         "missing_context",
+        "missing_input_details",
+        "missing_output_details",
         "poor_ai_interpretability"
       ],
-      "current_summary": "Get Location",
-      "current_description": "Get Location",
-      "description_suggestion": "Retrieves the details of a specified location. Requires authentication and the location's unique identifier. Returns the requested location object.",
-      "reasoning": "The current description is too vague and lacks context. The improved description provides details about authentication, parameters required, and what is returned.",
-      "batch_index": 2
+      "current_summary": "Create Order Type",
+      "current_description": "Create Order Type",
+      "summary_suggestion": "Create a new order type",
+      "description_suggestion": "Creates a new order type in the POS system. Accepts an OrderType object in the request body containing the order type configuration (e.g., name, description, attributes). Returns the created order type object with its assigned unique identifier. The operation enables defining new order categories such as dine-in, takeout, or delivery for use in order processing.",
+      "reasoning": "Current description is too minimal. Added details about request body structure, what fields are expected, return value including the ID assignment, and practical context about order type categories. This enables AI agents to understand what data to provide and what to expect in response.",
+      "batch_index": 5
     }
   },
   {
@@ -11270,7 +11530,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'locationsUpdate' has semantic quality issues: vague_description, missing_context, poor_ai_interpretability. The current description is too vague and lacks context. The improved description provides details about authentication, parameters required, and what is returned.",
+    "message": "Operation 'orderTypesOne' has semantic quality issues: vague_description, missing_context, missing_output_details, poor_ai_interpretability. Original description lacks specificity about inputs and outputs. Enhanced with parameter requirements, return value details, and practical use cases. This helps AI agents understand the operation's purpose and when to use it in workflows.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11281,18 +11541,20 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "locationsUpdate",
+      "operation_id": "orderTypesOne",
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
         "missing_context",
+        "missing_output_details",
         "poor_ai_interpretability"
       ],
-      "current_summary": "Update Location",
-      "current_description": "Update Location",
-      "description_suggestion": "Updates the details of an existing location. Requires authentication, the location's unique identifier, and a valid location object in the request body. Returns the updated location object. Any unspecified fields will retain their current values.",
-      "reasoning": "The current description is too vague and lacks context. The improved description provides details about authentication, parameters required, and what is returned.",
-      "batch_index": 2
+      "current_summary": "Get Order Type",
+      "current_description": "Get Order Type",
+      "summary_suggestion": "Retrieve a specific order type",
+      "description_suggestion": "Retrieves the details of a specific order type by its unique identifier. Requires the order type ID as a path parameter. Returns the complete order type object including its configuration, name, description, and any associated metadata. Use this operation to fetch details about a particular order type before creating orders or updating configurations.",
+      "reasoning": "Original description lacks specificity about inputs and outputs. Enhanced with parameter requirements, return value details, and practical use cases. This helps AI agents understand the operation's purpose and when to use it in workflows.",
+      "batch_index": 5
     }
   },
   {
@@ -11306,7 +11568,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'locationsDelete' has semantic quality issues: vague_description, missing_context, missing_side_effects, poor_ai_interpretability. The current description is vague and lacks details about authentication, side effects, and what is returned. The improved description provides these details for better AI agent understanding.",
+    "message": "Operation 'orderTypesUpdate' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details, poor_ai_interpretability. Current description is too generic. Added clarity about PATCH semantics (partial updates), required parameters, request body structure, return value, and practical examples. This helps AI agents understand partial update behavior and construct appropriate requests.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11317,7 +11579,46 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "locationsDelete",
+      "operation_id": "orderTypesUpdate",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Update Order Type",
+      "current_description": "Update Order Type",
+      "summary_suggestion": "Update an existing order type",
+      "description_suggestion": "Updates an existing order type configuration using a PATCH request. Requires the order type ID as a path parameter and an OrderType object in the request body. Supports partial updates - only provided fields will be modified. Returns the updated order type object with all current configuration details. Use this operation to modify order type properties such as name, description, or attributes.",
+      "reasoning": "Current description is too generic. Added clarity about PATCH semantics (partial updates), required parameters, request body structure, return value, and practical examples. This helps AI agents understand partial update behavior and construct appropriate requests.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'orderTypesDelete' has semantic quality issues: vague_description, missing_context, missing_side_effects, poor_ai_interpretability. Original description lacks essential context about destructive operations. Added clarity about permanent deletion, required parameters, return value, and critical side effects. This helps AI agents understand the operation's irreversible nature and make informed decisions about when to execute it.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "orderTypesDelete",
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
@@ -11325,11 +11626,12 @@
         "missing_side_effects",
         "poor_ai_interpretability"
       ],
-      "current_summary": "Delete Location",
-      "current_description": "Delete Location",
-      "description_suggestion": "Deletes a specified location. Requires authentication and the location's unique identifier. If successful, returns a confirmation message. Deleting a location will result in the loss of all associated data.",
-      "reasoning": "The current description is vague and lacks details about authentication, side effects, and what is returned. The improved description provides these details for better AI agent understanding.",
-      "batch_index": 2
+      "current_summary": "Delete Order Type",
+      "current_description": "Delete Order Type",
+      "summary_suggestion": "Delete an order type by ID",
+      "description_suggestion": "Permanently removes an order type from the POS system by its unique identifier. Requires the order type ID as a path parameter. Returns a confirmation of deletion with the deleted resource ID. Note: Deleting an order type may affect existing orders or configurations that reference it. Ensure the order type is no longer in use before deletion.",
+      "reasoning": "Original description lacks essential context about destructive operations. Added clarity about permanent deletion, required parameters, return value, and critical side effects. This helps AI agents understand the operation's irreversible nature and make informed decisions about when to execute it.",
+      "batch_index": 5
     }
   },
   {
@@ -11343,7 +11645,45 @@
         "character": 0
       }
     },
-    "message": "Operation 'itemsAll' has semantic quality issues: vague_description, missing_context, poor_ai_interpretability. The current description is very vague. The improved description provides context on pagination and the structure of the returned data, which would be useful for AI agents.",
+    "message": "Operation 'tendersAll' has semantic quality issues: vague_description, missing_context, missing_output_details, poor_ai_interpretability. Original description is too minimal. Enhanced with pagination details (consistent with API documentation), return value structure, practical examples of tender types, and use case guidance. This helps AI agents understand when to call this operation and how to handle paginated tender lists.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "tendersAll",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "List Tenders",
+      "current_description": "List Tenders",
+      "summary_suggestion": "Retrieve all available payment tenders",
+      "description_suggestion": "Retrieves a paginated list of all payment tenders configured in the POS system. Supports cursor-based pagination via the cursor and limit parameters. Returns an array of tender objects representing available payment methods (e.g., cash, credit card, digital wallet). Use this operation to discover supported payment tenders for order processing or payment configuration.",
+      "reasoning": "Original description is too minimal. Enhanced with pagination details (consistent with API documentation), return value structure, practical examples of tender types, and use case guidance. This helps AI agents understand when to call this operation and how to handle paginated tender lists.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'itemsAll' has semantic quality issues: vague_description, missing_context, missing_output_details, poor_ai_interpretability. Original description is identical to summary and provides no context about pagination, filtering, or return structure. Added details about pagination support (cursor-based as per API docs), filtering/sorting capabilities, and return format to help AI agents understand when and how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11359,12 +11699,14 @@
       "issues_found": [
         "vague_description",
         "missing_context",
+        "missing_output_details",
         "poor_ai_interpretability"
       ],
       "current_summary": "List Items",
       "current_description": "List Items",
-      "description_suggestion": "Retrieves a list of all items in the POS system. You can paginate the results using the 'cursor' and 'limit' parameters. Returns a collection of item objects, each including metadata like 'id', 'name', and 'description'.",
-      "reasoning": "The current description is very vague. The improved description provides context on pagination and the structure of the returned data, which would be useful for AI agents.",
+      "summary_suggestion": "Retrieve all POS items with pagination",
+      "description_suggestion": "Retrieves a paginated list of all items in the POS system. Supports filtering, sorting, and cursor-based pagination. Returns an array of item objects with metadata including pagination cursors for navigating through results. Use cursor and limit parameters to control pagination.",
+      "reasoning": "Original description is identical to summary and provides no context about pagination, filtering, or return structure. Added details about pagination support (cursor-based as per API docs), filtering/sorting capabilities, and return format to help AI agents understand when and how to use this operation.",
       "batch_index": 3
     }
   },
@@ -11379,7 +11721,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'itemsAdd' has semantic quality issues: vague_description, missing_context, poor_ai_interpretability. The current description is too vague. The suggested description specifies what information needs to be provided in the request body and what the response will include, improving AI agent interpretability.",
+    "message": "Operation 'itemsAdd' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description lacks all context about inputs, outputs, and side effects. Enhanced to explain what data is required/optional, what is returned, and that the item is immediately available after creation. This helps AI agents understand the operation's full lifecycle and effects.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11394,13 +11736,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context",
-        "poor_ai_interpretability"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Create Item",
       "current_description": "Create Item",
-      "description_suggestion": "Creates a new item in the POS system. The request body should include details such as item name, description, and price. Returns the newly created item object, including its unique 'id'.",
-      "reasoning": "The current description is too vague. The suggested description specifies what information needs to be provided in the request body and what the response will include, improving AI agent interpretability.",
+      "summary_suggestion": "Create a new POS item",
+      "description_suggestion": "Creates a new item in the POS system. Accepts an Item object with required fields such as name and optional fields like description, pricing, and category. Returns the created item object with a unique identifier assigned by the system. The item becomes immediately available for use in orders and transactions.",
+      "reasoning": "Original description lacks all context about inputs, outputs, and side effects. Enhanced to explain what data is required/optional, what is returned, and that the item is immediately available after creation. This helps AI agents understand the operation's full lifecycle and effects.",
       "batch_index": 3
     }
   },
@@ -11415,7 +11759,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'itemsOne' has semantic quality issues: vague_description, missing_context, poor_ai_interpretability. The current description lacks detail. The suggested description explains what information is returned, which would help an AI agent understand the operation's purpose and expected output.",
+    "message": "Operation 'itemsOne' has semantic quality issues: vague_description, missing_context, missing_output_details. Original description provides no context about the ID parameter requirement or what data is returned. Added clarity about the ID parameter, comprehensive return data, and use case context for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11431,12 +11775,13 @@
       "issues_found": [
         "vague_description",
         "missing_context",
-        "poor_ai_interpretability"
+        "missing_output_details"
       ],
       "current_summary": "Get Item",
       "current_description": "Get Item",
-      "description_suggestion": "Retrieves detailed information for a specific item identified by 'id'. Returns the item object, which includes metadata such as 'id', 'name', 'description', and 'price'.",
-      "reasoning": "The current description lacks detail. The suggested description explains what information is returned, which would help an AI agent understand the operation's purpose and expected output.",
+      "summary_suggestion": "Retrieve a specific POS item by ID",
+      "description_suggestion": "Retrieves detailed information for a specific item identified by its unique ID. Returns the complete item object including name, description, pricing, modifiers, and other configuration details. Use this operation to fetch item details before displaying or using in transactions.",
+      "reasoning": "Original description provides no context about the ID parameter requirement or what data is returned. Added clarity about the ID parameter, comprehensive return data, and use case context for AI agent decision-making.",
       "batch_index": 3
     }
   },
@@ -11451,7 +11796,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'itemsUpdate' has semantic quality issues: vague_description, missing_context, poor_ai_interpretability. The current description is too vague. The suggested description specifies what needs to be included in the request body and what the response will include, which would aid in AI agent interpretability.",
+    "message": "Operation 'itemsUpdate' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description lacks input requirements, output details, and side effects. Enhanced to clarify that this is a PATCH operation supporting partial updates, what is returned, and that changes are immediately effective. This helps AI agents understand the operation's scope and impact.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11466,13 +11811,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context",
-        "poor_ai_interpretability"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Update Item",
       "current_description": "Update Item",
-      "description_suggestion": "Updates an existing item identified by 'id'. The request body should include updated details such as item name, description, and price. Returns the updated item object.",
-      "reasoning": "The current description is too vague. The suggested description specifies what needs to be included in the request body and what the response will include, which would aid in AI agent interpretability.",
+      "summary_suggestion": "Update an existing POS item",
+      "description_suggestion": "Updates an existing item identified by its ID. Supports partial updates - only provided fields in the Item object will be modified. Returns the updated item object with all current values. Changes take effect immediately and affect all future orders using this item.",
+      "reasoning": "Original description lacks input requirements, output details, and side effects. Enhanced to clarify that this is a PATCH operation supporting partial updates, what is returned, and that changes are immediately effective. This helps AI agents understand the operation's scope and impact.",
       "batch_index": 3
     }
   },
@@ -11487,7 +11834,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'itemsDelete' has semantic quality issues: vague_description, missing_side_effects, poor_ai_interpretability. The current description lacks detail about the side effects of the operation and what the response will indicate. The suggested description includes this information, which would help an AI agent understand the operation's effects.",
+    "message": "Operation 'itemsDelete' has semantic quality issues: vague_description, missing_context, missing_output_details, missing_side_effects. Original description provides no context about the ID parameter, return value, or side effects. Added clarity about what is deleted, what is returned, and important context about impact on existing orders. This helps AI agents understand the operation's consequences.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11502,13 +11849,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_side_effects",
-        "poor_ai_interpretability"
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Delete Item",
       "current_description": "Delete Item",
-      "description_suggestion": "Deletes an existing item identified by 'id'. This action is irreversible. Returns a success message if the item was deleted successfully.",
-      "reasoning": "The current description lacks detail about the side effects of the operation and what the response will indicate. The suggested description includes this information, which would help an AI agent understand the operation's effects.",
+      "summary_suggestion": "Delete a POS item by ID",
+      "description_suggestion": "Deletes an item from the POS system identified by its unique ID. Returns a confirmation with the deleted item's ID. The item is permanently removed and can no longer be used in new orders. Existing orders referencing this item are not affected.",
+      "reasoning": "Original description provides no context about the ID parameter, return value, or side effects. Added clarity about what is deleted, what is returned, and important context about impact on existing orders. This helps AI agents understand the operation's consequences.",
       "batch_index": 3
     }
   },
@@ -11523,7 +11872,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'modifiersAll' has semantic quality issues: vague_description, missing_context, poor_ai_interpretability. The current description is very vague. The improved description provides context on pagination and the structure of the returned data, which would be useful for AI agents.",
+    "message": "Operation 'modifiersAll' has semantic quality issues: vague_description, missing_context, missing_output_details, poor_ai_interpretability. Original description is identical to summary and lacks domain context about what modifiers are. Added explanation of modifier purpose (options/add-ons for items), pagination support, and return structure. This helps AI agents understand the domain concept and when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11539,12 +11888,14 @@
       "issues_found": [
         "vague_description",
         "missing_context",
+        "missing_output_details",
         "poor_ai_interpretability"
       ],
       "current_summary": "List Modifiers",
       "current_description": "List Modifiers",
-      "description_suggestion": "Retrieves a list of all modifiers in the POS system. You can paginate the results using the 'cursor' and 'limit' parameters. Returns a collection of modifier objects, each including metadata like 'id', 'name', and 'description'.",
-      "reasoning": "The current description is very vague. The improved description provides context on pagination and the structure of the returned data, which would be useful for AI agents.",
+      "summary_suggestion": "Retrieve all POS modifiers with pagination",
+      "description_suggestion": "Retrieves a paginated list of all modifiers in the POS system. Modifiers are options or add-ons that can be applied to items. Supports filtering, sorting, and cursor-based pagination. Returns an array of modifier objects with metadata including pagination cursors for navigating through results.",
+      "reasoning": "Original description is identical to summary and lacks domain context about what modifiers are. Added explanation of modifier purpose (options/add-ons for items), pagination support, and return structure. This helps AI agents understand the domain concept and when to use this operation.",
       "batch_index": 3
     }
   },
@@ -11559,7 +11910,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'modifiersAdd' has semantic quality issues: vague_description, missing_context, poor_ai_interpretability. The current description is too vague. The suggested description specifies what information needs to be provided in the request body and what the response will include, improving AI agent interpretability.",
+    "message": "Operation 'modifiersAdd' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description lacks all context about inputs, outputs, and side effects. Enhanced to explain what modifiers are in POS context, what data is required/optional, what is returned, and that the modifier is immediately available. This helps AI agents understand the domain concept and operation lifecycle.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11574,13 +11925,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context",
-        "poor_ai_interpretability"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Create Modifier",
       "current_description": "Create Modifier",
-      "description_suggestion": "Creates a new modifier in the POS system. The request body should include details such as modifier name, description, and any applicable prices. Returns the newly created modifier object, including its unique 'id'.",
-      "reasoning": "The current description is too vague. The suggested description specifies what information needs to be provided in the request body and what the response will include, improving AI agent interpretability.",
+      "summary_suggestion": "Create a new POS modifier",
+      "description_suggestion": "Creates a new modifier in the POS system. Modifiers are options or add-ons that can be applied to items (e.g., extra toppings, size options). Accepts a Modifier object with required fields such as name and optional fields like description and pricing. Returns the created modifier object with a unique identifier. The modifier becomes immediately available for assignment to items.",
+      "reasoning": "Original description lacks all context about inputs, outputs, and side effects. Enhanced to explain what modifiers are in POS context, what data is required/optional, what is returned, and that the modifier is immediately available. This helps AI agents understand the domain concept and operation lifecycle.",
       "batch_index": 3
     }
   },
@@ -11595,7 +11948,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 46 operations analyzed, 38 quality issues found",
+    "message": "Semantic analysis completed: 46 operations analyzed, 45 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -11607,7 +11960,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 46,
-      "total_issues_found": 38,
+      "total_issues_found": 45,
       "batches_processed": 7
     }
   }

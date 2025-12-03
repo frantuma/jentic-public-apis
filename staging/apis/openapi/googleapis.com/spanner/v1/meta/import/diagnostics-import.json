@@ -19225,7 +19225,1044 @@
         "character": 0
       }
     },
-    "message": "Operation 'spanner.projects.instances.instancePartitions.operations.delete' has semantic quality issues: vague_summary, unclear_purpose. The original summary was missing. Added a clear summary and kept the description unchanged as it was already clear.",
+    "message": "Operation 'spanner.projects.instances.databases.sessions.streamingRead' has semantic quality issues: vague_summary, missing_context, missing_output_details, poor_ai_interpretability. Original description lacks a summary entirely and provides only constraint information without explaining the operation's purpose or use case. Missing context about what the operation does (executes a read), what it requires (active session, ReadRequest), what it returns (stream of PartialResultSet), and when to use it (large datasets). Added actionable summary, clarified the streaming nature and memory efficiency benefits, and explained the relationship to the standard Read operation for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databases.sessions.streamingRead",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Like Read, except returns the result set as a stream. Unlike Read, there is no limit on the size of the returned result set. However, no individual row in the result set can exceed 100 MiB, and no column value can exceed 10 MiB.",
+      "summary_suggestion": "Stream database query results from a session",
+      "description_suggestion": "Executes a read operation on a Cloud Spanner session and returns results as a stream. Unlike the standard Read operation, streaming read has no limit on total result set size, enabling retrieval of large datasets. Individual row size is limited to 100 MiB and column values to 10 MiB. Requires an active session and valid ReadRequest parameters. Returns a stream of PartialResultSet messages containing rows and metadata. Useful for processing large result sets without loading entire results into memory.",
+      "reasoning": "Original description lacks a summary entirely and provides only constraint information without explaining the operation's purpose or use case. Missing context about what the operation does (executes a read), what it requires (active session, ReadRequest), what it returns (stream of PartialResultSet), and when to use it (large datasets). Added actionable summary, clarified the streaming nature and memory efficiency benefits, and explained the relationship to the standard Read operation for better AI agent decision-making.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instanceConfigs.list' has semantic quality issues: vague_summary. Description is clear and complete, explaining what is listed and the types of configurations returned. However, summary is missing entirely. Added concise action-oriented summary that specifies the resource type and scope.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instanceConfigs.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the supported instance configurations for a given project. Returns both Google-managed configurations and user-managed configurations.",
+      "summary_suggestion": "List supported instance configurations for project",
+      "reasoning": "Description is clear and complete, explaining what is listed and the types of configurations returned. However, summary is missing entirely. Added concise action-oriented summary that specifies the resource type and scope.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instanceConfigs.create' has semantic quality issues: vague_summary, missing_input_details. Summary was missing. Description is verbose and difficult for AI agents to parse due to excessive formatting and state transition details. Improved summary to be concise and action-oriented. Condensed description to focus on key information: what is created, that it's asynchronous, the name assignment behavior, key state transitions, and authorization requirements. Removed excessive bullet points while preserving essential operational context.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instanceConfigs.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates an instance configuration and begins preparing it to be used. The returned long-running operation can be used to track the progress of preparing the new instance configuration. The instance configuration name is assigned by the caller. If the named instance configuration already exists, `CreateInstanceConfig` returns `ALREADY_EXISTS`. Immediately after the request returns: * The instance configuration is readable via the API, with all requested attributes. The instance configuration's reconciling field is set to true. Its state is `CREATING`. While the operation is pending: * Cancelling the operation renders the instance configuration immediately unreadable via the API. * Except for deleting the creating resource, all other attempts to modify the instance configuration are rejected. Upon completion of the returned operation: * Instances can be created using the instance configuration. * The instance configuration's reconciling field becomes false. Its state becomes `READY`. The returned long-running operation will have a name of the format `/operations/` and can be used to track creation of the instance configuration. The metadata field type is CreateInstanceConfigMetadata. The response field type is InstanceConfig, if successful. Authorization requires `spanner.instanceConfigs.create` permission on the resource parent.",
+      "summary_suggestion": "Create new instance configuration",
+      "description_suggestion": "Creates a new instance configuration that defines geographic placement and replication for Cloud Spanner instances. The operation is asynchronous and returns a long-running operation that can be tracked via the Operation resource. The instance configuration name is provided by the caller; if it already exists, returns ALREADY_EXISTS. Immediately after request: configuration is readable with state CREATING and reconciling=true. Upon operation completion: configuration state becomes READY, reconciling=false, and instances can be created using this configuration. Requires spanner.instanceConfigs.create permission.",
+      "reasoning": "Summary was missing. Description is verbose and difficult for AI agents to parse due to excessive formatting and state transition details. Improved summary to be concise and action-oriented. Condensed description to focus on key information: what is created, that it's asynchronous, the name assignment behavior, key state transitions, and authorization requirements. Removed excessive bullet points while preserving essential operational context.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.instancePartitionOperations.list' has semantic quality issues: vague_summary, missing_context. Summary was missing. Description contains technical details about operation naming conventions that are less relevant to AI agents. Improved summary to be action-oriented and specific. Simplified description to focus on what operations are returned, the time window, ordering, and authorization requirements. Removed internal naming format details and clarified status values for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.instancePartitionOperations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Lists instance partition long-running operations in the given instance. An instance partition operation has a name of the form `projects//instances//instancePartitions//operations/`. The long-running operation metadata field type `metadata.type_url` describes the type of the metadata. Operations returned include those that have completed/failed/canceled within the last 7 days, and pending operations. Operations returned are ordered by `operation.metadata.value.start_time` in descending order starting from the most recently started operation. Authorization requires `spanner.instancePartitionOperations.list` permission on the resource parent.",
+      "summary_suggestion": "List instance partition long-running operations",
+      "description_suggestion": "Lists long-running operations for instance partitions within a specified instance. Returns operations with status PENDING, COMPLETED, FAILED, or CANCELED from the last 7 days, ordered by start_time in descending order (most recent first). Each operation includes metadata describing the operation type via metadata.type_url. Requires spanner.instancePartitionOperations.list permission.",
+      "reasoning": "Summary was missing. Description contains technical details about operation naming conventions that are less relevant to AI agents. Improved summary to be action-oriented and specific. Simplified description to focus on what operations are returned, the time window, ordering, and authorization requirements. Removed internal naming format details and clarified status values for better AI agent interpretability.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.instancePartitions.list' has semantic quality issues: vague_summary. Description is clear and concise. Summary is missing. Added action-oriented summary that specifies the resource type and scope for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.instancePartitions.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all instance partitions for the given instance.",
+      "summary_suggestion": "List instance partitions for instance",
+      "reasoning": "Description is clear and concise. Summary is missing. Added action-oriented summary that specifies the resource type and scope for AI agent clarity.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.instancePartitions.create' has semantic quality issues: vague_summary, missing_input_details. Summary was missing. Description is verbose with excessive bullet points and formatting that obscures key information for AI agents. Improved summary to be concise and action-oriented. Condensed description to focus on: what is created (definition of instance partition), that it's asynchronous, name assignment behavior, key state transitions, resource allocation/billing, and operational constraints. Removed internal metadata type details while preserving essential operational context.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.instancePartitions.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates an instance partition and begins preparing it to be used. The returned long-running operation can be used to track the progress of preparing the new instance partition. The instance partition name is assigned by the caller. If the named instance partition already exists, `CreateInstancePartition` returns `ALREADY_EXISTS`. Immediately upon completion of this request: * The instance partition is readable via the API, with all requested attributes but no allocated resources. Its state is `CREATING`. Until completion of the returned operation: * Cancelling the operation renders the instance partition immediately unreadable via the API. * The instance partition can be deleted. * All other attempts to modify the instance partition are rejected. Upon completion of the returned operation: * Billing for all successfully-allocated resources begins (some types may have lower than the requested levels). * Databases can start using this instance partition. * The instance partition's allocated resource levels are readable via the API. * The instance partition's state becomes `READY`. The returned long-running operation will have a name of the format `/operations/` and can be used to track creation of the instance partition. The metadata field type is CreateInstancePartitionMetadata. The response field type is InstancePartition, if successful.",
+      "summary_suggestion": "Create new instance partition",
+      "description_suggestion": "Creates a new instance partition, an isolated set of Cloud Spanner resources on which databases can define placements. The operation is asynchronous and returns a long-running operation for tracking progress. The instance partition name is provided by the caller; if it already exists, returns ALREADY_EXISTS. Immediately after request: partition is readable with state CREATING but no allocated resources. Upon operation completion: state becomes READY, resources are allocated and billed, and databases can use this partition. During operation: partition can be deleted but other modifications are rejected. Requires appropriate permissions.",
+      "reasoning": "Summary was missing. Description is verbose with excessive bullet points and formatting that obscures key information for AI agents. Improved summary to be concise and action-oriented. Condensed description to focus on: what is created (definition of instance partition), that it's asynchronous, name assignment behavior, key state transitions, resource allocation/billing, and operational constraints. Removed internal metadata type details while preserving essential operational context.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.list' has semantic quality issues: vague_summary. Description is clear and concise. Summary is missing. Added action-oriented summary that includes domain context (Cloud Spanner) and specifies the scope (project) for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all instances in the given project.",
+      "summary_suggestion": "List Cloud Spanner instances in project",
+      "reasoning": "Description is clear and concise. Summary is missing. Added action-oriented summary that includes domain context (Cloud Spanner) and specifies the scope (project) for better AI agent understanding.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.create' has semantic quality issues: vague_summary, missing_input_details. Summary was missing. Description is verbose with excessive bullet points and formatting that obscures key information for AI agents. Improved summary to include domain context (Cloud Spanner) and be action-oriented. Condensed description to focus on: what is created (definition of instance), that it's asynchronous, name assignment behavior, key state transitions, resource allocation/billing, and operational constraints. Removed internal metadata type details while preserving essential operational context for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates an instance and begins preparing it to begin serving. The returned long-running operation can be used to track the progress of preparing the new instance. The instance name is assigned by the caller. If the named instance already exists, `CreateInstance` returns `ALREADY_EXISTS`. Immediately upon completion of this request: * The instance is readable via the API, with all requested attributes but no allocated resources. Its state is `CREATING`. Until completion of the returned operation: * Cancelling the operation renders the instance immediately unreadable via the API. * The instance can be deleted. * All other attempts to modify the instance are rejected. Upon completion of the returned operation: * Billing for all successfully-allocated resources begins (some types may have lower than the requested levels). * Databases can be created in the instance. * The instance's allocated resource levels are readable via the API. * The instance's state becomes `READY`. The returned long-running operation will have a name of the format `/operations/` and can be used to track creation of the instance. The metadata field type is CreateInstanceMetadata. The response field type is Instance, if successful.",
+      "summary_suggestion": "Create new Cloud Spanner instance",
+      "description_suggestion": "Creates a new Cloud Spanner instance, an isolated set of resources on which databases can be hosted. The operation is asynchronous and returns a long-running operation for tracking progress. The instance name is provided by the caller; if it already exists, returns ALREADY_EXISTS. Immediately after request: instance is readable with state CREATING but no allocated resources. Upon operation completion: state becomes READY, resources are allocated and billed, and databases can be created in the instance. During operation: instance can be deleted but other modifications are rejected. Requires appropriate permissions.",
+      "reasoning": "Summary was missing. Description is verbose with excessive bullet points and formatting that obscures key information for AI agents. Improved summary to include domain context (Cloud Spanner) and be action-oriented. Condensed description to focus on: what is created (definition of instance), that it's asynchronous, name assignment behavior, key state transitions, resource allocation/billing, and operational constraints. Removed internal metadata type details while preserving essential operational context for AI agent decision-making.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.move' has semantic quality issues: vague_summary, missing_context. The description is comprehensive and well-structured with good detail about preconditions, side effects, and operation tracking. However, the summary is missing entirely. Added a concise, action-oriented summary that clearly indicates the operation's purpose for AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.move",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Moves an instance to the target instance configuration. You can use the returned long-running operation to track the progress of moving the instance. `MoveInstance` returns `FAILED_PRECONDITION` if the instance meets any of the following criteria: * Is undergoing a move to a different instance configuration * Has backups * Has an ongoing update * Contains any CMEK-enabled databases * Is a free trial instance While the operation is pending: * All other attempts to modify the instance, including changes to its compute capacity, are rejected. * The following database and backup admin operations are rejected: * `DatabaseAdmin.CreateDatabase` * `DatabaseAdmin.UpdateDatabaseDdl` (disabled if default_leader is specified in the request.) * `DatabaseAdmin.RestoreDatabase` * `DatabaseAdmin.CreateBackup` * `DatabaseAdmin.CopyBackup` * Both the source and target instance configurations are subject to hourly compute and storage charges. * The instance might experience higher read-write latencies and a higher transaction abort rate. However, moving an instance doesn't cause any downtime. The returned long-running operation has a name of the format `/operations/` and can be used to track the move instance operation. The metadata field type is MoveInstanceMetadata. The response field type is Instance, if successful. Cancelling the operation sets its metadata's cancel_time. Cancellation is not immediate because it involves moving any data previously moved to the target instance configuration back to the original instance configuration. You can use this operation to track the progress of the cancellation. Upon successful completion of the cancellation, the operation terminates with `CANCELLED` status. If not cancelled, upon completion of the returned operation: * The instance successfully moves to the target instance configuration. * You are billed for compute and storage in target instance configuration. Authorization requires the `spanner.instances.update` permission on the resource instance. For more details, see [Move an instance](https://cloud.google.com/spanner/docs/move-instance).",
+      "summary_suggestion": "Move instance to target configuration",
+      "reasoning": "The description is comprehensive and well-structured with good detail about preconditions, side effects, and operation tracking. However, the summary is missing entirely. Added a concise, action-oriented summary that clearly indicates the operation's purpose for AI agent interpretability.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.scans.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original description is too vague and lacks context about what scans are, what parameters are expected, and what the response contains. Summary is missing. Enhanced to clarify the operation's purpose, expected inputs (database resource name, pagination), and output (list of scan objects) for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.scans.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Return available scans given a Database-specific resource name.",
+      "summary_suggestion": "List available database scans",
+      "description_suggestion": "Lists all available scans for a specified Cloud Spanner database. Scans provide detailed information about database structure and statistics. Requires a valid database resource name in the parent parameter. Returns a list of scan objects ordered by creation time. Supports pagination through page_size and page_token parameters.",
+      "reasoning": "Original description is too vague and lacks context about what scans are, what parameters are expected, and what the response contains. Summary is missing. Enhanced to clarify the operation's purpose, expected inputs (database resource name, pagination), and output (list of scan objects) for better AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.backupOperations.list' has semantic quality issues: vague_summary, missing_input_details. The description is detailed and clear about what operations are returned, their format, retention period (7 days), and ordering. However, the summary is missing. Added a concise, action-oriented summary that clearly indicates this lists backup-related long-running operations for AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.backupOperations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the backup long-running operations in the given instance. A backup operation has a name of the form `projects//instances//backups//operations/`. The long-running operation metadata field type `metadata.type_url` describes the type of the metadata. Operations returned include those that have completed/failed/canceled within the last 7 days, and pending operations. Operations returned are ordered by `operation.metadata.value.progress.start_time` in descending order starting from the most recently started operation.",
+      "summary_suggestion": "List backup operations for instance",
+      "reasoning": "The description is detailed and clear about what operations are returned, their format, retention period (7 days), and ordering. However, the summary is missing. Added a concise, action-oriented summary that clearly indicates this lists backup-related long-running operations for AI agent interpretability.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.databases.backupSchedules.list' has semantic quality issues: vague_summary. The description is clear and concise about the operation's purpose. However, the summary is missing. Added a concise, action-oriented summary that clearly indicates the operation retrieves backup schedules for a specific database.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databases.backupSchedules.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all the backup schedules for the database.",
+      "summary_suggestion": "List backup schedules for database",
+      "reasoning": "The description is clear and concise about the operation's purpose. However, the summary is missing. Added a concise, action-oriented summary that clearly indicates the operation retrieves backup schedules for a specific database.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.databases.backupSchedules.create' has semantic quality issues: vague_summary, missing_output_details. Original description is too minimal and lacks context about what a backup schedule does, what inputs are required, and what is returned. Summary is missing. Enhanced to clarify the operation's purpose, expected input (BackupSchedule object), and output (created BackupSchedule with ID) for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databases.backupSchedules.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new backup schedule.",
+      "summary_suggestion": "Create backup schedule for database",
+      "description_suggestion": "Creates a new backup schedule for a Cloud Spanner database. The backup schedule defines when and how frequently automated backups are created. Requires a BackupSchedule object in the request body specifying the schedule configuration. Returns the created BackupSchedule object with all properties including the assigned schedule ID.",
+      "reasoning": "Original description is too minimal and lacks context about what a backup schedule does, what inputs are required, and what is returned. Summary is missing. Enhanced to clarify the operation's purpose, expected input (BackupSchedule object), and output (created BackupSchedule with ID) for better AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.backups.list' has semantic quality issues: vague_summary. The description is clear about what is returned (completed and pending backups) and the ordering. However, the summary is missing. Added a concise, action-oriented summary that clearly indicates the operation retrieves backups for a specific instance.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.backups.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Lists completed and pending backups. Backups returned are ordered by `create_time` in descending order, starting from the most recent `create_time`.",
+      "summary_suggestion": "List backups for instance",
+      "reasoning": "The description is clear about what is returned (completed and pending backups) and the ordering. However, the summary is missing. Added a concise, action-oriented summary that clearly indicates the operation retrieves backups for a specific instance.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.backups.create' has semantic quality issues: vague_summary. The description is comprehensive and well-structured with good detail about the long-running operation, metadata types, cancellation behavior, and concurrency constraints. However, the summary is missing. Added a concise, action-oriented summary that clearly indicates the operation initiates backup creation for AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.backups.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Starts creating a new Cloud Spanner Backup. The returned backup long-running operation will have a name of the format `projects//instances//backups//operations/` and can be used to track creation of the backup. The metadata field type is CreateBackupMetadata. The response field type is Backup, if successful. Cancelling the returned operation will stop the creation and delete the backup. There can be only one pending backup creation per database. Backup creation of different databases can run concurrently.",
+      "summary_suggestion": "Create backup for database",
+      "reasoning": "The description is comprehensive and well-structured with good detail about the long-running operation, metadata types, cancellation behavior, and concurrency constraints. However, the summary is missing. Added a concise, action-oriented summary that clearly indicates the operation initiates backup creation for AI agent interpretability.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.databases.sessions.executeBatchDml' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity about return values and response structure. Added concise summary indicating batch execution capability. Enhanced description to explicitly state what is returned and emphasize the importance of checking response status for error handling, which is critical for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databases.sessions.executeBatchDml",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Executes a batch of SQL DML statements. This method allows many statements to be run with lower latency than submitting them sequentially with ExecuteSql. Statements are executed in sequential order. A request can succeed even if a statement fails. The ExecuteBatchDmlResponse.status field in the response provides information about the statement that failed. Clients must inspect this field to determine whether an error occurred. Execution stops after the first failed statement; the remaining statements are not executed.",
+      "summary_suggestion": "Execute multiple SQL DML statements in batch",
+      "description_suggestion": "Executes a batch of SQL DML statements with lower latency than sequential ExecuteSql calls. Statements are executed in sequential order, and execution stops after the first failed statement. The response includes ExecuteBatchDmlResponse.status field indicating which statement failed, if any. A request can succeed even if individual statements fail - clients must inspect the status field to determine success or failure. Returns the batch execution results with status information for each statement.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about return values and response structure. Added concise summary indicating batch execution capability. Enhanced description to explicitly state what is returned and emphasize the importance of checking response status for error handling, which is critical for AI agent decision-making.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.databases.sessions.executeSql' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is comprehensive but could be more concise and better organized for AI agent interpretation. Added clear summary indicating single-reply execution. Reorganized description to lead with what the operation does, then constraints, then alternatives, making it easier for AI agents to determine applicability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databases.sessions.executeSql",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Executes an SQL statement, returning all results in a single reply. This method can't be used to return a result set larger than 10 MiB; if the query yields more data than that, the query fails with a `FAILED_PRECONDITION` error. Operations inside read-write transactions might return `ABORTED`. If this occurs, the application should restart the transaction from the beginning. See Transaction for more details. Larger result sets can be fetched in streaming fashion by calling ExecuteStreamingSql instead. The query string can be SQL or [Graph Query Language (GQL)](https://cloud.google.com/spanner/docs/reference/standard-sql/graph-intro).",
+      "summary_suggestion": "Execute SQL query and return complete result set",
+      "description_suggestion": "Executes a single SQL or Graph Query Language (GQL) statement and returns the complete result set in a single reply. Limited to result sets of 10 MiB or smaller; queries exceeding this limit fail with FAILED_PRECONDITION error. Supports both SQL and GQL query strings. Operations within read-write transactions may return ABORTED status, requiring transaction restart. For larger result sets, use ExecuteStreamingSql instead. Returns the query result set with metadata.",
+      "reasoning": "Missing summary entirely. Description is comprehensive but could be more concise and better organized for AI agent interpretation. Added clear summary indicating single-reply execution. Reorganized description to lead with what the operation does, then constraints, then alternatives, making it easier for AI agents to determine applicability.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.databases.sessions.executeStreamingSql' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description relies on comparison to ExecuteSql rather than standing alone. Added clear summary indicating streaming capability. Rewrote description to be self-contained, emphasizing the key advantage (no size limit on total results) and practical benefit (memory efficiency), making it clearer for AI agents when to choose this over ExecuteSql.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databases.sessions.executeStreamingSql",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Like ExecuteSql, except returns the result set as a stream. Unlike ExecuteSql, there is no limit on the size of the returned result set. However, no individual row in the result set can exceed 100 MiB, and no column value can exceed 10 MiB. The query string can be SQL or [Graph Query Language (GQL)](https://cloud.google.com/spanner/docs/reference/standard-sql/graph-intro).",
+      "summary_suggestion": "Execute SQL query and stream results",
+      "description_suggestion": "Executes a single SQL or Graph Query Language (GQL) statement and returns the result set as a stream. Unlike ExecuteSql, there is no limit on total result set size. Individual row size is limited to 100 MiB and column values to 10 MiB. Supports both SQL and GQL query strings. Streaming allows processing of arbitrarily large result sets without loading entire result into memory. Returns streamed result rows with metadata.",
+      "reasoning": "Missing summary entirely. Description relies on comparison to ExecuteSql rather than standing alone. Added clear summary indicating streaming capability. Rewrote description to be self-contained, emphasizing the key advantage (no size limit on total results) and practical benefit (memory efficiency), making it clearer for AI agents when to choose this over ExecuteSql.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.databases.sessions.partitionQuery' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary entirely. Description lacks clarity about return values and token lifecycle management. Added concise summary indicating parallel execution capability. Enhanced description to clarify what is returned, emphasize session/transaction consistency requirements, and explain token invalidation conditions more clearly for AI agent decision-making about when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databases.sessions.partitionQuery",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a set of partition tokens that can be used to execute a query operation in parallel. Each of the returned partition tokens can be used by ExecuteStreamingSql to specify a subset of the query result to read. The same session and read-only transaction must be used by the `PartitionQueryRequest` used to create the partition tokens and the `ExecuteSqlRequests` that use the partition tokens. Partition tokens become invalid when the session used to create them is deleted, is idle for too long, begins a new transaction, or becomes too old. When any of these happen, it isn't possible to resume the query, and the whole operation must be restarted from the beginning.",
+      "summary_suggestion": "Create partition tokens for parallel query execution",
+      "description_suggestion": "Creates a set of partition tokens that enable parallel execution of a query operation. Each returned partition token specifies a subset of the query result and can be used with ExecuteStreamingSql. The same session and read-only transaction must be used for both PartitionQueryRequest and subsequent ExecuteSqlRequests using the tokens. Partition tokens become invalid if the session is deleted, becomes idle, begins a new transaction, or expires. When tokens become invalid, the entire query operation must be restarted. Returns partition tokens and query metadata for parallel execution.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about return values and token lifecycle management. Added concise summary indicating parallel execution capability. Enhanced description to clarify what is returned, emphasize session/transaction consistency requirements, and explain token invalidation conditions more clearly for AI agent decision-making about when to use this operation.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.databases.sessions.partitionRead' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary entirely. Description lacks clarity about return values and ordering semantics. Added concise summary indicating parallel execution capability. Enhanced description to clarify what is returned, emphasize the important ordering guarantee caveat, and explain token invalidation conditions more clearly for AI agents to understand when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databases.sessions.partitionRead",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a set of partition tokens that can be used to execute a read operation in parallel. Each of the returned partition tokens can be used by StreamingRead to specify a subset of the read result to read. The same session and read-only transaction must be used by the `PartitionReadRequest` used to create the partition tokens and the `ReadRequests` that use the partition tokens. There are no ordering guarantees on rows returned among the returned partition tokens, or even within each individual `StreamingRead` call issued with a `partition_token`. Partition tokens become invalid when the session used to create them is deleted, is idle for too long, begins a new transaction, or becomes too old. When any of these happen, it isn't possible to resume the read, and the whole operation must be restarted from the beginning.",
+      "summary_suggestion": "Create partition tokens for parallel read execution",
+      "description_suggestion": "Creates a set of partition tokens that enable parallel execution of a read operation. Each returned partition token specifies a subset of the read result and can be used with StreamingRead. The same session and read-only transaction must be used for both PartitionReadRequest and subsequent ReadRequests using the tokens. Note: there are no ordering guarantees on rows returned among partition tokens or within individual StreamingRead calls. Partition tokens become invalid if the session is deleted, becomes idle, begins a new transaction, or expires. When tokens become invalid, the entire read operation must be restarted. Returns partition tokens and read metadata for parallel execution.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about return values and ordering semantics. Added concise summary indicating parallel execution capability. Enhanced description to clarify what is returned, emphasize the important ordering guarantee caveat, and explain token invalidation conditions more clearly for AI agents to understand when and how to use this operation.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.databases.sessions.read' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is comprehensive but could be more concise for AI agent interpretation. Added clear summary indicating key lookup capability. Reorganized description to lead with operation purpose, then constraints, then alternatives, making it easier for AI agents to determine when to use this operation versus ExecuteSql or StreamingRead.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databases.sessions.read",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Reads rows from the database using key lookups and scans, as a simple key/value style alternative to ExecuteSql. This method can't be used to return a result set larger than 10 MiB; if the read matches more data than that, the read fails with a `FAILED_PRECONDITION` error. Reads inside read-write transactions might return `ABORTED`. If this occurs, the application should restart the transaction from the beginning. See Transaction for more details. Larger result sets can be yielded in streaming fashion by calling StreamingRead instead.",
+      "summary_suggestion": "Read rows from database using key lookups",
+      "description_suggestion": "Reads rows from the database using key lookups and scans as a key/value style alternative to ExecuteSql. Limited to result sets of 10 MiB or smaller; reads exceeding this limit fail with FAILED_PRECONDITION error. Reads within read-write transactions may return ABORTED status, requiring transaction restart. For larger result sets, use StreamingRead instead. Returns the read result set with matching rows and metadata.",
+      "reasoning": "Missing summary entirely. Description is comprehensive but could be more concise for AI agent interpretation. Added clear summary indicating key lookup capability. Reorganized description to lead with operation purpose, then constraints, then alternatives, making it easier for AI agents to determine when to use this operation versus ExecuteSql or StreamingRead.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.databases.sessions.rollback' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity about return values and side effects. Added concise summary indicating rollback and lock release. Enhanced description to explicitly state return behavior and side effects (lock release, change discard), making it clearer for AI agents to understand the operation's impact and when to invoke it.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databases.sessions.rollback",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Rolls back a transaction, releasing any locks it holds. It's a good idea to call this for any transaction that includes one or more Read or ExecuteSql requests and ultimately decides not to commit. `Rollback` returns `OK` if it successfully aborts the transaction, the transaction was already aborted, or the transaction isn't found. `Rollback` never returns `ABORTED`.",
+      "summary_suggestion": "Rollback transaction and release locks",
+      "description_suggestion": "Rolls back a transaction, releasing any locks it holds. Call this for transactions that include Read or ExecuteSql requests but do not commit. Returns OK status if the transaction is successfully aborted, was already aborted, or is not found. Rollback never returns ABORTED status. Side effects: all pending changes in the transaction are discarded and locks are released.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about return values and side effects. Added concise summary indicating rollback and lock release. Enhanced description to explicitly state return behavior and side effects (lock release, change discard), making it clearer for AI agents to understand the operation's impact and when to invoke it.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.backups.copy' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is overly technical and lacks clarity about the operation's purpose and practical effects. Improved version clarifies that this creates a new backup copy, explains the asynchronous nature, and better contextualizes the operation name format and cancellation behavior for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.backups.copy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Starts copying a Cloud Spanner Backup. The returned backup long-running operation will have a name of the format `projects//instances//backups//operations/` and can be used to track copying of the backup. The operation is associated with the destination backup. The metadata field type is CopyBackupMetadata. The response field type is Backup, if successful. Cancelling the returned operation will stop the copying and delete the destination backup. Concurrent CopyBackup requests can run on the same source backup.",
+      "summary_suggestion": "Copy a Cloud Spanner backup to a destination",
+      "description_suggestion": "Initiates an asynchronous copy operation for a Cloud Spanner backup. The operation creates a new backup at the specified destination with the same data as the source backup. Returns a long-running operation (format: `projects//instances//backups//operations/`) that can be used to track progress. The operation metadata type is CopyBackupMetadata and the response type is Backup. Cancelling the operation will stop the copy and delete the destination backup. Multiple concurrent copy operations can run on the same source backup.",
+      "reasoning": "Missing summary entirely. Description is overly technical and lacks clarity about the operation's purpose and practical effects. Improved version clarifies that this creates a new backup copy, explains the asynchronous nature, and better contextualizes the operation name format and cancellation behavior for AI agent understanding.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.databaseOperations.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description lacks context about what operations are returned and their relevance. Added clarity about operation statuses, retention period, and that pagination/filtering is supported to help AI agents understand filtering capabilities and result scope.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databaseOperations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Lists database longrunning-operations. A database operation has a name of the form `projects//instances//databases//operations/`. The long-running operation metadata field type `metadata.type_url` describes the type of the metadata. Operations returned include those that have completed/failed/canceled within the last 7 days, and pending operations.",
+      "summary_suggestion": "List database long-running operations",
+      "description_suggestion": "Retrieves a list of long-running operations for databases within a Cloud Spanner instance. Returns operations with various statuses including pending, completed, failed, and canceled operations from the last 7 days. Each operation has a name format of `projects//instances//databases//operations/`. The metadata field type_url indicates the specific operation type (e.g., CreateDatabaseMetadata, RestoreDatabaseMetadata). Supports filtering and pagination via query parameters.",
+      "reasoning": "Missing summary. Description lacks context about what operations are returned and their relevance. Added clarity about operation statuses, retention period, and that pagination/filtering is supported to help AI agents understand filtering capabilities and result scope.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.databases.databaseRoles.list' has semantic quality issues: vague_summary, vague_description, missing_context. Missing summary and description is too minimal. Added context about what database roles are used for (access control), clarified that results are paginated, and mentioned support for filtering to improve AI agent interpretability about the operation's purpose and capabilities.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databases.databaseRoles.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Lists Cloud Spanner database roles.",
+      "summary_suggestion": "List database roles for a Cloud Spanner database",
+      "description_suggestion": "Retrieves a list of all database roles defined for a specific Cloud Spanner database. Database roles are used to manage access control and permissions within the database. Returns a paginated list of role objects with their properties and associated permissions. Supports filtering and pagination via query parameters.",
+      "reasoning": "Missing summary and description is too minimal. Added context about what database roles are used for (access control), clarified that results are paginated, and mentioned support for filtering to improve AI agent interpretability about the operation's purpose and capabilities.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.databases.list' has semantic quality issues: vague_summary, vague_description, missing_context. Missing summary and description is too generic. Enhanced description specifies that results are paginated, mentions key database properties returned, and clarifies the instance scope to help AI agents understand what information is available and how to use filtering options.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databases.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Lists Cloud Spanner databases.",
+      "summary_suggestion": "List Cloud Spanner databases in an instance",
+      "description_suggestion": "Retrieves a list of all Cloud Spanner databases within a specified instance. Returns a paginated list of database objects with their properties including creation time, state, and configuration. Supports filtering by database state and pagination via query parameters. Useful for discovering available databases and monitoring database inventory.",
+      "reasoning": "Missing summary and description is too generic. Enhanced description specifies that results are paginated, mentions key database properties returned, and clarifies the instance scope to help AI agents understand what information is available and how to use filtering options.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.databases.create' has semantic quality issues: vague_summary, missing_context. Missing summary. Description has incomplete operation name format and lacks clarity about asynchronous nature. Improved version corrects the operation name format, clarifies the async workflow, and better explains when the database becomes available for use.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databases.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new Spanner database and starts to prepare it for serving. The returned long-running operation will have a name of the format `/operations/` and can be used to track preparation of the database. The metadata field type is CreateDatabaseMetadata. The response field type is Database, if successful.",
+      "summary_suggestion": "Create a new Cloud Spanner database",
+      "description_suggestion": "Initiates creation of a new Cloud Spanner database within an instance. The operation is asynchronous and returns a long-running operation (format: `projects//instances//databases//operations/`) that can be used to track database preparation progress. The operation metadata type is CreateDatabaseMetadata and the response type is Database upon successful completion. The database will be ready for serving once the operation completes.",
+      "reasoning": "Missing summary. Description has incomplete operation name format and lacks clarity about asynchronous nature. Improved version corrects the operation name format, clarifies the async workflow, and better explains when the database becomes available for use.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.databases.restore' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is verbose and difficult to parse. Reorganized to lead with the core action, clarified constraints upfront, and simplified the explanation of sequential restore operations to improve AI agent understanding of prerequisites and limitations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databases.restore",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Create a new database by restoring from a completed backup. The new database must be in the same project and in an instance with the same instance configuration as the instance containing the backup. The returned database long-running operation has a name of the format `projects//instances//databases//operations/`, and can be used to track the progress of the operation, and to cancel it. The metadata field type is RestoreDatabaseMetadata. The response type is Database, if successful. Cancelling the returned operation will stop the restore and delete the database. There can be only one database being restored into an instance at a time. Once the restore operation completes, a new restore operation can be initiated, without waiting for the optimize operation associated with the first restore to complete.",
+      "summary_suggestion": "Restore a Cloud Spanner database from backup",
+      "description_suggestion": "Creates a new Cloud Spanner database by restoring data from a completed backup. The source backup and target instance must be in the same project and have matching instance configurations. Returns a long-running operation (format: `projects//instances//databases//operations/`) to track restore progress. The operation metadata type is RestoreDatabaseMetadata and the response type is Database. Constraints: only one restore operation per instance at a time; cancelling the operation deletes the target database. After restore completes, subsequent restore operations can begin immediately without waiting for optimization to finish.",
+      "reasoning": "Missing summary. Description is verbose and difficult to parse. Reorganized to lead with the core action, clarified constraints upfront, and simplified the explanation of sequential restore operations to improve AI agent understanding of prerequisites and limitations.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instanceConfigOperations.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description lacks context about operation scope and filtering capabilities. Added clarity about user-managed scope, result ordering, and pagination support to help AI agents understand what operations are included and how to navigate results.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instanceConfigOperations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the user-managed instance configuration long-running operations in the given project. An instance configuration operation has a name of the form `projects//instanceConfigs//operations/`. The long-running operation metadata field type `metadata.type_url` describes the type of the metadata. Operations returned include those that have completed/failed/canceled within the last 7 days, and pending operations. Operations returned are ordered by `operation.metadata.value.start_time` in descending order starting from the most recently started operation.",
+      "summary_suggestion": "List instance configuration long-running operations",
+      "description_suggestion": "Retrieves a list of long-running operations for user-managed instance configurations within a Cloud Spanner project. Returns operations with various statuses including pending, completed, failed, and canceled operations from the last 7 days. Each operation has a name format of `projects//instanceConfigs//operations/`. Results are ordered by start_time in descending order (most recent first). The metadata field type_url indicates the specific operation type. Supports filtering and pagination via query parameters.",
+      "reasoning": "Missing summary. Description lacks context about operation scope and filtering capabilities. Added clarity about user-managed scope, result ordering, and pagination support to help AI agents understand what operations are included and how to navigate results.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.instancePartitions.operations.delete' has semantic quality issues: vague_summary, not_actionable, poor_ai_interpretability. Missing summary entirely. Description is clear but could better emphasize that this is a cleanup operation that doesn't affect the underlying task. Added summary to clarify the action. Improved description to explicitly state it removes the operation record and clarify the distinction between deleting the operation record versus cancelling the operation itself, which aids AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -19240,12 +20277,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "unclear_purpose"
+        "not_actionable",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.",
-      "summary_suggestion": "Delete a long-running operation",
-      "reasoning": "The original summary was missing. Added a clear summary and kept the description unchanged as it was already clear.",
+      "summary_suggestion": "Delete a long-running operation record",
+      "description_suggestion": "Removes a long-running operation from the server. This indicates the client no longer needs the operation result and removes the operation record, but does not cancel the underlying operation if still in progress. Returns an empty response on success. Returns `google.rpc.Code.UNIMPLEMENTED` if the server does not support this method.",
+      "reasoning": "Missing summary entirely. Description is clear but could better emphasize that this is a cleanup operation that doesn't affect the underlying task. Added summary to clarify the action. Improved description to explicitly state it removes the operation record and clarify the distinction between deleting the operation record versus cancelling the operation itself, which aids AI agent decision-making.",
       "batch_index": 1
     }
   },
@@ -19260,7 +20299,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'spanner.projects.instances.instancePartitions.operations.get' has semantic quality issues: vague_summary. The original summary was missing. Added a clear summary while the description was already clear.",
+    "message": "Operation 'spanner.projects.instances.instancePartitions.operations.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about what is returned and practical use cases. Added summary for clarity. Enhanced description to specify the Operation schema is returned, mention metadata and results, and provide context about when to use this operation for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -19274,12 +20313,14 @@
       "operation_id": "spanner.projects.instances.instancePartitions.operations.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.",
-      "summary_suggestion": "Get the latest state of a long-running operation",
-      "reasoning": "The original summary was missing. Added a clear summary while the description was already clear.",
+      "summary_suggestion": "Retrieve the current state of a long-running operation",
+      "description_suggestion": "Retrieves the latest state and progress of a long-running operation. Returns an Operation object containing the current status, metadata, and result (if completed). Clients should poll this method at intervals recommended by the API service to track operation progress. Useful for monitoring asynchronous tasks like instance partition updates or database modifications.",
+      "reasoning": "Missing summary. Description lacks clarity about what is returned and practical use cases. Added summary for clarity. Enhanced description to specify the Operation schema is returned, mention metadata and results, and provide context about when to use this operation for AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -19294,7 +20335,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'spanner.projects.instances.databases.getScans' has semantic quality issues: vague_summary. The original summary was missing. Added a clear summary while the description was already clear.",
+    "message": "Operation 'spanner.projects.instances.databases.getScans' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Missing summary. Description is vague about what 'scan' means and what data is returned. Added summary for clarity. Enhanced description to explain the purpose (Key Visualizer support), clarify what scan data represents (key distribution and access patterns), specify the return type, and provide context about use cases for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -19308,12 +20349,16 @@
       "operation_id": "spanner.projects.instances.databases.getScans",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Request a specific scan with Database-specific data for Cloud Key Visualizer.",
-      "summary_suggestion": "Request a specific scan with database-specific data",
-      "reasoning": "The original summary was missing. Added a clear summary while the description was already clear.",
+      "summary_suggestion": "Retrieve database scan data for Cloud Key Visualizer",
+      "description_suggestion": "Retrieves scan data for a specific database to support Cloud Key Visualizer analysis. Returns scan metrics and statistics that help visualize database key distribution and access patterns. Requires the database to have scan data available. Used for performance analysis and optimization of database key ranges.",
+      "reasoning": "Missing summary. Description is vague about what 'scan' means and what data is returned. Added summary for clarity. Enhanced description to explain the purpose (Key Visualizer support), clarify what scan data represents (key distribution and access patterns), specify the return type, and provide context about use cases for AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -19328,7 +20373,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'spanner.scans.list' has semantic quality issues: vague_summary. The current summary is missing, and the description is clear but the summary is vague.",
+    "message": "Operation 'spanner.projects.instances.databases.sessions.adaptMessage' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details. Missing summary. Description is too generic and lacks context about what messages are used for and what the stream contains. Added summary for clarity. Enhanced description to explain the request schema (AdaptMessageRequest), clarify the bidirectional nature, provide examples of operations (SQL execution, reads), mention session context, and specify that responses are streamed, enabling AI agents to understand this is for interactive session communication.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -19339,16 +20384,347 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "spanner.scans.list",
+      "operation_id": "spanner.projects.instances.databases.sessions.adaptMessage",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Return available scans given a Database-specific resource name.",
-      "summary_suggestion": "List available scans for a specific database",
-      "reasoning": "The current summary is missing, and the description is clear but the summary is vague.",
-      "batch_index": 2
+      "current_description": "Handles a single message from the client and returns the result as a stream. The server will interpret the message frame and respond with message frames to the client.",
+      "summary_suggestion": "Process a client message and stream server responses",
+      "description_suggestion": "Processes a single message frame from the client within a session context and returns a stream of response message frames. Accepts an AdaptMessageRequest containing the client message and session information. The server interprets the message, performs the requested operation (such as executing SQL or reading data), and streams back result frames. Used for bidirectional communication in multiplexed sessions. Returns a stream of message frames containing operation results or status updates.",
+      "reasoning": "Missing summary. Description is too generic and lacks context about what messages are used for and what the stream contains. Added summary for clarity. Enhanced description to explain the request schema (AdaptMessageRequest), clarify the bidirectional nature, provide examples of operations (SQL execution, reads), mention session context, and specify that responses are streamed, enabling AI agents to understand this is for interactive session communication.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.instancePartitions.operations.cancel' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is clear but could better specify the return value (empty response) and provide clearer guidance on how to verify cancellation. Added summary for clarity. Improved description to explicitly state the immediate return value, clarify the polling pattern, and emphasize that cancellation is best-effort, helping AI agents understand the asynchronous nature and need for follow-up status checks.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.instancePartitions.operations.cancel",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of `1`, corresponding to `Code.CANCELLED`.",
+      "summary_suggestion": "Request cancellation of a long-running operation",
+      "description_suggestion": "Initiates asynchronous cancellation of a long-running operation. The server attempts to cancel the operation but success is not guaranteed. Returns an empty response immediately. Use GetOperation to poll the operation status and verify cancellation succeeded. On successful cancellation, the operation's status becomes CANCELLED with an error code of 1. If the operation completes before cancellation takes effect, the operation will complete normally. Returns `google.rpc.Code.UNIMPLEMENTED` if the server does not support cancellation.",
+      "reasoning": "Missing summary. Description is clear but could better specify the return value (empty response) and provide clearer guidance on how to verify cancellation. Added summary for clarity. Improved description to explicitly state the immediate return value, clarify the polling pattern, and emphasize that cancellation is best-effort, helping AI agents understand the asynchronous nature and need for follow-up status checks.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.databases.changequorum' has semantic quality issues: vague_summary, missing_context, missing_input_details. Missing summary. Description lacks clarity about the request schema and provides incomplete operation name format. Added summary for clarity. Enhanced description to specify the ChangeQuorumRequest input, clarify the dual-region restriction upfront, complete the operation name format, and explain the metadata type, enabling AI agents to understand the prerequisites and how to track this critical database configuration change.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databases.changequorum",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "`ChangeQuorum` is strictly restricted to databases that use dual-region instance configurations. Initiates a background operation to change the quorum of a database from dual-region mode to single-region mode or vice versa. The returned long-running operation has a name of the format `projects//instances//databases//operations/` and can be used to track execution of the `ChangeQuorum`. The metadata field type is ChangeQuorumMetadata. Authorization requires `spanner.databases.changequorum` permission on the resource database.",
+      "summary_suggestion": "Change database quorum between single and dual-region modes",
+      "description_suggestion": "Initiates a background operation to change a database's quorum configuration between single-region and dual-region modes. Only applicable to databases using dual-region instance configurations. Accepts a ChangeQuorumRequest specifying the target quorum type. Returns a long-running Operation with metadata type ChangeQuorumMetadata that can be used to track the quorum change progress. Requires `spanner.databases.changequorum` permission. The operation name follows the format `projects/{project}/instances/{instance}/databases/{database}/operations/{operation}`.",
+      "reasoning": "Missing summary. Description lacks clarity about the request schema and provides incomplete operation name format. Added summary for clarity. Enhanced description to specify the ChangeQuorumRequest input, clarify the dual-region restriction upfront, complete the operation name format, and explain the metadata type, enabling AI agents to understand the prerequisites and how to track this critical database configuration change.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.databases.sessions.adapter' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity about return value and the specific purpose of adapter sessions. Added summary and enhanced description to clarify what an adapter session is, its reusability, and what is returned for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databases.sessions.adapter",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new session to be used for requests made by the adapter. A session identifies a specific incarnation of a database resource and is meant to be reused across many `AdaptMessage` calls.",
+      "summary_suggestion": "Create a new adapter session for database requests",
+      "description_suggestion": "Creates a new session for adapter-based requests to a Cloud Spanner database. The session identifies a specific incarnation of a database resource and is designed to be reused across multiple `AdaptMessage` calls. Returns an AdapterSession object containing the session identifier and configuration for subsequent adapter operations.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about return value and the specific purpose of adapter sessions. Added summary and enhanced description to clarify what an adapter session is, its reusability, and what is returned for better AI agent understanding.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.backups.getIamPolicy' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description is comprehensive but could be clearer about input requirements. Added concise summary and reorganized description to emphasize the resource parameter requirement and clarify permission requirements for different resource types.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.backups.getIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the access control policy for a database or backup resource. Returns an empty policy if a database or backup exists but does not have a policy set. Authorization requires `spanner.databases.getIamPolicy` permission on resource. For backups, authorization requires `spanner.backups.getIamPolicy` permission on resource. For backup schedules, authorization requires `spanner.backupSchedules.getIamPolicy` permission on resource.",
+      "summary_suggestion": "Retrieve IAM access control policy for backup resource",
+      "description_suggestion": "Retrieves the IAM access control policy for a database, backup, or backup schedule resource. Returns an empty policy if the resource exists but has no policy set. Requires appropriate IAM permissions: `spanner.databases.getIamPolicy` for databases, `spanner.backups.getIamPolicy` for backups, or `spanner.backupSchedules.getIamPolicy` for backup schedules. The resource path must be specified in the request.",
+      "reasoning": "Missing summary. Description is comprehensive but could be clearer about input requirements. Added concise summary and reorganized description to emphasize the resource parameter requirement and clarify permission requirements for different resource types.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.backups.setIamPolicy' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Missing summary. Description lacks clarity about input requirements (policy definition) and output (updated policy). Added summary and enhanced description to clarify that existing policies are replaced, what inputs are needed, and what is returned.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.backups.setIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Sets the access control policy on a database or backup resource. Replaces any existing policy. Authorization requires `spanner.databases.setIamPolicy` permission on resource. For backups, authorization requires `spanner.backups.setIamPolicy` permission on resource. For backup schedules, authorization requires `spanner.backupSchedules.setIamPolicy` permission on resource.",
+      "summary_suggestion": "Set IAM access control policy on backup resource",
+      "description_suggestion": "Sets the IAM access control policy on a database, backup, or backup schedule resource. This operation replaces any existing policy with the provided policy. Requires appropriate IAM permissions: `spanner.databases.setIamPolicy` for databases, `spanner.backups.setIamPolicy` for backups, or `spanner.backupSchedules.setIamPolicy` for backup schedules. The request must include the resource path and the new policy definition. Returns the updated policy.",
+      "reasoning": "Missing summary. Description lacks clarity about input requirements (policy definition) and output (updated policy). Added summary and enhanced description to clarify that existing policies are replaced, what inputs are needed, and what is returned.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.backups.testIamPermissions' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description is verbose and overly detailed about error conditions. Added concise summary and simplified description to focus on the core functionality (testing permissions) while clarifying input requirements and behavior for non-existent resources.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.backups.testIamPermissions",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns permissions that the caller has on the specified database or backup resource. Attempting this RPC on a non-existent Cloud Spanner database will result in a NOT_FOUND error if the user has `spanner.databases.list` permission on the containing Cloud Spanner instance. Otherwise returns an empty set of permissions. Calling this method on a backup that does not exist will result in a NOT_FOUND error if the user has `spanner.backups.list` permission on the containing instance. Calling this method on a backup schedule that does not exist will result in a NOT_FOUND error if the user has `spanner.backupSchedules.list` permission on the containing database.",
+      "summary_suggestion": "Test caller's IAM permissions on backup resource",
+      "description_suggestion": "Tests which IAM permissions the caller has on a specified database, backup, or backup schedule resource. Returns the subset of requested permissions that the caller possesses. For non-existent resources, returns NOT_FOUND error if the caller has list permissions on the parent resource, otherwise returns an empty permission set. The request must specify the resource path and the permissions to test.",
+      "reasoning": "Missing summary. Description is verbose and overly detailed about error conditions. Added concise summary and simplified description to focus on the core functionality (testing permissions) while clarifying input requirements and behavior for non-existent resources.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.databases.sessions.batchWrite' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is comprehensive but lacks clarity about streaming response behavior and return format. Added summary and reorganized description to emphasize key characteristics (atomic within groups, non-atomic across groups, streaming results, idempotency requirement) for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databases.sessions.batchWrite",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Batches the supplied mutation groups in a collection of efficient transactions. All mutations in a group are committed atomically. However, mutations across groups can be committed non-atomically in an unspecified order and thus, they must be independent of each other. Partial failure is possible, that is, some groups might have been committed successfully, while some might have failed. The results of individual batches are streamed into the response as the batches are applied. `BatchWrite` requests are not replay protected, meaning that each mutation group can be applied more than once. Replays of non-idempotent mutations can have undesirable effects. For example, replays of an insert mutation can produce an already exists error or if you use generated or commit timestamp-based keys, it can result in additional rows being added to the mutation's table. We recommend structuring your mutation groups to be idempotent to avoid this issue.",
+      "summary_suggestion": "Execute multiple mutation groups in efficient transactions",
+      "description_suggestion": "Executes multiple mutation groups as a collection of efficient transactions on a Cloud Spanner database. All mutations within a group are committed atomically, but mutations across groups are committed non-atomically in unspecified order and must be independent. Partial failure is possible - some groups may succeed while others fail. Results are streamed as batches are applied. Note: BatchWrite requests are not replay-protected; each mutation group may be applied multiple times. Ensure mutation groups are idempotent to avoid duplicate inserts or unintended side effects.",
+      "reasoning": "Missing summary. Description is comprehensive but lacks clarity about streaming response behavior and return format. Added summary and reorganized description to emphasize key characteristics (atomic within groups, non-atomic across groups, streaming results, idempotency requirement) for better AI agent understanding.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.databases.sessions.beginTransaction' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is too brief and lacks context about transaction types and return value. Added summary and enhanced description to clarify transaction options, when explicit transaction initiation is needed versus implicit, and what is returned.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databases.sessions.beginTransaction",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Begins a new transaction. This step can often be skipped: Read, ExecuteSql and Commit can begin a new transaction as a side-effect.",
+      "summary_suggestion": "Begin a new database transaction",
+      "description_suggestion": "Begins a new transaction on a Cloud Spanner session. This operation explicitly initiates a transaction with specified options (read-only, read-write, or partitioned DML). Note: This step is often optional as Read, ExecuteSql, and Commit operations can implicitly begin a new transaction as a side-effect. Returns a Transaction object containing the transaction identifier for use in subsequent operations.",
+      "reasoning": "Missing summary. Description is too brief and lacks context about transaction types and return value. Added summary and enhanced description to clarify transaction options, when explicit transaction initiation is needed versus implicit, and what is returned.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spanner.projects.instances.databases.sessions.commit' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about return value and is overly verbose about error scenarios. Added summary and reorganized description to clarify what is returned, when retries are needed, and how to handle UNKNOWN errors more concisely.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spanner.projects.instances.databases.sessions.commit",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Commits a transaction. The request includes the mutations to be applied to rows in the database. `Commit` might return an `ABORTED` error. This can occur at any time; commonly, the cause is conflicts with concurrent transactions. However, it can also happen for a variety of other reasons. If `Commit` returns `ABORTED`, the caller should retry the transaction from the beginning, reusing the same session. On very rare occasions, `Commit` might return `UNKNOWN`. This can happen, for example, if the client job experiences a 1+ hour networking failure. At that point, Cloud Spanner has lost track of the transaction outcome and we recommend that you perform another read from the database to see the state of things as they are now.",
+      "summary_suggestion": "Commit transaction mutations to database",
+      "description_suggestion": "Commits a transaction and applies all mutations to the Cloud Spanner database. The request includes the mutations to be applied to database rows. Returns a CommitResponse with commit timestamp and results. May return ABORTED error due to concurrent transaction conflicts or other reasons - retry the transaction from the beginning using the same session. Rarely returns UNKNOWN error (e.g., after extended network failures) - perform a database read to verify the current state.",
+      "reasoning": "Missing summary. Description lacks clarity about return value and is overly verbose about error scenarios. Added summary and reorganized description to clarify what is returned, when retries are needed, and how to handle UNKNOWN errors more concisely.",
+      "batch_index": 5
     }
   },
   {
@@ -19362,7 +20738,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 43 operations analyzed, 4 quality issues found",
+    "message": "Semantic analysis completed: 43 operations analyzed, 42 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -19374,7 +20750,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 43,
-      "total_issues_found": 4,
+      "total_issues_found": 42,
       "batches_processed": 8
     }
   }

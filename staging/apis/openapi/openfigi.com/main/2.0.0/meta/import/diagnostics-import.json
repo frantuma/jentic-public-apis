@@ -2928,7 +2928,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_/mapping' has semantic quality issues: vague_summary, missing_context, poor_ai_interpretability. The current summary is missing. The description lacks details about the request and response schemas, making it difficult for an AI agent to understand the operation's inputs and outputs.",
+    "message": "Operation 'post_/mapping' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_context. Original description lacks a summary entirely and provides minimal context. Enhanced version clarifies: (1) what 'third-party identifiers' means with examples, (2) that this is a bulk operation, (3) the request and response schemas involved, (4) what happens with unresolved identifiers, and (5) the use case. This helps AI agents understand when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2943,14 +2943,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
-        "poor_ai_interpretability"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Allows mapping from third-party identifiers to FIGIs.",
       "summary_suggestion": "Map third-party identifiers to FIGIs",
-      "description_suggestion": "Maps a list of third-party identifiers to their corresponding FIGIs. Expects a BulkMappingJob object in the request body. Returns a BulkMappingJobResult object containing the mapping results.",
-      "reasoning": "The current summary is missing. The description lacks details about the request and response schemas, making it difficult for an AI agent to understand the operation's inputs and outputs.",
+      "description_suggestion": "Performs bulk mapping of third-party identifiers (such as tickers, ISINs, or other security identifiers) to their corresponding Financial Instrument Global Identifiers (FIGIs). Accepts a BulkMappingJob request containing one or more identifier mappings. Returns a BulkMappingJobResult with the resolved FIGIs and any mapping errors or unresolved identifiers. This operation enables batch conversion of external identifiers to standardized FIGIs.",
+      "reasoning": "Original description lacks a summary entirely and provides minimal context. Enhanced version clarifies: (1) what 'third-party identifiers' means with examples, (2) that this is a bulk operation, (3) the request and response schemas involved, (4) what happens with unresolved identifiers, and (5) the use case. This helps AI agents understand when to use this operation and what to expect.",
       "batch_index": 0
     }
   },
@@ -2965,7 +2966,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get_/mapping/values/{key}' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_output_details. The current summary is missing. The description lacks details about the input parameter and the response schema, making it difficult for an AI agent to understand the operation's inputs and outputs.",
+    "message": "Operation 'get_/mapping/values/{key}' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_context. Original description is too vague about what 'enum-like fields' are and lacks context about the {key} parameter. Enhanced version: (1) clarifies the purpose of discovering valid values, (2) explains the {key} parameter with examples, (3) specifies the return format, (4) provides guidance on when to use this operation. This helps AI agents understand this is a discovery/validation operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2980,15 +2981,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
+        "vague_description",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Get values for enum-like fields.",
-      "summary_suggestion": "Get enum-like field values",
-      "description_suggestion": "Retrieves the values for a specific enum-like field identified by {key}. The {key} parameter should be a valid enum field identifier. Returns an array of values corresponding to the specified field.",
-      "reasoning": "The current summary is missing. The description lacks details about the input parameter and the response schema, making it difficult for an AI agent to understand the operation's inputs and outputs.",
+      "summary_suggestion": "Retrieve enumeration values for mapping fields",
+      "description_suggestion": "Retrieves the valid enumeration values for a specified mapping field parameter. The {key} path parameter identifies which field's valid values to return (e.g., securityType, idType, or other enum-like mapping fields). Returns an array of valid string values that can be used in mapping requests. Use this operation to discover valid options before constructing mapping requests.",
+      "reasoning": "Original description is too vague about what 'enum-like fields' are and lacks context about the {key} parameter. Enhanced version: (1) clarifies the purpose of discovering valid values, (2) explains the {key} parameter with examples, (3) specifies the return format, (4) provides guidance on when to use this operation. This helps AI agents understand this is a discovery/validation operation.",
       "batch_index": 0
     }
   },
@@ -3003,7 +3005,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_/search' has semantic quality issues: vague_summary, missing_context, missing_output_details. The current summary is missing. The description lacks details about the response schema, making it difficult for an AI agent to understand the operation's output.",
+    "message": "Operation 'post_/search' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary is missing and description lacks specificity. Enhanced version: (1) adds a concise summary, (2) clarifies what 'keywords and filters' means, (3) specifies the request/response schemas, (4) explains result ordering, (5) notes the requirement for at least one search criterion (from SearchRequest schema). This helps AI agents understand search capabilities and constraints.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3018,14 +3020,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
+        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Search for FIGIs using key words and other filters.",
       "summary_suggestion": "Search for FIGIs by keywords and filters",
-      "description_suggestion": "Searches for FIGIs using provided keywords and filters. Expects a SearchRequest object in the request body. The response contains a list of SearchResponseElement objects, each representing a matching FIGI.",
-      "reasoning": "The current summary is missing. The description lacks details about the response schema, making it difficult for an AI agent to understand the operation's output.",
+      "description_suggestion": "Searches for Financial Instrument Global Identifiers (FIGIs) using keyword queries and optional filter criteria. Accepts a SearchRequest containing search terms and optional filters (such as security type, market, or date ranges). Returns a SearchResponse array containing matching FIGI results with their associated metadata. Results are ranked by relevance to the search query. At least one search criterion must be provided in the request.",
+      "reasoning": "Original summary is missing and description lacks specificity. Enhanced version: (1) adds a concise summary, (2) clarifies what 'keywords and filters' means, (3) specifies the request/response schemas, (4) explains result ordering, (5) notes the requirement for at least one search criterion (from SearchRequest schema). This helps AI agents understand search capabilities and constraints.",
       "batch_index": 0
     }
   },
@@ -3040,7 +3042,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_/filter' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_output_details. The current summary is missing. The description lacks details about the input and response schemas, making it difficult for an AI agent to understand the operation's inputs and outputs.",
+    "message": "Operation 'post_/filter' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, unclear_purpose. Original summary is missing and description conflates this with /search without clarifying the distinction. Enhanced version: (1) adds a clear summary, (2) explains the key difference from /search (alphabetical sorting and counts vs. relevance ranking), (3) specifies request/response schemas, (4) clarifies the use case (browsing/discovery vs. search), (5) helps AI agents choose between /search and /filter operations based on their needs.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3055,15 +3057,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "unclear_purpose"
       ],
       "current_summary": "",
       "current_description": "Search for FIGIs using key words and other filters. The results are listed alphabetically by FIGI and include the number of results.",
-      "summary_suggestion": "Filter FIGIs by keywords and filters",
-      "description_suggestion": "Filters FIGIs using provided keywords and filters. Expects a FilterRequest object in the request body. The response contains an array of FilterResponse objects, each representing a matching FIGI, listed alphabetically by FIGI and including the number of results.",
-      "reasoning": "The current summary is missing. The description lacks details about the input and response schemas, making it difficult for an AI agent to understand the operation's inputs and outputs.",
+      "summary_suggestion": "Filter FIGIs with alphabetical sorting and result counts",
+      "description_suggestion": "Filters Financial Instrument Global Identifiers (FIGIs) using keyword queries and filter criteria, returning results in a structured format. Accepts a FilterRequest containing search terms and optional filter parameters. Returns a FilterResponse array with matching FIGIs sorted alphabetically, including aggregate result counts. This operation differs from /search in that it provides sorted, aggregated results suitable for browsing and discovery rather than ranked relevance-based search. Use this when you need organized, countable result sets.",
+      "reasoning": "Original summary is missing and description conflates this with /search without clarifying the distinction. Enhanced version: (1) adds a clear summary, (2) explains the key difference from /search (alphabetical sorting and counts vs. relevance ranking), (3) specifies request/response schemas, (4) clarifies the use case (browsing/discovery vs. search), (5) helps AI agents choose between /search and /filter operations based on their needs.",
       "batch_index": 0
     }
   },

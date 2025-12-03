@@ -1204,7 +1204,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'indexing.urlNotifications.publish' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. The original summary and description lacked clarity on the expected input, output, and side effects. The suggestions add these details for better AI agent interpretability.",
+    "message": "Operation 'indexing.urlNotifications.getMetadata' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks clarity on required inputs (URL parameter), expected output structure (UrlNotificationMetadata), and the constraint that only previously notified URLs can be queried. Enhanced version specifies the URL parameter requirement, clarifies the response schema, and explains the operational constraint for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "indexing.urlNotifications.getMetadata",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets metadata about a Web Document. This method can _only_ be used to query URLs that were previously seen in successful Indexing API notifications. Includes the latest `UrlNotification` received via this API.",
+      "summary_suggestion": "Retrieve URL notification metadata and history",
+      "description_suggestion": "Retrieves metadata about a previously indexed Web Document, including the latest UrlNotification received via the Indexing API. This method can only query URLs that have been successfully notified through prior Indexing API calls. Returns a UrlNotificationMetadata object containing notification history and status information for the specified URL.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on required inputs (URL parameter), expected output structure (UrlNotificationMetadata), and the constraint that only previously notified URLs can be queried. Enhanced version specifies the URL parameter requirement, clarifies the response schema, and explains the operational constraint for better AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'indexing.urlNotifications.publish' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description is too brief and lacks critical details: what input is expected (UrlNotification schema with URL and type), what the operation does (triggers Google indexing), what is returned (PublishUrlNotificationResponse), and important side effects (quota consumption, re-crawl triggering). Enhanced version provides complete context for AI agents to understand when and how to use this operation effectively.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1219,14 +1256,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_input_details",
         "missing_output_details",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Notifies that a URL has been updated or deleted.",
-      "summary_suggestion": "Notify URL update or deletion to Google Web Search",
-      "description_suggestion": "Notifies Google Web Search that a URL has been updated or deleted. Expects a `UrlNotification` object in the request body. Returns a `PublishUrlNotificationResponse` object indicating the success of the notification.",
-      "reasoning": "The original summary and description lacked clarity on the expected input, output, and side effects. The suggestions add these details for better AI agent interpretability.",
+      "summary_suggestion": "Notify Google of URL updates or deletions",
+      "description_suggestion": "Notifies Google Web Search that a URL has been updated or deleted. Accepts a UrlNotification object specifying the URL and notification type (UPDATE or DELETE). Successfully published notifications are indexed by Google and trigger a re-crawl of the specified URL. Returns a PublishUrlNotificationResponse confirming receipt of the notification. This operation requires authentication and is subject to quota limits.",
+      "reasoning": "Missing summary entirely. Description is too brief and lacks critical details: what input is expected (UrlNotification schema with URL and type), what the operation does (triggers Google indexing), what is returned (PublishUrlNotificationResponse), and important side effects (quota consumption, re-crawl triggering). Enhanced version provides complete context for AI agents to understand when and how to use this operation effectively.",
       "batch_index": 0
     }
   },
@@ -1241,7 +1279,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 2 operations analyzed, 1 quality issues found",
+    "message": "Semantic analysis completed: 2 operations analyzed, 2 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -1253,7 +1291,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 2,
-      "total_issues_found": 1,
+      "total_issues_found": 2,
       "batches_processed": 1
     }
   }

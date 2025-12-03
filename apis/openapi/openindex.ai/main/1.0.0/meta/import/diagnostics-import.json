@@ -679,7 +679,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'query_query_post' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. The current summary and description are too vague and lack specific details. The suggested summary and description provide clarity on the operation's purpose, expected inputs, and outputs, improving AI agent interpretability.",
+    "message": "Operation 'query_query_post' has semantic quality issues: vague_summary, unclear_purpose, missing_output_details, not_actionable, poor_ai_interpretability. Original summary 'Query' is too generic and not action-oriented. Description contains procedural guidance mixed with unclear phrasing ('don't do this often'). Improved version: (1) clarifies the operation executes document retrieval queries, (2) specifies input structure (query + optional filters), (3) explains output (ranked chunks with scores), (4) provides clear guidance on query decomposition and error handling, (5) uses consistent domain terminology (document chunks, relevance scores, metadata filters), (6) helps AI agents understand when to use this operation and how to structure requests for optimal results.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -694,15 +694,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description",
-        "missing_input_details",
-        "missing_output_details"
+        "unclear_purpose",
+        "missing_output_details",
+        "not_actionable",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Query",
       "current_description": "Accepts search query objects array each with query and optional filter. Break down complex questions into sub-questions. Refine results by criteria, e.g. time / source, don't do this often. Split queries if ResponseTooLargeError occurs.",
-      "summary_suggestion": "Execute a search query with optional filters",
-      "description_suggestion": "Executes a search query by accepting an array of query objects, each containing a natural language query and optional filters. Supports breaking down complex queries into sub-questions and refining results by criteria such as time and source. If the response is too large, it will automatically split the query. Expects a QueryRequest object as input and returns a QueryResponse object.",
-      "reasoning": "The current summary and description are too vague and lack specific details. The suggested summary and description provide clarity on the operation's purpose, expected inputs, and outputs, improving AI agent interpretability.",
+      "summary_suggestion": "Execute document retrieval queries with optional filtering",
+      "description_suggestion": "Executes one or more document retrieval queries against the indexed document collection. Each query object contains a natural language search query and optional metadata filters (e.g., source, date range). Returns ranked document chunks matching the queries with relevance scores. For complex questions, submit multiple focused sub-queries rather than a single broad query. If a ResponseTooLargeError occurs, split the query into smaller, more specific queries. Metadata filtering should be used judiciously to refine results when needed.",
+      "reasoning": "Original summary 'Query' is too generic and not action-oriented. Description contains procedural guidance mixed with unclear phrasing ('don't do this often'). Improved version: (1) clarifies the operation executes document retrieval queries, (2) specifies input structure (query + optional filters), (3) explains output (ranked chunks with scores), (4) provides clear guidance on query decomposition and error handling, (5) uses consistent domain terminology (document chunks, relevance scores, metadata filters), (6) helps AI agents understand when to use this operation and how to structure requests for optimal results.",
       "batch_index": 0
     }
   },

@@ -3010,7 +3010,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'iam.policies.delete' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing. Added a concise summary and expanded the description to include side effects of the action.",
+    "message": "Operation 'iam.policies.delete' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description is too brief and lacks critical details about inputs (resource name), outputs (empty response), and the irreversible nature of the operation. AI agents need to understand the permanent consequences and what parameters are required.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3025,13 +3025,124 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Deletes a policy. This action is permanent.",
-      "summary_suggestion": "Delete a specified policy",
-      "description_suggestion": "Deletes a specified policy. This action is permanent and cannot be undone. It removes the policy from the system entirely.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include side effects of the action.",
+      "summary_suggestion": "Delete an IAM policy permanently",
+      "description_suggestion": "Permanently deletes the specified IAM policy. This action cannot be undone. Requires the policy resource name as input. Returns an empty response on successful deletion. All bindings and rules associated with the policy will be removed.",
+      "reasoning": "Missing summary entirely. Description is too brief and lacks critical details about inputs (resource name), outputs (empty response), and the irreversible nature of the operation. AI agents need to understand the permanent consequences and what parameters are required.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'iam.policies.update' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is verbose and procedural but lacks clarity about what is returned and which fields are updatable. Restructured to be more concise while preserving the important read-modify-write guidance and adding explicit return value information for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "iam.policies.update",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates the specified policy. You can update only the rules and the display name for the policy. To update a policy, you should use a read-modify-write loop: 1. Use GetPolicy to read the current version of the policy. 2. Modify the policy as needed. 3. Use `UpdatePolicy` to write the updated policy. This pattern helps prevent conflicts between concurrent updates.",
+      "summary_suggestion": "Update IAM policy rules and display name",
+      "description_suggestion": "Updates the specified IAM policy's rules and display name. Only these fields can be modified; other policy attributes are immutable. Requires the complete updated policy object in the request body. Returns the updated GoogleIamV2betaPolicy object. Follow a read-modify-write pattern (GetPolicy → modify → UpdatePolicy) to prevent concurrent update conflicts.",
+      "reasoning": "Missing summary. Description is verbose and procedural but lacks clarity about what is returned and which fields are updatable. Restructured to be more concise while preserving the important read-modify-write guidance and adding explicit return value information for AI agent clarity.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'iam.policies.listPolicies' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description explains what is returned but lacks clarity about pagination support and how to get complete policy details. Added summary and enhanced description to clarify pagination capability and relationship to GetPolicy operation for AI agent navigation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "iam.policies.listPolicies",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves the policies of the specified kind that are attached to a resource. The response lists only policy metadata. In particular, policy rules are omitted.",
+      "summary_suggestion": "List IAM policies attached to a resource",
+      "description_suggestion": "Lists all IAM policies of the specified kind attached to a resource. Returns policy metadata only; individual policy rules are not included in the response. Use GetPolicy to retrieve the complete policy including rules. Supports pagination via optional parameters.",
+      "reasoning": "Missing summary. Description explains what is returned but lacks clarity about pagination support and how to get complete policy details. Added summary and enhanced description to clarify pagination capability and relationship to GetPolicy operation for AI agent navigation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'iam.policies.createPolicy' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Summary is missing entirely. Description is extremely vague with no details about inputs, outputs, or effects. AI agents cannot determine what parameters are needed or what the operation returns. Enhanced with specific schema references, return value details, and clarification that the policy is immediately effective.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "iam.policies.createPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a policy.",
+      "summary_suggestion": "Create a new IAM policy",
+      "description_suggestion": "Creates a new IAM policy in the specified parent resource. Requires a GoogleIamV2betaPolicy object in the request body with policy rules and display name. Returns the newly created GoogleIamV2betaPolicy object with an assigned resource name and metadata. The policy becomes immediately effective after creation.",
+      "reasoning": "Summary is missing entirely. Description is extremely vague with no details about inputs, outputs, or effects. AI agents cannot determine what parameters are needed or what the operation returns. Enhanced with specific schema references, return value details, and clarification that the policy is immediately effective.",
       "batch_index": 0
     }
   },
@@ -3046,7 +3157,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 5 operations analyzed, 1 quality issues found",
+    "message": "Semantic analysis completed: 5 operations analyzed, 4 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -3058,7 +3169,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 5,
-      "total_issues_found": 1,
+      "total_issues_found": 4,
       "batches_processed": 1
     }
   }

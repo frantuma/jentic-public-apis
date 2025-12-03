@@ -10085,7 +10085,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'drivelabels.labels.revisions.permissions.batchDelete' has semantic quality issues: vague_summary, missing_context, missing_input_details. The original summary was missing. Added a clear summary and provided more context about the input parameters and the effect of the operation.",
+    "message": "Operation 'drivelabels.labels.revisions.permissions.batchDelete' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description lacks actionability and context about what permissions control, who can be affected, and when to use this operation. Added summary to clarify batch deletion intent. Enhanced description to explain permission scope, immediate effect, and use cases for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10100,14 +10100,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
-        "missing_input_details"
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Deletes Label permissions. Permissions affect the Label resource as a whole, are not revisioned, and do not require publishing.",
-      "summary_suggestion": "Batch delete label permissions",
-      "description_suggestion": "Deletes multiple Label permissions for specified principals. Permissions affect the Label resource as a whole, are not revisioned, and do not require publishing. Requires the 'parent' parameter to specify the label resource. The request body should contain a list of principal identifiers to delete permissions for.",
-      "reasoning": "The original summary was missing. Added a clear summary and provided more context about the input parameters and the effect of the operation.",
+      "summary_suggestion": "Delete multiple label permissions in batch",
+      "description_suggestion": "Deletes one or more permissions from a label. Permissions control access to the label resource and apply globally to the label (not to specific revisions). Deleted permissions take effect immediately without requiring label publication. Use this operation to revoke access for users, groups, or audiences from a label.",
+      "reasoning": "Missing summary entirely. Description lacks actionability and context about what permissions control, who can be affected, and when to use this operation. Added summary to clarify batch deletion intent. Enhanced description to explain permission scope, immediate effect, and use cases for AI agent decision-making.",
       "batch_index": 2
     }
   },
@@ -10122,7 +10121,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'drivelabels.labels.revisions.permissions.batchUpdate' has semantic quality issues: vague_summary, missing_context, missing_input_details. The original summary was missing. Added a clear summary and provided more context about the input parameters and the effect of the operation.",
+    "message": "Operation 'drivelabels.labels.revisions.permissions.batchUpdate' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description explains the upsert logic but lacks context about permission scope, principals, and when to use this operation. Added summary to clarify batch upsert intent. Enhanced description to define what principals are, clarify immediate effect, and provide guidance for AI agents on operation usage and effects.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10137,14 +10136,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
-        "missing_input_details"
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Updates Label permissions. If a permission for the indicated principal doesn't exist, a new Label Permission is created, otherwise the existing permission is updated. Permissions affect the Label resource as a whole, are not revisioned, and do not require publishing.",
-      "summary_suggestion": "Batch update label permissions",
-      "description_suggestion": "Updates multiple Label permissions for specified principals. If a permission for the indicated principal doesn't exist, a new Label Permission is created, otherwise the existing permission is updated. Permissions affect the Label resource as a whole, are not revisioned, and do not require publishing. Requires the 'parent' parameter to specify the label resource. The request body should contain a list of principal identifiers along with their updated permissions.",
-      "reasoning": "The original summary was missing. Added a clear summary and provided more context about the input parameters and the effect of the operation.",
+      "summary_suggestion": "Create or update multiple label permissions in batch",
+      "description_suggestion": "Creates new permissions or updates existing permissions for a label. For each principal (user, group, or audience) specified in the request, if no permission exists, a new one is created; if one exists, it is updated with the new role. Permissions apply globally to the label resource and take effect immediately without requiring label publication. Use this operation to grant or modify access to a label for multiple principals at once.",
+      "reasoning": "Missing summary entirely. Description explains the upsert logic but lacks context about permission scope, principals, and when to use this operation. Added summary to clarify batch upsert intent. Enhanced description to define what principals are, clarify immediate effect, and provide guidance for AI agents on operation usage and effects.",
       "batch_index": 2
     }
   },
@@ -10159,7 +10157,258 @@
         "character": 0
       }
     },
-    "message": "Operation 'drivelabels.labels.list' has semantic quality issues: vague_summary, vague_description. The current summary and description are too vague. The suggested summary and description provide more clarity and context for the operation.",
+    "message": "Operation 'drivelabels.labels.enable' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is clear but lacks context about preconditions (label must be disabled) and the state transition implications. Added summary and enhanced description with preconditions and state transition clarity for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "drivelabels.labels.enable",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Enable a disabled Label and restore it to its published state. This will result in a new published revision based on the current disabled published revision. If there is an existing disabled draft revision, a new revision will be created based on that draft and will be enabled.",
+      "summary_suggestion": "Enable a disabled label and restore to published state",
+      "description_suggestion": "Enables a disabled Label and restores it to its published state. This operation creates a new published revision based on the current disabled published revision. If a disabled draft revision exists, a new revision will be created from that draft and enabled. The operation requires the label to be in a disabled state and will transition it back to an active, published state.",
+      "reasoning": "Missing summary entirely. Description is clear but lacks context about preconditions (label must be disabled) and the state transition implications. Added summary and enhanced description with preconditions and state transition clarity for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'drivelabels.labels.publish' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is comprehensive but dense and difficult for AI agents to parse. Added concise summary and reorganized description to clearly separate the action, state transition, revision management, and post-publication restrictions for improved AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "drivelabels.labels.publish",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Publish all draft changes to the Label. Once published, the Label may not return to its draft state. See `google.apps.drive.labels.v2.Lifecycle` for more information. Publishing a Label will result in a new published revision. All previous draft revisions will be deleted. Previous published revisions will be kept but are subject to automated deletion as needed. Once published, some changes are no longer permitted. Generally, any change that would invalidate or cause new restrictions on existing metadata related to the Label will be rejected. For example, the following changes to a Label will be rejected after the Label is published: * The label cannot be directly deleted. It must be disabled first, then deleted. * Field.FieldType cannot be changed. * Changes to Field validation options cannot reject something that was previously accepted. * Reducing the max entries.",
+      "summary_suggestion": "Publish draft label changes to production state",
+      "description_suggestion": "Publishes all draft changes to a Label, transitioning it from draft to published state. Once published, the Label cannot return to draft state. Publishing creates a new published revision, deletes all previous draft revisions, and retains previous published revisions (subject to automated cleanup). After publishing, certain modifications are restricted: the label cannot be directly deleted (must be disabled first), field types cannot be changed, validation rules cannot become more restrictive, and maximum entry counts cannot be reduced. These restrictions prevent invalidating existing metadata associated with the label.",
+      "reasoning": "Missing summary entirely. Description is comprehensive but dense and difficult for AI agents to parse. Added concise summary and reorganized description to clearly separate the action, state transition, revision management, and post-publication restrictions for improved AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'drivelabels.labels.updateLabelCopyMode' has semantic quality issues: vague_summary. Missing summary. Description is clear and concise, explaining what is updated, that it's not revisioned, doesn't require publishing, and takes effect immediately. Only summary suggestion needed.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "drivelabels.labels.updateLabelCopyMode",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Updates a Label's `CopyMode`. Changes to this policy are not revisioned, do not require publishing, and take effect immediately.",
+      "summary_suggestion": "Update label copy mode policy",
+      "reasoning": "Missing summary. Description is clear and concise, explaining what is updated, that it's not revisioned, doesn't require publishing, and takes effect immediately. Only summary suggestion needed.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'drivelabels.labels.revisions.locks.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is too minimal and lacks context about what LabelLocks represent and their purpose. Added summary and expanded description to explain what locks are, their purpose, and what the operation returns for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "drivelabels.labels.revisions.locks.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the LabelLocks on a Label.",
+      "summary_suggestion": "List label locks for a label revision",
+      "description_suggestion": "Retrieves a list of all LabelLocks associated with a specific Label revision. LabelLocks indicate whether a label component should be considered locked. This operation returns all locks currently applied to the label, which can be used to determine which label elements are restricted from modification.",
+      "reasoning": "Missing summary. Description is too minimal and lacks context about what LabelLocks represent and their purpose. Added summary and expanded description to explain what locks are, their purpose, and what the operation returns for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'drivelabels.labels.revisions.permissions.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is too vague and doesn't explain what permissions represent or what information is returned. Added summary and expanded description to clarify that permissions are principal-based access controls and explain the return value for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "drivelabels.labels.revisions.permissions.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Lists a Label's permissions.",
+      "summary_suggestion": "List label permissions for principals",
+      "description_suggestion": "Retrieves a list of all permissions associated with a Label. Each permission specifies the access level (role) granted to a principal (user, group, or audience) on the label. This operation returns all LabelPermission objects that define who can access and what actions they can perform on the label.",
+      "reasoning": "Missing summary. Description is too vague and doesn't explain what permissions represent or what information is returned. Added summary and expanded description to clarify that permissions are principal-based access controls and explain the return value for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'drivelabels.labels.revisions.updatePermissions' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description explains the upsert behavior and that permissions aren't revisioned, but lacks clarity on what principal types are supported and what is returned. Added summary and enhanced description with principal type examples and explicit return value information.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "drivelabels.labels.revisions.updatePermissions",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates a Label's permissions. If a permission for the indicated principal doesn't exist, a new Label Permission is created, otherwise the existing permission is updated. Permissions affect the Label resource as a whole, are not revisioned, and do not require publishing.",
+      "summary_suggestion": "Update or create label permissions for principal",
+      "description_suggestion": "Updates a Label's permissions for a specified principal (user, group, or audience). If no permission exists for the principal, a new LabelPermission is created; otherwise, the existing permission is updated. Permissions apply to the entire Label resource, are not revisioned, do not require publishing, and take effect immediately. Returns the updated or newly created LabelPermission object.",
+      "reasoning": "Missing summary. Description explains the upsert behavior and that permissions aren't revisioned, but lacks clarity on what principal types are supported and what is returned. Added summary and enhanced description with principal type examples and explicit return value information.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'drivelabels.labels.revisions.permissions.create' has semantic quality issues: vague_summary, inconsistent_terminology, missing_output_details. Missing summary. Description uses 'Updates' language for a POST/create operation, which is inconsistent terminology - POST operations should emphasize creation. Description also lacks return value information. Added summary emphasizing creation and revised description to use create-appropriate language while clarifying the upsert behavior and return value.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "drivelabels.labels.revisions.permissions.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "inconsistent_terminology",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates a Label's permissions. If a permission for the indicated principal doesn't exist, a new Label Permission is created, otherwise the existing permission is updated. Permissions affect the Label resource as a whole, are not revisioned, and do not require publishing.",
+      "summary_suggestion": "Create new label permission for principal",
+      "description_suggestion": "Creates a new permission for a Label, granting access to a specified principal (user, group, or audience). If a permission for the principal already exists, it will be updated instead. Permissions apply to the entire Label resource, are not revisioned, do not require publishing, and take effect immediately. Returns the created or updated LabelPermission object with the granted access level.",
+      "reasoning": "Missing summary. Description uses 'Updates' language for a POST/create operation, which is inconsistent terminology - POST operations should emphasize creation. Description also lacks return value information. Added summary emphasizing creation and revised description to use create-appropriate language while clarifying the upsert behavior and return value.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'drivelabels.labels.list' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description is too minimal. Added context about what labels are returned, filtering/pagination capabilities, and the types of metadata included. This helps AI agents understand the operation's scope and how to use filtering parameters effectively.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10174,13 +10423,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "List labels.",
-      "summary_suggestion": "Retrieve a list of all available labels.",
-      "description_suggestion": "Retrieves a list of all available labels. This operation returns a collection of label objects that can be used to organize and categorize Drive items.",
-      "reasoning": "The current summary and description are too vague. The suggested summary and description provide more clarity and context for the operation.",
+      "summary_suggestion": "List all available Drive labels",
+      "description_suggestion": "Retrieves a list of all Drive labels accessible to the authenticated user. Supports filtering, sorting, and pagination through query parameters. Returns a collection of label objects with their metadata, including name, description, and lifecycle state. Labels can be filtered by state (published, draft, disabled) and other criteria.",
+      "reasoning": "Original description is too minimal. Added context about what labels are returned, filtering/pagination capabilities, and the types of metadata included. This helps AI agents understand the operation's scope and how to use filtering parameters effectively.",
       "batch_index": 0
     }
   },
@@ -10195,7 +10446,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'drivelabels.labels.create' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented.",
+    "message": "Operation 'drivelabels.labels.create' has semantic quality issues: vague_summary, missing_context, missing_output_details, missing_side_effects. Original description lacks critical context about the label's initial state (UNPUBLISHED_DRAFT), the requirement to publish before use, and what the request/response schemas contain. Added these details to help AI agents understand the label creation workflow and lifecycle.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10209,12 +10460,16 @@
       "operation_id": "drivelabels.labels.create",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Creates a new Label.",
-      "summary_suggestion": "Create a new label.",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented.",
+      "summary_suggestion": "Create a new Drive label",
+      "description_suggestion": "Creates a new unpublished draft label with the provided configuration. The label is created in UNPUBLISHED_DRAFT state and must be published before it can be applied to Drive items. Accepts a GoogleAppsDriveLabelsV2betaLabel object specifying the label's display name, description, and field definitions. Returns the newly created label object with its unique identifier and initial lifecycle state.",
+      "reasoning": "Original description lacks critical context about the label's initial state (UNPUBLISHED_DRAFT), the requirement to publish before use, and what the request/response schemas contain. Added these details to help AI agents understand the label creation workflow and lifecycle.",
       "batch_index": 0
     }
   },
@@ -10229,7 +10484,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'drivelabels.users.getCapabilities' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and provides a clear action-oriented statement.",
+    "message": "Operation 'drivelabels.labels.revisions.permissions.delete' has semantic quality issues: vague_summary, missing_context, missing_output_details. Added clarity about what 'permission' means (access for a principal), emphasized immediate effect without publishing requirement, specified the empty response, and noted authorization requirements. This helps AI agents understand the permission model and when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "drivelabels.labels.revisions.permissions.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes a Label's permission. Permissions affect the Label resource as a whole, are not revisioned, and do not require publishing.",
+      "summary_suggestion": "Delete a label permission",
+      "description_suggestion": "Removes a specific permission from a label, revoking access for the associated principal (user, group, or audience). Permissions are applied at the label level and are not revisioned, so changes take effect immediately without requiring label publication. Returns an empty response on successful deletion. The operation requires appropriate authorization to modify label permissions.",
+      "reasoning": "Added clarity about what 'permission' means (access for a principal), emphasized immediate effect without publishing requirement, specified the empty response, and noted authorization requirements. This helps AI agents understand the permission model and when to use this operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'drivelabels.users.getCapabilities' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description is too vague about what 'capabilities' means. Added context that this retrieves authorization/permission information, specified examples of capabilities (create, manage permissions, publish), and explained that capabilities depend on user role and policies. This clarifies the operation's purpose for AI agents.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10243,12 +10535,88 @@
       "operation_id": "drivelabels.users.getCapabilities",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets the user capabilities.",
-      "summary_suggestion": "Retrieve user capabilities.",
-      "reasoning": "The current summary is missing. The suggested summary is concise and provides a clear action-oriented statement.",
+      "summary_suggestion": "Get authenticated user's label capabilities",
+      "description_suggestion": "Retrieves the capabilities and permissions of the authenticated user for managing Drive labels. Returns information about what label operations the user is authorized to perform, including whether they can create labels, manage permissions, publish labels, and other administrative actions. Capabilities are determined by the user's role and organizational policies.",
+      "reasoning": "Original description is too vague about what 'capabilities' means. Added context that this retrieves authorization/permission information, specified examples of capabilities (create, manage permissions, publish), and explained that capabilities depend on user role and policies. This clarifies the operation's purpose for AI agents.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'drivelabels.labels.delta' has semantic quality issues: vague_summary, missing_context. Added 'atomic' terminology to clarify all-or-nothing behavior, specified that errors prevent any changes, and clarified the request schema context. The original description is mostly good but benefits from terminology consistency and explicit mention of error handling for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "drivelabels.labels.delta",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Updates a single Label by applying a set of update requests resulting in a new draft revision. The batch update is all-or-nothing: If any of the update requests are invalid, no changes are applied. The resulting draft revision must be published before the changes may be used with Drive Items.",
+      "summary_suggestion": "Apply batch updates to a label",
+      "description_suggestion": "Applies a batch of update requests to a label, creating a new draft revision with the accumulated changes. The operation is atomic (all-or-nothing): if any update request is invalid, no changes are applied and an error is returned. The resulting draft revision must be explicitly published before the changes become available for use with Drive items. Accepts a GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequest specifying the updates to apply.",
+      "reasoning": "Added 'atomic' terminology to clarify all-or-nothing behavior, specified that errors prevent any changes, and clarified the request schema context. The original description is mostly good but benefits from terminology consistency and explicit mention of error handling for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'drivelabels.labels.disable' has semantic quality issues: vague_summary, missing_context. Added context about the effect of disabling (prevents new applications but preserves existing ones), clarified the revision management behavior, and mentioned the request schema. This helps AI agents understand the disable operation's purpose in the label lifecycle and its relationship to deletion.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "drivelabels.labels.disable",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Disable a published Label. Disabling a Label will result in a new disabled published revision based on the current published revision. If there is a draft revision, a new disabled draft revision will be created based on the latest draft revision. Older draft revisions will be deleted. Once disabled, a label may be deleted with `DeleteLabel`.",
+      "summary_suggestion": "Disable a published label",
+      "description_suggestion": "Disables a published label, preventing it from being applied to new Drive items while preserving existing applications. Creates a new disabled published revision based on the current published revision. If a draft revision exists, a new disabled draft revision is created from the latest draft, and older draft revisions are deleted. Disabled labels can subsequently be deleted using the DeleteLabel operation. Accepts a GoogleAppsDriveLabelsV2betaDisableLabelRequest.",
+      "reasoning": "Added context about the effect of disabling (prevents new applications but preserves existing ones), clarified the revision management behavior, and mentioned the request schema. This helps AI agents understand the disable operation's purpose in the label lifecycle and its relationship to deletion.",
       "batch_index": 0
     }
   },
@@ -10263,7 +10631,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 16 operations analyzed, 5 quality issues found",
+    "message": "Semantic analysis completed: 16 operations analyzed, 15 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -10275,7 +10643,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 16,
-      "total_issues_found": 5,
+      "total_issues_found": 15,
       "batches_processed": 3
     }
   }

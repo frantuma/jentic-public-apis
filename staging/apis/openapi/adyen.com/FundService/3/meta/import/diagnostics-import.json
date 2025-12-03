@@ -2027,7 +2027,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post-accountHolderBalance' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The summary should specify that balances are retrieved by currency, and the description should clarify the organization of balances by currency.",
+    "message": "Operation 'post-transferFunds' has semantic quality issues: missing_output_details, missing_side_effects. The current description lacks clarity on expected outputs and side effects. Added explicit details about: (1) request schema expectations (source, destination, amount, transfer code), (2) response schema details and HTTP status codes (200 vs 202), and (3) side effects (fund debit/credit operations). This enables AI agents to understand the operation's complete lifecycle and determine appropriate follow-up actions based on response status.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2038,17 +2038,52 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "post-accountHolderBalance",
+      "operation_id": "post-transferFunds",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
-        "vague_description"
+        "missing_output_details",
+        "missing_side_effects"
       ],
-      "current_summary": "Get the balances of an account holder",
-      "current_description": "Returns the account balances of an account holder. An account's balances are organized according by currencies. This mean that an account may have multiple balances: one for each currency.",
-      "summary_suggestion": "Retrieve account holder balances by currency",
-      "description_suggestion": "Retrieves the account balances of an account holder organized by currency. An account may have multiple balances, one for each currency.",
-      "reasoning": "The current summary and description are vague. The summary should specify that balances are retrieved by currency, and the description should clarify the organization of balances by currency.",
+      "current_summary": "Transfer funds between platform accounts",
+      "current_description": "Transfers funds from one account to another account. Both accounts must be in the same platform, but can have different account holders. The transfer must include a transfer code, which should be determined by the platform, in compliance with local regulations.",
+      "description_suggestion": "Transfers funds from one account to another account within the same platform. Both source and destination accounts can have different account holders. The transfer requires a transfer code determined by the platform in compliance with local regulations. Accepts a TransferFundsRequest containing source account, destination account, amount, and transfer code. Returns a TransferFundsResponse with transfer status and reference information. The operation may return 200 (immediate completion) or 202 (accepted for asynchronous processing). Funds are debited from the source account and credited to the destination account upon successful processing.",
+      "reasoning": "The current description lacks clarity on expected outputs and side effects. Added explicit details about: (1) request schema expectations (source, destination, amount, transfer code), (2) response schema details and HTTP status codes (200 vs 202), and (3) side effects (fund debit/credit operations). This enables AI agents to understand the operation's complete lifecycle and determine appropriate follow-up actions based on response status.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-accountHolderTransactionList' has semantic quality issues: missing_input_details, missing_side_effects. Original summary is too generic. Description lacks clarity about pagination requirements and filtering capabilities. Enhanced summary to emphasize pagination aspect. Improved description to clarify input parameters (accounts, statuses, page), output limitations (50 per account), and pagination mechanism for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-accountHolderTransactionList",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Get a list of transactions",
+      "current_description": "Returns a list of transactions for an account holder's accounts. You can specify the accounts and transaction statuses to be included on the list. The call returns a maximum of 50 transactions for each account. To retrieve all transactions, you must make another call with the 'page' value incremented. Transactions are listed in chronological order, with the most recent transaction first.",
+      "summary_suggestion": "Retrieve paginated transaction list for account holder",
+      "description_suggestion": "Returns a paginated list of transactions for an account holder's accounts. Supports filtering by specific accounts and transaction statuses. Each response returns a maximum of 50 transactions per account; use the 'page' parameter to retrieve additional transactions. Transactions are sorted chronologically with the most recent first. Useful for auditing account activity and transaction history.",
+      "reasoning": "Original summary is too generic. Description lacks clarity about pagination requirements and filtering capabilities. Enhanced summary to emphasize pagination aspect. Improved description to clarify input parameters (accounts, statuses, page), output limitations (50 per account), and pagination mechanism for AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -2063,7 +2098,42 @@
         "character": 0
       }
     },
-    "message": "Operation 'post-payoutAccountHolder' has semantic quality issues: vague_description. The current description is vague. It should clarify that the payout process includes any necessary fees and charges.",
+    "message": "Operation 'post-debitAccountHolder' has semantic quality issues: missing_context, missing_side_effects. Summary is appropriate. Description needs enhancement to clarify asynchronous nature, webhook notification requirement, and use case context. Added information about split instructions, asynchronous processing, and webhook notification to improve AI agent understanding of when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-debitAccountHolder",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "Send a direct debit request",
+      "current_description": "Sends a direct debit request to an account holder's bank account. If the direct debit is successful, the funds are settled in the accounts specified in the split instructions. Adyen sends the result of the direct debit in a [`DIRECT_DEBIT_INITIATED`](https://docs.adyen.com/api-explorer/#/NotificationService/latest/post/DIRECT_DEBIT_INITIATED) notification webhook.\n\n To learn more about direct debits, see [Top up accounts](https://docs.adyen.com/classic-platforms/top-up-accounts).",
+      "description_suggestion": "Initiates a direct debit request from an account holder's bank account to fund platform accounts. Upon successful processing, funds are distributed to specified accounts according to split instructions. The operation is asynchronous; Adyen sends the result via a DIRECT_DEBIT_INITIATED webhook notification. This operation is used for account top-ups and requires valid bank account details and split configuration.",
+      "reasoning": "Summary is appropriate. Description needs enhancement to clarify asynchronous nature, webhook notification requirement, and use case context. Added information about split instructions, asynchronous processing, and webhook notification to improve AI agent understanding of when and how to use this operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-payoutAccountHolder' has semantic quality issues: vague_description, missing_input_details, missing_side_effects. Summary is clear but description is too brief and lacks critical details. Enhanced description to include: what is being transferred (funds from platform to bank account), side effects (account balance reduction), prerequisites (sufficient balance), and asynchronous processing nature. This provides AI agents with better understanding of operation effects and constraints.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2077,12 +2147,119 @@
       "operation_id": "post-payoutAccountHolder",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_description",
+        "missing_input_details",
+        "missing_side_effects"
       ],
       "current_summary": "Pay out from an account to the account holder",
       "current_description": "Pays out a specified amount from an account to the bank account of account holder.",
-      "description_suggestion": "Pays out a specified amount from an account to the bank account of the account holder. The payout process includes any necessary fees and charges.",
-      "reasoning": "The current description is vague. It should clarify that the payout process includes any necessary fees and charges.",
+      "description_suggestion": "Initiates a payout of a specified amount from a platform account to the account holder's designated bank account. The operation transfers funds out of the platform, reducing the account balance. Requires the account to have sufficient available balance. The payout is processed asynchronously and the account holder receives the funds according to their bank's processing times.",
+      "reasoning": "Summary is clear but description is too brief and lacks critical details. Enhanced description to include: what is being transferred (funds from platform to bank account), side effects (account balance reduction), prerequisites (sufficient balance), and asynchronous processing nature. This provides AI agents with better understanding of operation effects and constraints.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-refundFundsTransfer' has semantic quality issues: missing_input_details, missing_side_effects. Summary is adequate. Description lacks details about prerequisites (valid transfer reference), side effects (balance restoration, transaction record creation), and constraints. Enhanced description to clarify what is required to execute the refund, what state changes occur, and the cross-account holder capability for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-refundFundsTransfer",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Refund a funds transfer",
+      "current_description": "Refunds funds transferred from one account to another. Both accounts must be in the same platform, but can have different account holders.",
+      "description_suggestion": "Reverses a previously executed funds transfer between two platform accounts, returning the transferred amount to the source account. Both accounts must belong to the same platform but can have different account holders. The refund operation restores the original account balances and creates a corresponding transaction record. Requires a valid reference to the original transfer.",
+      "reasoning": "Summary is adequate. Description lacks details about prerequisites (valid transfer reference), side effects (balance restoration, transaction record creation), and constraints. Enhanced description to clarify what is required to execute the refund, what state changes occur, and the cross-account holder capability for better AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-refundNotPaidOutTransfers' has semantic quality issues: missing_input_details, missing_side_effects. Summary is clear but description, while detailed, could better emphasize the account-scoped nature and split payment handling. Enhanced description to clarify the selective refund mechanism, what remains unchanged (commissions, fees, other account portions), and the use case for account-level reversals. This helps AI agents understand when to use this versus other refund operations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-refundNotPaidOutTransfers",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Refund all transactions of an account since the most recent payout",
+      "current_description": "Refunds all the transactions of an account that have taken place since the most recent payout. This request is on a account basis (as opposed to a payment basis), so only the portion of the payment that was made to the specified account is refunded. The commissions, fees, and payments to other accounts remain in the accounts to which they were sent as designated by the original payment's split details.",
+      "description_suggestion": "Refunds all transactions for a specified account that occurred after the most recent payout, reverting only the portion of split payments allocated to that account. Commissions, fees, and amounts distributed to other accounts per the original split instructions remain unchanged. This operation is account-scoped rather than payment-scoped, making it useful for selective account reversals. Requires identifying the target account and verifying payout history.",
+      "reasoning": "Summary is clear but description, while detailed, could better emphasize the account-scoped nature and split payment handling. Enhanced description to clarify the selective refund mechanism, what remains unchanged (commissions, fees, other account portions), and the use case for account-level reversals. This helps AI agents understand when to use this versus other refund operations.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post-setupBeneficiary' has semantic quality issues: missing_input_details, missing_side_effects. Summary is clear and action-oriented. Description adequately explains the operation but could better emphasize the permanent nature of the relationship and automatic redirection behavior. Enhanced description to clarify the automatic redirection mechanism, chain limitations, cycle prevention, and that this creates a persistent routing rule. This helps AI agents understand the long-term implications and constraints of this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post-setupBeneficiary",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Designate a beneficiary account and transfer the benefactor's current balance",
+      "current_description": "Defines a benefactor and a beneficiary relationship between two accounts. At the time of benefactor/beneficiary setup, the funds in the benefactor account are transferred to the beneficiary account, and any further payments to the benefactor account are automatically sent to the beneficiary account. A series of benefactor/beneficiaries may not exceed four beneficiaries and may not have a cycle in it.",
+      "description_suggestion": "Establishes a benefactor-beneficiary relationship between two accounts, automatically transferring the benefactor's current balance to the beneficiary account. All subsequent payments to the benefactor account are automatically redirected to the beneficiary account. Beneficiary chains are limited to a maximum of four levels and cannot contain cycles. This operation creates a permanent fund routing rule until explicitly removed.",
+      "reasoning": "Summary is clear and action-oriented. Description adequately explains the operation but could better emphasize the permanent nature of the relationship and automatic redirection behavior. Enhanced description to clarify the automatic redirection mechanism, chain limitations, cycle prevention, and that this creates a persistent routing rule. This helps AI agents understand the long-term implications and constraints of this operation.",
       "batch_index": 0
     }
   },
@@ -2097,7 +2274,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 8 operations analyzed, 2 quality issues found",
+    "message": "Semantic analysis completed: 8 operations analyzed, 7 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -2109,7 +2286,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 8,
-      "total_issues_found": 2,
+      "total_issues_found": 7,
       "batches_processed": 2
     }
   }

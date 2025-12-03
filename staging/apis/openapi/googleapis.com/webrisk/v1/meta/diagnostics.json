@@ -3125,7 +3125,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'webrisk.projects.submissions.create' has semantic quality issues: vague_summary, missing_context, poor_ai_interpretability. The original summary was missing, making it unclear. The description was improved to include missing context about the authentication requirement, the return value, and the Early Access limitation. The improved description also uses domain-appropriate terminology.",
+    "message": "Operation 'webrisk.projects.submissions.create' has semantic quality issues: vague_summary, missing_output_details. Original summary is missing entirely. Description lacks clarity on asynchronous processing, authentication requirements, and return value details. Added summary as action-oriented statement. Enhanced description to clarify that submission is processed asynchronously, explicitly mention authentication requirements, specify the return object type, and maintain domain terminology (phishing content, Social Engineering lists, URI) consistent with Web Risk API context. This improves AI agent interpretability for determining when and how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3140,15 +3140,156 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
-        "poor_ai_interpretability"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Creates a Submission of a URI suspected of containing phishing content to be reviewed. If the result verifies the existence of malicious phishing content, the site will be added to the [Google's Social Engineering lists](https://support.google.com/webmasters/answer/6350487/) in order to protect users that could get exposed to this threat in the future. Only allowlisted projects can use this method during Early Access. Please reach out to Sales or your customer engineer to obtain access.",
-      "summary_suggestion": "Submit a URI for phishing content review",
-      "description_suggestion": "Submits a URI suspected of containing phishing content to be reviewed. If the result verifies the existence of malicious phishing content, the site will be added to Google's Social Engineering lists to protect users. This method is available only to allowlisted projects during Early Access. Requires authentication. Returns a submission ID upon successful creation.",
-      "reasoning": "The original summary was missing, making it unclear. The description was improved to include missing context about the authentication requirement, the return value, and the Early Access limitation. The improved description also uses domain-appropriate terminology.",
+      "summary_suggestion": "Submit URI for phishing content review",
+      "description_suggestion": "Creates a submission of a URI suspected of containing phishing content for review. The submission is processed asynchronously. If malicious phishing content is verified, the URI will be added to Google's Social Engineering lists to protect users from exposure to this threat. Only allowlisted projects can use this method during Early Access. Requires authentication via OAuth 2.0. Returns a Submission object containing the submission details and status. Contact Sales or your customer engineer to obtain access.",
+      "reasoning": "Original summary is missing entirely. Description lacks clarity on asynchronous processing, authentication requirements, and return value details. Added summary as action-oriented statement. Enhanced description to clarify that submission is processed asynchronously, explicitly mention authentication requirements, specify the return object type, and maintain domain terminology (phishing content, Social Engineering lists, URI) consistent with Web Risk API context. This improves AI agent interpretability for determining when and how to use this operation.",
       "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'webrisk.hashes.search' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is clear but could better explain the workflow context and return value. Added summary and enhanced description to clarify the verification workflow and what data is returned, improving AI agent understanding of when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "webrisk.hashes.search",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the full hashes that match the requested hash prefix. This is used after a hash prefix is looked up in a threatList and there is a match. The client side threatList only holds partial hashes so the client must query this method to determine if there is a full hash match of a threat.",
+      "summary_suggestion": "Retrieve full hashes matching a prefix",
+      "description_suggestion": "Retrieves the complete hashes that match a requested hash prefix. This operation is used after a partial hash match is found in a threat list to verify if a full hash match exists. The client-side threat list stores only partial hashes, so this method must be called to confirm whether a complete threat hash match is present. Returns matching threat hashes with associated threat information.",
+      "reasoning": "Missing summary entirely. Description is clear but could better explain the workflow context and return value. Added summary and enhanced description to clarify the verification workflow and what data is returned, improving AI agent understanding of when to use this operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'webrisk.threatLists.computeDiff' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity on return values and response structure. Added concise summary and enhanced description to specify what diffs contain (additions, removals, checksums) and clarify the snapshot fallback behavior, enabling AI agents to understand the operation's output and when to use it.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "webrisk.threatLists.computeDiff",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the most recent threat list diffs. These diffs should be applied to a local database of hashes to keep it up-to-date. If the local database is empty or excessively out-of-date, a complete snapshot of the database will be returned. This Method only updates a single ThreatList at a time. To update multiple ThreatList databases, this method needs to be called once for each list.",
+      "summary_suggestion": "Compute threat list differences for database updates",
+      "description_suggestion": "Computes the most recent differences for a threat list to keep a local hash database synchronized. Returns incremental diffs that should be applied to the local database. If the local database is empty or significantly out-of-date, returns a complete snapshot instead. Processes one threat list per request; multiple lists require separate calls. Returns threat entry additions, removals, and checksum information for database validation.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on return values and response structure. Added concise summary and enhanced description to specify what diffs contain (additions, removals, checksums) and clarify the snapshot fallback behavior, enabling AI agents to understand the operation's output and when to use it.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'webrisk.uris.search' has semantic quality issues: vague_summary. Missing summary entirely. Description is clear and complete, explaining the operation's purpose, multi-list search capability, and response behavior. Added concise action-oriented summary to improve AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "webrisk.uris.search",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "This method is used to check whether a URI is on a given threatList. Multiple threatLists may be searched in a single query. The response will list all requested threatLists the URI was found to match. If the URI is not found on any of the requested ThreatList an empty response will be returned.",
+      "summary_suggestion": "Check if URI matches threat lists",
+      "reasoning": "Missing summary entirely. Description is clear and complete, explaining the operation's purpose, multi-list search capability, and response behavior. Added concise action-oriented summary to improve AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'webrisk.projects.operations.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description is too brief and lacks details about filtering capabilities, pagination, and return structure. Added summary and enhanced description to clarify filter support, pagination behavior, and response contents, improving AI agent's ability to determine when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "webrisk.projects.operations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
+      "summary_suggestion": "List filtered long-running operations",
+      "description_suggestion": "Lists long-running operations matching the specified filter criteria. Supports filtering by operation status, name patterns, and other criteria. Returns a paginated list of operations with their current state and metadata. If the server doesn't support this method, returns `UNIMPLEMENTED` error.",
+      "reasoning": "Missing summary entirely. Description is too brief and lacks details about filtering capabilities, pagination, and return structure. Added summary and enhanced description to clarify filter support, pagination behavior, and response contents, improving AI agent's ability to determine when and how to use this operation.",
+      "batch_index": 0
     }
   },
   {
@@ -3162,7 +3303,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 8 operations analyzed, 1 quality issues found",
+    "message": "Semantic analysis completed: 8 operations analyzed, 5 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -3174,7 +3315,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 8,
-      "total_issues_found": 1,
+      "total_issues_found": 5,
       "batches_processed": 2
     }
   }

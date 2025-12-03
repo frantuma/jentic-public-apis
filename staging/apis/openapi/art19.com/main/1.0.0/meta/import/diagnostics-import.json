@@ -6057,7 +6057,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get_/networks' has semantic quality issues: vague_description, missing_context. The current description provides a deprecation notice but lacks details about the operation's purpose, expected inputs, and outputs.",
+    "message": "Operation 'get_/series/{id}' has semantic quality issues: vague_description, missing_context, missing_output_details, missing_input_details. The current summary is generic and the description is completely empty. The improved summary adds specificity about the ID parameter. The description now explains: what the operation does (retrieves series details), what input is required (series ID), what is returned (Series resource with metadata and relationships), authentication requirements, and API specification compliance. This provides AI agents with clear context about when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6068,87 +6068,20 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "get_/networks",
+      "operation_id": "get_/series/{id}",
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details",
+        "missing_input_details"
       ],
-      "current_summary": "Get a list of networks",
-      "current_description": "### Deprecations\n\n- The attribute `cover_image_id` has been replaced with the relationship `cover_image`\n  and will be removed from the response in a future release.",
-      "description_suggestion": "Retrieves a list of networks available in the API. The response includes network metadata. Note: The attribute `cover_image_id` has been replaced with the relationship `cover_image` and will be removed from the response in a future release.",
-      "reasoning": "The current description provides a deprecation notice but lacks details about the operation's purpose, expected inputs, and outputs.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'get_/networks/{id}' has semantic quality issues: vague_description, missing_context. The current description provides a deprecation notice but lacks details about the operation's purpose, expected inputs, and outputs.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "get_/networks/{id}",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Get a specific network",
-      "current_description": "### Deprecations\n\n- The attribute `cover_image_id` has been replaced with the relationship `cover_image`\n  and will be removed from the response in a future release.",
-      "description_suggestion": "Retrieves details of a specific network identified by its ID. The response includes network metadata. Note: The attribute `cover_image_id` has been replaced with the relationship `cover_image` and will be removed from the response in a future release.",
-      "reasoning": "The current description provides a deprecation notice but lacks details about the operation's purpose, expected inputs, and outputs.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'get_/seasons/{id}' has semantic quality issues: vague_description, missing_context. The current description is missing and provides no context about the operation's purpose, expected inputs, and outputs.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "get_/seasons/{id}",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Get a specific season",
+      "current_summary": "Get a specific series",
       "current_description": "",
-      "description_suggestion": "Retrieves details of a specific season identified by its ID. The response includes season metadata. The result is automatically filtered depending on the privileges the used credential holds.",
-      "reasoning": "The current description is missing and provides no context about the operation's purpose, expected inputs, and outputs.",
-      "batch_index": 2
+      "summary_suggestion": "Retrieve a specific series by ID",
+      "description_suggestion": "Retrieves detailed information for a specific series identified by its unique ID. Returns a Series resource object containing metadata such as title, description, and relationships to associated seasons, episodes, networks, and classifications. Requires authentication via API token. The response conforms to the JSON:API specification.",
+      "reasoning": "The current summary is generic and the description is completely empty. The improved summary adds specificity about the ID parameter. The description now explains: what the operation does (retrieves series details), what input is required (series ID), what is returned (Series resource with metadata and relationships), authentication requirements, and API specification compliance. This provides AI agents with clear context about when to use this operation and what to expect.",
+      "batch_index": 3
     }
   },
   {
@@ -6162,7 +6095,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get_/classification_inclusions' has semantic quality issues: vague_description, missing_context. The current description is vague and lacks specific details about the filter parameters and the response structure. The suggestion provides a clearer explanation of the operation's purpose, expected inputs, and potential outcomes.",
+    "message": "Operation 'get_/classification_inclusions' has semantic quality issues: vague_summary, missing_output_details. Original summary is generic. Description explains filter requirements well but lacks clarity on return value and pagination. Enhanced summary to be action-oriented and added explicit return value information for better AI agent understanding of what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6176,14 +6109,14 @@
       "operation_id": "get_/classification_inclusions",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description",
-        "missing_context"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "Get ClassificationInclusion records",
       "current_description": "Classification Inclusions connect classifications with entities like series, episodes, or campaigns, amongst others.\n\nIn order to retrieve a set of classification inclusions, at least one of the following filter parameters must\nbe provided. Failing to do so renders a `400 Bad Request` response.\n\n- `ids[]`\n- `classified_id` and `classified_type`\n- `classified_id` and `classification_type`\n- `classification_id` and `classified_type`",
-      "summary_suggestion": "Retrieve a list of classification inclusions",
-      "description_suggestion": "Retrieves a list of ClassificationInclusion records that connect classifications with entities like series, episodes, or campaigns. At least one filter parameter must be provided: `ids[]`, `classified_id` and `classified_type`, `classified_id` and `classification_type`, or `classification_id` and `classified_type`. Failing to provide a filter parameter results in a `400 Bad Request` response.",
-      "reasoning": "The current description is vague and lacks specific details about the filter parameters and the response structure. The suggestion provides a clearer explanation of the operation's purpose, expected inputs, and potential outcomes.",
+      "summary_suggestion": "Retrieve classification inclusions with required filters",
+      "description_suggestion": "Retrieves a collection of ClassificationInclusion records that connect classifications with classified entities (series, episodes, campaigns, etc.). At least one of the following filter combinations is required: `ids[]`, `classified_id` with `classified_type`, `classified_id` with `classification_type`, or `classification_id` with `classified_type`. Omitting required filters returns a `400 Bad Request` error. Returns a paginated collection of ClassificationInclusion resources matching the filter criteria.",
+      "reasoning": "Original summary is generic. Description explains filter requirements well but lacks clarity on return value and pagination. Enhanced summary to be action-oriented and added explicit return value information for better AI agent understanding of what to expect.",
       "batch_index": 0
     }
   },
@@ -6198,7 +6131,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get_/classification_inclusions/{id}' has semantic quality issues: vague_description, missing_context. The current description is missing. The suggestion provides a clear explanation of the operation's purpose, expected input, and the response structure.",
+    "message": "Operation 'get_/classification_inclusions/{id}' has semantic quality issues: vague_description, missing_output_details. Summary is clear and action-oriented. Description is completely missing, which severely impacts AI agent interpretability. Added description explaining what the operation returns and the nature of the resource being retrieved.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6213,13 +6146,12 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "Get a specific classification inclusion",
       "current_description": "",
-      "summary_suggestion": "Get a specific classification inclusion by ID",
-      "description_suggestion": "Retrieves a specific ClassificationInclusion record by its unique ID. This operation requires the ID of the classification inclusion as a parameter. The response includes the detailed classification inclusion data.",
-      "reasoning": "The current description is missing. The suggestion provides a clear explanation of the operation's purpose, expected input, and the response structure.",
+      "description_suggestion": "Retrieves a single ClassificationInclusion resource by its unique identifier. Returns the ClassificationInclusion object containing the relationship between a classification and a classified entity (series, episode, campaign, etc.), including all associated metadata and relationships.",
+      "reasoning": "Summary is clear and action-oriented. Description is completely missing, which severely impacts AI agent interpretability. Added description explaining what the operation returns and the nature of the resource being retrieved.",
       "batch_index": 0
     }
   },
@@ -6234,7 +6166,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get_/classifications' has semantic quality issues: vague_description, missing_context. The current description is missing. The suggestion provides a clear explanation of the operation's purpose, expected inputs, and the response structure.",
+    "message": "Operation 'get_/classifications' has semantic quality issues: vague_summary, vague_description, missing_output_details. Summary is too generic. Description is missing entirely. Enhanced summary to indicate filtering capability. Added comprehensive description explaining what classifications are, their purpose in the API, and what the operation returns, enabling AI agents to understand when to use this endpoint.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6248,14 +6180,15 @@
       "operation_id": "get_/classifications",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "Get a list of classifications",
       "current_description": "",
-      "summary_suggestion": "Retrieve a list of classifications",
-      "description_suggestion": "Retrieves a list of Classification records. This operation allows filtering and pagination to manage the response size and content. The response includes the detailed classification data.",
-      "reasoning": "The current description is missing. The suggestion provides a clear explanation of the operation's purpose, expected inputs, and the response structure.",
+      "summary_suggestion": "Retrieve classifications with optional filtering",
+      "description_suggestion": "Retrieves a paginated collection of Classification resources. Classifications describe other resources such as countries, genres, languages, and other categorical attributes. Supports filtering and sorting via query parameters. Returns a collection of Classification objects with their associated metadata and relationships.",
+      "reasoning": "Summary is too generic. Description is missing entirely. Enhanced summary to indicate filtering capability. Added comprehensive description explaining what classifications are, their purpose in the API, and what the operation returns, enabling AI agents to understand when to use this endpoint.",
       "batch_index": 0
     }
   },
@@ -6270,7 +6203,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get_/classifications/{id}' has semantic quality issues: vague_description, missing_context. The current description is missing. The suggestion provides a clear explanation of the operation's purpose, expected input, and the response structure.",
+    "message": "Operation 'get_/classifications/{id}' has semantic quality issues: vague_description, missing_output_details. Summary is clear and action-oriented. Description is completely missing. Added description explaining what classifications represent and what the operation returns for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6285,13 +6218,12 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "Get a specific classification",
       "current_description": "",
-      "summary_suggestion": "Get a specific classification by ID",
-      "description_suggestion": "Retrieves a specific Classification record by its unique ID. This operation requires the ID of the classification as a parameter. The response includes the detailed classification data.",
-      "reasoning": "The current description is missing. The suggestion provides a clear explanation of the operation's purpose, expected input, and the response structure.",
+      "description_suggestion": "Retrieves a single Classification resource by its unique identifier. Returns the Classification object containing the classification details (such as country, genre, language, or other categorical attribute) and its associated metadata and relationships.",
+      "reasoning": "Summary is clear and action-oriented. Description is completely missing. Added description explaining what classifications represent and what the operation returns for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -6306,7 +6238,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get_/credits' has semantic quality issues: vague_description, missing_context. The current description is missing. The suggestion provides a clear explanation of the operation's purpose, expected inputs, and the response structure.",
+    "message": "Operation 'get_/credits' has semantic quality issues: vague_summary, vague_description, missing_output_details. Summary is too generic and doesn't convey the domain meaning of credits. Description is missing entirely. Enhanced summary to indicate the purpose of credits. Added comprehensive description explaining what credits represent, their role in linking people to content, and what the operation returns.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6320,14 +6252,15 @@
       "operation_id": "get_/credits",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "Get a list of credits",
       "current_description": "",
-      "summary_suggestion": "Retrieve a list of credits",
-      "description_suggestion": "Retrieves a list of Credit records. This operation allows filtering and pagination to manage the response size and content. The response includes the detailed credit data.",
-      "reasoning": "The current description is missing. The suggestion provides a clear explanation of the operation's purpose, expected inputs, and the response structure.",
+      "summary_suggestion": "Retrieve credits linking people to content",
+      "description_suggestion": "Retrieves a paginated collection of Credit resources. Credits link specific people to series, seasons, or episodes in defined roles (such as actor, director, producer, etc.). Supports filtering and sorting via query parameters. Returns a collection of Credit objects with associated person and content relationships.",
+      "reasoning": "Summary is too generic and doesn't convey the domain meaning of credits. Description is missing entirely. Enhanced summary to indicate the purpose of credits. Added comprehensive description explaining what credits represent, their role in linking people to content, and what the operation returns.",
       "batch_index": 0
     }
   },
@@ -6342,7 +6275,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get_/credits/{id}' has semantic quality issues: vague_description, missing_context. The current description is missing. The suggestion provides a clear explanation of the operation's purpose, expected input, and the response structure.",
+    "message": "Operation 'get_/credits/{id}' has semantic quality issues: vague_description, missing_output_details. Summary is clear and action-oriented. Description is completely missing. Added description explaining what a credit represents and what the operation returns, including the role information that is central to understanding credits.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6357,13 +6290,12 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "Get a specific credit",
       "current_description": "",
-      "summary_suggestion": "Get a specific credit by ID",
-      "description_suggestion": "Retrieves a specific Credit record by its unique ID. This operation requires the ID of the credit as a parameter. The response includes the detailed credit data.",
-      "reasoning": "The current description is missing. The suggestion provides a clear explanation of the operation's purpose, expected input, and the response structure.",
+      "description_suggestion": "Retrieves a single Credit resource by its unique identifier. Returns the Credit object containing the relationship between a person and a series, season, or episode, including the person's role (actor, director, producer, etc.) and associated metadata.",
+      "reasoning": "Summary is clear and action-oriented. Description is completely missing. Added description explaining what a credit represents and what the operation returns, including the role information that is central to understanding credits.",
       "batch_index": 0
     }
   },
@@ -6378,7 +6310,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get_/episodes' has semantic quality issues: vague_description, missing_context. The current description is vague and lacks specific details about the filter parameters and the response structure. The suggestion provides a clearer explanation of the operation's purpose, expected inputs, and potential outcomes.",
+    "message": "Operation 'get_/episodes' has semantic quality issues: vague_summary, missing_output_details. Summary is generic and doesn't convey the required filter constraint. Description explains filter requirements and permission model well but lacks explicit return value information. Enhanced summary to indicate filter requirement. Added explicit return value information and clarified the permission/access model for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6392,14 +6324,14 @@
       "operation_id": "get_/episodes",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description",
-        "missing_context"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "Get a list of episodes",
       "current_description": "One initial filter must be provided (`ids`, `series_id`, or `season_id`), otherwise a `400 Bad Request` response\nwill be returned. Additional filters are allowed.\n\nThis API will only return episodes that your credential has permission to access, which may not be exclusive to\nyour account, depending on the filter(s) being used. Be careful to filter the results as needed.",
-      "summary_suggestion": "Retrieve a list of episodes",
-      "description_suggestion": "Retrieves a list of Episode records. An initial filter must be provided (`ids`, `series_id`, or `season_id`), otherwise a `400 Bad Request` response will be returned. Additional filters are allowed. The API will only return episodes that your credential has permission to access, which may not be exclusive to your account. The response includes the detailed episode data.",
-      "reasoning": "The current description is vague and lacks specific details about the filter parameters and the response structure. The suggestion provides a clearer explanation of the operation's purpose, expected inputs, and potential outcomes.",
+      "summary_suggestion": "Retrieve episodes with required initial filter",
+      "description_suggestion": "Retrieves a paginated collection of Episode resources. Requires at least one initial filter (`ids`, `series_id`, or `season_id`); omitting these returns a `400 Bad Request` error. Additional filters are supported for refined results. Returns only episodes accessible to your credential, which may include content shared across accounts depending on filter criteria. Returns a collection of Episode objects with associated metadata and relationships.",
+      "reasoning": "Summary is generic and doesn't convey the required filter constraint. Description explains filter requirements and permission model well but lacks explicit return value information. Enhanced summary to indicate filter requirement. Added explicit return value information and clarified the permission/access model for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -6414,7 +6346,268 @@
         "character": 0
       }
     },
-    "message": "Operation 'get_/episodes/{id}' has semantic quality issues: vague_description, missing_context. The current description is missing and lacks context about the expected inputs and outputs.",
+    "message": "Operation 'get_/networks' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details. Original description only mentions deprecations without explaining the operation's core purpose. Added clarity about pagination requirements, privilege-based filtering, parameter support, and return format. Enhanced summary to indicate pagination is required per API documentation. This helps AI agents understand when to use this operation and what to expect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "get_/networks",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Get a list of networks",
+      "current_description": "### Deprecations\n\n- The attribute `cover_image_id` has been replaced with the relationship `cover_image`\n  and will be removed from the response in a future release.",
+      "summary_suggestion": "Retrieve paginated list of networks",
+      "description_suggestion": "Retrieves a paginated collection of Network resources. Results are filtered based on the credential's privileges. Supports filtering, sorting, and pagination parameters. Note: The `cover_image_id` attribute is deprecated and replaced by the `cover_image` relationship; it will be removed in a future release. Returns a JSON:API-compliant response containing Network resources with their relationships.",
+      "reasoning": "Original description only mentions deprecations without explaining the operation's core purpose. Added clarity about pagination requirements, privilege-based filtering, parameter support, and return format. Enhanced summary to indicate pagination is required per API documentation. This helps AI agents understand when to use this operation and what to expect.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'get_/networks/{id}' has semantic quality issues: vague_description, missing_context, missing_output_details. Original description only mentions deprecations without explaining the core operation. Added clarity about what is returned, the required path parameter, and the relationship structure. Helps AI agents understand the input requirement and expected output format.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "get_/networks/{id}",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Get a specific network",
+      "current_description": "### Deprecations\n\n- The attribute `cover_image_id` has been replaced with the relationship `cover_image`\n  and will be removed from the response in a future release.",
+      "summary_suggestion": "Retrieve a specific network by ID",
+      "description_suggestion": "Retrieves a single Network resource by its unique identifier. Returns the Network object with all attributes and relationships, including the cover_image relationship. Note: The `cover_image_id` attribute is deprecated and replaced by the `cover_image` relationship; it will be removed in a future release. Requires the network ID as a path parameter.",
+      "reasoning": "Original description only mentions deprecations without explaining the core operation. Added clarity about what is returned, the required path parameter, and the relationship structure. Helps AI agents understand the input requirement and expected output format.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'get_/people' has semantic quality issues: vague_description, missing_input_details, missing_output_details, poor_ai_interpretability. Original description explains the conceptual purpose of the People resource but lacks operational details. It doesn't mention pagination requirements, parameter support, or return format. Reframed to clarify this is a retrieval operation with pagination, while preserving the important context about the Credits system's non-permission-granting nature. This improves AI agent interpretability for when and how to use this endpoint.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "get_/people",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Get a list of people",
+      "current_description": "Each series, season, and episode has a Credits section where you may add people and roles.\nThis is an internal tool to recognize contributors. It is not related to ART19 users or account permissions.\nEach Person added will have no additional access or permissions granted as a result of being included in the Credits section.",
+      "summary_suggestion": "Retrieve paginated list of credited people",
+      "description_suggestion": "Retrieves a paginated collection of Person resources used in the Credits system for series, seasons, and episodes. This endpoint provides access to contributor records for attribution purposes only. Persons in the Credits system are not ART19 users and do not receive account permissions or access rights. Supports filtering, sorting, and pagination parameters. Returns a JSON:API-compliant response containing Person resources.",
+      "reasoning": "Original description explains the conceptual purpose of the People resource but lacks operational details. It doesn't mention pagination requirements, parameter support, or return format. Reframed to clarify this is a retrieval operation with pagination, while preserving the important context about the Credits system's non-permission-granting nature. This improves AI agent interpretability for when and how to use this endpoint.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'get_/people/{id}' has semantic quality issues: vague_description, missing_output_details, poor_ai_interpretability. Original description provides conceptual context but lacks operational clarity about what is returned and the required path parameter. Added specificity about the return value, input requirement, and preserved important context about the non-permission-granting nature of the Credits system. Improves AI agent understanding of the operation's mechanics.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "get_/people/{id}",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Get a specific person",
+      "current_description": "Each series, season, and episode has a Credits section where you may add people and roles.\nThis is an internal tool to recognize contributors. It is not related to ART19 users or account permissions.\nEach Person added will have no additional access or permissions granted as a result of being included in the Credits section.",
+      "summary_suggestion": "Retrieve a specific credited person by ID",
+      "description_suggestion": "Retrieves a single Person resource by its unique identifier. Returns the Person object with all attributes and relationships. Persons are used in the Credits system for series, seasons, and episodes to recognize contributors. Note: Persons in the Credits system are not ART19 users and do not receive account permissions or access rights. Requires the person ID as a path parameter.",
+      "reasoning": "Original description provides conceptual context but lacks operational clarity about what is returned and the required path parameter. Added specificity about the return value, input requirement, and preserved important context about the non-permission-granting nature of the Credits system. Improves AI agent understanding of the operation's mechanics.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'get_/seasons' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary is too generic. Description explains filtering behavior but lacks clarity about pagination requirements and parameter support. Enhanced summary to indicate pagination and privilege-based filtering. Expanded description to clarify pagination is required and what parameters are supported. This helps AI agents understand the operation's filtering behavior and pagination requirements.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "get_/seasons",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Get a list of seasons",
+      "current_description": "When retrieving a list of seasons, the result is automatically filtered depending on the\nprivileges the used credential holds. If there are no specific privileges to a series or network,\nonly active seasons for active series are included.",
+      "summary_suggestion": "Retrieve paginated list of seasons with privilege filtering",
+      "description_suggestion": "Retrieves a paginated collection of Season resources. Results are automatically filtered based on the credential's privileges: if the credential has no specific privileges to a series or network, only active seasons from active series are returned. Supports filtering, sorting, and pagination parameters. Returns a JSON:API-compliant response containing Season resources with their relationships.",
+      "reasoning": "Original summary is too generic. Description explains filtering behavior but lacks clarity about pagination requirements and parameter support. Enhanced summary to indicate pagination and privilege-based filtering. Expanded description to clarify pagination is required and what parameters are supported. This helps AI agents understand the operation's filtering behavior and pagination requirements.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'get_/seasons/{id}' has semantic quality issues: vague_description, missing_context, missing_output_details. Original description is completely empty, providing no operational guidance. Added complete description explaining what is returned, the required path parameter, and typical relationships. This is essential for AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "get_/seasons/{id}",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Get a specific season",
+      "current_description": "",
+      "summary_suggestion": "Retrieve a specific season by ID",
+      "description_suggestion": "Retrieves a single Season resource by its unique identifier. Returns the Season object with all attributes and relationships, including references to its parent Series and child Episodes. Requires the season ID as a path parameter.",
+      "reasoning": "Original description is completely empty, providing no operational guidance. Added complete description explaining what is returned, the required path parameter, and typical relationships. This is essential for AI agent interpretability.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'get_/series' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary is too generic. Description explains filtering behavior but lacks clarity about pagination requirements and parameter support. Enhanced summary to indicate pagination and privilege-based filtering. Expanded description to clarify pagination is required, what parameters are supported, and best practices for filtering. This helps AI agents understand the operation's filtering behavior and how to effectively query series.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "get_/series",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Get a list of series",
+      "current_description": "When retrieving a list of series, the result is automatically filtered depending on the\nprivileges the used credential holds. All credentials will have access to active series\nwith a public page enabled (on ART19). Utilizing a filter to limit the result to series\nassociated with your account is recommended.",
+      "summary_suggestion": "Retrieve paginated list of series with privilege filtering",
+      "description_suggestion": "Retrieves a paginated collection of Series resources. Results are automatically filtered based on the credential's privileges: all credentials have access to active series with public pages enabled on ART19. For credential-specific series, filtering by account association is recommended. Supports filtering, sorting, and pagination parameters. Returns a JSON:API-compliant response containing Series resources with their relationships.",
+      "reasoning": "Original summary is too generic. Description explains filtering behavior but lacks clarity about pagination requirements and parameter support. Enhanced summary to indicate pagination and privilege-based filtering. Expanded description to clarify pagination is required, what parameters are supported, and best practices for filtering. This helps AI agents understand the operation's filtering behavior and how to effectively query series.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'get_/episodes/{id}' has semantic quality issues: vague_description, missing_context, missing_output_details. The summary is clear and actionable, but the description is completely empty. Added context about what data is returned, authentication requirements, and the episode's relationships to help AI agents understand the operation's scope and output.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6429,12 +6622,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "Get a specific episode",
       "current_description": "",
-      "description_suggestion": "Retrieves the details of a specific episode identified by its unique ID. This includes metadata such as title, description, release date, and associated media assets. Requires authentication.",
-      "reasoning": "The current description is missing and lacks context about the expected inputs and outputs.",
+      "description_suggestion": "Retrieves a specific episode by ID. Returns the episode resource including metadata such as title, description, release date, and relationships to its parent season and series. Requires authentication via API token.",
+      "reasoning": "The summary is clear and actionable, but the description is completely empty. Added context about what data is returned, authentication requirements, and the episode's relationships to help AI agents understand the operation's scope and output.",
       "batch_index": 1
     }
   },
@@ -6449,7 +6643,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get_/episodes/{id}/next_sibling' has semantic quality issues: vague_description, missing_context. The current description is missing and lacks context about the expected inputs and outputs.",
+    "message": "Operation 'get_/episodes/{id}/next_sibling' has semantic quality issues: vague_description, missing_context, missing_output_details. Summary is clear and specific about the operation's purpose. Description is empty, so added context about what constitutes 'next' (release order), the returned data structure, use case, and authentication requirements for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6464,12 +6658,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "Get the episode released right after the specified one",
       "current_description": "",
-      "description_suggestion": "Retrieves the details of the episode that was released immediately after the specified episode. This includes metadata such as title, description, release date, and associated media assets. Requires authentication.",
-      "reasoning": "The current description is missing and lacks context about the expected inputs and outputs.",
+      "description_suggestion": "Retrieves the next episode in release order following the specified episode. Returns the subsequent episode resource with full metadata. Useful for navigating episode sequences within a season or series. Requires authentication via API token.",
+      "reasoning": "Summary is clear and specific about the operation's purpose. Description is empty, so added context about what constitutes 'next' (release order), the returned data structure, use case, and authentication requirements for better AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -6484,7 +6679,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get_/episodes/{id}/previous_sibling' has semantic quality issues: vague_description, missing_context. The current description is missing and lacks context about the expected inputs and outputs.",
+    "message": "Operation 'get_/episodes/{id}/previous_sibling' has semantic quality issues: vague_description, missing_context, missing_output_details. Summary is clear and specific about the operation's purpose. Description is empty, so added context about what constitutes 'previous' (release order), the returned data structure, use case, and authentication requirements for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6499,12 +6694,83 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "Get the episode released right before the specified one",
       "current_description": "",
-      "description_suggestion": "Retrieves the details of the episode that was released immediately before the specified episode. This includes metadata such as title, description, release date, and associated media assets. Requires authentication.",
-      "reasoning": "The current description is missing and lacks context about the expected inputs and outputs.",
+      "description_suggestion": "Retrieves the previous episode in release order preceding the specified episode. Returns the prior episode resource with full metadata. Useful for navigating episode sequences within a season or series. Requires authentication via API token.",
+      "reasoning": "Summary is clear and specific about the operation's purpose. Description is empty, so added context about what constitutes 'previous' (release order), the returned data structure, use case, and authentication requirements for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'get_/images' has semantic quality issues: vague_summary, missing_input_details. Summary 'Get a list of images' is too generic and doesn't indicate that pagination is required or that filtering is available. The description is comprehensive but could be more concise for collection endpoints. Improved summary to indicate pagination requirement and filtering capability, which helps AI agents understand this is a collection endpoint with specific parameter requirements.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "get_/images",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "Get a list of images",
+      "current_description": "An image represents a piece of artwork attached to some entity like a series, season, or episode,\nand is _owned_ by an entity called the `bucket`.\nAn image is also a container for several `MediaAssets` representing the physical files for various\nstyles used.\n\n## Media Asset Styles for Images\n\nMost media assets use square images. You may upload and use a square image, or upload an image of any\nshape and crop it to a square by specifying the cropping area. This area – identified by a coordinate\n`x, y` and a `width` & `height` – is the portion of the image used for all cover art. If an image has\ncropping defined, the cropped version of the image will be used in any `regular` or `square` style of media\nasset. If the original file is rectangular and does not have cropping, then the system will use a squared\nversion of the original file with the smaller of width or height as the square size.\n\nThe original image as uploaded into the system is always retained unmodified and available through\nthe style `original`. All media asset styles except `stripped-original` consist of the cropped image.\n\nAn image has media assets with the following styles:\n\n- `original`: This is the original file provided. May not be available, depending on permissions\n  and file type.\n- `stripped-original`: The original file with all metadata (EXIF, XMP, PNG metadata, etc.) removed.\n  This should be used for any application needing the original, uncropped, image.\n- `regular`: If the image has cropping defined, this is the cropped image.\n  If not, this is a square version of the original.\n- `thumb`: A square thumbnail of the image with a size of `100x100` pixels.\n- `square-400`: A square version of the image with a size of `400x400` pixels.\n- `square-640`: A square version of the image with a size of `640x640` pixels.\n- `square-888`: A square version of the image with a size of `888x888` pixels.\n- `square-3000`: A square version of the image with a size of `3000x3000` pixels.\n  This variant is only created if the cropped width & height are each at least 3000.\n- `itunes`: A square version of the image with a size of `1400x1400` pixels.\n\n### Preferred image used in feeds\n\nFor the main series image used in feeds, it is ideal to use the `square-3000` version.\nIf that is not available, the `itunes` version should be used instead.",
+      "summary_suggestion": "List images with pagination and filtering",
+      "reasoning": "Summary 'Get a list of images' is too generic and doesn't indicate that pagination is required or that filtering is available. The description is comprehensive but could be more concise for collection endpoints. Improved summary to indicate pagination requirement and filtering capability, which helps AI agents understand this is a collection endpoint with specific parameter requirements.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'get_/media_assets' has semantic quality issues: vague_summary, missing_input_details. Summary 'Get a list of media assets' is too generic and doesn't indicate that pagination is required or that filtering is available. The description is comprehensive and well-structured. Improved summary to indicate pagination requirement and filtering capability, which helps AI agents understand this is a collection endpoint with specific parameter requirements.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "get_/media_assets",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "Get a list of media assets",
+      "current_description": "A media asset is part of a collection of assets or files representing an image or a piece of audio content\nlike an episode or an ad. Images, for example, have differently sized versions for better rendering performance,\nand a piece of audio content usually comes in different encoding formats.\n\nThe `style` attribute of a media asset describes the role an asset plays in the context of the collection.\nThe collection is what an asset is attached to (`attachment_id|type`).\n\n## Styles for Images\n\nMost media assets use square images. You may upload and use a square image, or upload an image of any\nshape and crop it to a square by specifying the cropping area. This area – identified by a coordinate\n`x, y` and a `width` & `height` – is the portion of the image used for all cover art. If an image has\ncropping defined, the cropped version of the image will be used in any `regular` or `square` style of media\nasset. If the original file is rectangular and does not have cropping, then the system will use a squared\nversion of the original file with the smaller of width or height as the square size.\n\nThe original image as uploaded into the system is always retained unmodified and available through\nthe style `original`. All media asset styles except `stripped-original` consist of the cropped image.\n\nAn image has media assets with the following styles:\n\n- `original`: This is the original file provided. May not be available, depending on permissions\n  and file type.\n- `stripped-original`: The original file with all metadata (EXIF, XMP, PNG metadata, etc.) removed.\n  This should be used for any application needing the original, uncropped, image.\n- `regular`: If the image has cropping defined, this is the cropped image.\n  If not, this is a square version of the original.\n- `thumb`: A square thumbnail of the image with a size of `100x100` pixels.\n- `square-400`: A square version of the image with a size of `400x400` pixels.\n- `square-640`: A square version of the image with a size of `640x640` pixels.\n- `square-888`: A square version of the image with a size of `888x888` pixels.\n- `square-3000`: A square version of the image with a size of `3000x3000` pixels.\n  This variant is only created if the cropped width & height are each at least 3000.\n- `itunes`: A square version of the image with a size of `1400x1400` pixels.\n\n### Preferred image used in feeds\n\nFor the main series image used in feeds, it is ideal to use the `square-3000` version.\nIf that is not available, the `itunes` version should be used instead.\n\n\n## Styles for Audio\n\n- `medium`: A medium-quality version of the audio asset in various formats.\n- `original`: This is the original file provided. May not be available, depending on permissions\n  and file type.\n- `waveform_data`: The generated BBC Audiowaveform data in JSON or binary format.",
+      "summary_suggestion": "List media assets with pagination and filtering",
+      "reasoning": "Summary 'Get a list of media assets' is too generic and doesn't indicate that pagination is required or that filtering is available. The description is comprehensive and well-structured. Improved summary to indicate pagination requirement and filtering capability, which helps AI agents understand this is a collection endpoint with specific parameter requirements.",
       "batch_index": 1
     }
   },
@@ -6519,7 +6785,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 22 operations analyzed, 13 quality issues found",
+    "message": "Semantic analysis completed: 22 operations analyzed, 20 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -6531,7 +6797,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 22,
-      "total_issues_found": 13,
+      "total_issues_found": 20,
       "batches_processed": 4
     }
   }

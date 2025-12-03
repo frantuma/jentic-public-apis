@@ -1025,7 +1025,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'groupsmigration.archive.insert' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary was missing. Added a clear and concise summary. Improved the description to include authentication requirement, parameter details, and return value.",
+    "message": "Operation 'groupsmigration.archive.insert' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects, not_actionable. Original summary was empty and description was vague about the operation's purpose and context. Added clarity about: (1) who can use it (domain administrators), (2) what it does (archives emails for migration), (3) required inputs (group ID, email content), (4) what it returns (confirmation), and (5) side effects (email becomes available to members, indexed for search). This improves AI agent interpretability for determining when to use this operation in the Groups Migration API context.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1040,14 +1040,17 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects",
+        "not_actionable"
       ],
       "current_summary": "",
       "current_description": "Inserts a new mail into the archive of the Google group.",
-      "summary_suggestion": "Archive a new email in a Google group.",
-      "description_suggestion": "Inserts a new email into the specified Google group's archive. Requires authentication and the groupId parameter. Returns the archived email's metadata.",
-      "reasoning": "Original summary was missing. Added a clear and concise summary. Improved the description to include authentication requirement, parameter details, and return value.",
+      "summary_suggestion": "Archive email message to Google group",
+      "description_suggestion": "Archives an email message into a Google group's message archive. This operation allows domain administrators to migrate historical emails into the specified group. Requires the group ID as a path parameter and the email message content in the request body. Returns a confirmation response indicating successful archival. The email becomes immediately available to group members and is indexed for search.",
+      "reasoning": "Original summary was empty and description was vague about the operation's purpose and context. Added clarity about: (1) who can use it (domain administrators), (2) what it does (archives emails for migration), (3) required inputs (group ID, email content), (4) what it returns (confirmation), and (5) side effects (email becomes available to members, indexed for search). This improves AI agent interpretability for determining when to use this operation in the Groups Migration API context.",
       "batch_index": 0
     }
   },

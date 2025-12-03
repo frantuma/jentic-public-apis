@@ -2590,7 +2590,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'firebaseml.projects.models.delete' has semantic quality issues: vague_summary, vague_description, missing_side_effects. The current summary and description are vague. Added a more specific summary and detailed description including the side effect of the operation.",
+    "message": "Operation 'firebaseml.projects.models.delete' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description is too minimal. Added context about what is required (model resource name), what is returned (empty response), and important side effects (permanent deletion). Summary was missing entirely. These additions help AI agents understand the operation's scope and consequences.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2606,13 +2606,161 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_side_effects"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Deletes a model",
-      "summary_suggestion": "Deletes a specified model",
-      "description_suggestion": "Deletes a specified model. The deletion is permanent and will remove the model from Firebase ML. Returns an empty response upon successful deletion.",
-      "reasoning": "The current summary and description are vague. Added a more specific summary and detailed description including the side effect of the operation.",
+      "summary_suggestion": "Delete a Firebase ML model",
+      "description_suggestion": "Deletes a model from Firebase ML. Requires the model resource name. Returns an empty response on successful deletion. This operation permanently removes the model and cannot be undone.",
+      "reasoning": "Original description is too minimal. Added context about what is required (model resource name), what is returned (empty response), and important side effects (permanent deletion). Summary was missing entirely. These additions help AI agents understand the operation's scope and consequences.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firebaseml.projects.models.patch' has semantic quality issues: vague_summary, missing_input_details, missing_context. Original description lacks clarity about input expectations and partial update support. Added information about what inputs are expected (Model object), that partial updates are supported, and clarified the asynchronous nature of the response. Summary was missing. These improvements help AI agents understand the operation's behavior and constraints.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firebaseml.projects.models.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Updates a model. The longrunning operation will eventually return a Model.",
+      "summary_suggestion": "Update a Firebase ML model",
+      "description_suggestion": "Updates an existing model in Firebase ML. Accepts a Model object with fields to be updated. Supports partial updates - only provided fields will be modified. Returns a long-running Operation that eventually resolves to the updated Model resource.",
+      "reasoning": "Original description lacks clarity about input expectations and partial update support. Added information about what inputs are expected (Model object), that partial updates are supported, and clarified the asynchronous nature of the response. Summary was missing. These improvements help AI agents understand the operation's behavior and constraints.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firebaseml.projects.models.download' has semantic quality issues: vague_summary, missing_context, missing_output_details. Original description is unclear about what is actually returned. Added specific return type (DownloadModelResponse) and clarified the distinction between this limited download information and full model details. Summary was missing. These changes help AI agents understand the operation's specific purpose and what data they will receive.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firebaseml.projects.models.download",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets Download information for a model. This is meant for downloading model resources onto devices. It gives very limited information about the model.",
+      "summary_suggestion": "Get model download information",
+      "description_suggestion": "Retrieves download information for a model to enable deployment onto devices. Returns a DownloadModelResponse containing limited model metadata and download URLs. This operation provides device-specific download details rather than complete model information.",
+      "reasoning": "Original description is unclear about what is actually returned. Added specific return type (DownloadModelResponse) and clarified the distinction between this limited download information and full model details. Summary was missing. These changes help AI agents understand the operation's specific purpose and what data they will receive.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firebaseml.projects.models.list' has semantic quality issues: vague_summary, vague_description, missing_output_details. Original description is too minimal and doesn't explain pagination support or return structure. Added context about pagination capabilities and the specific response type (ListModelsResponse). Summary was missing. These additions help AI agents understand how to handle large result sets and what data structure to expect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firebaseml.projects.models.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the models",
+      "summary_suggestion": "List Firebase ML models",
+      "description_suggestion": "Lists all models in a Firebase project. Supports pagination through optional parameters. Returns a ListModelsResponse containing an array of Model resources and pagination tokens for retrieving additional results.",
+      "reasoning": "Original description is too minimal and doesn't explain pagination support or return structure. Added context about pagination capabilities and the specific response type (ListModelsResponse). Summary was missing. These additions help AI agents understand how to handle large result sets and what data structure to expect.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'firebaseml.projects.models.create' has semantic quality issues: vague_summary, missing_context. Original description lacks clarity about input expectations and what the final result contains. Added information about the Model input object and clarified that the final Model will include assigned metadata and identifiers. Summary was missing. These improvements help AI agents understand the complete lifecycle of model creation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "firebaseml.projects.models.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a model in Firebase ML. The longrunning operation will eventually return a Model",
+      "summary_suggestion": "Create a new Firebase ML model",
+      "description_suggestion": "Creates a new model in Firebase ML. Accepts a Model object with configuration details. Returns a long-running Operation that eventually resolves to the created Model resource with assigned metadata and identifiers.",
+      "reasoning": "Original description lacks clarity about input expectations and what the final result contains. Added information about the Model input object and clarified that the final Model will include assigned metadata and identifiers. Summary was missing. These improvements help AI agents understand the complete lifecycle of model creation.",
       "batch_index": 0
     }
   },
@@ -2627,7 +2775,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 6 operations analyzed, 1 quality issues found",
+    "message": "Semantic analysis completed: 6 operations analyzed, 5 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -2639,7 +2787,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 6,
-      "total_issues_found": 1,
+      "total_issues_found": 5,
       "batches_processed": 1
     }
   }

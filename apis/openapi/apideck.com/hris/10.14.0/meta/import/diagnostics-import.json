@@ -6068,7 +6068,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'timeOffRequestsOne' has semantic quality issues: vague_description, missing_input_details. Description is vague and does not explain what input parameters are required or what the output will be. Added context about the required parameters and the return value for better clarity and completeness.",
+    "message": "Operation 'timeOffRequestsAdd' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is identical to summary and provides no actionable details. Improved version clarifies the operation creates a new request, specifies expected inputs (employee ID, dates, type), explains the return value (created object with ID and timestamps), and documents the initial state (pending approval) as a side effect. This helps AI agents understand when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6079,16 +6079,20 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "timeOffRequestsOne",
+      "operation_id": "timeOffRequestsAdd",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
-      "current_summary": "Get Time Off Request",
-      "current_description": "Get Time Off Request",
-      "description_suggestion": "Retrieves a specific time off request by its ID for a particular employee. Requires the employee ID and the time off request ID. Returns the requested time off request object.",
-      "reasoning": "Description is vague and does not explain what input parameters are required or what the output will be. Added context about the required parameters and the return value for better clarity and completeness.",
+      "current_summary": "Create Time Off Request",
+      "current_description": "Create Time Off Request",
+      "summary_suggestion": "Create a new employee time off request",
+      "description_suggestion": "Creates a new time off request for an employee. Accepts time off request details including employee ID, start date, end date, and request type. Returns the created time off request object with a unique identifier and timestamps. The request is initially in a pending state pending manager approval.",
+      "reasoning": "Original description is identical to summary and provides no actionable details. Improved version clarifies the operation creates a new request, specifies expected inputs (employee ID, dates, type), explains the return value (created object with ID and timestamps), and documents the initial state (pending approval) as a side effect. This helps AI agents understand when to use this operation and what to expect.",
       "batch_index": 3
     }
   },
@@ -6103,7 +6107,121 @@
         "character": 0
       }
     },
-    "message": "Operation 'departmentsDelete' has semantic quality issues: vague_description, missing_side_effects. Original description is too vague. Added information on what happens when the department is deleted, required authorization, and the return value.",
+    "message": "Operation 'timeOffRequestsOne' has semantic quality issues: vague_summary, vague_description, missing_output_details. Original description lacks specificity about what is returned and what parameters are required. Enhanced version clarifies the retrieval scope (specific request by IDs), documents the response content (status, dates, type, approval info), and explicitly states required parameters. This enables AI agents to understand the operation's scope and determine if they have necessary identifiers.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "timeOffRequestsOne",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Get Time Off Request",
+      "current_description": "Get Time Off Request",
+      "summary_suggestion": "Retrieve a specific employee time off request",
+      "description_suggestion": "Retrieves a specific time off request for an employee by employee ID and request ID. Returns the complete time off request object including status, dates, type, and approval information. Requires valid employee_id and request id parameters.",
+      "reasoning": "Original description lacks specificity about what is returned and what parameters are required. Enhanced version clarifies the retrieval scope (specific request by IDs), documents the response content (status, dates, type, approval info), and explicitly states required parameters. This enables AI agents to understand the operation's scope and determine if they have necessary identifiers.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'timeOffRequestsUpdate' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is too generic and doesn't explain partial update behavior or side effects. Improved version clarifies that this is a PATCH operation supporting partial updates, specifies what can be updated, documents the return value, explains the partial update semantics, and notes potential workflow side effects. This helps AI agents understand the operation's scope and behavior.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "timeOffRequestsUpdate",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Update a time off request",
+      "current_description": "Update Time Off Request",
+      "summary_suggestion": "Update an existing employee time off request",
+      "description_suggestion": "Updates an existing time off request for an employee using partial update semantics. Accepts updates to request details such as dates, type, or status. Returns the updated time off request object. Only provided fields are modified; omitted fields retain their current values. May trigger approval workflow changes depending on status modifications.",
+      "reasoning": "Original description is too generic and doesn't explain partial update behavior or side effects. Improved version clarifies that this is a PATCH operation supporting partial updates, specifies what can be updated, documents the return value, explains the partial update semantics, and notes potential workflow side effects. This helps AI agents understand the operation's scope and behavior.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'timeOffRequestsDelete' has semantic quality issues: vague_summary, vague_description, missing_output_details, missing_side_effects. Original description lacks critical details about what happens after deletion and constraints on deletion. Enhanced version clarifies the deletion scope (specific request by IDs), documents the response (success with ID), explains the irreversible nature of deletion, and notes typical business constraints (only pending/rejected requests). This helps AI agents understand the operation's consequences and when it's appropriate to use.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "timeOffRequestsDelete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete a time off request",
+      "current_description": "Delete Time Off Request",
+      "summary_suggestion": "Delete an employee time off request",
+      "description_suggestion": "Deletes a specific time off request for an employee by employee ID and request ID. Returns a success response with the deleted request ID. Removes the time off request from the system; this action cannot be undone. Only pending or rejected requests can typically be deleted.",
+      "reasoning": "Original description lacks critical details about what happens after deletion and constraints on deletion. Enhanced version clarifies the deletion scope (specific request by IDs), documents the response (success with ID), explains the irreversible nature of deletion, and notes typical business constraints (only pending/rejected requests). This helps AI agents understand the operation's consequences and when it's appropriate to use.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'departmentsDelete' has semantic quality issues: vague_summary, vague_description, missing_context, missing_side_effects, not_actionable. Original summary and description are identical and overly simplistic. Added clarity about what is being deleted (by ID), the permanent nature of the operation, required parameters, return value, and potential side effects for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6117,13 +6235,17 @@
       "operation_id": "departmentsDelete",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_side_effects"
+        "missing_context",
+        "missing_side_effects",
+        "not_actionable"
       ],
       "current_summary": "Delete Department",
       "current_description": "Delete Department",
-      "description_suggestion": "Deletes a department by its ID. This operation removes the department and all associated data. Requires proper authorization. Returns HTTP status code 204 if successful.",
-      "reasoning": "Original description is too vague. Added information on what happens when the department is deleted, required authorization, and the return value.",
+      "summary_suggestion": "Delete a department by ID",
+      "description_suggestion": "Permanently deletes a department identified by the provided ID. This operation removes the department record from the HRIS system. Requires the department ID as a path parameter. Returns a confirmation of the deletion. Note: Deleting a department may have cascading effects on associated employees or organizational structures depending on system configuration.",
+      "reasoning": "Original summary and description are identical and overly simplistic. Added clarity about what is being deleted (by ID), the permanent nature of the operation, required parameters, return value, and potential side effects for AI agent decision-making.",
       "batch_index": 2
     }
   },
@@ -6138,7 +6260,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'payrollsAll' has semantic quality issues: vague_description, missing_output_details. Original description is too vague. Added information on optional filters, sorting parameters, and the return value.",
+    "message": "Operation 'payrollsAll' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description lacks any detail about pagination, filtering, or what data is returned. Added information about pagination support (cursor/limit), return structure, and use cases to help AI agents understand when and how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6152,14 +6274,16 @@
       "operation_id": "payrollsAll",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
+        "missing_context",
         "missing_output_details"
       ],
       "current_summary": "List Payroll",
       "current_description": "List Payroll",
-      "summary_suggestion": "List All Payrolls",
-      "description_suggestion": "Lists all payrolls in the system. Accepts optional filters and sorting parameters. Returns a collection of payroll objects.",
-      "reasoning": "Original description is too vague. Added information on optional filters, sorting parameters, and the return value.",
+      "summary_suggestion": "List all payroll records",
+      "description_suggestion": "Retrieves a paginated list of all payroll records in the HRIS system. Supports filtering, sorting, and pagination through query parameters (cursor and limit). Returns an array of payroll objects with metadata including pagination cursors for navigating through results. Use this operation to retrieve multiple payroll records for reporting or analysis purposes.",
+      "reasoning": "Original description lacks any detail about pagination, filtering, or what data is returned. Added information about pagination support (cursor/limit), return structure, and use cases to help AI agents understand when and how to use this operation.",
       "batch_index": 2
     }
   },
@@ -6174,7 +6298,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'payrollsOne' has semantic quality issues: vague_description, missing_output_details. Original description is too vague. Added information on the return value.",
+    "message": "Operation 'payrollsOne' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details. Original description provides no context about required parameters or return values. Added clarity about the required payroll_id parameter, what is returned, and the operation's purpose for AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6188,14 +6312,17 @@
       "operation_id": "payrollsOne",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
+        "missing_context",
+        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "Get Payroll",
       "current_description": "Get Payroll",
-      "summary_suggestion": "Retrieve Payroll Details",
-      "description_suggestion": "Retrieves detailed information for a specific payroll by its ID. Returns a payroll object containing details such as pay period, salary, and deductions.",
-      "reasoning": "Original description is too vague. Added information on the return value.",
+      "summary_suggestion": "Retrieve a specific payroll record",
+      "description_suggestion": "Retrieves a single payroll record by its unique payroll ID. Requires the payroll_id path parameter to identify which payroll to fetch. Returns the complete payroll object containing all payroll details and associated metadata. Use this operation when you need detailed information about a specific payroll.",
+      "reasoning": "Original description provides no context about required parameters or return values. Added clarity about the required payroll_id parameter, what is returned, and the operation's purpose for AI agent interpretability.",
       "batch_index": 2
     }
   },
@@ -6210,7 +6337,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'employeePayrollsAll' has semantic quality issues: vague_description, missing_output_details. Original description is too vague. Added information on optional filters, sorting parameters, and the return value.",
+    "message": "Operation 'employeePayrollsAll' has semantic quality issues: vague_summary, missing_context, missing_output_details. Description is too brief and lacks pagination context. Added information about pagination support, the employee_id requirement, return structure, and use cases to improve AI agent understanding of when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6224,14 +6351,15 @@
       "operation_id": "employeePayrollsAll",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description",
+        "vague_summary",
+        "missing_context",
         "missing_output_details"
       ],
       "current_summary": "List Employee Payrolls",
       "current_description": "List payrolls for employee",
-      "summary_suggestion": "List Payrolls for Employee",
-      "description_suggestion": "Lists all payrolls for a specified employee by employee ID. Accepts optional filters and sorting parameters. Returns a collection of payroll objects.",
-      "reasoning": "Original description is too vague. Added information on optional filters, sorting parameters, and the return value.",
+      "summary_suggestion": "List all payrolls for an employee",
+      "description_suggestion": "Retrieves a paginated list of all payroll records associated with a specific employee, identified by employee_id. Supports filtering, sorting, and pagination through query parameters (cursor and limit). Returns an array of payroll objects for the specified employee with metadata including pagination cursors. Use this operation to retrieve an employee's complete payroll history or current payroll information.",
+      "reasoning": "Description is too brief and lacks pagination context. Added information about pagination support, the employee_id requirement, return structure, and use cases to improve AI agent understanding of when to use this operation.",
       "batch_index": 2
     }
   },
@@ -6246,7 +6374,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'employeePayrollsOne' has semantic quality issues: vague_description, missing_output_details. Original description is too vague. Added information on the return value.",
+    "message": "Operation 'employeePayrollsOne' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_output_details. Description lacks detail about required parameters and return values. Added clarity about both required path parameters (employee_id and payroll_id), what is returned, and the operation's purpose for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6260,14 +6388,16 @@
       "operation_id": "employeePayrollsOne",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description",
+        "vague_summary",
+        "missing_context",
+        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "Get Employee Payroll",
       "current_description": "Get payroll for employee",
-      "summary_suggestion": "Retrieve Employee Payroll Details",
-      "description_suggestion": "Retrieves detailed information for a specific employee payroll by employee ID and payroll ID. Returns a payroll object containing details such as pay period, salary, and deductions.",
-      "reasoning": "Original description is too vague. Added information on the return value.",
+      "summary_suggestion": "Retrieve a specific payroll for an employee",
+      "description_suggestion": "Retrieves a single payroll record for a specific employee. Requires both employee_id and payroll_id path parameters to identify the employee and their specific payroll record. Returns the complete payroll object containing all payroll details for that employee. Use this operation when you need detailed information about a specific payroll for a particular employee.",
+      "reasoning": "Description lacks detail about required parameters and return values. Added clarity about both required path parameters (employee_id and payroll_id), what is returned, and the operation's purpose for better AI agent decision-making.",
       "batch_index": 2
     }
   },
@@ -6282,7 +6412,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'timeOffRequestsAll' has semantic quality issues: vague_description, missing_output_details. Original description is too vague. Added information on optional filters, sorting parameters, and the return value.",
+    "message": "Operation 'timeOffRequestsAll' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description is identical to summary and provides no operational context. Added information about pagination support, return structure with specific field examples, and use cases to help AI agents understand when and how to use this operation effectively.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6296,14 +6426,16 @@
       "operation_id": "timeOffRequestsAll",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
+        "missing_context",
         "missing_output_details"
       ],
       "current_summary": "List Time Off Requests",
       "current_description": "List Time Off Requests",
-      "summary_suggestion": "List All Time Off Requests",
-      "description_suggestion": "Lists all time off requests in the system. Accepts optional filters and sorting parameters. Returns a collection of time off request objects.",
-      "reasoning": "Original description is too vague. Added information on optional filters, sorting parameters, and the return value.",
+      "summary_suggestion": "List all time off requests",
+      "description_suggestion": "Retrieves a paginated list of all time off requests in the HRIS system. Supports filtering, sorting, and pagination through query parameters (cursor and limit). Returns an array of time off request objects containing details such as employee, request dates, status, and type. Use this operation to retrieve time off requests for reporting, approval workflows, or employee leave management.",
+      "reasoning": "Original description is identical to summary and provides no operational context. Added information about pagination support, return structure with specific field examples, and use cases to help AI agents understand when and how to use this operation effectively.",
       "batch_index": 2
     }
   },
@@ -6318,7 +6450,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'companiesOne' has semantic quality issues: vague_summary, vague_description. Both the summary and description were very vague. Added specificity about retrieving a company by ID and detailed company data in the response.",
+    "message": "Operation 'companiesOne' has semantic quality issues: vague_summary, vague_description, missing_output_details, poor_ai_interpretability. Original description is too minimal and doesn't explain what data is returned or what parameters are needed. Improved version clarifies the operation retrieves a single company record, specifies the return type (HrisCompany), and indicates the required ID parameter for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6333,13 +6465,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Get Company",
       "current_description": "Get Company",
-      "summary_suggestion": "Retrieve a specific company by ID",
-      "description_suggestion": "Retrieves detailed information for a specific company identified by its unique ID. The response includes comprehensive company data.",
-      "reasoning": "Both the summary and description were very vague. Added specificity about retrieving a company by ID and detailed company data in the response.",
+      "summary_suggestion": "Retrieve a specific company record",
+      "description_suggestion": "Retrieves detailed information for a specific company by ID. Returns the complete HrisCompany object containing company details such as name, legal entity information, and organizational structure. Requires the company ID as a path parameter.",
+      "reasoning": "Original description is too minimal and doesn't explain what data is returned or what parameters are needed. Improved version clarifies the operation retrieves a single company record, specifies the return type (HrisCompany), and indicates the required ID parameter for better AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -6354,7 +6488,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'companiesUpdate' has semantic quality issues: vague_summary, vague_description, missing_input_details. The summary and description were too vague. Added details about updating company information by ID and the need for a JSON payload with updated fields.",
+    "message": "Operation 'companiesUpdate' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description lacks critical details about what can be updated, whether partial updates are supported, and what is returned. Enhanced version clarifies PATCH semantics, specifies the request schema, indicates the return value, and explains the ID requirement for improved AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6370,13 +6504,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Update Company",
       "current_description": "Update Company",
-      "summary_suggestion": "Update information for a specific company",
-      "description_suggestion": "Updates the information for a specific company identified by its unique ID. Accepts a JSON payload with updated company fields. Returns the updated company object.",
-      "reasoning": "The summary and description were too vague. Added details about updating company information by ID and the need for a JSON payload with updated fields.",
+      "summary_suggestion": "Update company information",
+      "description_suggestion": "Updates company information for a specific company record. Accepts partial updates via PATCH - only provided fields in the HrisCompany schema will be modified. Returns the updated company object. Requires the company ID as a path parameter and valid company data in the request body.",
+      "reasoning": "Original description lacks critical details about what can be updated, whether partial updates are supported, and what is returned. Enhanced version clarifies PATCH semantics, specifies the request schema, indicates the return value, and explains the ID requirement for improved AI agent interpretability.",
       "batch_index": 1
     }
   },
@@ -6391,7 +6527,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'companiesDelete' has semantic quality issues: vague_description. The description was very vague. Added details about deleting a company by ID and the success status upon deletion.",
+    "message": "Operation 'companiesDelete' has semantic quality issues: vague_summary, vague_description, missing_side_effects, not_actionable. Original description doesn't convey the destructive nature of the operation or its side effects. Improved version emphasizes permanence, clarifies the ID requirement, and indicates the response type to help AI agents understand the consequences of this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6405,12 +6541,16 @@
       "operation_id": "companiesDelete",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description"
+        "vague_summary",
+        "vague_description",
+        "missing_side_effects",
+        "not_actionable"
       ],
       "current_summary": "Delete Company",
       "current_description": "Delete Company",
-      "description_suggestion": "Deletes a specific company identified by its unique ID. The operation returns a success status upon deletion.",
-      "reasoning": "The description was very vague. Added details about deleting a company by ID and the success status upon deletion.",
+      "summary_suggestion": "Delete a company record",
+      "description_suggestion": "Permanently deletes a company record by ID. This operation removes the company from the system and cannot be undone. Requires the company ID as a path parameter. Returns a success confirmation upon deletion.",
+      "reasoning": "Original description doesn't convey the destructive nature of the operation or its side effects. Improved version emphasizes permanence, clarifies the ID requirement, and indicates the response type to help AI agents understand the consequences of this operation.",
       "batch_index": 1
     }
   },
@@ -6425,7 +6565,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'departmentsAll' has semantic quality issues: vague_summary, vague_description, missing_output_details. Both the summary and description were vague. Added details about retrieving a list of departments and the included department details in the response.",
+    "message": "Operation 'departmentsAll' has semantic quality issues: vague_summary, vague_description, missing_output_details, missing_context. Original description is too generic and doesn't explain pagination support or return structure. Enhanced version clarifies pagination mechanism (cursor-based), specifies the return type, mentions metadata availability, and notes potential filter/sort support for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6441,13 +6581,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "List Departments",
       "current_description": "List Departments",
-      "summary_suggestion": "Retrieve a list of all departments",
-      "description_suggestion": "Retrieves a list of all departments within the organization. The response includes department IDs, names, and other relevant details.",
-      "reasoning": "Both the summary and description were vague. Added details about retrieving a list of departments and the included department details in the response.",
+      "summary_suggestion": "Retrieve all departments with pagination",
+      "description_suggestion": "Retrieves a paginated list of all departments in the organization. Supports cursor-based pagination via the cursor and limit parameters. Returns an array of Department objects with metadata including pagination cursors for navigating through results. Filters and sorting may be available depending on the connected HRIS system.",
+      "reasoning": "Original description is too generic and doesn't explain pagination support or return structure. Enhanced version clarifies pagination mechanism (cursor-based), specifies the return type, mentions metadata availability, and notes potential filter/sort support for better AI agent decision-making.",
       "batch_index": 1
     }
   },
@@ -6462,7 +6603,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'departmentsAdd' has semantic quality issues: vague_description, missing_input_details. The description was vague and lacked input details. Added details about creating a new department and the need for a JSON payload with department details.",
+    "message": "Operation 'departmentsAdd' has semantic quality issues: vague_summary, vague_description, missing_output_details, missing_side_effects. Original description lacks input/output clarity and doesn't explain the creation side effects. Improved version specifies the request schema, clarifies the return value includes ID and timestamps, and indicates immediate availability for better AI agent understanding of the operation's effects.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6476,13 +6617,16 @@
       "operation_id": "departmentsAdd",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Create Department",
       "current_description": "Create Department",
-      "description_suggestion": "Creates a new department within the organization. Accepts a JSON payload with department details such as name and description. Returns the newly created department object.",
-      "reasoning": "The description was vague and lacked input details. Added details about creating a new department and the need for a JSON payload with department details.",
+      "summary_suggestion": "Create a new department",
+      "description_suggestion": "Creates a new department in the organization. Accepts department information via the Department schema in the request body. Returns the newly created Department object with an assigned ID and timestamps. The department is immediately available in the system after creation.",
+      "reasoning": "Original description lacks input/output clarity and doesn't explain the creation side effects. Improved version specifies the request schema, clarifies the return value includes ID and timestamps, and indicates immediate availability for better AI agent understanding of the operation's effects.",
       "batch_index": 1
     }
   },
@@ -6497,7 +6641,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'departmentsOne' has semantic quality issues: vague_summary, vague_description. Both the summary and description were very vague. Added specificity about retrieving a department by ID and detailed department data in the response.",
+    "message": "Operation 'departmentsOne' has semantic quality issues: vague_summary, vague_description, missing_output_details, poor_ai_interpretability. Original description is too minimal and doesn't explain what data is returned or parameter requirements. Improved version clarifies the operation retrieves a single department, specifies the return type, mentions relevant fields, and indicates the required ID parameter for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6512,13 +6656,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Get Department",
       "current_description": "Get Department",
-      "summary_suggestion": "Retrieve a specific department by ID",
-      "description_suggestion": "Retrieves detailed information for a specific department identified by its unique ID. The response includes comprehensive department data.",
-      "reasoning": "Both the summary and description were very vague. Added specificity about retrieving a department by ID and detailed department data in the response.",
+      "summary_suggestion": "Retrieve a specific department record",
+      "description_suggestion": "Retrieves detailed information for a specific department by ID. Returns the complete Department object containing department details such as name, parent department, and organizational hierarchy information. Requires the department ID as a path parameter.",
+      "reasoning": "Original description is too minimal and doesn't explain what data is returned or parameter requirements. Improved version clarifies the operation retrieves a single department, specifies the return type, mentions relevant fields, and indicates the required ID parameter for better AI agent interpretability.",
       "batch_index": 1
     }
   },
@@ -6533,7 +6679,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'departmentsUpdate' has semantic quality issues: vague_description, missing_input_details. The description was vague and lacked input details. Added details about updating department information by ID and the need for a JSON payload with updated fields.",
+    "message": "Operation 'departmentsUpdate' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description lacks critical details about update scope, PATCH semantics, and return value. Enhanced version clarifies partial update support, specifies the request schema, indicates the return value, and explains the ID requirement for improved AI agent understanding of when and how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6547,13 +6693,17 @@
       "operation_id": "departmentsUpdate",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Update Department",
       "current_description": "Update Department",
-      "description_suggestion": "Updates the information for a specific department identified by its unique ID. Accepts a JSON payload with updated department fields. Returns the updated department object.",
-      "reasoning": "The description was vague and lacked input details. Added details about updating department information by ID and the need for a JSON payload with updated fields.",
+      "summary_suggestion": "Update department information",
+      "description_suggestion": "Updates department information for a specific department record. Accepts partial updates via PATCH - only provided fields in the Department schema will be modified. Returns the updated Department object. Requires the department ID as a path parameter and valid department data in the request body.",
+      "reasoning": "Original description lacks critical details about update scope, PATCH semantics, and return value. Enhanced version clarifies partial update support, specifies the request schema, indicates the return value, and explains the ID requirement for improved AI agent understanding of when and how to use this operation.",
       "batch_index": 1
     }
   },
@@ -6568,7 +6718,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'employeesAll' has semantic quality issues: vague_description, missing_side_effects. The original description is too vague and lacks details about the operation's functionality, such as pagination support and the availability of complete employee details via another endpoint.",
+    "message": "Operation 'employeesAll' has semantic quality issues: missing_output_details, poor_ai_interpretability. Current description explains architectural limitations but lacks clarity on what data is returned and how to use pagination. AI agents need to understand that this returns partial data, how to get complete data, and what parameters control the response. Enhanced summary is more action-oriented and specific about pagination.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6582,13 +6732,14 @@
       "operation_id": "employeesAll",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description",
-        "missing_side_effects"
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "List Employees",
       "current_description": "Apideck operates as a stateless Unified API, which means that the list endpoint only provides a portion of the employee model. This is due to the fact that most HRIS systems do not readily provide all data in every call. However, you can access the complete employee model through an employee detail call.",
-      "description_suggestion": "Retrieves a list of all employees. This operation can be used to fetch employee data for various purposes. It supports pagination via cursor and limit parameters. Returns a paginated list of employee objects. To access complete details for a specific employee, use the employee detail endpoint.",
-      "reasoning": "The original description is too vague and lacks details about the operation's functionality, such as pagination support and the availability of complete employee details via another endpoint.",
+      "summary_suggestion": "Retrieve paginated list of employees",
+      "description_suggestion": "Retrieves a paginated list of employees from the HRIS system. Note that this endpoint returns a partial employee model due to stateless API design and HRIS system limitations. For complete employee details including all fields, use the Get Employee endpoint with a specific employee ID. Supports filtering, sorting, and cursor-based pagination via limit and cursor parameters.",
+      "reasoning": "Current description explains architectural limitations but lacks clarity on what data is returned and how to use pagination. AI agents need to understand that this returns partial data, how to get complete data, and what parameters control the response. Enhanced summary is more action-oriented and specific about pagination.",
       "batch_index": 0
     }
   },
@@ -6603,7 +6754,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'employeesAdd' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The original description is too vague. Added details about the required input and the output to improve clarity and AI agent interpretability.",
+    "message": "Operation 'employeesAdd' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is minimal and provides no context. Enhanced version explains what the operation does, what input is expected (Employee schema), what is returned (created employee with ID), and side effects (record is immediately available). This helps AI agents understand when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6619,12 +6770,14 @@
       "issues_found": [
         "vague_description",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Create Employee",
       "current_description": "Create Employee",
-      "description_suggestion": "Creates a new employee record. Requires an employee object in the request body, including mandatory fields such as name, email, and department. Returns the newly created employee object with a unique identifier.",
-      "reasoning": "The original description is too vague. Added details about the required input and the output to improve clarity and AI agent interpretability.",
+      "summary_suggestion": "Create new employee record",
+      "description_suggestion": "Creates a new employee record in the HRIS system. Accepts an Employee object with required and optional fields. Returns the created employee object with a generated unique identifier. The new employee record is immediately available for retrieval and updates. Requires appropriate authentication and permissions.",
+      "reasoning": "Original description is minimal and provides no context. Enhanced version explains what the operation does, what input is expected (Employee schema), what is returned (created employee with ID), and side effects (record is immediately available). This helps AI agents understand when to use this operation and what to expect.",
       "batch_index": 0
     }
   },
@@ -6639,7 +6792,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'employeesOne' has semantic quality issues: vague_description, missing_output_details. The original description is too vague. Added details about the expected output to improve clarity and AI agent interpretability.",
+    "message": "Operation 'employeesOne' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Original description is too minimal. Enhanced version clarifies that this returns the complete employee model (addressing the limitation mentioned in the list endpoint), specifies what data is included, and explains the required ID parameter. This helps AI agents understand when to use this versus the list endpoint.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6654,12 +6807,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "Get Employee",
       "current_description": "Get Employee",
-      "description_suggestion": "Retrieves detailed information for a specific employee identified by the provided employee ID. Returns the complete employee object including personal and professional details.",
-      "reasoning": "The original description is too vague. Added details about the expected output to improve clarity and AI agent interpretability.",
+      "summary_suggestion": "Retrieve complete employee details",
+      "description_suggestion": "Retrieves the complete employee record for a specified employee ID. Returns the full employee model with all available fields, including personal information, employment details, compensation, and custom mappings. This endpoint provides comprehensive employee data compared to the list endpoint which returns partial models. Requires a valid employee ID as a path parameter.",
+      "reasoning": "Original description is too minimal. Enhanced version clarifies that this returns the complete employee model (addressing the limitation mentioned in the list endpoint), specifies what data is included, and explains the required ID parameter. This helps AI agents understand when to use this versus the list endpoint.",
       "batch_index": 0
     }
   },
@@ -6674,7 +6829,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'employeesUpdate' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The original description is too vague. Added details about the required input and the output to improve clarity and AI agent interpretability.",
+    "message": "Operation 'employeesUpdate' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description lacks all essential details. Enhanced version explains the operation accepts an Employee object, supports partial updates (important for PATCH semantics), returns the updated record, and requires an ID. This clarity is critical for AI agents to understand update behavior and when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6690,12 +6845,14 @@
       "issues_found": [
         "vague_description",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Update Employee",
       "current_description": "Update Employee",
-      "description_suggestion": "Updates the details of an existing employee identified by the provided employee ID. Accepts an employee object in the request body with the fields to be updated. Returns the updated employee object.",
-      "reasoning": "The original description is too vague. Added details about the required input and the output to improve clarity and AI agent interpretability.",
+      "summary_suggestion": "Update employee record fields",
+      "description_suggestion": "Updates an existing employee record with provided fields. Accepts a partial or complete Employee object and applies changes to the specified employee. Supports partial updates - only provided fields are modified, existing data is preserved. Returns the updated employee object reflecting all changes. Requires a valid employee ID and appropriate permissions.",
+      "reasoning": "Original description lacks all essential details. Enhanced version explains the operation accepts an Employee object, supports partial updates (important for PATCH semantics), returns the updated record, and requires an ID. This clarity is critical for AI agents to understand update behavior and when to use this operation.",
       "batch_index": 0
     }
   },
@@ -6710,7 +6867,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'employeesDelete' has semantic quality issues: vague_description, missing_side_effects. The original description is too vague. Added details about the operation's side effects and the expected output to improve clarity and AI agent interpretability.",
+    "message": "Operation 'employeesDelete' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is minimal. Enhanced version specifies the required ID parameter, explains the side effect (record is removed and inaccessible), clarifies the response, and includes a warning about irreversibility. This helps AI agents understand the destructive nature of this operation and use it appropriately.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6725,12 +6882,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_input_details",
+        "missing_output_details",
         "missing_side_effects"
       ],
       "current_summary": "Delete Employee",
       "current_description": "Delete Employee",
-      "description_suggestion": "Deletes the employee record identified by the provided employee ID. The employee is permanently removed from the system. Returns a confirmation message upon successful deletion.",
-      "reasoning": "The original description is too vague. Added details about the operation's side effects and the expected output to improve clarity and AI agent interpretability.",
+      "summary_suggestion": "Delete employee record",
+      "description_suggestion": "Deletes an employee record from the HRIS system. Requires a valid employee ID as a path parameter. Upon successful deletion, the employee record is removed and no longer accessible. Returns a success response with the deleted employee's ID. This action is typically irreversible - verify the correct employee ID before deletion.",
+      "reasoning": "Original description is minimal. Enhanced version specifies the required ID parameter, explains the side effect (record is removed and inaccessible), clarifies the response, and includes a warning about irreversibility. This helps AI agents understand the destructive nature of this operation and use it appropriately.",
       "batch_index": 0
     }
   },
@@ -6745,7 +6905,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'companiesAll' has semantic quality issues: vague_description, missing_side_effects. The original description is too vague. Added details about pagination support to improve clarity and AI agent interpretability.",
+    "message": "Operation 'companiesAll' has semantic quality issues: vague_description, missing_output_details. Original description is too minimal. Enhanced version explains pagination support (consistent with API documentation), what data is returned, and how to use pagination parameters. This helps AI agents understand how to retrieve company data and navigate through results.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6760,12 +6920,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_side_effects"
+        "missing_output_details"
       ],
       "current_summary": "List Companies",
       "current_description": "List Companies",
-      "description_suggestion": "Retrieves a list of all companies in the system. Supports pagination via cursor and limit parameters. Returns a paginated list of company objects.",
-      "reasoning": "The original description is too vague. Added details about pagination support to improve clarity and AI agent interpretability.",
+      "summary_suggestion": "Retrieve paginated list of companies",
+      "description_suggestion": "Retrieves a paginated list of companies from the HRIS system. Supports cursor-based pagination via limit and cursor parameters to control result set size and navigation. Returns company objects with core information including identifiers, names, and organizational details. Use limit and cursor parameters to fetch subsequent pages of results.",
+      "reasoning": "Original description is too minimal. Enhanced version explains pagination support (consistent with API documentation), what data is returned, and how to use pagination parameters. This helps AI agents understand how to retrieve company data and navigate through results.",
       "batch_index": 0
     }
   },
@@ -6780,7 +6941,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'companiesAdd' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The original description is too vague. Added details about the required input and the output to improve clarity and AI agent interpretability.",
+    "message": "Operation 'companiesAdd' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is minimal. Enhanced version explains what input is expected (HrisCompany schema), what is returned (created company with ID), and side effects (immediately available for use). This helps AI agents understand the operation's purpose and what to expect from the response.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6796,12 +6957,14 @@
       "issues_found": [
         "vague_description",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Create Company",
       "current_description": "Create Company",
-      "description_suggestion": "Creates a new company record. Requires a company object in the request body, including mandatory fields such as company name and address. Returns the newly created company object with a unique identifier.",
-      "reasoning": "The original description is too vague. Added details about the required input and the output to improve clarity and AI agent interpretability.",
+      "summary_suggestion": "Create new company record",
+      "description_suggestion": "Creates a new company record in the HRIS system. Accepts a HrisCompany object with required and optional fields such as name, legal entity information, and organizational details. Returns the created company object with a generated unique identifier. The new company record is immediately available for use in employee assignments and other operations. Requires appropriate authentication and permissions.",
+      "reasoning": "Original description is minimal. Enhanced version explains what input is expected (HrisCompany schema), what is returned (created company with ID), and side effects (immediately available for use). This helps AI agents understand the operation's purpose and what to expect from the response.",
       "batch_index": 0
     }
   },
@@ -6816,7 +6979,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 25 operations analyzed, 21 quality issues found",
+    "message": "Semantic analysis completed: 25 operations analyzed, 24 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -6828,7 +6991,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 25,
-      "total_issues_found": 21,
+      "total_issues_found": 24,
       "batches_processed": 4
     }
   }

@@ -3887,7 +3887,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'doubleclicksearch.reports.request' has semantic quality issues: vague_summary, vague_description. The original summary and description were vague. The suggestions provide clarity on the action and expected inputs/outputs.",
+    "message": "Operation 'doubleclicksearch.reports.request' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Original description is too minimal and lacks critical context. Missing: (1) summary entirely, (2) input details about ReportRequest parameters, (3) output details about returned Report object and reportId, (4) side effects about asynchronous processing and queueing, (5) guidance on how to track/retrieve results. Enhanced version provides AI agents with clear understanding of when to use this operation, what to provide, what to expect, and how it integrates with other operations.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3902,13 +3902,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Inserts a report request into the reporting system.",
-      "summary_suggestion": "Submit a report request to the system",
-      "description_suggestion": "Submits a report request to the Search Ads 360 reporting system. Expects a ReportRequest object as input. Returns a report request identifier upon successful submission.",
-      "reasoning": "The original summary and description were vague. The suggestions provide clarity on the action and expected inputs/outputs.",
+      "summary_suggestion": "Submit a report request for asynchronous processing",
+      "description_suggestion": "Submits a report request to the Search Ads 360 reporting system for asynchronous processing. Accepts a ReportRequest object specifying report parameters such as columns, filters, and date ranges. Returns a Report object containing the request details and a reportId for tracking. The report is queued for generation and can be polled using the reportId to check status and retrieve results once complete.",
+      "reasoning": "Original description is too minimal and lacks critical context. Missing: (1) summary entirely, (2) input details about ReportRequest parameters, (3) output details about returned Report object and reportId, (4) side effects about asynchronous processing and queueing, (5) guidance on how to track/retrieve results. Enhanced version provides AI agents with clear understanding of when to use this operation, what to provide, what to expect, and how it integrates with other operations.",
       "batch_index": 1
     }
   },
@@ -3923,7 +3926,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'doubleclicksearch.reports.generate' has semantic quality issues: vague_summary, missing_output_details. The original summary was missing, and the description lacked details about the output. The suggestions provide a clear action and specify the expected output.",
+    "message": "Operation 'doubleclicksearch.reports.generate' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, poor_ai_interpretability. Original summary is missing and description lacks essential details. Missing: (1) summary entirely, (2) input specification (ReportRequest), (3) output specification (Report object with rows), (4) key distinction from asynchronous operation (synchronous/blocking behavior), (5) guidance on when to use this vs. the request operation. Enhanced version clarifies the synchronous nature, expected inputs/outputs, and helps AI agents choose between synchronous and asynchronous approaches.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3938,13 +3941,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Generates and returns a report immediately.",
-      "summary_suggestion": "Generate a report immediately",
-      "description_suggestion": "Generates a report immediately and returns the report data. Expects a ReportRequest object as input. Returns a Report object containing the generated report data.",
-      "reasoning": "The original summary was missing, and the description lacked details about the output. The suggestions provide a clear action and specify the expected output.",
+      "summary_suggestion": "Generate and retrieve a report synchronously",
+      "description_suggestion": "Generates a Search Ads 360 report synchronously and returns the complete report data immediately. Accepts a ReportRequest object specifying report parameters such as columns, filters, and date ranges. Returns a Report object containing the generated report rows and metadata. This operation blocks until report generation completes, making it suitable for smaller reports or when immediate results are required. For larger reports, consider using the asynchronous request operation.",
+      "reasoning": "Original summary is missing and description lacks essential details. Missing: (1) summary entirely, (2) input specification (ReportRequest), (3) output specification (Report object with rows), (4) key distinction from asynchronous operation (synchronous/blocking behavior), (5) guidance on when to use this vs. the request operation. Enhanced version clarifies the synchronous nature, expected inputs/outputs, and helps AI agents choose between synchronous and asynchronous approaches.",
       "batch_index": 1
     }
   },
@@ -3959,7 +3964,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'doubleclicksearch.reports.get' has semantic quality issues: vague_summary, missing_context. The original summary was missing, and the description lacked context about the response. The suggestions provide a clear action and specify the expected response details.",
+    "message": "Operation 'doubleclicksearch.reports.get' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_context, poor_ai_interpretability. Original summary is missing and description is incomplete. Missing: (1) summary entirely, (2) input details about reportId parameter and its origin, (3) output details about Report object contents and status information, (4) context about relationship to asynchronous request operation, (5) guidance on polling behavior. Enhanced version explains the polling workflow, clarifies the reportId dependency, specifies return contents, and helps AI agents understand when and how to use this operation in the report retrieval workflow.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3974,13 +3979,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Polls for the status of a report request.",
-      "summary_suggestion": "Check the status of a report request",
-      "description_suggestion": "Checks the status of a report request identified by {reportId}. Returns the current status of the report request, including whether the report is generated, in progress, or failed.",
-      "reasoning": "The original summary was missing, and the description lacked context about the response. The suggestions provide a clear action and specify the expected response details.",
+      "summary_suggestion": "Check report generation status and retrieve results",
+      "description_suggestion": "Retrieves the status and results of a previously submitted report request. Requires the reportId parameter returned from the asynchronous report request operation. Returns a Report object containing the current status, report metadata (such as currency code), and generated report rows if the report has completed processing. Use this operation to poll for completion of asynchronous report requests and download the results once available.",
+      "reasoning": "Original summary is missing and description is incomplete. Missing: (1) summary entirely, (2) input details about reportId parameter and its origin, (3) output details about Report object contents and status information, (4) context about relationship to asynchronous request operation, (5) guidance on polling behavior. Enhanced version explains the polling workflow, clarifies the reportId dependency, specifies return contents, and helps AI agents understand when and how to use this operation in the report retrieval workflow.",
       "batch_index": 1
     }
   },
@@ -3995,7 +4003,157 @@
         "character": 0
       }
     },
-    "message": "Operation 'doubleclicksearch.conversion.insert' has semantic quality issues: vague_summary, missing_input_details. The original description is clear but lacks input details. The summary suggestion is concise and action-oriented. The description suggestion adds clarity on the expected input and output.",
+    "message": "Operation 'doubleclicksearch.reports.getFile' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_context, poor_ai_interpretability. Original summary is missing and description lacks critical context. Missing: (1) summary entirely, (2) input details about reportId and reportFragment parameters and their purposes, (3) output details about file format and content, (4) context about report fragmentation and when this operation is needed, (5) workflow context showing relationship to status polling. Enhanced version explains the fragmentation concept, clarifies both required parameters, specifies the file format, and helps AI agents understand when and how to use this operation for large report downloads.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "doubleclicksearch.reports.getFile",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Downloads a report file encoded in UTF-8.",
+      "summary_suggestion": "Download a specific report file fragment",
+      "description_suggestion": "Downloads a specific fragment of a completed report as a UTF-8 encoded file. Requires reportId (from the report request operation) and reportFragment parameters to identify which portion of the report to download. Returns the raw report data file for the specified fragment. Large reports are split into multiple fragments; use this operation to download individual fragments after confirming report completion via the status polling operation. Useful for handling large reports that cannot be retrieved in a single response.",
+      "reasoning": "Original summary is missing and description lacks critical context. Missing: (1) summary entirely, (2) input details about reportId and reportFragment parameters and their purposes, (3) output details about file format and content, (4) context about report fragmentation and when this operation is needed, (5) workflow context showing relationship to status polling. Enhanced version explains the fragmentation concept, clarifies both required parameters, specifies the file format, and helps AI agents understand when and how to use this operation for large report downloads.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'doubleclicksearch.conversion.get' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original description lacks summary and is incomplete. Missing details about required path parameters (agencyId, advertiserId, engineAccountId), the fact that it supports filtering/pagination, and what the response contains. Added these details for better AI agent understanding of when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "doubleclicksearch.conversion.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves a list of conversions from a DoubleClick Search engine account.",
+      "summary_suggestion": "Retrieve conversions from engine account",
+      "description_suggestion": "Retrieves a list of conversions from a specified DoubleClick Search engine account. Requires agency ID, advertiser ID, and engine account ID as path parameters. Supports filtering and pagination through query parameters. Returns a ConversionList object containing conversion records with properties such as conversion ID, timestamp, value, and attribution data.",
+      "reasoning": "Original description lacks summary and is incomplete. Missing details about required path parameters (agencyId, advertiserId, engineAccountId), the fact that it supports filtering/pagination, and what the response contains. Added these details for better AI agent understanding of when and how to use this operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'doubleclicksearch.reports.getIdMappingFile' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description has good detail but lacks clarity about required parameters and return type. Added summary and clarified parameter requirements, expanded entity list for completeness, and specified the return type (IdMappingFile) for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "doubleclicksearch.reports.getIdMappingFile",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Downloads a csv file(encoded in UTF-8) that contains ID mappings between legacy SA360 and new SA360. The file includes all children entities of the given advertiser(e.g. engine accounts, campaigns, ad groups, etc.) that exist in both legacy SA360 and new SA360.",
+      "summary_suggestion": "Download ID mapping file for advertiser",
+      "description_suggestion": "Downloads a UTF-8 encoded CSV file containing ID mappings between legacy Search Ads 360 and new Search Ads 360 for a specified advertiser. Requires agency ID and advertiser ID as path parameters. The file includes all child entities (engine accounts, campaigns, ad groups, keywords, ads) that exist in both legacy and new SA360 systems. Returns an IdMappingFile object with the downloadable file content.",
+      "reasoning": "Missing summary entirely. Description has good detail but lacks clarity about required parameters and return type. Added summary and clarified parameter requirements, expanded entity list for completeness, and specified the return type (IdMappingFile) for AI agent clarity.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'doubleclicksearch.savedColumns.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is minimal and lacks context about what saved columns are used for and what the response contains. Added summary, clarified required parameters, provided domain context about saved columns' purpose, and specified return type for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "doubleclicksearch.savedColumns.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieve the list of saved columns for a specified advertiser.",
+      "summary_suggestion": "List saved columns for advertiser",
+      "description_suggestion": "Retrieves the list of saved columns for a specified advertiser. Requires agency ID and advertiser ID as path parameters. Saved columns represent custom reporting dimensions created by the advertiser for Floodlight activities, Google Analytics goals, or custom KPIs. Returns a SavedColumnList object containing SavedColumn entries with names and definitions.",
+      "reasoning": "Missing summary. Description is minimal and lacks context about what saved columns are used for and what the response contains. Added summary, clarified required parameters, provided domain context about saved columns' purpose, and specified return type for better AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'doubleclicksearch.conversion.insert' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description lacks details about request body structure, required fields, response content, and side effects. Added summary, specified request schema (ConversionList), clarified required conversion fields, explained what is returned, and documented the side effect of creating persistent records for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4010,13 +4168,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Inserts a batch of new conversions into DoubleClick Search.",
-      "summary_suggestion": "Insert batch of new conversions into DoubleClick Search.",
-      "description_suggestion": "Inserts a batch of new conversions into DoubleClick Search. Expects a list of Conversion objects in the request body. Returns a list of inserted conversion IDs.",
-      "reasoning": "The original description is clear but lacks input details. The summary suggestion is concise and action-oriented. The description suggestion adds clarity on the expected input and output.",
+      "summary_suggestion": "Insert batch of conversions",
+      "description_suggestion": "Inserts a batch of new conversions into DoubleClick Search. Accepts a ConversionList request body containing conversion records with required fields such as conversion ID, timestamp, value, and advertiser ID. Each conversion is validated and processed. Returns a ConversionList object containing the inserted conversions with confirmation of successful insertion. Side effect: Creates new conversion records in the DoubleClick Search system that will be reflected in reports and analytics.",
+      "reasoning": "Missing summary. Description lacks details about request body structure, required fields, response content, and side effects. Added summary, specified request schema (ConversionList), clarified required conversion fields, explained what is returned, and documented the side effect of creating persistent records for AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -4031,7 +4191,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'doubleclicksearch.conversion.update' has semantic quality issues: vague_summary, missing_input_details. The original description is clear but lacks input details. The summary suggestion is concise and action-oriented. The description suggestion adds clarity on the expected input and output.",
+    "message": "Operation 'doubleclicksearch.conversion.update' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description is too brief and lacks critical details about request structure, how conversions are identified, what fields can be updated, response content, and side effects. Added summary, clarified request schema, explained identification mechanism, noted partial update support, and documented side effects for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4046,13 +4206,89 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Updates a batch of conversions in DoubleClick Search.",
-      "summary_suggestion": "Update batch of conversions in DoubleClick Search.",
-      "description_suggestion": "Updates a batch of conversions in DoubleClick Search. Expects a list of Conversion objects with updated data in the request body. Returns a list of updated conversion IDs.",
-      "reasoning": "The original description is clear but lacks input details. The summary suggestion is concise and action-oriented. The description suggestion adds clarity on the expected input and output.",
+      "summary_suggestion": "Update batch of conversions",
+      "description_suggestion": "Updates a batch of existing conversions in DoubleClick Search. Accepts a ConversionList request body containing conversion records to update, identified by conversion ID. Supports partial updates of conversion properties such as value, timestamp, and custom attributes. Returns a ConversionList object containing the updated conversions. Side effect: Modifies existing conversion records in the DoubleClick Search system, affecting historical data and report calculations.",
+      "reasoning": "Missing summary. Description is too brief and lacks critical details about request structure, how conversions are identified, what fields can be updated, response content, and side effects. Added summary, clarified request schema, explained identification mechanism, noted partial update support, and documented side effects for AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'doubleclicksearch.conversion.updateAvailability' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description mentions floodlight activities but lacks context about what availability means, request/response structure, and side effects. Added summary, clarified the purpose of availability updates, specified request/response schemas, provided domain context about floodlight activities, and documented side effects for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "doubleclicksearch.conversion.updateAvailability",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates the availabilities of a batch of floodlight activities in DoubleClick Search.",
+      "summary_suggestion": "Update floodlight activity availability",
+      "description_suggestion": "Updates the availability status of a batch of floodlight activities in DoubleClick Search. Accepts an UpdateAvailabilityRequest body specifying which floodlight activities to update and their new availability status. Availability data indicates whether floodlight activities are active and ready for conversion tracking. Returns an UpdateAvailabilityResponse object confirming the availability updates. Side effect: Changes the operational status of floodlight activities, affecting which conversions can be tracked.",
+      "reasoning": "Missing summary. Description mentions floodlight activities but lacks context about what availability means, request/response structure, and side effects. Added summary, clarified the purpose of availability updates, specified request/response schemas, provided domain context about floodlight activities, and documented side effects for AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'doubleclicksearch.conversion.getByCustomerId' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is identical to doubleclicksearch.conversion.get but this operation uses customer ID instead of agency/advertiser/engine account IDs. Added summary clarifying the customer ID parameter, and updated description to reflect the different parameter structure while maintaining consistency with the similar operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "doubleclicksearch.conversion.getByCustomerId",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves a list of conversions from a DoubleClick Search engine account.",
+      "summary_suggestion": "Retrieve conversions by customer ID",
+      "description_suggestion": "Retrieves a list of conversions from a DoubleClick Search engine account for a specified customer. Requires customer ID as a path parameter. Supports filtering and pagination through query parameters to narrow results by date range, conversion type, or other criteria. Returns a ConversionList object containing conversion records with properties such as conversion ID, timestamp, value, and attribution data.",
+      "reasoning": "Missing summary. Description is identical to doubleclicksearch.conversion.get but this operation uses customer ID instead of agency/advertiser/engine account IDs. Added summary clarifying the customer ID parameter, and updated description to reflect the different parameter structure while maintaining consistency with the similar operation.",
       "batch_index": 0
     }
   },
@@ -4067,7 +4303,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 11 operations analyzed, 5 quality issues found",
+    "message": "Semantic analysis completed: 11 operations analyzed, 11 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -4079,7 +4315,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 11,
-      "total_issues_found": 5,
+      "total_issues_found": 11,
       "batches_processed": 2
     }
   }

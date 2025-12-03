@@ -4213,7 +4213,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'websecurityscanner.projects.scanConfigs.scanRuns.findings.list' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggested summary and description provide clarity on the operation's purpose and expected output.",
+    "message": "Operation 'websecurityscanner.projects.scanConfigs.scanRuns.findings.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, poor_ai_interpretability. Missing summary entirely. Description is too brief and lacks context about what findings represent (vulnerabilities), expected inputs (parent ScanRun identifier), pagination support, and response structure. AI agents need clarity on the relationship between findings and scan runs, and what data they'll receive.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4228,13 +4228,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "List Findings under a given ScanRun.",
-      "summary_suggestion": "List all findings under a specific ScanRun.",
-      "description_suggestion": "Retrieves a list of all findings identified during a specific ScanRun under a given project. The findings are returned in a structured format, including details such as the type of vulnerability, affected URL, and severity.",
-      "reasoning": "The current summary and description are vague. The suggested summary and description provide clarity on the operation's purpose and expected output.",
+      "summary_suggestion": "List vulnerabilities found in a scan run",
+      "description_suggestion": "Retrieves all Finding resources (detected vulnerabilities) from a specific ScanRun. Requires the parent ScanRun resource identifier. Supports filtering and pagination through query parameters. Returns a ListFindingsResponse containing an array of Finding objects, each representing a vulnerability instance with details such as type, severity, and affected URL.",
+      "reasoning": "Missing summary entirely. Description is too brief and lacks context about what findings represent (vulnerabilities), expected inputs (parent ScanRun identifier), pagination support, and response structure. AI agents need clarity on the relationship between findings and scan runs, and what data they'll receive.",
       "batch_index": 1
     }
   },
@@ -4249,7 +4251,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'websecurityscanner.projects.scanConfigs.list' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary provides clarity on the operation's purpose.",
+    "message": "Operation 'websecurityscanner.projects.scanConfigs.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, poor_ai_interpretability. Missing summary entirely. Description lacks detail about what ScanConfigs represent (scan settings/parameters), expected inputs (project identifier), pagination support, and response structure. AI agents need to understand that ScanConfigs are templates for scans and what data structure to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4263,12 +4265,16 @@
       "operation_id": "websecurityscanner.projects.scanConfigs.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Lists ScanConfigs under a given project.",
-      "summary_suggestion": "List all ScanConfigs under a specific project.",
-      "reasoning": "The current summary is missing. The suggested summary provides clarity on the operation's purpose.",
+      "summary_suggestion": "List scan configurations for a project",
+      "description_suggestion": "Retrieves all ScanConfig resources associated with a specified project. Requires the parent project identifier. Supports pagination and filtering through query parameters. Returns a ListScanConfigsResponse containing an array of ScanConfig objects, each defining the settings and parameters for web vulnerability scans.",
+      "reasoning": "Missing summary entirely. Description lacks detail about what ScanConfigs represent (scan settings/parameters), expected inputs (project identifier), pagination support, and response structure. AI agents need to understand that ScanConfigs are templates for scans and what data structure to expect.",
       "batch_index": 1
     }
   },
@@ -4283,7 +4289,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'websecurityscanner.projects.scanConfigs.create' has semantic quality issues: vague_summary, missing_input_details. The current summary and description are vague. The suggested summary and description provide clarity on the operation's purpose and the expected input details.",
+    "message": "Operation 'websecurityscanner.projects.scanConfigs.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Missing summary entirely. Description is too minimal and doesn't explain what inputs are required (ScanConfig object with specific fields), what the response contains (created resource with ID), or the side effect (config becomes available for use). AI agents need to understand the request/response structure and the operational consequence of creation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4298,13 +4304,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Creates a new ScanConfig.",
-      "summary_suggestion": "Create a new ScanConfig for a project.",
-      "description_suggestion": "Creates a new ScanConfig for a specified project using the provided configuration details. The ScanConfig defines the parameters for the web security scan, such as the target URLs, scan types, and authentication settings.",
-      "reasoning": "The current summary and description are vague. The suggested summary and description provide clarity on the operation's purpose and the expected input details.",
+      "summary_suggestion": "Create a new web vulnerability scan configuration",
+      "description_suggestion": "Creates a new ScanConfig resource within a specified project. Accepts a ScanConfig object in the request body containing scan parameters such as target URL, authentication credentials, and vulnerability check settings. Returns the created ScanConfig resource with a system-generated resource identifier. The new ScanConfig is immediately available for launching scan runs.",
+      "reasoning": "Missing summary entirely. Description is too minimal and doesn't explain what inputs are required (ScanConfig object with specific fields), what the response contains (created resource with ID), or the side effect (config becomes available for use). AI agents need to understand the request/response structure and the operational consequence of creation.",
       "batch_index": 1
     }
   },
@@ -4319,7 +4328,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'websecurityscanner.projects.scanConfigs.scanRuns.list' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary provides clarity on the operation's purpose and the order of the returned ScanRuns.",
+    "message": "Operation 'websecurityscanner.projects.scanConfigs.scanRuns.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, poor_ai_interpretability. Missing summary entirely. Description mentions sort order but lacks context about what ScanRuns represent (actual scan executions vs. configurations), expected inputs (parent ScanConfig identifier), pagination support, and response structure. AI agents need clarity on the relationship between ScanConfigs and ScanRuns, and what execution data they'll receive.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4333,12 +4342,16 @@
       "operation_id": "websecurityscanner.projects.scanConfigs.scanRuns.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Lists ScanRuns under a given ScanConfig, in descending order of ScanRun stop time.",
-      "summary_suggestion": "List all ScanRuns under a specific ScanConfig.",
-      "reasoning": "The current summary is missing. The suggested summary provides clarity on the operation's purpose and the order of the returned ScanRuns.",
+      "summary_suggestion": "List scan execution runs for a configuration",
+      "description_suggestion": "Retrieves all ScanRun resources associated with a specified ScanConfig, sorted by stop time in descending order (most recent first). Requires the parent ScanConfig identifier. Supports pagination and filtering through query parameters. Returns a ListScanRunsResponse containing an array of ScanRun objects, each representing an actual execution of the scan with status, timing, and result information.",
+      "reasoning": "Missing summary entirely. Description mentions sort order but lacks context about what ScanRuns represent (actual scan executions vs. configurations), expected inputs (parent ScanConfig identifier), pagination support, and response structure. AI agents need clarity on the relationship between ScanConfigs and ScanRuns, and what execution data they'll receive.",
       "batch_index": 1
     }
   },
@@ -4353,7 +4366,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'websecurityscanner.projects.scanConfigs.scanRuns.findings.get' has semantic quality issues: vague_summary, vague_description. Both the summary and description were missing and have been added to improve clarity and specificity.",
+    "message": "Operation 'websecurityscanner.projects.scanConfigs.delete' has semantic quality issues: vague_summary, missing_side_effects. Missing summary entirely. Description lacks clarity about permanence, what child resources are affected, and return value. Added context about irreversibility and explicit mention of affected resources (ScanRuns, Findings) for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "websecurityscanner.projects.scanConfigs.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes an existing ScanConfig and its child resources.",
+      "summary_suggestion": "Delete a ScanConfig and its child resources",
+      "description_suggestion": "Deletes an existing ScanConfig and all its associated child resources including ScanRuns and Findings. This operation is permanent and cannot be undone. Requires the ScanConfig name as input. Returns an empty response on successful deletion.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about permanence, what child resources are affected, and return value. Added context about irreversibility and explicit mention of affected resources (ScanRuns, Findings) for better AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'websecurityscanner.projects.scanConfigs.scanRuns.findings.get' has semantic quality issues: vague_summary, vague_description, missing_context. Missing summary and overly generic description. Added domain context that a Finding represents a vulnerability, clarified input requirement, and specified return value includes vulnerability details for better AI agent understanding of what data will be retrieved.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4368,13 +4417,196 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Gets a Finding.",
-      "summary_suggestion": "Retrieve a specific Finding from a ScanRun.",
-      "description_suggestion": "Retrieves a specific Finding identified by the given resource name under a ScanRun. Returns the Finding object.",
-      "reasoning": "Both the summary and description were missing and have been added to improve clarity and specificity.",
+      "summary_suggestion": "Retrieve a specific vulnerability finding",
+      "description_suggestion": "Retrieves a specific Finding resource representing a vulnerability instance identified during a ScanRun. Requires the Finding name as input. Returns the complete Finding object including vulnerability details, severity, and remediation information.",
+      "reasoning": "Missing summary and overly generic description. Added domain context that a Finding represents a vulnerability, clarified input requirement, and specified return value includes vulnerability details for better AI agent understanding of what data will be retrieved.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'websecurityscanner.projects.scanConfigs.patch' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description mentions partial update but lacks clarity on how it works. Added explicit explanation of partial update behavior, clarified input requirements (name and request body), and specified return value for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "websecurityscanner.projects.scanConfigs.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates a ScanConfig. This method support partial update of a ScanConfig.",
+      "summary_suggestion": "Partially update a ScanConfig",
+      "description_suggestion": "Updates a ScanConfig with partial update support. Only provided fields in the request body will be modified; omitted fields retain their current values. Requires the ScanConfig name and a ScanConfig object with fields to update. Returns the updated ScanConfig resource.",
+      "reasoning": "Missing summary. Description mentions partial update but lacks clarity on how it works. Added explicit explanation of partial update behavior, clarified input requirements (name and request body), and specified return value for AI agent clarity.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'websecurityscanner.projects.scanConfigs.start' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks clarity about what happens after invocation (asynchronous execution), return value details, and side effects. Added context that scanning is asynchronous and returns a ScanRun object for tracking, helping AI agents understand the operation's lifecycle.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "websecurityscanner.projects.scanConfigs.start",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Start a ScanRun according to the given ScanConfig.",
+      "summary_suggestion": "Start a security scan run",
+      "description_suggestion": "Initiates a new ScanRun based on the specified ScanConfig. This operation begins the actual vulnerability scanning process according to the configuration parameters. Requires the ScanConfig name and a StartScanRunRequest. Returns a ScanRun resource with initial status and tracking information. The scan runs asynchronously.",
+      "reasoning": "Missing summary. Description lacks clarity about what happens after invocation (asynchronous execution), return value details, and side effects. Added context that scanning is asynchronous and returns a ScanRun object for tracking, helping AI agents understand the operation's lifecycle.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'websecurityscanner.projects.scanConfigs.scanRuns.stop' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is minimal and lacks context about what stopping means operationally. Added clarity that this terminates an ongoing scan, specified input requirements, and clarified that findings discovered before stopping are still returned.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "websecurityscanner.projects.scanConfigs.scanRuns.stop",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Stops a ScanRun. The stopped ScanRun is returned.",
+      "summary_suggestion": "Stop an active security scan run",
+      "description_suggestion": "Stops an active ScanRun, terminating the ongoing vulnerability scan. Requires the ScanRun name and a StopScanRunRequest. Returns the updated ScanRun resource with final status and any findings discovered before the stop was executed.",
+      "reasoning": "Missing summary. Description is minimal and lacks context about what stopping means operationally. Added clarity that this terminates an ongoing scan, specified input requirements, and clarified that findings discovered before stopping are still returned.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'websecurityscanner.projects.scanConfigs.scanRuns.crawledUrls.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description lacks context about pagination support and return value structure. Added clarity that this shows discovered URLs from the scan, mentioned pagination support, and specified the response format for AI agent understanding of how to handle results.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "websecurityscanner.projects.scanConfigs.scanRuns.crawledUrls.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "List CrawledUrls under a given ScanRun.",
+      "summary_suggestion": "List URLs crawled during a scan run",
+      "description_suggestion": "Lists all URLs that were crawled and discovered during a specific ScanRun. Requires the ScanRun parent resource name. Supports pagination via optional parameters. Returns a ListCrawledUrlsResponse containing the crawled URLs and pagination tokens for retrieving additional results.",
+      "reasoning": "Missing summary. Description lacks context about pagination support and return value structure. Added clarity that this shows discovered URLs from the scan, mentioned pagination support, and specified the response format for AI agent understanding of how to handle results.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'websecurityscanner.projects.scanConfigs.scanRuns.findingTypeStats.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks context about what FindingTypeStats represents (aggregated statistics by vulnerability type). Added domain context about vulnerability categorization, clarified the analytical nature of this endpoint, and specified return value structure for better AI agent understanding of when to use this for summary vs. detailed findings.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "websecurityscanner.projects.scanConfigs.scanRuns.findingTypeStats.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "List all FindingTypeStats under a given ScanRun.",
+      "summary_suggestion": "List vulnerability statistics by type",
+      "description_suggestion": "Lists aggregated statistics of findings grouped by vulnerability type for a specific ScanRun. Provides a summary view of discovered vulnerabilities categorized by type (e.g., XSS, SQL Injection). Requires the ScanRun parent resource name. Returns a ListFindingTypeStatsResponse containing vulnerability type statistics and counts.",
+      "reasoning": "Missing summary. Description lacks context about what FindingTypeStats represents (aggregated statistics by vulnerability type). Added domain context about vulnerability categorization, clarified the analytical nature of this endpoint, and specified return value structure for better AI agent understanding of when to use this for summary vs. detailed findings.",
       "batch_index": 0
     }
   },
@@ -4389,7 +4621,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 11 operations analyzed, 5 quality issues found",
+    "message": "Semantic analysis completed: 11 operations analyzed, 11 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -4401,7 +4633,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 11,
-      "total_issues_found": 5,
+      "total_issues_found": 11,
       "batches_processed": 2
     }
   }

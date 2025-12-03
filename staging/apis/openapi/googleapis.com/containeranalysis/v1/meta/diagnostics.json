@@ -10334,7 +10334,79 @@
         "character": 0
       }
     },
-    "message": "Operation 'containeranalysis.projects.locations.notes.delete' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestion provides a clear action and additional context about the operation's effect and requirements.",
+    "message": "Operation 'containeranalysis.projects.locations.notes.setIamPolicy' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity about return value (Policy object). Added explicit mention of IAM terminology consistency with API context, clarified permission requirements, and specified that the operation returns the updated Policy object to improve AI agent understanding of operation effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "containeranalysis.projects.locations.notes.setIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Sets the access control policy on the specified note or occurrence. Requires `containeranalysis.notes.setIamPolicy` or `containeranalysis.occurrences.setIamPolicy` permission if the resource is a note or an occurrence, respectively. The resource takes the format `projects/[PROJECT_ID]/notes/[NOTE_ID]` for notes and `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]` for occurrences.",
+      "summary_suggestion": "Set IAM access control policy on note or occurrence",
+      "description_suggestion": "Sets the Identity and Access Management (IAM) access control policy on the specified note or occurrence resource. Requires `containeranalysis.notes.setIamPolicy` permission for notes or `containeranalysis.occurrences.setIamPolicy` permission for occurrences. The resource parameter must be formatted as `projects/[PROJECT_ID]/notes/[NOTE_ID]` for notes or `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]` for occurrences. Returns the updated Policy object containing the new bindings and access controls.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about return value (Policy object). Added explicit mention of IAM terminology consistency with API context, clarified permission requirements, and specified that the operation returns the updated Policy object to improve AI agent understanding of operation effects.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'containeranalysis.projects.locations.notes.testIamPermissions' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity about what is returned (TestIamPermissionsResponse with subset of permissions). Added explicit IAM terminology for consistency with API context, clarified that the response contains only the permissions the caller has (not all permissions), and specified the response type to help AI agents understand the operation's output and use it appropriately.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "containeranalysis.projects.locations.notes.testIamPermissions",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns the permissions that a caller has on the specified note or occurrence. Requires list permission on the project (for example, `containeranalysis.notes.list`). The resource takes the format `projects/[PROJECT_ID]/notes/[NOTE_ID]` for notes and `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]` for occurrences.",
+      "summary_suggestion": "Test caller's IAM permissions on note or occurrence",
+      "description_suggestion": "Tests which Identity and Access Management (IAM) permissions the authenticated caller has on the specified note or occurrence resource. Requires list permission on the project (for example, `containeranalysis.notes.list`). The resource parameter must be formatted as `projects/[PROJECT_ID]/notes/[NOTE_ID]` for notes or `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]` for occurrences. Returns a TestIamPermissionsResponse containing the subset of requested permissions that the caller actually possesses.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about what is returned (TestIamPermissionsResponse with subset of permissions). Added explicit IAM terminology for consistency with API context, clarified that the response contains only the permissions the caller has (not all permissions), and specified the response type to help AI agents understand the operation's output and use it appropriately.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'containeranalysis.projects.locations.notes.delete' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects, poor_ai_interpretability. Original description lacks critical context for AI agents. Missing: (1) what 'note' means in this domain (analysis type definition), (2) input parameter requirements (resource name format), (3) side effects (impact on referencing occurrences), (4) irreversibility of deletion. Enhanced version provides domain context and helps agents understand consequences.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10349,13 +10421,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_input_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Deletes the specified note.",
-      "summary_suggestion": "Delete the specified note.",
-      "description_suggestion": "Deletes the specified note and removes it from the system. Requires authentication. Returns an empty response body on success.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action and additional context about the operation's effect and requirements.",
+      "summary_suggestion": "Delete a note from Container Analysis",
+      "description_suggestion": "Deletes the specified note and all associated metadata. The note must be identified by its full resource name. Once deleted, the note cannot be recovered. Any occurrences referencing this note will remain but will no longer have an associated note definition.",
+      "reasoning": "Original description lacks critical context for AI agents. Missing: (1) what 'note' means in this domain (analysis type definition), (2) input parameter requirements (resource name format), (3) side effects (impact on referencing occurrences), (4) irreversibility of deletion. Enhanced version provides domain context and helps agents understand consequences.",
       "batch_index": 0
     }
   },
@@ -10370,7 +10444,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'containeranalysis.projects.locations.notes.get' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestion provides a clear action and additional context about the operation's effect and requirements.",
+    "message": "Operation 'containeranalysis.projects.locations.notes.get' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, poor_ai_interpretability. Original is too minimal. Missing: (1) domain context about what a 'note' represents (analysis type), (2) input requirements (resource name format), (3) output details (Note schema structure), (4) cross-project access capability. Enhanced version clarifies purpose and helps AI agents understand when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10385,13 +10459,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Gets the specified note.",
-      "summary_suggestion": "Get the specified note.",
-      "description_suggestion": "Retrieves the specified note from the system. Requires authentication. Returns the note object on success.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action and additional context about the operation's effect and requirements.",
+      "summary_suggestion": "Retrieve a note definition from Container Analysis",
+      "description_suggestion": "Retrieves the specified note, which defines a type of analysis that can be performed on resources. Requires the full resource name of the note. Returns the complete Note object containing analysis metadata, vulnerability information, and related URLs. Consumer projects can retrieve notes from provider projects.",
+      "reasoning": "Original is too minimal. Missing: (1) domain context about what a 'note' represents (analysis type), (2) input requirements (resource name format), (3) output details (Note schema structure), (4) cross-project access capability. Enhanced version clarifies purpose and helps AI agents understand when to use this operation.",
       "batch_index": 0
     }
   },
@@ -10406,7 +10482,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'containeranalysis.projects.locations.occurrences.getNotes' has semantic quality issues: vague_summary, vague_description. The current summary is missing. The suggestion provides a clear action and additional context about the operation's effect and requirements.",
+    "message": "Operation 'containeranalysis.projects.locations.notes.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Original lacks essential details for AI agents. Missing: (1) input structure (Note schema, field mask support), (2) output details (returns updated Note), (3) side effects (impacts future occurrences), (4) permission requirements. Enhanced version clarifies partial update capability and downstream effects.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10417,17 +10493,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "containeranalysis.projects.locations.occurrences.getNotes",
+      "operation_id": "containeranalysis.projects.locations.notes.patch",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
-      "current_description": "Gets the note attached to the specified occurrence. Consumer projects can use this method to get a note that belongs to a provider project.",
-      "summary_suggestion": "Get the note attached to the specified occurrence.",
-      "description_suggestion": "Retrieves the note attached to the specified occurrence. Consumer projects can use this method to get a note that belongs to a provider project. Requires authentication. Returns the note object on success.",
-      "reasoning": "The current summary is missing. The suggestion provides a clear action and additional context about the operation's effect and requirements.",
+      "current_description": "Updates the specified note.",
+      "summary_suggestion": "Update a note definition in Container Analysis",
+      "description_suggestion": "Updates the specified note with new analysis metadata. Accepts a Note object and supports partial updates via field masks. Returns the updated Note object. Changes to a note definition affect how future occurrences of that analysis type are interpreted. Requires appropriate IAM permissions to modify notes.",
+      "reasoning": "Original lacks essential details for AI agents. Missing: (1) input structure (Note schema, field mask support), (2) output details (returns updated Note), (3) side effects (impacts future occurrences), (4) permission requirements. Enhanced version clarifies partial update capability and downstream effects.",
       "batch_index": 0
     }
   },
@@ -10442,7 +10520,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'containeranalysis.projects.locations.resources.exportSBOM' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestion provides a clear action and additional context about the operation's effect and requirements.",
+    "message": "Operation 'containeranalysis.projects.locations.resources.exportSBOM' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_context. Original is too vague for AI agents. Missing: (1) domain context (what SBOM is and its purpose), (2) input details (ExportSBOMRequest structure, resource types), (3) output details (SBOM format and content), (4) prerequisites (resource must be scanned). Enhanced version clarifies the operation's purpose in vulnerability management and artifact analysis context.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10457,13 +10535,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Generates an SBOM for the given resource.",
-      "summary_suggestion": "Generate an SBOM for the specified resource.",
-      "description_suggestion": "Generates a Software Bill of Materials (SBOM) for the specified resource. Requires authentication. Returns the SBOM object on success.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action and additional context about the operation's effect and requirements.",
+      "summary_suggestion": "Generate Software Bill of Materials for a resource",
+      "description_suggestion": "Generates a Software Bill of Materials (SBOM) for the specified resource, typically a container image or artifact. Accepts an ExportSBOMRequest specifying the resource and desired SBOM format. Returns the generated SBOM document containing component inventory, versions, and dependency information. Requires the resource to have been previously scanned by Container Analysis.",
+      "reasoning": "Original is too vague for AI agents. Missing: (1) domain context (what SBOM is and its purpose), (2) input details (ExportSBOMRequest structure, resource types), (3) output details (SBOM format and content), (4) prerequisites (resource must be scanned). Enhanced version clarifies the operation's purpose in vulnerability management and artifact analysis context.",
       "batch_index": 0
     }
   },
@@ -10478,7 +10558,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'containeranalysis.projects.locations.notes.list' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestion provides a clear action and additional context about the operation's effect and requirements.",
+    "message": "Operation 'containeranalysis.projects.locations.notes.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original lacks sufficient detail for AI agents. Missing: (1) domain context (notes define analysis types), (2) input capabilities (filtering, pagination parameters), (3) output structure (collection of Note objects), (4) purpose context (categorization of analysis). Enhanced version clarifies what notes represent and how to use pagination/filtering.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10493,13 +10573,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists notes for the specified project.",
-      "summary_suggestion": "List notes for the specified project.",
-      "description_suggestion": "Lists all notes for the specified project. Requires authentication. Returns a list of note objects on success.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action and additional context about the operation's effect and requirements.",
+      "summary_suggestion": "List all notes in a project",
+      "description_suggestion": "Lists all notes (analysis type definitions) for the specified project. Supports filtering and pagination via query parameters. Returns a collection of Note objects, each defining a type of analysis that can be performed on resources. Notes are used to categorize and define vulnerability and metadata analysis types.",
+      "reasoning": "Original lacks sufficient detail for AI agents. Missing: (1) domain context (notes define analysis types), (2) input capabilities (filtering, pagination parameters), (3) output structure (collection of Note objects), (4) purpose context (categorization of analysis). Enhanced version clarifies what notes represent and how to use pagination/filtering.",
       "batch_index": 0
     }
   },
@@ -10514,7 +10595,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'containeranalysis.projects.locations.notes.create' has semantic quality issues: vague_summary, vague_description. The current summary and description are too vague. The suggestions provide more clarity on the operation's purpose and expected inputs/outputs.",
+    "message": "Operation 'containeranalysis.projects.locations.notes.create' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_context. Original description is too minimal. Added context about what a note represents in the Grafeas/Container Analysis domain, required input format, return value, and the relationship between notes and occurrences. This helps AI agents understand the semantic purpose and when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10529,13 +10610,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Creates a new note.",
-      "summary_suggestion": "Create a new note for a specified resource.",
-      "description_suggestion": "Creates a new note for the specified resource. Requires authentication and a valid Note object in the request body. Returns the newly created note.",
-      "reasoning": "The current summary and description are too vague. The suggestions provide more clarity on the operation's purpose and expected inputs/outputs.",
+      "summary_suggestion": "Create a new analysis note",
+      "description_suggestion": "Creates a new note that defines a type of analysis that can be performed on resources. A note represents metadata about a vulnerability, build, or other analysis type. Requires the parent project path in the format `projects/[PROJECT_ID]/locations/[LOCATION]`. Returns the created Note object with a generated name. The note can be referenced by occurrences to document analysis findings.",
+      "reasoning": "Original description is too minimal. Added context about what a note represents in the Grafeas/Container Analysis domain, required input format, return value, and the relationship between notes and occurrences. This helps AI agents understand the semantic purpose and when to use this operation.",
       "batch_index": 1
     }
   },
@@ -10550,7 +10634,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'containeranalysis.projects.locations.notes.batchCreate' has semantic quality issues: vague_summary. The current summary is vague. The suggestion provides a more specific action-oriented summary.",
+    "message": "Operation 'containeranalysis.projects.locations.notes.batchCreate' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original description lacks detail about batch semantics, input structure, return format, and error handling. Added information about efficiency benefits, response structure, and partial failure handling to improve AI agent decision-making about when to use batch vs. individual operations.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10564,12 +10648,16 @@
       "operation_id": "containeranalysis.projects.locations.notes.batchCreate",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Creates new notes in batch.",
-      "summary_suggestion": "Create multiple notes in batch.",
-      "reasoning": "The current summary is vague. The suggestion provides a more specific action-oriented summary.",
+      "summary_suggestion": "Batch create multiple analysis notes",
+      "description_suggestion": "Creates multiple notes in a single batch operation. Accepts a BatchCreateNotesRequest containing a list of notes to create for the specified project. More efficient than individual create calls when creating multiple analysis note definitions. Returns a BatchCreateNotesResponse with all successfully created Note objects. Partial failures may occur - check response for individual note creation status.",
+      "reasoning": "Original description lacks detail about batch semantics, input structure, return format, and error handling. Added information about efficiency benefits, response structure, and partial failure handling to improve AI agent decision-making about when to use batch vs. individual operations.",
       "batch_index": 1
     }
   },
@@ -10584,7 +10672,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'containeranalysis.projects.locations.occurrences.list' has semantic quality issues: vague_summary, missing_context. The current summary is vague and lacks context about the expected inputs and outputs. The suggestions provide a more specific action-oriented summary and additional context.",
+    "message": "Operation 'containeranalysis.projects.locations.occurrences.list' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_output_details. Original description is incomplete. Added context about what occurrences represent, filtering capabilities, pagination support, and use cases. This helps AI agents understand the operation's purpose in querying analysis results and when to apply filters.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10599,13 +10687,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists occurrences for the specified project.",
-      "summary_suggestion": "List occurrences for the specified resource.",
-      "description_suggestion": "Lists occurrences for the specified resource. Requires authentication and returns a list of occurrence objects. Additional parameters can be used to filter the results.",
-      "reasoning": "The current summary is vague and lacks context about the expected inputs and outputs. The suggestions provide a more specific action-oriented summary and additional context.",
+      "summary_suggestion": "List resource analysis occurrences",
+      "description_suggestion": "Lists all occurrences (analysis findings) for the specified project. Occurrences represent instances of analysis types found on resources. Supports filtering by resource, note kind, and other criteria through query parameters. Returns a paginated list of Occurrence objects with optional filtering and sorting. Use this to query analysis results across resources or to find specific vulnerability/build findings.",
+      "reasoning": "Original description is incomplete. Added context about what occurrences represent, filtering capabilities, pagination support, and use cases. This helps AI agents understand the operation's purpose in querying analysis results and when to apply filters.",
       "batch_index": 1
     }
   },
@@ -10620,7 +10710,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'containeranalysis.projects.locations.occurrences.create' has semantic quality issues: vague_summary, missing_context. The current summary and description are too vague. The suggestions provide more clarity on the operation's purpose, expected inputs, and outputs.",
+    "message": "Operation 'containeranalysis.projects.locations.occurrences.create' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_context. Original description is too minimal. Added domain context explaining the relationship between occurrences and notes, required input format, and what the operation records. This helps AI agents understand the semantic purpose and when to create occurrences.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10635,13 +10725,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
         "missing_context"
       ],
       "current_summary": "",
       "current_description": "Creates a new occurrence.",
-      "summary_suggestion": "Create a new occurrence for a specified resource.",
-      "description_suggestion": "Creates a new occurrence for the specified resource. Requires authentication and a valid Occurrence object in the request body. Returns the newly created occurrence.",
-      "reasoning": "The current summary and description are too vague. The suggestions provide more clarity on the operation's purpose, expected inputs, and outputs.",
+      "summary_suggestion": "Create a new analysis occurrence",
+      "description_suggestion": "Creates a new occurrence that records an instance of an analysis type found on a resource. An occurrence links a note (analysis type definition) to a specific resource, documenting findings like vulnerabilities or build metadata. Requires the parent project path in format `projects/[PROJECT_ID]/locations/[LOCATION]` and an Occurrence object specifying the resource, note reference, and analysis details. Returns the created Occurrence object with a generated name.",
+      "reasoning": "Original description is too minimal. Added domain context explaining the relationship between occurrences and notes, required input format, and what the operation records. This helps AI agents understand the semantic purpose and when to create occurrences.",
       "batch_index": 1
     }
   },
@@ -10656,7 +10749,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'containeranalysis.projects.locations.occurrences.batchCreate' has semantic quality issues: vague_summary. The current summary is vague. The suggestion provides a more specific action-oriented summary.",
+    "message": "Operation 'containeranalysis.projects.locations.occurrences.batchCreate' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original description lacks batch operation context and details. Added information about efficiency benefits, request/response structure, and partial failure handling to help AI agents decide between batch and individual operations.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10670,12 +10763,16 @@
       "operation_id": "containeranalysis.projects.locations.occurrences.batchCreate",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Creates new occurrences in batch.",
-      "summary_suggestion": "Create multiple occurrences in batch.",
-      "reasoning": "The current summary is vague. The suggestion provides a more specific action-oriented summary.",
+      "summary_suggestion": "Batch create multiple analysis occurrences",
+      "description_suggestion": "Creates multiple occurrences in a single batch operation. Accepts a BatchCreateOccurrencesRequest containing a list of occurrences to create for the specified project. More efficient than individual create calls when recording multiple analysis findings. Returns a BatchCreateOccurrencesResponse with all successfully created Occurrence objects. Partial failures may occur - check response for individual occurrence creation status.",
+      "reasoning": "Original description lacks batch operation context and details. Added information about efficiency benefits, request/response structure, and partial failure handling to help AI agents decide between batch and individual operations.",
       "batch_index": 1
     }
   },
@@ -10690,7 +10787,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'containeranalysis.projects.locations.occurrences.getVulnerabilitySummary' has semantic quality issues: vague_summary. The current summary is vague. The suggestion provides a more specific action-oriented summary.",
+    "message": "Operation 'containeranalysis.projects.locations.occurrences.getVulnerabilitySummary' has semantic quality issues: vague_summary, missing_context, missing_output_details. Original description is vague about the summary content and use case. Added specificity about vulnerability severity metrics, return object type, and practical use cases. This helps AI agents understand what data is returned and when to use this operation for security insights.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10704,12 +10801,15 @@
       "operation_id": "containeranalysis.projects.locations.occurrences.getVulnerabilitySummary",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets a summary of the number and severity of occurrences.",
-      "summary_suggestion": "Get vulnerability summary for occurrences.",
-      "reasoning": "The current summary is vague. The suggestion provides a more specific action-oriented summary.",
+      "summary_suggestion": "Get vulnerability occurrence summary",
+      "description_suggestion": "Retrieves an aggregated summary of vulnerability occurrences for the specified project, including counts and severity distribution. Returns a VulnerabilitySummary object with metrics on the number of vulnerabilities by severity level (CRITICAL, HIGH, MEDIUM, LOW, etc.). Useful for security dashboards and compliance reporting. Supports filtering by resource to scope the summary to specific artifacts.",
+      "reasoning": "Original description is vague about the summary content and use case. Added specificity about vulnerability severity metrics, return object type, and practical use cases. This helps AI agents understand what data is returned and when to use this operation for security insights.",
       "batch_index": 1
     }
   },
@@ -10724,7 +10824,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 16 operations analyzed, 11 quality issues found",
+    "message": "Semantic analysis completed: 16 operations analyzed, 13 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -10736,7 +10836,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 16,
-      "total_issues_found": 11,
+      "total_issues_found": 13,
       "batches_processed": 3
     }
   }

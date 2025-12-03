@@ -4076,7 +4076,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'fitness.users.dataSources.datasets.get' has semantic quality issues: vague_summary, missing_side_effects. Added a summary and clarified that there are no side effects.",
+    "message": "Operation 'fitness.users.dataSources.datasets.get' has semantic quality issues: vague_summary, missing_context, poor_ai_interpretability. Missing summary entirely. Description is overly technical and repetitive, making it difficult for AI agents to understand the core purpose. Improved version clarifies the retrieval action, explains the overlap logic more concisely, specifies the return value, and adds authentication context for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4091,13 +4091,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_context",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Returns a dataset containing all data points whose start and end times overlap with the specified range of the dataset minimum start time and maximum end time. Specifically, any data point whose start time is less than or equal to the dataset end time and whose end time is greater than or equal to the dataset start time.",
-      "summary_suggestion": "Retrieve a dataset by ID",
-      "description_suggestion": "Retrieves a dataset containing all data points whose start and end times overlap with the specified range of the dataset minimum start time and maximum end time. Specifically, any data point whose start time is less than or equal to the dataset end time and whose end time is greater than or equal to the dataset start time. No side effects.",
-      "reasoning": "Added a summary and clarified that there are no side effects.",
+      "summary_suggestion": "Retrieve dataset with overlapping data points",
+      "description_suggestion": "Retrieves a dataset and all associated data points whose time ranges overlap with the dataset's time boundaries. A data point is included if its start time is less than or equal to the dataset end time AND its end time is greater than or equal to the dataset start time. Returns the complete dataset object with all matching data points. Requires authentication and valid userId, dataSourceId, and datasetId.",
+      "reasoning": "Missing summary entirely. Description is overly technical and repetitive, making it difficult for AI agents to understand the core purpose. Improved version clarifies the retrieval action, explains the overlap logic more concisely, specifies the return value, and adds authentication context for AI agent decision-making.",
       "batch_index": 1
     }
   },
@@ -4112,7 +4113,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'fitness.users.dataSources.datasets.patch' has semantic quality issues: vague_summary, missing_output_details. Added a summary and clarified the output details.",
+    "message": "Operation 'fitness.users.dataSources.datasets.patch' has semantic quality issues: vague_summary, missing_context, missing_side_effects, not_actionable. Missing summary. Description is unclear about the action and contains confusing language ('subsquent calls'). Improved version clarifies that this is an insert operation, explains the non-destructive nature upfront, specifies the return value, adds authentication context, and clarifies input requirements for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4127,13 +4128,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
+        "missing_context",
+        "missing_side_effects",
+        "not_actionable"
       ],
       "current_summary": "",
       "current_description": "Adds data points to a dataset. The dataset need not be previously created. All points within the given dataset will be returned with subsquent calls to retrieve this dataset. Data points can belong to more than one dataset. This method does not use patch semantics: the data points provided are merely inserted, with no existing data replaced.",
-      "summary_suggestion": "Add data points to a dataset",
-      "description_suggestion": "Adds data points to a dataset. The dataset need not be previously created. All points within the given dataset will be returned with subsequent calls to retrieve this dataset. Data points can belong to more than one dataset. This method does not use patch semantics: the data points provided are merely inserted, with no existing data replaced. Returns the updated dataset.",
-      "reasoning": "Added a summary and clarified the output details.",
+      "summary_suggestion": "Add data points to dataset",
+      "description_suggestion": "Adds data points to a dataset, creating the dataset if it does not already exist. Data points are inserted without replacing existing data (non-destructive operation). Data points can belong to multiple datasets simultaneously. Returns the updated dataset containing all data points. Requires authentication and valid userId, dataSourceId, and datasetId. Accepts a Dataset object in the request body.",
+      "reasoning": "Missing summary. Description is unclear about the action and contains confusing language ('subsquent calls'). Improved version clarifies that this is an insert operation, explains the non-destructive nature upfront, specifies the return value, adds authentication context, and clarifies input requirements for better AI agent interpretability.",
       "batch_index": 1
     }
   },
@@ -4148,7 +4151,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'fitness.users.dataset.aggregate' has semantic quality issues: vague_summary, missing_output_details. Added a summary and clarified the output details.",
+    "message": "Operation 'fitness.users.dataset.aggregate' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, poor_ai_interpretability. Missing summary entirely. Description is vague about what 'buckets' and 'boundary' mean in the fitness domain. Improved version adds concrete examples of bucket types, clarifies input/output schemas, specifies that only one bucket type per request is allowed, and provides domain context for AI agents to understand when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4163,13 +4166,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Aggregates data of a certain type or stream into buckets divided by a given type of boundary. Multiple data sets of multiple types and from multiple sources can be aggregated into exactly one bucket type per request.",
-      "summary_suggestion": "Aggregate data into buckets",
-      "description_suggestion": "Aggregates data of a certain type or stream into buckets divided by a given type of boundary. Multiple data sets of multiple types and from multiple sources can be aggregated into exactly one bucket type per request. Returns the aggregated data.",
-      "reasoning": "Added a summary and clarified the output details.",
+      "summary_suggestion": "Aggregate fitness data into time or activity buckets",
+      "description_suggestion": "Aggregates fitness data from multiple datasets, data sources, and types into buckets using a specified boundary type (time-based, activity-based, or session-based). Each request supports exactly one bucket type. Accepts an AggregateRequest object specifying the data to aggregate, aggregation metrics, and bucketing strategy. Returns an AggregateResponse containing bucketed data with aggregated values. Requires authentication and valid userId.",
+      "reasoning": "Missing summary entirely. Description is vague about what 'buckets' and 'boundary' mean in the fitness domain. Improved version adds concrete examples of bucket types, clarifies input/output schemas, specifies that only one bucket type per request is allowed, and provides domain context for AI agents to understand when to use this operation.",
       "batch_index": 1
     }
   },
@@ -4184,7 +4190,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'fitness.users.sessions.list' has semantic quality issues: vague_summary. Added a summary and clarified the description.",
+    "message": "Operation 'fitness.users.sessions.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description is too minimal and lacks context about pagination, filtering capabilities, and return format. Improved version specifies that results are paginated, clarifies what Session objects contain (per API context), mentions filtering/pagination support, specifies the response schema, and adds authentication context for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4198,13 +4204,15 @@
       "operation_id": "fitness.users.sessions.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists sessions previously created.",
-      "summary_suggestion": "List all user sessions",
-      "description_suggestion": "Lists all sessions previously created by the user.",
-      "reasoning": "Added a summary and clarified the description.",
+      "summary_suggestion": "List user's fitness sessions",
+      "description_suggestion": "Retrieves a paginated list of all sessions previously created for the authenticated user. Sessions contain metadata such as user-friendly names and time interval information. Supports filtering and pagination via query parameters. Returns a ListSessionsResponse containing an array of Session objects and pagination information. Requires authentication and valid userId.",
+      "reasoning": "Missing summary. Description is too minimal and lacks context about pagination, filtering capabilities, and return format. Improved version specifies that results are paginated, clarifies what Session objects contain (per API context), mentions filtering/pagination support, specifies the response schema, and adds authentication context for AI agent decision-making.",
       "batch_index": 1
     }
   },
@@ -4219,7 +4227,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'fitness.users.sessions.update' has semantic quality issues: vague_summary, missing_output_details. Added a summary and clarified the output details.",
+    "message": "Operation 'fitness.users.sessions.delete' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary. Description lacks important context about permanence, side effects, and response format. Improved version clarifies the destructive nature of the operation, specifies authentication requirements, and indicates the expected response for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "fitness.users.sessions.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes a session specified by the given session ID.",
+      "summary_suggestion": "Delete a fitness session",
+      "description_suggestion": "Permanently deletes a session and its associated metadata. The session is identified by the provided sessionId. This operation cannot be undone. Requires authentication and valid userId and sessionId. Returns a 204 No Content response on successful deletion.",
+      "reasoning": "Missing summary. Description lacks important context about permanence, side effects, and response format. Improved version clarifies the destructive nature of the operation, specifies authentication requirements, and indicates the expected response for AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'fitness.users.sessions.update' has semantic quality issues: vague_summary, missing_context, missing_output_details, not_actionable. Missing summary. Description uses unclear language ('insert' instead of 'create') and lacks clarity about upsert semantics. Improved version clarifies the create-or-update behavior, specifies input/output schemas, explains what Session contains, and adds authentication context for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4234,13 +4279,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
+        "missing_context",
+        "missing_output_details",
+        "not_actionable"
       ],
       "current_summary": "",
       "current_description": "Updates or insert a given session.",
-      "summary_suggestion": "Update a user session",
-      "description_suggestion": "Updates or inserts a given session. Requires a session ID and session details. Returns the updated session.",
-      "reasoning": "Added a summary and clarified the output details.",
+      "summary_suggestion": "Create or update a fitness session",
+      "description_suggestion": "Creates a new session or updates an existing session identified by the provided sessionId. If the session does not exist, it is created with the provided data. If it exists, all fields are replaced with the provided values. Accepts a Session object in the request body containing metadata such as name and time interval information. Returns the created or updated Session object. Requires authentication and valid userId and sessionId.",
+      "reasoning": "Missing summary. Description uses unclear language ('insert' instead of 'create') and lacks clarity about upsert semantics. Improved version clarifies the create-or-update behavior, specifies input/output schemas, explains what Session contains, and adds authentication context for better AI agent interpretability.",
       "batch_index": 1
     }
   },
@@ -4255,7 +4302,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'fitness.users.dataSources.list' has semantic quality issues: vague_summary, missing_context. The original summary was missing. Added a clear summary and clarified the description to include the return value.",
+    "message": "Operation 'fitness.users.dataSources.list' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description lacks clarity about what is returned and doesn't mention scope-based filtering implications for AI agents. Added summary and enhanced description with return type information and clearer explanation of scope limitations.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4274,9 +4321,9 @@
       ],
       "current_summary": "",
       "current_description": "Lists all data sources that are visible to the developer, using the OAuth scopes provided. The list is not exhaustive; the user may have private data sources that are only visible to other developers, or calls using other scopes.",
-      "summary_suggestion": "List all data sources for a user",
-      "description_suggestion": "Lists all data sources that are visible to the authenticated user, using the OAuth scopes provided. The list is not exhaustive; the user may have private data sources that are only visible to other developers, or calls using other scopes. Returns a list of DataSource objects.",
-      "reasoning": "The original summary was missing. Added a clear summary and clarified the description to include the return value.",
+      "summary_suggestion": "List user's visible data sources",
+      "description_suggestion": "Retrieves all data sources visible to the authenticated developer for the specified user, filtered by OAuth scopes. The returned list may not be exhaustive; the user may have additional private data sources visible only to other developers or with different scopes. Returns a ListDataSourcesResponse containing the accessible data sources.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about what is returned and doesn't mention scope-based filtering implications for AI agents. Added summary and enhanced description with return type information and clearer explanation of scope limitations.",
       "batch_index": 0
     }
   },
@@ -4291,7 +4338,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'fitness.users.dataSources.delete' has semantic quality issues: vague_summary, missing_side_effects. The original summary was missing. Added a clear summary and included side effects of the operation.",
+    "message": "Operation 'fitness.users.dataSources.create' has semantic quality issues: vague_summary, vague_description, missing_output_details. Missing summary. Description is excessively verbose and contains implementation details that obscure the core operation. Condensed to focus on what the operation does, key input constraints (don't set dataStreamId), deprecation warning, and what is returned. Improved AI agent interpretability by removing tangential details about data stream updates and project number obfuscation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "fitness.users.dataSources.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new data source that is unique across all data sources belonging to this user. A data source is a unique source of sensor data. Data sources can expose raw data coming from hardware sensors on local or companion devices. They can also expose derived data, created by transforming or merging other data sources. Multiple data sources can exist for the same data type. Every data point in every dataset inserted into or read from the Fitness API has an associated data source. Each data source produces a unique stream of dataset updates, with a unique data source identifier. Not all changes to data source affect the data stream ID, so that data collected by updated versions of the same application/device can still be considered to belong to the same data source. Data sources are identified using a string generated by the server, based on the contents of the source being created. The dataStreamId field should not be set when invoking this method. It will be automatically generated by the server with the correct format. If a dataStreamId is set, it must match the format that the server would generate. This format is a combination of some fields from the data source, and has a specific order. If it doesn't match, the request will fail with an error. Specifying a DataType which is not a known type (beginning with \"com.google.\") will create a DataSource with a *custom data type*. Custom data types are only readable by the application that created them. Custom data types are *deprecated*; use standard data types instead. In addition to the data source fields included in the data source ID, the developer project number that is authenticated when creating the data source is included. This developer project number is obfuscated when read by any other developer reading public data types.",
+      "summary_suggestion": "Create a new data source for user",
+      "description_suggestion": "Creates a new unique data source for the specified user. The data source represents a sensor data stream (raw or derived) and is identified by a server-generated dataStreamId based on the provided DataSource object. Do not set the dataStreamId field; it will be automatically generated. Custom data types (not beginning with 'com.google.') are deprecated; use standard data types instead. Returns the created DataSource with the generated dataStreamId.",
+      "reasoning": "Missing summary. Description is excessively verbose and contains implementation details that obscure the core operation. Condensed to focus on what the operation does, key input constraints (don't set dataStreamId), deprecation warning, and what is returned. Improved AI agent interpretability by removing tangential details about data stream updates and project number obfuscation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'fitness.users.dataSources.delete' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about the constraint (data must be empty) and what constitutes success. Added summary and enhanced description to clarify the precondition and expected response behavior for AI agents.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4306,13 +4390,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Deletes the specified data source. The request will fail if the data source contains any data points.",
-      "summary_suggestion": "Delete a specified data source",
-      "description_suggestion": "Deletes the specified data source. The request will fail if the data source contains any data points. The deletion will remove all associated data points and datasets.",
-      "reasoning": "The original summary was missing. Added a clear summary and included side effects of the operation.",
+      "summary_suggestion": "Delete a data source",
+      "description_suggestion": "Deletes the specified data source for the user. The operation will fail with an error if the data source contains any data points. All associated data must be removed before deletion. Returns a 200 response on successful deletion.",
+      "reasoning": "Missing summary. Description lacks clarity about the constraint (data must be empty) and what constitutes success. Added summary and enhanced description to clarify the precondition and expected response behavior for AI agents.",
       "batch_index": 0
     }
   },
@@ -4327,7 +4411,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'fitness.users.dataSources.get' has semantic quality issues: vague_summary, missing_output_details. The original summary was missing. Added a clear summary and included the return value in the description.",
+    "message": "Operation 'fitness.users.dataSources.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is too minimal and doesn't specify what is returned. Added summary and expanded description to clarify the return type (DataSource object) and what information it contains.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4346,9 +4430,9 @@
       ],
       "current_summary": "",
       "current_description": "Returns the specified data source.",
-      "summary_suggestion": "Get the specified data source",
-      "description_suggestion": "Returns the specified data source. Returns a DataSource object.",
-      "reasoning": "The original summary was missing. Added a clear summary and included the return value in the description.",
+      "summary_suggestion": "Retrieve a data source",
+      "description_suggestion": "Retrieves the specified data source for the user. Returns the DataSource object containing metadata such as data type, device information, and data stream identifier.",
+      "reasoning": "Missing summary. Description is too minimal and doesn't specify what is returned. Added summary and expanded description to clarify the return type (DataSource object) and what information it contains.",
       "batch_index": 0
     }
   },
@@ -4363,7 +4447,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'fitness.users.dataSources.update' has semantic quality issues: vague_summary, missing_output_details. The original summary was missing. Added a clear summary and included the return value in the description.",
+    "message": "Operation 'fitness.users.dataSources.update' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about what fields can be modified and what is returned. Added summary and clarified which fields are immutable versus modifiable, plus specified the return type for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4382,9 +4466,9 @@
       ],
       "current_summary": "",
       "current_description": "Updates the specified data source. The dataStreamId, dataType, type, dataStreamName, and device properties with the exception of version, cannot be modified. Data sources are identified by their dataStreamId.",
-      "summary_suggestion": "Update the specified data source",
-      "description_suggestion": "Updates the specified data source. The dataStreamId, dataType, type, dataStreamName, and device properties with the exception of version, cannot be modified. Data sources are identified by their dataStreamId. Returns the updated DataSource object.",
-      "reasoning": "The original summary was missing. Added a clear summary and included the return value in the description.",
+      "summary_suggestion": "Update a data source",
+      "description_suggestion": "Updates the specified data source for the user. Only modifiable fields can be changed; dataStreamId, dataType, type, dataStreamName, and device properties (except version) are immutable. Returns the updated DataSource object.",
+      "reasoning": "Missing summary. Description lacks clarity about what fields can be modified and what is returned. Added summary and clarified which fields are immutable versus modifiable, plus specified the return type for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -4399,7 +4483,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'fitness.users.dataSources.dataPointChanges.list' has semantic quality issues: vague_summary, missing_output_details. The original summary was missing. Added a clear summary and included the return value in the description.",
+    "message": "Operation 'fitness.users.dataSources.dataPointChanges.list' has semantic quality issues: vague_summary, missing_output_details, missing_context. Missing summary. Description is vague about what 'changes' means and doesn't explain the return type or use case. Added summary and enhanced description to clarify that this tracks modifications, specify the response type, and provide context about the operation's purpose for AI agents.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4414,13 +4498,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Queries for user's data point changes for a particular data source.",
-      "summary_suggestion": "List data point changes for a data source",
-      "description_suggestion": "Queries for user's data point changes for a particular data source. Returns a list of DataPointChange objects.",
-      "reasoning": "The original summary was missing. Added a clear summary and included the return value in the description.",
+      "summary_suggestion": "List data point changes for data source",
+      "description_suggestion": "Retrieves data point changes for the specified data source, allowing tracking of modifications over time. Returns a ListDataPointChangesResponse containing the change history filtered by the query parameters (time range, limit, etc.). Useful for syncing and detecting updates to fitness data.",
+      "reasoning": "Missing summary. Description is vague about what 'changes' means and doesn't explain the return type or use case. Added summary and enhanced description to clarify that this tracks modifications, specify the response type, and provide context about the operation's purpose for AI agents.",
       "batch_index": 0
     }
   },
@@ -4435,7 +4520,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'fitness.users.dataSources.datasets.delete' has semantic quality issues: vague_summary, missing_output_details. The original summary was missing. Added a clear summary and included the return value in the description.",
+    "message": "Operation 'fitness.users.dataSources.datasets.delete' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is complex but lacks clarity about the deletion behavior and return value. Added summary and restructured description to clarify the two deletion modes (full vs. partial) and specify the expected response, improving AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4454,9 +4539,9 @@
       ],
       "current_summary": "",
       "current_description": "Performs an inclusive delete of all data points whose start and end times have any overlap with the time range specified by the dataset ID. For most data types, the entire data point will be deleted. For data types where the time span represents a consistent value (such as com.google.activity.segment), and a data point straddles either end point of the dataset, only the overlapping portion of the data point will be deleted.",
-      "summary_suggestion": "Delete data points within a dataset range",
-      "description_suggestion": "Performs an inclusive delete of all data points whose start and end times have any overlap with the time range specified by the dataset ID. For most data types, the entire data point will be deleted. For data types where the time span represents a consistent value (such as com.google.activity.segment), and a data point straddles either end point of the dataset, only the overlapping portion of the data point will be deleted. Returns a success message.",
-      "reasoning": "The original summary was missing. Added a clear summary and included the return value in the description.",
+      "summary_suggestion": "Delete dataset and overlapping data points",
+      "description_suggestion": "Deletes all data points within the specified dataset whose time ranges overlap with the dataset's time interval. For most data types, entire data points are deleted. For interval-based data types (e.g., com.google.activity.segment), only the overlapping time portion is deleted if a data point straddles the dataset boundaries. Returns a 200 response on successful deletion.",
+      "reasoning": "Missing summary. Description is complex but lacks clarity about the deletion behavior and return value. Added summary and restructured description to clarify the two deletion modes (full vs. partial) and specify the expected response, improving AI agent interpretability.",
       "batch_index": 0
     }
   },
@@ -4471,7 +4556,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 13 operations analyzed, 11 quality issues found",
+    "message": "Semantic analysis completed: 13 operations analyzed, 13 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -4483,7 +4568,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 13,
-      "total_issues_found": 11,
+      "total_issues_found": 13,
       "batches_processed": 2
     }
   }

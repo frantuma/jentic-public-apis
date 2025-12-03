@@ -9857,7 +9857,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListComposition' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. Added details about pagination, filtering, and sorting to improve clarity and completeness.",
+    "message": "Operation 'DeleteComposition' has semantic quality issues: vague_summary, missing_side_effects. Original description lacks clarity about side effects (permanent deletion of media files) and response behavior. Added information about state requirements and response code to help AI agents understand the destructive nature and consequences of this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9868,17 +9868,17 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "ListComposition",
+      "operation_id": "DeleteComposition",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_side_effects"
       ],
-      "current_summary": "List of all Recording compositions.",
-      "current_description": "List of all Recording compositions.",
-      "summary_suggestion": "Retrieve a list of all Recording compositions.",
-      "description_suggestion": "Retrieves a list of all Recording compositions. Supports pagination, filtering, and sorting.",
-      "reasoning": "The current summary and description are vague. Added details about pagination, filtering, and sorting to improve clarity and completeness.",
+      "current_summary": "Delete a Recording Composition resource identified by a Composition SID.",
+      "current_description": "Delete a Recording Composition resource identified by a Composition SID.",
+      "summary_suggestion": "Delete a composition by SID",
+      "description_suggestion": "Deletes a Composition resource identified by the provided Composition SID. This operation permanently removes the composition and its associated media files. The composition must exist and be in a deletable state. Returns a 204 No Content response on successful deletion.",
+      "reasoning": "Original description lacks clarity about side effects (permanent deletion of media files) and response behavior. Added information about state requirements and response code to help AI agents understand the destructive nature and consequences of this operation.",
       "batch_index": 0
     }
   },
@@ -9893,7 +9893,45 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateComposition' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Both the summary and description were missing. Added details about the required parameters, authentication, and the return value to improve clarity and completeness.",
+    "message": "Operation 'ListComposition' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original summary is not action-oriented (uses 'List of' instead of verb). Description lacks details about filtering capabilities, pagination support, and parameter usage. Enhanced version clarifies that this is a retrieval operation with filtering and pagination support, critical for AI agents to understand how to query compositions effectively.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListComposition",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "List of all Recording compositions.",
+      "current_description": "List of all Recording compositions.",
+      "summary_suggestion": "List all compositions with filtering",
+      "description_suggestion": "Retrieves a paginated list of Composition resources. Supports filtering by status, date range, and other criteria through query parameters. Returns a list of composition objects with pagination metadata. Use limit and offset parameters to control result set size and position.",
+      "reasoning": "Original summary is not action-oriented (uses 'List of' instead of verb). Description lacks details about filtering capabilities, pagination support, and parameter usage. Enhanced version clarifies that this is a retrieval operation with filtering and pagination support, critical for AI agents to understand how to query compositions effectively.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateComposition' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details, not_actionable. Operation has no summary or description, making it impossible for AI agents to understand its purpose. Added comprehensive description explaining what compositions are created from (Room recordings), required inputs (Room SID, layout, audio sources, format), customization options, and expected response to enable proper AI agent usage.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9909,14 +9947,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "missing_context",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "not_actionable"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Create a new Recording Composition.",
-      "description_suggestion": "Creates a new Recording Composition with the specified parameters. Requires authentication. Returns the newly created Composition resource.",
-      "reasoning": "Both the summary and description were missing. Added details about the required parameters, authentication, and the return value to improve clarity and completeness.",
+      "summary_suggestion": "Create a new composition",
+      "description_suggestion": "Creates a new Composition resource to generate a composite video from a Room recording. Requires specifying the Room SID, video layout, audio sources, and output format. Accepts parameters for customizing composition settings such as resolution, frame rate, and media format (mp4, webm, or mkv). Returns the created Composition object with status 'enqueued' and a unique Composition SID for tracking.",
+      "reasoning": "Operation has no summary or description, making it impossible for AI agents to understand its purpose. Added comprehensive description explaining what compositions are created from (Room recordings), required inputs (Room SID, layout, audio sources, format), customization options, and expected response to enable proper AI agent usage.",
       "batch_index": 0
     }
   },
@@ -9931,7 +9971,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateCompositionHook' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Both the summary and description were missing. Added details about the required parameters, authentication, and the return value to improve clarity and completeness.",
+    "message": "Operation 'DeleteCompositionHook' has semantic quality issues: vague_summary, missing_side_effects. Original description lacks clarity about side effects and scope of deletion. Enhanced version clarifies that only the hook configuration is deleted, not existing compositions, and explains the consequence of deletion (no future compositions from this hook). This helps AI agents understand the impact of the operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteCompositionHook",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete a Recording CompositionHook resource identified by a `CompositionHook SID`.",
+      "current_description": "Delete a Recording CompositionHook resource identified by a `CompositionHook SID`.",
+      "summary_suggestion": "Delete a composition hook by SID",
+      "description_suggestion": "Deletes a CompositionHook resource identified by the provided CompositionHook SID. This operation removes the hook configuration, preventing future compositions from being created using this hook's settings. Existing compositions created by this hook are not affected. Returns a 204 No Content response on successful deletion.",
+      "reasoning": "Original description lacks clarity about side effects and scope of deletion. Enhanced version clarifies that only the hook configuration is deleted, not existing compositions, and explains the consequence of deletion (no future compositions from this hook). This helps AI agents understand the impact of the operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateCompositionHook' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details, not_actionable. Operation has no summary or description, making it impossible for AI agents to determine its purpose or usage. Added comprehensive description explaining what can be updated (hook configuration parameters), that partial updates are supported, and what is returned. This enables AI agents to understand when and how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9947,14 +10023,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "missing_context",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "not_actionable"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Update an existing CompositionHook resource.",
-      "description_suggestion": "Updates an existing CompositionHook resource identified by a CompositionHook SID. Requires authentication. Returns the updated CompositionHook resource.",
-      "reasoning": "Both the summary and description were missing. Added details about the required parameters, authentication, and the return value to improve clarity and completeness.",
+      "summary_suggestion": "Update composition hook settings",
+      "description_suggestion": "Updates an existing CompositionHook resource identified by the provided CompositionHook SID. Allows modifying hook configuration such as audio sources, video layout, output format, and webhook URL. Supports partial updates - only provided fields will be modified. Returns the updated CompositionHook object with all current settings.",
+      "reasoning": "Operation has no summary or description, making it impossible for AI agents to determine its purpose or usage. Added comprehensive description explaining what can be updated (hook configuration parameters), that partial updates are supported, and what is returned. This enables AI agents to understand when and how to use this operation.",
       "batch_index": 0
     }
   },
@@ -9969,189 +10047,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListCompositionHook' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague and lack detail. The suggestions provide clarity on the operation's purpose and mention the use of parameters for filtering.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListCompositionHook",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description"
-      ],
-      "current_summary": "List of all Recording CompositionHook resources.",
-      "current_description": "List of all Recording CompositionHook resources.",
-      "summary_suggestion": "List all Recording CompositionHook resources.",
-      "description_suggestion": "Retrieves a list of all Recording CompositionHook resources available in the system. Parameters can be used to filter the results.",
-      "reasoning": "The current summary and description are vague and lack detail. The suggestions provide clarity on the operation's purpose and mention the use of parameters for filtering.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateCompositionHook' has semantic quality issues: vague_summary, vague_description, missing_input_details. The current summary and description are missing. The suggestions provide a clear purpose, mention the need for authentication, and describe the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateCompositionHook",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_input_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Create a new Recording CompositionHook.",
-      "description_suggestion": "Creates a new Recording CompositionHook with the specified parameters. Requires authentication. Returns the newly created CompositionHook resource.",
-      "reasoning": "The current summary and description are missing. The suggestions provide a clear purpose, mention the need for authentication, and describe the return value.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchCompositionSettings' has semantic quality issues: vague_summary, vague_description. The current summary and description are missing. The suggestions provide clarity on the operation's purpose and mention that no parameters are required.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchCompositionSettings",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Fetch default CompositionSettings.",
-      "description_suggestion": "Retrieves the default CompositionSettings. This operation does not require any parameters.",
-      "reasoning": "The current summary and description are missing. The suggestions provide clarity on the operation's purpose and mention that no parameters are required.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateCompositionSettings' has semantic quality issues: vague_summary, vague_description, missing_input_details. The current summary and description are missing. The suggestions provide a clear purpose, mention the need for authentication, and describe the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateCompositionSettings",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_input_details"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Create default CompositionSettings.",
-      "description_suggestion": "Creates the default CompositionSettings with the specified parameters. Requires authentication. Returns the newly created CompositionSettings resource.",
-      "reasoning": "The current summary and description are missing. The suggestions provide a clear purpose, mention the need for authentication, and describe the return value.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListRecording' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague and lack detail. The suggestions provide clarity on the operation's purpose and mention the use of parameters for filtering.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListRecording",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description"
-      ],
-      "current_summary": "List of all Track recordings.",
-      "current_description": "List of all Track recordings.",
-      "summary_suggestion": "List all Track recordings.",
-      "description_suggestion": "Retrieves a list of all Track recordings available in the system. Parameters can be used to filter the results.",
-      "reasoning": "The current summary and description are vague and lack detail. The suggestions provide clarity on the operation's purpose and mention the use of parameters for filtering.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchRecordingSettings' has semantic quality issues: vague_summary, vague_description, missing_output_details. The summary and description were missing. Added a clear summary and description that specifies the operation's purpose and expected output.",
+    "message": "Operation 'FetchRecordingSettings' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. Operation has no summary or description. Added clear action verb, context about what settings are retrieved, and explanation of what the response contains and how these defaults apply to recordings.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10167,13 +10063,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
       "summary_suggestion": "Retrieve default recording settings",
-      "description_suggestion": "Fetches the default recording settings for a Twilio account. Returns the default recording settings object.",
-      "reasoning": "The summary and description were missing. Added a clear summary and description that specifies the operation's purpose and expected output.",
+      "description_suggestion": "Fetches the default recording settings for video rooms. Returns the current default configuration including audio and video recording preferences, file format, and other recording parameters that apply to new recordings unless overridden at the room or composition level.",
+      "reasoning": "Operation has no summary or description. Added clear action verb, context about what settings are retrieved, and explanation of what the response contains and how these defaults apply to recordings.",
       "batch_index": 2
     }
   },
@@ -10188,7 +10085,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateRecordingSettings' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. The summary and description were missing. Added a clear summary and description that specifies the operation's purpose, required input, and expected output.",
+    "message": "Operation 'CreateRecordingSettings' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, missing_side_effects. Operation has no summary or description. Added clarity about create/update behavior, input parameters context, return value, and side effects (settings apply to future recordings). This helps AI agents understand when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10204,14 +10101,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Create default recording settings",
-      "description_suggestion": "Creates the default recording settings for a Twilio account. Requires a JSON payload with the desired settings. Returns the newly created recording settings object.",
-      "reasoning": "The summary and description were missing. Added a clear summary and description that specifies the operation's purpose, required input, and expected output.",
+      "summary_suggestion": "Create or update default recording settings",
+      "description_suggestion": "Creates or updates the default recording settings for video rooms. Accepts configuration parameters for audio and video recording preferences, file format, and other recording options. Returns the updated default recording settings configuration. These settings will apply to all new recordings in rooms unless explicitly overridden.",
+      "reasoning": "Operation has no summary or description. Added clarity about create/update behavior, input parameters context, return value, and side effects (settings apply to future recordings). This helps AI agents understand when to use this operation and what to expect.",
       "batch_index": 2
     }
   },
@@ -10226,7 +10125,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchRoom' has semantic quality issues: vague_summary, vague_description, missing_output_details. The summary and description were missing. Added a clear summary and description that specifies the operation's purpose and expected output.",
+    "message": "Operation 'FetchRoom' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. Operation has no summary or description. Added domain-specific terminology (SID), clarified what information is returned, and provided context for when an AI agent would use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10242,13 +10141,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Retrieve room details",
-      "description_suggestion": "Fetches the details of a specific room by its SID. Returns the room object.",
-      "reasoning": "The summary and description were missing. Added a clear summary and description that specifies the operation's purpose and expected output.",
+      "summary_suggestion": "Retrieve a video room by SID",
+      "description_suggestion": "Fetches a specific video room by its unique identifier (SID). Returns the room's current state including status, creation timestamp, participant information, and configuration details. Use this to check room status, participant count, and other room metadata.",
+      "reasoning": "Operation has no summary or description. Added domain-specific terminology (SID), clarified what information is returned, and provided context for when an AI agent would use this operation.",
       "batch_index": 2
     }
   },
@@ -10263,7 +10163,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateRoom' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. The summary and description were missing. Added a clear summary and description that specifies the operation's purpose, required input, and expected output.",
+    "message": "Operation 'UpdateRoom' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, missing_side_effects. Operation has no summary or description. Added clarity about what can be modified, the SID parameter requirement, return status code, and side effects (immediate impact on participants). Helps AI agents understand this modifies room state.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10279,14 +10179,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Update room details",
-      "description_suggestion": "Updates the details of a specific room by its SID. Requires a JSON payload with the desired changes. Returns the updated room object.",
-      "reasoning": "The summary and description were missing. Added a clear summary and description that specifies the operation's purpose, required input, and expected output.",
+      "summary_suggestion": "Update video room configuration",
+      "description_suggestion": "Updates the configuration of a video room identified by its SID. Accepts parameters to modify room settings such as status (e.g., to close the room). Returns the updated room object with HTTP 202 Accepted status. Changes take effect immediately and affect all participants in the room.",
+      "reasoning": "Operation has no summary or description. Added clarity about what can be modified, the SID parameter requirement, return status code, and side effects (immediate impact on participants). Helps AI agents understand this modifies room state.",
       "batch_index": 2
     }
   },
@@ -10301,7 +10203,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateRoom' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. The summary and description were missing. Added a clear summary and description that specifies the operation's purpose, required input, and expected output.",
+    "message": "Operation 'CreateRoom' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, missing_side_effects. Operation has no summary or description. Added action clarity, input context, return value with status code, and side effects (room becomes available). Helps AI agents understand this creates a new resource and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10317,14 +10219,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Create a new room",
-      "description_suggestion": "Creates a new room with the specified settings. Requires a JSON payload with the desired room settings. Returns the newly created room object.",
-      "reasoning": "The summary and description were missing. Added a clear summary and description that specifies the operation's purpose, required input, and expected output.",
+      "summary_suggestion": "Create a new video room",
+      "description_suggestion": "Creates a new video room for hosting video conferences or meetings. Accepts configuration parameters such as room type, recording settings, and other room options. Returns the newly created room object with HTTP 201 Created status, including the room's unique SID and initial state. The room is immediately available for participants to join.",
+      "reasoning": "Operation has no summary or description. Added action clarity, input context, return value with status code, and side effects (room becomes available). Helps AI agents understand this creates a new resource and what to expect.",
       "batch_index": 2
     }
   },
@@ -10339,7 +10243,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListRoom' has semantic quality issues: vague_summary, vague_description, missing_output_details. The summary and description were missing. Added a clear summary and description that specifies the operation's purpose and expected output.",
+    "message": "Operation 'ListRoom' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. Operation has no summary or description. Added context about pagination and filtering capabilities (7 parameters suggest filtering options), clarified return format, and provided use cases for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10355,13 +10259,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "List all rooms",
-      "description_suggestion": "Lists all rooms in the Twilio account. Optionally filters by various parameters. Returns a list of room objects.",
-      "reasoning": "The summary and description were missing. Added a clear summary and description that specifies the operation's purpose and expected output.",
+      "summary_suggestion": "List all video rooms with filtering",
+      "description_suggestion": "Retrieves a paginated list of video rooms. Supports filtering and pagination parameters to narrow results by status, creation date, or other criteria. Returns an array of room objects with their current state, configuration, and metadata. Use this to discover existing rooms, monitor room status, or retrieve specific rooms matching filter criteria.",
+      "reasoning": "Operation has no summary or description. Added context about pagination and filtering capabilities (7 parameters suggest filtering options), clarified return format, and provided use cases for AI agent decision-making.",
       "batch_index": 2
     }
   },
@@ -10376,7 +10281,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchRoomParticipant' has semantic quality issues: vague_summary, vague_description, missing_output_details. The summary and description were missing. Added a clear summary and description that specifies the operation's purpose and expected output.",
+    "message": "Operation 'FetchRoomParticipant' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. Operation has no summary or description. Added clarity about required parameters (RoomSid and Sid), what information is returned, and use cases. Helps AI agents understand this retrieves participant-level details within a specific room context.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10392,13 +10297,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Retrieve details of a room participant",
-      "description_suggestion": "Fetches the details of a specific participant in a room by their SID. Returns the participant object.",
-      "reasoning": "The summary and description were missing. Added a clear summary and description that specifies the operation's purpose and expected output.",
+      "summary_suggestion": "Retrieve a room participant by SID",
+      "description_suggestion": "Fetches a specific participant in a video room using the room SID and participant SID. Returns the participant's current state including connection status, media tracks, and other participant metadata. Use this to check participant status, verify connection state, or retrieve participant details for monitoring or management purposes.",
+      "reasoning": "Operation has no summary or description. Added clarity about required parameters (RoomSid and Sid), what information is returned, and use cases. Helps AI agents understand this retrieves participant-level details within a specific room context.",
       "batch_index": 2
     }
   },
@@ -10413,7 +10319,474 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateRoomParticipant' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original summary and description were missing. Added a clear and concise summary and description, including the required parameters and the return value.",
+    "message": "Operation 'ListCompositionHook' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details. Original description is repetitive and lacks clarity about what composition hooks are, what parameters are available, and what the response contains. The term 'Recording CompositionHook' is confusing - composition hooks are for compositions, not recordings. Added context about pagination, filtering, and return value structure for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListCompositionHook",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "List of all Recording CompositionHook resources.",
+      "current_description": "List of all Recording CompositionHook resources.",
+      "summary_suggestion": "Retrieve all composition hooks",
+      "description_suggestion": "Retrieves a paginated list of all CompositionHook resources. CompositionHooks define how video compositions are created and formatted. Supports filtering and pagination through query parameters. Returns an array of composition hook objects with their configurations including format, audio sources, and webhook URLs.",
+      "reasoning": "Original description is repetitive and lacks clarity about what composition hooks are, what parameters are available, and what the response contains. The term 'Recording CompositionHook' is confusing - composition hooks are for compositions, not recordings. Added context about pagination, filtering, and return value structure for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateCompositionHook' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, missing_side_effects. Operation has no summary or description. Added action-oriented summary and comprehensive description explaining the purpose of composition hooks, required inputs (format, audio sources), optional parameters (webhook), return value (composition hook object with SID), and side effects (hook applies to future compositions).",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateCompositionHook",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Create a new composition hook",
+      "description_suggestion": "Creates a new CompositionHook resource that defines how video compositions will be automatically created and formatted. Requires configuration parameters including format (mp4, webm, or avi), audio sources, and optional webhook URL for notifications. Returns the created composition hook object with a unique SID. The hook will be applied to future compositions matching its criteria.",
+      "reasoning": "Operation has no summary or description. Added action-oriented summary and comprehensive description explaining the purpose of composition hooks, required inputs (format, audio sources), optional parameters (webhook), return value (composition hook object with SID), and side effects (hook applies to future compositions).",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchCompositionSettings' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. Operation has no summary or description. Added action-oriented summary and description explaining that this fetches default settings (not user-specific), what types of settings are included, and what the response contains. The 'Default' path segment indicates this is a singleton resource for default settings.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchCompositionSettings",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Retrieve default composition settings",
+      "description_suggestion": "Retrieves the default CompositionSettings resource that defines global configuration for video compositions. These settings include default layout, resolution, frame rate, and other composition parameters applied when creating compositions. Returns the composition settings object with all current default values.",
+      "reasoning": "Operation has no summary or description. Added action-oriented summary and description explaining that this fetches default settings (not user-specific), what types of settings are included, and what the response contains. The 'Default' path segment indicates this is a singleton resource for default settings.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateCompositionSettings' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, missing_side_effects. Operation has no summary or description. POST to a singleton 'Default' resource typically updates rather than creates. Added summary and description explaining this updates global defaults, what can be configured, that partial updates are supported, return value, and side effects (applies to future compositions).",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateCompositionSettings",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Update default composition settings",
+      "description_suggestion": "Updates the default CompositionSettings resource that applies globally to all video compositions. Allows configuration of default layout, resolution, frame rate, and other composition parameters. Accepts partial updates - only provided fields will be modified. Returns the updated composition settings object. Changes apply to all future compositions using these defaults.",
+      "reasoning": "Operation has no summary or description. POST to a singleton 'Default' resource typically updates rather than creates. Added summary and description explaining this updates global defaults, what can be configured, that partial updates are supported, return value, and side effects (applies to future compositions).",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListRecording' has semantic quality issues: vague_summary, vague_description, inconsistent_terminology, missing_context, missing_input_details, missing_output_details. Original description uses 'Track recordings' which is inconsistent terminology - recordings are media files, not track-specific. Description lacks context about filtering options, pagination support, and response structure. Added clarification that this lists all recordings (not track-specific), documented available filters based on recording schema, explained pagination support, and described return value structure for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListRecording",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "inconsistent_terminology",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "List of all Track recordings.",
+      "current_description": "List of all Track recordings.",
+      "summary_suggestion": "Retrieve all recordings",
+      "description_suggestion": "Retrieves a paginated list of all Recording resources. Supports filtering by room, participant, media type (audio or video), and status (processing, completed, or deleted). Supports pagination through limit and offset parameters. Returns an array of recording objects with metadata including creation date, duration, media type, and status.",
+      "reasoning": "Original description uses 'Track recordings' which is inconsistent terminology - recordings are media files, not track-specific. Description lacks context about filtering options, pagination support, and response structure. Added clarification that this lists all recordings (not track-specific), documented available filters based on recording schema, explained pagination support, and described return value structure for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchRoomParticipantSubscribedTrack' has semantic quality issues: vague_summary, vague_description, not_actionable, poor_ai_interpretability. Original summary is overly technical and contains a typo ('be' instead of 'by'). Description repeats the summary verbatim without explaining the operation's purpose or context. Improved version clarifies the action (retrieve), specifies the resource hierarchy (room > participant > track), explains required parameters, and maintains the important note about track name uniqueness while making it more actionable for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchRoomParticipantSubscribedTrack",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "not_actionable",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Returns a single Track resource represented by `track_sid`.  Note: This is one resource with the Video API that requires a SID, be Track Name on the subscriber side is not guaranteed to be unique.",
+      "current_description": "Returns a single Track resource represented by `track_sid`.  Note: This is one resource with the Video API that requires a SID, be Track Name on the subscriber side is not guaranteed to be unique.",
+      "summary_suggestion": "Retrieve a specific subscribed track for a participant",
+      "description_suggestion": "Retrieves a single SubscribedTrack resource for a participant in a room. Requires the Room SID, Participant SID, and Track SID. Returns the subscribed track details including media type and subscription status. Note: Track names are not guaranteed to be unique on the subscriber side; use the Track SID for reliable identification.",
+      "reasoning": "Original summary is overly technical and contains a typo ('be' instead of 'by'). Description repeats the summary verbatim without explaining the operation's purpose or context. Improved version clarifies the action (retrieve), specifies the resource hierarchy (room > participant > track), explains required parameters, and maintains the important note about track name uniqueness while making it more actionable for AI agents.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListRoomParticipantSubscribedTrack' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description is too brief and lacks context about pagination, filtering capabilities, and use cases. Improved version specifies that results are paginated, mentions filtering/pagination support, clarifies the return format, and explains the operational context for AI agents to understand when this operation is useful.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListRoomParticipantSubscribedTrack",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Returns a list of tracks that are subscribed for the participant.",
+      "current_description": "Returns a list of tracks that are subscribed for the participant.",
+      "summary_suggestion": "List all subscribed tracks for a participant",
+      "description_suggestion": "Retrieves a paginated list of all SubscribedTrack resources for a specific participant in a room. Supports filtering and pagination parameters. Returns an array of subscribed tracks with details including media type, subscription status, and track identifiers. Useful for monitoring which remote tracks a participant is currently receiving.",
+      "reasoning": "Original description is too brief and lacks context about pagination, filtering capabilities, and use cases. Improved version specifies that results are paginated, mentions filtering/pagination support, clarifies the return format, and explains the operational context for AI agents to understand when this operation is useful.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchRoomRecording' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details. Operation has no summary or description. Added clear action verb (retrieve), specified required parameters (Room SID, Recording SID), explained expected outputs based on recording schema properties, and provided context for when an AI agent should use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchRoomRecording",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Retrieve a specific room recording",
+      "description_suggestion": "Retrieves a single Recording resource for a specific room. Requires the Room SID and Recording SID. Returns the recording details including status, media type, duration, size, and download URL. Use this operation to check recording status or retrieve metadata for a completed or in-progress recording.",
+      "reasoning": "Operation has no summary or description. Added clear action verb (retrieve), specified required parameters (Room SID, Recording SID), explained expected outputs based on recording schema properties, and provided context for when an AI agent should use this operation.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteRoomRecording' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_side_effects. Operation has no summary or description. Added clear action verb (delete), specified required parameters, explained the side effect (permanent removal of media files), clarified the response behavior, and warned about irreversibility to help AI agents understand the consequences of this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteRoomRecording",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "Delete a room recording",
+      "description_suggestion": "Deletes a specific Recording resource from a room. Requires the Room SID and Recording SID. Permanently removes the recording and its associated media files. Returns a 204 No Content response on successful deletion. This operation cannot be undone.",
+      "reasoning": "Operation has no summary or description. Added clear action verb (delete), specified required parameters, explained the side effect (permanent removal of media files), clarified the response behavior, and warned about irreversibility to help AI agents understand the consequences of this operation.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListRoomRecording' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_context, missing_output_details. Operation has no summary or description. Added clear action verb (list), specified the required parameter (Room SID), mentioned pagination and filtering capabilities based on the 8 parameters, explained the return format, and provided context for AI agent decision-making about when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListRoomRecording",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "",
+      "summary_suggestion": "List all recordings for a room",
+      "description_suggestion": "Retrieves a paginated list of all Recording resources for a specific room. Requires the Room SID. Supports filtering by recording status and type, and pagination parameters. Returns an array of recordings with details including status, media type, duration, size, and creation timestamps. Useful for retrieving recording history or monitoring recording completion status.",
+      "reasoning": "Operation has no summary or description. Added clear action verb (list), specified the required parameter (Room SID), mentioned pagination and filtering capabilities based on the 8 parameters, explained the return format, and provided context for AI agent decision-making about when to use this operation.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchRoomRecordingRule' has semantic quality issues: vague_summary, vague_description, not_actionable, missing_context. Original summary/description are identical and vague about the operation's purpose. The term 'Returns a list' is passive and unclear. Improved version uses active voice (retrieve), clarifies that this gets configuration rules (not a list of multiple rule sets), explains what recording rules control, and provides context for when an AI agent should use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchRoomRecordingRule",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "not_actionable",
+        "missing_context"
+      ],
+      "current_summary": "Returns a list of Recording Rules for the Room.",
+      "current_description": "Returns a list of Recording Rules for the Room.",
+      "summary_suggestion": "Retrieve recording rules for a room",
+      "description_suggestion": "Retrieves the RecordingRules configuration for a specific room. Requires the Room SID. Returns the recording rules that define which participants or tracks should be automatically recorded. Use this operation to verify the current recording configuration for a room.",
+      "reasoning": "Original summary/description are identical and vague about the operation's purpose. The term 'Returns a list' is passive and unclear. Improved version uses active voice (retrieve), clarifies that this gets configuration rules (not a list of multiple rule sets), explains what recording rules control, and provides context for when an AI agent should use this operation.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateRoomRecordingRule' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Original summary/description are identical and lack specificity about inputs and effects. Improved version clarifies what inputs are required (Room SID and rule configuration), explains what the operation returns, and importantly notes the side effect about when changes take effect, helping AI agents understand the operational impact of this update.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateRoomRecordingRule",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Update the Recording Rules for the Room",
+      "current_description": "Update the Recording Rules for the Room",
+      "summary_suggestion": "Update recording rules for a room",
+      "description_suggestion": "Updates the RecordingRules configuration for a specific room. Requires the Room SID and a request body specifying the new recording rules (e.g., which participants or tracks to record). Returns the updated RecordingRules resource. Changes take effect immediately for new participants; existing participants' recording status may not change retroactively.",
+      "reasoning": "Original summary/description are identical and lack specificity about inputs and effects. Improved version clarifies what inputs are required (Room SID and rule configuration), explains what the operation returns, and importantly notes the side effect about when changes take effect, helping AI agents understand the operational impact of this update.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateRoomParticipant' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Operation has no summary or description, making it impossible for AI agents to understand its purpose. Added action-oriented summary, clarified what can be updated, specified required parameters (Room SID, Participant SID), and documented the 202 response indicating asynchronous processing.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10429,14 +10802,17 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Update participant details in a room",
-      "description_suggestion": "Updates the details of a participant in a specified room. Requires room and participant SIDs. Returns the updated participant object.",
-      "reasoning": "Original summary and description were missing. Added a clear and concise summary and description, including the required parameters and the return value.",
+      "summary_suggestion": "Update room participant properties",
+      "description_suggestion": "Updates properties of a participant in a video room. Allows modification of participant state such as status or other mutable attributes. Requires the Room SID and Participant SID. Returns the updated Participant resource with HTTP 202 status indicating the update is being processed.",
+      "reasoning": "Operation has no summary or description, making it impossible for AI agents to understand its purpose. Added action-oriented summary, clarified what can be updated, specified required parameters (Room SID, Participant SID), and documented the 202 response indicating asynchronous processing.",
       "batch_index": 3
     }
   },
@@ -10451,7 +10827,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListRoomParticipant' has semantic quality issues: vague_summary, vague_description, missing_context. Original summary and description were missing. Added a clear and concise summary and description, including the context of the parameters and the return value.",
+    "message": "Operation 'ListRoomParticipant' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details, poor_ai_interpretability. Missing summary and description entirely. Added clear action statement, specified required Room SID parameter, mentioned pagination support (8 parameters suggest filtering/pagination), and clarified return value as a list of Participant resources.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10467,13 +10843,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "unclear_purpose",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "List participants in a room",
-      "description_suggestion": "Lists all participants in a specified room. Accepts various parameters for filtering and pagination. Returns a list of participant objects.",
-      "reasoning": "Original summary and description were missing. Added a clear and concise summary and description, including the context of the parameters and the return value.",
+      "summary_suggestion": "List all participants in a room",
+      "description_suggestion": "Retrieves a paginated list of all participants currently in or previously connected to a video room. Requires the Room SID. Supports filtering and pagination parameters. Returns a list of Participant resources with their connection status, identity, and metadata.",
+      "reasoning": "Missing summary and description entirely. Added clear action statement, specified required Room SID parameter, mentioned pagination support (8 parameters suggest filtering/pagination), and clarified return value as a list of Participant resources.",
       "batch_index": 3
     }
   },
@@ -10488,7 +10866,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateRoomParticipantAnonymize' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original summary and description were missing. Added a clear and concise summary and description, including the required parameters and the return value.",
+    "message": "Operation 'UpdateRoomParticipantAnonymize' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_context, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. No summary or description provided. Added domain-specific action term 'anonymize', explained the privacy/data protection purpose, specified required parameters, documented the return value, and noted the irreversible nature of anonymization as a critical side effect for AI agents.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10504,14 +10882,18 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
+        "missing_context",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Anonymize participant in a room",
-      "description_suggestion": "Anonymizes a participant in a specified room. Requires room and participant SIDs. Returns the anonymized participant object.",
-      "reasoning": "Original summary and description were missing. Added a clear and concise summary and description, including the required parameters and the return value.",
+      "summary_suggestion": "Anonymize a room participant",
+      "description_suggestion": "Anonymizes a participant in a video room by removing or masking their identity information. This operation redacts personally identifiable information from the participant's record. Requires the Room SID and Participant SID. Returns the anonymized Participant resource with HTTP 200 status. This action is typically irreversible.",
+      "reasoning": "No summary or description provided. Added domain-specific action term 'anonymize', explained the privacy/data protection purpose, specified required parameters, documented the return value, and noted the irreversible nature of anonymization as a critical side effect for AI agents.",
       "batch_index": 3
     }
   },
@@ -10526,7 +10908,83 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateRoomParticipantSubscribeRule' has semantic quality issues: vague_description, missing_input_details. Original description was missing details. Added a clear and concise description, including the required parameters and the return value.",
+    "message": "Operation 'ListRoomParticipantPublishedTrack' has semantic quality issues: vague_summary, missing_context, missing_output_details. Summary is wordy and uses backticks awkwardly. Description lacks clarity about what 'published' means in this context and doesn't explain the return structure. Enhanced to clarify that only active tracks are returned, specified required parameters, and documented the return as a list of PublishedTrack resources with metadata.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListRoomParticipantPublishedTrack",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Returns a list of tracks associated with a given Participant. Only `currently` Published Tracks are in the list resource.",
+      "current_description": "Returns a list of tracks associated with a given Participant. Only `currently` Published Tracks are in the list resource.",
+      "summary_suggestion": "List published tracks for a participant",
+      "description_suggestion": "Retrieves a paginated list of all currently published media tracks (audio and/or video) being broadcast by a specific participant in a video room. Only active/currently published tracks are included; disconnected or ended tracks are excluded. Requires Room SID and Participant SID. Returns a list of PublishedTrack resources with track metadata and status.",
+      "reasoning": "Summary is wordy and uses backticks awkwardly. Description lacks clarity about what 'published' means in this context and doesn't explain the return structure. Enhanced to clarify that only active tracks are returned, specified required parameters, and documented the return as a list of PublishedTrack resources with metadata.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchRoomParticipantSubscribeRule' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, poor_ai_interpretability. Summary and description are identical and lack domain context. 'Subscribe Rules' is domain-specific but unexplained. Added context about what subscribe rules do (define track subscription permissions), specified required parameters, and clarified the return value includes subscription permissions and filters.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchRoomParticipantSubscribeRule",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Returns a list of Subscribe Rules for the Participant.",
+      "current_description": "Returns a list of Subscribe Rules for the Participant.",
+      "summary_suggestion": "Retrieve participant subscribe rules",
+      "description_suggestion": "Retrieves the subscription rules configured for a participant in a video room. Subscribe rules define which media tracks the participant is allowed to receive from other participants. Requires Room SID and Participant SID. Returns a list of SubscribeRule resources specifying track subscription permissions and filters.",
+      "reasoning": "Summary and description are identical and lack domain context. 'Subscribe Rules' is domain-specific but unexplained. Added context about what subscribe rules do (define track subscription permissions), specified required parameters, and clarified the return value includes subscription permissions and filters.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateRoomParticipantSubscribeRule' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details, missing_side_effects. Summary is acceptable but description is too brief and lacks domain context. Added explanation of what subscribe rules control, specified that this is a POST operation with rule definitions as input, documented the return value, and noted that changes apply immediately to active subscriptions.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10541,122 +10999,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_input_details"
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Update the Subscribe Rules for the Participant",
       "current_description": "Update the Subscribe Rules for the Participant",
-      "summary_suggestion": "Update Subscribe Rules for a Participant",
-      "description_suggestion": "Updates the Subscribe Rules for a specified participant in a room. Requires room and participant SIDs. Returns the updated Subscribe Rules.",
-      "reasoning": "Original description was missing details. Added a clear and concise description, including the required parameters and the return value.",
+      "description_suggestion": "Updates the subscription rules for a participant in a video room, controlling which media tracks they are allowed to receive from other participants. Accepts rule definitions specifying track filters and subscription permissions. Requires Room SID and Participant SID. Returns the updated SubscribeRule resources. Changes take effect immediately for active subscriptions.",
+      "reasoning": "Summary is acceptable but description is too brief and lacks domain context. Added explanation of what subscribe rules control, specified that this is a POST operation with rule definitions as input, documented the return value, and noted that changes apply immediately to active subscriptions.",
       "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchRoomRecording' has semantic quality issues: vague_summary, vague_description. Both the summary and description are missing. The suggested summary and description provide clear and concise information about the operation.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchRoomRecording",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Fetch a specific room recording.",
-      "description_suggestion": "Fetches a specific room recording by its `Sid` and `RoomSid`.",
-      "reasoning": "Both the summary and description are missing. The suggested summary and description provide clear and concise information about the operation.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeleteRoomRecording' has semantic quality issues: vague_summary, vague_description. Both the summary and description are missing. The suggested summary and description provide clear and concise information about the operation.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteRoomRecording",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "Delete a specific room recording.",
-      "description_suggestion": "Deletes a specific room recording by its `Sid` and `RoomSid`.",
-      "reasoning": "Both the summary and description are missing. The suggested summary and description provide clear and concise information about the operation.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListRoomRecording' has semantic quality issues: vague_summary, vague_description. Both the summary and description are missing. The suggested summary and description provide clear and concise information about the operation.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListRoomRecording",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description"
-      ],
-      "current_summary": "",
-      "current_description": "",
-      "summary_suggestion": "List recordings for a specific room.",
-      "description_suggestion": "Lists all recordings for a specific room by its `RoomSid`.",
-      "reasoning": "Both the summary and description are missing. The suggested summary and description provide clear and concise information about the operation.",
-      "batch_index": 4
     }
   },
   {
@@ -10670,7 +11022,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 35 operations analyzed, 22 quality issues found",
+    "message": "Semantic analysis completed: 35 operations analyzed, 30 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -10682,7 +11034,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 35,
-      "total_issues_found": 22,
+      "total_issues_found": 30,
       "batches_processed": 5
     }
   }

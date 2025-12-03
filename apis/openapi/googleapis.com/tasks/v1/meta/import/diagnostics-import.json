@@ -3489,7 +3489,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'tasks.tasks.list' has semantic quality issues: vague_summary. The summary was missing and too vague. A concise and action-oriented summary improves clarity and AI agent interpretability.",
+    "message": "Operation 'tasks.tasks.list' has semantic quality issues: vague_summary, missing_input_details. Missing summary entirely. Description lacks clarity about available filtering/pagination options despite 12 parameters. Added summary and enhanced description to indicate parameter availability for AI agent decision-making. Fixed typo 'be default' to 'by default'.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3503,12 +3503,14 @@
       "operation_id": "tasks.tasks.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details"
       ],
       "current_summary": "",
       "current_description": "Returns all tasks in the specified task list. Does not return assigned tasks be default (from Docs, Chat Spaces). A user can have up to 20,000 non-hidden tasks per list and up to 100,000 tasks in total at a time.",
-      "summary_suggestion": "Get all tasks in a task list",
-      "reasoning": "The summary was missing and too vague. A concise and action-oriented summary improves clarity and AI agent interpretability.",
+      "summary_suggestion": "Retrieve all tasks from a task list",
+      "description_suggestion": "Returns all tasks in the specified task list. By default, does not return tasks assigned from Docs or Chat Spaces. Supports filtering, sorting, and pagination through optional parameters. A user can have up to 20,000 non-hidden tasks per list and up to 100,000 tasks in total at a time.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about available filtering/pagination options despite 12 parameters. Added summary and enhanced description to indicate parameter availability for AI agent decision-making. Fixed typo 'be default' to 'by default'.",
       "batch_index": 0
     }
   },
@@ -3523,7 +3525,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'tasks.tasklists.list' has semantic quality issues: vague_summary. The current description is clear and complete, but the summary was missing and too vague. Adding a concise and action-oriented summary improves clarity and AI agent interpretability.",
+    "message": "Operation 'tasks.tasks.insert' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks explicit mention of return value (newly created Task object). Added summary and clarified return behavior for better AI agent interpretability regarding what to expect after successful creation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3534,15 +3536,198 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "tasks.tasklists.list",
+      "operation_id": "tasks.tasks.insert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new task on the specified task list. Tasks assigned from Docs or Chat Spaces cannot be inserted from Tasks Public API; they can only be created by assigning them from Docs or Chat Spaces. A user can have up to 20,000 non-hidden tasks per list and up to 100,000 tasks in total at a time.",
+      "summary_suggestion": "Create a new task in a task list",
+      "description_suggestion": "Creates a new task on the specified task list. Tasks assigned from Docs or Chat Spaces cannot be inserted via this API; they can only be created by assigning them from those sources. Returns the newly created Task object. A user can have up to 20,000 non-hidden tasks per list and up to 100,000 tasks in total at a time.",
+      "reasoning": "Missing summary. Description lacks explicit mention of return value (newly created Task object). Added summary and clarified return behavior for better AI agent interpretability regarding what to expect after successful creation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'tasks.tasks.delete' has semantic quality issues: vague_summary. Missing summary. Description is comprehensive and clear about the operation's purpose, side effects (cascading deletion of assigned tasks), and alternative approaches. Summary addition improves AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "tasks.tasks.delete",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary"
       ],
       "current_summary": "",
-      "current_description": "Returns all the authenticated user's task lists. A user can have up to 2000 lists at a time.",
-      "summary_suggestion": "Get all task lists of the authenticated user",
-      "reasoning": "The current description is clear and complete, but the summary was missing and too vague. Adding a concise and action-oriented summary improves clarity and AI agent interpretability.",
+      "current_description": "Deletes the specified task from the task list. If the task is assigned, both the assigned task and the original task (in Docs, Chat Spaces) are deleted. To delete the assigned task only, navigate to the assignment surface and unassign the task from there.",
+      "summary_suggestion": "Delete a task from a task list",
+      "reasoning": "Missing summary. Description is comprehensive and clear about the operation's purpose, side effects (cascading deletion of assigned tasks), and alternative approaches. Summary addition improves AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'tasks.tasks.get' has semantic quality issues: vague_summary, vague_description. Missing summary and description is overly terse. Enhanced description to indicate what task properties are returned, helping AI agents understand the response structure and when this operation is useful for retrieving task details.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "tasks.tasks.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description"
+      ],
+      "current_summary": "",
+      "current_description": "Returns the specified task.",
+      "summary_suggestion": "Retrieve a specific task",
+      "description_suggestion": "Returns the specified task from the task list. Includes all task properties such as title, description, due date, completion status, and assignment information if applicable.",
+      "reasoning": "Missing summary and description is overly terse. Enhanced description to indicate what task properties are returned, helping AI agents understand the response structure and when this operation is useful for retrieving task details.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'tasks.tasks.patch' has semantic quality issues: vague_summary, vague_description, missing_input_details. Missing summary and vague description. Added summary clarifying partial update behavior. Enhanced description to explain patch semantics, what fields can be updated, and return value. This helps AI agents understand when to use PATCH vs PUT and what to expect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "tasks.tasks.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates the specified task. This method supports patch semantics.",
+      "summary_suggestion": "Partially update a task",
+      "description_suggestion": "Updates the specified task using patch semantics. Only provided fields in the request body will be modified; omitted fields remain unchanged. Returns the updated Task object. Supports partial updates for task properties such as title, description, due date, and completion status.",
+      "reasoning": "Missing summary and vague description. Added summary clarifying partial update behavior. Enhanced description to explain patch semantics, what fields can be updated, and return value. This helps AI agents understand when to use PATCH vs PUT and what to expect.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'tasks.tasks.update' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Missing summary and extremely vague description. Added summary and comprehensive description explaining PUT semantics (full replacement), requirement to provide all fields, return value, and distinction from PATCH. Critical for AI agents to understand when to use PUT vs PATCH.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "tasks.tasks.update",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates the specified task.",
+      "summary_suggestion": "Replace a task with updated data",
+      "description_suggestion": "Updates the specified task using full replacement semantics. The entire Task object in the request body replaces the existing task; all fields must be provided. Returns the updated Task object. Use PATCH for partial updates or PUT for complete replacement.",
+      "reasoning": "Missing summary and extremely vague description. Added summary and comprehensive description explaining PUT semantics (full replacement), requirement to provide all fields, return value, and distinction from PATCH. Critical for AI agents to understand when to use PUT vs PATCH.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'tasks.tasks.move' has semantic quality issues: vague_summary, missing_input_details. Missing summary entirely. Description is comprehensive but could clarify that it returns the updated task object. Summary needed to help AI agents quickly identify this as a task repositioning operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "tasks.tasks.move",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Moves the specified task to another position in the destination task list. If the destination list is not specified, the task is moved within its current list. This can include putting it as a child task under a new parent and/or move it to a different position among its sibling tasks. A user can have up to 2,000 subtasks per task.",
+      "summary_suggestion": "Move task to new position or list",
+      "description_suggestion": "Moves the specified task to another position in the destination task list, or within its current list if no destination is specified. Supports repositioning tasks among siblings and establishing parent-child relationships (subtasks). A user can have up to 2,000 subtasks per task. Returns the updated task object.",
+      "reasoning": "Missing summary entirely. Description is comprehensive but could clarify that it returns the updated task object. Summary needed to help AI agents quickly identify this as a task repositioning operation.",
       "batch_index": 1
     }
   },
@@ -3557,7 +3742,115 @@
         "character": 0
       }
     },
-    "message": "Operation 'tasks.tasklists.get' has semantic quality issues: vague_summary. The current description is clear and complete, but the summary was missing and too vague. Adding a concise summary enhances clarity and AI agent interpretability.",
+    "message": "Operation 'tasks.tasklists.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about the return format (TaskLists collection). Added explicit return type information for better AI agent understanding of response structure.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "tasks.tasklists.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns all the authenticated user's task lists. A user can have up to 2000 lists at a time.",
+      "summary_suggestion": "List all authenticated user's task lists",
+      "description_suggestion": "Returns all task lists for the authenticated user. A user can have up to 2000 lists at a time. Returns a TaskLists collection containing all task list objects.",
+      "reasoning": "Missing summary. Description lacks clarity about the return format (TaskLists collection). Added explicit return type information for better AI agent understanding of response structure.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'tasks.tasklists.insert' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description lacks input details (what TaskList properties are expected) and output details (returns created TaskList). Added clarity on request/response schemas for AI agent usability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "tasks.tasklists.insert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new task list and adds it to the authenticated user's task lists. A user can have up to 2000 lists at a time.",
+      "summary_suggestion": "Create new task list",
+      "description_suggestion": "Creates a new task list and adds it to the authenticated user's task lists. Accepts a TaskList object with the list name and optional properties. A user can have up to 2000 lists at a time. Returns the newly created TaskList object.",
+      "reasoning": "Missing summary. Description lacks input details (what TaskList properties are expected) and output details (returns created TaskList). Added clarity on request/response schemas for AI agent usability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'tasks.tasklists.delete' has semantic quality issues: vague_summary, missing_side_effects. Missing summary. Description has important side effects but could emphasize the cascading deletion behavior and permanence more clearly for AI agents to understand the full impact of this destructive operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "tasks.tasklists.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes the authenticated user's specified task list. If the list contains assigned tasks, both the assigned tasks and the original tasks in the assignment surface (Docs, Chat Spaces) are deleted.",
+      "summary_suggestion": "Delete task list",
+      "description_suggestion": "Deletes the authenticated user's specified task list. Important: If the list contains assigned tasks, both the assigned tasks and the original tasks in the assignment surface (Docs, Chat Spaces) are deleted. This action is permanent and cannot be undone.",
+      "reasoning": "Missing summary. Description has important side effects but could emphasize the cascading deletion behavior and permanence more clearly for AI agents to understand the full impact of this destructive operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'tasks.tasklists.get' has semantic quality issues: vague_summary. Missing summary. Description is clear and complete - it explains the operation retrieves a specific task list for the authenticated user and returns the TaskList object. Only summary improvement needed.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3575,8 +3868,82 @@
       ],
       "current_summary": "",
       "current_description": "Returns the authenticated user's specified task list.",
-      "summary_suggestion": "Get the specified task list of the authenticated user",
-      "reasoning": "The current description is clear and complete, but the summary was missing and too vague. Adding a concise summary enhances clarity and AI agent interpretability.",
+      "summary_suggestion": "Get task list details",
+      "reasoning": "Missing summary. Description is clear and complete - it explains the operation retrieves a specific task list for the authenticated user and returns the TaskList object. Only summary improvement needed.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'tasks.tasklists.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description mentions patch semantics but lacks clarity on what that means for AI agents (partial updates only). Added explicit explanation of patch behavior and return value for better interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "tasks.tasklists.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates the authenticated user's specified task list. This method supports patch semantics.",
+      "summary_suggestion": "Partially update task list",
+      "description_suggestion": "Partially updates the authenticated user's specified task list using patch semantics. Only provided fields in the TaskList object will be modified; omitted fields remain unchanged. Returns the updated TaskList object.",
+      "reasoning": "Missing summary. Description mentions patch semantics but lacks clarity on what that means for AI agents (partial updates only). Added explicit explanation of patch behavior and return value for better interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'tasks.tasklists.update' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too vague about the update semantics. PUT typically means full replacement, so clarified this distinction from PATCH. Added input/output details and explicit mention of full replacement behavior for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "tasks.tasklists.update",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates the authenticated user's specified task list.",
+      "summary_suggestion": "Replace task list",
+      "description_suggestion": "Replaces the authenticated user's specified task list with the provided TaskList object. All fields in the task list will be updated according to the request body. Returns the updated TaskList object.",
+      "reasoning": "Missing summary. Description is too vague about the update semantics. PUT typically means full replacement, so clarified this distinction from PATCH. Added input/output details and explicit mention of full replacement behavior for AI agent clarity.",
       "batch_index": 1
     }
   },
@@ -3591,7 +3958,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 14 operations analyzed, 3 quality issues found",
+    "message": "Semantic analysis completed: 14 operations analyzed, 13 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -3603,7 +3970,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 14,
-      "total_issues_found": 3,
+      "total_issues_found": 13,
       "batches_processed": 2
     }
   }

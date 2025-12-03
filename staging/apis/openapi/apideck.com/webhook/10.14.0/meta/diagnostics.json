@@ -2676,7 +2676,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'webhooksResolve' has semantic quality issues: unclear_purpose, missing_input_details, missing_output_details. The original description was unclear and lacked details about inputs and outputs. The improved description clarifies the purpose, mentions required authentication, and specifies what the operation returns.",
+    "message": "Operation 'webhooksResolve' has semantic quality issues: vague_description, missing_context, missing_output_details. The current description is too brief and lacks important context about what 'resolve' means in this domain, what parameters are required, and what the operation returns. Added clarity about lookup_id usage, service ID context, webhook delivery mechanism, and return value details to improve AI agent understanding of when and how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2690,15 +2690,14 @@
       "operation_id": "webhooksResolve",
       "has_quality_issues": true,
       "issues_found": [
-        "unclear_purpose",
-        "missing_input_details",
+        "vague_description",
+        "missing_context",
         "missing_output_details"
       ],
       "current_summary": "Resolve and Execute a connection webhook",
       "current_description": "Resolve a webhook based on lookup_id and then execute it",
-      "summary_suggestion": "Resolve and execute a specific webhook",
-      "description_suggestion": "Resolves a webhook based on the provided webhook ID and service ID, and then executes it. Requires authentication. Returns the execution status and any relevant data.",
-      "reasoning": "The original description was unclear and lacked details about inputs and outputs. The improved description clarifies the purpose, mentions required authentication, and specifies what the operation returns.",
+      "description_suggestion": "Resolves a webhook by its lookup_id and executes the associated webhook event. This operation retrieves the webhook configuration using the provided identifier and service ID, then triggers the webhook delivery to its configured endpoint. Returns the execution result including delivery status and any error details if the webhook execution fails.",
+      "reasoning": "The current description is too brief and lacks important context about what 'resolve' means in this domain, what parameters are required, and what the operation returns. Added clarity about lookup_id usage, service ID context, webhook delivery mechanism, and return value details to improve AI agent understanding of when and how to use this operation.",
       "batch_index": 1
     }
   },
@@ -2713,7 +2712,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'webhookVerify' has semantic quality issues: vague_summary, vague_description, missing_input_details. The original summary and description were vague and lacked details about the operation's purpose, inputs, and outputs. The improved description clarifies the purpose, mentions required authentication, and specifies what the operation returns.",
+    "message": "Operation 'webhookVerify' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_context, missing_output_details, poor_ai_interpretability. The GET method and operation name 'webhookVerify' suggest this is a verification/validation operation, not an execution operation like webhooksResolve. The current description incorrectly mirrors the POST operation. Clarified that this is a read-only verification operation that checks webhook health and configuration without side effects, making it clear for AI agents to distinguish from the resolve operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2729,13 +2728,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "unclear_purpose",
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Resolve and Execute a connection webhook",
       "current_description": "Resolve a webhook based on lookup_id and then execute it",
-      "summary_suggestion": "Resolve a webhook",
-      "description_suggestion": "Resolves a webhook based on the provided webhook ID and service ID. Requires authentication. Returns the resolved webhook details.",
-      "reasoning": "The original summary and description were vague and lacked details about the operation's purpose, inputs, and outputs. The improved description clarifies the purpose, mentions required authentication, and specifies what the operation returns.",
+      "summary_suggestion": "Verify webhook configuration and connectivity",
+      "description_suggestion": "Verifies the configuration and connectivity of a webhook by its lookup_id and service ID. This operation validates that the webhook endpoint is reachable and properly configured without triggering actual event delivery. Returns the verification status, endpoint health check results, and any configuration issues detected. Use this to test webhook setup before enabling event delivery.",
+      "reasoning": "The GET method and operation name 'webhookVerify' suggest this is a verification/validation operation, not an execution operation like webhooksResolve. The current description incorrectly mirrors the POST operation. Clarified that this is a read-only verification operation that checks webhook health and configuration without side effects, making it clear for AI agents to distinguish from the resolve operation.",
       "batch_index": 1
     }
   },
@@ -2750,7 +2752,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'eventLogsAll' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The original description was vague and lacked details about inputs and outputs. The improved description clarifies the purpose, mentions optional parameters, and specifies what the operation returns.",
+    "message": "Operation 'eventLogsAll' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details. The current description is identical to the summary and provides no actionable information. Missing details about pagination support (cursor/limit), what data is returned in logs, and the use case for this operation. Enhanced with pagination context consistent with the API's documented pagination model, specific log fields, and practical use cases to help AI agents understand when to retrieve event logs.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2765,15 +2767,276 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_context",
         "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "List event logs",
       "current_description": "List event logs",
-      "summary_suggestion": "List all event logs",
-      "description_suggestion": "Lists all event logs for webhooks. Accepts optional parameters for filtering, sorting, and pagination. Returns a paginated list of event logs.",
-      "reasoning": "The original description was vague and lacked details about inputs and outputs. The improved description clarifies the purpose, mentions optional parameters, and specifies what the operation returns.",
+      "summary_suggestion": "Retrieve paginated webhook event logs",
+      "description_suggestion": "Retrieves a paginated list of webhook event logs for all webhooks. Supports cursor-based pagination via the cursor and limit parameters. Returns event log entries including event type, delivery status, timestamp, and response details. Use this to monitor webhook delivery history, troubleshoot failed deliveries, and audit webhook activity across your application.",
+      "reasoning": "The current description is identical to the summary and provides no actionable information. Missing details about pagination support (cursor/limit), what data is returned in logs, and the use case for this operation. Enhanced with pagination context consistent with the API's documented pagination model, specific log fields, and practical use cases to help AI agents understand when to retrieve event logs.",
       "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'webhooksAll' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Current description is too minimal. Added details about pagination support (consistent with API context), return value structure, and what information is included in webhook objects to help AI agents understand the response format and pagination requirements.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "webhooksAll",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "List webhook subscriptions",
+      "current_description": "List all webhook subscriptions",
+      "description_suggestion": "Retrieves a paginated list of all webhook subscriptions for the authenticated application. Supports cursor-based pagination via the cursor and limit query parameters. Returns an array of webhook subscription objects with their configuration details, delivery URLs, event types, and status.",
+      "reasoning": "Current description is too minimal. Added details about pagination support (consistent with API context), return value structure, and what information is included in webhook objects to help AI agents understand the response format and pagination requirements.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'webhooksAdd' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description lacks specificity about required inputs and outputs. Enhanced to clarify what CreateWebhookRequest contains (delivery URL, event types, unified API), what is returned (webhook object with ID and status), and the side effect that the webhook becomes active immediately.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "webhooksAdd",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Create webhook subscription",
+      "current_description": "Create a webhook subscription to receive events",
+      "description_suggestion": "Creates a new webhook subscription to receive events from a specified Unified API. Requires a delivery URL, event types to subscribe to, and the target unified API. Returns the created webhook subscription object with a unique ID and current status. The webhook will begin receiving events immediately upon successful creation.",
+      "reasoning": "Original description lacks specificity about required inputs and outputs. Enhanced to clarify what CreateWebhookRequest contains (delivery URL, event types, unified API), what is returned (webhook object with ID and status), and the side effect that the webhook becomes active immediately.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'webhooksOne' has semantic quality issues: vague_description, missing_output_details. Description is too generic. Added clarity about what information is returned (delivery URL, event types, unified API, status, metadata) to help AI agents understand the response structure and what details they can expect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "webhooksOne",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Get webhook subscription",
+      "current_description": "Get the webhook subscription details",
+      "description_suggestion": "Retrieves detailed information for a specific webhook subscription by ID. Returns the complete webhook configuration including delivery URL, subscribed event types, unified API, status, and creation metadata.",
+      "reasoning": "Description is too generic. Added clarity about what information is returned (delivery URL, event types, unified API, status, metadata) to help AI agents understand the response structure and what details they can expect.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'webhooksUpdate' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description provides minimal context. Enhanced to explain that this is a partial update operation (PATCH semantics), what fields can be modified, that it returns the updated object, and that changes are immediate. This helps AI agents understand the operation's scope and effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "webhooksUpdate",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Update webhook subscription",
+      "current_description": "Update a webhook subscription",
+      "description_suggestion": "Updates an existing webhook subscription configuration. Supports partial updates via PATCH - only provided fields in the UpdateWebhookRequest will be modified (e.g., delivery URL, event types, status). Returns the updated webhook subscription object. Changes take effect immediately.",
+      "reasoning": "Original description provides minimal context. Enhanced to explain that this is a partial update operation (PATCH semantics), what fields can be modified, that it returns the updated object, and that changes are immediate. This helps AI agents understand the operation's scope and effects.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'webhooksDelete' has semantic quality issues: vague_description, missing_output_details, missing_side_effects. Description lacks important details about the operation's effects. Added clarity that deletion is permanent, the webhook stops receiving events immediately, the expected response code (204), and that the action is irreversible to help AI agents understand the consequences.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "webhooksDelete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete webhook subscription",
+      "current_description": "Delete a webhook subscription",
+      "description_suggestion": "Permanently deletes a webhook subscription by ID. The webhook will immediately stop receiving events. Returns a 204 No Content response on successful deletion. This action cannot be undone.",
+      "reasoning": "Description lacks important details about the operation's effects. Added clarity that deletion is permanent, the webhook stops receiving events immediately, the expected response code (204), and that the action is irreversible to help AI agents understand the consequences.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'webhooksExecute' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, not_actionable. Original summary and description are extremely vague and don't clarify the operation's purpose or effects. Enhanced summary to indicate manual triggering, and description to explain that this forces event delivery, accepts event data, and returns delivery status. This helps AI agents understand when to use this operation (testing, manual event triggering).",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "webhooksExecute",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "not_actionable"
+      ],
+      "current_summary": "Execute a webhook",
+      "current_description": "Execute a webhook",
+      "summary_suggestion": "Manually trigger webhook event delivery",
+      "description_suggestion": "Manually executes a webhook subscription by ID for a specific service, triggering event delivery to the configured endpoint. Accepts webhook event data in the request body and immediately sends it to the webhook's delivery URL. Returns the execution result including delivery status and response from the endpoint.",
+      "reasoning": "Original summary and description are extremely vague and don't clarify the operation's purpose or effects. Enhanced summary to indicate manual triggering, and description to explain that this forces event delivery, accepts event data, and returns delivery status. This helps AI agents understand when to use this operation (testing, manual event triggering).",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'webhooksShortExecute' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, not_actionable, missing_context. Original summary and description are identical to webhooksExecute but lack clarity about the difference. Enhanced to indicate this is a shortened path alternative, clarify that it accepts both body and query parameters, and explain it serves the same purpose as the standard execute endpoint. This helps AI agents distinguish between the two similar operations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "webhooksShortExecute",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "not_actionable",
+        "missing_context"
+      ],
+      "current_summary": "Execute a webhook",
+      "current_description": "Execute a webhook",
+      "summary_suggestion": "Manually trigger webhook event delivery (short path)",
+      "description_suggestion": "Manually executes a webhook subscription using a shortened URL path. Accepts webhook event data and query parameters to trigger event delivery to the configured endpoint for a specific service. Returns the execution result including delivery status and response from the webhook endpoint. This is an alternative endpoint to the standard execute operation.",
+      "reasoning": "Original summary and description are identical to webhooksExecute but lack clarity about the difference. Enhanced to indicate this is a shortened path alternative, clarify that it accepts both body and query parameters, and explain it serves the same purpose as the standard execute endpoint. This helps AI agents distinguish between the two similar operations.",
+      "batch_index": 0
     }
   },
   {
@@ -2787,7 +3050,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 10 operations analyzed, 3 quality issues found",
+    "message": "Semantic analysis completed: 10 operations analyzed, 10 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -2799,7 +3062,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 10,
-      "total_issues_found": 3,
+      "total_issues_found": 10,
       "batches_processed": 2
     }
   }

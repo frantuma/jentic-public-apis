@@ -1367,7 +1367,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post-changeStatus' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestions provide more clarity and context for AI agents.",
+    "message": "Operation 'post-changeStatus' has semantic quality issues: missing_output_details, missing_side_effects, poor_ai_interpretability. Original description lacks clarity on what statuses are supported, what the operation returns, and what side effects occur. Added context about status types, return value, and state change implications for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1381,14 +1381,15 @@
       "operation_id": "post-changeStatus",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
-        "vague_description"
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Changes the status of the payment method.",
       "current_description": "Changes the status of the provided payment method to the specified status.",
-      "summary_suggestion": "Change the status of the stored value payment method.",
-      "description_suggestion": "Changes the status of the provided stored value payment method to the specified status. Requires authentication. Returns the updated status.",
-      "reasoning": "The current summary and description are vague. The suggestions provide more clarity and context for AI agents.",
+      "summary_suggestion": "Change stored value payment method status",
+      "description_suggestion": "Changes the status of a stored value payment method to the specified status (e.g., active, inactive, blocked). Requires the payment method identifier and target status in the request. Returns the updated payment method status and confirmation of the status change. This operation modifies the payment method's operational state.",
+      "reasoning": "Original description lacks clarity on what statuses are supported, what the operation returns, and what side effects occur. Added context about status types, return value, and state change implications for better AI agent decision-making.",
       "batch_index": 0
     }
   },
@@ -1403,7 +1404,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post-checkBalance' has semantic quality issues: vague_summary, missing_output_details. The current summary and description are vague. The suggestions provide more clarity and context for AI agents, including the return value.",
+    "message": "Operation 'post-checkBalance' has semantic quality issues: vague_summary, vague_description, missing_output_details, poor_ai_interpretability. Original summary is too generic ('Checks the balance'). Description lacks specificity about what is returned and whether it's a read-only operation. Enhanced to clarify return value structure and that no state changes occur, helping AI agents understand this is a safe query operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1418,13 +1419,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
+        "vague_description",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Checks the balance.",
       "current_description": "Checks the balance of the provided payment method.",
-      "summary_suggestion": "Check the balance of the stored value payment method.",
-      "description_suggestion": "Checks the balance of the provided stored value payment method. Requires authentication. Returns the current balance.",
-      "reasoning": "The current summary and description are vague. The suggestions provide more clarity and context for AI agents, including the return value.",
+      "summary_suggestion": "Check stored value payment method balance",
+      "description_suggestion": "Retrieves the current balance of a stored value payment method. Requires the payment method identifier in the request. Returns the current balance amount and currency. This is a read-only operation that does not modify any stored value data.",
+      "reasoning": "Original summary is too generic ('Checks the balance'). Description lacks specificity about what is returned and whether it's a read-only operation. Enhanced to clarify return value structure and that no state changes occur, helping AI agents understand this is a safe query operation.",
       "batch_index": 0
     }
   },
@@ -1439,7 +1442,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post-issue' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestions provide more clarity and context for AI agents, including the return value.",
+    "message": "Operation 'post-issue' has semantic quality issues: vague_summary, missing_context, missing_output_details, missing_side_effects. Original description is vague about what 'card' means in stored value context and what is returned. Added clarity that this creates a new card instance, specified return values, and noted potential side effects like activation workflows for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1454,13 +1457,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Issues a new card.",
       "current_description": "Issues a new card of the given payment method.",
-      "summary_suggestion": "Issue a new stored value card.",
-      "description_suggestion": "Issues a new stored value card of the given payment method. Requires authentication. Returns the details of the issued card.",
-      "reasoning": "The current summary and description are vague. The suggestions provide more clarity and context for AI agents, including the return value.",
+      "summary_suggestion": "Issue new stored value card",
+      "description_suggestion": "Issues a new stored value card for the specified payment method product. Requires payment method type and initial configuration in the request. Returns the newly issued card details including card identifier, activation status, and initial balance. This operation creates a new card instance and may trigger activation workflows.",
+      "reasoning": "Original description is vague about what 'card' means in stored value context and what is returned. Added clarity that this creates a new card instance, specified return values, and noted potential side effects like activation workflows for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -1475,7 +1480,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post-load' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestions provide more clarity and context for AI agents, including the return value.",
+    "message": "Operation 'post-load' has semantic quality issues: vague_description, missing_output_details, missing_side_effects. Original description lacks detail about what is returned and the balance impact. Enhanced to clarify the amount parameter, return values including updated balance, and explicitly state the side effect of increasing available funds for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1489,14 +1494,15 @@
       "operation_id": "post-load",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Loads the payment method.",
       "current_description": "Loads the payment method with the specified funds.",
-      "summary_suggestion": "Load funds onto the stored value payment method.",
-      "description_suggestion": "Loads the specified funds onto the stored value payment method. Requires authentication. Returns the updated balance.",
-      "reasoning": "The current summary and description are vague. The suggestions provide more clarity and context for AI agents, including the return value.",
+      "summary_suggestion": "Load funds to stored value payment method",
+      "description_suggestion": "Adds funds to a stored value payment method by loading the specified amount. Requires the payment method identifier and amount to load in the request. Returns the updated balance, transaction reference, and confirmation of the load operation. This operation increases the payment method's available balance.",
+      "reasoning": "Original description lacks detail about what is returned and the balance impact. Enhanced to clarify the amount parameter, return values including updated balance, and explicitly state the side effect of increasing available funds for AI agent clarity.",
       "batch_index": 0
     }
   },
@@ -1511,7 +1517,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post-mergeBalance' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestions provide more clarity and context for AI agents, including the return value.",
+    "message": "Operation 'post-mergeBalance' has semantic quality issues: missing_context, missing_output_details, missing_side_effects, poor_ai_interpretability. Original description is unclear about directionality and side effects. Enhanced to clarify that this is a balance transfer operation, specify both cards involved, detail the return values, and explicitly state that source card is depleted while destination is increased for proper AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1525,14 +1531,16 @@
       "operation_id": "post-mergeBalance",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
-        "vague_description"
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Merge the balance of two cards.",
       "current_description": "Increases the balance of the paymentmethod by the full amount left on the source paymentmethod",
-      "summary_suggestion": "Merge the balance of two stored value cards.",
-      "description_suggestion": "Increases the balance of the target payment method by the full amount left on the source payment method. Requires authentication. Returns the updated balance.",
-      "reasoning": "The current summary and description are vague. The suggestions provide more clarity and context for AI agents, including the return value.",
+      "summary_suggestion": "Merge stored value balances between cards",
+      "description_suggestion": "Transfers the complete balance from a source stored value card to a destination card. Requires both source and destination payment method identifiers in the request. Returns the updated balances for both cards and the transferred amount. This operation depletes the source card balance to zero and increases the destination card balance accordingly.",
+      "reasoning": "Original description is unclear about directionality and side effects. Enhanced to clarify that this is a balance transfer operation, specify both cards involved, detail the return values, and explicitly state that source card is depleted while destination is increased for proper AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -1547,7 +1555,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post-voidTransaction' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestions provide more clarity and context for AI agents, including the return value.",
+    "message": "Operation 'post-voidTransaction' has semantic quality issues: missing_context, missing_output_details, missing_side_effects. Original description lacks specificity about what transaction identifier is needed, what is returned, and the balance impact. Added clarity on required input, return values including balance update, and explicit statement that this reverses the transaction's financial effect for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -1561,14 +1569,15 @@
       "operation_id": "post-voidTransaction",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
-        "vague_description"
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Voids a transaction.",
       "current_description": "Voids the referenced stored value transaction.",
-      "summary_suggestion": "Void a stored value transaction.",
-      "description_suggestion": "Voids the referenced stored value transaction. Requires authentication. Returns the status of the void operation.",
-      "reasoning": "The current summary and description are vague. The suggestions provide more clarity and context for AI agents, including the return value.",
+      "summary_suggestion": "Void stored value transaction",
+      "description_suggestion": "Reverses a previously executed stored value transaction by voiding it. Requires the transaction reference or identifier in the request. Returns the void confirmation, original transaction details, and updated payment method balance reflecting the reversal. This operation reverses the financial impact of the original transaction.",
+      "reasoning": "Original description lacks specificity about what transaction identifier is needed, what is returned, and the balance impact. Added clarity on required input, return values including balance update, and explicit statement that this reverses the transaction's financial effect for better AI agent decision-making.",
       "batch_index": 0
     }
   },

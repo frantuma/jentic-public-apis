@@ -5536,7 +5536,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'datastore.projects.runQuery' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. The original summary and description were too vague. Added details about the request schema, response, and the order of query stages for better clarity and AI agent interpretability.",
+    "message": "Operation 'datastore.projects.runQuery' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_context, not_actionable, poor_ai_interpretability. Original description is severely lacking. It provides no context about inputs (RunQueryRequest structure, query parameters), outputs (RunQueryResponse, EntityResult objects), or operational details (pagination, consistency options). The empty summary and minimal description make it impossible for AI agents to understand when to use this operation or what parameters to provide. Improved version includes: (1) clear action verb 'Executes', (2) input details referencing RunQueryRequest and query parameters, (3) output details including EntityResult and cursor information, (4) operational context about read consistency and result constraints, (5) domain-appropriate terminology consistent with the API context (Entity, Datastore, ReadOptions, EntityResult, PartitionId concepts).",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5553,14 +5553,287 @@
         "vague_summary",
         "vague_description",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_context",
+        "not_actionable",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Queries for entities.",
-      "summary_suggestion": "Execute a query to retrieve entities from Datastore.",
-      "description_suggestion": "Executes a query on the specified Datastore project to retrieve entities. Accepts a `RunQueryRequest` object that includes the query parameters. Returns a list of matching entities and metadata. The query stages are executed in the following order: kind, filter, projection, order, start_cursor, end_cursor, and of. Requires authentication and appropriate permissions.",
-      "reasoning": "The original summary and description were too vague. Added details about the request schema, response, and the order of query stages for better clarity and AI agent interpretability.",
+      "summary_suggestion": "Execute a query to retrieve Datastore entities",
+      "description_suggestion": "Executes a query against the Datastore to retrieve entities matching specified criteria. Accepts a RunQueryRequest containing query parameters such as kind filters, property filters, projections, and ordering. Returns a RunQueryResponse with matched EntityResult objects, cursor information for pagination, and query execution metadata. Supports read consistency options (strong or eventual) via ReadOptions. Results are limited by the query's configured constraints.",
+      "reasoning": "Original description is severely lacking. It provides no context about inputs (RunQueryRequest structure, query parameters), outputs (RunQueryResponse, EntityResult objects), or operational details (pagination, consistency options). The empty summary and minimal description make it impossible for AI agents to understand when to use this operation or what parameters to provide. Improved version includes: (1) clear action verb 'Executes', (2) input details referencing RunQueryRequest and query parameters, (3) output details including EntityResult and cursor information, (4) operational context about read consistency and result constraints, (5) domain-appropriate terminology consistent with the API context (Entity, Datastore, ReadOptions, EntityResult, PartitionId concepts).",
       "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'datastore.projects.allocateIds' has semantic quality issues: vague_summary, missing_output_details, poor_ai_interpretability. Original description lacks a summary and is incomplete. Added clarity about the operation's purpose (pre-allocation before insertion), what it accepts (list of keys), what it returns (allocated IDs), and clarified that it doesn't modify existing entities. This helps AI agents understand when to use this operation in entity creation workflows.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "datastore.projects.allocateIds",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Allocates IDs for the given keys, which is useful for referencing an entity before it is inserted.",
+      "summary_suggestion": "Allocate entity IDs for given keys",
+      "description_suggestion": "Allocates unique entity IDs for the provided keys in Cloud Datastore. This operation is useful for obtaining entity identifiers before inserting entities into the database, enabling forward references. Accepts a list of keys and returns allocated IDs that can be used in subsequent entity creation operations. Does not modify existing entities.",
+      "reasoning": "Original description lacks a summary and is incomplete. Added clarity about the operation's purpose (pre-allocation before insertion), what it accepts (list of keys), what it returns (allocated IDs), and clarified that it doesn't modify existing entities. This helps AI agents understand when to use this operation in entity creation workflows.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'datastore.projects.beginTransaction' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, poor_ai_interpretability. Original description is too minimal. Added context about transaction purpose (atomic operations), what it returns (transaction ID), ACID guarantees, and lifecycle management. This enables AI agents to understand transaction workflows and when to use this operation as part of multi-step data operations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "datastore.projects.beginTransaction",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Begins a new transaction.",
+      "summary_suggestion": "Begin a new Datastore transaction",
+      "description_suggestion": "Initiates a new transaction in Cloud Datastore for executing a series of read and write operations atomically. Returns a transaction ID that must be used in subsequent operations (lookup, query, commit, or rollback). Transactions provide ACID guarantees for data consistency. The transaction remains active until explicitly committed or rolled back.",
+      "reasoning": "Original description is too minimal. Added context about transaction purpose (atomic operations), what it returns (transaction ID), ACID guarantees, and lifecycle management. This enables AI agents to understand transaction workflows and when to use this operation as part of multi-step data operations.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'datastore.projects.commit' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_output_details, poor_ai_interpretability. Original description lacks summary and is incomplete. Added context about transaction requirements (valid transaction ID), input details (mutations list), output details (results and generated keys), and critical side effect (atomic all-or-nothing behavior). This helps AI agents understand transaction completion workflows and error handling.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "datastore.projects.commit",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Commits a transaction, optionally creating, deleting or modifying some entities.",
+      "summary_suggestion": "Commit transaction with entity mutations",
+      "description_suggestion": "Commits an active transaction to Cloud Datastore, persisting all entity mutations (creates, updates, deletes) atomically. Requires a valid transaction ID from beginTransaction. Accepts a list of mutations specifying entities to create, update, or delete. Returns the committed mutation results including generated keys for newly created entities. All mutations are applied atomically - if any mutation fails, the entire transaction is rolled back.",
+      "reasoning": "Original description lacks summary and is incomplete. Added context about transaction requirements (valid transaction ID), input details (mutations list), output details (results and generated keys), and critical side effect (atomic all-or-nothing behavior). This helps AI agents understand transaction completion workflows and error handling.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'datastore.projects.lookup' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_output_details, poor_ai_interpretability. Original description is too vague. Added context about input (list of keys, read options), output (EntityResult objects with found/missing/deferred keys), and consistency options. This helps AI agents understand how to retrieve entities and handle partial results or consistency requirements.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "datastore.projects.lookup",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Looks up entities by key.",
+      "summary_suggestion": "Retrieve entities by their keys",
+      "description_suggestion": "Retrieves one or more entities from Cloud Datastore by their unique keys. Accepts a list of entity keys and optional read options (consistency level, transaction context). Returns EntityResult objects containing the found entities, missing keys, and deferred keys. Supports both strong and eventual consistency reads. Can be executed within a transaction for consistent reads.",
+      "reasoning": "Original description is too vague. Added context about input (list of keys, read options), output (EntityResult objects with found/missing/deferred keys), and consistency options. This helps AI agents understand how to retrieve entities and handle partial results or consistency requirements.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'datastore.projects.reserveIds' has semantic quality issues: vague_summary, missing_context, missing_output_details, poor_ai_interpretability. Original description lacks summary and is unclear about the operation's purpose and effects. Added context about why this is useful (controlling ID assignment), what it accepts (keys with specific IDs), what it does (reserves identifiers), and clarified it doesn't create entities. This helps AI agents understand ID management workflows.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "datastore.projects.reserveIds",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Prevents the supplied keys' IDs from being auto-allocated by Cloud Datastore.",
+      "summary_suggestion": "Reserve entity IDs to prevent auto-allocation",
+      "description_suggestion": "Reserves the specified entity IDs in Cloud Datastore to prevent them from being auto-allocated by the system. Useful when you want to use specific ID values for entities. Accepts a list of keys with specific IDs to reserve. After reservation, these IDs will not be assigned to other entities. Does not create entities, only reserves their identifiers for future use.",
+      "reasoning": "Original description lacks summary and is unclear about the operation's purpose and effects. Added context about why this is useful (controlling ID assignment), what it accepts (keys with specific IDs), what it does (reserves identifiers), and clarified it doesn't create entities. This helps AI agents understand ID management workflows.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'datastore.projects.rollback' has semantic quality issues: vague_summary, missing_context, missing_input_details, poor_ai_interpretability. Original description lacks summary and context. Added details about transaction ID requirement, what happens to mutations (discarded), transaction state after rollback (terminated), and use cases (error handling, conditional aborts). This helps AI agents understand transaction lifecycle and error recovery patterns.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "datastore.projects.rollback",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_input_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Rolls back a transaction.",
+      "summary_suggestion": "Rollback an active transaction",
+      "description_suggestion": "Rolls back an active transaction in Cloud Datastore, discarding all pending mutations and releasing transaction locks. Requires a valid transaction ID from beginTransaction. Cancels all entity modifications (creates, updates, deletes) that were staged but not yet committed. After rollback, the transaction is terminated and cannot be reused. Use this to abort operations when errors occur or conditions are not met.",
+      "reasoning": "Original description lacks summary and context. Added details about transaction ID requirement, what happens to mutations (discarded), transaction state after rollback (terminated), and use cases (error handling, conditional aborts). This helps AI agents understand transaction lifecycle and error recovery patterns.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'datastore.projects.runAggregationQuery' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details, poor_ai_interpretability. Original description is too minimal and vague. Added context about aggregation types (count, sum, average), input structure (query with filters/grouping), output format (results with computed values), execution modes (transactional/non-transactional), and performance benefits. This helps AI agents understand when to use aggregation queries versus entity retrieval.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "datastore.projects.runAggregationQuery",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Runs an aggregation query.",
+      "summary_suggestion": "Execute aggregation query on entities",
+      "description_suggestion": "Executes an aggregation query against Cloud Datastore entities, computing aggregate functions (count, sum, average, etc.) over a filtered set of entities. Accepts a RunAggregationQueryRequest containing the query definition with filters, grouping, and aggregation specifications. Returns aggregation results with computed values and optional grouping information. Supports both transactional and non-transactional execution. More efficient than retrieving all entities for client-side aggregation.",
+      "reasoning": "Original description is too minimal and vague. Added context about aggregation types (count, sum, average), input structure (query with filters/grouping), output format (results with computed values), execution modes (transactional/non-transactional), and performance benefits. This helps AI agents understand when to use aggregation queries versus entity retrieval.",
+      "batch_index": 0
     }
   },
   {
@@ -5574,7 +5847,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 8 operations analyzed, 1 quality issues found",
+    "message": "Semantic analysis completed: 8 operations analyzed, 8 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -5586,7 +5859,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 8,
-      "total_issues_found": 1,
+      "total_issues_found": 8,
       "batches_processed": 2
     }
   }

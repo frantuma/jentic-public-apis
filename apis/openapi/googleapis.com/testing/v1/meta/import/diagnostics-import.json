@@ -6219,7 +6219,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'testing.projects.deviceSessions.list' has semantic quality issues: vague_summary, missing_context. The original summary was missing, and the description lacked context about the types of sessions that can be listed. The suggestions provide a clearer summary and a more detailed description.",
+    "message": "Operation 'testing.projects.deviceSessions.cancel' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description includes useful details about state change and retention policy but lacks clarity on what is returned and prerequisites. Improved summary is action-oriented. Enhanced description clarifies the operation's effect, retention behavior, state requirements, and return value for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6230,17 +6230,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "testing.projects.deviceSessions.list",
+      "operation_id": "testing.projects.deviceSessions.cancel",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "GET /v1/projects/{project_id}/deviceSessions Lists device Sessions owned by the project user.",
-      "summary_suggestion": "List device sessions for a project",
-      "description_suggestion": "Lists the device sessions owned by the project user. This operation allows users to retrieve a list of all active and finished device sessions associated with a specific project.",
-      "reasoning": "The original summary was missing, and the description lacked context about the types of sessions that can be listed. The suggestions provide a clearer summary and a more detailed description.",
+      "current_description": "POST /v1/projects/{project_id}/deviceSessions/{device_session_id}:cancel Changes the DeviceSession to state FINISHED and terminates all connections. Canceled sessions are not deleted and can be retrieved or listed by the user until they expire based on the 28 day deletion policy.",
+      "summary_suggestion": "Cancel a device session and terminate connections",
+      "description_suggestion": "Terminates an active device session by changing its state to FINISHED and closing all active connections. The canceled session is retained and remains queryable for 28 days before automatic deletion. Requires the device session to be in an active state. Returns the updated DeviceSession object with state FINISHED.",
+      "reasoning": "Missing summary entirely. Description includes useful details about state change and retention policy but lacks clarity on what is returned and prerequisites. Improved summary is action-oriented. Enhanced description clarifies the operation's effect, retention behavior, state requirements, and return value for better AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -6255,7 +6256,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'testing.projects.deviceSessions.create' has semantic quality issues: vague_summary, vague_description, missing_input_details. The original summary and description were both vague and lacked details about the input and output. The suggestions provide a clearer summary and a more detailed description, including information about the required input and the output format.",
+    "message": "Operation 'testing.projects.deviceSessions.list' has semantic quality issues: vague_summary, missing_output_details, missing_input_details. Missing summary entirely. Description is minimal and lacks details about pagination, filtering capabilities, ordering, and return structure. Enhanced version clarifies pagination support, filtering options, return format, and sort order to help AI agents understand filtering and pagination capabilities.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "testing.projects.deviceSessions.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "GET /v1/projects/{project_id}/deviceSessions Lists device Sessions owned by the project user.",
+      "summary_suggestion": "List device sessions for a project",
+      "description_suggestion": "Retrieves a paginated list of all DeviceSession objects owned by the authenticated user within the specified project. Supports filtering and pagination through query parameters. Returns a list of DeviceSession objects with their current states and metadata. Sessions are ordered by creation time in descending order.",
+      "reasoning": "Missing summary entirely. Description is minimal and lacks details about pagination, filtering capabilities, ordering, and return structure. Enhanced version clarifies pagination support, filtering options, return format, and sort order to help AI agents understand filtering and pagination capabilities.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'testing.projects.deviceSessions.create' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details. Missing summary entirely. Description is extremely minimal - only shows the endpoint path with no explanation of purpose, inputs, outputs, or effects. Enhanced version explains the operation creates a device session, clarifies the request schema (DeviceSession), describes device provisioning behavior, specifies the return value and initial state, and notes the asynchronous nature of device allocation for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6271,13 +6309,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "POST /v1/projects/{project_id}/deviceSessions",
       "summary_suggestion": "Create a new device session",
-      "description_suggestion": "Creates a new device session for a project. This operation requires the project ID and a valid DeviceSession object in the request body. Upon successful creation, the operation returns the newly created DeviceSession object.",
-      "reasoning": "The original summary and description were both vague and lacked details about the input and output. The suggestions provide a clearer summary and a more detailed description, including information about the required input and the output format.",
+      "description_suggestion": "Creates a new DeviceSession for the specified project, allocating a physical or virtual device for testing. Accepts a DeviceSession request object specifying device configuration, test environment, and session parameters. The operation provisions the device and establishes connections for test execution. Returns the created DeviceSession object with a unique session ID and initial state ACTIVE. Session allocation may take several seconds to complete.",
+      "reasoning": "Missing summary entirely. Description is extremely minimal - only shows the endpoint path with no explanation of purpose, inputs, outputs, or effects. Enhanced version explains the operation creates a device session, clarifies the request schema (DeviceSession), describes device provisioning behavior, specifies the return value and initial state, and notes the asynchronous nature of device allocation for better AI agent interpretability.",
       "batch_index": 1
     }
   },
@@ -6292,7 +6332,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'testing.applicationDetailService.getApkDetails' has semantic quality issues: vague_summary, missing_context. The current summary is missing. Added a concise summary and clarified the description to include the input and output details.",
+    "message": "Operation 'testing.applicationDetailService.getApkDetails' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description is too brief and lacks context about inputs (FileReference), outputs (what details are returned), and use case. Added clarity about what the operation accepts and returns, plus domain context about APK analysis for testing purposes.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6307,13 +6347,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets the details of an Android application APK.",
-      "summary_suggestion": "Retrieve details of an Android APK",
-      "description_suggestion": "Retrieves the details of an Android application's APK file. Requires a FileReference as input. Returns the APK details.",
-      "reasoning": "The current summary is missing. Added a concise summary and clarified the description to include the input and output details.",
+      "summary_suggestion": "Retrieve Android APK application details",
+      "description_suggestion": "Retrieves detailed metadata and information about an Android APK file. Accepts a FileReference pointing to the APK file and returns comprehensive application details including manifest information, permissions, and other APK properties. This operation is useful for analyzing APK characteristics before running tests.",
+      "reasoning": "Missing summary entirely. Description is too brief and lacks context about inputs (FileReference), outputs (what details are returned), and use case. Added clarity about what the operation accepts and returns, plus domain context about APK analysis for testing purposes.",
       "batch_index": 0
     }
   },
@@ -6328,7 +6369,147 @@
         "character": 0
       }
     },
-    "message": "Operation 'testing.projects.deviceSessions.get' has semantic quality issues: vague_summary, missing_context. The current summary is missing. Added a concise summary. The description was clarified to include the input and output details.",
+    "message": "Operation 'testing.projects.testMatrices.create' has semantic quality issues: vague_summary, missing_input_details. Description is comprehensive and well-structured with good detail about constraints (2000 device limit), behavior (unsupported environments, asynchronous execution creation), and error conditions. However, missing summary. Added action-oriented summary that captures the dual nature of creation and execution initiation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "testing.projects.testMatrices.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates and runs a matrix of tests according to the given specifications. Unsupported environments will be returned in the state UNSUPPORTED. A test matrix is limited to use at most 2000 devices in parallel. The returned matrix will not yet contain the executions that will be created for this matrix. Execution creation happens later on and will require a call to GetTestMatrix. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed or if the matrix tries to use too many simultaneous devices.",
+      "summary_suggestion": "Create and initiate a test matrix execution",
+      "reasoning": "Description is comprehensive and well-structured with good detail about constraints (2000 device limit), behavior (unsupported environments, asynchronous execution creation), and error conditions. However, missing summary. Added action-oriented summary that captures the dual nature of creation and execution initiation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'testing.projects.testMatrices.get' has semantic quality issues: vague_summary. Description is detailed and informative with good context about execution population, flaky test handling, and error conditions. Missing summary only. Added action-oriented summary that captures both status checking and execution retrieval aspects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "testing.projects.testMatrices.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Checks the status of a test matrix and the executions once they are created. The test matrix will contain the list of test executions to run if and only if the resultStorage.toolResultsExecution fields have been populated. Note: Flaky test executions may be added to the matrix at a later stage. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the Test Matrix does not exist",
+      "summary_suggestion": "Retrieve test matrix status and execution details",
+      "reasoning": "Description is detailed and informative with good context about execution population, flaky test handling, and error conditions. Missing summary only. Added action-oriented summary that captures both status checking and execution retrieval aspects.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'testing.projects.testMatrices.cancel' has semantic quality issues: vague_summary. Description is clear and complete with good detail about asynchronous behavior, idempotency (no effect if final), and error conditions. Missing summary only. Added concise, action-oriented summary.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "testing.projects.testMatrices.cancel",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Cancels unfinished test executions in a test matrix. This call returns immediately and cancellation proceeds asynchronously. If the matrix is already final, this operation will have no effect. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the Test Matrix does not exist",
+      "summary_suggestion": "Cancel unfinished test executions in matrix",
+      "reasoning": "Description is clear and complete with good detail about asynchronous behavior, idempotency (no effect if final), and error conditions. Missing summary only. Added concise, action-oriented summary.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'testing.testEnvironmentCatalog.get' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity about what inputs are required (environmentType parameter) and what outputs are returned (catalog contents). Added summary and expanded description to explain the purpose, inputs, and typical use case for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "testing.testEnvironmentCatalog.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the catalog of supported test environments. May return any of the following canonical error codes: - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the environment type does not exist - INTERNAL - if an internal error occurred",
+      "summary_suggestion": "Retrieve supported test environment catalog",
+      "description_suggestion": "Retrieves the catalog of supported test environments for a specified environment type. Returns available devices, OS versions, locales, and other configuration options supported by the testing infrastructure. Useful for determining what test environments are available before creating a test matrix. Requires a valid environmentType parameter.",
+      "reasoning": "Missing summary. Description lacks clarity about what inputs are required (environmentType parameter) and what outputs are returned (catalog contents). Added summary and expanded description to explain the purpose, inputs, and typical use case for AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'testing.projects.deviceSessions.get' has semantic quality issues: vague_summary, unclear_purpose, not_actionable, poor_ai_interpretability. Missing summary. Description is poorly formatted (includes HTTP method), unclear about purpose, and contains awkward phrasing ('must poll GetDeviceSession'). Reformatted to be clearer about what the operation does, what it returns, and how it should be used. Improved AI agent interpretability by clarifying the polling pattern and required parameters.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6343,13 +6524,53 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "unclear_purpose",
+        "not_actionable",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "GET /v1/projects/{project_id}/deviceSessions/{device_session_id} Return a DeviceSession, which documents the allocation status and whether the device is allocated. Clients making requests from this API must poll GetDeviceSession.",
-      "summary_suggestion": "Get device session status",
-      "description_suggestion": "Retrieves the status of a device session, including allocation status. The response includes the DeviceSession object. Clients must poll GetDeviceSession for updates.",
-      "reasoning": "The current summary is missing. Added a concise summary. The description was clarified to include the input and output details.",
+      "summary_suggestion": "Retrieve device session allocation status",
+      "description_suggestion": "Retrieves the current status of a device session, including allocation state and device availability. Returns a DeviceSession object containing allocation status and device information. This operation should be polled periodically to monitor device session state changes. Requires project ID and device session ID.",
+      "reasoning": "Missing summary. Description is poorly formatted (includes HTTP method), unclear about purpose, and contains awkward phrasing ('must poll GetDeviceSession'). Reformatted to be clearer about what the operation does, what it returns, and how it should be used. Improved AI agent interpretability by clarifying the polling pattern and required parameters.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'testing.projects.deviceSessions.patch' has semantic quality issues: vague_summary, unclear_purpose, missing_input_details, not_actionable. Missing summary. Description is poorly formatted (includes HTTP method and malformed path), lacks clarity about inputs and outputs, and doesn't explain the update_mask mechanism. Reformatted to clearly explain the PATCH semantics, partial update support, and required parameters. Improved AI agent interpretability by clarifying what inputs are needed and what the operation returns.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "testing.projects.deviceSessions.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "unclear_purpose",
+        "missing_input_details",
+        "not_actionable"
+      ],
+      "current_summary": "",
+      "current_description": "PATCH /v1/projects/{projectId}/deviceSessions/deviceSessionId}:updateDeviceSession Updates the current device session to the fields described by the update_mask.",
+      "summary_suggestion": "Update device session configuration fields",
+      "description_suggestion": "Updates specified fields of a device session using the provided update_mask. Accepts a DeviceSession object with the fields to be updated and an update_mask parameter indicating which fields should be modified. Returns the updated DeviceSession object. Only fields specified in the update_mask will be changed, supporting partial updates.",
+      "reasoning": "Missing summary. Description is poorly formatted (includes HTTP method and malformed path), lacks clarity about inputs and outputs, and doesn't explain the update_mask mechanism. Reformatted to clearly explain the PATCH semantics, partial update support, and required parameters. Improved AI agent interpretability by clarifying what inputs are needed and what the operation returns.",
       "batch_index": 0
     }
   },
@@ -6364,7 +6585,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 10 operations analyzed, 4 quality issues found",
+    "message": "Semantic analysis completed: 10 operations analyzed, 10 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -6376,7 +6597,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 10,
-      "total_issues_found": 4,
+      "total_issues_found": 10,
       "batches_processed": 2
     }
   }

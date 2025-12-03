@@ -9543,7 +9543,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'serviceusage.services.generateServiceIdentity' has semantic quality issues: vague_summary, missing_context, missing_output_details. The original summary and description were missing. The suggested summary and description provide clarity on the operation's purpose, context, and output details.",
+    "message": "Operation 'serviceusage.services.batchEnable' has semantic quality issues: vague_summary, missing_input_details. Missing summary entirely. Description is good but lacks clarity about input requirements (BatchEnableServicesRequest) and could better emphasize the atomic nature for AI agents deciding whether to use this operation. Added summary and enhanced description with input/output details and consistency guarantees.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9554,18 +9554,17 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "serviceusage.services.generateServiceIdentity",
+      "operation_id": "serviceusage.services.batchEnable",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
-        "missing_output_details"
+        "missing_input_details"
       ],
       "current_summary": "",
-      "current_description": "Generates service identity for service.",
-      "summary_suggestion": "Generate service identity for a specified service",
-      "description_suggestion": "Generates a unique identity for the specified service. This identity can be used for authentication and authorization purposes. The response includes the generated service identity details.",
-      "reasoning": "The original summary and description were missing. The suggested summary and description provide clarity on the operation's purpose, context, and output details.",
+      "current_description": "Enables multiple services on a project. The operation is atomic: if enabling any service fails, then the entire batch fails, and no state changes occur. Operation response type: `google.protobuf.Empty`",
+      "summary_suggestion": "Enable multiple services atomically on project",
+      "description_suggestion": "Enables multiple services on a project in a single atomic operation. If enabling any service fails, the entire batch fails and no state changes occur. Requires a BatchEnableServicesRequest specifying the services to enable. Returns an empty response upon successful completion. This operation ensures consistency by preventing partial service enablement.",
+      "reasoning": "Missing summary entirely. Description is good but lacks clarity about input requirements (BatchEnableServicesRequest) and could better emphasize the atomic nature for AI agents deciding whether to use this operation. Added summary and enhanced description with input/output details and consistency guarantees.",
       "batch_index": 2
     }
   },
@@ -9580,7 +9579,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.list' has semantic quality issues: vague_summary, missing_context. The original summary was missing. The description was vague and lacked context about what is being listed.",
+    "message": "Operation 'serviceusage.services.generateServiceIdentity' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, unclear_purpose, poor_ai_interpretability. Missing summary entirely. Description is extremely vague ('Generates service identity for service' is circular and uninformative). Lacks context about what a service identity is, what inputs are required, what is returned, and when an AI agent should use this operation. Enhanced both summary and description with domain context, input/output details, and use case information for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9591,17 +9590,57 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.list",
+      "operation_id": "serviceusage.services.generateServiceIdentity",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "unclear_purpose",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
-      "current_description": "Lists all consumer overrides on this limit.",
-      "summary_suggestion": "List all consumer quota overrides",
-      "description_suggestion": "Lists all consumer overrides on the specified quota limit. This includes overrides set by the consumer to limit their own usage.",
-      "reasoning": "The original summary was missing. The description was vague and lacked context about what is being listed.",
+      "current_description": "Generates service identity for service.",
+      "summary_suggestion": "Generate service identity for specified service",
+      "description_suggestion": "Generates a service identity for the specified service. A service identity is a unique identifier that represents the service within Google Cloud Platform and is used for authentication and authorization purposes. Requires the parent resource path and service name. Returns a ServiceIdentity object containing the generated identity details. This operation is typically used when setting up service-to-service authentication or configuring service permissions.",
+      "reasoning": "Missing summary entirely. Description is extremely vague ('Generates service identity for service' is circular and uninformative). Lacks context about what a service identity is, what inputs are required, what is returned, and when an AI agent should use this operation. Enhanced both summary and description with domain context, input/output details, and use case information for better AI agent interpretability.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'serviceusage.services.consumerQuotaMetrics.limits.adminOverrides.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description is clear about purpose and context but lacks information about the return value. Added summary and clarified return value for better AI agent understanding of what this operation produces.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "serviceusage.services.consumerQuotaMetrics.limits.adminOverrides.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates an admin override. An admin override is applied by an administrator of a parent folder or parent organization of the consumer receiving the override. An admin override is intended to limit the amount of quota the consumer can use out of the total quota pool allocated to all children of the folder or organization.",
+      "summary_suggestion": "Create an admin quota override",
+      "description_suggestion": "Creates an admin override to limit a consumer's quota usage. Admin overrides are applied by administrators of parent folders or organizations and restrict the quota a consumer can use from the total pool allocated to all children. Returns the created QuotaOverride object with the override configuration applied.",
+      "reasoning": "Missing summary entirely. Description is clear about purpose and context but lacks information about the return value. Added summary and clarified return value for better AI agent understanding of what this operation produces.",
       "batch_index": 1
     }
   },
@@ -9616,7 +9655,188 @@
         "character": 0
       }
     },
-    "message": "Operation 'serviceusage.operations.list' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggested summary and description are more specific and actionable.",
+    "message": "Operation 'serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary and description is too terse. Added context about pagination, return type, and use case. Clarified that these are consumer-applied (not admin-applied) overrides for better AI agent distinction between override types.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all consumer overrides on this limit.",
+      "summary_suggestion": "List consumer quota overrides for a limit",
+      "description_suggestion": "Lists all consumer overrides applied to a specific quota limit. Returns a paginated list of ConsumerQuotaLimit objects showing all overrides the consumer has set on their own authority for this limit. Useful for auditing consumer-applied quota restrictions.",
+      "reasoning": "Missing summary and description is too terse. Added context about pagination, return type, and use case. Clarified that these are consumer-applied (not admin-applied) overrides for better AI agent distinction between override types.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description explains constraints well but lacks return value information. Added summary and clarified return value for complete AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a consumer override. A consumer override is applied to the consumer on its own authority to limit its own quota usage. Consumer overrides cannot be used to grant more quota than would be allowed by admin overrides, producer overrides, or the default limit of the service.",
+      "summary_suggestion": "Create a consumer quota override",
+      "description_suggestion": "Creates a consumer override to self-limit quota usage. Consumer overrides are applied by the consumer on their own authority and cannot exceed limits set by admin overrides, producer overrides, or service defaults. Returns the created QuotaOverride object with the override configuration applied.",
+      "reasoning": "Missing summary entirely. Description explains constraints well but lacks return value information. Added summary and clarified return value for complete AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'serviceusage.services.consumerQuotaMetrics.importAdminOverrides' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary and output details. Added summary and clarified atomic transaction semantics and return value. Emphasized that this is a batch operation affecting multiple metrics/limits simultaneously, which is critical for AI agent understanding of scope and atomicity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "serviceusage.services.consumerQuotaMetrics.importAdminOverrides",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates or updates multiple admin overrides atomically, all on the same consumer, but on many different metrics or limits. The name field in the quota override message should not be set.",
+      "summary_suggestion": "Batch import admin quota overrides",
+      "description_suggestion": "Creates or updates multiple admin overrides atomically for a single consumer across different metrics and limits. All overrides are applied together in a single transaction - either all succeed or all fail. The name field in quota override messages should not be set. Returns an Operation object representing the batch import result.",
+      "reasoning": "Missing summary and output details. Added summary and clarified atomic transaction semantics and return value. Emphasized that this is a batch operation affecting multiple metrics/limits simultaneously, which is critical for AI agent understanding of scope and atomicity.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'serviceusage.services.consumerQuotaMetrics.importConsumerOverrides' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary and output details. Added summary and clarified atomic transaction semantics and return value. Emphasized batch nature and atomicity guarantee, distinguishing this from individual override creation operations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "serviceusage.services.consumerQuotaMetrics.importConsumerOverrides",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates or updates multiple consumer overrides atomically, all on the same consumer, but on many different metrics or limits. The name field in the quota override message should not be set.",
+      "summary_suggestion": "Batch import consumer quota overrides",
+      "description_suggestion": "Creates or updates multiple consumer overrides atomically for a single consumer across different metrics and limits. All overrides are applied together in a single transaction - either all succeed or all fail. The name field in quota override messages should not be set. Returns an Operation object representing the batch import result.",
+      "reasoning": "Missing summary and output details. Added summary and clarified atomic transaction semantics and return value. Emphasized batch nature and atomicity guarantee, distinguishing this from individual override creation operations.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'serviceusage.services.list' has semantic quality issues: vague_summary. Description is comprehensive and clear about scope, permissions, filtering capabilities, and return content. However, missing summary. Added concise summary that captures the dual nature of the operation (available services and their state). Description provides excellent detail for AI agent understanding of filtering options and permission requirements.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "serviceusage.services.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all services available to the specified project, and the current state of those services with respect to the project. The list includes all public services, all services for which the calling user has the `servicemanagement.services.bind` permission, and all services that have already been enabled on the project. The list can be filtered to only include services in a specific state, for example to only include services enabled on the project.",
+      "summary_suggestion": "List available and enabled services",
+      "reasoning": "Description is comprehensive and clear about scope, permissions, filtering capabilities, and return content. However, missing summary. Added concise summary that captures the dual nature of the operation (available services and their state). Description provides excellent detail for AI agent understanding of filtering options and permission requirements.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'serviceusage.operations.list' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description lacks context about operation tracking purpose and return format. Added clarity about operation resource type, pagination, and use case for AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9631,13 +9851,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
-      "summary_suggestion": "List all operations matching the specified filter",
-      "description_suggestion": "Lists all operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
-      "reasoning": "The current summary and description are vague. The suggested summary and description are more specific and actionable.",
+      "summary_suggestion": "List filtered long-running operations",
+      "description_suggestion": "Lists long-running operations that match the specified filter criteria in the request. Returns a paginated list of Operation resources. If the server doesn't support this method, it returns `UNIMPLEMENTED`. Useful for tracking the status of asynchronous service management tasks.",
+      "reasoning": "Missing summary entirely. Description lacks context about operation tracking purpose and return format. Added clarity about operation resource type, pagination, and use case for AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -9652,7 +9872,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.delete' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing and the description lacks information about the side effects of the operation.",
+    "message": "Operation 'serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.delete' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary. Description too terse and lacks context about what happens after deletion and what input is required. Added details about reversion behavior and response format for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9667,13 +9887,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_context",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes a consumer override.",
-      "summary_suggestion": "Delete a consumer quota limit override",
-      "description_suggestion": "Deletes a consumer quota limit override. This action removes the specified override, which may affect the quota limit's behavior.",
-      "reasoning": "The current summary is missing and the description lacks information about the side effects of the operation.",
+      "summary_suggestion": "Delete consumer quota override",
+      "description_suggestion": "Deletes a consumer-specific quota override for a quota limit. After deletion, the quota limit reverts to the default or admin-configured value. Requires the consumer override resource name. Returns an empty response on success.",
+      "reasoning": "Missing summary. Description too terse and lacks context about what happens after deletion and what input is required. Added details about reversion behavior and response format for better AI agent decision-making.",
       "batch_index": 0
     }
   },
@@ -9688,7 +9909,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.patch' has semantic quality issues: vague_summary, missing_context. The current summary is missing and the description lacks context about the request parameters and response schema.",
+    "message": "Operation 'serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.patch' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks detail about input schema, partial update support, and return value. Added specificity about QuotaOverride schema, partial update behavior, and response format to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9703,13 +9924,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Updates a consumer override.",
-      "summary_suggestion": "Update a consumer quota limit override",
-      "description_suggestion": "Updates a consumer quota limit override. This action modifies the specified override, which may affect the quota limit's behavior.",
-      "reasoning": "The current summary is missing and the description lacks context about the request parameters and response schema.",
+      "summary_suggestion": "Update consumer quota override",
+      "description_suggestion": "Updates a consumer-specific quota override for a quota limit. Accepts a QuotaOverride object with fields to be modified. Supports partial updates - only provided fields will be changed. Returns the updated QuotaOverride resource. Requires the override resource name and appropriate permissions.",
+      "reasoning": "Missing summary. Description lacks detail about input schema, partial update support, and return value. Added specificity about QuotaOverride schema, partial update behavior, and response format to improve AI agent interpretability.",
       "batch_index": 0
     }
   },
@@ -9724,7 +9946,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'serviceusage.services.consumerQuotaMetrics.limits.adminOverrides.list' has semantic quality issues: vague_summary, missing_context. The current summary is missing and the description lacks context about the response schema.",
+    "message": "Operation 'serviceusage.services.enable' has semantic quality issues: vague_summary, missing_context. Missing summary. Description lacks context about request schema, operation type (long-running), and preconditions. Added details about EnableServiceRequest input, long-running nature, and precondition information for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "serviceusage.services.enable",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Enables a service so that it can be used with a project. Operation response type: `google.protobuf.Empty`",
+      "summary_suggestion": "Enable service for project",
+      "description_suggestion": "Enables a service so that it can be used with a project. Accepts an EnableServiceRequest. Returns an empty response on success. This is a long-running operation that may take time to complete. The service must not already be enabled; attempting to enable an already-enabled service may result in an error.",
+      "reasoning": "Missing summary. Description lacks context about request schema, operation type (long-running), and preconditions. Added details about EnableServiceRequest input, long-running nature, and precondition information for better AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'serviceusage.services.consumerQuotaMetrics.limits.adminOverrides.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description lacks context about pagination, precedence hierarchy, and input requirements. Added clarity about admin override precedence, pagination support, and parent resource requirement to improve AI agent understanding of this operation's role in quota management.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9743,9 +10001,9 @@
       ],
       "current_summary": "",
       "current_description": "Lists all admin overrides on this limit.",
-      "summary_suggestion": "List all admin overrides for a quota limit",
-      "description_suggestion": "Lists all admin overrides for a specific quota limit. This operation returns a list of all overrides applied to the specified limit.",
-      "reasoning": "The current summary is missing and the description lacks context about the response schema.",
+      "summary_suggestion": "List admin quota overrides",
+      "description_suggestion": "Lists all admin-configured quota overrides for a specific quota limit. Returns a paginated list of admin override resources. Admin overrides take precedence over consumer overrides and default quota values. Requires the parent quota limit resource name.",
+      "reasoning": "Missing summary. Description lacks context about pagination, precedence hierarchy, and input requirements. Added clarity about admin override precedence, pagination support, and parent resource requirement to improve AI agent understanding of this operation's role in quota management.",
       "batch_index": 0
     }
   },
@@ -9760,7 +10018,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 16 operations analyzed, 6 quality issues found",
+    "message": "Semantic analysis completed: 16 operations analyzed, 13 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -9772,7 +10030,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 16,
-      "total_issues_found": 6,
+      "total_issues_found": 13,
       "batches_processed": 3
     }
   }

@@ -2579,7 +2579,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchJob' has semantic quality issues: vague_summary, vague_description, missing_output_details. The original summary and description were missing. The suggested summary and description provide clarity on the operation's purpose and expected output, improving AI agent interpretability.",
+    "message": "Operation 'FetchJob' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, poor_ai_interpretability. Operation has no summary or description, making it impossible for AI agents to understand its purpose. Added clear action verb (Retrieve), specified what is being retrieved (bulk export job details), explained the required input (JobSid), and clarified the return value and use case for monitoring job status.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2595,13 +2595,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_output_details"
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Retrieve details of a specific export job",
-      "description_suggestion": "Fetches the details of a specific export job identified by its JobSid. This operation requires authentication and returns the job details including status, start time, and end time.",
-      "reasoning": "The original summary and description were missing. The suggested summary and description provide clarity on the operation's purpose and expected output, improving AI agent interpretability.",
+      "summary_suggestion": "Retrieve bulk export job details",
+      "description_suggestion": "Retrieves the details and status of a specific bulk export job identified by its JobSid. Returns the job object containing status, progress, configuration, and result information. Use this operation to monitor export job completion and retrieve export results.",
+      "reasoning": "Operation has no summary or description, making it impossible for AI agents to understand its purpose. Added clear action verb (Retrieve), specified what is being retrieved (bulk export job details), explained the required input (JobSid), and clarified the return value and use case for monitoring job status.",
       "batch_index": 1
     }
   },
@@ -2616,7 +2619,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteJob' has semantic quality issues: vague_summary, vague_description, missing_output_details, missing_side_effects. The original summary and description were missing. The suggested summary and description provide clarity on the operation's purpose, expected output, and side effects, improving AI agent interpretability.",
+    "message": "Operation 'DeleteJob' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_side_effects, poor_ai_interpretability. Operation lacks summary and description entirely. Added action-oriented language (Cancel and delete), specified the required parameter (JobSid), clarified the side effects (removes job, halts processing), and included important constraints about which job states can be deleted to help AI agents determine appropriate usage.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2632,14 +2635,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_output_details",
-        "missing_side_effects"
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Delete a specific export job",
-      "description_suggestion": "Deletes a specific export job identified by its JobSid. This operation requires authentication and confirms the deletion by returning a success message or error if the job does not exist.",
-      "reasoning": "The original summary and description were missing. The suggested summary and description provide clarity on the operation's purpose, expected output, and side effects, improving AI agent interpretability.",
+      "summary_suggestion": "Cancel and delete bulk export job",
+      "description_suggestion": "Deletes and cancels a bulk export job identified by its JobSid. This operation removes the job from the system and halts any in-progress export processing. Returns a 204 No Content response on successful deletion. Note: Only jobs in pending or processing states can be deleted.",
+      "reasoning": "Operation lacks summary and description entirely. Added action-oriented language (Cancel and delete), specified the required parameter (JobSid), clarified the side effects (removes job, halts processing), and included important constraints about which job states can be deleted to help AI agents determine appropriate usage.",
       "batch_index": 1
     }
   },
@@ -2654,7 +2659,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchDay' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details. The current summary and description are too vague. Added details about the required parameters and the expected output to improve clarity and AI agent interpretability.",
+    "message": "Operation 'FetchDay' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description is too generic and doesn't clarify what 'Day' means in the bulk exports context. Added context about resource type, parameters, and return value to help AI agents understand this retrieves daily export data.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2671,14 +2676,13 @@
         "vague_summary",
         "vague_description",
         "missing_context",
-        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "Fetch a specific Day.",
       "current_description": "Fetch a specific Day.",
-      "summary_suggestion": "Retrieve details of a specific day's export data.",
-      "description_suggestion": "Retrieves detailed information for a specific day's export data. Requires {ResourceType} and {Day} parameters. Returns detailed export data for the specified day.",
-      "reasoning": "The current summary and description are too vague. Added details about the required parameters and the expected output to improve clarity and AI agent interpretability.",
+      "summary_suggestion": "Retrieve export data for a specific day",
+      "description_suggestion": "Retrieves export data available for a specific day within a resource type. Requires the resource type and day identifier as path parameters. Returns the day object containing export information and metadata for that specific date.",
+      "reasoning": "Original description is too generic and doesn't clarify what 'Day' means in the bulk exports context. Added context about resource type, parameters, and return value to help AI agents understand this retrieves daily export data.",
       "batch_index": 0
     }
   },
@@ -2693,7 +2697,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListDay' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The current description is too vague. Added details about the required parameters and the expected output to improve clarity and AI agent interpretability.",
+    "message": "Operation 'ListDay' has semantic quality issues: vague_description, missing_context, missing_output_details. Summary is adequate, but description lacks clarity about pagination support and what the returned day objects contain. Enhanced to explain pagination capability and return value structure for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2708,13 +2712,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_input_details",
+        "missing_context",
         "missing_output_details"
       ],
       "current_summary": "Retrieve a list of all Days for a resource.",
       "current_description": "Retrieve a list of all Days for a resource.",
-      "description_suggestion": "Retrieves a list of all available days for a specific resource type. Requires {ResourceType} and optional filtering parameters. Returns a list of days with metadata.",
-      "reasoning": "The current description is too vague. Added details about the required parameters and the expected output to improve clarity and AI agent interpretability.",
+      "description_suggestion": "Retrieves a list of all available export days for a specified resource type. Supports pagination through query parameters. Returns a collection of day objects, each containing export availability and metadata for that date.",
+      "reasoning": "Summary is adequate, but description lacks clarity about pagination support and what the returned day objects contain. Enhanced to explain pagination capability and return value structure for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -2729,7 +2733,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchExport' has semantic quality issues: vague_summary, vague_description, missing_output_details. The current summary and description are too vague. Added details about the required parameters and the expected output to improve clarity and AI agent interpretability.",
+    "message": "Operation 'FetchExport' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description is too vague. Added context about what export data is returned and clarified that this retrieves configuration for a resource type, not a specific export instance.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2745,13 +2749,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "missing_context",
         "missing_output_details"
       ],
       "current_summary": "Fetch a specific Export.",
       "current_description": "Fetch a specific Export.",
-      "summary_suggestion": "Retrieve details of a specific export.",
-      "description_suggestion": "Retrieves detailed information about a specific export. Requires {ResourceType} parameter. Returns detailed export data.",
-      "reasoning": "The current summary and description are too vague. Added details about the required parameters and the expected output to improve clarity and AI agent interpretability.",
+      "summary_suggestion": "Retrieve export configuration for a resource type",
+      "description_suggestion": "Retrieves the export configuration and metadata for a specified resource type. Returns the export object containing available export options, status, and configuration details for the resource.",
+      "reasoning": "Original description is too vague. Added context about what export data is returned and clarified that this retrieves configuration for a resource type, not a specific export instance.",
       "batch_index": 0
     }
   },
@@ -2766,7 +2771,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchExportConfiguration' has semantic quality issues: vague_summary, vague_description, missing_output_details. The current summary and description are too vague. Added details about the required parameters and the expected output to improve clarity and AI agent interpretability.",
+    "message": "Operation 'FetchExportConfiguration' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original description lacks specificity about what configuration settings are returned. Enhanced to clarify that this retrieves configuration parameters and settings that control export behavior.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2782,13 +2787,14 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "missing_context",
         "missing_output_details"
       ],
       "current_summary": "Fetch a specific Export Configuration.",
       "current_description": "Fetch a specific Export Configuration.",
-      "summary_suggestion": "Retrieve details of a specific export configuration.",
-      "description_suggestion": "Retrieves detailed configuration settings for a specific export. Requires {ResourceType} parameter. Returns detailed export configuration data.",
-      "reasoning": "The current summary and description are too vague. Added details about the required parameters and the expected output to improve clarity and AI agent interpretability.",
+      "summary_suggestion": "Retrieve export configuration settings for a resource",
+      "description_suggestion": "Retrieves the current export configuration settings for a specified resource type. Returns the configuration object containing export parameters, field mappings, and other settings that control how exports are generated for this resource.",
+      "reasoning": "Original description lacks specificity about what configuration settings are returned. Enhanced to clarify that this retrieves configuration parameters and settings that control export behavior.",
       "batch_index": 0
     }
   },
@@ -2803,7 +2809,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateExportConfiguration' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. The current summary and description are too vague. Added details about the required parameters, request body, and the expected output to improve clarity and AI agent interpretability.",
+    "message": "Operation 'UpdateExportConfiguration' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is too generic. Added details about request body parameters, return value, and side effects (changes apply to future exports) to help AI agents understand the impact of this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2820,13 +2826,14 @@
         "vague_summary",
         "vague_description",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Update a specific Export Configuration.",
       "current_description": "Update a specific Export Configuration.",
-      "summary_suggestion": "Modify settings of a specific export configuration.",
-      "description_suggestion": "Modifies the configuration settings for a specific export. Requires {ResourceType} parameter and a request body with updated configuration details. Returns the updated export configuration.",
-      "reasoning": "The current summary and description are too vague. Added details about the required parameters, request body, and the expected output to improve clarity and AI agent interpretability.",
+      "summary_suggestion": "Update export configuration settings for a resource",
+      "description_suggestion": "Updates the export configuration settings for a specified resource type. Accepts configuration parameters in the request body to modify export behavior, field mappings, and other settings. Returns the updated configuration object. Changes take effect for subsequent export jobs.",
+      "reasoning": "Original description is too generic. Added details about request body parameters, return value, and side effects (changes apply to future exports) to help AI agents understand the impact of this operation.",
       "batch_index": 0
     }
   },
@@ -2841,7 +2848,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListExportCustomJob' has semantic quality issues: vague_summary, vague_description, missing_context, missing_input_details, missing_output_details. Both summary and description were missing. Added details about the required parameters and the expected output to improve clarity and AI agent interpretability.",
+    "message": "Operation 'ListExportCustomJob' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_context, missing_output_details. Operation has no summary or description. Added clear action-oriented summary and comprehensive description explaining the operation retrieves custom export jobs with pagination support and returns job status information.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2857,15 +2864,15 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
         "missing_context",
-        "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Retrieve a list of all custom export jobs.",
-      "description_suggestion": "Retrieves a list of all custom export jobs for a specific resource type. Requires {ResourceType} and optional filtering parameters. Returns a list of custom export jobs with metadata.",
-      "reasoning": "Both summary and description were missing. Added details about the required parameters and the expected output to improve clarity and AI agent interpretability.",
+      "summary_suggestion": "List custom export jobs for a resource type",
+      "description_suggestion": "Retrieves a list of all custom export jobs for a specified resource type. Supports filtering and pagination through query parameters. Returns a collection of job objects containing job status, creation date, and export details for each custom job.",
+      "reasoning": "Operation has no summary or description. Added clear action-oriented summary and comprehensive description explaining the operation retrieves custom export jobs with pagination support and returns job status information.",
       "batch_index": 0
     }
   },
@@ -2880,7 +2887,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateExportCustomJob' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Both summary and description were missing. Added details about the required parameters, request body, and the expected output to improve clarity and AI agent interpretability.",
+    "message": "Operation 'CreateExportCustomJob' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_context, missing_input_details, missing_output_details, missing_side_effects. Operation has no summary or description. Added clear action-oriented summary and detailed description explaining what parameters are accepted, what is returned (job ID and status), and the side effect (job is queued for processing).",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2896,14 +2903,17 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
+        "unclear_purpose",
+        "missing_context",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Create a new custom export job.",
-      "description_suggestion": "Creates a new custom export job for a specific resource type. Requires {ResourceType} and a request body with job details. Returns the newly created custom export job.",
-      "reasoning": "Both summary and description were missing. Added details about the required parameters, request body, and the expected output to improve clarity and AI agent interpretability.",
+      "summary_suggestion": "Create a custom export job for a resource type",
+      "description_suggestion": "Creates a new custom export job for a specified resource type. Accepts job configuration parameters in the request body (such as date range, fields to export, and format options). Returns the created job object with a unique job ID and initial status. The job is queued for processing and will generate export data according to the specified parameters.",
+      "reasoning": "Operation has no summary or description. Added clear action-oriented summary and detailed description explaining what parameters are accepted, what is returned (job ID and status), and the side effect (job is queued for processing).",
       "batch_index": 0
     }
   },

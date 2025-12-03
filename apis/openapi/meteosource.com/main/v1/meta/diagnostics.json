@@ -441,32 +441,6 @@
   {
     "range": {
       "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Info object should contain `license` field. [path: info]",
-    "severity": 2,
-    "code": "info-license",
-    "code_description": null,
-    "source": "redocly-validator",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [
-        "info"
-      ],
-      "target": "bundled-spec"
-    }
-  },
-  {
-    "range": {
-      "start": {
         "line": 2,
         "character": 9
       },
@@ -18112,10 +18086,106 @@
       },
       "end": {
         "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Info object should contain `license` field. [path: info]",
+    "severity": 2,
+    "code": "info-license",
+    "code_description": null,
+    "source": "redocly-validator",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [
+        "info"
+      ],
+      "target": "bundled-spec"
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'nearest_place_nearest_place_get' has semantic quality issues: missing_output_details. Summary is clear and action-oriented. Description lacks explicit details about what data is returned (place_id, name, coordinates, timezone, country). Adding return value details improves AI agent understanding of what this operation provides and how it integrates with other endpoints like the point endpoint.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "nearest_place_nearest_place_get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details"
+      ],
+      "current_summary": "Returns the nearest named location for a given GPS coordinates.",
+      "current_description": "## Search for nearest place by coordinates\n\nYou can use this endpoint to find the nearest place from given coordinates.\n\n*Note: If you specify coordinates of a secluded place (e.g. middle of the ocean), the nearest point can be very far from the coordinates.*",
+      "description_suggestion": "## Search for nearest place by coordinates\n\nYou can use this endpoint to find the nearest named place from given coordinates. The response contains the place_id, name, coordinates, timezone, and country information for the nearest location.\n\n*Note: If you specify coordinates of a secluded place (e.g. middle of the ocean), the nearest point can be very far from the coordinates.*",
+      "reasoning": "Summary is clear and action-oriented. Description lacks explicit details about what data is returned (place_id, name, coordinates, timezone, country). Adding return value details improves AI agent understanding of what this operation provides and how it integrates with other endpoints like the point endpoint.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'map_map_get' has semantic quality issues: missing_output_details, missing_context. Summary is vague about the action (doesn't clearly indicate 'generate' or 'retrieve'). Description lacks explicit information about the output format (binary PNG) and response type. Added clarity about what the operation returns (PNG image), reorganized notes for better readability, and clarified coverage limitations. Improved summary uses action verb 'Generate' for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "map_map_get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Returns PNG weather map for given area and variable",
+      "current_description": "## PNG weather forecast maps for given area and variable\n\n### Area specification\nThere are two ways to specify geographical area you need for your map:\n1. Specify `X` and `Y` coordinates and zoom level `Z` of desired tile in <a href=\"https://www.maptiler.com/google-maps-coordinates-tile-bounds-projection/\" rel=\"nofollow\" target=\"_blank\">Google Maps Tile notation</a>.\n2. Specify latitude and longitude bounds of the area you want to cover.\n\n### Notes\n * The resulting PNG maps are **always** in <a href=\"https://epsg.io/3857\" rel=\"nofollow\" target=\"_blank\">Google Mercator projection (EPSG:3857)</a>.\n * As Meteosource only covers areas between latitudes 80° and -80°, you can only request maps within these bounds, when specifying the latitude and longitude boundaries. When specifying the area using Google Maps Tile notation, the regions outside our supported latitudes will be fully transparent.\n* The finest resolution is not available for maps covering very large regions. The resulting map will be automatically downscaled in this case, to guarantee high-speed responses.\n* Weather maps are only supported for forecasts, not for archive data.",
+      "summary_suggestion": "Generate PNG weather forecast map for specified area",
+      "description_suggestion": "## PNG weather forecast maps for given area and variable\n\nGenerates a PNG image containing weather forecast data for a specified geographical area and weather variable. The response is a binary PNG file in Google Mercator projection (EPSG:3857).\n\n### Area specification\nThere are two ways to specify geographical area you need for your map:\n1. Specify `X` and `Y` coordinates and zoom level `Z` of desired tile in <a href=\"https://www.maptiler.com/google-maps-coordinates-tile-bounds-projection/\" rel=\"nofollow\" target=\"_blank\">Google Maps Tile notation</a>.\n2. Specify latitude and longitude bounds of the area you want to cover.\n\n### Coverage and Limitations\n * Coverage is limited to latitudes between 80° and -80°. Regions outside this range will appear transparent.\n* The finest resolution is not available for maps covering very large regions; maps are automatically downscaled to ensure fast responses.\n* Weather maps are only supported for forecasts, not for historical/archive data.\n\n### Notes\n * The resulting PNG maps are **always** in <a href=\"https://epsg.io/3857\" rel=\"nofollow\" target=\"_blank\">Google Mercator projection (EPSG:3857)</a>.",
+      "reasoning": "Summary is vague about the action (doesn't clearly indicate 'generate' or 'retrieve'). Description lacks explicit information about the output format (binary PNG) and response type. Added clarity about what the operation returns (PNG image), reorganized notes for better readability, and clarified coverage limitations. Improved summary uses action verb 'Generate' for better AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 7 operations analyzed, 0 quality issues found",
+    "message": "Semantic analysis completed: 7 operations analyzed, 2 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -18127,7 +18197,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 7,
-      "total_issues_found": 0,
+      "total_issues_found": 2,
       "batches_processed": 1
     }
   }

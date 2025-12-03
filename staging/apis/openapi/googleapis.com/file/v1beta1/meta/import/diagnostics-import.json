@@ -6917,7 +6917,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'file.projects.locations.instances.shares.create' has semantic quality issues: vague_summary, missing_context, missing_input_details. The original summary was missing. The description was vague and lacked details about the required inputs and the response.",
+    "message": "Operation 'file.projects.locations.instances.shares.create' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, missing_side_effects. Original description is too minimal. Added context about what a share is in the Filestore domain, what inputs are expected (Share object with specific properties), clarified that this returns a long-running Operation (consistent with API patterns), and explained the side effect (share becomes accessible). This helps AI agents understand the operation's purpose, inputs, outputs, and effects.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6932,14 +6932,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
         "missing_context",
-        "missing_input_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Creates a share.",
-      "summary_suggestion": "Create a new file share in a specified instance.",
-      "description_suggestion": "Creates a new file share within a specified Filestore instance. Requires the parent resource path and a Share object in the request body. The response includes the newly created Share object.",
-      "reasoning": "The original summary was missing. The description was vague and lacked details about the required inputs and the response.",
+      "summary_suggestion": "Create a new Filestore instance share",
+      "description_suggestion": "Creates a new NFS share within a Filestore instance. The share is defined by the provided Share object, which specifies the share name, capacity, and NFS export options. This operation returns a long-running Operation that completes when the share is fully provisioned and ready for client access. The share will be accessible via NFS once the operation completes successfully.",
+      "reasoning": "Original description is too minimal. Added context about what a share is in the Filestore domain, what inputs are expected (Share object with specific properties), clarified that this returns a long-running Operation (consistent with API patterns), and explained the side effect (share becomes accessible). This helps AI agents understand the operation's purpose, inputs, outputs, and effects.",
       "batch_index": 2
     }
   },
@@ -6954,43 +6956,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'file.projects.locations.instances.snapshots.list' has semantic quality issues: vague_summary, missing_context. The original summary was missing. The description was vague and lacked details about the parameters and response structure.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "file.projects.locations.instances.snapshots.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_context"
-      ],
-      "current_summary": "",
-      "current_description": "Lists all snapshots in a project for either a specified location or for all locations.",
-      "summary_suggestion": "List all snapshots in a specified Filestore instance.",
-      "description_suggestion": "Lists all snapshots associated with a specified Filestore instance. Optionally, filters can be applied to list snapshots for a specific location. The response includes a list of Snapshot objects.",
-      "reasoning": "The original summary was missing. The description was vague and lacked details about the parameters and response structure.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'file.projects.locations.instances.snapshots.create' has semantic quality issues: vague_summary, missing_context, missing_input_details, missing_output_details. The original summary was missing. The description was vague and lacked details about the required inputs and the response.",
+    "message": "Operation 'file.projects.locations.instances.snapshots.create' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details, missing_side_effects. Original description is too minimal and lacks domain context. Added explanation of what a snapshot represents (point-in-time copy), what inputs are expected (Snapshot object with name and source), clarified that this returns a long-running Operation (consistent with API patterns), and explained the side effects and use cases (restoration, instance creation). This enables AI agents to understand the operation's purpose, inputs, outputs, and practical applications.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7005,15 +6971,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
         "missing_context",
-        "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Creates a snapshot.",
-      "summary_suggestion": "Create a new snapshot for a specified Filestore instance.",
-      "description_suggestion": "Creates a new snapshot for a specified Filestore instance. Requires the parent resource path and a Snapshot object in the request body. The response includes the newly created Snapshot object.",
-      "reasoning": "The original summary was missing. The description was vague and lacked details about the required inputs and the response.",
+      "summary_suggestion": "Create a new Filestore instance snapshot",
+      "description_suggestion": "Creates a point-in-time snapshot of a Filestore instance's file share. The snapshot is defined by the provided Snapshot object, which specifies the snapshot name and source instance. This operation returns a long-running Operation that completes when the snapshot is fully created and ready for use. The snapshot can subsequently be used to restore file share data or create new instances.",
+      "reasoning": "Original description is too minimal and lacks domain context. Added explanation of what a snapshot represents (point-in-time copy), what inputs are expected (Snapshot object with name and source), clarified that this returns a long-running Operation (consistent with API patterns), and explained the side effects and use cases (restoration, instance creation). This enables AI agents to understand the operation's purpose, inputs, outputs, and practical applications.",
       "batch_index": 2
     }
   },
@@ -7028,7 +6995,263 @@
         "character": 0
       }
     },
-    "message": "Operation 'file.projects.locations.backups.delete' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing. Added a concise summary and detailed description including side effects.",
+    "message": "Operation 'file.projects.locations.instances.restore' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary entirely. Description lacks clarity about what happens to existing data (overwrite), the operation type (long-running), and return value. Added context about data overwriting, operation type, and return value for better AI agent understanding of side effects and expected behavior.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "file.projects.locations.instances.restore",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Restores an existing instance's file share from a backup. The capacity of the instance needs to be equal to or larger than the capacity of the backup (and also equal to or larger than the minimum capacity of the tier).",
+      "summary_suggestion": "Restore instance file share from backup",
+      "description_suggestion": "Restores an existing Filestore instance's file share from a specified backup. The target instance capacity must be equal to or larger than the backup capacity and meet the minimum capacity requirement for its tier. This operation overwrites the current file share data with the backup contents. Returns a long-running operation that completes when the restore is finished.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about what happens to existing data (overwrite), the operation type (long-running), and return value. Added context about data overwriting, operation type, and return value for better AI agent understanding of side effects and expected behavior.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'file.projects.locations.instances.revert' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary entirely. Description is vague about side effects (data loss of changes after snapshot) and operation type. Added clarity about data overwriting, what gets lost, and that this is a long-running operation for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "file.projects.locations.instances.revert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Revert an existing instance's file system to a specified snapshot.",
+      "summary_suggestion": "Revert instance file system to snapshot",
+      "description_suggestion": "Reverts an existing Filestore instance's file system to a specified snapshot. This operation restores the file system to the state captured in the snapshot, overwriting any changes made after the snapshot was created. Returns a long-running operation that completes when the revert is finished.",
+      "reasoning": "Missing summary entirely. Description is vague about side effects (data loss of changes after snapshot) and operation type. Added clarity about data overwriting, what gets lost, and that this is a long-running operation for better AI agent decision-making.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'file.projects.locations.backups.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks information about pagination support and return value structure. Added details about pagination and explicit return type for better AI agent understanding of how to iterate through results.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "file.projects.locations.backups.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all backups in a project for either a specified location or for all locations.",
+      "summary_suggestion": "List backups in project or location",
+      "description_suggestion": "Lists all Filestore backups in a project, optionally filtered by location. Supports pagination through page size and token parameters. Returns a list of Backup objects matching the specified criteria.",
+      "reasoning": "Missing summary entirely. Description lacks information about pagination support and return value structure. Added details about pagination and explicit return type for better AI agent understanding of how to iterate through results.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'file.projects.locations.backups.create' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary entirely. Description is extremely vague - doesn't specify what is being backed up (an instance), the operation type (long-running), or return value. Added context about backup source, operation type, and return value for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "file.projects.locations.backups.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a backup.",
+      "summary_suggestion": "Create a Filestore backup",
+      "description_suggestion": "Creates a new Filestore backup of a specified instance. The backup captures the current state of the instance's file share. Returns a long-running operation that completes when the backup is created and ready for use.",
+      "reasoning": "Missing summary entirely. Description is extremely vague - doesn't specify what is being backed up (an instance), the operation type (long-running), or return value. Added context about backup source, operation type, and return value for AI agent clarity.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'file.projects.locations.instances.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks information about pagination support and return value structure. Added details about pagination and explicit return type for better AI agent understanding of how to retrieve and iterate through instances.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "file.projects.locations.instances.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all instances in a project for either a specified location or for all locations.",
+      "summary_suggestion": "List Filestore instances in project",
+      "description_suggestion": "Lists all Filestore instances in a project, optionally filtered by location. Supports pagination through page size and token parameters. Returns a list of Instance objects matching the specified criteria.",
+      "reasoning": "Missing summary entirely. Description lacks information about pagination support and return value structure. Added details about pagination and explicit return type for better AI agent understanding of how to retrieve and iterate through instances.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'file.projects.locations.instances.create' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary entirely. Description focuses only on backup scenario and lacks information about the operation type (long-running), return value, and general instance creation context. Added clarity about operation type, return value, and broader context for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "file.projects.locations.instances.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates an instance. When creating from a backup, the capacity of the new instance needs to be equal to or larger than the capacity of the backup (and also equal to or larger than the minimum capacity of the tier).",
+      "summary_suggestion": "Create a Filestore instance",
+      "description_suggestion": "Creates a new Filestore instance with specified configuration. Can optionally restore from an existing backup - in this case, the new instance capacity must be equal to or larger than the backup capacity and meet the minimum capacity requirement for its tier. Returns a long-running operation that completes when the instance is created and ready for use.",
+      "reasoning": "Missing summary entirely. Description focuses only on backup scenario and lacks information about the operation type (long-running), return value, and general instance creation context. Added clarity about operation type, return value, and broader context for AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'file.projects.locations.instances.shares.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks information about pagination support and return value structure. Added details about pagination and explicit return type for better AI agent understanding of how to retrieve and iterate through shares.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "file.projects.locations.instances.shares.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all shares for a specified instance.",
+      "summary_suggestion": "List shares for Filestore instance",
+      "description_suggestion": "Lists all Filestore shares for a specified instance. Supports pagination through page size and token parameters. Returns a list of Share objects configured on the instance.",
+      "reasoning": "Missing summary entirely. Description lacks information about pagination support and return value structure. Added details about pagination and explicit return type for better AI agent understanding of how to retrieve and iterate through shares.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'file.projects.locations.backups.delete' has semantic quality issues: vague_summary, missing_side_effects, missing_output_details. Missing summary entirely. Description is too brief and lacks critical information about permanence of deletion, what happens to the backup resource, and the asynchronous nature of the operation. Added context about irreversibility and Operation return type for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7043,13 +7266,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_side_effects",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Deletes a backup.",
-      "summary_suggestion": "Delete a specific backup.",
-      "description_suggestion": "Deletes a specific backup. Upon successful deletion, the backup resource is removed from the system. If the backup is currently being used, the operation may fail.",
-      "reasoning": "The current summary is missing. Added a concise summary and detailed description including side effects.",
+      "summary_suggestion": "Delete a Cloud Filestore backup",
+      "description_suggestion": "Deletes a specified Cloud Filestore backup. This operation permanently removes the backup and its associated data. The backup resource will no longer be accessible after deletion. Returns an Operation object representing the long-running deletion process.",
+      "reasoning": "Missing summary entirely. Description is too brief and lacks critical information about permanence of deletion, what happens to the backup resource, and the asynchronous nature of the operation. Added context about irreversibility and Operation return type for better AI agent understanding.",
       "batch_index": 0
     }
   },
@@ -7064,7 +7288,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'file.projects.locations.backups.patch' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing. Added a concise summary and detailed description including input details.",
+    "message": "Operation 'file.projects.locations.backups.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks specificity about what details are returned. Added reference to Backup schema and examples of returned information to improve AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "file.projects.locations.backups.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the details of a specific backup.",
+      "summary_suggestion": "Retrieve Cloud Filestore backup details",
+      "description_suggestion": "Retrieves detailed information about a specific Cloud Filestore backup, including its status, creation time, source instance, and configuration. Returns a Backup object containing all backup metadata and properties.",
+      "reasoning": "Missing summary. Description lacks specificity about what details are returned. Added reference to Backup schema and examples of returned information to improve AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'file.projects.locations.backups.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is vague about what settings can be updated and doesn't clarify partial update behavior. Added information about updateable fields, partial update support, and return value for better AI agent guidance.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7079,13 +7339,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Updates the settings of a specific backup.",
-      "summary_suggestion": "Update settings of a specific backup.",
-      "description_suggestion": "Updates the settings of a specific backup. The request should include the fields to update. Only the specified fields will be updated; the rest will remain unchanged.",
-      "reasoning": "The current summary is missing. Added a concise summary and detailed description including input details.",
+      "summary_suggestion": "Update Cloud Filestore backup settings",
+      "description_suggestion": "Updates the settings of a specific Cloud Filestore backup. Supports partial updates - only provided fields in the Backup request body will be modified. Common updatable fields include labels and description. Returns the updated Backup object reflecting all changes.",
+      "reasoning": "Missing summary. Description is vague about what settings can be updated and doesn't clarify partial update behavior. Added information about updateable fields, partial update support, and return value for better AI agent guidance.",
       "batch_index": 0
     }
   },
@@ -7100,7 +7361,79 @@
         "character": 0
       }
     },
-    "message": "Operation 'file.projects.locations.instances.promoteReplica' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing. Added a concise summary and detailed description including side effects.",
+    "message": "Operation 'file.projects.locations.operations.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description mentions error handling but lacks context about what operations are being listed (long-running Cloud Filestore operations), what filters are supported, and the response structure. Added operational context and return type information.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "file.projects.locations.operations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
+      "summary_suggestion": "List long-running operations with filters",
+      "description_suggestion": "Lists long-running operations that match the specified filter criteria in the request. Supports filtering by operation status, name patterns, and other criteria. Returns a ListOperationsResponse containing Operation objects matching the filter. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
+      "reasoning": "Missing summary. Description mentions error handling but lacks context about what operations are being listed (long-running Cloud Filestore operations), what filters are supported, and the response structure. Added operational context and return type information.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'file.projects.locations.operations.cancel' has semantic quality issues: vague_summary, missing_input_details. Missing summary. Description is comprehensive and well-detailed, explaining best-effort semantics, error handling, verification methods, and the final state of cancelled operations. The description is already excellent for AI agent interpretability; only the summary was needed.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "file.projects.locations.operations.cancel",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of `1`, corresponding to `Code.CANCELLED`.",
+      "summary_suggestion": "Request cancellation of long-running operation",
+      "reasoning": "Missing summary. Description is comprehensive and well-detailed, explaining best-effort semantics, error handling, verification methods, and the final state of cancelled operations. The description is already excellent for AI agent interpretability; only the summary was needed.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'file.projects.locations.instances.promoteReplica' has semantic quality issues: vague_summary, missing_context, missing_side_effects, missing_output_details. Missing summary. Description is too brief and lacks critical context about the operation's purpose (failover/HA scenarios), side effects (primary becomes inaccessible), input requirements, and asynchronous nature. Added domain context about high-availability patterns and Operation return type.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7115,13 +7448,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_context",
+        "missing_side_effects",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Promote the standby instance (replica).",
-      "summary_suggestion": "Promote the standby instance (replica).",
-      "description_suggestion": "Promotes the standby instance (replica) to the primary instance. This operation may cause downtime and should be performed carefully. Upon successful promotion, the standby instance becomes the primary instance.",
-      "reasoning": "The current summary is missing. Added a concise summary and detailed description including side effects.",
+      "summary_suggestion": "Promote standby Filestore instance to primary",
+      "description_suggestion": "Promotes a standby Cloud Filestore instance (replica) to become the primary instance. This operation is typically used for failover scenarios or planned maintenance. After promotion, the replica becomes the active instance and the previous primary is no longer accessible. Requires a PromoteReplicaRequest. Returns an Operation object representing the long-running promotion process.",
+      "reasoning": "Missing summary. Description is too brief and lacks critical context about the operation's purpose (failover/HA scenarios), side effects (primary becomes inaccessible), input requirements, and asynchronous nature. Added domain context about high-availability patterns and Operation return type.",
       "batch_index": 0
     }
   },
@@ -7136,7 +7471,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 17 operations analyzed, 6 quality issues found",
+    "message": "Semantic analysis completed: 17 operations analyzed, 15 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -7148,7 +7483,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 17,
-      "total_issues_found": 6,
+      "total_issues_found": 15,
       "batches_processed": 3
     }
   }

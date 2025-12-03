@@ -14139,7 +14139,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'videos' has semantic quality issues: vague_summary, missing_context. The current summary is vague and does not specify that the articles are published. The description is good but could be improved by specifying that the returned articles are published and adding more context about the pagination.",
+    "message": "Operation 'postAdminUsersCreate' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Original summary 'Invite a User' is vague about the mechanism (email invitation). Description lacks clarity on what is returned and the side effect (email sent). Added specifics about email delivery, authentication requirement, return value, and user experience for better AI agent understanding of when and how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14150,17 +14150,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "videos",
+      "operation_id": "postAdminUsersCreate",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details",
+        "missing_side_effects"
       ],
-      "current_summary": "Articles with a video",
-      "current_description": "This endpoint allows the client to retrieve a list of articles that are uploaded with a video.\n\nIt will only return published video articles ordered by descending popularity.\n\nIt supports pagination, each page will contain 24 articles by default.",
-      "summary_suggestion": "Retrieve published video articles",
-      "description_suggestion": "This endpoint allows the client to retrieve a list of published articles that are uploaded with a video. The articles are ordered by descending popularity. It supports pagination, with each page containing 24 articles by default.",
-      "reasoning": "The current summary is vague and does not specify that the articles are published. The description is good but could be improved by specifying that the returned articles are published and adding more context about the pagination.",
+      "current_summary": "Invite a User",
+      "current_description": "This endpoint allows the client to trigger an invitation to the provided email address.\n\n        It requires a token from a user with `super_admin` privileges.",
+      "summary_suggestion": "Send user invitation to email address",
+      "description_suggestion": "Sends an invitation email to the specified email address, allowing the recipient to create a new user account. Requires authentication with `super_admin` privileges. Returns confirmation of the invitation being sent. The invited user will receive an email with instructions to complete account setup.",
+      "reasoning": "Original summary 'Invite a User' is vague about the mechanism (email invitation). Description lacks clarity on what is returned and the side effect (email sent). Added specifics about email delivery, authentication requirement, return value, and user experience for better AI agent understanding of when and how to use this operation.",
       "batch_index": 8
     }
   },
@@ -14175,41 +14176,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'get_/api/pages' has semantic quality issues: vague_summary. The current summary is vague and could be more action-oriented.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "get_/api/pages",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "show details for all pages",
-      "current_description": "This endpoint allows the client to retrieve details for all Page objects.",
-      "summary_suggestion": "Retrieve details for all pages",
-      "reasoning": "The current summary is vague and could be more action-oriented.",
-      "batch_index": 5
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'post_/api/pages' has semantic quality issues: vague_summary, missing_input_details. The current summary is too vague and the description lacks details about the input and authentication requirements.",
+    "message": "Operation 'post_/api/pages' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary 'pages' is too vague and not action-oriented. Description lacks specificity about what inputs are expected and what the response contains. Enhanced version clarifies the action, expected inputs, and return value for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14224,13 +14191,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "pages",
       "current_description": "This endpoint allows the client to create a new page.",
       "summary_suggestion": "Create a new page",
-      "description_suggestion": "This endpoint allows the client to create a new page. Requires authentication. Expects a 'Page' object in the request body. Returns the created page object.",
-      "reasoning": "The current summary is too vague and the description lacks details about the input and authentication requirements.",
+      "description_suggestion": "Creates a new Page object. Accepts page details in the request body and returns the created page with its assigned ID. The response includes the complete Page object with all properties.",
+      "reasoning": "Original summary 'pages' is too vague and not action-oriented. Description lacks specificity about what inputs are expected and what the response contains. Enhanced version clarifies the action, expected inputs, and return value for better AI agent interpretability.",
       "batch_index": 5
     }
   },
@@ -14245,7 +14213,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'put_/api/pages/{id}' has semantic quality issues: vague_description, not_actionable. The current description is vague and does not indicate the action being performed.",
+    "message": "Operation 'put_/api/pages/{id}' has semantic quality issues: vague_description, not_actionable, missing_output_details. Summary is good, but description is incorrect - it describes a retrieval operation instead of an update operation. This creates confusion for AI agents about the actual action performed. Enhanced description clarifies that this is an update operation, explains the expected inputs and outputs, and notes support for partial updates.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14260,12 +14228,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "not_actionable"
+        "not_actionable",
+        "missing_output_details"
       ],
       "current_summary": "update details for a page",
       "current_description": "This endpoint allows the client to retrieve details for a single Page object, specified by ID.",
-      "description_suggestion": "This endpoint allows the client to update details for a single Page object, specified by ID. Requires authentication. Expects a 'Page' object in the request body. Returns the updated page object.",
-      "reasoning": "The current description is vague and does not indicate the action being performed.",
+      "description_suggestion": "Updates an existing Page object specified by ID. Accepts updated page details in the request body and returns the modified Page object with all updated properties. Supports partial updates - only provided fields will be modified.",
+      "reasoning": "Summary is good, but description is incorrect - it describes a retrieval operation instead of an update operation. This creates confusion for AI agents about the actual action performed. Enhanced description clarifies that this is an update operation, explains the expected inputs and outputs, and notes support for partial updates.",
       "batch_index": 5
     }
   },
@@ -14280,7 +14249,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'getPodcastEpisodes' has semantic quality issues: vague_summary. The current summary is vague and could be more action-oriented.",
+    "message": "Operation 'getPodcastEpisodes' has semantic quality issues: vague_summary, missing_input_details. Original summary 'Podcast Episodes' is too generic and not action-oriented. Description is comprehensive but could be more concise and better structured for AI agent parsing. Enhanced summary clarifies the action and filtering criteria. Improved description reorganizes information for clarity and explicitly mentions pagination parameter support.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14294,12 +14263,14 @@
       "operation_id": "getPodcastEpisodes",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details"
       ],
       "current_summary": "Podcast Episodes",
-      "current_description": "This endpoint allows the client to retrieve a list of podcast episodes.\n       \"Podcast episodes\" are episodes belonging to podcasts.\n       It will only return active (reachable) podcast episodes that belong to published podcasts available on the platform, ordered by descending publication date.\n       It supports pagination, each page will contain 30 articles by default.",
-      "summary_suggestion": "Retrieve a list of podcast episodes",
-      "reasoning": "The current summary is vague and could be more action-oriented.",
+      "current_description": "This endpoint allows the client to retrieve a list of podcast episodes.\n        \"Podcast episodes\" are episodes belonging to podcasts.\n        It will only return active (reachable) podcast episodes that belong to published podcasts available on the platform, ordered by descending publication date.\n        It supports pagination, each page will contain 30 articles by default.",
+      "summary_suggestion": "Retrieve published podcast episodes",
+      "description_suggestion": "Retrieves a paginated list of active podcast episodes from published podcasts, ordered by descending publication date. Returns 30 episodes per page by default. Supports pagination parameters to navigate through results. Only returns episodes that are reachable and belong to published podcasts available on the platform.",
+      "reasoning": "Original summary 'Podcast Episodes' is too generic and not action-oriented. Description is comprehensive but could be more concise and better structured for AI agent parsing. Enhanced summary clarifies the action and filtering criteria. Improved description reorganizes information for clarity and explicitly mentions pagination parameter support.",
       "batch_index": 5
     }
   },
@@ -14314,7 +14285,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'createArticle' has semantic quality issues: vague_summary, vague_description, missing_context. The summary 'Publish article' is vague. The description lacks details about the request body and the response. Added context about the request body and response for better clarity and AI agent interpretability.",
+    "message": "Operation 'getProfileImage' has semantic quality issues: vague_summary, missing_output_details. Original summary is not action-oriented and uses awkward phrasing ('A Users'). Description lacks clarity about what is returned. Enhanced summary uses proper action verb and clearer phrasing. Improved description specifies the return type (ProfileImage object) and clarifies that it works for both users and organizations, improving AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14325,19 +14296,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "createArticle",
+      "operation_id": "getProfileImage",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description",
-        "missing_context"
+        "missing_output_details"
       ],
-      "current_summary": "Publish article",
-      "current_description": "This endpoint allows the client to create a new article.",
-      "summary_suggestion": "Create a new article",
-      "description_suggestion": "Creates a new article for the authenticated user. The request body should include the article details. Returns the newly created article object with a 201 status code.",
-      "reasoning": "The summary 'Publish article' is vague. The description lacks details about the request body and the response. Added context about the request body and response for better clarity and AI agent interpretability.",
-      "batch_index": 0
+      "current_summary": "A Users or organizations profile image",
+      "current_description": "This endpoint allows the client to retrieve a user or organization profile image information by its corresponding username.",
+      "summary_suggestion": "Retrieve user or organization profile image",
+      "description_suggestion": "Retrieves profile image information for a user or organization by username. Returns a ProfileImage object containing the image URL and metadata. The endpoint supports both user and organization profile images.",
+      "reasoning": "Original summary is not action-oriented and uses awkward phrasing ('A Users'). Description lacks clarity about what is returned. Enhanced summary uses proper action verb and clearer phrasing. Improved description specifies the return type (ProfileImage object) and clarifies that it works for both users and organizations, improving AI agent interpretability.",
+      "batch_index": 5
     }
   },
   {
@@ -14351,7 +14321,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'updateArticle' has semantic quality issues: vague_description, missing_context. The description lacks details about the request body and the response. Added context about the request body and response for better clarity and AI agent interpretability.",
+    "message": "Operation 'deleteSegment' has semantic quality issues: missing_side_effects, missing_output_details. The current description mentions the constraint about Billboards but lacks clarity on what happens when the constraint is violated and what the response indicates. Added explicit information about authentication requirement, failure conditions, and response behavior for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14362,190 +14332,16 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "updateArticle",
+      "operation_id": "deleteSegment",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description",
-        "missing_context"
+        "missing_side_effects",
+        "missing_output_details"
       ],
-      "current_summary": "Update an article by id",
-      "current_description": "This endpoint allows the client to update an existing article.\n\n\"Articles\" are all the posts that users create on DEV that typically show up in the feed. They can be a blog post, a discussion question, a help thread etc. but is referred to as article within the code.",
-      "description_suggestion": "Updates an existing article given its `id`. The request body should include the updated article details. Requires authentication. Returns the updated article object with a 200 status code.",
-      "reasoning": "The description lacks details about the request body and the response. Added context about the request body and response for better clarity and AI agent interpretability.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'getOrgUsers' has semantic quality issues: missing_context, missing_input_details. Added context about pagination and parameters to improve clarity and completeness.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "getOrgUsers",
-      "has_quality_issues": true,
-      "issues_found": [
-        "missing_context",
-        "missing_input_details"
-      ],
-      "current_summary": "Organization's users",
-      "current_description": "This endpoint allows the client to retrieve a list of users belonging to the organization\n\nIt supports pagination, each page will contain `30` users by default.",
-      "summary_suggestion": "Retrieve users of an organization",
-      "description_suggestion": "Retrieves a list of users belonging to the specified organization. Supports pagination, with each page containing up to 30 users by default. Requires the organization's ID or username as a parameter.",
-      "reasoning": "Added context about pagination and parameters to improve clarity and completeness.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'getOrgArticles' has semantic quality issues: missing_context. Corrected the default number of items per page from 'users' to 'articles' and added missing context about pagination and parameters.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "getOrgArticles",
-      "has_quality_issues": true,
-      "issues_found": [
-        "missing_context"
-      ],
-      "current_summary": "Organization's Articles",
-      "current_description": "This endpoint allows the client to retrieve a list of Articles belonging to the organization\n\nIt supports pagination, each page will contain `30` users by default.",
-      "summary_suggestion": "Retrieve articles of an organization",
-      "description_suggestion": "Retrieves a list of articles belonging to the specified organization. Supports pagination, with each page containing up to 30 articles by default. Requires the organization's ID or username as a parameter.",
-      "reasoning": "Corrected the default number of items per page from 'users' to 'articles' and added missing context about pagination and parameters.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'getOrganizations' has semantic quality issues: missing_context. Corrected the default number of items per page from 'tags' to 'organizations' and added missing context about pagination.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "getOrganizations",
-      "has_quality_issues": true,
-      "issues_found": [
-        "missing_context"
-      ],
-      "current_summary": "Organizations",
-      "current_description": "This endpoint allows the client to retrieve a list of Dev organizations.\n\nIt supports pagination, each page will contain 10 tags by default.",
-      "summary_suggestion": "Retrieve a list of organizations",
-      "description_suggestion": "Retrieves a list of organizations. Supports pagination, with each page containing up to 10 organizations by default.",
-      "reasoning": "Corrected the default number of items per page from 'tags' to 'organizations' and added missing context about pagination.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'put_/api/organizations/{id}' has semantic quality issues: missing_input_details. Added context about required parameters and authentication to improve clarity and completeness.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "put_/api/organizations/{id}",
-      "has_quality_issues": true,
-      "issues_found": [
-        "missing_input_details"
-      ],
-      "current_summary": "Update an organization by id",
-      "current_description": "This endpoint allows the client to update an existing organization.",
-      "description_suggestion": "Updates an existing organization with the provided parameters. Requires the organization's ID and authentication token. Returns the updated organization object.",
-      "reasoning": "Added context about required parameters and authentication to improve clarity and completeness.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'get_/api/billboards' has semantic quality issues: vague_summary. The current summary is too vague. A more specific summary helps AI agents understand the intent better.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "get_/api/billboards",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary"
-      ],
-      "current_summary": "Billboards",
-      "current_description": "This endpoint allows the client to retrieve a list of all billboards.",
-      "summary_suggestion": "Retrieve a list of all billboards",
-      "reasoning": "The current summary is too vague. A more specific summary helps AI agents understand the intent better.",
+      "current_summary": "Delete a manually managed audience segment",
+      "current_description": "This endpoint allows the client to delete an audience segment specified by ID.\n\nAudience segments cannot be deleted if there are still any Billboards using them.",
+      "description_suggestion": "Deletes an audience segment specified by ID. The segment must not be in use by any Billboards; attempting to delete a segment with active Billboard associations will fail. Requires authentication. Returns a 200 status on successful deletion.",
+      "reasoning": "The current description mentions the constraint about Billboards but lacks clarity on what happens when the constraint is violated and what the response indicates. Added explicit information about authentication requirement, failure conditions, and response behavior for better AI agent decision-making.",
       "batch_index": 2
     }
   },
@@ -14560,7 +14356,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'getCommentsByArticleId' has semantic quality issues: vague_summary, missing_context. The original summary is too vague. The description is mostly complete but could be more concise. Added a more specific summary and refined the description for clarity.",
+    "message": "Operation 'addUsersToSegment' has semantic quality issues: missing_input_details, missing_output_details. Current description explains the success/failure distinction but lacks clarity on input format and response structure. Added explicit reference to the SegmentUserIds request schema, clarified response format with success/failure arrays, and noted authentication requirement for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14571,17 +14367,891 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "getCommentsByArticleId",
+      "operation_id": "addUsersToSegment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Add users to a manually managed audience segment",
+      "current_description": "This endpoint allows the client to add users in bulk to an audience segment specified by ID.\n\nSuccesses are users that were included in the segment (even if they were already in it), and failures are users that could not be added to the segment.",
+      "description_suggestion": "Adds users in bulk to an audience segment specified by ID. Accepts a list of user IDs via the SegmentUserIds schema. Returns a response containing success and failure arrays: successes include users added or already in the segment, failures include users that could not be added. Requires authentication.",
+      "reasoning": "Current description explains the success/failure distinction but lacks clarity on input format and response structure. Added explicit reference to the SegmentUserIds request schema, clarified response format with success/failure arrays, and noted authentication requirement for AI agent clarity.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'removeUsersFromSegment' has semantic quality issues: missing_input_details, missing_output_details. Similar to addUsersToSegment, the description explains outcomes but lacks input format and response structure details. Added explicit reference to SegmentUserIds schema, clarified response format with success/failure arrays, and noted authentication requirement for improved AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "removeUsersFromSegment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Remove users from a manually managed audience segment",
+      "current_description": "This endpoint allows the client to remove users in bulk from an audience segment specified by ID.\n\nSuccesses are users that were removed; failures are users that weren't a part of the segment.",
+      "description_suggestion": "Removes users in bulk from an audience segment specified by ID. Accepts a list of user IDs via the SegmentUserIds schema. Returns a response containing success and failure arrays: successes are users that were removed, failures are users that were not in the segment. Requires authentication.",
+      "reasoning": "Similar to addUsersToSegment, the description explains outcomes but lacks input format and response structure details. Added explicit reference to SegmentUserIds schema, clarified response format with success/failure arrays, and noted authentication requirement for improved AI agent interpretability.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'get_/api/billboards' has semantic quality issues: vague_summary, vague_description, missing_output_details. Original summary is too generic and not action-oriented. Description lacks specificity about what billboards are (display ads/widgets) and what properties are returned. Added domain context about Billboard objects, clarified return format, and noted public access for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "get_/api/billboards",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Billboards",
+      "current_description": "This endpoint allows the client to retrieve a list of all billboards.",
+      "summary_suggestion": "Retrieve all billboards",
+      "description_suggestion": "Retrieves a list of all billboards (display ads and widgets). Returns an array of Billboard objects containing properties such as name, placement, and associated segments. No authentication required for this public endpoint.",
+      "reasoning": "Original summary is too generic and not action-oriented. Description lacks specificity about what billboards are (display ads/widgets) and what properties are returned. Added domain context about Billboard objects, clarified return format, and noted public access for AI agent clarity.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post_/api/billboards' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Summary is adequate but description is too minimal. Added domain context about what billboards are, clarified expected inputs (configuration fields), noted authentication requirement, and specified response format and HTTP status code for better AI agent understanding of when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post_/api/billboards",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Create a billboard",
+      "current_description": "This endpoint allows the client to create a new billboard.",
+      "description_suggestion": "Creates a new billboard (display ad or widget). Accepts billboard configuration including name, placement, and segment associations. Requires authentication. Returns the created Billboard object with assigned ID and metadata (201 Created).",
+      "reasoning": "Summary is adequate but description is too minimal. Added domain context about what billboards are, clarified expected inputs (configuration fields), noted authentication requirement, and specified response format and HTTP status code for better AI agent understanding of when and how to use this operation.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'get_/api/billboards/{id}' has semantic quality issues: vague_summary, vague_description, missing_output_details. Summary is awkwardly phrased and not action-oriented. Description lacks specificity about what data is returned and domain context. Improved summary to be more direct and action-focused, added domain context about billboards, clarified return object properties, and noted public access for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "get_/api/billboards/{id}",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "A billboard (by id)",
+      "current_description": "This endpoint allows the client to retrieve a single billboard, via its id.",
+      "summary_suggestion": "Retrieve a billboard by ID",
+      "description_suggestion": "Retrieves a single billboard (display ad or widget) specified by its ID. Returns the complete Billboard object containing properties such as name, placement, segment associations, and metadata. No authentication required for this public endpoint.",
+      "reasoning": "Summary is awkwardly phrased and not action-oriented. Description lacks specificity about what data is returned and domain context. Improved summary to be more direct and action-focused, added domain context about billboards, clarified return object properties, and noted public access for AI agent clarity.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'createArticle' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Original summary 'Publish article' is vague about the creation action. Description lacks critical details about authentication requirements, input expectations, return value, and publication behavior. Added specificity about what articles are, authentication requirement, return status code, and publication behavior for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "createArticle",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Publish article",
+      "current_description": "This endpoint allows the client to create a new article.\n\n\"Articles\" are all the posts that users create on DEV that typically show up in the feed. They can be a blog post, a discussion question, a help thread etc. but is referred to as article within the code.",
+      "summary_suggestion": "Create and publish a new article",
+      "description_suggestion": "Creates a new article (post) for the authenticated user. Articles can be blog posts, discussion questions, help threads, or other content types. Requires authentication and valid article data in the request body. Returns the created article object with a 201 status code. The article will be published and appear in the feed based on visibility settings.",
+      "reasoning": "Original summary 'Publish article' is vague about the creation action. Description lacks critical details about authentication requirements, input expectations, return value, and publication behavior. Added specificity about what articles are, authentication requirement, return status code, and publication behavior for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getArticles' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Summary is too generic and doesn't convey the retrieval action or filtering capabilities. Description mentions pagination but lacks clarity on available parameters, authentication status, and return format. Enhanced to specify filtering capabilities, default behavior, pagination details, and return structure for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getArticles",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Published articles",
+      "current_description": "This endpoint allows the client to retrieve a list of articles.\n\n\"Articles\" are all the posts that users create on DEV that typically\n show up in the feed. They can be a blog post, a discussion question,\na help thread etc. but is referred to as article within the code.\n\nBy default it will return featured, published articles ordered\nby descending popularity.\n \nIt supports pagination, each page will contain `30` articles by default.",
+      "summary_suggestion": "Retrieve published articles with filtering and pagination",
+      "description_suggestion": "Retrieves a paginated list of published articles. By default, returns featured articles ordered by descending popularity. Supports filtering by tags, authors, and other criteria through query parameters. Pagination defaults to 30 articles per page. Does not require authentication for public articles. Returns an array of article objects with metadata.",
+      "reasoning": "Summary is too generic and doesn't convey the retrieval action or filtering capabilities. Description mentions pagination but lacks clarity on available parameters, authentication status, and return format. Enhanced to specify filtering capabilities, default behavior, pagination details, and return structure for AI agents.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getLatestArticles' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Summary has grammatical issues and lacks action clarity. Description is incomplete - missing information about authentication, return format, and use case. Enhanced to clarify the recency ordering, authentication status, pagination behavior, and return structure for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getLatestArticles",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Published articles sorted by published date",
+      "current_description": "This endpoint allows the client to retrieve a list of articles. ordered by descending publish date.\n\nIt supports pagination, each page will contain 30 articles by default.",
+      "summary_suggestion": "Retrieve recently published articles ordered by date",
+      "description_suggestion": "Retrieves a paginated list of published articles ordered by descending publication date (most recent first). Supports pagination with a default page size of 30 articles. Does not require authentication. Useful for discovering the latest content. Returns an array of article objects with publication metadata.",
+      "reasoning": "Summary has grammatical issues and lacks action clarity. Description is incomplete - missing information about authentication, return format, and use case. Enhanced to clarify the recency ordering, authentication status, pagination behavior, and return structure for better AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getArticleById' has semantic quality issues: vague_summary, missing_output_details. Summary lacks action verb clarity. Description is too minimal - missing information about authentication, return format, and error handling. Enhanced to specify what data is returned, authentication requirements, and potential error responses for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getArticleById",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "Published article by id",
+      "current_description": "This endpoint allows the client to retrieve a single published article given its `id`.",
+      "summary_suggestion": "Retrieve a published article by ID",
+      "description_suggestion": "Retrieves a single published article by its unique identifier. Does not require authentication for public articles. Returns the complete article object including content, metadata, comments count, and engagement metrics. Returns 404 if the article does not exist or is not published.",
+      "reasoning": "Summary lacks action verb clarity. Description is too minimal - missing information about authentication, return format, and error handling. Enhanced to specify what data is returned, authentication requirements, and potential error responses for AI agent clarity.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'updateArticle' has semantic quality issues: missing_input_details, missing_output_details, missing_side_effects. Summary is adequate. Description lacks critical details about authentication, authorization (author-only), partial update support, and side effects. Enhanced to clarify authentication requirements, authorization rules, update behavior, and publication effects for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "updateArticle",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Update an article by id",
+      "current_description": "This endpoint allows the client to update an existing article.\n\n\"Articles\" are all the posts that users create on DEV that typically show up in the feed. They can be a blog post, a discussion question, a help thread etc. but is referred to as article within the code.",
+      "description_suggestion": "Updates an existing article by its ID. Requires authentication - only the article author can update their own articles. Supports partial updates; only provided fields will be modified. Returns the updated article object. Changes are immediately reflected in the feed and search results.",
+      "reasoning": "Summary is adequate. Description lacks critical details about authentication, authorization (author-only), partial update support, and side effects. Enhanced to clarify authentication requirements, authorization rules, update behavior, and publication effects for AI agents.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getArticleByPath' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Summary is vague about what 'path' means. Description lacks specificity about path components and return format. Enhanced to clarify that path consists of username and slug, authentication status, and return structure for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getArticleByPath",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Published article by path",
+      "current_description": "This endpoint allows the client to retrieve a single published article given its `path`.",
+      "summary_suggestion": "Retrieve a published article by username and slug",
+      "description_suggestion": "Retrieves a single published article using its path components: username (author) and slug (URL-friendly title). Does not require authentication for public articles. Returns the complete article object including content, metadata, and engagement metrics. Returns 404 if the article does not exist or is not published.",
+      "reasoning": "Summary is vague about what 'path' means. Description lacks specificity about path components and return format. Enhanced to clarify that path consists of username and slug, authentication status, and return structure for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getUserArticles' has semantic quality issues: missing_input_details, missing_output_details. Summary is adequate but could be more specific. Description is mostly complete but lacks clarity on authentication scope (own articles only), return format, and pagination parameter details. Enhanced to emphasize that only authenticated user's own articles are returned, clarify return structure, and improve pagination documentation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getUserArticles",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "User's articles",
+      "current_description": "This endpoint allows the client to retrieve a list of published articles on behalf of an authenticated user.\n\n\"Articles\" are all the posts that users create on DEV that typically show up in the feed. They can be a blog post, a discussion question, a help thread etc. but is referred to as article within the code.\n\nPublished articles will be in reverse chronological publication order.\n\nIt will return published articles with pagination. By default a page will contain 30 articles.",
+      "description_suggestion": "Retrieves a paginated list of published articles for the authenticated user. Returns articles in reverse chronological order (most recent first). Requires authentication - returns only the authenticated user's own articles. Pagination defaults to 30 articles per page. Returns an array of article objects with full metadata and engagement metrics.",
+      "reasoning": "Summary is adequate but could be more specific. Description is mostly complete but lacks clarity on authentication scope (own articles only), return format, and pagination parameter details. Enhanced to emphasize that only authenticated user's own articles are returned, clarify return structure, and improve pagination documentation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getOrgUsers' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary is too generic. Description lacks clarity about required parameters, return type, and pagination details. Improved version specifies what data is returned, pagination behavior, required inputs, and response format for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getOrgUsers",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Organization's users",
+      "current_description": "This endpoint allows the client to retrieve a list of users belonging to the organization\n\nIt supports pagination, each page will contain `30` users by default.",
+      "summary_suggestion": "Retrieve paginated list of organization members",
+      "description_suggestion": "Retrieves a paginated list of users belonging to the specified organization. Supports pagination with a default page size of 30 users. Requires the organization ID or username as a path parameter. Returns an array of User objects representing organization members.",
+      "reasoning": "Original summary is too generic. Description lacks clarity about required parameters, return type, and pagination details. Improved version specifies what data is returned, pagination behavior, required inputs, and response format for better AI agent understanding.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getOrgArticles' has semantic quality issues: vague_summary, vague_description, missing_output_details. Summary is too generic. Description contains a copy-paste error (mentions '30 users' instead of articles) and lacks clarity about return type. Improved version corrects the pagination detail, specifies the response schema type (ArticleIndex), and clarifies the operation's purpose for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getOrgArticles",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Organization's Articles",
+      "current_description": "This endpoint allows the client to retrieve a list of Articles belonging to the organization\n\nIt supports pagination, each page will contain `30` users by default.",
+      "summary_suggestion": "Retrieve paginated list of organization articles",
+      "description_suggestion": "Retrieves a paginated list of articles published by the specified organization. Supports pagination with a default page size of 30 articles per page. Requires the organization ID or username as a path parameter. Returns an array of ArticleIndex objects representing the organization's published content.",
+      "reasoning": "Summary is too generic. Description contains a copy-paste error (mentions '30 users' instead of articles) and lacks clarity about return type. Improved version corrects the pagination detail, specifies the response schema type (ArticleIndex), and clarifies the operation's purpose for AI agents.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getOrganizations' has semantic quality issues: vague_summary, vague_description, missing_output_details. Summary is too vague. Description contains a copy-paste error (mentions 'tags' instead of organizations) and lacks clarity about return type. Improved version corrects the pagination detail, removes domain-specific reference ('Dev'), specifies the response schema type, and clarifies pagination behavior.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getOrganizations",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Organizations",
+      "current_description": "This endpoint allows the client to retrieve a list of Dev organizations.\n\n  It supports pagination, each page will contain 10 tags by default.",
+      "summary_suggestion": "Retrieve paginated list of organizations",
+      "description_suggestion": "Retrieves a paginated list of all organizations in the Forem instance. Supports pagination with a default page size of 10 organizations per page. Returns an array of Organization objects containing organization details and metadata.",
+      "reasoning": "Summary is too vague. Description contains a copy-paste error (mentions 'tags' instead of organizations) and lacks clarity about return type. Improved version corrects the pagination detail, removes domain-specific reference ('Dev'), specifies the response schema type, and clarifies pagination behavior.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'createOrganization' has semantic quality issues: missing_input_details, missing_output_details, missing_side_effects. Summary is clear and actionable. Description lacks details about required request body structure, response format, and explicit mention of what is returned. Improved version clarifies input requirements, response schema, and authentication/authorization constraints for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "createOrganization",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Create an Organization",
+      "current_description": "This endpoint allows the client to create an organization with the provided parameters.\n        It requires a token from a user with `admin` privileges.",
+      "description_suggestion": "Creates a new organization with the provided parameters. Requires authentication with admin privileges. Accepts an Organization object in the request body containing organization details. Returns the newly created Organization object with assigned ID and metadata. Only users with admin privileges can create organizations.",
+      "reasoning": "Summary is clear and actionable. Description lacks details about required request body structure, response format, and explicit mention of what is returned. Improved version clarifies input requirements, response schema, and authentication/authorization constraints for AI agent clarity.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getOrganizationById' has semantic quality issues: vague_summary, missing_output_details. Summary uses awkward phrasing ('An organization (by id)'). Description lacks clarity about return type and what information is included in the response. Improved version uses clearer action-oriented language and specifies the response schema type.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getOrganizationById",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "An organization (by id)",
+      "current_description": "This endpoint allows the client to retrieve a single organization by their id",
+      "summary_suggestion": "Retrieve organization details by ID",
+      "description_suggestion": "Retrieves a single organization by its ID. Requires the organization ID as a path parameter. Returns an Organization object containing the organization's details, metadata, and configuration.",
+      "reasoning": "Summary uses awkward phrasing ('An organization (by id)'). Description lacks clarity about return type and what information is included in the response. Improved version uses clearer action-oriented language and specifies the response schema type.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'put_/api/organizations/{id}' has semantic quality issues: missing_input_details, missing_output_details, missing_side_effects. Summary is clear and actionable. Description is too vague and lacks critical details about request body structure, response format, whether updates are partial or full replacement, and authorization requirements. Improved version clarifies input/output schemas and side effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "put_/api/organizations/{id}",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Update an organization by id",
+      "current_description": "This endpoint allows the client to update an existing organization.",
+      "description_suggestion": "Updates an existing organization with the provided parameters. Requires the organization ID as a path parameter and an Organization object in the request body. Supports full replacement of organization data. Returns the updated Organization object. Requires admin privileges or organization ownership.",
+      "reasoning": "Summary is clear and actionable. Description is too vague and lacks critical details about request body structure, response format, whether updates are partial or full replacement, and authorization requirements. Improved version clarifies input/output schemas and side effects.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'delete_/api/organizations/{id}' has semantic quality issues: missing_output_details, missing_side_effects. Summary is clear and actionable. Description lacks important details about side effects (data deletion), response format, and authorization requirements. Improved version emphasizes the destructive nature of the operation and clarifies authorization constraints for AI agent safety.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "delete_/api/organizations/{id}",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete an Organization by id",
+      "current_description": "This endpoint allows the client to delete a single organization, specified by id",
+      "description_suggestion": "Deletes an organization and all associated data. Requires the organization ID as a path parameter. This is a destructive operation that cannot be undone. Returns a 200 status code on successful deletion. Requires admin privileges or organization ownership.",
+      "reasoning": "Summary is clear and actionable. Description lacks important details about side effects (data deletion), response format, and authorization requirements. Improved version emphasizes the destructive nature of the operation and clarifies authorization constraints for AI agent safety.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post_/api/reactions/toggle' has semantic quality issues: vague_summary, missing_output_details. Original summary 'toggle reaction' is too generic and doesn't indicate the action subject. Description lacks clarity on return value and authentication requirements. Enhanced summary specifies the action target, and improved description clarifies the toggle behavior, return value, and authentication needs for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post_/api/reactions/toggle",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "toggle reaction",
+      "current_description": "This endpoint allows the client to toggle the user's reaction to a specified reactable (eg, Article, Comment, or User). For examples:\n        * \"Like\"ing an Article will create a new \"like\" Reaction from the user for that Articles\n        * \"Like\"ing that Article a second time will remove the \"like\" from the user",
+      "summary_suggestion": "Toggle user reaction to a reactable",
+      "description_suggestion": "Toggles the authenticated user's reaction to a specified reactable (Article, Comment, or User). If a reaction of the specified type exists, it will be removed; if it doesn't exist, it will be created. Returns the resulting reaction state (created or removed). Requires authentication and valid reactable ID and reaction type parameters.",
+      "reasoning": "Original summary 'toggle reaction' is too generic and doesn't indicate the action subject. Description lacks clarity on return value and authentication requirements. Enhanced summary specifies the action target, and improved description clarifies the toggle behavior, return value, and authentication needs for better AI agent understanding.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'post_/api/reactions' has semantic quality issues: vague_summary, missing_output_details, unclear_purpose. Original summary 'create reaction' doesn't capture the idempotent behavior. Description is confusing about whether it creates or returns existing reactions. Enhanced summary clarifies the dual behavior, and improved description explicitly states the idempotent nature, return value, and authentication requirements for clearer AI agent interpretation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "post_/api/reactions",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "unclear_purpose"
+      ],
+      "current_summary": "create reaction",
+      "current_description": "This endpoint allows the client to create a reaction to a specified reactable (eg, Article, Comment, or User). For examples:\n        * \"Like\"ing an Article will create a new \"like\" Reaction from the user for that Articles\n        * \"Like\"ing that Article a second time will return the previous \"like\"",
+      "summary_suggestion": "Create or retrieve user reaction",
+      "description_suggestion": "Creates a reaction from the authenticated user to a specified reactable (Article, Comment, or User). If a reaction of the specified type already exists for that reactable, returns the existing reaction instead of creating a duplicate. Returns the reaction object. Requires authentication and valid reactable ID and reaction type parameters.",
+      "reasoning": "Original summary 'create reaction' doesn't capture the idempotent behavior. Description is confusing about whether it creates or returns existing reactions. Enhanced summary clarifies the dual behavior, and improved description explicitly states the idempotent nature, return value, and authentication requirements for clearer AI agent interpretation.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getReadinglist' has semantic quality issues: vague_summary, missing_context. Original summary 'Readinglist' is not action-oriented and lacks clarity. Description doesn't specify authentication requirement or return schema. Enhanced summary uses action verb and clarifies the user context, while improved description specifies authentication, return schema type, and pagination details for better AI agent usability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getReadinglist",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
         "missing_context"
       ],
-      "current_summary": "Comments",
-      "current_description": "This endpoint allows the client to retrieve all comments belonging to an article or podcast episode as threaded conversations.\n\nIt will return the all top level comments with their nested comments as threads. See the format specification for further details.\n\nIt supports pagination, each page will contain `50` top level comments (and as many child comments they have) by default.\n\nIf the page parameter is not passed, all comments of an article or podcast will be returned.",
-      "summary_suggestion": "Retrieve comments for an article or podcast",
-      "description_suggestion": "This endpoint allows the client to retrieve all comments belonging to an article or podcast episode as threaded conversations. It will return all top-level comments with their nested comments as threads. Supports pagination with a default of 50 top-level comments per page. If the page parameter is not passed, all comments of an article or podcast will be returned.",
-      "reasoning": "The original summary is too vague. The description is mostly complete but could be more concise. Added a more specific summary and refined the description for clarity.",
+      "current_summary": "Readinglist",
+      "current_description": "This endpoint allows the client to retrieve a list of articles that were saved to a Users readinglist.\n        It supports pagination, each page will contain `30` articles by default",
+      "summary_suggestion": "Retrieve authenticated user's saved articles",
+      "description_suggestion": "Retrieves the authenticated user's reading list containing articles they have saved. Returns a paginated list of ArticleIndex objects with 30 articles per page by default. Supports pagination parameters to navigate through saved articles. Requires authentication.",
+      "reasoning": "Original summary 'Readinglist' is not action-oriented and lacks clarity. Description doesn't specify authentication requirement or return schema. Enhanced summary uses action verb and clarifies the user context, while improved description specifies authentication, return schema type, and pagination details for better AI agent usability.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getTags' has semantic quality issues: vague_summary, missing_context. Original summary 'Tags' is not action-oriented and lacks specificity. Description doesn't clarify authentication requirements or return schema. Enhanced summary includes action verb and sorting criteria, while improved description specifies return schema type, pagination details, and explicitly notes public access for better AI agent interpretation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getTags",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "Tags",
+      "current_description": "This endpoint allows the client to retrieve a list of tags that can be used to tag articles.\n\nIt will return tags ordered by popularity.\n \nIt supports pagination, each page will contain 10 tags by default.",
+      "summary_suggestion": "Retrieve available tags ordered by popularity",
+      "description_suggestion": "Retrieves a list of available tags that can be used to tag articles, ordered by popularity. Returns a paginated list of Tag objects with 10 tags per page by default. Supports pagination parameters to navigate through the tag list. No authentication required.",
+      "reasoning": "Original summary 'Tags' is not action-oriented and lacks specificity. Description doesn't clarify authentication requirements or return schema. Enhanced summary includes action verb and sorting criteria, while improved description specifies return schema type, pagination details, and explicitly notes public access for better AI agent interpretation.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'unLimitUser' has semantic quality issues: vague_summary, inconsistent_terminology. Original summary 'Remove limited for a User' uses awkward phrasing ('limited for'). Description lacks clarity on what removing the limit actually restores and is inconsistent with the limitUser operation's terminology. Enhanced summary uses clearer phrasing consistent with limitUser operation, and improved description explicitly states the restoration of notification generation and clarifies the reversal of effects for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "unLimitUser",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "inconsistent_terminology"
+      ],
+      "current_summary": "Remove limited for a User",
+      "current_description": "This endpoint allows the client to remove limits for a user.\n \nThe user associated with the API key must have any 'admin' or 'moderator' role.\n\nThis specified user will be restored to 'general' status. Users are not notified\nof limits in the UI, so if you want them to know about this, you must\nnotify them.",
+      "summary_suggestion": "Remove limited role from a user",
+      "description_suggestion": "Removes the 'limited' role from a user, restoring them to 'general' status. This reverses the effects of limiting, allowing the user's posts and comments to generate notifications normally again. Requires the authenticated user to have 'admin' or 'moderator' role. Users are not notified of this status change in the UI, so external notification is recommended if desired.",
+      "reasoning": "Original summary 'Remove limited for a User' uses awkward phrasing ('limited for'). Description lacks clarity on what removing the limit actually restores and is inconsistent with the limitUser operation's terminology. Enhanced summary uses clearer phrasing consistent with limitUser operation, and improved description explicitly states the restoration of notification generation and clarifies the reversal of effects for better AI agent understanding.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'put_/api/billboards/{id}' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is too generic and lacks critical details. Added information about what can be updated (Billboard attributes), authentication requirement, return value, and partial update support. Enhanced summary to be more specific about the action.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "put_/api/billboards/{id}",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Update a billboard by ID",
+      "current_description": "This endpoint allows the client to update the attributes of a single billboard, via its id.",
+      "summary_suggestion": "Update billboard attributes",
+      "description_suggestion": "Updates the attributes of a billboard identified by its ID. Accepts a Billboard object with the fields to be modified. Returns the updated Billboard object. Requires authentication. Partial updates are supported - only provided fields will be modified.",
+      "reasoning": "Original description is too generic and lacks critical details. Added information about what can be updated (Billboard attributes), authentication requirement, return value, and partial update support. Enhanced summary to be more specific about the action.",
       "batch_index": 3
     }
   },
@@ -14596,7 +15266,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'getUser' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestions provide more clarity and detail.",
+    "message": "Operation 'put_/api/billboards/{id}/unpublish' has semantic quality issues: vague_description, missing_output_details, missing_side_effects. Summary is clear and action-oriented. Description needs enhancement to clarify the effect (billboard no longer displayed), authentication requirement, and what is returned. Added specificity about the state change for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14607,17 +15277,197 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "getUser",
+      "operation_id": "put_/api/billboards/{id}/unpublish",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Unpublish a billboard",
+      "current_description": "This endpoint allows the client to remove a billboard from rotation by un-publishing it.",
+      "description_suggestion": "Removes a billboard from active rotation by unpublishing it. The billboard will no longer be displayed to users. Requires authentication and the billboard ID in the path. Returns the updated Billboard object with published status set to false.",
+      "reasoning": "Summary is clear and action-oriented. Description needs enhancement to clarify the effect (billboard no longer displayed), authentication requirement, and what is returned. Added specificity about the state change for better AI agent understanding.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getCommentsByArticleId' has semantic quality issues: vague_summary, missing_input_details. Original summary 'Comments' is too vague and doesn't indicate the action. Description is verbose but lacks clarity about required input parameters. Improved summary to be action-oriented and specific. Clarified description to explicitly state required query parameters and pagination behavior for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getCommentsByArticleId",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "Comments",
+      "current_description": "This endpoint allows the client to retrieve all comments belonging to an article or podcast episode as threaded conversations.\n\nIt will return the all top level comments with their nested comments as threads. See the format specification for further details.\n\nIt supports pagination, each page will contain `50` top level comments (and as many child comments they have) by default.\n\nIf the page parameter is not passed, all comments of an article or podcast will be returned.",
+      "summary_suggestion": "Retrieve threaded comments for article or episode",
+      "description_suggestion": "Retrieves all comments for a specified article or podcast episode as threaded conversations. Returns top-level comments with their nested child comments organized as threads. Supports pagination with 50 top-level comments per page by default; omit the page parameter to retrieve all comments. Requires either article_id or podcast_episode_id query parameter.",
+      "reasoning": "Original summary 'Comments' is too vague and doesn't indicate the action. Description is verbose but lacks clarity about required input parameters. Improved summary to be action-oriented and specific. Clarified description to explicitly state required query parameters and pagination behavior for better AI agent interpretability.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getCommentById' has semantic quality issues: vague_summary, vague_description. Original summary is too generic. Description uses awkward phrasing ('his descendants') and lacks clarity. Improved summary to indicate both the retrieval action and the threaded structure. Clarified description with better terminology and explicit mention of the required path parameter.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getCommentById",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
         "vague_description"
       ],
-      "current_summary": "A User",
-      "current_description": "This endpoint allows the client to retrieve a single user, either by id\nor by the user's username.\n\nFor complete documentation, see the v0 API docs: https://developers.forem.com/api/v0#tag/users/operation/getUser",
-      "summary_suggestion": "Get a single user by ID or username",
-      "description_suggestion": "This endpoint allows the client to retrieve a single user's information by either their ID or username. The response includes detailed user data.",
-      "reasoning": "The current summary and description are vague. The suggestions provide more clarity and detail.",
+      "current_summary": "Comment by id",
+      "current_description": "This endpoint allows the client to retrieve a comment as well as his descendants comments.\n\n  It will return the required comment (the root) with its nested descendants as a thread.\n\n  See the format specification for further details.",
+      "summary_suggestion": "Retrieve comment with threaded replies",
+      "description_suggestion": "Retrieves a single comment and all its descendant replies organized as a threaded conversation. Returns the specified comment as the root with all nested child comments displayed as a thread structure. Requires the comment ID in the path.",
+      "reasoning": "Original summary is too generic. Description uses awkward phrasing ('his descendants') and lacks clarity. Improved summary to indicate both the retrieval action and the threaded structure. Clarified description with better terminology and explicit mention of the required path parameter.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getFollowers' has semantic quality issues: vague_summary, missing_input_details. Original summary 'Followers' is too generic and doesn't indicate the action or whose followers are being retrieved. Description is verbose with unnecessary explanation of what followers are. Improved summary to clarify it retrieves the authenticated user's followers. Streamlined description to focus on pagination details and authentication requirement.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getFollowers",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "Followers",
+      "current_description": "This endpoint allows the client to retrieve a list of the followers they have.\n        \"Followers\" are users that are following other users on the website.\n        It supports pagination, each page will contain 80 followers by default.",
+      "summary_suggestion": "Retrieve authenticated user's followers",
+      "description_suggestion": "Retrieves a paginated list of users following the authenticated user. Each page contains 80 followers by default. Supports pagination parameters to navigate through the follower list. Requires authentication.",
+      "reasoning": "Original summary 'Followers' is too generic and doesn't indicate the action or whose followers are being retrieved. Description is verbose with unnecessary explanation of what followers are. Improved summary to clarify it retrieves the authenticated user's followers. Streamlined description to focus on pagination details and authentication requirement.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getOrganization' has semantic quality issues: vague_summary, vague_description. Original summary is awkwardly phrased and not action-oriented. Description is minimal and lacks information about what is returned. Improved summary to use clear action verb and specify the lookup method. Enhanced description to clarify the return value and required path parameter for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getOrganization",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description"
+      ],
+      "current_summary": "An organization (by username)",
+      "current_description": "This endpoint allows the client to retrieve a single organization by their username",
+      "summary_suggestion": "Retrieve organization by username",
+      "description_suggestion": "Retrieves a single organization identified by its username. Returns the Organization object containing organization details including name, description, profile information, and other metadata. Requires the organization username in the path.",
+      "reasoning": "Original summary is awkwardly phrased and not action-oriented. Description is minimal and lacks information about what is returned. Improved summary to use clear action verb and specify the lookup method. Enhanced description to clarify the return value and required path parameter for better AI agent understanding.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'spamUser' has semantic quality issues: missing_side_effects, not_actionable. Original summary is vague about the action's effect. Description has typo ('Addding') and lacks clarity about return value. Added specific side effects (content preservation, notification requirement), return status code, and clarified that this is a restrictive action for content moderation purposes.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "spamUser",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_side_effects",
+        "not_actionable"
+      ],
+      "current_summary": "Add spam role for a User",
+      "current_description": "This endpoint allows the client to add the spam role to a user.\n\n          The user associated with the API key must have any 'admin' or 'moderator' role.\n\n          This specified user will be assigned the 'spam' role. Addding the spam role to a user will stop the\n          user from posting new posts and comments. It doesn't delete any of the user's content, just\n          prevents them from creating new content while having the spam role. Users are not notified of their spaminess\n          in the UI, so if you want them to know about this, you must notify them",
+      "summary_suggestion": "Assign spam role to restrict user posting",
+      "description_suggestion": "Assigns the 'spam' role to a user, preventing them from creating new posts and comments. Requires 'admin' or 'moderator' role. The user's existing content remains in the database but they cannot create new content. Users are not automatically notified of this status change via UI or email - manual notification is required if desired. Returns 204 No Content on success.",
+      "reasoning": "Original summary is vague about the action's effect. Description has typo ('Addding') and lacks clarity about return value. Added specific side effects (content preservation, notification requirement), return status code, and clarified that this is a restrictive action for content moderation purposes.",
       "batch_index": 7
     }
   },
@@ -14632,7 +15482,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'post_/api/reactions' has semantic quality issues: vague_description, missing_output_details. The original description is vague and lacks details about the output. The suggestion clarifies the process and includes information about the response.",
+    "message": "Operation 'unSpamUser' has semantic quality issues: vague_description, missing_side_effects. Summary is clear and actionable. Description lacks return status code and could be more explicit about the side effect (re-enabling posting capability). Added return value and clarified the restoration of posting privileges for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -14643,18 +15493,410 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "post_/api/reactions",
+      "operation_id": "unSpamUser",
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_side_effects"
+      ],
+      "current_summary": "Remove spam role from a User",
+      "current_description": "This endpoint allows the client to remove the spam role for a user.\n\n          The user associated with the API key must have any 'admin' or 'moderator' role.\n\n          This specified user will be restored to 'general' status. Users are not notified\n          of removing their spam role in the UI, so if you want them to know about this, you must\n          notify them.",
+      "description_suggestion": "Removes the 'spam' role from a user, restoring them to 'general' status and re-enabling their ability to post and comment. Requires 'admin' or 'moderator' role. Users are not automatically notified of this status change via UI or email - manual notification is required if desired. Returns 204 No Content on success.",
+      "reasoning": "Summary is clear and actionable. Description lacks return status code and could be more explicit about the side effect (re-enabling posting capability). Added return value and clarified the restoration of posting privileges for better AI agent understanding.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'trustUser' has semantic quality issues: missing_output_details. Summary is clear and actionable. Description is mostly complete but lacks explicit return value information. Added return status code for consistency with other user role management operations and improved clarity about the privileges granted.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "trustUser",
+      "has_quality_issues": true,
+      "issues_found": [
         "missing_output_details"
       ],
-      "current_summary": "create reaction",
-      "current_description": "This endpoint allows the client to create a reaction to a specified reactable (eg, Article, Comment, or User). For examples:\n        * \"Like\"ing an Article will create a new \"like\" Reaction from the user for that Articles\n        * \"Like\"ing that Article a second time will return the previous \"like\"",
-      "summary_suggestion": "Create a reaction to a reactable",
-      "description_suggestion": "This endpoint allows the client to create a reaction to a specified reactable (e.g., Article, Comment, or User). For example, 'liking' an Article will create a new 'like' Reaction from the user for that Article. 'Liking' that Article a second time will return the previous 'like'. The response will include the updated reaction status.",
-      "reasoning": "The original description is vague and lacks details about the output. The suggestion clarifies the process and includes information about the response.",
-      "batch_index": 6
+      "current_summary": "Add trusted role for a User",
+      "current_description": "This endpoint allows the client to add the trusted role to a user.\n          The user associated with the API key must have an 'admin' or 'moderator' role.\n          The specified user will be assigned the 'trusted' role. Adding the trusted role to a user\n          allows them to upvote and downvote posts and flag content that needs investigating by admins.\n          Users are notified of this change in the UI, and by email.",
+      "description_suggestion": "Assigns the 'trusted' role to a user, granting them the ability to upvote and downvote posts and flag content for admin review. Requires 'admin' or 'moderator' role. Users are automatically notified of this status change via UI and email. Returns 204 No Content on success.",
+      "reasoning": "Summary is clear and actionable. Description is mostly complete but lacks explicit return value information. Added return status code for consistency with other user role management operations and improved clarity about the privileges granted.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'unTrustUser' has semantic quality issues: missing_output_details. Summary is clear and actionable. Description lacks return value and could be more explicit about the side effects (revocation of voting and flagging privileges). Added return status code and clarified the privileges being revoked for consistency and AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "unTrustUser",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details"
+      ],
+      "current_summary": "Remove trusted role from a User",
+      "current_description": "This endpoint allows the client to remove the trusted role for a user.\n          The user associated with the API key must have an 'admin' or 'moderator' role.\n          The specified user will be restored to 'general' status. Users are not notified\n          of removing their trusted role in the UI, so if you want them to know about this, you must\n          notify them.",
+      "description_suggestion": "Removes the 'trusted' role from a user, restoring them to 'general' status and revoking their ability to upvote, downvote, and flag content. Requires 'admin' or 'moderator' role. Users are not automatically notified of this status change via UI or email - manual notification is required if desired. Returns 204 No Content on success.",
+      "reasoning": "Summary is clear and actionable. Description lacks return value and could be more explicit about the side effects (revocation of voting and flagging privileges). Added return status code and clarified the privileges being revoked for consistency and AI agent clarity.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getUserMe' has semantic quality issues: vague_summary, vague_description, missing_context. Original summary is a noun phrase, not action-oriented. Description is too generic and lacks context about authentication requirements, return schema type, and access restrictions. Added action verb, authentication requirement, specific schema reference (MyUser), and clarified that this is self-only access for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getUserMe",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context"
+      ],
+      "current_summary": "The authenticated user",
+      "current_description": "This endpoint allows the client to retrieve information about the authenticated user",
+      "summary_suggestion": "Retrieve authenticated user profile",
+      "description_suggestion": "Retrieves the profile information of the currently authenticated user. Requires API key authentication. Returns the MyUser schema containing the user's complete profile including email, preferences, and account settings. This endpoint is only accessible to the authenticated user themselves.",
+      "reasoning": "Original summary is a noun phrase, not action-oriented. Description is too generic and lacks context about authentication requirements, return schema type, and access restrictions. Added action verb, authentication requirement, specific schema reference (MyUser), and clarified that this is self-only access for better AI agent understanding.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getUser' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Original summary is a noun phrase, not action-oriented. Description lacks clarity about parameter options, return schema type, and authentication requirements. Added action verb, clarified parameter flexibility, specified return schema (ExtendedUser), noted public accessibility, and provided use case context for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getUser",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "A User",
+      "current_description": "This endpoint allows the client to retrieve a single user, either by id\nor by the user's username.\n\nFor complete documentation, see the v0 API docs: https://developers.forem.com/api/v0#tag/users/operation/getUser",
+      "summary_suggestion": "Retrieve user by ID or username",
+      "description_suggestion": "Retrieves a single user's public profile information by their numeric ID or username. Accepts either parameter format for flexibility. Returns the ExtendedUser schema containing the user's profile details. This endpoint is publicly accessible without authentication. Useful for retrieving user information for display or verification purposes.",
+      "reasoning": "Original summary is a noun phrase, not action-oriented. Description lacks clarity about parameter options, return schema type, and authentication requirements. Added action verb, clarified parameter flexibility, specified return schema (ExtendedUser), noted public accessibility, and provided use case context for AI agents.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'unpublishUser' has semantic quality issues: missing_output_details, missing_side_effects. Summary is clear and actionable. Description has typo ('asychronously') and could be more concise while maintaining completeness. Reorganized for clarity, fixed typo, and added use case context. Emphasized asynchronous nature and side effects (notification deletion) for AI agent understanding of operation timing and consequences.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "unpublishUser",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Unpublish a User's Articles and Comments",
+      "current_description": "This endpoint allows the client to unpublish all of the articles and\ncomments created by a user.\n\nThe user associated with the API key must have any 'admin' or 'moderator' role.\n\nThis specified user's articles and comments will be unpublished and will no longer be\nvisible to the public. They will remain in the database and will set back to draft status\non the specified user's  dashboard. Any notifications associated with the specified user's\narticles and comments will be deleted.\n\nNote this endpoint unpublishes articles and comments asychronously: it will return a 204 NO CONTENT\nstatus code immediately, but the articles and comments will not be unpublished until the\nrequest is completed on the server.",
+      "description_suggestion": "Unpublishes all articles and comments created by a user, removing them from public visibility. Requires 'admin' or 'moderator' role. Content remains in the database as draft status on the user's dashboard, and all associated notifications are deleted. This operation is asynchronous - returns 204 No Content immediately, but unpublishing occurs server-side. Useful for content moderation and removing inappropriate published material.",
+      "reasoning": "Summary is clear and actionable. Description has typo ('asychronously') and could be more concise while maintaining completeness. Reorganized for clarity, fixed typo, and added use case context. Emphasized asynchronous nature and side effects (notification deletion) for AI agent understanding of operation timing and consequences.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getUserPublishedArticles' has semantic quality issues: vague_summary, missing_output_details. Original summary 'User's published articles' is too vague and not action-oriented. Description is verbose with unnecessary context about what articles are in the codebase. Improved summary uses action verb 'Retrieve' and clarifies authentication requirement. Enhanced description specifies pagination defaults, sort order, authentication requirement, and hints at response content for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getUserPublishedArticles",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "User's published articles",
+      "current_description": "This endpoint allows the client to retrieve a list of published articles on behalf of an authenticated user.\n\n\"Articles\" are all the posts that users create on DEV that typically show up in the feed. They can be a blog post, a discussion question, a help thread etc. but is referred to as article within the code.\n\nPublished articles will be in reverse chronological publication order.\n\nIt will return published articles with pagination. By default a page will contain 30 articles.",
+      "summary_suggestion": "Retrieve authenticated user's published articles",
+      "description_suggestion": "Retrieves a paginated list of published articles for the authenticated user, ordered by publication date (newest first). Returns up to 30 articles per page by default. Requires authentication via API key. Each article includes metadata such as title, content, author information, and engagement metrics.",
+      "reasoning": "Original summary 'User's published articles' is too vague and not action-oriented. Description is verbose with unnecessary context about what articles are in the codebase. Improved summary uses action verb 'Retrieve' and clarifies authentication requirement. Enhanced description specifies pagination defaults, sort order, authentication requirement, and hints at response content for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getUserUnpublishedArticles' has semantic quality issues: vague_summary, missing_output_details. Original summary lacks action verb and is too generic. Description contains unnecessary codebase context. Improved summary uses 'Retrieve' and clarifies authentication. Enhanced description specifies draft status, sort order, pagination defaults, authentication requirement, and use case context for AI agents to determine when to call this endpoint.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getUserUnpublishedArticles",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "User's unpublished articles",
+      "current_description": "This endpoint allows the client to retrieve a list of unpublished articles on behalf of an authenticated user.\n\n\"Articles\" are all the posts that users create on DEV that typically show up in the feed. They can be a blog post, a discussion question, a help thread etc. but is referred to as article within the code.\n\nUnpublished articles will be in reverse chronological creation order.\n\nIt will return unpublished articles with pagination. By default a page will contain 30 articles.",
+      "summary_suggestion": "Retrieve authenticated user's unpublished articles",
+      "description_suggestion": "Retrieves a paginated list of unpublished (draft) articles for the authenticated user, ordered by creation date (newest first). Returns up to 30 articles per page by default. Requires authentication via API key. Useful for accessing articles in progress or scheduled for future publication.",
+      "reasoning": "Original summary lacks action verb and is too generic. Description contains unnecessary codebase context. Improved summary uses 'Retrieve' and clarifies authentication. Enhanced description specifies draft status, sort order, pagination defaults, authentication requirement, and use case context for AI agents to determine when to call this endpoint.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getUserAllArticles' has semantic quality issues: vague_summary, missing_output_details. Original summary 'User's all articles' is grammatically awkward and lacks action verb. Description is verbose with unnecessary codebase context. Improved summary uses 'Retrieve' and proper grammar. Enhanced description clarifies the mixed sort order (unpublished first, then published), pagination defaults, and authentication requirement for better AI agent understanding of result ordering.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getUserAllArticles",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "User's all articles",
+      "current_description": "This endpoint allows the client to retrieve a list of all articles on behalf of an authenticated user.\n\n\"Articles\" are all the posts that users create on DEV that typically show up in the feed. They can be a blog post, a discussion question, a help thread etc. but is referred to as article within the code.\n\nIt will return both published and unpublished articles with pagination.\n\nUnpublished articles will be at the top of the list in reverse chronological creation order. Published articles will follow in reverse chronological publication order.\n\nBy default a page will contain 30 articles.",
+      "summary_suggestion": "Retrieve authenticated user's all articles",
+      "description_suggestion": "Retrieves a paginated list of all articles (published and unpublished) for the authenticated user. Unpublished articles appear first in reverse chronological creation order, followed by published articles in reverse chronological publication order. Returns up to 30 articles per page by default. Requires authentication via API key.",
+      "reasoning": "Original summary 'User's all articles' is grammatically awkward and lacks action verb. Description is verbose with unnecessary codebase context. Improved summary uses 'Retrieve' and proper grammar. Enhanced description clarifies the mixed sort order (unpublished first, then published), pagination defaults, and authentication requirement for better AI agent understanding of result ordering.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getSegments' has semantic quality issues: vague_summary, missing_output_details. Original summary is a noun phrase, not action-oriented. Description lacks clarity about scope (user's own segments) and response content. Improved summary uses action verb 'Retrieve' and clarifies ownership scope. Enhanced description specifies pagination defaults, clarifies that only user-created segments are returned, explains the Billboard relationship, and hints at response structure for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getSegments",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "Manually managed audience segments",
+      "current_description": "This endpoint allows the client to retrieve a list of audience segments.\n\nAn audience segment is a group of users that can be targeted by a Billboard. This API only permits managing segments you create and maintain yourself.\n\nThe endpoint supports pagination, and each page will contain `30` segments by default.",
+      "summary_suggestion": "Retrieve user's manually managed audience segments",
+      "description_suggestion": "Retrieves a paginated list of audience segments created and maintained by the authenticated user. Audience segments are user groups that can be targeted by Billboards (display ads). Returns up to 30 segments per page by default. Each segment includes metadata such as name, description, and user count.",
+      "reasoning": "Original summary is a noun phrase, not action-oriented. Description lacks clarity about scope (user's own segments) and response content. Improved summary uses action verb 'Retrieve' and clarifies ownership scope. Enhanced description specifies pagination defaults, clarifies that only user-created segments are returned, explains the Billboard relationship, and hints at response structure for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'createSegment' has semantic quality issues: missing_input_details, missing_output_details. Summary is clear and action-oriented. Description lacks critical details about required inputs, response format, and ownership/access control. Enhanced description specifies authentication requirement, hints at expected input parameters, clarifies response format, and explains access control for AI agents to understand what data to provide and what to expect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "createSegment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Create a manually managed audience segment",
+      "current_description": "This endpoint allows the client to create a new audience segment.\n \nAn audience segment is a group of users that can be targeted by a Billboard. This API only permits managing segments you create and maintain yourself.",
+      "description_suggestion": "Creates a new manually managed audience segment for targeting users with Billboards. Requires authentication via API key. Accepts segment configuration parameters such as name and description. Returns the created Segment object with assigned ID and metadata. The segment will be associated with the authenticated user and can only be modified by that user.",
+      "reasoning": "Summary is clear and action-oriented. Description lacks critical details about required inputs, response format, and ownership/access control. Enhanced description specifies authentication requirement, hints at expected input parameters, clarifies response format, and explains access control for AI agents to understand what data to provide and what to expect.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getSegment' has semantic quality issues: vague_summary, missing_output_details. Original summary is a noun phrase, not action-oriented. Description is too minimal and lacks response details and access control information. Improved summary uses action verb 'Retrieve'. Enhanced description specifies what data is returned, authentication requirement, and access control constraints for AI agents to understand when this operation will succeed and what to expect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getSegment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "A manually managed audience segment",
+      "current_description": "This endpoint allows the client to retrieve a single manually-managed audience segment specified by ID.",
+      "summary_suggestion": "Retrieve a manually managed audience segment",
+      "description_suggestion": "Retrieves a single manually managed audience segment by ID. Returns the Segment object including name, description, user count, and other metadata. Requires authentication via API key. Only segments created by the authenticated user can be accessed.",
+      "reasoning": "Original summary is a noun phrase, not action-oriented. Description is too minimal and lacks response details and access control information. Improved summary uses action verb 'Retrieve'. Enhanced description specifies what data is returned, authentication requirement, and access control constraints for AI agents to understand when this operation will succeed and what to expect.",
+      "batch_index": 1
     }
   },
   {
@@ -14668,7 +15910,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 58 operations analyzed, 15 quality issues found",
+    "message": "Semantic analysis completed: 58 operations analyzed, 49 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -14680,7 +15922,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 58,
-      "total_issues_found": 15,
+      "total_issues_found": 49,
       "batches_processed": 9
     }
   }

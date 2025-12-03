@@ -10284,7 +10284,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.enableVpcServiceControls' has semantic quality issues: vague_summary, vague_description. The current summary is missing, and the description lacks details about authentication, return value, and the effect of enabling VPC service controls.",
+    "message": "Operation 'servicenetworking.services.enableVpcServiceControls' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description is too brief and lacks context about what VPC service controls are, what inputs are required, what the operation returns, and the side effects of enabling controls. Added domain context about VPC service controls purpose, clarified that it modifies connection configuration, and specified return value for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10299,13 +10299,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Enables VPC service controls for a connection.",
       "summary_suggestion": "Enable VPC service controls for a connection",
-      "description_suggestion": "Enables VPC service controls for a specified connection, ensuring that only authorized services can access the network. Requires authentication and returns the updated configuration.",
-      "reasoning": "The current summary is missing, and the description lacks details about authentication, return value, and the effect of enabling VPC service controls.",
+      "description_suggestion": "Enables VPC service controls for a specified connection resource. VPC service controls provide additional security by restricting access to services based on network perimeter policies. This operation modifies the connection configuration and returns the updated connection resource with VPC service controls enabled.",
+      "reasoning": "Missing summary entirely. Description is too brief and lacks context about what VPC service controls are, what inputs are required, what the operation returns, and the side effects of enabling controls. Added domain context about VPC service controls purpose, clarified that it modifies connection configuration, and specified return value for better AI agent understanding.",
       "batch_index": 3
     }
   },
@@ -10320,7 +10321,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.projects.global.networks.updateConsumerConfig' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing, and the description lacks details about authentication and the return value of the updated configuration.",
+    "message": "Operation 'servicenetworking.services.searchRange' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is comprehensive but dense and lacks clear output specification. Reorganized for clarity, explicitly stated what is returned, and added context about use case (fail-fast validation) to help AI agents understand when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicenetworking.services.searchRange",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Service producers can use this method to find a currently unused range within consumer allocated ranges. This returned range is not reserved, and not guaranteed to remain unused. It will validate previously provided allocated ranges, find non-conflicting sub-range of requested size (expressed in number of leading bits of ipv4 network mask, as in CIDR range notation).",
+      "summary_suggestion": "Find an unused IP address range for allocation",
+      "description_suggestion": "Searches for an available IP address range within consumer-allocated ranges for service producers. Validates previously provided allocated ranges and identifies a non-conflicting sub-range matching the requested size (specified in CIDR notation as leading bits of IPv4 network mask). Returns the available range, though it is not reserved and may become unavailable. Useful for fail-fast validation before subnet allocation.",
+      "reasoning": "Missing summary. Description is comprehensive but dense and lacks clear output specification. Reorganized for clarity, explicitly stated what is returned, and added context about use case (fail-fast validation) to help AI agents understand when to use this operation.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicenetworking.services.projects.global.networks.updateConsumerConfig' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks clarity about what is returned and side effects of the update. Added explicit mention of return value and clarified that changes affect network routing behavior immediately. Improved specificity about configuration scope for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10335,13 +10372,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Service producers use this method to update the configuration of their connection including the import/export of custom routes and subnetwork routes with public IP.",
-      "summary_suggestion": "Update the consumer configuration of a network",
-      "description_suggestion": "Updates the configuration of a consumer network, including the import/export of custom routes and subnetwork routes with public IP. Requires authentication and returns the updated configuration.",
-      "reasoning": "The current summary is missing, and the description lacks details about authentication and the return value of the updated configuration.",
+      "summary_suggestion": "Update connection configuration for route management",
+      "description_suggestion": "Updates the connection configuration for a service producer's network connection. Allows configuration of route import/export settings, including custom routes and subnetwork routes with public IP addresses. This operation modifies the connection's routing behavior and returns the updated connection configuration resource. Changes take effect immediately on the peered networks.",
+      "reasoning": "Missing summary. Description lacks clarity about what is returned and side effects of the update. Added explicit mention of return value and clarified that changes affect network routing behavior immediately. Improved specificity about configuration scope for better AI agent decision-making.",
       "batch_index": 3
     }
   },
@@ -10356,7 +10394,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.validate' has semantic quality issues: vague_summary, missing_output_details. The current summary is missing, and the description lacks details about authentication and the return value of the validation results.",
+    "message": "Operation 'servicenetworking.services.validate' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description explains the use case well but lacks explicit output specification and actionable guidance for AI agents. Added clear summary, specified return value (validation results), and included guidance on when to use this operation relative to other operations (before AddSubnetwork) for improved AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10375,9 +10413,9 @@
       ],
       "current_summary": "",
       "current_description": "Service producers use this method to validate if the consumer provided network, project and requested range are valid. This allows them to use a fail-fast mechanism for consumer requests, and not have to wait for AddSubnetwork operation completion to determine if user request is invalid.",
-      "summary_suggestion": "Validate consumer network, project, and requested range",
-      "description_suggestion": "Validates if the consumer provided network, project, and requested range are valid. Requires authentication and returns validation results, allowing for a fail-fast mechanism.",
-      "reasoning": "The current summary is missing, and the description lacks details about authentication and the return value of the validation results.",
+      "summary_suggestion": "Validate consumer network configuration and IP range",
+      "description_suggestion": "Validates whether a consumer's provided network, project, and requested IP range are valid for service networking. Enables service producers to implement fail-fast validation without waiting for subnet allocation operations to complete. Returns validation results indicating whether the configuration is acceptable or contains errors. Use this before initiating AddSubnetwork operations to catch invalid requests early.",
+      "reasoning": "Missing summary. Description explains the use case well but lacks explicit output specification and actionable guidance for AI agents. Added clear summary, specified return value (validation results), and included guidance on when to use this operation relative to other operations (before AddSubnetwork) for improved AI agent interpretability.",
       "batch_index": 3
     }
   },
@@ -10392,7 +10430,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.dnsRecordSets.add' has semantic quality issues: vague_summary, missing_context. The current summary was missing, and the description lacked details about authentication and the return value.",
+    "message": "Operation 'servicenetworking.services.connections.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description is comprehensive but lacks clarity on return value (Operation resource). Added explicit mention of Operation return type for AI agent understanding of asynchronous behavior. Clarified bidirectional nature of peering and improved flow for better interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicenetworking.services.connections.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a private connection that establishes a VPC Network Peering connection to a VPC network in the service producer's organization. The administrator of the service consumer's VPC network invokes this method. The administrator must assign one or more allocated IP ranges for provisioning subnetworks in the service producer's VPC network. This connection is used for all supported services in the service producer's organization, so it only needs to be invoked once.",
+      "summary_suggestion": "Create a private VPC Network Peering connection",
+      "description_suggestion": "Creates a private connection that establishes a VPC Network Peering connection between the service consumer's VPC network and the service producer's VPC network. The service consumer's administrator must assign one or more allocated IP ranges for provisioning subnetworks in the producer's VPC network. This connection enables all supported services in the producer's organization and only needs to be created once per consumer-producer pair. Returns an Operation resource representing the long-running connection creation process.",
+      "reasoning": "Missing summary entirely. Description is comprehensive but lacks clarity on return value (Operation resource). Added explicit mention of Operation return type for AI agent understanding of asynchronous behavior. Clarified bidirectional nature of peering and improved flow for better interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicenetworking.services.dnsRecordSets.add' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too brief and lacks input/output details. Added clarity about what gets added, who uses it, expected inputs, and return value to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10407,13 +10481,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Service producers can use this method to add DNS record sets to private DNS zones in the shared producer host project.",
-      "summary_suggestion": "Add DNS record set to private DNS zone",
-      "description_suggestion": "Service producers can use this method to add DNS record sets to private DNS zones in the shared producer host project. This operation requires authentication and returns the newly created DNS record set.",
-      "reasoning": "The current summary was missing, and the description lacked details about authentication and the return value.",
+      "summary_suggestion": "Add DNS record sets to private DNS zones",
+      "description_suggestion": "Adds one or more DNS record sets to private DNS zones in the shared producer host project. Service producers use this method to configure DNS records for services accessible through private connections. Accepts a request containing the DNS record set details to be added. Returns the added DNS record set resource(s) or an Operation resource if the operation is long-running.",
+      "reasoning": "Missing summary. Description is too brief and lacks input/output details. Added clarity about what gets added, who uses it, expected inputs, and return value to improve AI agent interpretability.",
       "batch_index": 1
     }
   },
@@ -10428,7 +10503,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.dnsRecordSets.get' has semantic quality issues: vague_summary, missing_context. The current summary was missing, and the description lacked details about authentication and the return value.",
+    "message": "Operation 'servicenetworking.services.dnsRecordSets.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity on return value and what parameters are needed. Added explicit mention of DnsRecordSet return type and clarified the retrieval purpose for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10443,13 +10518,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Producers can use this method to retrieve information about the DNS record set added to the private zone inside the shared tenant host project associated with a consumer network.",
       "summary_suggestion": "Retrieve DNS record set information",
-      "description_suggestion": "Producers can use this method to retrieve information about the DNS record set added to the private zone inside the shared tenant host project associated with a consumer network. This operation requires authentication and returns the requested DNS record set details.",
-      "reasoning": "The current summary was missing, and the description lacked details about authentication and the return value.",
+      "description_suggestion": "Retrieves information about a specific DNS record set from a private DNS zone in the shared tenant host project associated with a consumer network. Service producers use this method to query DNS record details for services accessible through private connections. Returns the DnsRecordSet resource containing the requested DNS record information.",
+      "reasoning": "Missing summary. Description lacks clarity on return value and what parameters are needed. Added explicit mention of DnsRecordSet return type and clarified the retrieval purpose for better AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -10464,7 +10539,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.dnsRecordSets.list' has semantic quality issues: vague_summary, missing_context. The current summary was missing, and the description lacked details about authentication and the return value.",
+    "message": "Operation 'servicenetworking.services.dnsRecordSets.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description has redundancy ('available' appears twice) and lacks output details. Added mention of pagination support and explicit return type (list of DnsRecordSet resources) for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10479,13 +10554,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Producers can use this method to retrieve a list of available DNS RecordSets available inside the private zone on the tenant host project accessible from their network.",
-      "summary_suggestion": "List available DNS record sets",
-      "description_suggestion": "Producers can use this method to retrieve a list of available DNS RecordSets available inside the private zone on the tenant host project accessible from their network. This operation requires authentication and returns a list of DNS record sets.",
-      "reasoning": "The current summary was missing, and the description lacked details about authentication and the return value.",
+      "summary_suggestion": "List DNS record sets in private DNS zones",
+      "description_suggestion": "Lists all DNS record sets available in a private DNS zone on the tenant host project accessible from the producer's network. Service producers use this method to view all configured DNS records for services accessible through private connections. Supports pagination through standard list parameters. Returns a list of DnsRecordSet resources.",
+      "reasoning": "Missing summary. Description has redundancy ('available' appears twice) and lacks output details. Added mention of pagination support and explicit return type (list of DnsRecordSet resources) for better AI agent interpretability.",
       "batch_index": 1
     }
   },
@@ -10500,7 +10575,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.dnsRecordSets.remove' has semantic quality issues: vague_summary, missing_context. The current summary was missing, and the description lacked details about authentication and the return value.",
+    "message": "Operation 'servicenetworking.services.dnsRecordSets.remove' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks input/output details and doesn't clarify what happens after removal. Added clarity about request content, return value, and potential asynchronous behavior for improved AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10515,13 +10590,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Service producers can use this method to remove DNS record sets from private DNS zones in the shared producer host project.",
-      "summary_suggestion": "Remove DNS record set from private DNS zone",
-      "description_suggestion": "Service producers can use this method to remove DNS record sets from private DNS zones in the shared producer host project. This operation requires authentication and returns a confirmation message upon successful removal.",
-      "reasoning": "The current summary was missing, and the description lacked details about authentication and the return value.",
+      "summary_suggestion": "Remove DNS record sets from private DNS zones",
+      "description_suggestion": "Removes one or more DNS record sets from private DNS zones in the shared producer host project. Service producers use this method to delete DNS records for services no longer accessible through private connections. Accepts a request specifying which DNS record sets to remove. Returns an empty response or an Operation resource if the operation is long-running.",
+      "reasoning": "Missing summary. Description lacks input/output details and doesn't clarify what happens after removal. Added clarity about request content, return value, and potential asynchronous behavior for improved AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -10536,7 +10611,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.dnsRecordSets.update' has semantic quality issues: vague_summary, missing_context. The current summary was missing, and the description lacked details about authentication and the return value.",
+    "message": "Operation 'servicenetworking.services.dnsRecordSets.update' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is vague about what gets updated and lacks input/output details. Added clarity about update scope, request content, and return value to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10551,13 +10626,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Service producers can use this method to update DNS record sets from private DNS zones in the shared producer host project.",
-      "summary_suggestion": "Update DNS record set in private DNS zone",
-      "description_suggestion": "Service producers can use this method to update DNS record sets from private DNS zones in the shared producer host project. This operation requires authentication and returns the updated DNS record set.",
-      "reasoning": "The current summary was missing, and the description lacked details about authentication and the return value.",
+      "summary_suggestion": "Update DNS record sets in private DNS zones",
+      "description_suggestion": "Updates one or more DNS record sets in private DNS zones in the shared producer host project. Service producers use this method to modify DNS records for services accessible through private connections. Accepts a request containing the updated DNS record set details. Returns the updated DnsRecordSet resource(s) or an Operation resource if the operation is long-running.",
+      "reasoning": "Missing summary. Description is vague about what gets updated and lacks input/output details. Added clarity about update scope, request content, and return value to improve AI agent interpretability.",
       "batch_index": 1
     }
   },
@@ -10572,7 +10648,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.dnsZones.add' has semantic quality issues: vague_summary, missing_context. The current summary was missing, and the description lacked details about authentication and the return value.",
+    "message": "Operation 'servicenetworking.services.dnsZones.add' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks output details and doesn't clarify the bidirectional zone creation. Added explicit mention of return type and clarified that both producer and consumer zones are created for better AI agent understanding of the operation's scope.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10587,13 +10663,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Service producers can use this method to add private DNS zones in the shared producer host project and matching peering zones in the consumer project.",
-      "summary_suggestion": "Add private DNS zone and peering zone",
-      "description_suggestion": "Service producers can use this method to add private DNS zones in the shared producer host project and matching peering zones in the consumer project. This operation requires authentication and returns the newly created DNS zone and peering zone.",
-      "reasoning": "The current summary was missing, and the description lacked details about authentication and the return value.",
+      "summary_suggestion": "Add private DNS zones for producer and consumer",
+      "description_suggestion": "Adds private DNS zones in the shared producer host project and creates matching peering zones in the consumer project. Service producers use this method to establish DNS infrastructure for services accessible through private connections. Accepts a request specifying the DNS zone configuration. Returns the created DnsZone resource(s) or an Operation resource if the operation is long-running.",
+      "reasoning": "Missing summary. Description lacks output details and doesn't clarify the bidirectional zone creation. Added explicit mention of return type and clarified that both producer and consumer zones are created for better AI agent understanding of the operation's scope.",
       "batch_index": 1
     }
   },
@@ -10608,223 +10684,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.projects.global.networks.peeredDnsDomains.delete' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides more detail about the operation's purpose, required input, and expected outcome.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "servicenetworking.services.projects.global.networks.peeredDnsDomains.delete",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description"
-      ],
-      "current_summary": "",
-      "current_description": "Deletes a peered DNS domain.",
-      "summary_suggestion": "Delete a peered DNS domain",
-      "description_suggestion": "Deletes a specified peered DNS domain from the network configuration. Requires the name of the peered DNS domain to be deleted. Returns an empty response on success.",
-      "reasoning": "The current summary and description are vague. The suggested summary is concise and action-oriented, while the suggested description provides more detail about the operation's purpose, required input, and expected outcome.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'servicenetworking.services.projects.global.networks.dnsZones.get' has semantic quality issues: vague_summary, missing_context. The current summary is missing, and the description lacks clarity about the expected inputs and outputs. The suggested summary and description provide more context and clarity.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "servicenetworking.services.projects.global.networks.dnsZones.get",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_context"
-      ],
-      "current_summary": "",
-      "current_description": "Service producers can use this method to retrieve a DNS zone in the shared producer host project and the matching peering zones in consumer project",
-      "summary_suggestion": "Retrieve DNS zone information",
-      "description_suggestion": "Retrieves a DNS zone from the shared producer host project and the corresponding peering zones in the consumer project. Requires the name of the DNS zone. Returns the DNS zone details.",
-      "reasoning": "The current summary is missing, and the description lacks clarity about the expected inputs and outputs. The suggested summary and description provide more context and clarity.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'servicenetworking.services.connections.patch' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing, and the description lacks detail about the required input parameters. The suggested summary and description are more specific and actionable.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "servicenetworking.services.connections.patch",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_input_details"
-      ],
-      "current_summary": "",
-      "current_description": "Updates the allocated ranges that are assigned to a connection.",
-      "summary_suggestion": "Update allocated ranges for a connection",
-      "description_suggestion": "Updates the allocated IP ranges assigned to a specific connection. Requires the name of the connection and the updated allocated ranges. Returns the updated connection details.",
-      "reasoning": "The current summary is missing, and the description lacks detail about the required input parameters. The suggested summary and description are more specific and actionable.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'servicenetworking.services.connections.deleteConnection' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing, and the description lacks detail about the required input parameters. The suggested summary and description are more specific and actionable.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "servicenetworking.services.connections.deleteConnection",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_input_details"
-      ],
-      "current_summary": "",
-      "current_description": "Deletes a private service access connection.",
-      "summary_suggestion": "Delete a private service access connection",
-      "description_suggestion": "Deletes a specified private service access connection. Requires the name of the connection to be deleted. Returns an empty response on success.",
-      "reasoning": "The current summary is missing, and the description lacks detail about the required input parameters. The suggested summary and description are more specific and actionable.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'servicenetworking.services.projects.global.networks.getVpcServiceControls' has semantic quality issues: vague_summary, missing_context. The current summary is missing, and the description lacks clarity about the expected inputs and outputs. The suggested summary and description are more specific and actionable.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "servicenetworking.services.projects.global.networks.getVpcServiceControls",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_context"
-      ],
-      "current_summary": "",
-      "current_description": "Consumers use this method to find out the state of VPC Service Controls. The controls could be enabled or disabled for a connection.",
-      "summary_suggestion": "Get VPC Service Controls state",
-      "description_suggestion": "Retrieves the state of VPC Service Controls for a specified connection. The controls can be enabled or disabled. Requires the name of the connection. Returns the state of VPC Service Controls.",
-      "reasoning": "The current summary is missing, and the description lacks clarity about the expected inputs and outputs. The suggested summary and description are more specific and actionable.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'servicenetworking.services.connections.list' has semantic quality issues: vague_summary, missing_context. The current summary is missing, and the description lacks detail about the required input parameters. The suggested summary and description are more specific and actionable.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "servicenetworking.services.connections.list",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "missing_context"
-      ],
-      "current_summary": "",
-      "current_description": "List the private connections that are configured in a service consumer's VPC network.",
-      "summary_suggestion": "List private connections in a VPC network",
-      "description_suggestion": "Lists all private connections configured in a specified service consumer's VPC network. Requires the parent resource name. Returns a list of private connection details.",
-      "reasoning": "The current summary is missing, and the description lacks detail about the required input parameters. The suggested summary and description are more specific and actionable.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'servicenetworking.services.projects.global.networks.dnsZones.list' has semantic quality issues: vague_summary, missing_context. Added a more specific summary and expanded the description to include context about DNS zones and VPC Service Controls.",
+    "message": "Operation 'servicenetworking.services.projects.global.networks.dnsZones.list' has semantic quality issues: vague_summary, missing_output_details, poor_ai_interpretability. Missing summary entirely. Description lacks clarity about return type (DnsZone resources) and doesn't explicitly state this is a read-only retrieval operation. Added return value details and clarified the dual-project scope for better AI agent understanding of when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10839,13 +10699,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Service producers can use this method to retrieve a list of available DNS zones in the shared producer host project and the matching peering zones in the consumer project.",
-      "summary_suggestion": "List available DNS zones and matching peering zones",
-      "description_suggestion": "Service producers can use this method to retrieve a list of available DNS zones in the shared producer host project and the matching peering zones in the consumer project. This includes DNS zones that are configured for VPC Service Controls.",
-      "reasoning": "Added a more specific summary and expanded the description to include context about DNS zones and VPC Service Controls.",
+      "summary_suggestion": "List DNS zones for producer and consumer projects",
+      "description_suggestion": "Retrieves a list of available DNS zones in the shared producer host project and matching peering zones in the consumer project. Returns a collection of DnsZone resources representing both producer and consumer DNS zones. Useful for service producers to discover existing DNS zone configurations across peered networks.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about return type (DnsZone resources) and doesn't explicitly state this is a read-only retrieval operation. Added return value details and clarified the dual-project scope for better AI agent understanding of when to use this operation.",
       "batch_index": 2
     }
   },
@@ -10860,7 +10721,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.dnsZones.remove' has semantic quality issues: vague_summary, missing_context. Added a more specific summary and expanded the description to include context about the impact on DNS resolution.",
+    "message": "Operation 'servicenetworking.services.dnsZones.remove' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description lacks information about request schema (RemoveDnsZoneRequest), return value, and critical side effects (permanent deletion, impact on DNS resolution). Added these details to help AI agents understand the destructive nature of this operation and when it should be used.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10875,13 +10736,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Service producers can use this method to remove private DNS zones in the shared producer host project and matching peering zones in the consumer project.",
-      "summary_suggestion": "Remove private DNS zones and matching peering zones",
-      "description_suggestion": "Service producers can use this method to remove private DNS zones in the shared producer host project and matching peering zones in the consumer project. This action will affect DNS resolution for services using the specified zones.",
-      "reasoning": "Added a more specific summary and expanded the description to include context about the impact on DNS resolution.",
+      "summary_suggestion": "Remove private DNS zones from producer and consumer",
+      "description_suggestion": "Removes private DNS zones from the shared producer host project and matching peering zones from the consumer project. Accepts a RemoveDnsZoneRequest specifying which DNS zones to remove. Returns a 200 response on successful removal. This operation permanently deletes DNS zone configurations and affects DNS resolution for both producer and consumer VPC networks.",
+      "reasoning": "Missing summary. Description lacks information about request schema (RemoveDnsZoneRequest), return value, and critical side effects (permanent deletion, impact on DNS resolution). Added these details to help AI agents understand the destructive nature of this operation and when it should be used.",
       "batch_index": 2
     }
   },
@@ -10896,7 +10758,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.projects.global.networks.peeredDnsDomains.list' has semantic quality issues: vague_summary, missing_context. Added a more specific summary and expanded the description to include context about the purpose of peered DNS domains.",
+    "message": "Operation 'servicenetworking.services.projects.global.networks.peeredDnsDomains.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description is too brief and lacks context about what PeeredDnsDomain resources represent and their purpose in DNS resolution. Added details about return type, domain suffix routing behavior, and use case to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10911,13 +10773,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists peered DNS domains for a connection.",
       "summary_suggestion": "List peered DNS domains for a connection",
-      "description_suggestion": "Lists peered DNS domains for a connection, which are DNS domains that are configured to resolve requests from the producer VPC network to the consumer VPC network.",
-      "reasoning": "Added a more specific summary and expanded the description to include context about the purpose of peered DNS domains.",
+      "description_suggestion": "Retrieves a list of peered DNS domains associated with a specific connection. Returns a collection of PeeredDnsDomain resources that define DNS domain suffixes for which requests originating in the producer VPC network are resolved in the consumer VPC network. Useful for discovering DNS routing configurations for a peered connection.",
+      "reasoning": "Missing summary. Description is too brief and lacks context about what PeeredDnsDomain resources represent and their purpose in DNS resolution. Added details about return type, domain suffix routing behavior, and use case to improve AI agent interpretability.",
       "batch_index": 2
     }
   },
@@ -10932,7 +10795,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.projects.global.networks.peeredDnsDomains.create' has semantic quality issues: vague_summary, missing_context. Added a more specific summary and expanded the description to include context about the purpose of peered DNS domains.",
+    "message": "Operation 'servicenetworking.services.projects.global.networks.peeredDnsDomains.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description uses unclear terminology ('given namespace') and lacks information about request schema (PeeredDnsDomain), return value, and the effect of enabling cross-VPC DNS resolution. Improved clarity and added schema/return details for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10947,13 +10810,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Creates a peered DNS domain which sends requests for records in given namespace originating in the service producer VPC network to the consumer VPC network to be resolved.",
-      "summary_suggestion": "Create a peered DNS domain",
-      "description_suggestion": "Creates a peered DNS domain, which allows DNS requests from the producer VPC network to be resolved in the consumer VPC network. This is useful for services that need to communicate across VPC networks.",
-      "reasoning": "Added a more specific summary and expanded the description to include context about the purpose of peered DNS domains.",
+      "summary_suggestion": "Create a peered DNS domain for cross-VPC resolution",
+      "description_suggestion": "Creates a peered DNS domain that routes DNS requests for specified namespaces from the producer VPC network to the consumer VPC network for resolution. Accepts a PeeredDnsDomain request object specifying the domain namespace and routing configuration. Returns the created PeeredDnsDomain resource with assigned identifiers. This operation enables DNS resolution across peered VPC networks for specified domain suffixes.",
+      "reasoning": "Missing summary. Description uses unclear terminology ('given namespace') and lacks information about request schema (PeeredDnsDomain), return value, and the effect of enabling cross-VPC DNS resolution. Improved clarity and added schema/return details for better AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -10968,7 +10832,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.roles.add' has semantic quality issues: vague_summary, missing_context. Added a more specific summary and expanded the description to include context about the impact on member permissions.",
+    "message": "Operation 'servicenetworking.services.roles.add' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks information about request schema (AddRolesRequest), return value, and doesn't clearly explain the constraint about allowlisted roles and granularity. Added schema details and clarified the IAM policy modification side effect for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -10983,13 +10847,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Service producers can use this method to add roles in the shared VPC host project. Each role is bound to the provided member. Each role must be selected from within an allowlisted set of roles. Each role is applied at only the granularity specified in the allowlist.",
-      "summary_suggestion": "Add roles to a shared VPC host project",
-      "description_suggestion": "Service producers can use this method to add roles in the shared VPC host project. Each role is bound to the provided member. Each role must be selected from within an allowlisted set of roles. Each role is applied at only the granularity specified in the allowlist. This action will affect the permissions of the specified member.",
-      "reasoning": "Added a more specific summary and expanded the description to include context about the impact on member permissions.",
+      "summary_suggestion": "Add IAM roles to shared VPC host project",
+      "description_suggestion": "Adds IAM roles to the shared VPC host project for specified members. Accepts an AddRolesRequest containing role and member bindings. Each role must be selected from the allowlisted set of roles, and roles are applied at the granularity specified in the allowlist. Returns a 200 response confirming role assignments. This operation modifies IAM policy bindings in the shared VPC host project.",
+      "reasoning": "Missing summary. Description lacks information about request schema (AddRolesRequest), return value, and doesn't clearly explain the constraint about allowlisted roles and granularity. Added schema details and clarified the IAM policy modification side effect for better AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -11004,7 +10869,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.addSubnetwork' has semantic quality issues: vague_summary, missing_context. Added a more specific summary and expanded the description to include context about the impact on the network configuration.",
+    "message": "Operation 'servicenetworking.services.addSubnetwork' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is lengthy and uses inconsistent terminology ('ipV4' should be 'IPv4'). Lacks explicit mention of return value and could better organize information about idempotency and side effects. Improved clarity, fixed terminology, and added return value details for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11019,13 +10884,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "For service producers, provisions a new subnet in a peered service's shared VPC network in the requested region and with the requested size that's expressed as a CIDR range (number of leading bits of ipV4 network mask). The method checks against the assigned allocated ranges to find a non-conflicting IP address range. The method will reuse a subnet if subsequent calls contain the same subnet name, region, and prefix length. This method will make producer's tenant project to be a shared VPC service project as needed.",
-      "summary_suggestion": "Add a new subnet to a peered service's shared VPC network",
-      "description_suggestion": "For service producers, provisions a new subnet in a peered service's shared VPC network in the requested region and with the requested size that's expressed as a CIDR range (number of leading bits of ipV4 network mask). The method checks against the assigned allocated ranges to find a non-conflicting IP address range. The method will reuse a subnet if subsequent calls contain the same subnet name, region, and prefix length. This method will make producer's tenant project to be a shared VPC service project as needed. This action will affect the network configuration of the specified service.",
-      "reasoning": "Added a more specific summary and expanded the description to include context about the impact on the network configuration.",
+      "summary_suggestion": "Provision a subnet in peered service VPC network",
+      "description_suggestion": "Provisions a new subnet in a peered service's shared VPC network in the specified region with the requested size (expressed as CIDR prefix length). Accepts an AddSubnetworkRequest specifying subnet name, region, and prefix length. The operation checks allocated ranges to find non-conflicting IP addresses and reuses existing subnets if the same name, region, and prefix length are provided. Returns the provisioned subnet resource. Side effects include converting the producer's tenant project to a shared VPC service project if needed.",
+      "reasoning": "Missing summary. Description is lengthy and uses inconsistent terminology ('ipV4' should be 'IPv4'). Lacks explicit mention of return value and could better organize information about idempotency and side effects. Improved clarity, fixed terminology, and added return value details for better AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -11040,7 +10905,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicenetworking.services.disableVpcServiceControls' has semantic quality issues: vague_summary, missing_context. Added a more specific summary and expanded the description to include context about the impact on the security configuration.",
+    "message": "Operation 'servicenetworking.services.disableVpcServiceControls' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description is too brief and lacks critical information about request schema (DisableVpcServiceControlsRequest), return value, and important side effects (removal of security policy enforcement, impact on traffic restrictions). Added these details to help AI agents understand the security implications of this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -11055,14 +10920,235 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Disables VPC service controls for a connection.",
       "summary_suggestion": "Disable VPC service controls for a connection",
-      "description_suggestion": "Disables VPC service controls for a connection, which allows services to communicate across VPC networks without the restrictions imposed by VPC Service Controls. This action will affect the security configuration of the specified connection.",
-      "reasoning": "Added a more specific summary and expanded the description to include context about the impact on the security configuration.",
+      "description_suggestion": "Disables VPC service controls for a specified connection. Accepts a DisableVpcServiceControlsRequest to configure the disabling operation. Returns a 200 response confirming VPC service controls have been disabled. This operation removes security policy enforcement for the connection, allowing unrestricted traffic between the producer and consumer VPC networks.",
+      "reasoning": "Missing summary. Description is too brief and lacks critical information about request schema (DisableVpcServiceControlsRequest), return value, and important side effects (removal of security policy enforcement, impact on traffic restrictions). Added these details to help AI agents understand the security implications of this operation.",
       "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicenetworking.services.projects.global.networks.peeredDnsDomains.delete' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Original description is too minimal. Added context about what a peered DNS domain is, the effect of deletion on DNS resolution, and clarified the required input. This helps AI agents understand the operational impact and when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicenetworking.services.projects.global.networks.peeredDnsDomains.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes a peered DNS domain.",
+      "summary_suggestion": "Delete a peered DNS domain",
+      "description_suggestion": "Deletes a peered DNS domain resource. This operation removes the DNS domain suffix configuration that was used for resolving requests between producer and consumer VPC networks. After deletion, DNS resolution for this domain will no longer be available across the peered networks. Requires the resource name of the peered DNS domain to be deleted.",
+      "reasoning": "Original description is too minimal. Added context about what a peered DNS domain is, the effect of deletion on DNS resolution, and clarified the required input. This helps AI agents understand the operational impact and when to use this operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicenetworking.services.projects.global.networks.dnsZones.get' has semantic quality issues: vague_summary, missing_output_details. Summary was missing entirely. Description lacked clarity about return values and was incomplete. Enhanced to specify what is returned and clarified the dual-zone retrieval pattern for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicenetworking.services.projects.global.networks.dnsZones.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Service producers can use this method to retrieve a DNS zone in the shared producer host project and the matching peering zones in consumer project",
+      "summary_suggestion": "Retrieve DNS zone and peering zones",
+      "description_suggestion": "Retrieves a DNS zone resource from the shared producer host project along with the matching peering zones in the consumer project. This method is used by service producers to view DNS zone configurations across both producer and consumer VPC networks. Returns the DNS zone object containing zone details and associated peering zone information.",
+      "reasoning": "Summary was missing entirely. Description lacked clarity about return values and was incomplete. Enhanced to specify what is returned and clarified the dual-zone retrieval pattern for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicenetworking.services.connections.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Summary was missing. Description was vague about what 'allocated ranges' means in this context. Added clarity that these are IP address ranges, specified the Connection schema usage, and explained the input/output relationship for AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicenetworking.services.connections.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates the allocated ranges that are assigned to a connection.",
+      "summary_suggestion": "Update connection allocated IP ranges",
+      "description_suggestion": "Updates the allocated IP address ranges assigned to a private service connection. This operation modifies the Connection resource to change which IP ranges are reserved for the connection between producer and consumer VPC networks. Accepts a Connection object with updated range specifications and returns the modified Connection resource with the new allocations applied.",
+      "reasoning": "Summary was missing. Description was vague about what 'allocated ranges' means in this context. Added clarity that these are IP address ranges, specified the Connection schema usage, and explained the input/output relationship for AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicenetworking.services.connections.deleteConnection' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Summary was missing. Description lacked context about what a private service access connection is and the side effects of deletion. Added details about VPC peering, resource release, and service accessibility impact to help AI agents understand the operational consequences.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicenetworking.services.connections.deleteConnection",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes a private service access connection.",
+      "summary_suggestion": "Delete private service access connection",
+      "description_suggestion": "Deletes a private service access connection between a service producer and consumer VPC network. This operation removes the VPC Network Peering connection and associated network configurations. After deletion, the service will no longer be accessible through the private connection, and any allocated IP ranges will be released. Requires the connection resource name.",
+      "reasoning": "Summary was missing. Description lacked context about what a private service access connection is and the side effects of deletion. Added details about VPC peering, resource release, and service accessibility impact to help AI agents understand the operational consequences.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicenetworking.services.projects.global.networks.getVpcServiceControls' has semantic quality issues: vague_summary, missing_output_details. Summary was missing. Description was unclear about return values and used informal language ('find out'). Improved to be more precise about what state information is returned and clarified the purpose for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicenetworking.services.projects.global.networks.getVpcServiceControls",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Consumers use this method to find out the state of VPC Service Controls. The controls could be enabled or disabled for a connection.",
+      "summary_suggestion": "Get VPC Service Controls state",
+      "description_suggestion": "Retrieves the current state of VPC Service Controls for a service connection. This method allows service consumers to determine whether VPC Service Controls are enabled or disabled for a specific connection. Returns the VPC Service Controls configuration state indicating whether access controls are active for the connection.",
+      "reasoning": "Summary was missing. Description was unclear about return values and used informal language ('find out'). Improved to be more precise about what state information is returned and clarified the purpose for AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'servicenetworking.services.connections.list' has semantic quality issues: vague_summary, missing_output_details. Summary was missing. Description lacked details about return format and pagination. Added clarity about what Connection resources represent, the list return format, and pagination support to improve AI agent understanding of how to process results.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "servicenetworking.services.connections.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "List the private connections that are configured in a service consumer's VPC network.",
+      "summary_suggestion": "List private service connections",
+      "description_suggestion": "Lists all private service access connections configured in a service consumer's VPC network. This operation retrieves Connection resources that represent VPC Network Peering connections between the consumer and service producer networks. Returns a list of Connection objects with their current configuration and status. Supports pagination through parent resource specification.",
+      "reasoning": "Summary was missing. Description lacked details about return format and pagination. Added clarity about what Connection resources represent, the list return format, and pagination support to improve AI agent understanding of how to process results.",
+      "batch_index": 0
     }
   },
   {
@@ -11076,7 +11162,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 25 operations analyzed, 22 quality issues found",
+    "message": "Semantic analysis completed: 25 operations analyzed, 24 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -11088,7 +11174,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 25,
-      "total_issues_found": 22,
+      "total_issues_found": 24,
       "batches_processed": 4
     }
   }

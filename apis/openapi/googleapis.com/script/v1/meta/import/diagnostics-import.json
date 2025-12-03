@@ -4626,7 +4626,46 @@
         "character": 0
       }
     },
-    "message": "Operation 'script.scripts.run' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Both the summary and description were missing. The suggested summary and description provide clarity on the operation's purpose, required inputs, and expected outputs.",
+    "message": "Operation 'script.projects.versions.get' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_context. The operation lacks a summary entirely and the description is too minimal. It doesn't explain what a 'version' represents in this context (a snapshot), what parameters are required (scriptId, versionNumber), what is returned (Version resource), or the use case (accessing historical versions). Enhanced description adds domain context about versions being snapshots, clarifies required inputs, specifies the return type, and explains practical use cases for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "script.projects.versions.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Gets a version of a script project.",
+      "summary_suggestion": "Retrieve a specific script project version",
+      "description_suggestion": "Retrieves a specific version snapshot of a script project by version number. This operation returns the Version resource containing the script code and metadata for the specified version. Requires the script project ID and version number as parameters. Useful for accessing historical versions or comparing script changes across versions.",
+      "reasoning": "The operation lacks a summary entirely and the description is too minimal. It doesn't explain what a 'version' represents in this context (a snapshot), what parameters are required (scriptId, versionNumber), what is returned (Version resource), or the use case (accessing historical versions). Enhanced description adds domain context about versions being snapshots, clarifies required inputs, specifies the return type, and explains practical use cases for AI agent decision-making.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'script.scripts.run' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects, unclear_purpose, poor_ai_interpretability. Both summary and description are completely empty, making this operation impossible for AI agents to understand. The operation is critical for the API but lacks all essential information: what it does (executes functions), what inputs it expects (ExecutionRequest with function name and parameters), what it returns (Value resource with results), potential side effects (depends on function logic), and authentication requirements. Added comprehensive details covering purpose, inputs, outputs, side effects, and security context for proper AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4643,13 +4682,16 @@
         "vague_summary",
         "vague_description",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_side_effects",
+        "unclear_purpose",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "",
-      "summary_suggestion": "Execute a script with specified parameters.",
-      "description_suggestion": "Executes a script identified by the scriptId with the provided parameters. Requires authentication. Returns the execution result, including any output values or error messages.",
-      "reasoning": "Both the summary and description were missing. The suggested summary and description provide clarity on the operation's purpose, required inputs, and expected outputs.",
+      "summary_suggestion": "Execute a script function with specified parameters",
+      "description_suggestion": "Executes a specified function in a script project and returns the result. Accepts an ExecutionRequest containing the function name, parameters, and optional authentication context. Returns a Value resource representing the function's return value or execution error. This operation triggers immediate script execution and may have side effects depending on the executed function (e.g., modifying spreadsheets, sending emails). Requires the script project ID and appropriate OAuth2 authentication.",
+      "reasoning": "Both summary and description are completely empty, making this operation impossible for AI agents to understand. The operation is critical for the API but lacks all essential information: what it does (executes functions), what inputs it expects (ExecutionRequest with function name and parameters), what it returns (Value resource with results), potential side effects (depends on function logic), and authentication requirements. Added comprehensive details covering purpose, inputs, outputs, side effects, and security context for proper AI agent interpretability.",
       "batch_index": 2
     }
   },
@@ -4664,7 +4706,254 @@
         "character": 0
       }
     },
-    "message": "Operation 'script.projects.deployments.create' has semantic quality issues: vague_summary, missing_context. The current summary is missing. The description lacks details about authentication and the return value.",
+    "message": "Operation 'script.processes.list' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description lacks context about authentication scope (user-specific), filtering/pagination capabilities, and what constitutes a 'process' in this API. Added clarity about process types and filtering support for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "script.processes.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "List information about processes made by or on behalf of a user, such as process type and current status.",
+      "summary_suggestion": "List user's script execution processes",
+      "description_suggestion": "Retrieves a list of script execution processes initiated by or on behalf of the authenticated user. Returns process information including type (e.g., trigger, manual execution, API call), current status, and execution details. Supports filtering and pagination through query parameters.",
+      "reasoning": "Missing summary entirely. Description lacks context about authentication scope (user-specific), filtering/pagination capabilities, and what constitutes a 'process' in this API. Added clarity about process types and filtering support for better AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'script.processes.listScriptProcesses' has semantic quality issues: vague_summary, missing_context, missing_input_details. Missing summary. Description doesn't clarify that it requires a specific script ID as input, or mention filtering/pagination capabilities. Improved to specify the required scriptId parameter and distinguish this from the user-scoped list operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "script.processes.listScriptProcesses",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "List information about a script's executed processes, such as process type and current status.",
+      "summary_suggestion": "List processes for a specific script",
+      "description_suggestion": "Retrieves a list of execution processes for a specific Apps Script project. Returns process information including type (e.g., trigger, manual execution, API call), current status, and execution details. Requires the script ID as input. Supports filtering and pagination through query parameters.",
+      "reasoning": "Missing summary. Description doesn't clarify that it requires a specific script ID as input, or mention filtering/pagination capabilities. Improved to specify the required scriptId parameter and distinguish this from the user-scoped list operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'script.projects.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description doesn't explain what the operation returns or what input is expected (CreateProjectRequest). Added details about request structure and response content to help AI agents understand the complete operation flow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "script.projects.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new, empty script project with no script files and a base manifest file.",
+      "summary_suggestion": "Create a new Apps Script project",
+      "description_suggestion": "Creates a new, empty Apps Script project with no script files and a base manifest file. Accepts a CreateProjectRequest containing the project title. Returns the newly created Project resource with metadata including the assigned scriptId, creation timestamp, and initial manifest.",
+      "reasoning": "Missing summary. Description doesn't explain what the operation returns or what input is expected (CreateProjectRequest). Added details about request structure and response content to help AI agents understand the complete operation flow.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'script.projects.get' has semantic quality issues: vague_summary. Missing summary. Description is clear and complete - it explains the purpose, required input (scriptId), and return type (metadata). Only summary suggestion needed.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "script.projects.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Gets a script project's metadata.",
+      "summary_suggestion": "Retrieve script project metadata",
+      "reasoning": "Missing summary. Description is clear and complete - it explains the purpose, required input (scriptId), and return type (metadata). Only summary suggestion needed.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'script.projects.getContent' has semantic quality issues: vague_summary. Missing summary. Description is clear and specific - it explains what content is returned (code source and metadata for each file) and the required input (scriptId). Only summary suggestion needed.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "script.projects.getContent",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the content of the script project, including the code source and metadata for each script file.",
+      "summary_suggestion": "Retrieve script project content and files",
+      "reasoning": "Missing summary. Description is clear and specific - it explains what content is returned (code source and metadata for each file) and the required input (scriptId). Only summary suggestion needed.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'script.projects.updateContent' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is detailed but lacks clarity about the destructive nature (clears all files) and doesn't specify the return value. Reorganized for clarity and added explicit warning about file clearing and return type for better AI agent understanding of side effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "script.projects.updateContent",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates the content of the specified script project. This content is stored as the HEAD version, and is used when the script is executed as a trigger, in the script editor, in add-on preview mode, or as a web app or Apps Script API in development mode. This clears all the existing files in the project.",
+      "summary_suggestion": "Update script project content and files",
+      "description_suggestion": "Updates the content of the specified Apps Script project by replacing all script files with the provided Content. The updated content is stored as the HEAD version and used for trigger execution, script editor, add-on preview, web app, and development mode API calls. Warning: This operation clears all existing files in the project. Returns the updated Content resource.",
+      "reasoning": "Missing summary. Description is detailed but lacks clarity about the destructive nature (clears all files) and doesn't specify the return value. Reorganized for clarity and added explicit warning about file clearing and return type for better AI agent understanding of side effects.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'script.projects.deployments.list' has semantic quality issues: vague_summary. Missing summary. Description is clear and concise - it explains the purpose and required input (scriptId). Only summary suggestion needed.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "script.projects.deployments.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the deployments of an Apps Script project.",
+      "summary_suggestion": "List script project deployments",
+      "reasoning": "Missing summary. Description is clear and concise - it explains the purpose and required input (scriptId). Only summary suggestion needed.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'script.projects.deployments.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks detail about what DeploymentConfig contains, what the response includes, and the purpose of deployments. Added context about inputs, outputs, and the operational effect for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4679,13 +4968,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Creates a deployment of an Apps Script project.",
-      "summary_suggestion": "Create a new deployment for an Apps Script project.",
-      "description_suggestion": "Creates a new deployment of an Apps Script project with the specified configuration. Requires authentication and returns the newly created deployment details.",
-      "reasoning": "The current summary is missing. The description lacks details about authentication and the return value.",
+      "summary_suggestion": "Create a new Apps Script project deployment",
+      "description_suggestion": "Creates a new deployment of an Apps Script project. Accepts a DeploymentConfig object specifying the deployment configuration (e.g., version, description). Returns a Deployment resource containing the deployment ID, creation timestamp, and configuration details. The deployment makes a specific version of the script available for execution.",
+      "reasoning": "Missing summary entirely. Description lacks detail about what DeploymentConfig contains, what the response includes, and the purpose of deployments. Added context about inputs, outputs, and the operational effect for AI agent clarity.",
       "batch_index": 1
     }
   },
@@ -4700,7 +4990,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'script.projects.deployments.delete' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing. The description lacks details about authentication and the side effects of the operation.",
+    "message": "Operation 'script.projects.deployments.delete' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary. Description lacks information about required parameters, side effects (deployment becomes unavailable), and the irreversible nature of deletion. Added these details to help AI agents understand the consequences of this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4715,13 +5005,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_context",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Deletes a deployment of an Apps Script project.",
-      "summary_suggestion": "Delete an existing deployment of an Apps Script project.",
-      "description_suggestion": "Deletes a specified deployment of an Apps Script project. Requires authentication and confirms the deletion. The operation will remove the deployment and any associated resources.",
-      "reasoning": "The current summary is missing. The description lacks details about authentication and the side effects of the operation.",
+      "summary_suggestion": "Delete an Apps Script project deployment",
+      "description_suggestion": "Deletes a deployment of an Apps Script project. Requires the script ID and deployment ID. Removes the deployment, making that specific deployment version no longer available for execution. Returns an empty response on success. This action cannot be undone.",
+      "reasoning": "Missing summary. Description lacks information about required parameters, side effects (deployment becomes unavailable), and the irreversible nature of deletion. Added these details to help AI agents understand the consequences of this operation.",
       "batch_index": 1
     }
   },
@@ -4736,7 +5027,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'script.projects.deployments.get' has semantic quality issues: vague_summary, missing_context. The current summary is missing. The description lacks details about authentication and the return value.",
+    "message": "Operation 'script.projects.deployments.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description doesn't specify what information is returned in the Deployment resource. Added details about response contents to improve AI agent understanding of available deployment metadata.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4751,13 +5042,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets a deployment of an Apps Script project.",
-      "summary_suggestion": "Retrieve details of an existing Apps Script project deployment.",
-      "description_suggestion": "Retrieves the details of a specified deployment of an Apps Script project. Requires authentication and returns the deployment information.",
-      "reasoning": "The current summary is missing. The description lacks details about authentication and the return value.",
+      "summary_suggestion": "Retrieve an Apps Script project deployment",
+      "description_suggestion": "Retrieves a specific deployment of an Apps Script project. Requires the script ID and deployment ID. Returns a Deployment resource containing the deployment configuration, version information, creation timestamp, and deployment status.",
+      "reasoning": "Missing summary. Description doesn't specify what information is returned in the Deployment resource. Added details about response contents to improve AI agent understanding of available deployment metadata.",
       "batch_index": 1
     }
   },
@@ -4772,7 +5063,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'script.projects.deployments.update' has semantic quality issues: vague_summary, missing_context. The current summary is missing. The description lacks details about authentication and the return value.",
+    "message": "Operation 'script.projects.deployments.update' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks information about what can be updated via UpdateDeploymentRequest and what the response contains. Added specifics about modifiable fields and response content for better AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4787,13 +5078,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Updates a deployment of an Apps Script project.",
-      "summary_suggestion": "Update an existing deployment of an Apps Script project.",
-      "description_suggestion": "Updates a specified deployment of an Apps Script project with the provided configuration. Requires authentication and returns the updated deployment details.",
-      "reasoning": "The current summary is missing. The description lacks details about authentication and the return value.",
+      "summary_suggestion": "Update an Apps Script project deployment",
+      "description_suggestion": "Updates a deployment of an Apps Script project. Requires the script ID and deployment ID. Accepts an UpdateDeploymentRequest object to modify deployment configuration (e.g., description, version). Returns the updated Deployment resource with the new configuration details.",
+      "reasoning": "Missing summary. Description lacks information about what can be updated via UpdateDeploymentRequest and what the response contains. Added specifics about modifiable fields and response content for better AI agent interpretability.",
       "batch_index": 1
     }
   },
@@ -4808,7 +5100,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'script.projects.getMetrics' has semantic quality issues: vague_summary, missing_context. The current summary is missing. The description lacks details about authentication and the return value.",
+    "message": "Operation 'script.projects.getMetrics' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description mentions what metrics are available but lacks information about input parameters (date range filtering) and the structure of returned metrics data. Added parameter context and output details for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4823,13 +5115,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Get metrics data for scripts, such as number of executions and active users.",
-      "summary_suggestion": "Retrieve metrics for an Apps Script project.",
-      "description_suggestion": "Retrieves the metrics data for a specified Apps Script project, including the number of executions and active users. Requires authentication and returns the metrics data.",
-      "reasoning": "The current summary is missing. The description lacks details about authentication and the return value.",
+      "summary_suggestion": "Retrieve script execution and usage metrics",
+      "description_suggestion": "Retrieves metrics data for an Apps Script project, including execution counts and active user statistics. Accepts optional parameters to filter metrics by date range and metric type. Returns aggregated metrics showing script performance and usage patterns over the specified period.",
+      "reasoning": "Missing summary. Description mentions what metrics are available but lacks information about input parameters (date range filtering) and the structure of returned metrics data. Added parameter context and output details for AI agent clarity.",
       "batch_index": 1
     }
   },
@@ -4844,7 +5137,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'script.projects.versions.list' has semantic quality issues: vague_summary, missing_context. The current summary is missing. The description lacks details about authentication and the return value.",
+    "message": "Operation 'script.projects.versions.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description doesn't explain pagination support or what the response structure contains. Added details about pagination parameters and response format to help AI agents understand how to retrieve and iterate through versions.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4859,13 +5152,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "List the versions of a script project.",
-      "summary_suggestion": "List all versions of an Apps Script project.",
-      "description_suggestion": "Lists all versions of a specified Apps Script project. Requires authentication and returns a list of version details.",
-      "reasoning": "The current summary is missing. The description lacks details about authentication and the return value.",
+      "summary_suggestion": "List all versions of a script project",
+      "description_suggestion": "Lists all versions of a script project. Accepts optional pagination parameters to control the number of results and offset. Returns a ListVersionsResponse containing an array of Version resources, each representing a snapshot of the project code at a specific point in time.",
+      "reasoning": "Missing summary. Description doesn't explain pagination support or what the response structure contains. Added details about pagination parameters and response format to help AI agents understand how to retrieve and iterate through versions.",
       "batch_index": 1
     }
   },
@@ -4880,7 +5173,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'script.projects.versions.create' has semantic quality issues: vague_summary, missing_context. The current summary is missing. The description lacks details about authentication and the return value.",
+    "message": "Operation 'script.projects.versions.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description explains immutability and auto-numbering but lacks clarity about what the Version request object should contain and what the response includes. Added details about request structure, response contents, and immutability constraints for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4895,13 +5188,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Creates a new immutable version using the current code, with a unique version number.",
-      "summary_suggestion": "Create a new version of an Apps Script project.",
-      "description_suggestion": "Creates a new immutable version of an Apps Script project using the current code, with a unique version number. Requires authentication and returns the newly created version details.",
-      "reasoning": "The current summary is missing. The description lacks details about authentication and the return value.",
+      "summary_suggestion": "Create a new immutable version snapshot",
+      "description_suggestion": "Creates a new immutable version of a script project using the current code. Accepts a Version object (typically with a description). Automatically assigns a unique version number and captures the current project state as a read-only snapshot. Returns the created Version resource containing the version number, creation timestamp, and description. Versions cannot be modified after creation.",
+      "reasoning": "Missing summary. Description explains immutability and auto-numbering but lacks clarity about what the Version request object should contain and what the response includes. Added details about request structure, response contents, and immutability constraints for better AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -4916,7 +5210,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 16 operations analyzed, 8 quality issues found",
+    "message": "Semantic analysis completed: 16 operations analyzed, 16 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -4928,7 +5222,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 16,
-      "total_issues_found": 8,
+      "total_issues_found": 16,
       "batches_processed": 3
     }
   }

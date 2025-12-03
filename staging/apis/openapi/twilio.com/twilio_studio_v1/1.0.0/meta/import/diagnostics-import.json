@@ -4352,7 +4352,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListFlow' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are too vague. Added context to specify that it retrieves Studio Flows and described the return value.",
+    "message": "Operation 'ListEngagement' has semantic quality issues: missing_input_details, missing_output_details. Original description lacks details about pagination support, filtering capabilities, and response structure. Added information about pagination, return format, and status values to help AI agents understand available options and response structure.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4363,19 +4363,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "ListFlow",
+      "operation_id": "ListEngagement",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
-      "current_summary": "Retrieve a list of all Flows.",
-      "current_description": "Retrieve a list of all Flows.",
-      "summary_suggestion": "Retrieve a list of all Studio Flows.",
-      "description_suggestion": "Retrieves a list of all Studio Flows available in the current account. Returns a list of Flow objects with their respective SIDs and other metadata.",
-      "reasoning": "The current summary and description are too vague. Added context to specify that it retrieves Studio Flows and described the return value.",
-      "batch_index": 2
+      "current_summary": "Retrieve a list of all Engagements for the Flow.",
+      "current_description": "Retrieve a list of all Engagements for the Flow.",
+      "summary_suggestion": "List all Engagements for a Flow",
+      "description_suggestion": "Retrieves a paginated list of all Engagements for the specified Flow. Supports filtering and pagination parameters. Returns an array of Engagement objects with their current status (active or ended) and metadata.",
+      "reasoning": "Original description lacks details about pagination support, filtering capabilities, and response structure. Added information about pagination, return format, and status values to help AI agents understand available options and response structure.",
+      "batch_index": 0
     }
   },
   {
@@ -4389,7 +4388,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchFlow' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context to specify that it retrieves a Studio Flow and described the return value.",
+    "message": "Operation 'CreateEngagement' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Description is too minimal. Added details about required parameters (contact information), optional context data, return value structure, and the prerequisite that Flow must be published. This helps AI agents understand what inputs are needed and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4400,52 +4399,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "FetchFlow",
+      "operation_id": "CreateEngagement",
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Retrieve a specific Flow.",
-      "current_description": "Retrieve a specific Flow.",
-      "description_suggestion": "Retrieves a specific Studio Flow by its unique SID. Returns a Flow object with detailed metadata.",
-      "reasoning": "The current description is too vague. Added context to specify that it retrieves a Studio Flow and described the return value.",
-      "batch_index": 2
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeleteFlow' has semantic quality issues: vague_description, missing_side_effects. The current description is too vague. Added context to specify that it deletes a Studio Flow and described the side effects and return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteFlow",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
         "missing_side_effects"
       ],
-      "current_summary": "Delete a specific Flow.",
-      "current_description": "Delete a specific Flow.",
-      "description_suggestion": "Deletes a specific Studio Flow by its unique SID. The Flow is permanently removed from the account. Returns a success message if the deletion is successful.",
-      "reasoning": "The current description is too vague. Added context to specify that it deletes a Studio Flow and described the side effects and return value.",
-      "batch_index": 2
+      "current_summary": "Triggers a new Engagement for the Flow",
+      "current_description": "Triggers a new Engagement for the Flow",
+      "description_suggestion": "Initiates a new Engagement for the specified Flow, starting the flow execution with the provided parameters. Accepts contact information and optional context data. Returns the created Engagement object with status 'active' and a unique Engagement SID. The Flow must be in 'published' status to create Engagements.",
+      "reasoning": "Description is too minimal. Added details about required parameters (contact information), optional context data, return value structure, and the prerequisite that Flow must be published. This helps AI agents understand what inputs are needed and what to expect.",
+      "batch_index": 0
     }
   },
   {
@@ -4459,7 +4425,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListStep' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context to specify that it retrieves Steps for an Engagement in a Studio Flow and described the return value.",
+    "message": "Operation 'FetchEngagement' has semantic quality issues: vague_description, missing_output_details. Original description lacks specificity about what information is returned. Added details about the return structure including status values and key fields to improve AI agent understanding of the response.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4470,17 +4436,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "ListStep",
+      "operation_id": "FetchEngagement",
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_output_details"
       ],
-      "current_summary": "Retrieve a list of all Steps for an Engagement.",
-      "current_description": "Retrieve a list of all Steps for an Engagement.",
-      "description_suggestion": "Retrieves a list of all Steps for a specific Engagement in a Studio Flow. Returns a list of Step objects with their respective SIDs and other metadata.",
-      "reasoning": "The current description is too vague. Added context to specify that it retrieves Steps for an Engagement in a Studio Flow and described the return value.",
-      "batch_index": 2
+      "current_summary": "Retrieve an Engagement",
+      "current_description": "Retrieve an Engagement",
+      "summary_suggestion": "Fetch a specific Engagement",
+      "description_suggestion": "Retrieves detailed information about a specific Engagement by its SID. Returns the Engagement object including its current status (active or ended), creation timestamp, and associated metadata.",
+      "reasoning": "Original description lacks specificity about what information is returned. Added details about the return structure including status values and key fields to improve AI agent understanding of the response.",
+      "batch_index": 0
     }
   },
   {
@@ -4494,7 +4461,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchStep' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context to specify that it retrieves a Step within an Engagement in a Studio Flow and described the return value.",
+    "message": "Operation 'FetchEngagementContext' has semantic quality issues: vague_description, missing_output_details, missing_context. Description lacks clarity about what 'context' means in this domain. Added explanation that context includes variables and state data, and clarified the return structure to help AI agents understand the purpose and response format.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4505,17 +4472,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "FetchStep",
+      "operation_id": "FetchEngagementContext",
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_output_details",
         "missing_context"
       ],
-      "current_summary": "Retrieve a Step.",
-      "current_description": "Retrieve a Step.",
-      "description_suggestion": "Retrieves a specific Step within an Engagement in a Studio Flow by its unique SID. Returns a Step object with detailed metadata.",
-      "reasoning": "The current description is too vague. Added context to specify that it retrieves a Step within an Engagement in a Studio Flow and described the return value.",
-      "batch_index": 2
+      "current_summary": "Retrieve the most recent context for an Engagement.",
+      "current_description": "Retrieve the most recent context for an Engagement.",
+      "description_suggestion": "Retrieves the most recent execution context for the specified Engagement, including variables, state, and data accumulated during the Engagement's execution. Returns a context object containing key-value pairs representing the current state of the Engagement.",
+      "reasoning": "Description lacks clarity about what 'context' means in this domain. Added explanation that context includes variables and state data, and clarified the return structure to help AI agents understand the purpose and response format.",
+      "batch_index": 0
     }
   },
   {
@@ -4529,7 +4497,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchStepContext' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context to specify that it retrieves the context for an Engagement Step within a Studio Flow and described the return value.",
+    "message": "Operation 'ListExecution' has semantic quality issues: missing_input_details, missing_output_details. Original description lacks information about available filters and pagination. Added details about status filtering options and pagination support to help AI agents understand what query options are available and what to expect in the response.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4540,17 +4508,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "FetchStepContext",
+      "operation_id": "ListExecution",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
-      "current_summary": "Retrieve the context for an Engagement Step.",
-      "current_description": "Retrieve the context for an Engagement Step.",
-      "description_suggestion": "Retrieves the context for an Engagement Step within a Studio Flow by its unique SID. Returns a Step Context object with detailed metadata.",
-      "reasoning": "The current description is too vague. Added context to specify that it retrieves the context for an Engagement Step within a Studio Flow and described the return value.",
-      "batch_index": 2
+      "current_summary": "Retrieve a list of all Executions for the Flow.",
+      "current_description": "Retrieve a list of all Executions for the Flow.",
+      "summary_suggestion": "List all Executions for a Flow",
+      "description_suggestion": "Retrieves a paginated list of all Executions for the specified Flow. Supports filtering by status (active or ended) and pagination parameters. Returns an array of Execution objects with their current status and metadata.",
+      "reasoning": "Original description lacks information about available filters and pagination. Added details about status filtering options and pagination support to help AI agents understand what query options are available and what to expect in the response.",
+      "batch_index": 0
     }
   },
   {
@@ -4564,7 +4533,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchExecution' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are too vague. The improved version provides more context about what the operation retrieves and its purpose.",
+    "message": "Operation 'CreateExecution' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Description is too minimal and lacks actionable details. Added information about optional context parameters, return value structure including status, and the prerequisite that Flow must be published. This enables AI agents to understand required setup and expected outcomes.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateExecution",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Triggers a new Execution for the Flow",
+      "current_description": "Triggers a new Execution for the Flow",
+      "description_suggestion": "Initiates a new Execution for the specified Flow, starting the flow logic with the provided parameters. Accepts optional context data to initialize the Execution environment. Returns the created Execution object with status 'active' and a unique Execution SID. The Flow must be in 'published' status to create Executions.",
+      "reasoning": "Description is too minimal and lacks actionable details. Added information about optional context parameters, return value structure including status, and the prerequisite that Flow must be published. This enables AI agents to understand required setup and expected outcomes.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchExecution' has semantic quality issues: vague_summary, vague_description, missing_output_details. Original description is too minimal. Enhanced to clarify what is being retrieved (specific execution for a flow), what is returned (execution object with status and metadata), and what parameters are required. This helps AI agents understand the operation's scope and when to use it.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4580,13 +4586,13 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "Retrieve an Execution",
       "current_description": "Retrieve an Execution",
-      "summary_suggestion": "Retrieve details of a specific execution",
-      "description_suggestion": "Retrieves the details of a specific execution identified by FlowSid and ExecutionSid. Returns the execution object with its status, context, and related steps.",
-      "reasoning": "The current summary and description are too vague. The improved version provides more context about what the operation retrieves and its purpose.",
+      "summary_suggestion": "Fetch a specific Flow Execution",
+      "description_suggestion": "Retrieves a specific Execution for a given Flow. Returns the Execution object with its current status (active or ended), timestamps, and associated metadata. Requires the Flow SID and Execution SID as path parameters.",
+      "reasoning": "Original description is too minimal. Enhanced to clarify what is being retrieved (specific execution for a flow), what is returned (execution object with status and metadata), and what parameters are required. This helps AI agents understand the operation's scope and when to use it.",
       "batch_index": 1
     }
   },
@@ -4601,44 +4607,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteExecution' has semantic quality issues: vague_summary, vague_description, missing_side_effects. The current summary and description are vague. The improved version clarifies the action's purpose and side effects.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteExecution",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description",
-        "missing_side_effects"
-      ],
-      "current_summary": "Delete the Execution and all Steps relating to it.",
-      "current_description": "Delete the Execution and all Steps relating to it.",
-      "summary_suggestion": "Delete an execution and its related steps",
-      "description_suggestion": "Deletes the specified execution and all steps associated with it. This action is irreversible and results in the removal of all related data.",
-      "reasoning": "The current summary and description are vague. The improved version clarifies the action's purpose and side effects.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'UpdateExecution' has semantic quality issues: vague_summary, vague_description, missing_input_details. The current summary and description are too vague. The improved version provides more context about the input parameters and the action's purpose.",
+    "message": "Operation 'UpdateExecution' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original description is narrow and doesn't explain the effect of the operation. Enhanced to clarify that this terminates execution (not just a status update), what parameters are needed, and what is returned. Better terminology ('terminate' vs 'update status') improves AI agent understanding of the operation's purpose.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4653,14 +4622,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "Update the status of an Execution to `ended`.",
       "current_description": "Update the status of an Execution to `ended`.",
-      "summary_suggestion": "Update the status of an execution",
-      "description_suggestion": "Updates the status of the specified execution to `ended`. Requires authentication and may include additional parameters for partial updates.",
-      "reasoning": "The current summary and description are too vague. The improved version provides more context about the input parameters and the action's purpose.",
+      "summary_suggestion": "Terminate a Flow Execution",
+      "description_suggestion": "Terminates an active Execution by updating its status to 'ended'. This operation marks the Execution as complete and stops any further processing. Requires the Flow SID and Execution SID as path parameters. Returns the updated Execution object with the new 'ended' status.",
+      "reasoning": "Original description is narrow and doesn't explain the effect of the operation. Enhanced to clarify that this terminates execution (not just a status update), what parameters are needed, and what is returned. Better terminology ('terminate' vs 'update status') improves AI agent understanding of the operation's purpose.",
       "batch_index": 1
     }
   },
@@ -4675,7 +4644,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchExecutionContext' has semantic quality issues: vague_summary, vague_description. The current summary and description are too vague. The improved version provides more context about what the operation retrieves and its purpose.",
+    "message": "Operation 'FetchExecutionContext' has semantic quality issues: vague_description, missing_output_details, missing_context. Summary is adequate but description lacks clarity about what 'context' means in this domain. Enhanced to explain that context contains state and variables, clarifies it's the accumulated data from execution lifecycle, and specifies the return structure. This helps AI agents understand what data they'll receive.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4689,14 +4658,14 @@
       "operation_id": "FetchExecutionContext",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "Retrieve the most recent context for an Execution.",
       "current_description": "Retrieve the most recent context for an Execution.",
-      "summary_suggestion": "Retrieve the context for a specific execution",
-      "description_suggestion": "Retrieves the most recent context for the specified execution, including any variables or data associated with the execution.",
-      "reasoning": "The current summary and description are too vague. The improved version provides more context about what the operation retrieves and its purpose.",
+      "description_suggestion": "Retrieves the execution context object containing the most recent state and variables for a given Execution. The context includes all data accumulated during the Execution's lifecycle. Requires the Flow SID and Execution SID as path parameters. Returns an execution_context object with 5 properties including context data.",
+      "reasoning": "Summary is adequate but description lacks clarity about what 'context' means in this domain. Enhanced to explain that context contains state and variables, clarifies it's the accumulated data from execution lifecycle, and specifies the return structure. This helps AI agents understand what data they'll receive.",
       "batch_index": 1
     }
   },
@@ -4711,7 +4680,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListExecutionStep' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are too vague. The improved version provides more context about what the operation retrieves and its purpose.",
+    "message": "Operation 'ListExecutionStep' has semantic quality issues: vague_description, missing_output_details. Summary is clear but description lacks detail about pagination, what steps represent, and return structure. Enhanced to clarify that results are paginated, explain what steps are (nodes in flow), mention query parameter support, and describe the return format. Improves AI agent's ability to use pagination and understand the data structure.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4725,15 +4694,13 @@
       "operation_id": "ListExecutionStep",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "Retrieve a list of all Steps for an Execution.",
       "current_description": "Retrieve a list of all Steps for an Execution.",
-      "summary_suggestion": "List all steps for a specific execution",
-      "description_suggestion": "Retrieves a list of all steps associated with the specified execution, including details such as step status and context.",
-      "reasoning": "The current summary and description are too vague. The improved version provides more context about what the operation retrieves and its purpose.",
+      "description_suggestion": "Retrieves a paginated list of all Steps executed within a specific Execution. Each Step represents a node traversed in the Flow. Supports filtering and pagination through query parameters. Returns an array of execution_step objects containing step details, timestamps, and context data.",
+      "reasoning": "Summary is clear but description lacks detail about pagination, what steps represent, and return structure. Enhanced to clarify that results are paginated, explain what steps are (nodes in flow), mention query parameter support, and describe the return format. Improves AI agent's ability to use pagination and understand the data structure.",
       "batch_index": 1
     }
   },
@@ -4748,7 +4715,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchExecutionStep' has semantic quality issues: vague_summary, vague_description. The current summary and description are too vague. The improved version provides more context about what the operation retrieves and its purpose.",
+    "message": "Operation 'FetchExecutionStep' has semantic quality issues: vague_summary, vague_description, missing_output_details. Original description is too generic. Enhanced to clarify what a Step is (node/action in flow), what parameters are required (flow, execution, step SIDs), and what is returned. Better terminology and context help AI agents understand when to use this operation and what data they'll receive.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4763,13 +4730,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_output_details"
       ],
       "current_summary": "Retrieve a Step.",
       "current_description": "Retrieve a Step.",
-      "summary_suggestion": "Retrieve details of a specific execution step",
-      "description_suggestion": "Retrieves the details of a specific step within the specified execution, including its status and context.",
-      "reasoning": "The current summary and description are too vague. The improved version provides more context about what the operation retrieves and its purpose.",
+      "summary_suggestion": "Fetch a specific Execution Step",
+      "description_suggestion": "Retrieves a specific Step from an Execution. A Step represents a single node or action executed within a Flow. Returns the execution_step object containing step details, execution context, timestamps, and the result of the step's processing.",
+      "reasoning": "Original description is too generic. Enhanced to clarify what a Step is (node/action in flow), what parameters are required (flow, execution, step SIDs), and what is returned. Better terminology and context help AI agents understand when to use this operation and what data they'll receive.",
       "batch_index": 1
     }
   },
@@ -4784,7 +4752,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchExecutionStepContext' has semantic quality issues: vague_summary, vague_description. The current summary and description are too vague. The improved version provides more context about what the operation retrieves and its purpose.",
+    "message": "Operation 'FetchExecutionStepContext' has semantic quality issues: vague_description, missing_output_details, missing_context. Summary is adequate but description lacks clarity about what step context contains and how it differs from execution context. Enhanced to explain that step context contains variables and state up to that specific step, clarifies the required parameters, and specifies the return structure. Helps AI agents understand the scope and purpose of this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4798,14 +4766,14 @@
       "operation_id": "FetchExecutionStepContext",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
-        "vague_description"
+        "vague_description",
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "Retrieve the context for an Execution Step.",
       "current_description": "Retrieve the context for an Execution Step.",
-      "summary_suggestion": "Retrieve the context for a specific execution step",
-      "description_suggestion": "Retrieves the context for a specific step within the specified execution, including any variables or data associated with the step.",
-      "reasoning": "The current summary and description are too vague. The improved version provides more context about what the operation retrieves and its purpose.",
+      "description_suggestion": "Retrieves the execution context object for a specific Step within an Execution. The step context contains variables, state, and data accumulated up to and including that Step's execution. Requires the Flow SID, Execution SID, and Step SID as path parameters. Returns an execution_step_context object with step-specific state information.",
+      "reasoning": "Summary is adequate but description lacks clarity about what step context contains and how it differs from execution context. Enhanced to explain that step context contains variables and state up to that specific step, clarifies the required parameters, and specifies the return structure. Helps AI agents understand the scope and purpose of this operation.",
       "batch_index": 1
     }
   },
@@ -4820,7 +4788,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListEngagement' has semantic quality issues: vague_description, missing_context. The current description lacks specificity and context. The suggested description provides more details about the operation's purpose and expected inputs.",
+    "message": "Operation 'ListFlow' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Original description is repetitive and lacks detail. Enhanced version clarifies that results are paginated, mentions query parameter support for filtering, specifies return format, and includes relevant Flow properties (status values from API context). This helps AI agents understand pagination requirements and available filtering options.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4831,18 +4799,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "ListEngagement",
+      "operation_id": "ListFlow",
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
-      "current_summary": "Retrieve a list of all Engagements for the Flow.",
-      "current_description": "Retrieve a list of all Engagements for the Flow.",
-      "summary_suggestion": "Retrieve a list of all Engagements for a specific Flow.",
-      "description_suggestion": "Retrieves a list of all Engagements for a specified Flow. Includes details such as Engagement SID, status, and timestamps. Requires the Flow SID as a parameter.",
-      "reasoning": "The current description lacks specificity and context. The suggested description provides more details about the operation's purpose and expected inputs.",
-      "batch_index": 0
+      "current_summary": "Retrieve a list of all Flows.",
+      "current_description": "Retrieve a list of all Flows.",
+      "summary_suggestion": "List all Studio Flows",
+      "description_suggestion": "Retrieves a paginated list of all Studio Flows accessible to the authenticated account. Supports filtering and pagination via query parameters. Returns an array of Flow objects containing metadata including Sid, friendly name, status (draft or published), and timestamps.",
+      "reasoning": "Original description is repetitive and lacks detail. Enhanced version clarifies that results are paginated, mentions query parameter support for filtering, specifies return format, and includes relevant Flow properties (status values from API context). This helps AI agents understand pagination requirements and available filtering options.",
+      "batch_index": 2
     }
   },
   {
@@ -4856,7 +4825,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateEngagement' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context. The suggested description provides more details about the operation's purpose, required inputs, and the expected output.",
+    "message": "Operation 'FetchFlow' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Original description lacks specificity about required inputs and outputs. Enhanced version clarifies the Sid parameter requirement, explains what 'specific' means, and details the returned Flow object properties including status values from the API context. This enables AI agents to understand what identifier is needed and what data will be returned.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4867,18 +4836,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "CreateEngagement",
+      "operation_id": "FetchFlow",
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
-      "current_summary": "Triggers a new Engagement for the Flow",
-      "current_description": "Triggers a new Engagement for the Flow",
-      "summary_suggestion": "Create a new Engagement for the Flow.",
-      "description_suggestion": "Creates a new Engagement for the specified Flow. Requires the Flow SID and Engagement details. Returns the Engagement SID and other details.",
-      "reasoning": "The current description is too vague and lacks context. The suggested description provides more details about the operation's purpose, required inputs, and the expected output.",
-      "batch_index": 0
+      "current_summary": "Retrieve a specific Flow.",
+      "current_description": "Retrieve a specific Flow.",
+      "summary_suggestion": "Fetch a specific Studio Flow",
+      "description_suggestion": "Retrieves a specific Studio Flow by its Sid (unique identifier). Returns the complete Flow object including metadata such as friendly name, status (draft or published), definition, and timestamps. Requires the Flow Sid as a path parameter.",
+      "reasoning": "Original description lacks specificity about required inputs and outputs. Enhanced version clarifies the Sid parameter requirement, explains what 'specific' means, and details the returned Flow object properties including status values from the API context. This enables AI agents to understand what identifier is needed and what data will be returned.",
+      "batch_index": 2
     }
   },
   {
@@ -4892,7 +4862,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchEngagement' has semantic quality issues: vague_description, missing_context. The current description lacks specificity and context. The suggested description provides more details about the operation's purpose, required inputs, and the expected output.",
+    "message": "Operation 'DeleteFlow' has semantic quality issues: vague_description, missing_input_details, missing_side_effects. Original description omits critical information about side effects and permanence. Enhanced version clarifies the Sid parameter requirement, specifies the response code, emphasizes irreversibility, and explains what gets deleted. This helps AI agents understand the destructive nature of this operation and when it should be used.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4903,18 +4873,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "FetchEngagement",
+      "operation_id": "DeleteFlow",
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_input_details",
+        "missing_side_effects"
       ],
-      "current_summary": "Retrieve an Engagement",
-      "current_description": "Retrieve an Engagement",
-      "summary_suggestion": "Retrieve details of a specific Engagement for the Flow.",
-      "description_suggestion": "Retrieves details of a specific Engagement for the specified Flow. Requires the Flow SID and Engagement SID as parameters. Returns Engagement details including status and context.",
-      "reasoning": "The current description lacks specificity and context. The suggested description provides more details about the operation's purpose, required inputs, and the expected output.",
-      "batch_index": 0
+      "current_summary": "Delete a specific Flow.",
+      "current_description": "Delete a specific Flow.",
+      "summary_suggestion": "Delete a Studio Flow",
+      "description_suggestion": "Permanently deletes a specific Studio Flow identified by its Sid. This operation removes the Flow definition and all associated metadata. Requires the Flow Sid as a path parameter. Returns HTTP 204 No Content on successful deletion. This action cannot be undone.",
+      "reasoning": "Original description omits critical information about side effects and permanence. Enhanced version clarifies the Sid parameter requirement, specifies the response code, emphasizes irreversibility, and explains what gets deleted. This helps AI agents understand the destructive nature of this operation and when it should be used.",
+      "batch_index": 2
     }
   },
   {
@@ -4928,7 +4899,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteEngagement' has semantic quality issues: vague_description, missing_context. The current description lacks specificity and context. The suggested description provides more details about the operation's purpose, required inputs, and the expected output.",
+    "message": "Operation 'ListStep' has semantic quality issues: vague_description, missing_context, missing_output_details. Original description lacks domain context about what Steps represent in Studio. Enhanced version explains Steps as execution units within Engagements, clarifies the hierarchical relationship (Flow > Engagement > Steps), specifies required path parameters, and mentions pagination support. This helps AI agents understand the data structure and when to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4939,18 +4910,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "DeleteEngagement",
+      "operation_id": "ListStep",
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
-      "current_summary": "Delete this Engagement and all Steps relating to it.",
-      "current_description": "Delete this Engagement and all Steps relating to it.",
-      "summary_suggestion": "Delete a specific Engagement and its related Steps.",
-      "description_suggestion": "Deletes a specific Engagement and all related Steps for the specified Flow. Requires the Flow SID and Engagement SID as parameters. Returns a confirmation message.",
-      "reasoning": "The current description lacks specificity and context. The suggested description provides more details about the operation's purpose, required inputs, and the expected output.",
-      "batch_index": 0
+      "current_summary": "Retrieve a list of all Steps for an Engagement.",
+      "current_description": "Retrieve a list of all Steps for an Engagement.",
+      "summary_suggestion": "List Steps in a Flow Engagement",
+      "description_suggestion": "Retrieves a paginated list of all Steps executed within a specific Engagement of a Studio Flow. Steps represent individual interactions or decision points in the Flow execution. Requires Flow Sid and Engagement Sid as path parameters. Returns an array of Step objects with execution details and timestamps. Supports pagination via query parameters.",
+      "reasoning": "Original description lacks domain context about what Steps represent in Studio. Enhanced version explains Steps as execution units within Engagements, clarifies the hierarchical relationship (Flow > Engagement > Steps), specifies required path parameters, and mentions pagination support. This helps AI agents understand the data structure and when to use this operation.",
+      "batch_index": 2
     }
   },
   {
@@ -4964,7 +4936,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchEngagementContext' has semantic quality issues: vague_description, missing_context. The current description lacks specificity and context. The suggested description provides more details about the operation's purpose, required inputs, and the expected output.",
+    "message": "Operation 'FetchStep' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details. Original description is extremely vague with no context. Enhanced version clarifies the hierarchical path parameters needed, explains what a Step is in the Studio domain, and specifies the returned data. This enables AI agents to understand the required identifiers and the relationship between Flows, Engagements, and Steps.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4975,18 +4947,20 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "FetchEngagementContext",
+      "operation_id": "FetchStep",
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
       ],
-      "current_summary": "Retrieve the most recent context for an Engagement.",
-      "current_description": "Retrieve the most recent context for an Engagement.",
-      "summary_suggestion": "Retrieve the most recent context for a specific Engagement.",
-      "description_suggestion": "Retrieves the most recent context for the specified Engagement. Requires the Flow SID and Engagement SID as parameters. Returns context details including variables and timestamps.",
-      "reasoning": "The current description lacks specificity and context. The suggested description provides more details about the operation's purpose, required inputs, and the expected output.",
-      "batch_index": 0
+      "current_summary": "Retrieve a Step.",
+      "current_description": "Retrieve a Step.",
+      "summary_suggestion": "Fetch a specific Engagement Step",
+      "description_suggestion": "Retrieves a specific Step from a Studio Flow Engagement by its Sid. Steps represent individual execution points within an Engagement. Requires Flow Sid, Engagement Sid, and Step Sid as path parameters. Returns the Step object including execution status, type, and contextual data about the interaction.",
+      "reasoning": "Original description is extremely vague with no context. Enhanced version clarifies the hierarchical path parameters needed, explains what a Step is in the Studio domain, and specifies the returned data. This enables AI agents to understand the required identifiers and the relationship between Flows, Engagements, and Steps.",
+      "batch_index": 2
     }
   },
   {
@@ -5000,7 +4974,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListExecution' has semantic quality issues: vague_description, missing_context. The current description lacks specificity and context. The suggested description provides more details about the operation's purpose and expected inputs.",
+    "message": "Operation 'FetchStepContext' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details. Original description doesn't explain what 'context' means in the Studio domain. Enhanced version clarifies that context contains execution state and variables, specifies all three required path parameters, and references the context schema structure (5-6 properties from API context). This helps AI agents understand the distinction between Step data and Step context, and when to retrieve context information.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5011,54 +4985,20 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "ListExecution",
+      "operation_id": "FetchStepContext",
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
       ],
-      "current_summary": "Retrieve a list of all Executions for the Flow.",
-      "current_description": "Retrieve a list of all Executions for the Flow.",
-      "summary_suggestion": "Retrieve a list of all Executions for a specific Flow.",
-      "description_suggestion": "Retrieves a list of all Executions for the specified Flow. Includes details such as Execution SID, status, and timestamps. Requires the Flow SID as a parameter.",
-      "reasoning": "The current description lacks specificity and context. The suggested description provides more details about the operation's purpose and expected inputs.",
-      "batch_index": 0
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateExecution' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context. The suggested description provides more details about the operation's purpose, required inputs, and the expected output.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateExecution",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Triggers a new Execution for the Flow",
-      "current_description": "Triggers a new Execution for the Flow",
-      "summary_suggestion": "Create a new Execution for the Flow.",
-      "description_suggestion": "Creates a new Execution for the specified Flow. Requires the Flow SID and Execution details. Returns the Execution SID and other details.",
-      "reasoning": "The current description is too vague and lacks context. The suggested description provides more details about the operation's purpose, required inputs, and the expected output.",
-      "batch_index": 0
+      "current_summary": "Retrieve the context for an Engagement Step.",
+      "current_description": "Retrieve the context for an Engagement Step.",
+      "summary_suggestion": "Fetch Step execution context data",
+      "description_suggestion": "Retrieves the execution context for a specific Step within a Studio Flow Engagement. The context contains variables, state data, and other contextual information captured during Step execution. Requires Flow Sid, Engagement Sid, and Step Sid as path parameters. Returns a context object with up to 6 properties containing execution state and variable values.",
+      "reasoning": "Original description doesn't explain what 'context' means in the Studio domain. Enhanced version clarifies that context contains execution state and variables, specifies all three required path parameters, and references the context schema structure (5-6 properties from API context). This helps AI agents understand the distinction between Step data and Step context, and when to retrieve context information.",
+      "batch_index": 2
     }
   },
   {
@@ -5072,7 +5012,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 20 operations analyzed, 20 quality issues found",
+    "message": "Semantic analysis completed: 20 operations analyzed, 18 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -5084,7 +5024,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 20,
-      "total_issues_found": 20,
+      "total_issues_found": 18,
       "batches_processed": 3
     }
   }

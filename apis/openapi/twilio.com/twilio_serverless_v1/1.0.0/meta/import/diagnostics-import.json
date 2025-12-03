@@ -6726,7 +6726,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateVariable' has semantic quality issues: vague_summary, vague_description, missing_input_details. The current summary and description are too vague. Added details about the required parameters and the return value for better clarity and AI agent interpretability.",
+    "message": "Operation 'CreateVariable' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_context. Original description is identical to summary and lacks essential context. Added clarity about what variables are used for (configuration storage), scope (environment-specific), required parameters, return value structure, and scoping behavior to help AI agents understand when and how to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6740,15 +6740,16 @@
       "operation_id": "CreateVariable",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "Create a new Variable.",
       "current_description": "Create a new Variable.",
-      "summary_suggestion": "Create a new environment variable.",
-      "description_suggestion": "Creates a new variable for the specified environment within a service. Requires the ServiceSid and EnvironmentSid parameters. Returns the newly created variable details upon success.",
-      "reasoning": "The current summary and description are too vague. Added details about the required parameters and the return value for better clarity and AI agent interpretability.",
+      "summary_suggestion": "Create environment variable in service",
+      "description_suggestion": "Creates a new environment variable within a specified Twilio Serverless service and environment. The variable stores key-value configuration data accessible to functions and assets in that environment. Requires the ServiceSid and EnvironmentSid path parameters. Returns the created Variable resource with its Sid, key, value, and metadata. Variables are scoped to their environment and cannot be shared across environments.",
+      "reasoning": "Original description is identical to summary and lacks essential context. Added clarity about what variables are used for (configuration storage), scope (environment-specific), required parameters, return value structure, and scoping behavior to help AI agents understand when and how to use this operation.",
       "batch_index": 5
     }
   },
@@ -6763,7 +6764,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchVariable' has semantic quality issues: vague_description, missing_output_details. The current description is too vague. Added details about the required parameters and the return value for better clarity and AI agent interpretability.",
+    "message": "Operation 'FetchVariable' has semantic quality issues: vague_description, missing_output_details, missing_context. Original description lacks specificity about what is returned and operational context. Added details about required parameters, return value structure, and clarified that this is a read-only operation to improve AI agent understanding of when to use this endpoint.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6778,12 +6779,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "Retrieve a specific Variable.",
       "current_description": "Retrieve a specific Variable.",
-      "description_suggestion": "Retrieves a specific variable by its Sid within the specified environment of a service. Requires the ServiceSid, EnvironmentSid, and Sid parameters. Returns the details of the specified variable.",
-      "reasoning": "The current description is too vague. Added details about the required parameters and the return value for better clarity and AI agent interpretability.",
+      "summary_suggestion": "Retrieve environment variable details",
+      "description_suggestion": "Retrieves a specific environment variable from a Twilio Serverless service environment by its Sid. Requires ServiceSid, EnvironmentSid, and Variable Sid as path parameters. Returns the complete Variable resource including its key, value, date created, and date updated. This operation is read-only and does not modify any state.",
+      "reasoning": "Original description lacks specificity about what is returned and operational context. Added details about required parameters, return value structure, and clarified that this is a read-only operation to improve AI agent understanding of when to use this endpoint.",
       "batch_index": 5
     }
   },
@@ -6798,7 +6801,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateVariable' has semantic quality issues: vague_summary, vague_description, missing_input_details. The current summary and description are too vague. Added details about the required parameters and the return value for better clarity and AI agent interpretability.",
+    "message": "Operation 'UpdateVariable' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_context, missing_side_effects. Original description is too generic and lacks critical details. Added information about what can be updated (value), required parameters, request/response structure, and important side effect that changes affect new deployments. This helps AI agents understand the scope and impact of the operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6812,15 +6815,17 @@
       "operation_id": "UpdateVariable",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context",
+        "missing_side_effects"
       ],
       "current_summary": "Update a specific Variable.",
       "current_description": "Update a specific Variable.",
-      "summary_suggestion": "Update a specific environment variable.",
-      "description_suggestion": "Updates a specific variable by its Sid within the specified environment of a service. Requires the ServiceSid, EnvironmentSid, and Sid parameters. Returns the updated variable details upon success.",
-      "reasoning": "The current summary and description are too vague. Added details about the required parameters and the return value for better clarity and AI agent interpretability.",
+      "summary_suggestion": "Update environment variable value",
+      "description_suggestion": "Updates an existing environment variable in a Twilio Serverless service environment. Requires ServiceSid, EnvironmentSid, and Variable Sid as path parameters. Accepts the new variable value in the request body. Returns the updated Variable resource with its current key, value, and metadata. Changes take effect immediately for new function deployments. Supports partial updates - only the value field needs to be provided.",
+      "reasoning": "Original description is too generic and lacks critical details. Added information about what can be updated (value), required parameters, request/response structure, and important side effect that changes affect new deployments. This helps AI agents understand the scope and impact of the operation.",
       "batch_index": 5
     }
   },
@@ -6835,7 +6840,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteVariable' has semantic quality issues: vague_description, missing_side_effects. The current description is too vague. Added details about the required parameters, the return value, and the side effect of the operation for better clarity and AI agent interpretability.",
+    "message": "Operation 'DeleteVariable' has semantic quality issues: vague_description, missing_output_details, missing_context, missing_side_effects. Original description lacks context about operation effects and return behavior. Added details about required parameters, response code, side effects (variable becomes inaccessible), permanence of deletion, and a practical warning about backing up values. This helps AI agents understand the consequences of using this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6850,12 +6855,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_output_details",
+        "missing_context",
         "missing_side_effects"
       ],
       "current_summary": "Delete a specific Variable.",
       "current_description": "Delete a specific Variable.",
-      "description_suggestion": "Deletes a specific variable by its Sid within the specified environment of a service. Requires the ServiceSid, EnvironmentSid, and Sid parameters. Returns a success message upon deletion.",
-      "reasoning": "The current description is too vague. Added details about the required parameters, the return value, and the side effect of the operation for better clarity and AI agent interpretability.",
+      "summary_suggestion": "Delete environment variable from service",
+      "description_suggestion": "Deletes a specific environment variable from a Twilio Serverless service environment. Requires ServiceSid, EnvironmentSid, and Variable Sid as path parameters. Returns a 204 No Content response on successful deletion. Once deleted, the variable is no longer accessible to functions and assets in that environment. This operation is permanent and cannot be undone - consider backing up critical configuration values before deletion.",
+      "reasoning": "Original description lacks context about operation effects and return behavior. Added details about required parameters, response code, side effects (variable becomes inaccessible), permanence of deletion, and a practical warning about backing up values. This helps AI agents understand the consequences of using this operation.",
       "batch_index": 5
     }
   },
@@ -6870,745 +6878,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchLog' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the required authentication and the returned log object.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchLog",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Retrieve a specific log.",
-      "current_description": "Retrieve a specific log.",
-      "description_suggestion": "Retrieve a specific log associated with a Service and Environment. Requires authentication. Returns the log object.",
-      "reasoning": "The current description is too vague and lacks context about the required authentication and the returned log object.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListService' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the required authentication and the returned list of Service objects.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListService",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Retrieve a list of all Services.",
-      "current_description": "Retrieve a list of all Services.",
-      "description_suggestion": "Retrieve a list of all Service resources. Requires authentication. Returns a list of Service objects.",
-      "reasoning": "The current description is too vague and lacks context about the required authentication and the returned list of Service objects.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateService' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the required authentication and the returned Service object.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateService",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Create a new Service resource.",
-      "current_description": "Create a new Service resource.",
-      "description_suggestion": "Create a new Service resource. Requires authentication. Returns the newly created Service object.",
-      "reasoning": "The current description is too vague and lacks context about the required authentication and the returned Service object.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchService' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the required authentication and the returned Service object.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchService",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Retrieve a specific Service resource.",
-      "current_description": "Retrieve a specific Service resource.",
-      "description_suggestion": "Retrieve a specific Service resource by its SID. Requires authentication. Returns the Service object.",
-      "reasoning": "The current description is too vague and lacks context about the required authentication and the returned Service object.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeleteService' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the required authentication and the returned success message.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteService",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Delete a Service resource.",
-      "current_description": "Delete a Service resource.",
-      "description_suggestion": "Delete a specific Service resource by its SID. Requires authentication. Returns a success message.",
-      "reasoning": "The current description is too vague and lacks context about the required authentication and the returned success message.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'UpdateService' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the required authentication and the returned Service object.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "UpdateService",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Update a specific Service resource.",
-      "current_description": "Update a specific Service resource.",
-      "description_suggestion": "Update a specific Service resource by its SID. Requires authentication. Returns the updated Service object.",
-      "reasoning": "The current description is too vague and lacks context about the required authentication and the returned Service object.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListVariable' has semantic quality issues: vague_description, missing_context. The current description is too vague and lacks context about the required authentication and the returned list of Variable objects.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListVariable",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Retrieve a list of all Variables.",
-      "current_description": "Retrieve a list of all Variables.",
-      "description_suggestion": "Retrieve a list of all Variables associated with a specific Service and Environment. Requires authentication. Returns the list of Variable objects.",
-      "reasoning": "The current description is too vague and lacks context about the required authentication and the returned list of Variable objects.",
-      "batch_index": 4
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchFunction' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about what is retrieved and the parameters used.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchFunction",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Retrieve a specific Function resource.",
-      "current_description": "Retrieve a specific Function resource.",
-      "description_suggestion": "Retrieves a specific Function resource by its Service Sid and Function Sid. Returns a detailed Function object including its configuration and metadata.",
-      "reasoning": "The current description is too vague. Added context about what is retrieved and the parameters used.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeleteFunction' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about what is deleted and the parameters used.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteFunction",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Delete a Function resource.",
-      "current_description": "Delete a Function resource.",
-      "summary_suggestion": "Delete a specific Function resource.",
-      "description_suggestion": "Deletes a specific Function resource by its Service Sid and Function Sid. Returns a success message if the deletion is successful.",
-      "reasoning": "The current description is too vague. Added context about what is deleted and the parameters used.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'UpdateFunction' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about what is updated, the required payload, and the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "UpdateFunction",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Update a specific Function resource.",
-      "current_description": "Update a specific Function resource.",
-      "description_suggestion": "Updates a specific Function resource by its Service Sid and Function Sid. Requires a JSON payload with the updated function details. Returns the updated Function object.",
-      "reasoning": "The current description is too vague. Added context about what is updated, the required payload, and the return value.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListFunctionVersion' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about the parameters used and the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListFunctionVersion",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Retrieve a list of all Function Version resources.",
-      "current_description": "Retrieve a list of all Function Version resources.",
-      "description_suggestion": "Retrieves a list of all Function Version resources for a specific Function by its Service Sid and Function Sid. Returns a list of Function Version objects.",
-      "reasoning": "The current description is too vague. Added context about the parameters used and the return value.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchFunctionVersion' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about what is retrieved and the parameters used.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchFunctionVersion",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Retrieve a specific Function Version resource.",
-      "current_description": "Retrieve a specific Function Version resource.",
-      "description_suggestion": "Retrieves a specific Function Version resource by its Service Sid, Function Sid, and Version Sid. Returns a detailed Function Version object including its metadata and content.",
-      "reasoning": "The current description is too vague. Added context about what is retrieved and the parameters used.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchFunctionVersionContent' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about what is retrieved and the parameters used.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchFunctionVersionContent",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Retrieve the content of a specific Function Version resource.",
-      "current_description": "Retrieve a the content of a specific Function Version resource.",
-      "description_suggestion": "Retrieves the content of a specific Function Version resource by its Service Sid, Function Sid, and Version Sid. Returns the content as a binary stream.",
-      "reasoning": "The current description is too vague. Added context about what is retrieved and the parameters used.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListLog' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about the parameters used and the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListLog",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_context"
-      ],
-      "current_summary": "Retrieve a list of all logs.",
-      "current_description": "Retrieve a list of all logs.",
-      "description_suggestion": "Retrieves a list of all logs for a specific Environment by its Service Sid and Environment Sid. Returns a list of Log objects.",
-      "reasoning": "The current description is too vague. Added context about the parameters used and the return value.",
-      "batch_index": 3
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListBuild' has semantic quality issues: vague_summary, vague_description. The current summary and description are too vague. The suggestions specify the service context and clarify the operation's purpose and output.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListBuild",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description"
-      ],
-      "current_summary": "Retrieve a list of all Builds.",
-      "current_description": "Retrieve a list of all Builds.",
-      "summary_suggestion": "Retrieve a list of all Builds for a specific service.",
-      "description_suggestion": "Retrieves a list of all Build resources associated with a specific service. Returns a list of Build objects.",
-      "reasoning": "The current summary and description are too vague. The suggestions specify the service context and clarify the operation's purpose and output.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateBuild' has semantic quality issues: vague_description. The current description is vague. The suggestion specifies the service context, requirements, and return value for better clarity.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateBuild",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description"
-      ],
-      "current_summary": "Create a new Build resource. At least one function version or asset version is required.",
-      "current_description": "Create a new Build resource. At least one function version or asset version is required.",
-      "description_suggestion": "Creates a new Build resource for a specific service. Requires at least one function version or asset version. Returns the newly created Build object.",
-      "reasoning": "The current description is vague. The suggestion specifies the service context, requirements, and return value for better clarity.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchBuild' has semantic quality issues: vague_summary, vague_description. The current summary and description are too vague. The suggestions specify the service and build context and clarify the operation's purpose and output.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchBuild",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description"
-      ],
-      "current_summary": "Retrieve a specific Build resource.",
-      "current_description": "Retrieve a specific Build resource.",
-      "summary_suggestion": "Retrieve a specific Build resource for a service.",
-      "description_suggestion": "Retrieves a specific Build resource for a given service and build SID. Returns the Build object.",
-      "reasoning": "The current summary and description are too vague. The suggestions specify the service and build context and clarify the operation's purpose and output.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'DeleteBuild' has semantic quality issues: vague_description, missing_side_effects. The current description is vague and missing side effects. The suggestion specifies the service and build context, clarifies the operation's purpose, and includes the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "DeleteBuild",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description",
-        "missing_side_effects"
-      ],
-      "current_summary": "Delete a Build resource.",
-      "current_description": "Delete a Build resource.",
-      "description_suggestion": "Deletes a specific Build resource for a given service and build SID. Returns a success message if the deletion is successful.",
-      "reasoning": "The current description is vague and missing side effects. The suggestion specifies the service and build context, clarifies the operation's purpose, and includes the return value.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'FetchBuildStatus' has semantic quality issues: vague_summary, vague_description. The current summary and description are too vague. The suggestions specify the service and build context and clarify the operation's purpose and output.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "FetchBuildStatus",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description"
-      ],
-      "current_summary": "Retrieve a specific Build resource.",
-      "current_description": "Retrieve a specific Build resource.",
-      "summary_suggestion": "Retrieve the status of a specific Build resource.",
-      "description_suggestion": "Retrieves the status of a specific Build resource for a given service and build SID. Returns the status object.",
-      "reasoning": "The current summary and description are too vague. The suggestions specify the service and build context and clarify the operation's purpose and output.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListDeployment' has semantic quality issues: vague_summary, vague_description. The current summary and description are too vague. The suggestions specify the service and environment context and clarify the operation's purpose and output.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "ListDeployment",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_summary",
-        "vague_description"
-      ],
-      "current_summary": "Retrieve a list of all Deployments.",
-      "current_description": "Retrieve a list of all Deployments.",
-      "summary_suggestion": "Retrieve a list of all Deployments for a specific environment.",
-      "description_suggestion": "Retrieves a list of all Deployment resources associated with a specific service and environment. Returns a list of Deployment objects.",
-      "reasoning": "The current summary and description are too vague. The suggestions specify the service and environment context and clarify the operation's purpose and output.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'CreateDeployment' has semantic quality issues: vague_description. The current description is vague. The suggestion specifies the service and environment context, clarifies the operation's purpose, and includes the return value.",
-    "severity": 2,
-    "code": "POOR_OPERATION_SEMANTICS",
-    "code_description": null,
-    "source": "semantic_analyzer",
-    "tags": null,
-    "related_information": null,
-    "data": {
-      "fixable": true,
-      "path": [],
-      "target": "bundled-spec",
-      "operation_id": "CreateDeployment",
-      "has_quality_issues": true,
-      "issues_found": [
-        "vague_description"
-      ],
-      "current_summary": "Create a new Deployment.",
-      "current_description": "Create a new Deployment.",
-      "description_suggestion": "Creates a new Deployment resource for a specific service and environment. Returns the newly created Deployment object.",
-      "reasoning": "The current description is vague. The suggestion specifies the service and environment context, clarifies the operation's purpose, and includes the return value.",
-      "batch_index": 1
-    }
-  },
-  {
-    "range": {
-      "start": {
-        "line": 0,
-        "character": 0
-      },
-      "end": {
-        "line": 0,
-        "character": 0
-      }
-    },
-    "message": "Operation 'ListAsset' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are too vague. Added context about the service and included details about the response and filtering parameters.",
+    "message": "Operation 'ListAsset' has semantic quality issues: vague_description, missing_input_details, missing_output_details, poor_ai_interpretability. Original description is too minimal and doesn't explain pagination, filtering capabilities, or what fields are returned. AI agents need to understand the scoping by Service SID and available query parameters to use this operation effectively.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7622,15 +6892,16 @@
       "operation_id": "ListAsset",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "Retrieve a list of all Assets.",
       "current_description": "Retrieve a list of all Assets.",
-      "summary_suggestion": "Retrieve a list of all Asset resources for a given service.",
-      "description_suggestion": "Retrieves a list of all Asset resources associated with a specific service. The response includes details such as Asset ID, name, and visibility. The list can be filtered by parameters such as page and pageSize.",
-      "reasoning": "The current summary and description are too vague. Added context about the service and included details about the response and filtering parameters.",
+      "summary_suggestion": "List all Assets in a Service",
+      "description_suggestion": "Retrieves a paginated list of all Asset resources within a specified Service. Supports filtering and pagination parameters. Returns an array of Asset objects containing metadata such as friendly name, date created, and date updated. Requires the Service SID to scope the query.",
+      "reasoning": "Original description is too minimal and doesn't explain pagination, filtering capabilities, or what fields are returned. AI agents need to understand the scoping by Service SID and available query parameters to use this operation effectively.",
       "batch_index": 0
     }
   },
@@ -7645,7 +6916,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateAsset' has semantic quality issues: vague_description, missing_input_details. The current description is too vague. Added details about the required input parameters and the return value.",
+    "message": "Operation 'CreateAsset' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description lacks clarity on required inputs (friendly name), what the response contains, and the side effect that the Asset is ready for use. AI agents need this information to construct proper requests and understand the operation's outcome.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7660,12 +6931,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "Create a new Asset resource.",
       "current_description": "Create a new Asset resource.",
-      "description_suggestion": "Creates a new Asset resource for a specified service. Requires the Asset's name and visibility as input. Returns the newly created Asset resource details.",
-      "reasoning": "The current description is too vague. Added details about the required input parameters and the return value.",
+      "summary_suggestion": "Create a new Asset in a Service",
+      "description_suggestion": "Creates a new Asset resource within a specified Service. Requires a friendly name for the Asset. Returns the newly created Asset object with assigned SID, date created, and other metadata. The Asset becomes immediately available for versioning and deployment.",
+      "reasoning": "Original description lacks clarity on required inputs (friendly name), what the response contains, and the side effect that the Asset is ready for use. AI agents need this information to construct proper requests and understand the operation's outcome.",
       "batch_index": 0
     }
   },
@@ -7680,7 +6954,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchAsset' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about the response details.",
+    "message": "Operation 'FetchAsset' has semantic quality issues: vague_description, missing_output_details. Description doesn't specify what information is returned or the use case context. Adding details about returned fields and typical use cases helps AI agents understand when to call this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7695,12 +6969,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "Retrieve a specific Asset resource.",
       "current_description": "Retrieve a specific Asset resource.",
-      "description_suggestion": "Retrieves a specific Asset resource for a given service and Asset ID. The response includes details such as Asset ID, name, and visibility.",
-      "reasoning": "The current description is too vague. Added context about the response details.",
+      "summary_suggestion": "Fetch a specific Asset by SID",
+      "description_suggestion": "Retrieves a specific Asset resource by its SID within a Service. Returns the Asset object containing metadata including friendly name, SID, date created, date updated, and URL. Useful for inspecting Asset properties before creating versions or deployments.",
+      "reasoning": "Description doesn't specify what information is returned or the use case context. Adding details about returned fields and typical use cases helps AI agents understand when to call this operation.",
       "batch_index": 0
     }
   },
@@ -7715,7 +6990,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteAsset' has semantic quality issues: vague_description, missing_side_effects. The current description is too vague. Added details about the return value and side effects.",
+    "message": "Operation 'DeleteAsset' has semantic quality issues: vague_description, missing_output_details, missing_side_effects. Original description doesn't explain the cascading deletion of versions, the permanence of the action, or the HTTP response. AI agents need to understand the destructive nature and side effects before executing this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7730,12 +7005,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_output_details",
         "missing_side_effects"
       ],
       "current_summary": "Delete an Asset resource.",
       "current_description": "Delete an Asset resource.",
-      "description_suggestion": "Deletes an Asset resource for a specified service and Asset ID. The operation returns a success message upon deletion.",
-      "reasoning": "The current description is too vague. Added details about the return value and side effects.",
+      "summary_suggestion": "Delete an Asset from a Service",
+      "description_suggestion": "Deletes a specific Asset resource and all associated Asset Versions from a Service. This operation is permanent and cannot be undone. Returns HTTP 204 No Content on successful deletion. Ensure the Asset is no longer needed before deletion, as it will be removed from all deployments.",
+      "reasoning": "Original description doesn't explain the cascading deletion of versions, the permanence of the action, or the HTTP response. AI agents need to understand the destructive nature and side effects before executing this operation.",
       "batch_index": 0
     }
   },
@@ -7750,7 +7027,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'UpdateAsset' has semantic quality issues: vague_description, missing_input_details, missing_output_details. The current description is too vague. Added details about the required input parameters and the return value.",
+    "message": "Operation 'UpdateAsset' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Description lacks detail on what fields can be updated, whether updates are partial or full, and what is returned. AI agents need to know that this updates metadata only and doesn't affect versions to use it correctly.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7770,8 +7047,9 @@
       ],
       "current_summary": "Update a specific Asset resource.",
       "current_description": "Update a specific Asset resource.",
-      "description_suggestion": "Updates a specific Asset resource for a specified service and Asset ID. The request body includes the fields to be updated. Returns the updated Asset resource details.",
-      "reasoning": "The current description is too vague. Added details about the required input parameters and the return value.",
+      "summary_suggestion": "Update an Asset's metadata",
+      "description_suggestion": "Updates metadata for a specific Asset resource, such as the friendly name. Accepts partial updates - only provided fields are modified. Returns the updated Asset object with all current properties. Does not affect existing Asset Versions or deployments.",
+      "reasoning": "Description lacks detail on what fields can be updated, whether updates are partial or full, and what is returned. AI agents need to know that this updates metadata only and doesn't affect versions to use it correctly.",
       "batch_index": 0
     }
   },
@@ -7786,7 +7064,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListAssetVersion' has semantic quality issues: vague_description, missing_context. The current summary and description are too vague. Added context about the service, asset, and included details about the response and filtering parameters.",
+    "message": "Operation 'ListAssetVersion' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Original description doesn't explain the hierarchical relationship (Asset contains Versions), pagination support, or what fields are returned. AI agents need to understand that versions are snapshots and the visibility property to use this operation effectively.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7801,13 +7079,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "Retrieve a list of all Asset Versions.",
       "current_description": "Retrieve a list of all Asset Versions.",
-      "summary_suggestion": "Retrieve a list of all Asset Versions for a given service and asset.",
-      "description_suggestion": "Retrieves a list of all Asset Versions associated with a specific service and asset. The response includes details such as Asset Version ID, version number, and visibility. The list can be filtered by parameters such as page and pageSize.",
-      "reasoning": "The current summary and description are too vague. Added context about the service, asset, and included details about the response and filtering parameters.",
+      "summary_suggestion": "List all versions of an Asset",
+      "description_suggestion": "Retrieves a paginated list of all Asset Version resources for a specific Asset within a Service. Each version represents a snapshot of the Asset at a point in time. Supports pagination and sorting parameters. Returns an array of Asset Version objects with metadata including visibility (public/protected/private), date created, and version SID.",
+      "reasoning": "Original description doesn't explain the hierarchical relationship (Asset contains Versions), pagination support, or what fields are returned. AI agents need to understand that versions are snapshots and the visibility property to use this operation effectively.",
       "batch_index": 0
     }
   },
@@ -7822,7 +7101,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchAssetVersion' has semantic quality issues: vague_description, missing_context. The current description is too vague. Added context about the response details.",
+    "message": "Operation 'FetchAssetVersion' has semantic quality issues: vague_description, missing_output_details. Description doesn't specify the returned fields or use cases. Adding details about visibility property and typical use cases helps AI agents understand when and why to fetch a specific version.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7837,12 +7116,13 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
-        "missing_context"
+        "missing_output_details"
       ],
       "current_summary": "Retrieve a specific Asset Version.",
       "current_description": "Retrieve a specific Asset Version.",
-      "description_suggestion": "Retrieves a specific Asset Version for a given service, asset, and Asset Version ID. The response includes details such as Asset Version ID, version number, and visibility.",
-      "reasoning": "The current description is too vague. Added context about the response details.",
+      "summary_suggestion": "Fetch a specific Asset Version",
+      "description_suggestion": "Retrieves a specific Asset Version resource by its SID. Returns the Asset Version object containing metadata including visibility level (public/protected/private), date created, and the associated Asset SID. Use this to inspect version properties before deployment or to retrieve version history.",
+      "reasoning": "Description doesn't specify the returned fields or use cases. Adding details about visibility property and typical use cases helps AI agents understand when and why to fetch a specific version.",
       "batch_index": 0
     }
   },
@@ -7857,7 +7137,532 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchDeployment' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are too vague. The suggestion adds context about the required parameters and the returned object.",
+    "message": "Operation 'FetchFunction' has semantic quality issues: vague_description, missing_context, missing_output_details. Original description is repetitive and lacks context about what information is returned and what parameters are required. Enhanced version clarifies the resource hierarchy (Service > Function), specifies required parameters, and indicates what data is returned for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchFunction",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a specific Function resource.",
+      "current_description": "Retrieve a specific Function resource.",
+      "summary_suggestion": "Fetch a Function resource by ID",
+      "description_suggestion": "Retrieves a specific Function resource within a Service by its SID. Returns the Function resource object containing metadata such as friendly name, date created, and date updated. Requires the Service SID and Function SID as path parameters.",
+      "reasoning": "Original description is repetitive and lacks context about what information is returned and what parameters are required. Enhanced version clarifies the resource hierarchy (Service > Function), specifies required parameters, and indicates what data is returned for better AI agent understanding.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteFunction' has semantic quality issues: vague_description, missing_context, missing_side_effects. Original lacks critical information about permanence, side effects (deletion of associated versions), and response status. Enhanced version clarifies the destructive nature and cascading effects for AI agents to understand the operation's impact.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteFunction",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete a Function resource.",
+      "current_description": "Delete a Function resource.",
+      "summary_suggestion": "Delete a Function resource",
+      "description_suggestion": "Permanently deletes a specific Function resource from a Service. Requires the Service SID and Function SID as path parameters. This action cannot be undone. All associated Function Versions will also be removed. Returns HTTP 204 No Content on successful deletion.",
+      "reasoning": "Original lacks critical information about permanence, side effects (deletion of associated versions), and response status. Enhanced version clarifies the destructive nature and cascading effects for AI agents to understand the operation's impact.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateFunction' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_context. Original is too generic and doesn't explain what can be updated, what inputs are expected, or what is returned. Enhanced version specifies updatable fields, clarifies partial update support, and indicates the response format for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateFunction",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Update a Function resource",
+      "current_description": "Update a specific Function resource.",
+      "summary_suggestion": "Update Function resource properties",
+      "description_suggestion": "Updates properties of a specific Function resource within a Service. Accepts a request body with updatable fields such as friendly name. Requires the Service SID and Function SID as path parameters. Returns the updated Function resource object. Supports partial updates - only provided fields will be modified.",
+      "reasoning": "Original is too generic and doesn't explain what can be updated, what inputs are expected, or what is returned. Enhanced version specifies updatable fields, clarifies partial update support, and indicates the response format for better AI agent decision-making.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListFunctionVersion' has semantic quality issues: vague_description, missing_context, missing_output_details. Original lacks context about pagination, filtering capabilities, and the resource hierarchy. Enhanced version clarifies the scoping (Service > Function > Versions), pagination support, and what data is returned to help AI agents understand filtering and iteration options.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListFunctionVersion",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a list of all Function Version resources.",
+      "current_description": "Retrieve a list of all Function Version resources.",
+      "summary_suggestion": "List Function Versions for a Function",
+      "description_suggestion": "Retrieves a paginated list of all Function Version resources for a specific Function within a Service. Supports filtering and pagination via query parameters (limit, offset). Returns an array of Function Version resource objects containing version metadata, build status, and timestamps. Requires Service SID and Function SID as path parameters.",
+      "reasoning": "Original lacks context about pagination, filtering capabilities, and the resource hierarchy. Enhanced version clarifies the scoping (Service > Function > Versions), pagination support, and what data is returned to help AI agents understand filtering and iteration options.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchFunctionVersion' has semantic quality issues: vague_description, missing_context, missing_output_details. Original is repetitive and doesn't explain the resource hierarchy or what information is available. Enhanced version clarifies the nested resource structure, specifies all required parameters, and indicates the returned data for better AI agent context.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchFunctionVersion",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a specific Function Version resource.",
+      "current_description": "Retrieve a specific Function Version resource.",
+      "summary_suggestion": "Fetch a specific Function Version",
+      "description_suggestion": "Retrieves a specific Function Version resource by its SID. Returns the Function Version resource object containing version metadata, build status, runtime information, and timestamps. Requires Service SID, Function SID, and Function Version SID as path parameters. Use this to inspect a particular version's configuration and status.",
+      "reasoning": "Original is repetitive and doesn't explain the resource hierarchy or what information is available. Enhanced version clarifies the nested resource structure, specifies all required parameters, and indicates the returned data for better AI agent context.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchFunctionVersionContent' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Original has grammatical error ('a the') and is vague about what 'content' means. Enhanced version clarifies that this returns the actual source code, specifies the response format, and explains the use case for AI agents to understand when to use this endpoint versus FetchFunctionVersion.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchFunctionVersionContent",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a the content of a specific Function Version resource.",
+      "current_description": "Retrieve a the content of a specific Function Version resource.",
+      "summary_suggestion": "Fetch Function Version source code",
+      "description_suggestion": "Retrieves the source code content of a specific Function Version resource. Returns the raw function code as a string. Requires Service SID, Function SID, and Function Version SID as path parameters. Use this to inspect or download the actual implementation code of a deployed function version.",
+      "reasoning": "Original has grammatical error ('a the') and is vague about what 'content' means. Enhanced version clarifies that this returns the actual source code, specifies the response format, and explains the use case for AI agents to understand when to use this endpoint versus FetchFunctionVersion.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListLog' has semantic quality issues: vague_description, missing_context, missing_output_details, unclear_purpose. Original is extremely vague about what logs are being retrieved and from where. Enhanced version clarifies the resource hierarchy (Service > Environment > Logs), specifies the log content and filtering capabilities, and indicates pagination support to help AI agents understand the operation's scope and filtering options.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListLog",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_output_details",
+        "unclear_purpose"
+      ],
+      "current_summary": "Retrieve a list of all logs.",
+      "current_description": "Retrieve a list of all logs.",
+      "summary_suggestion": "List execution logs for an Environment",
+      "description_suggestion": "Retrieves a paginated list of execution logs for a specific Environment within a Service. Logs contain information about function executions, errors, and system events. Supports filtering by log level, function, and time range via query parameters. Returns an array of Log resource objects with timestamps, levels, and messages. Requires Service SID and Environment SID as path parameters.",
+      "reasoning": "Original is extremely vague about what logs are being retrieved and from where. Enhanced version clarifies the resource hierarchy (Service > Environment > Logs), specifies the log content and filtering capabilities, and indicates pagination support to help AI agents understand the operation's scope and filtering options.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListBuild' has semantic quality issues: vague_description, missing_input_details, missing_output_details, poor_ai_interpretability. Original description is too minimal. Added context about pagination support, filtering capabilities, what Build objects contain, and use cases. This helps AI agents understand when to use this operation and what to expect in the response.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListBuild",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Retrieve a list of all Builds.",
+      "current_description": "Retrieve a list of all Builds.",
+      "summary_suggestion": "List all Builds for a Service",
+      "description_suggestion": "Retrieves a paginated list of all Build resources for a specified Service. Supports filtering and pagination through query parameters. Returns an array of Build objects containing build status, runtime version, and deployment information. Useful for monitoring build history and status.",
+      "reasoning": "Original description is too minimal. Added context about pagination support, filtering capabilities, what Build objects contain, and use cases. This helps AI agents understand when to use this operation and what to expect in the response.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateBuild' has semantic quality issues: vague_description, missing_output_details, missing_side_effects. Enhanced description clarifies the input requirements, explains the asynchronous nature of builds, specifies the initial status, and indicates how to monitor progress. Added side effects information about what the build process does. This enables AI agents to understand the full lifecycle and when to check build status.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateBuild",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Create a new Build resource. At least one function version or asset version is required.",
+      "current_description": "Create a new Build resource. At least one function version or asset version is required.",
+      "summary_suggestion": "Create a new Build from function/asset versions",
+      "description_suggestion": "Creates a new Build resource by packaging specified function versions and/or asset versions. Requires at least one function version or asset version to be included. Returns the created Build object with initial status (typically 'building'). The build process is asynchronous; use FetchBuildStatus to monitor completion. Side effect: initiates compilation and packaging of the specified versions.",
+      "reasoning": "Enhanced description clarifies the input requirements, explains the asynchronous nature of builds, specifies the initial status, and indicates how to monitor progress. Added side effects information about what the build process does. This enables AI agents to understand the full lifecycle and when to check build status.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchBuild' has semantic quality issues: vague_description, missing_output_details, missing_context. Original description lacks specificity about what information is returned. Added details about the Build status enum values, runtime information, and practical use cases. This helps AI agents understand what data they'll receive and when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchBuild",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "Retrieve a specific Build resource.",
+      "current_description": "Retrieve a specific Build resource.",
+      "summary_suggestion": "Fetch a specific Build by ID",
+      "description_suggestion": "Retrieves a specific Build resource by its Sid. Returns the Build object including status (building, completed, or failed), runtime version, and associated function/asset versions. Use this to check build progress or retrieve build details after creation.",
+      "reasoning": "Original description lacks specificity about what information is returned. Added details about the Build status enum values, runtime information, and practical use cases. This helps AI agents understand what data they'll receive and when to use this operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteBuild' has semantic quality issues: vague_description, missing_output_details, missing_side_effects. Added clarity about the HTTP response code, side effects of deletion, and important constraint about deployment status. This helps AI agents understand the consequences of the operation and when it can be performed.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteBuild",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete a Build resource.",
+      "current_description": "Delete a Build resource.",
+      "summary_suggestion": "Delete a Build resource",
+      "description_suggestion": "Deletes a specific Build resource by its Sid. Returns HTTP 204 No Content on success. Side effects: removes the build from the service and frees associated resources. Note: only builds that are not currently deployed can be deleted.",
+      "reasoning": "Added clarity about the HTTP response code, side effects of deletion, and important constraint about deployment status. This helps AI agents understand the consequences of the operation and when it can be performed.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchBuildStatus' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_output_details. Original summary was identical to FetchBuild, causing confusion. Clarified that this endpoint specifically returns status information, not the full Build object. Added details about the BuildStatus schema and error handling. This distinguishes it from FetchBuild and helps AI agents choose the correct endpoint.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchBuildStatus",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "unclear_purpose",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a specific Build resource.",
+      "current_description": "Retrieve a specific Build resource.",
+      "summary_suggestion": "Fetch Build status and progress",
+      "description_suggestion": "Retrieves the current status of a specific Build resource. Returns a BuildStatus object containing the build's current state (building, completed, or failed) and any error information if the build failed. Use this to monitor asynchronous build progress after creation.",
+      "reasoning": "Original summary was identical to FetchBuild, causing confusion. Clarified that this endpoint specifically returns status information, not the full Build object. Added details about the BuildStatus schema and error handling. This distinguishes it from FetchBuild and helps AI agents choose the correct endpoint.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListDeployment' has semantic quality issues: vague_description, missing_input_details, missing_output_details, poor_ai_interpretability. Original description lacks context about the Environment scope and what information deployments contain. Added details about pagination, filtering, and the relationship between deployments and builds. This helps AI agents understand the hierarchical structure and what data is available.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListDeployment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Retrieve a list of all Deployments.",
+      "current_description": "Retrieve a list of all Deployments.",
+      "summary_suggestion": "List all Deployments in an Environment",
+      "description_suggestion": "Retrieves a paginated list of all Deployment resources for a specified Environment within a Service. Supports filtering and pagination through query parameters. Returns an array of Deployment objects containing deployment status, build information, and timestamps. Useful for tracking deployment history and current environment state.",
+      "reasoning": "Original description lacks context about the Environment scope and what information deployments contain. Added details about pagination, filtering, and the relationship between deployments and builds. This helps AI agents understand the hierarchical structure and what data is available.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateDeployment' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Enhanced description clarifies the required input (Build Sid), explains what gets deployed, and describes the side effects of making functions/assets accessible. Added context about the immediate nature of deployments. This helps AI agents understand the deployment workflow and the consequences of this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateDeployment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Create a new Deployment.",
+      "current_description": "Create a new Deployment.",
+      "summary_suggestion": "Deploy a Build to an Environment",
+      "description_suggestion": "Creates a new Deployment by deploying a specified Build to a target Environment. Requires a valid Build Sid. Returns the created Deployment object with status and deployment timestamp. Side effects: activates the build's functions and assets in the environment, making them accessible at the environment's URL. The deployment is typically immediate.",
+      "reasoning": "Enhanced description clarifies the required input (Build Sid), explains what gets deployed, and describes the side effects of making functions/assets accessible. Added context about the immediate nature of deployments. This helps AI agents understand the deployment workflow and the consequences of this operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchDeployment' has semantic quality issues: vague_description, missing_output_details, missing_context. The current description is identical to the summary and lacks specificity. Added context about what parameters are required (ServiceSid, EnvironmentSid, Sid), what the response contains (deployment metadata, status, build info), and use cases to help AI agents understand when to call this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7871,15 +7676,14 @@
       "operation_id": "FetchDeployment",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
         "vague_description",
+        "missing_output_details",
         "missing_context"
       ],
       "current_summary": "Retrieve a specific Deployment.",
       "current_description": "Retrieve a specific Deployment.",
-      "summary_suggestion": "Retrieve details of a specific Deployment.",
-      "description_suggestion": "Retrieves detailed information about a specific Deployment within a Service and Environment. Requires the Deployment Sid. Returns the Deployment object.",
-      "reasoning": "The current summary and description are too vague. The suggestion adds context about the required parameters and the returned object.",
+      "description_suggestion": "Retrieves a specific Deployment resource by its SID within a given Service and Environment. Returns the Deployment object containing deployment metadata, status, and associated build information. Use this to inspect deployment details or verify deployment state.",
+      "reasoning": "The current description is identical to the summary and lacks specificity. Added context about what parameters are required (ServiceSid, EnvironmentSid, Sid), what the response contains (deployment metadata, status, build info), and use cases to help AI agents understand when to call this operation.",
       "batch_index": 2
     }
   },
@@ -7894,7 +7698,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListEnvironment' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are too vague. The suggestion adds context about the required parameters and the returned object.",
+    "message": "Operation 'ListEnvironment' has semantic quality issues: vague_description, missing_output_details, missing_input_details. Original description lacks detail about pagination support, filtering capabilities, and what the response contains. Enhanced to clarify that results are paginated, mention parameter support, and explain typical use cases for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7908,15 +7712,14 @@
       "operation_id": "ListEnvironment",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_output_details",
+        "missing_input_details"
       ],
       "current_summary": "Retrieve a list of all environments.",
       "current_description": "Retrieve a list of all environments.",
-      "summary_suggestion": "List all environments for a specific service.",
-      "description_suggestion": "Lists all environments associated with a specific Service. Returns a list of Environment objects.",
-      "reasoning": "The current summary and description are too vague. The suggestion adds context about the required parameters and the returned object.",
+      "description_suggestion": "Retrieves a paginated list of all Environment resources within a Service. Supports filtering and pagination parameters. Returns an array of Environment objects with their configuration details. Use this to discover available environments or manage environment inventory.",
+      "reasoning": "Original description lacks detail about pagination support, filtering capabilities, and what the response contains. Enhanced to clarify that results are paginated, mention parameter support, and explain typical use cases for AI agent decision-making.",
       "batch_index": 2
     }
   },
@@ -7931,7 +7734,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateEnvironment' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. The current summary and description are too vague. The suggestion adds context about the required input parameters, request body, and the returned object.",
+    "message": "Operation 'CreateEnvironment' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Current description is too minimal. Added clarity about required inputs (ServiceSid, environment name), what is returned (Environment object with SID), and the effect of the operation (environment becomes available for deployments) to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7945,16 +7748,14 @@
       "operation_id": "CreateEnvironment",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
         "vague_description",
         "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "Create a new environment.",
       "current_description": "Create a new environment.",
-      "summary_suggestion": "Create a new environment for a service.",
-      "description_suggestion": "Creates a new environment for a specific Service. Requires environment details in the request body. Returns the newly created Environment object.",
-      "reasoning": "The current summary and description are too vague. The suggestion adds context about the required input parameters, request body, and the returned object.",
+      "description_suggestion": "Creates a new Environment resource within a Service. Requires the ServiceSid path parameter and an environment name in the request body. Returns the newly created Environment object with its SID and configuration. The environment will be available for deploying functions and assets.",
+      "reasoning": "Current description is too minimal. Added clarity about required inputs (ServiceSid, environment name), what is returned (Environment object with SID), and the effect of the operation (environment becomes available for deployments) to improve AI agent interpretability.",
       "batch_index": 2
     }
   },
@@ -7969,7 +7770,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'FetchEnvironment' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are too vague. The suggestion adds context about the required parameters and the returned object.",
+    "message": "Operation 'FetchEnvironment' has semantic quality issues: vague_description, missing_output_details, missing_context. Description is too generic and identical to summary. Enhanced to specify required parameters (ServiceSid, Sid), clarify response contents (configuration, identifiers, metadata), and provide context for when this operation should be used.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7983,15 +7784,14 @@
       "operation_id": "FetchEnvironment",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
         "vague_description",
+        "missing_output_details",
         "missing_context"
       ],
       "current_summary": "Retrieve a specific environment.",
       "current_description": "Retrieve a specific environment.",
-      "summary_suggestion": "Retrieve details of a specific environment.",
-      "description_suggestion": "Retrieves detailed information about a specific Environment within a Service. Requires the Environment Sid. Returns the Environment object.",
-      "reasoning": "The current summary and description are too vague. The suggestion adds context about the required parameters and the returned object.",
+      "description_suggestion": "Retrieves a specific Environment resource by its SID within a given Service. Returns the Environment object containing configuration details, unique identifiers, and metadata. Use this to inspect environment settings or verify environment existence before performing operations.",
+      "reasoning": "Description is too generic and identical to summary. Enhanced to specify required parameters (ServiceSid, Sid), clarify response contents (configuration, identifiers, metadata), and provide context for when this operation should be used.",
       "batch_index": 2
     }
   },
@@ -8006,7 +7806,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'DeleteEnvironment' has semantic quality issues: vague_summary, vague_description, missing_side_effects. The current description is too vague. The suggestion adds context about the required parameters and the returned message, including side effects.",
+    "message": "Operation 'DeleteEnvironment' has semantic quality issues: vague_description, missing_side_effects, missing_context. Original description lacks critical information about side effects. Added details about what gets deleted (environment and associated deployments), the resulting state (environment unavailable), and a warning about irreversibility to help AI agents understand the consequences of this destructive operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8020,14 +7820,14 @@
       "operation_id": "DeleteEnvironment",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
         "vague_description",
-        "missing_side_effects"
+        "missing_side_effects",
+        "missing_context"
       ],
       "current_summary": "Delete a specific environment.",
       "current_description": "Delete a specific environment.",
-      "description_suggestion": "Deletes a specific Environment within a Service. Requires the Environment Sid. Returns a success message if the environment is deleted.",
-      "reasoning": "The current description is too vague. The suggestion adds context about the required parameters and the returned message, including side effects.",
+      "description_suggestion": "Deletes a specific Environment resource by its SID within a given Service. This operation removes the environment and all associated deployments. The environment will no longer be available for function and asset deployment. Use with caution as this action cannot be undone.",
+      "reasoning": "Original description lacks critical information about side effects. Added details about what gets deleted (environment and associated deployments), the resulting state (environment unavailable), and a warning about irreversibility to help AI agents understand the consequences of this destructive operation.",
       "batch_index": 2
     }
   },
@@ -8042,7 +7842,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'ListFunction' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are too vague. The suggestion adds context about the required parameters and the returned object.",
+    "message": "Operation 'ListFunction' has semantic quality issues: vague_description, missing_output_details, missing_input_details. Description is too minimal and identical to summary. Enhanced to clarify pagination support, parameter capabilities, response structure (array of Function objects), and typical use cases for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8056,15 +7856,14 @@
       "operation_id": "ListFunction",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
         "vague_description",
-        "missing_context"
+        "missing_output_details",
+        "missing_input_details"
       ],
       "current_summary": "Retrieve a list of all Functions.",
       "current_description": "Retrieve a list of all Functions.",
-      "summary_suggestion": "List all functions for a specific service.",
-      "description_suggestion": "Lists all functions associated with a specific Service. Returns a list of Function objects.",
-      "reasoning": "The current summary and description are too vague. The suggestion adds context about the required parameters and the returned object.",
+      "description_suggestion": "Retrieves a paginated list of all Function resources within a Service. Supports filtering and pagination parameters. Returns an array of Function objects with their metadata and configuration. Use this to discover available functions or manage function inventory within a service.",
+      "reasoning": "Description is too minimal and identical to summary. Enhanced to clarify pagination support, parameter capabilities, response structure (array of Function objects), and typical use cases for better AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -8079,7 +7878,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'CreateFunction' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. The current summary and description are too vague. The suggestion adds context about the required input parameters, request body, and the returned object.",
+    "message": "Operation 'CreateFunction' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Current description lacks specificity about inputs and outputs. Added clarity about required parameters (ServiceSid, function name), what is returned (Function object with SID and metadata), and the effect (function becomes available for versioning and deployment) to improve AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -8093,17 +7892,273 @@
       "operation_id": "CreateFunction",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary",
         "vague_description",
         "missing_input_details",
         "missing_output_details"
       ],
       "current_summary": "Create a new Function resource.",
       "current_description": "Create a new Function resource.",
-      "summary_suggestion": "Create a new function for a service.",
-      "description_suggestion": "Creates a new function for a specific Service. Requires function details in the request body. Returns the newly created Function object.",
-      "reasoning": "The current summary and description are too vague. The suggestion adds context about the required input parameters, request body, and the returned object.",
+      "description_suggestion": "Creates a new Function resource within a Service. Requires the ServiceSid path parameter and a function name in the request body. Returns the newly created Function object with its SID and metadata. The function will be available for versioning and deployment to environments.",
+      "reasoning": "Current description lacks specificity about inputs and outputs. Added clarity about required parameters (ServiceSid, function name), what is returned (Function object with SID and metadata), and the effect (function becomes available for versioning and deployment) to improve AI agent decision-making.",
       "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchLog' has semantic quality issues: vague_description, missing_context, missing_output_details. Original description is too minimal and lacks context about what logs contain and their purpose. Added specificity about required parameters, return value details, and use case context to help AI agents understand when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchLog",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a specific log.",
+      "current_description": "Retrieve a specific log.",
+      "summary_suggestion": "Fetch a specific environment log entry",
+      "description_suggestion": "Retrieves a specific log entry from a Serverless environment. Requires the Service SID, Environment SID, and Log SID. Returns the log object containing execution details, timestamps, and output information for debugging and monitoring purposes.",
+      "reasoning": "Original description is too minimal and lacks context about what logs contain and their purpose. Added specificity about required parameters, return value details, and use case context to help AI agents understand when to use this operation.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListService' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Original description lacks pagination context and output details. Added information about pagination support and what fields are returned to help AI agents understand how to iterate through results and what data to expect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListService",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a list of all Services.",
+      "current_description": "Retrieve a list of all Services.",
+      "summary_suggestion": "List all Serverless Services",
+      "description_suggestion": "Retrieves a paginated list of all Serverless Services in the account. Supports pagination parameters (PageSize, Page, PageToken) to control result set size and navigation. Returns an array of Service objects with metadata including SID, friendly name, creation date, and status.",
+      "reasoning": "Original description lacks pagination context and output details. Added information about pagination support and what fields are returned to help AI agents understand how to iterate through results and what data to expect.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'CreateService' has semantic quality issues: vague_description, missing_input_details, missing_output_details, missing_side_effects. Original description is too generic. Added required input (friendly name), return value details (SID, timestamps), and side effects (Service becomes available for deployment) to clarify the operation's purpose and effects for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "CreateService",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Create a new Service resource.",
+      "current_description": "Create a new Service resource.",
+      "summary_suggestion": "Create a new Serverless Service",
+      "description_suggestion": "Creates a new Serverless Service resource. Requires a unique friendly name for the Service. Returns the newly created Service object with assigned SID, creation timestamp, and initial configuration. The Service becomes available for deploying Functions and Assets immediately after creation.",
+      "reasoning": "Original description is too generic. Added required input (friendly name), return value details (SID, timestamps), and side effects (Service becomes available for deployment) to clarify the operation's purpose and effects for AI agents.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'FetchService' has semantic quality issues: vague_description, missing_output_details. Original description lacks context about what information is returned and the operation's use case. Added details about return value contents and typical usage scenarios to improve AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "FetchService",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "Retrieve a specific Service resource.",
+      "current_description": "Retrieve a specific Service resource.",
+      "summary_suggestion": "Fetch a specific Serverless Service",
+      "description_suggestion": "Retrieves a specific Serverless Service resource by its SID. Returns the Service object containing configuration details, metadata, creation date, and current status. Use this to inspect Service properties before deploying or managing Functions and Assets.",
+      "reasoning": "Original description lacks context about what information is returned and the operation's use case. Added details about return value contents and typical usage scenarios to improve AI agent interpretability.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'DeleteService' has semantic quality issues: vague_description, missing_output_details, missing_side_effects. Original description omits critical information about cascading deletions and permanence. Added warnings about side effects (deletion of all child resources) and clarified the response to help AI agents understand the destructive nature of this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "DeleteService",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete a Service resource.",
+      "current_description": "Delete a Service resource.",
+      "summary_suggestion": "Delete a Serverless Service",
+      "description_suggestion": "Permanently deletes a Serverless Service resource and all associated Functions, Assets, Environments, and Deployments. This action cannot be undone. Requires the Service SID. Returns HTTP 204 No Content on successful deletion.",
+      "reasoning": "Original description omits critical information about cascading deletions and permanence. Added warnings about side effects (deletion of all child resources) and clarified the response to help AI agents understand the destructive nature of this operation.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'UpdateService' has semantic quality issues: vague_description, missing_input_details, missing_output_details. Original description lacks clarity about what can be updated and whether partial updates are supported. Added information about updateable fields, partial update support, and return value to help AI agents understand the operation's scope and effects.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "UpdateService",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Update a specific Service resource.",
+      "current_description": "Update a specific Service resource.",
+      "summary_suggestion": "Update a Serverless Service",
+      "description_suggestion": "Updates a specific Serverless Service resource. Supports partial updates to the friendly name and other Service-level configuration. Requires the Service SID. Returns the updated Service object with modified fields and current metadata. Only provided fields are modified.",
+      "reasoning": "Original description lacks clarity about what can be updated and whether partial updates are supported. Added information about updateable fields, partial update support, and return value to help AI agents understand the operation's scope and effects.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'ListVariable' has semantic quality issues: vague_description, missing_context, missing_input_details, missing_output_details. Summary is clear and action-oriented. Description has been improved to include context about Variables' purpose (environment configuration), required parameters, pagination support, and return value details for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "ListVariable",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "List all Variables in an Environment",
+      "current_description": "Retrieves a paginated list of all Variables defined in a specific Serverless Environment. Requires Service SID and Environment SID. Supports pagination parameters (PageSize, Page, PageToken). Returns an array of Variable objects containing key-value pairs, visibility settings, and metadata for environment-specific configuration management.",
+      "reasoning": "Summary is clear and action-oriented. Description has been improved to include context about Variables' purpose (environment configuration), required parameters, pagination support, and return value details for better AI agent understanding.",
+      "batch_index": 4
     }
   },
   {

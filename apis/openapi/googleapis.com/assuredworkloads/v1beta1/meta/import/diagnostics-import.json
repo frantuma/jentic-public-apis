@@ -6291,7 +6291,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'assuredworkloads.organizations.locations.workloads.enableResourceMonitoring' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The summary was missing, and the description lacked details about the operation's success indication and the specific compliance violations being monitored.",
+    "message": "Operation 'assuredworkloads.organizations.locations.workloads.enableResourceMonitoring' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description lacks context about what monitoring does, what permission is required, and what the operation returns. Added details about activation of monitoring, compliance violation detection, required permissions, and response type for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6306,13 +6306,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Enable resource violation monitoring for a workload.",
-      "summary_suggestion": "Enable resource monitoring for a workload.",
-      "description_suggestion": "Enables resource violation monitoring for a specified workload. This action will start monitoring the workload for any compliance violations related to resource usage. The operation returns a status indicating the success of the enablement.",
-      "reasoning": "The current summary and description are vague. The summary was missing, and the description lacked details about the operation's success indication and the specific compliance violations being monitored.",
+      "summary_suggestion": "Enable resource violation monitoring for workload",
+      "description_suggestion": "Enables resource violation monitoring for the specified workload. This activates continuous monitoring of resources within the workload environment to detect compliance violations. Returns an EnableResourceMonitoringResponse upon successful completion. Requires assuredworkloads.workload.update permission.",
+      "reasoning": "Missing summary entirely. Description lacks context about what monitoring does, what permission is required, and what the operation returns. Added details about activation of monitoring, compliance violation detection, required permissions, and response type for better AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -6327,7 +6328,43 @@
         "character": 0
       }
     },
-    "message": "Operation 'assuredworkloads.organizations.locations.workloads.updates.list' has semantic quality issues: vague_summary. The current summary was missing. The description is clear, but a concise summary was needed to improve clarity and AI agent interpretability.",
+    "message": "Operation 'assuredworkloads.organizations.locations.workloads.restrictAllowedResources' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about the operation's effect and return value. Reorganized to clarify what the operation does, required permissions, reference documentation, and that it returns a long-running operation for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "assuredworkloads.organizations.locations.workloads.restrictAllowedResources",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Restrict the list of resources allowed in the Workload environment. The current list of allowed products can be found at https://cloud.google.com/assured-workloads/docs/supported-products In addition to assuredworkloads.workload.update permission, the user should also have orgpolicy.policy.set permission on the folder resource to use this functionality.",
+      "summary_suggestion": "Restrict allowed resources in workload environment",
+      "description_suggestion": "Restricts the list of resources allowed within the Workload environment by applying resource constraints. Requires both assuredworkloads.workload.update and orgpolicy.policy.set permissions on the folder resource. Refer to https://cloud.google.com/assured-workloads/docs/supported-products for the current list of supported products. Returns a long-running operation that completes when the resource restrictions are applied.",
+      "reasoning": "Missing summary. Description lacks clarity about the operation's effect and return value. Reorganized to clarify what the operation does, required permissions, reference documentation, and that it returns a long-running operation for better AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'assuredworkloads.organizations.locations.workloads.updates.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description is too generic and lacks context about what 'updates' means in this domain (compliance configuration changes). Added domain context about WorkloadUpdate objects, pagination support, and clarified the nature of updates for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6341,12 +6378,15 @@
       "operation_id": "assuredworkloads.organizations.locations.workloads.updates.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "This endpoint lists all updates for the given workload.",
-      "summary_suggestion": "List all updates for a workload.",
-      "reasoning": "The current summary was missing. The description is clear, but a concise summary was needed to improve clarity and AI agent interpretability.",
+      "summary_suggestion": "List all workload compliance updates",
+      "description_suggestion": "Lists all workload updates (compliance configuration changes) for the specified workload. Returns a paginated list of WorkloadUpdate objects containing information about each compliance update. Supports filtering and pagination through standard list parameters.",
+      "reasoning": "Missing summary. Description is too generic and lacks context about what 'updates' means in this domain (compliance configuration changes). Added domain context about WorkloadUpdate objects, pagination support, and clarified the nature of updates for better AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -6361,7 +6401,79 @@
         "character": 0
       }
     },
-    "message": "Operation 'assuredworkloads.organizations.locations.workloads.create' has semantic quality issues: vague_summary, missing_context. The current summary and description were missing. The description lacked details about the request format and the returned workload object. The summary and description were added to improve clarity and provide necessary context for AI agents.",
+    "message": "Operation 'assuredworkloads.organizations.locations.workloads.violations.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about return value and pagination support. Added summary, clarified that it returns Violation objects, emphasized pagination support, and improved formatting of the wildcard documentation for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "assuredworkloads.organizations.locations.workloads.violations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists the Violations in the AssuredWorkload Environment. Callers may also choose to read across multiple Workloads as per [AIP-159](https://google.aip.dev/159) by using '-' (the hyphen or dash character) as a wildcard character instead of workload-id in the parent. Format `organizations/{org_id}/locations/{location}/workloads/-`",
+      "summary_suggestion": "List compliance violations in workload environment",
+      "description_suggestion": "Lists all compliance violations detected in the specified Assured Workload environment. Supports querying across multiple workloads by using '-' as a wildcard in the parent path (format: `organizations/{org_id}/locations/{location}/workloads/-`), following AIP-159 conventions. Returns a paginated list of Violation objects with details about each compliance violation. Supports filtering and pagination through standard list parameters.",
+      "reasoning": "Missing summary. Description lacks clarity about return value and pagination support. Added summary, clarified that it returns Violation objects, emphasized pagination support, and improved formatting of the wildcard documentation for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'assuredworkloads.organizations.locations.workloads.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description uses unexplained acronym 'CRM Node' and lacks output details. Added summary, clarified CRM terminology, specified return type (Workload objects), and documented pagination support for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "assuredworkloads.organizations.locations.workloads.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists Assured Workloads under a CRM Node.",
+      "summary_suggestion": "List Assured Workloads under organization",
+      "description_suggestion": "Lists all Assured Workloads under the specified Cloud Resource Manager (CRM) node (organization or folder). Returns a paginated list of Workload objects containing workload configurations and compliance settings. Supports filtering and pagination through standard list parameters.",
+      "reasoning": "Missing summary. Description uses unexplained acronym 'CRM Node' and lacks output details. Added summary, clarified CRM terminology, specified return type (Workload objects), and documented pagination support for better AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'assuredworkloads.organizations.locations.workloads.create' has semantic quality issues: vague_summary, missing_context, missing_output_details, missing_side_effects. Missing summary. Description is extremely vague and lacks input/output details and side effects. Added summary, clarified input requirements (Workload object with specific fields), documented that it returns a long-running operation, and explained the side effect of creating workload environment and applying policies for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6376,14 +6488,301 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Creates Assured Workload.",
-      "summary_suggestion": "Create a new Assured Workload.",
-      "description_suggestion": "Creates a new Assured Workload with the specified configuration. The request should include the necessary details for the workload, such as the resource settings and compliance policies. The operation returns the newly created workload object.",
-      "reasoning": "The current summary and description were missing. The description lacked details about the request format and the returned workload object. The summary and description were added to improve clarity and provide necessary context for AI agents.",
+      "summary_suggestion": "Create new Assured Workload with compliance settings",
+      "description_suggestion": "Creates a new Assured Workload with the specified compliance configuration and resource settings. Accepts a Workload object containing workload name, compliance regime, KMS settings, and resource constraints. Returns a long-running operation that completes when the workload and its associated resources are provisioned. The operation creates the workload environment and applies configured compliance policies.",
+      "reasoning": "Missing summary. Description is extremely vague and lacks input/output details and side effects. Added summary, clarified input requirements (Workload object with specific fields), documented that it returns a long-running operation, and explained the side effect of creating workload environment and applying policies for better AI agent understanding.",
       "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'assuredworkloads.organizations.locations.workloads.analyzeWorkloadMove' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about return value and practical use case. Added summary, specified return type (MoveImpact object), clarified the best-effort nature, and added context about using this for pre-migration evaluation to help AI agents understand when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "assuredworkloads.organizations.locations.workloads.analyzeWorkloadMove",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Analyzes a hypothetical move of a source resource to a target workload to surface compliance risks. The analysis is best effort and is not guaranteed to be exhaustive.",
+      "summary_suggestion": "Analyze compliance risks of resource move",
+      "description_suggestion": "Analyzes a hypothetical move of a source resource to a target workload to identify potential compliance risks and violations. Returns a MoveImpact object detailing compliance risks, policy conflicts, and other impacts of the proposed move. The analysis is best-effort and may not be exhaustive. Use this to evaluate feasibility before performing actual resource migrations.",
+      "reasoning": "Missing summary. Description lacks clarity about return value and practical use case. Added summary, specified return type (MoveImpact object), clarified the best-effort nature, and added context about using this for pre-migration evaluation to help AI agents understand when and how to use this operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'assuredworkloads.organizations.locations.workloads.delete' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity on return value and prerequisites structure. Added explicit summary, clarified prerequisites, specified return type (empty response), and reorganized for better AI agent understanding of when this operation can be used.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "assuredworkloads.organizations.locations.workloads.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes the workload. Make sure that workload's direct children are already in a deleted state, otherwise the request will fail with a FAILED_PRECONDITION error. In addition to assuredworkloads.workload.delete permission, the user should also have orgpolicy.policy.set permission on the deleted folder to remove Assured Workloads OrgPolicies.",
+      "summary_suggestion": "Delete a workload and its associated policies",
+      "description_suggestion": "Deletes the specified workload and removes associated Assured Workloads OrgPolicies. Prerequisites: all direct child resources must already be deleted, and the caller must have both assuredworkloads.workload.delete and orgpolicy.policy.set permissions on the workload's folder. Returns an empty response on success. Fails with FAILED_PRECONDITION if child resources still exist.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on return value and prerequisites structure. Added explicit summary, clarified prerequisites, specified return type (empty response), and reorganized for better AI agent understanding of when this operation can be used.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'assuredworkloads.organizations.locations.operations.get' has semantic quality issues: vague_summary. Summary is missing. Description is clear and complete, explaining purpose (get latest state), use case (polling), and return type (operation state). Added concise, action-oriented summary.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "assuredworkloads.organizations.locations.operations.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.",
+      "summary_suggestion": "Retrieve the current state of a long-running operation",
+      "reasoning": "Summary is missing. Description is clear and complete, explaining purpose (get latest state), use case (polling), and return type (operation state). Added concise, action-oriented summary.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'assuredworkloads.organizations.locations.workloads.patch' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity on return value and etag usage. Added summary specifying updatable fields. Enhanced description with PATCH semantics explanation, etag behavior, concurrency constraints, and explicit return type for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "assuredworkloads.organizations.locations.workloads.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates an existing workload. Currently allows updating of workload display_name and labels. For force updates don't set etag field in the Workload. Only one update operation per workload can be in progress.",
+      "summary_suggestion": "Update workload display name and labels",
+      "description_suggestion": "Updates an existing workload's display_name and labels. Supports partial updates via PATCH semantics. For force updates, omit the etag field; otherwise include the current etag for optimistic concurrency control. Only one update operation per workload can be in progress. Returns the updated Workload object.",
+      "reasoning": "Missing summary. Description lacks clarity on return value and etag usage. Added summary specifying updatable fields. Enhanced description with PATCH semantics explanation, etag behavior, concurrency constraints, and explicit return type for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'assuredworkloads.organizations.locations.operations.list' has semantic quality issues: vague_summary. Summary is missing. Description is adequate, explaining filtering capability and error handling. Added concise, action-oriented summary that clarifies this lists long-running operations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "assuredworkloads.organizations.locations.operations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "",
+      "current_description": "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
+      "summary_suggestion": "List long-running operations matching filter criteria",
+      "reasoning": "Summary is missing. Description is adequate, explaining filtering capability and error handling. Added concise, action-oriented summary that clarifies this lists long-running operations.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'assuredworkloads.organizations.locations.workloads.violations.acknowledge' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity on input requirements and return value. Added summary. Enhanced description with explicit mention of request requirements (acknowledgement details), return type (AcknowledgeViolationResponse), and permanence for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "assuredworkloads.organizations.locations.workloads.violations.acknowledge",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Acknowledges an existing violation. By acknowledging a violation, users acknowledge the existence of a compliance violation in their workload and decide to ignore it due to a valid business justification. Acknowledgement is a permanent operation and it cannot be reverted.",
+      "summary_suggestion": "Acknowledge a compliance violation in a workload",
+      "description_suggestion": "Acknowledges an existing compliance violation in the workload, indicating acceptance of the violation due to valid business justification. This is a permanent operation that cannot be reverted. Requires providing acknowledgement details in the request. Returns an AcknowledgeViolationResponse confirming the acknowledgement.",
+      "reasoning": "Missing summary. Description lacks clarity on input requirements and return value. Added summary. Enhanced description with explicit mention of request requirements (acknowledgement details), return type (AcknowledgeViolationResponse), and permanence for AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'assuredworkloads.organizations.locations.workloads.updates.apply' has semantic quality issues: vague_summary, vague_description, missing_output_details. Missing summary and vague description. Original description is too generic ('creates a new operation'). Added summary clarifying the domain context (compliance update). Enhanced description with specifics about what gets updated (compliance configuration), input type, and return type (long-running operation) for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "assuredworkloads.organizations.locations.workloads.updates.apply",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "This endpoint creates a new operation to apply the given update.",
+      "summary_suggestion": "Apply a compliance update to a workload",
+      "description_suggestion": "Applies a pending workload compliance update by creating a new long-running operation. The update modifies the workload's compliance configuration according to the specified ApplyWorkloadUpdateRequest. Returns a GoogleLongrunningOperation that can be polled to track the update's progress and completion status.",
+      "reasoning": "Missing summary and vague description. Original description is too generic ('creates a new operation'). Added summary clarifying the domain context (compliance update). Enhanced description with specifics about what gets updated (compliance configuration), input type, and return type (long-running operation) for better AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'assuredworkloads.organizations.locations.workloads.enableComplianceUpdates' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is detailed but lacks clarity on return value and permission requirements structure. Added concise summary. Reorganized description for clarity, specified return type (EnableComplianceUpdatesResponse), and clarified permission requirements for better AI agent understanding of prerequisites.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "assuredworkloads.organizations.locations.workloads.enableComplianceUpdates",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "This endpoint enables Assured Workloads service to offer compliance updates for the folder based assured workload. It sets up an Assured Workloads Service Agent, having permissions to read compliance controls (for example: Org Policies) applied on the workload. The caller must have `resourcemanager.folders.getIamPolicy` and `resourcemanager.folders.setIamPolicy` permissions on the assured workload folder.",
+      "summary_suggestion": "Enable compliance updates for a workload",
+      "description_suggestion": "Enables the Assured Workloads service to provide compliance updates for the specified workload. This operation provisions an Assured Workloads Service Agent with permissions to read compliance controls (such as Org Policies) applied to the workload. Requires caller to have resourcemanager.folders.getIamPolicy and resourcemanager.folders.setIamPolicy permissions on the workload's folder. Returns an EnableComplianceUpdatesResponse on success.",
+      "reasoning": "Missing summary. Description is detailed but lacks clarity on return value and permission requirements structure. Added concise summary. Reorganized description for clarity, specified return type (EnableComplianceUpdatesResponse), and clarified permission requirements for better AI agent understanding of prerequisites.",
+      "batch_index": 0
     }
   },
   {
@@ -6397,7 +6796,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 14 operations analyzed, 3 quality issues found",
+    "message": "Semantic analysis completed: 14 operations analyzed, 14 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -6409,7 +6808,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 14,
-      "total_issues_found": 3,
+      "total_issues_found": 14,
       "batches_processed": 2
     }
   }

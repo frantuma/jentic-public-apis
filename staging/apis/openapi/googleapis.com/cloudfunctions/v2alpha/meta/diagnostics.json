@@ -6413,7 +6413,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudfunctions.projects.locations.functions.patch' has semantic quality issues: vague_summary. The current summary is missing. The description is vague and lacks details about the input and output. The suggestions improve clarity, completeness, and AI agent interpretability.",
+    "message": "Operation 'cloudfunctions.projects.locations.functions.delete' has semantic quality issues: vague_summary, missing_side_effects. Missing summary entirely. Description lacks clarity about irreversibility and complete removal of resources. Added explicit mention of side effects (trigger updates and permanent deletion) for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6424,16 +6424,17 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "cloudfunctions.projects.locations.functions.patch",
+      "operation_id": "cloudfunctions.projects.locations.functions.delete",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_side_effects"
       ],
       "current_summary": "",
-      "current_description": "Updates existing function.",
-      "summary_suggestion": "Update an existing function",
-      "description_suggestion": "Updates the specified function with the provided configuration. Supports partial updates where only the specified fields are updated.",
-      "reasoning": "The current summary is missing. The description is vague and lacks details about the input and output. The suggestions improve clarity, completeness, and AI agent interpretability.",
+      "current_description": "Deletes a function with the given name from the specified project. If the given function is used by some trigger, the trigger will be updated to remove this function.",
+      "summary_suggestion": "Delete a Cloud Function by name",
+      "description_suggestion": "Deletes a Cloud Function with the specified name from the project. If the function is referenced by event triggers, those triggers will be automatically updated to remove the function reference. This operation is irreversible and will remove all function code and configuration.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about irreversibility and complete removal of resources. Added explicit mention of side effects (trigger updates and permanent deletion) for AI agent decision-making.",
       "batch_index": 0
     }
   },
@@ -6448,7 +6449,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudfunctions.projects.locations.runtimes.list' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary is concise and action-oriented.",
+    "message": "Operation 'cloudfunctions.projects.locations.functions.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is too minimal and doesn't clarify what information is returned. Enhanced to specify that it returns the complete Function resource with all configuration details, helping AI agents understand the scope of returned data.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6459,16 +6460,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "cloudfunctions.projects.locations.runtimes.list",
+      "operation_id": "cloudfunctions.projects.locations.functions.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Returns a list of runtimes that are supported for the requested project.",
-      "summary_suggestion": "List supported runtimes for a project",
-      "reasoning": "The current summary is missing. The suggested summary is concise and action-oriented.",
-      "batch_index": 2
+      "current_description": "Returns a function with the given name from the requested project.",
+      "summary_suggestion": "Retrieve a Cloud Function by name",
+      "description_suggestion": "Retrieves the complete configuration and metadata of a Cloud Function with the specified name from the project. Returns the Function resource including build configuration, service configuration, event trigger details, and current deployment status.",
+      "reasoning": "Missing summary. Description is too minimal and doesn't clarify what information is returned. Enhanced to specify that it returns the complete Function resource with all configuration details, helping AI agents understand the scope of returned data.",
+      "batch_index": 0
     }
   },
   {
@@ -6482,7 +6485,190 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudfunctions.projects.locations.functions.detachFunction' has semantic quality issues: vague_summary, missing_context, missing_side_effects. The current summary was missing, and the description lacked details about the context, side effects, and the process involved.",
+    "message": "Operation 'cloudfunctions.projects.locations.functions.patch' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Missing summary and extremely vague description. Original doesn't explain what can be updated, whether partial updates are supported, or what is returned. Added clarity about partial update support, return value, and potential side effects (redeployment) for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudfunctions.projects.locations.functions.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates existing function.",
+      "summary_suggestion": "Update a Cloud Function configuration",
+      "description_suggestion": "Updates an existing Cloud Function's configuration. Accepts a Function resource with fields to be modified. Supports partial updates - only provided fields will be changed. Returns the updated Function resource with all current configuration details. Changes may trigger redeployment depending on which fields are modified.",
+      "reasoning": "Missing summary and extremely vague description. Original doesn't explain what can be updated, whether partial updates are supported, or what is returned. Added clarity about partial update support, return value, and potential side effects (redeployment) for better AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudfunctions.projects.locations.list' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is generic and lacks domain context about Cloud Functions deployment regions. Enhanced to clarify this lists deployment regions and added context about use case (determining deployment targets).",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudfunctions.projects.locations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Lists information about the supported locations for this service.",
+      "summary_suggestion": "List supported Cloud Functions locations",
+      "description_suggestion": "Lists all Google Cloud locations where the Cloud Functions service is available. Returns location metadata including region identifiers, display names, and service capabilities. Useful for determining where functions can be deployed.",
+      "reasoning": "Missing summary. Description is generic and lacks domain context about Cloud Functions deployment regions. Enhanced to clarify this lists deployment regions and added context about use case (determining deployment targets).",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudfunctions.projects.locations.operations.list' has semantic quality issues: vague_summary, missing_context. Missing summary and vague description. Original doesn't clarify what operations are being listed (long-running async tasks) or their domain context. Enhanced to specify these are Cloud Functions operations (deployments, upgrades) and clarified filtering capabilities for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudfunctions.projects.locations.operations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
+      "summary_suggestion": "List long-running Cloud Functions operations",
+      "description_suggestion": "Lists long-running operations for Cloud Functions in the specified location that match the provided filter criteria. Returns Operation resources including status, progress, and results of asynchronous tasks such as function deployments and upgrades. Supports filtering by operation name, status, and other criteria.",
+      "reasoning": "Missing summary and vague description. Original doesn't clarify what operations are being listed (long-running async tasks) or their domain context. Enhanced to specify these are Cloud Functions operations (deployments, upgrades) and clarified filtering capabilities for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudfunctions.projects.locations.functions.abortFunctionUpgrade' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks clarity about what happens to the original function and what is returned. Added explicit mention that 1st Gen function remains intact, clarified this is a rollback operation, and specified the Operation return value for AI agent understanding of async behavior.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudfunctions.projects.locations.functions.abortFunctionUpgrade",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Aborts generation upgrade process for a function with the given name from the specified project. Deletes all 2nd Gen copy related configuration and resources which were created during the upgrade process.",
+      "summary_suggestion": "Abort Cloud Function 1st to 2nd Gen upgrade",
+      "description_suggestion": "Aborts an in-progress upgrade of a 1st Generation Cloud Function to 2nd Generation. Rolls back the upgrade by deleting all 2nd Gen copy configuration and resources created during the upgrade process. The original 1st Gen function remains intact and operational. Returns an Operation resource tracking the abort process.",
+      "reasoning": "Missing summary. Description lacks clarity about what happens to the original function and what is returned. Added explicit mention that 1st Gen function remains intact, clarified this is a rollback operation, and specified the Operation return value for AI agent understanding of async behavior.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudfunctions.projects.locations.functions.commitFunctionUpgrade' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description mentions irreversibility but lacks clarity about complete removal of 1st Gen resources and the permanent nature of the change. Enhanced to emphasize irreversibility, clarify that 1st Gen is completely removed, and specify Operation return value for async tracking.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudfunctions.projects.locations.functions.commitFunctionUpgrade",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Finalizes the upgrade after which function upgrade can not be rolled back. This is the last step of the multi step process to upgrade 1st Gen functions to 2nd Gen. Deletes all original 1st Gen related configuration and resources.",
+      "summary_suggestion": "Finalize 1st to 2nd Gen Cloud Function upgrade",
+      "description_suggestion": "Finalizes and commits a 1st Generation to 2nd Generation Cloud Function upgrade. This is the final irreversible step in the multi-step upgrade process. Deletes all original 1st Gen configuration and resources, making the upgrade permanent. After commitment, the function operates as 2nd Gen only and cannot be rolled back. Returns an Operation resource tracking the commit process.",
+      "reasoning": "Missing summary. Description mentions irreversibility but lacks clarity about complete removal of 1st Gen resources and the permanent nature of the change. Enhanced to emphasize irreversibility, clarify that 1st Gen is completely removed, and specify Operation return value for async tracking.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudfunctions.projects.locations.functions.detachFunction' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_context, missing_output_details. Original description is grammatically unclear ('Detaches 2nd Gen function to Cloud Run' is ambiguous about direction). Missing context about what detachment means, what the operation returns, and when it should be used. Added clarity about the operation's purpose, expected output, and use case for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6497,15 +6683,387 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "vague_description",
+        "unclear_purpose",
         "missing_context",
-        "missing_side_effects"
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Detaches 2nd Gen function to Cloud Run function.",
-      "summary_suggestion": "Detach 2nd Gen function to Cloud Run function.",
-      "description_suggestion": "Detaches the specified 2nd Gen Cloud Function to a Cloud Run function. This operation changes the function's runtime environment and may affect its availability during the process. The function's state and configuration are updated accordingly.",
-      "reasoning": "The current summary was missing, and the description lacked details about the context, side effects, and the process involved.",
+      "summary_suggestion": "Detach 2nd Gen function from Cloud Run",
+      "description_suggestion": "Detaches a 2nd Gen Cloud Function from its Cloud Run service, converting it back to a standalone Cloud Run service. This operation removes the Cloud Functions management layer while preserving the underlying Cloud Run deployment. Returns the detached Cloud Run service configuration. This is typically used when migrating away from Cloud Functions management.",
+      "reasoning": "Original description is grammatically unclear ('Detaches 2nd Gen function to Cloud Run' is ambiguous about direction). Missing context about what detachment means, what the operation returns, and when it should be used. Added clarity about the operation's purpose, expected output, and use case for better AI agent understanding.",
       "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudfunctions.projects.locations.functions.generateDownloadUrl' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks clarity about what input is required and what the response contains. Added explicit mention of input parameter (function name), response schema details, and practical use cases to improve AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudfunctions.projects.locations.functions.generateDownloadUrl",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns a signed URL for downloading deployed function source code. The URL is only valid for a limited period and should be used within 30 minutes of generation. For more information about the signed URL usage see: https://cloud.google.com/storage/docs/access-control/signed-urls",
+      "summary_suggestion": "Generate signed URL for function source download",
+      "description_suggestion": "Generates a time-limited signed URL for downloading the deployed source code of a Cloud Function. The returned URL is valid for 30 minutes and can be used to retrieve the function's source code from Cloud Storage. Requires the function name as input. Returns a GenerateDownloadUrlResponse containing the signed URL and its expiration time. Useful for backup, audit, or migration purposes.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about what input is required and what the response contains. Added explicit mention of input parameter (function name), response schema details, and practical use cases to improve AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudfunctions.projects.locations.functions.redirectFunctionUpgradeTraffic' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks information about what the operation returns and prerequisites. Added explicit mention of return type (Operation), prerequisites, and the fact that 1st Gen remains available for rollback, which is critical for AI agents to understand the upgrade workflow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudfunctions.projects.locations.functions.redirectFunctionUpgradeTraffic",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Changes the traffic target of a function from the original 1st Gen function to the 2nd Gen copy. This is the second step of the multi step process to upgrade 1st Gen functions to 2nd Gen. After this operation, all new traffic will be served by 2nd Gen copy.",
+      "summary_suggestion": "Redirect function traffic to 2nd Gen copy",
+      "description_suggestion": "Redirects all incoming traffic for a 1st Gen Cloud Function to its 2nd Gen copy. This is the second step in the multi-step 1st Gen to 2nd Gen upgrade process. After this operation completes, all new requests are served by the 2nd Gen function while the 1st Gen function remains available for rollback. Requires the function name as input. Returns an Operation resource tracking the traffic migration. Prerequisites: SetupFunctionUpgradeConfig must have been called first.",
+      "reasoning": "Missing summary. Description lacks information about what the operation returns and prerequisites. Added explicit mention of return type (Operation), prerequisites, and the fact that 1st Gen remains available for rollback, which is critical for AI agents to understand the upgrade workflow.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudfunctions.projects.locations.functions.rollbackFunctionUpgradeTraffic' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks information about return type and when this operation can be called. Added explicit mention of Operation return type, prerequisite (traffic must be redirected first), and use case to improve AI agent understanding of the upgrade workflow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudfunctions.projects.locations.functions.rollbackFunctionUpgradeTraffic",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Reverts the traffic target of a function from the 2nd Gen copy to the original 1st Gen function. After this operation, all new traffic would be served by the 1st Gen.",
+      "summary_suggestion": "Rollback function traffic to 1st Gen",
+      "description_suggestion": "Reverts traffic for a Cloud Function from its 2nd Gen copy back to the original 1st Gen function. This operation undoes a previous redirectFunctionUpgradeTraffic call, restoring all incoming requests to the 1st Gen function. Requires the function name as input. Returns an Operation resource tracking the traffic rollback. Can only be called after traffic has been redirected to 2nd Gen. Useful for reverting failed upgrades.",
+      "reasoning": "Missing summary. Description lacks information about return type and when this operation can be called. Added explicit mention of Operation return type, prerequisite (traffic must be redirected first), and use case to improve AI agent understanding of the upgrade workflow.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudfunctions.projects.locations.functions.setupFunctionUpgradeConfig' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks explicit mention of return type and next steps in the upgrade workflow. Added Operation return type and reference to the next operation in the upgrade sequence to help AI agents understand the complete workflow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudfunctions.projects.locations.functions.setupFunctionUpgradeConfig",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a 2nd Gen copy of the function configuration based on the 1st Gen function with the given name. This is the first step of the multi step process to upgrade 1st Gen functions to 2nd Gen. Only 2nd Gen configuration is setup as part of this request and traffic continues to be served by 1st Gen.",
+      "summary_suggestion": "Setup 2nd Gen function upgrade configuration",
+      "description_suggestion": "Creates a 2nd Gen Cloud Function configuration based on an existing 1st Gen function. This is the first step in the multi-step 1st Gen to 2nd Gen upgrade process. The operation sets up the 2nd Gen configuration while traffic continues to be served by the 1st Gen function. Requires the 1st Gen function name as input. Returns an Operation resource. After completion, use redirectFunctionUpgradeTraffic to migrate traffic to the 2nd Gen copy.",
+      "reasoning": "Missing summary. Description lacks explicit mention of return type and next steps in the upgrade workflow. Added Operation return type and reference to the next operation in the upgrade sequence to help AI agents understand the complete workflow.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudfunctions.projects.locations.functions.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too minimal and lacks information about pagination, filtering, and response structure. Added details about supported parameters (page_size, page_token, filter), response format, and required input to improve AI agent understanding of how to use this operation effectively.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudfunctions.projects.locations.functions.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns a list of functions that belong to the requested project.",
+      "summary_suggestion": "List Cloud Functions in a project",
+      "description_suggestion": "Lists all Cloud Functions in the specified project and location. Supports pagination through page_size and page_token parameters. Optionally filter results using the filter parameter. Returns a ListFunctionsResponse containing an array of Function objects and a next_page_token for pagination. Requires the parent resource (project and location) as input.",
+      "reasoning": "Missing summary. Description is too minimal and lacks information about pagination, filtering, and response structure. Added details about supported parameters (page_size, page_token, filter), response format, and required input to improve AI agent understanding of how to use this operation effectively.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudfunctions.projects.locations.functions.create' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description lacks details about required input structure, what the operation returns, and the complete creation workflow. Added explicit mention of Function schema requirements, Operation return type, and the fact that creation includes build and deployment steps, which is essential for AI agents to understand the full scope of this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudfunctions.projects.locations.functions.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new function. If a function with the given name already exists in the specified project, the long running operation will return `ALREADY_EXISTS` error.",
+      "summary_suggestion": "Create a new Cloud Function",
+      "description_suggestion": "Creates a new Cloud Function in the specified project and location. Requires a Function object containing the function configuration (name, runtime, source, trigger, etc.). Returns a long-running Operation that tracks the function creation process. The operation completes when the function is fully deployed and ready to handle events. Returns ALREADY_EXISTS error if a function with the same name already exists in the project. Function creation includes building the container image and deploying to Cloud Run.",
+      "reasoning": "Missing summary. Description lacks details about required input structure, what the operation returns, and the complete creation workflow. Added explicit mention of Function schema requirements, Operation return type, and the fact that creation includes build and deployment steps, which is essential for AI agents to understand the full scope of this operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudfunctions.projects.locations.functions.generateUploadUrl' has semantic quality issues: vague_summary, missing_context, poor_ai_interpretability. Missing summary entirely. Original description is overly verbose and mixes implementation details with usage instructions. Improved version clarifies the operation's purpose (generating a signed URL for source uploads), explains the workflow context (used with CreateFunction/UpdateFunction), consolidates upload requirements, and specifies the response format for better AI agent understanding of inputs and outputs.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudfunctions.projects.locations.functions.generateUploadUrl",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Returns a signed URL for uploading a function source code. For more information about the signed URL usage see: https://cloud.google.com/storage/docs/access-control/signed-urls. Once the function source code upload is complete, the used signed URL should be provided in CreateFunction or UpdateFunction request as a reference to the function source code. When uploading source code to the generated signed URL, please follow these restrictions: * Source file type should be a zip file. * No credentials should be attached - the signed URLs provide access to the target bucket using internal service identity; if credentials were attached, the identity from the credentials would be used, but that identity does not have permissions to upload files to the URL. When making a HTTP PUT request, specify this header: * `content-type: application/zip` Do not specify this header: * `Authorization: Bearer YOUR_TOKEN`",
+      "summary_suggestion": "Generate signed URL for function source upload",
+      "description_suggestion": "Generates a signed URL for uploading Cloud Function source code. The returned URL can be used to upload a zip file containing the function source, which should then be referenced in CreateFunction or UpdateFunction requests. The signed URL provides temporary access to the target storage bucket using internal service identity. Upload requirements: source must be a zip file, content-type header must be 'application/zip', and no Authorization header should be included. Returns a GenerateUploadUrlResponse containing the signed URL and expiration time.",
+      "reasoning": "Missing summary entirely. Original description is overly verbose and mixes implementation details with usage instructions. Improved version clarifies the operation's purpose (generating a signed URL for source uploads), explains the workflow context (used with CreateFunction/UpdateFunction), consolidates upload requirements, and specifies the response format for better AI agent understanding of inputs and outputs.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudfunctions.projects.locations.runtimes.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks detail about what constitutes a runtime, pagination support, and practical use cases. Enhanced version specifies the response structure (identifiers, display names, deprecation status), mentions pagination support, and provides context for when an AI agent should use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudfunctions.projects.locations.runtimes.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns a list of runtimes that are supported for the requested project.",
+      "summary_suggestion": "List supported Cloud Function runtimes",
+      "description_suggestion": "Lists all runtime environments supported for Cloud Functions in the specified project and location. Returns a list of available runtimes with their identifiers, display names, and deprecation status. Supports pagination through standard list parameters (pageSize, pageToken). Use this operation to discover which language runtimes are available before creating or updating functions.",
+      "reasoning": "Missing summary. Description lacks detail about what constitutes a runtime, pagination support, and practical use cases. Enhanced version specifies the response structure (identifiers, display names, deprecation status), mentions pagination support, and provides context for when an AI agent should use this operation.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudfunctions.projects.locations.functions.setIamPolicy' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks input context (SetIamPolicyRequest structure), output details (returns updated Policy), and doesn't clearly explain the replacement behavior. Enhanced version specifies the request schema, explains what the policy contains, clarifies the return value, and provides context for error conditions to help AI agents understand when this operation succeeds or fails.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudfunctions.projects.locations.functions.setIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.",
+      "summary_suggestion": "Set IAM access control policy for function",
+      "description_suggestion": "Sets the IAM access control policy for the specified Cloud Function, replacing any existing policy. Requires the SetIamPolicyRequest containing the new Policy object with bindings that define role-to-member mappings. Returns the updated Policy object. May return NOT_FOUND if the function does not exist, INVALID_ARGUMENT if the policy is malformed, or PERMISSION_DENIED if the caller lacks setIamPolicy permission.",
+      "reasoning": "Missing summary. Description lacks input context (SetIamPolicyRequest structure), output details (returns updated Policy), and doesn't clearly explain the replacement behavior. Enhanced version specifies the request schema, explains what the policy contains, clarifies the return value, and provides context for error conditions to help AI agents understand when this operation succeeds or fails.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudfunctions.projects.locations.functions.testIamPermissions' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks input details (TestIamPermissionsRequest with permission list) and output details (TestIamPermissionsResponse with granted permissions). The warning about fail-open behavior is important but needs clearer context. Enhanced version specifies request/response schemas, clarifies the permission checking mechanism, and maintains the important security caveat while improving AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudfunctions.projects.locations.functions.testIamPermissions",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.",
+      "summary_suggestion": "Test IAM permissions on Cloud Function",
+      "description_suggestion": "Tests which IAM permissions the authenticated caller has on the specified Cloud Function. Accepts a TestIamPermissionsRequest containing a list of permission strings to check. Returns a TestIamPermissionsResponse with the subset of requested permissions that the caller actually has. If the function does not exist, returns an empty permission set rather than an error. Designed for building permission-aware UIs and tools; not suitable for authorization enforcement due to potential fail-open behavior.",
+      "reasoning": "Missing summary. Description lacks input details (TestIamPermissionsRequest with permission list) and output details (TestIamPermissionsResponse with granted permissions). The warning about fail-open behavior is important but needs clearer context. Enhanced version specifies request/response schemas, clarifies the permission checking mechanism, and maintains the important security caveat while improving AI agent interpretability.",
+      "batch_index": 2
     }
   },
   {
@@ -6519,7 +7077,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 19 operations analyzed, 3 quality issues found",
+    "message": "Semantic analysis completed: 19 operations analyzed, 18 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -6531,7 +7089,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 19,
-      "total_issues_found": 3,
+      "total_issues_found": 18,
       "batches_processed": 3
     }
   }

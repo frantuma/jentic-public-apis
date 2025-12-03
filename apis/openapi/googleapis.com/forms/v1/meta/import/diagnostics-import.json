@@ -4688,7 +4688,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'forms.forms.batchUpdate' has semantic quality issues: vague_summary, missing_context, missing_input_details. The current summary and description are vague. The suggested summary and description are more specific and provide a clear understanding of the operation's purpose, inputs, and outputs.",
+    "message": "Operation 'forms.forms.watches.renew' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity on return value and doesn't explicitly state what object is returned. Added summary for AI agent clarity. Enhanced description to specify the Watch object is returned and clarified the error handling behavior for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4699,18 +4699,17 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "forms.forms.batchUpdate",
+      "operation_id": "forms.forms.watches.renew",
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context",
-        "missing_input_details"
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Change the form with a batch of updates.",
-      "summary_suggestion": "Batch update a form with a set of changes",
-      "description_suggestion": "Applies a batch of updates to the specified form. The request should include a list of operations that modify the form's properties. Each operation must specify the type of change and the new value. The response includes the updated form object.",
-      "reasoning": "The current summary and description are vague. The suggested summary and description are more specific and provide a clear understanding of the operation's purpose, inputs, and outputs.",
+      "current_description": "Renew an existing watch for seven days. The state of the watch after renewal is `ACTIVE`, and the `expire_time` is seven days from the renewal. Renewing a watch in an error state (e.g. `SUSPENDED`) succeeds if the error is no longer present, but fail otherwise. After a watch has expired, RenewWatch returns `NOT_FOUND`.",
+      "summary_suggestion": "Renew a form watch for seven days",
+      "description_suggestion": "Renews an existing watch on a form for an additional seven days. After renewal, the watch state becomes `ACTIVE` with `expire_time` set to seven days from the renewal timestamp. If the watch is in an error state (e.g., `SUSPENDED`), renewal succeeds only if the error condition has been resolved. Returns the renewed Watch object with updated expiration time. Returns `NOT_FOUND` if the watch has already expired.",
+      "reasoning": "Missing summary entirely. Description lacks clarity on return value and doesn't explicitly state what object is returned. Added summary for AI agent clarity. Enhanced description to specify the Watch object is returned and clarified the error handling behavior for better AI agent decision-making.",
       "batch_index": 1
     }
   },
@@ -4725,7 +4724,120 @@
         "character": 0
       }
     },
-    "message": "Operation 'forms.forms.get' has semantic quality issues: vague_summary. The current summary is missing. The suggested summary and description provide clarity and completeness.",
+    "message": "Operation 'forms.forms.batchUpdate' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Missing summary entirely. Description is extremely vague ('Change the form') without explaining what types of changes are possible, what inputs are required, or what is returned. Added actionable summary. Enhanced description to clarify: batch nature of updates, types of modifications possible, atomic behavior, return value structure, and side effects (immediate modification). This significantly improves AI agent interpretability for determining when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "forms.forms.batchUpdate",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "",
+      "current_description": "Change the form with a batch of updates.",
+      "summary_suggestion": "Apply batch updates to a form",
+      "description_suggestion": "Applies a batch of updates to a form in a single request. Accepts a BatchUpdateFormRequest containing multiple update operations (e.g., modifying items, settings, info). Updates are applied atomically - either all updates succeed or the entire request fails. Returns a BatchUpdateFormResponse containing the updated form state and details about each applied update. Modifications affect the form's structure, content, and settings immediately.",
+      "reasoning": "Missing summary entirely. Description is extremely vague ('Change the form') without explaining what types of changes are possible, what inputs are required, or what is returned. Added actionable summary. Enhanced description to clarify: batch nature of updates, types of modifications possible, atomic behavior, return value structure, and side effects (immediate modification). This significantly improves AI agent interpretability for determining when to use this operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'forms.forms.setPublishSettings' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary entirely. Description lacks information about return value and side effects. Added concise summary. Enhanced description to clarify: what publish settings control, the return value (PublishSettings object), the legacy form limitation (already present but contextualized), and side effects (immediate effect on accessibility). This helps AI agents understand the operation's impact and what to expect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "forms.forms.setPublishSettings",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Updates the publish settings of a form. Legacy forms aren't supported because they don't have the `publish_settings` field.",
+      "summary_suggestion": "Update form publish settings",
+      "description_suggestion": "Updates the publish settings of a form, controlling how the form is shared and accessed. Accepts a SetPublishSettingsRequest with the desired publish configuration. Returns the updated PublishSettings object reflecting the new publication state. Note: Legacy forms are not supported as they lack the `publish_settings` field. Changes take effect immediately and affect form accessibility.",
+      "reasoning": "Missing summary entirely. Description lacks information about return value and side effects. Added concise summary. Enhanced description to clarify: what publish settings control, the return value (PublishSettings object), the legacy form limitation (already present but contextualized), and side effects (immediate effect on accessibility). This helps AI agents understand the operation's impact and what to expect.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'forms.forms.create' has semantic quality issues: vague_summary, missing_context. Missing summary entirely. Description is verbose and uses awkward phrasing ('disallowed', 'you must first call'). Improved version clarifies that only specific fields are accepted, explains the workflow for adding items, and specifies the return value for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "forms.forms.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Create a new form using the title given in the provided form message in the request. *Important:* Only the form.info.title and form.info.document_title fields are copied to the new form. All other fields including the form description, items and settings are disallowed. To create a new form and add items, you must first call forms.create to create an empty form with a title and (optional) document title, and then call forms.update to add the items.",
+      "summary_suggestion": "Create a new form with title",
+      "description_suggestion": "Creates a new Google Form with the specified title and optional document title. Only form.info.title and form.info.document_title fields are accepted in the request; all other fields (description, items, settings) are ignored. To add items to the form after creation, use the forms.update operation. Returns the newly created Form object with a unique formId.",
+      "reasoning": "Missing summary entirely. Description is verbose and uses awkward phrasing ('disallowed', 'you must first call'). Improved version clarifies that only specific fields are accepted, explains the workflow for adding items, and specifies the return value for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'forms.forms.get' has semantic quality issues: vague_summary, vague_description, missing_output_details. Missing summary and description is too minimal. Improved version specifies what is retrieved (complete form with all components), clarifies the required parameter, and explains the return value for AI agent clarity.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -4739,13 +4851,202 @@
       "operation_id": "forms.forms.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Get a form.",
-      "summary_suggestion": "Retrieve a specific form",
-      "description_suggestion": "Retrieves the specified form by its ID. Returns the form object if found.",
-      "reasoning": "The current summary is missing. The suggested summary and description provide clarity and completeness.",
+      "summary_suggestion": "Retrieve a form by ID",
+      "description_suggestion": "Retrieves a complete Google Form by its formId. Returns the Form object containing all form metadata, settings, items, and configuration. Requires the formId path parameter.",
+      "reasoning": "Missing summary and description is too minimal. Improved version specifies what is retrieved (complete form with all components), clarifies the required parameter, and explains the return value for AI agent clarity.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'forms.forms.responses.list' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. Missing summary and description lacks detail about pagination, filtering capabilities, and return structure. Improved version explains pagination support, filtering options, and the response format to help AI agents understand available parameters and expected output.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "forms.forms.responses.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "List a form's responses.",
+      "summary_suggestion": "List all responses for a form",
+      "description_suggestion": "Lists all FormResponse objects submitted for a specific form. Supports pagination via optional parameters (pageSize, pageToken) and filtering by response timestamp. Returns a ListFormResponsesResponse containing an array of FormResponse objects and pagination information.",
+      "reasoning": "Missing summary and description lacks detail about pagination, filtering capabilities, and return structure. Improved version explains pagination support, filtering options, and the response format to help AI agents understand available parameters and expected output.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'forms.forms.responses.get' has semantic quality issues: vague_summary, vague_description, missing_output_details. Missing summary and description is too vague ('one response'). Improved version clarifies that it retrieves a specific response by ID, explains what data is returned (complete response with answers), and specifies required parameters.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "forms.forms.responses.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Get one response from the form.",
+      "summary_suggestion": "Retrieve a specific form response",
+      "description_suggestion": "Retrieves a single FormResponse object by responseId from a specified form. Returns the complete response data including respondent answers to all form items. Requires both formId and responseId path parameters.",
+      "reasoning": "Missing summary and description is too vague ('one response'). Improved version clarifies that it retrieves a specific response by ID, explains what data is returned (complete response with answers), and specifies required parameters.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'forms.forms.watches.list' has semantic quality issues: vague_summary, vague_description, missing_context, missing_output_details. Missing summary. Description is confusing with unclear phrasing ('owned by invoking project', 'maximum number of watches is two'). Improved version clarifies that watches are form-specific, explains their purpose (event monitoring and notifications), and provides clearer context about limits and return value.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "forms.forms.watches.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Return a list of the watches owned by the invoking project. The maximum number of watches is two: For each invoker, the limit is one for each event type per form.",
+      "summary_suggestion": "List all watches for a form",
+      "description_suggestion": "Lists all Watch objects created for a specific form by the invoking project. Each Watch monitors form events and triggers notifications to a specified target. The maximum number of watches per form is two (one per event type). Returns an array of Watch objects with their configuration and expiration times.",
+      "reasoning": "Missing summary. Description is confusing with unclear phrasing ('owned by invoking project', 'maximum number of watches is two'). Improved version clarifies that watches are form-specific, explains their purpose (event monitoring and notifications), and provides clearer context about limits and return value.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'forms.forms.watches.create' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks clarity about watch purpose (event monitoring), what inputs are needed (event type, target), and what the operation returns. Improved version explains the watch functionality, clarifies the per-event-type limit, and specifies the return value for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "forms.forms.watches.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Create a new watch. If a watch ID is provided, it must be unused. For each invoking project, the per form limit is one watch per Watch.EventType. A watch expires seven days after it is created (see Watch.expire_time).",
+      "summary_suggestion": "Create a watch for form events",
+      "description_suggestion": "Creates a new Watch to monitor a specific form for events and receive notifications. Watches are configured with an event type (e.g., RESPONSES_SUBMITTED) and a notification target. Each form supports a maximum of one watch per event type. Watches automatically expire seven days after creation. Returns the created Watch object with its unique watchId and expiration time.",
+      "reasoning": "Missing summary. Description lacks clarity about watch purpose (event monitoring), what inputs are needed (event type, target), and what the operation returns. Improved version explains the watch functionality, clarifies the per-event-type limit, and specifies the return value for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'forms.forms.watches.delete' has semantic quality issues: vague_summary, vague_description, missing_output_details. Missing summary and description is too minimal. Improved version clarifies what deletion accomplishes (stops monitoring and notifications), specifies required parameters, explains the side effect (no more notifications), and indicates the response type.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "forms.forms.watches.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Delete a watch.",
+      "summary_suggestion": "Delete a form event watch",
+      "description_suggestion": "Deletes a Watch by watchId, stopping event monitoring and notifications for the specified form. Requires both formId and watchId path parameters. After deletion, no further notifications will be sent for that watch. Returns an empty response on success.",
+      "reasoning": "Missing summary and description is too minimal. Improved version clarifies what deletion accomplishes (stops monitoring and notifications), specifies required parameters, explains the side effect (no more notifications), and indicates the response type.",
       "batch_index": 0
     }
   },
@@ -4760,7 +5061,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 10 operations analyzed, 2 quality issues found",
+    "message": "Semantic analysis completed: 10 operations analyzed, 10 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -4772,7 +5073,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 10,
-      "total_issues_found": 2,
+      "total_issues_found": 10,
       "batches_processed": 2
     }
   }

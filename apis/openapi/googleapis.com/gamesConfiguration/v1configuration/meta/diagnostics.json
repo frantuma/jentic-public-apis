@@ -3004,7 +3004,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gamesConfiguration.leaderboardConfigurations.delete' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing. Added a side-effect warning and authentication requirement to the description for better clarity.",
+    "message": "Operation 'gamesConfiguration.leaderboardConfigurations.delete' has semantic quality issues: vague_summary, missing_side_effects, missing_context. Missing summary entirely. Description lacks clarity about permanence of deletion, required parameters, and response details. Added context about irreversibility, explicit parameter requirement, and HTTP response to improve AI agent understanding of when and how to use this destructive operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3019,13 +3019,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_side_effects"
+        "missing_side_effects",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Delete the leaderboard configuration with the given ID.",
-      "summary_suggestion": "Delete the leaderboard configuration",
-      "description_suggestion": "Deletes the leaderboard configuration with the specified ID. This action is irreversible and will remove the leaderboard from the game. Requires authentication.",
-      "reasoning": "The current summary is missing. Added a side-effect warning and authentication requirement to the description for better clarity.",
+      "summary_suggestion": "Delete a leaderboard configuration",
+      "description_suggestion": "Deletes the leaderboard configuration resource identified by the provided leaderboardId. This operation permanently removes the leaderboard configuration and cannot be undone. Requires the leaderboardId path parameter. Returns a 204 No Content response on successful deletion.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about permanence of deletion, required parameters, and response details. Added context about irreversibility, explicit parameter requirement, and HTTP response to improve AI agent understanding of when and how to use this destructive operation.",
       "batch_index": 1
     }
   },
@@ -3040,7 +3041,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'gamesConfiguration.leaderboardConfigurations.update' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing. Added a side-effect warning and authentication requirement to the description for better clarity.",
+    "message": "Operation 'gamesConfiguration.leaderboardConfigurations.get' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is vague about what metadata is returned and doesn't specify the LeaderboardConfiguration schema. Added explicit parameter requirement, response schema reference, and clarification that this is a read-only operation to improve AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gamesConfiguration.leaderboardConfigurations.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves the metadata of the leaderboard configuration with the given ID.",
+      "summary_suggestion": "Retrieve leaderboard configuration metadata",
+      "description_suggestion": "Retrieves the complete leaderboard configuration resource identified by the provided leaderboardId. Returns a LeaderboardConfiguration object containing metadata such as display name, score order, icon URL, and localized strings. Requires the leaderboardId path parameter. No authentication side effects or state changes occur.",
+      "reasoning": "Missing summary. Description is vague about what metadata is returned and doesn't specify the LeaderboardConfiguration schema. Added explicit parameter requirement, response schema reference, and clarification that this is a read-only operation to improve AI agent interpretability.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gamesConfiguration.leaderboardConfigurations.update' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description lacks specificity about request/response schemas, update semantics (full vs. partial), and side effects on player-facing leaderboard display. Added explicit schema references, clarification of full replacement semantics, and impact on player experience to enable AI agents to understand the operation's scope and consequences.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3055,13 +3093,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Update the metadata of the leaderboard configuration with the given ID.",
       "summary_suggestion": "Update leaderboard configuration metadata",
-      "description_suggestion": "Updates the metadata of the leaderboard configuration with the specified ID. Requires authentication. Returns the updated leaderboard configuration object. Partial updates are supported - only provided fields will be modified.",
-      "reasoning": "The current summary is missing. Added a side-effect warning and authentication requirement to the description for better clarity.",
+      "description_suggestion": "Updates the leaderboard configuration resource identified by the provided leaderboardId. Accepts a LeaderboardConfiguration object in the request body containing updated metadata fields. Returns the updated LeaderboardConfiguration object. Supports full replacement of the configuration. The operation modifies the game's leaderboard settings and may affect how leaderboards are displayed to players.",
+      "reasoning": "Missing summary. Description lacks specificity about request/response schemas, update semantics (full vs. partial), and side effects on player-facing leaderboard display. Added explicit schema references, clarification of full replacement semantics, and impact on player experience to enable AI agents to understand the operation's scope and consequences.",
       "batch_index": 1
     }
   },
@@ -3076,7 +3116,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gamesConfiguration.achievementConfigurations.delete' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing. Added a summary and expanded the description to include side effects and the nature of the action.",
+    "message": "Operation 'gamesConfiguration.achievementConfigurations.delete' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Missing summary entirely. Description lacks context about permanence of deletion, parameter requirements, and response details. Added clarity about side effects (permanent removal) and expected response for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3091,13 +3131,236 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_context",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Delete the achievement configuration with the given ID.",
-      "summary_suggestion": "Delete an achievement configuration by ID",
-      "description_suggestion": "Deletes the achievement configuration with the given ID. Returns a success message if the deletion is successful. Note: This action is irreversible.",
-      "reasoning": "The current summary is missing. Added a summary and expanded the description to include side effects and the nature of the action.",
+      "summary_suggestion": "Delete achievement configuration by ID",
+      "description_suggestion": "Deletes the achievement configuration with the specified ID. This operation removes the achievement configuration from the application permanently. Requires the achievement ID as a path parameter. Returns a 204 No Content response on successful deletion.",
+      "reasoning": "Missing summary entirely. Description lacks context about permanence of deletion, parameter requirements, and response details. Added clarity about side effects (permanent removal) and expected response for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gamesConfiguration.achievementConfigurations.get' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is vague about what 'metadata' includes and what is returned. Enhanced with specific parameter requirements and response schema details (AchievementConfiguration) for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gamesConfiguration.achievementConfigurations.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Retrieves the metadata of the achievement configuration with the given ID.",
+      "summary_suggestion": "Retrieve achievement configuration metadata",
+      "description_suggestion": "Retrieves the complete metadata of the achievement configuration with the specified ID. Requires the achievement ID as a path parameter. Returns an AchievementConfiguration object containing all configuration details including localized strings, display properties, and achievement type information.",
+      "reasoning": "Missing summary. Description is vague about what 'metadata' includes and what is returned. Enhanced with specific parameter requirements and response schema details (AchievementConfiguration) for AI agent clarity.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gamesConfiguration.achievementConfigurations.update' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks specificity about request body requirements and response format. Added clarity about required input schema and return value for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gamesConfiguration.achievementConfigurations.update",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Update the metadata of the achievement configuration with the given ID.",
+      "summary_suggestion": "Update achievement configuration metadata",
+      "description_suggestion": "Updates the metadata of the achievement configuration with the specified ID. Requires the achievement ID as a path parameter and an AchievementConfiguration object in the request body. Returns the updated AchievementConfiguration object. Supports full replacement of the configuration.",
+      "reasoning": "Missing summary. Description lacks specificity about request body requirements and response format. Added clarity about required input schema and return value for better AI agent decision-making.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gamesConfiguration.achievementConfigurations.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks information about pagination support, required parameters, and response structure. Enhanced with pagination context and specific response schema details for AI agent usability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gamesConfiguration.achievementConfigurations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns a list of the achievement configurations in this application.",
+      "summary_suggestion": "List achievement configurations for application",
+      "description_suggestion": "Returns a paginated list of all achievement configurations for the specified application. Requires the application ID as a path parameter. Supports pagination through query parameters. Returns an AchievementConfigurationListResponse containing an array of AchievementConfiguration objects.",
+      "reasoning": "Missing summary. Description lacks information about pagination support, required parameters, and response structure. Enhanced with pagination context and specific response schema details for AI agent usability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gamesConfiguration.achievementConfigurations.insert' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity about required inputs and response details. Added specificity about request body schema, parameter requirements, and that a new ID is assigned on creation for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gamesConfiguration.achievementConfigurations.insert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Insert a new achievement configuration in this application.",
+      "summary_suggestion": "Create new achievement configuration",
+      "description_suggestion": "Creates a new achievement configuration in the specified application. Requires the application ID as a path parameter and an AchievementConfiguration object in the request body. Returns the newly created AchievementConfiguration object with an assigned achievement ID.",
+      "reasoning": "Missing summary. Description lacks clarity about required inputs and response details. Added specificity about request body schema, parameter requirements, and that a new ID is assigned on creation for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gamesConfiguration.leaderboardConfigurations.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks information about pagination support, required parameters, and response structure. Enhanced with pagination context and specific response schema details consistent with achievement configurations for AI agent usability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gamesConfiguration.leaderboardConfigurations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns a list of the leaderboard configurations in this application.",
+      "summary_suggestion": "List leaderboard configurations for application",
+      "description_suggestion": "Returns a paginated list of all leaderboard configurations for the specified application. Requires the application ID as a path parameter. Supports pagination through query parameters. Returns a LeaderboardConfigurationListResponse containing an array of LeaderboardConfiguration objects.",
+      "reasoning": "Missing summary. Description lacks information about pagination support, required parameters, and response structure. Enhanced with pagination context and specific response schema details consistent with achievement configurations for AI agent usability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gamesConfiguration.leaderboardConfigurations.insert' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity about required inputs and response details. Added specificity about request body schema, parameter requirements, and that a new ID is assigned on creation for consistency with achievement configuration operations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gamesConfiguration.leaderboardConfigurations.insert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Insert a new leaderboard configuration in this application.",
+      "summary_suggestion": "Create new leaderboard configuration",
+      "description_suggestion": "Creates a new leaderboard configuration in the specified application. Requires the application ID as a path parameter and a LeaderboardConfiguration object in the request body. Returns the newly created LeaderboardConfiguration object with an assigned leaderboard ID.",
+      "reasoning": "Missing summary. Description lacks clarity about required inputs and response details. Added specificity about request body schema, parameter requirements, and that a new ID is assigned on creation for consistency with achievement configuration operations.",
       "batch_index": 0
     }
   },
@@ -3112,7 +3375,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 10 operations analyzed, 3 quality issues found",
+    "message": "Semantic analysis completed: 10 operations analyzed, 10 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -3124,7 +3387,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 10,
-      "total_issues_found": 3,
+      "total_issues_found": 10,
       "batches_processed": 2
     }
   }

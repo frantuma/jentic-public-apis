@@ -2381,7 +2381,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudtrace.projects.traces.spans.createSpan' has semantic quality issues: vague_summary, vague_description, missing_input_details. The current summary is missing. The description is vague and lacks details about the input parameters and the returned object.",
+    "message": "Operation 'cloudtrace.projects.traces.spans.createSpan' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects, not_actionable, poor_ai_interpretability. Original description is too minimal. Missing: summary entirely, clarity on what a span is in this domain context, input requirements (Span object structure), output details (returns created Span), and side effects (span added to trace). Added domain context about span nesting, operation details, and trace visibility. Improved AI agent interpretability by clarifying when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2397,13 +2397,55 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "not_actionable",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Creates a new span.",
-      "summary_suggestion": "Create a new span in the trace.",
-      "description_suggestion": "Creates a new span within a specified trace using the provided Span object. The Span object must include the necessary attributes such as name, duration, and parent span ID if applicable. The operation returns the newly created Span object.",
-      "reasoning": "The current summary is missing. The description is vague and lacks details about the input parameters and the returned object.",
+      "summary_suggestion": "Create a new span in a trace",
+      "description_suggestion": "Creates a new span within an existing trace. A span represents a single operation and can be nested to form a trace tree. Accepts a Span object containing operation details such as display name, start/end times, attributes, events, links, and status. Returns the created Span object with server-assigned identifiers. This operation adds the span to the specified trace and makes it available for viewing in Cloud Trace.",
+      "reasoning": "Original description is too minimal. Missing: summary entirely, clarity on what a span is in this domain context, input requirements (Span object structure), output details (returns created Span), and side effects (span added to trace). Added domain context about span nesting, operation details, and trace visibility. Improved AI agent interpretability by clarifying when to use this operation and what to expect.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudtrace.projects.traces.batchWrite' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Original summary is missing entirely. Description lacks input details (BatchWriteSpansRequest structure), output details (returns Empty response), and side effects clarity (spans are immutable after creation). Added context about batch optimization, use case (high-volume ingestion), and clarified the immutability constraint. Improved AI agent interpretability by explaining when to use batch vs. single span creation and what the operation returns.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudtrace.projects.traces.batchWrite",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Batch writes new spans to new or existing traces. You cannot update existing spans.",
+      "summary_suggestion": "Batch write spans to traces",
+      "description_suggestion": "Batch writes multiple new spans to new or existing traces in a single request. Accepts a BatchWriteSpansRequest containing a collection of spans to be written. Each span is added to its specified trace; spans cannot be updated after creation. Returns an Empty response on success. This operation is optimized for high-volume span ingestion and is useful for applications sending trace data in batches. Note: Existing spans cannot be modified; only new spans can be added.",
+      "reasoning": "Original summary is missing entirely. Description lacks input details (BatchWriteSpansRequest structure), output details (returns Empty response), and side effects clarity (spans are immutable after creation). Added context about batch optimization, use case (high-volume ingestion), and clarified the immutability constraint. Improved AI agent interpretability by explaining when to use batch vs. single span creation and what the operation returns.",
       "batch_index": 0
     }
   },
@@ -2418,7 +2460,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 2 operations analyzed, 1 quality issues found",
+    "message": "Semantic analysis completed: 2 operations analyzed, 2 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -2430,7 +2472,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 2,
-      "total_issues_found": 1,
+      "total_issues_found": 2,
       "batches_processed": 1
     }
   }

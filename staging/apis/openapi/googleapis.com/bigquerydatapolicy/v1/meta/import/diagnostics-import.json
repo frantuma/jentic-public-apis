@@ -3138,7 +3138,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'bigquerydatapolicy.projects.locations.dataPolicies.setIamPolicy' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing. The description is improved to include input details and clarify the return type.",
+    "message": "Operation 'bigquerydatapolicy.projects.locations.dataPolicies.setIamPolicy' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Original summary was empty and description lacked critical details. Added: (1) explicit mention of IAM policy replacement behavior, (2) input schema context (SetIamPolicyRequest), (3) output details (returns Policy object), (4) side effect clarification that this replaces existing policy, and (5) domain-appropriate terminology consistent with API context. This helps AI agents understand when to use this operation and what to expect.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3153,13 +3153,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Sets the IAM policy for the specified data policy.",
-      "summary_suggestion": "Set IAM policy for specified data policy",
-      "description_suggestion": "Sets the IAM policy for the specified data policy. Requires authentication and expects a `SetIamPolicyRequest` object as input. Returns the updated IAM policy.",
-      "reasoning": "The current summary is missing. The description is improved to include input details and clarify the return type.",
+      "summary_suggestion": "Set IAM policy for data policy resource",
+      "description_suggestion": "Sets the Identity and Access Management (IAM) policy for the specified data policy resource. Accepts a SetIamPolicyRequest containing the policy bindings to apply. Replaces the existing IAM policy entirely. Returns the updated Policy object reflecting the new access control configuration. This operation modifies access permissions for the data policy resource.",
+      "reasoning": "Original summary was empty and description lacked critical details. Added: (1) explicit mention of IAM policy replacement behavior, (2) input schema context (SetIamPolicyRequest), (3) output details (returns Policy object), (4) side effect clarification that this replaces existing policy, and (5) domain-appropriate terminology consistent with API context. This helps AI agents understand when to use this operation and what to expect.",
       "batch_index": 1
     }
   },
@@ -3174,7 +3176,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'bigquerydatapolicy.projects.locations.dataPolicies.testIamPermissions' has semantic quality issues: vague_summary. The current summary is missing. The description is improved to include input details and clarify the return type.",
+    "message": "Operation 'bigquerydatapolicy.projects.locations.dataPolicies.testIamPermissions' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Original summary was empty and description was incomplete. Added: (1) explicit mention of input (TestIamPermissionsRequest with permission list), (2) output details (TestIamPermissionsResponse with subset of permissions), (3) clarification that this is a read-only operation with no side effects, and (4) use case context for AI agents. This enables agents to understand this is a permission validation operation and what to expect in the response.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3188,13 +3190,15 @@
       "operation_id": "bigquerydatapolicy.projects.locations.dataPolicies.testIamPermissions",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Returns the caller's permission on the specified data policy resource.",
-      "summary_suggestion": "Test IAM permissions for specified data policy",
-      "description_suggestion": "Returns the caller's permission on the specified data policy resource. Requires authentication and expects a `TestIamPermissionsRequest` object as input. Returns a `TestIamPermissionsResponse` object indicating the caller's permissions.",
-      "reasoning": "The current summary is missing. The description is improved to include input details and clarify the return type.",
+      "summary_suggestion": "Test caller permissions on data policy",
+      "description_suggestion": "Tests which permissions the caller has on the specified data policy resource. Accepts a TestIamPermissionsRequest containing a list of permissions to check. Returns a TestIamPermissionsResponse listing only the permissions the caller possesses. Does not modify any resources. Useful for authorization checks before attempting operations.",
+      "reasoning": "Original summary was empty and description was incomplete. Added: (1) explicit mention of input (TestIamPermissionsRequest with permission list), (2) output details (TestIamPermissionsResponse with subset of permissions), (3) clarification that this is a read-only operation with no side effects, and (4) use case context for AI agents. This enables agents to understand this is a permission validation operation and what to expect in the response.",
       "batch_index": 1
     }
   },
@@ -3209,7 +3213,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'bigquerydatapolicy.projects.locations.dataPolicies.delete' has semantic quality issues: vague_summary, missing_side_effects. The current summary is missing. Added a concise summary and expanded the description to include side effects of the operation.",
+    "message": "Operation 'bigquerydatapolicy.projects.locations.dataPolicies.delete' has semantic quality issues: vague_summary, missing_side_effects. Missing summary entirely. Description lacks clarity about permanence of deletion and return value. Added context about irreversibility and empty response to help AI agents understand the destructive nature of this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3228,9 +3232,9 @@
       ],
       "current_summary": "",
       "current_description": "Deletes the data policy specified by its resource name.",
-      "summary_suggestion": "Delete specified data policy",
-      "description_suggestion": "Deletes the data policy specified by its resource name. It removes the data policy from the system, and any associated data or configurations are discarded.",
-      "reasoning": "The current summary is missing. Added a concise summary and expanded the description to include side effects of the operation.",
+      "summary_suggestion": "Delete a data policy by resource name",
+      "description_suggestion": "Deletes the data policy specified by its resource name. This operation permanently removes the data policy and cannot be undone. Requires the resource name of the data policy to be deleted. Returns an empty response on successful deletion.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about permanence of deletion and return value. Added context about irreversibility and empty response to help AI agents understand the destructive nature of this operation.",
       "batch_index": 0
     }
   },
@@ -3245,7 +3249,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'bigquerydatapolicy.projects.locations.dataPolicies.get' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary while the description is already clear and complete.",
+    "message": "Operation 'bigquerydatapolicy.projects.locations.dataPolicies.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks information about what is returned. Added clarity about the DataPolicy response schema to help AI agents understand the output structure.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3259,12 +3263,14 @@
       "operation_id": "bigquerydatapolicy.projects.locations.dataPolicies.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets the data policy specified by its resource name.",
-      "summary_suggestion": "Get specified data policy",
-      "reasoning": "The current summary is missing. Added a concise summary while the description is already clear and complete.",
+      "summary_suggestion": "Retrieve a data policy by resource name",
+      "description_suggestion": "Retrieves the data policy specified by its resource name. Returns the complete DataPolicy object containing the policy configuration, including data masking rules, labels, and metadata.",
+      "reasoning": "Missing summary. Description lacks information about what is returned. Added clarity about the DataPolicy response schema to help AI agents understand the output structure.",
       "batch_index": 0
     }
   },
@@ -3279,7 +3285,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'bigquerydatapolicy.projects.locations.dataPolicies.rename' has semantic quality issues: vague_summary. The current summary is missing. Added a concise summary while the description is already clear and complete.",
+    "message": "Operation 'bigquerydatapolicy.projects.locations.dataPolicies.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks detail about input schema (DataPolicy), partial update support, and return value. Enhanced to clarify that this is a partial update operation and what the response contains.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigquerydatapolicy.projects.locations.dataPolicies.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates the metadata for an existing data policy. The target data policy can be specified by the resource name.",
+      "summary_suggestion": "Update data policy metadata and configuration",
+      "description_suggestion": "Updates the metadata and configuration for an existing data policy specified by its resource name. Accepts a DataPolicy object with fields to be updated. Supports partial updates - only provided fields will be modified. Returns the updated DataPolicy object with all current configuration.",
+      "reasoning": "Missing summary. Description lacks detail about input schema (DataPolicy), partial update support, and return value. Enhanced to clarify that this is a partial update operation and what the response contains.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigquerydatapolicy.projects.locations.dataPolicies.rename' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is vague about inputs and outputs. Added clarity about RenameDataPolicyRequest schema and return value to help AI agents understand the required request structure and response.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -3293,12 +3336,123 @@
       "operation_id": "bigquerydatapolicy.projects.locations.dataPolicies.rename",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Renames the id (display name) of the specified data policy.",
-      "summary_suggestion": "Rename specified data policy",
-      "reasoning": "The current summary is missing. Added a concise summary while the description is already clear and complete.",
+      "summary_suggestion": "Rename a data policy's display name",
+      "description_suggestion": "Renames the display name (id) of the specified data policy. Requires the data policy resource name and a RenameDataPolicyRequest containing the new display name. Returns the updated DataPolicy object with the new display name applied.",
+      "reasoning": "Missing summary. Description is vague about inputs and outputs. Added clarity about RenameDataPolicyRequest schema and return value to help AI agents understand the required request structure and response.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigquerydatapolicy.projects.locations.dataPolicies.list' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks information about pagination support and response structure. Added context about ListDataPoliciesResponse to help AI agents understand pagination capabilities and response format.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigquerydatapolicy.projects.locations.dataPolicies.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "List all of the data policies in the specified parent project.",
+      "summary_suggestion": "List all data policies in a project",
+      "description_suggestion": "Lists all data policies in the specified parent project. Supports pagination through optional parameters. Returns a ListDataPoliciesResponse containing an array of DataPolicy objects and pagination tokens for retrieving additional results.",
+      "reasoning": "Missing summary. Description lacks information about pagination support and response structure. Added context about ListDataPoliciesResponse to help AI agents understand pagination capabilities and response format.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigquerydatapolicy.projects.locations.dataPolicies.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description uses backticks inconsistently and lacks clarity about return value. Improved terminology consistency and added information about the DataPolicy response to enhance AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigquerydatapolicy.projects.locations.dataPolicies.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new data policy under a project with the given `dataPolicyId` (used as the display name), policy tag, and data policy type.",
+      "summary_suggestion": "Create a new data policy in a project",
+      "description_suggestion": "Creates a new data policy under the specified project. Requires a DataPolicy object with dataPolicyId (display name), policy tag reference, and data policy type (e.g., data masking policy). Returns the newly created DataPolicy object with all configuration and metadata.",
+      "reasoning": "Missing summary. Description uses backticks inconsistently and lacks clarity about return value. Improved terminology consistency and added information about the DataPolicy response to enhance AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'bigquerydatapolicy.projects.locations.dataPolicies.getIamPolicy' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description lacks information about request parameters and response structure. Added clarity about GetIamPolicyRequest and Policy response schema to help AI agents understand IAM policy retrieval.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "bigquerydatapolicy.projects.locations.dataPolicies.getIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets the IAM policy for the specified data policy.",
+      "summary_suggestion": "Retrieve IAM policy for a data policy",
+      "description_suggestion": "Retrieves the Identity and Access Management (IAM) policy for the specified data policy. Requires the data policy resource name and optional GetIamPolicyRequest parameters. Returns a Policy object containing role bindings and access control rules for the data policy.",
+      "reasoning": "Missing summary. Description lacks information about request parameters and response structure. Added clarity about GetIamPolicyRequest and Policy response schema to help AI agents understand IAM policy retrieval.",
       "batch_index": 0
     }
   },
@@ -3313,7 +3467,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 9 operations analyzed, 5 quality issues found",
+    "message": "Semantic analysis completed: 9 operations analyzed, 9 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -3325,7 +3479,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 9,
-      "total_issues_found": 5,
+      "total_issues_found": 9,
       "batches_processed": 2
     }
   }

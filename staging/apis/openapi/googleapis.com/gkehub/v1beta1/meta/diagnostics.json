@@ -5471,7 +5471,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gkehub.projects.locations.memberships.delete' has semantic quality issues: vague_summary, missing_side_effects. Added a summary to clarify the action. Enhanced the description to include side effects of the operation.",
+    "message": "Operation 'gkehub.projects.locations.memberships.delete' has semantic quality issues: vague_summary, missing_context, missing_side_effects. Original summary was empty. Description lacked clarity about what 'Membership' represents (member cluster), the side effect (cluster no longer managed), and platform limitations. Added context about membership deletion implications and clarified the scope of support for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5486,13 +5486,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
+        "missing_context",
         "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Removes a Membership. **This is currently only supported for GKE clusters on Google Cloud**. To unregister other clusters, follow the instructions at https://cloud.google.com/anthos/multicluster-management/connect/unregistering-a-cluster.",
-      "summary_suggestion": "Delete a specific Membership",
-      "description_suggestion": "Removes a Membership. **This is currently only supported for GKE clusters on Google Cloud**. To unregister other clusters, follow the instructions at https://cloud.google.com/anthos/multicluster-management/connect/unregistering-a-cluster. Upon successful deletion, the membership will no longer be part of the project.",
-      "reasoning": "Added a summary to clarify the action. Enhanced the description to include side effects of the operation.",
+      "summary_suggestion": "Remove a member cluster from GKE Hub",
+      "description_suggestion": "Removes a Membership, unregistering the associated member cluster from GKE Hub. This operation is currently only supported for GKE clusters on Google Cloud. For other cluster types, follow the unregistration instructions at https://cloud.google.com/anthos/multicluster-management/connect/unregistering-a-cluster. The membership resource will be deleted and the cluster will no longer be managed by GKE Hub.",
+      "reasoning": "Original summary was empty. Description lacked clarity about what 'Membership' represents (member cluster), the side effect (cluster no longer managed), and platform limitations. Added context about membership deletion implications and clarified the scope of support for AI agent decision-making.",
       "batch_index": 0
     }
   },
@@ -5507,7 +5508,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gkehub.projects.locations.memberships.get' has semantic quality issues: vague_summary. Added a summary to clarify the action.",
+    "message": "Operation 'gkehub.projects.locations.memberships.get' has semantic quality issues: vague_summary, missing_context. Original summary was empty and description was too generic. Added context about what 'Membership' represents (member cluster), what details are returned, and clarified the resource type for better AI agent understanding of the operation's scope.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5521,12 +5522,14 @@
       "operation_id": "gkehub.projects.locations.memberships.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Gets the details of a Membership.",
-      "summary_suggestion": "Retrieve details of a specific Membership",
-      "reasoning": "Added a summary to clarify the action.",
+      "summary_suggestion": "Retrieve member cluster membership details",
+      "description_suggestion": "Retrieves detailed information about a specific Membership, including the member cluster's registration status, configuration, and connection details. Returns the complete Membership resource for the specified cluster.",
+      "reasoning": "Original summary was empty and description was too generic. Added context about what 'Membership' represents (member cluster), what details are returned, and clarified the resource type for better AI agent understanding of the operation's scope.",
       "batch_index": 0
     }
   },
@@ -5541,7 +5544,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'gkehub.projects.locations.memberships.list' has semantic quality issues: vague_summary. The current summary is missing. Adding a concise summary improves clarity and actionability.",
+    "message": "Operation 'gkehub.projects.locations.memberships.patch' has semantic quality issues: vague_summary, missing_context, missing_input_details. Original summary was empty and description lacked specificity. Added context about partial update support, input expectations (Membership object), and return value. Clarified that this is for member cluster configuration changes to improve AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -5552,15 +5555,311 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "gkehub.projects.locations.memberships.list",
+      "operation_id": "gkehub.projects.locations.memberships.patch",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_input_details"
       ],
       "current_summary": "",
-      "current_description": "Lists Memberships in a given project and location.",
-      "summary_suggestion": "List memberships in a specified project and location.",
-      "reasoning": "The current summary is missing. Adding a concise summary improves clarity and actionability.",
+      "current_description": "Updates an existing Membership.",
+      "summary_suggestion": "Update member cluster membership configuration",
+      "description_suggestion": "Updates an existing Membership resource with partial or full modifications. Accepts a Membership object with updated fields and applies changes to the member cluster's registration and configuration. Supports partial updates - only provided fields will be modified. Returns the updated Membership resource.",
+      "reasoning": "Original summary was empty and description lacked specificity. Added context about partial update support, input expectations (Membership object), and return value. Clarified that this is for member cluster configuration changes to improve AI agent interpretability.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gkehub.projects.locations.operations.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Original summary was empty. Description mentioned error handling but lacked context about what operations are being listed (long-running operations), what is returned (Operation resources), and filtering capabilities. Added clarity about operation types and return structure for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gkehub.projects.locations.operations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
+      "summary_suggestion": "List long-running operations matching filter",
+      "description_suggestion": "Lists long-running operations that match the specified filter criteria in the request. Returns a paginated list of Operation resources with their current status and progress. If the server doesn't support this method, it returns `UNIMPLEMENTED`. Supports filtering by operation status, name, and other criteria.",
+      "reasoning": "Original summary was empty. Description mentioned error handling but lacked context about what operations are being listed (long-running operations), what is returned (Operation resources), and filtering capabilities. Added clarity about operation types and return structure for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gkehub.projects.locations.operations.cancel' has semantic quality issues: vague_summary, missing_context. Original summary was empty. Description was overly verbose with technical details about error codes. Simplified while retaining essential information: best-effort nature, state transition on success, and verification method. Improved clarity for AI agents to understand when to use this operation and what to expect.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gkehub.projects.locations.operations.cancel",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of `1`, corresponding to `Code.CANCELLED`.",
+      "summary_suggestion": "Request cancellation of a long-running operation",
+      "description_suggestion": "Requests asynchronous cancellation of a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. On successful cancellation, the operation transitions to a CANCELLED state with an Operation.error value. The operation resource is not deleted. Use Operations.GetOperation to verify cancellation status. If the server doesn't support this method, it returns `UNIMPLEMENTED`.",
+      "reasoning": "Original summary was empty. Description was overly verbose with technical details about error codes. Simplified while retaining essential information: best-effort nature, state transition on success, and verification method. Improved clarity for AI agents to understand when to use this operation and what to expect.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gkehub.projects.locations.memberships.generateConnectManifest' has semantic quality issues: vague_summary, missing_context, missing_output_details. Original summary was empty. Description lacked specificity about what manifest is generated (Kubernetes manifest for Connect agent), what is returned (GenerateConnectManifestResponse), and the intended audience. Added clarity about the output format and use case to help AI agents understand when this operation is appropriate.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gkehub.projects.locations.memberships.generateConnectManifest",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Generates the manifest for deployment of the GKE connect agent. **This method is used internally by Google-provided libraries.** Most clients should not need to call this method directly.",
+      "summary_suggestion": "Generate GKE Connect agent deployment manifest",
+      "description_suggestion": "Generates the Kubernetes manifest required for deploying the GKE Connect agent to a member cluster. Returns a GenerateConnectManifestResponse containing the manifest configuration. This method is primarily used internally by Google-provided libraries and SDKs. Most clients should use higher-level APIs rather than calling this method directly.",
+      "reasoning": "Original summary was empty. Description lacked specificity about what manifest is generated (Kubernetes manifest for Connect agent), what is returned (GenerateConnectManifestResponse), and the intended audience. Added clarity about the output format and use case to help AI agents understand when this operation is appropriate.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gkehub.projects.locations.memberships.generateExclusivityManifest' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description is comprehensive but dense and could be more concise for AI agent interpretation. Improved summary provides clear action and context. Refined description maintains technical accuracy while improving clarity about inputs (membership name), outputs (manifest response), and the operation's role in the exclusivity validation workflow.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gkehub.projects.locations.memberships.generateExclusivityManifest",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "GenerateExclusivityManifest generates the manifests to update the exclusivity artifacts in the cluster if needed. Exclusivity artifacts include the Membership custom resource definition (CRD) and the singleton Membership custom resource (CR). Combined with ValidateExclusivity, exclusivity artifacts guarantee that a Kubernetes cluster is only registered to a single GKE Hub. The Membership CRD is versioned, and may require conversion when the GKE Hub API server begins serving a newer version of the CRD and corresponding CR. The response will be the converted CRD and CR if there are any differences between the versions.",
+      "summary_suggestion": "Generate exclusivity artifact manifests for cluster",
+      "description_suggestion": "Generates Kubernetes manifests to update exclusivity artifacts (Membership CRD and CR) in the cluster. Ensures a cluster is registered to only one GKE Hub. Detects version differences between the current and server-side CRD/CR and returns converted manifests if updates are needed. Use with ValidateExclusivity to verify exclusivity state. Returns GenerateExclusivityManifestResponse containing the manifest resources.",
+      "reasoning": "Missing summary entirely. Description is comprehensive but dense and could be more concise for AI agent interpretation. Improved summary provides clear action and context. Refined description maintains technical accuracy while improving clarity about inputs (membership name), outputs (manifest response), and the operation's role in the exclusivity validation workflow.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gkehub.projects.locations.memberships.create' has semantic quality issues: vague_summary, missing_output_details. Missing summary entirely. Description lacks clarity about what is returned and that this is a long-running operation. Improved summary specifies the action and context. Enhanced description clarifies the scope (GKE clusters), expected input (Membership object), output (created Membership resource), and operational characteristics (long-running) for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gkehub.projects.locations.memberships.create",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a new Membership. **This is currently only supported for GKE clusters on Google Cloud**. To register other clusters, follow the instructions at https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster.",
+      "summary_suggestion": "Register a GKE cluster as Hub membership",
+      "description_suggestion": "Creates a new Membership resource to register a GKE cluster with GKE Hub. Currently supported only for GKE clusters on Google Cloud. For non-GKE clusters, see https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster. Accepts a Membership object in the request body. Returns the created Membership resource with assigned metadata and status. This is a long-running operation.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about what is returned and that this is a long-running operation. Improved summary specifies the action and context. Enhanced description clarifies the scope (GKE clusters), expected input (Membership object), output (created Membership resource), and operational characteristics (long-running) for better AI agent decision-making.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gkehub.projects.locations.memberships.validateExclusivity' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description is vague about what 'exclusivity' means and what the operation returns. Improved summary clarifies the validation purpose. Enhanced description explains the domain concept (exclusive Hub registration), clarifies that no existing membership is needed, specifies the response type, and indicates the relationship with GenerateExclusivityManifest for AI agent workflow understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gkehub.projects.locations.memberships.validateExclusivity",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "ValidateExclusivity validates the state of exclusivity in the cluster. The validation does not depend on an existing Hub membership resource.",
+      "summary_suggestion": "Validate cluster exclusivity state",
+      "description_suggestion": "Validates whether a cluster is exclusively registered to a single GKE Hub by checking the state of exclusivity artifacts (Membership CRD and CR). Does not require an existing Membership resource. Returns ValidateExclusivityResponse indicating the validation status and any conflicts detected. Use with GenerateExclusivityManifest to remediate exclusivity violations.",
+      "reasoning": "Missing summary entirely. Description is vague about what 'exclusivity' means and what the operation returns. Improved summary clarifies the validation purpose. Enhanced description explains the domain concept (exclusive Hub registration), clarifies that no existing membership is needed, specifies the response type, and indicates the relationship with GenerateExclusivityManifest for AI agent workflow understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gkehub.projects.locations.memberships.setIamPolicy' has semantic quality issues: vague_summary, missing_input_details. Missing summary entirely. Description mentions error cases but lacks clarity about the input (SetIamPolicyRequest) and output (Policy). Improved summary provides clear action. Enhanced description specifies the input schema, output type, and clarifies error conditions for better AI agent error handling and decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gkehub.projects.locations.memberships.setIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "",
+      "current_description": "Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.",
+      "summary_suggestion": "Set IAM access control policy",
+      "description_suggestion": "Sets the access control policy on the specified Membership resource, replacing any existing policy. Accepts a SetIamPolicyRequest containing the new Policy object. Returns the updated Policy. May return NOT_FOUND if resource doesn't exist, INVALID_ARGUMENT if policy is malformed, or PERMISSION_DENIED if caller lacks setIamPolicy permission.",
+      "reasoning": "Missing summary entirely. Description mentions error cases but lacks clarity about the input (SetIamPolicyRequest) and output (Policy). Improved summary provides clear action. Enhanced description specifies the input schema, output type, and clarifies error conditions for better AI agent error handling and decision-making.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'gkehub.projects.locations.memberships.testIamPermissions' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks clarity about inputs (TestIamPermissionsRequest) and outputs (TestIamPermissionsResponse). Improved summary provides concise action. Enhanced description specifies request/response schemas, clarifies the empty-set behavior for non-existent resources, and maintains the important caveats about usage and failure modes for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "gkehub.projects.locations.memberships.testIamPermissions",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.",
+      "summary_suggestion": "Test caller permissions on resource",
+      "description_suggestion": "Tests which permissions a caller has on the specified Membership resource. Accepts a TestIamPermissionsRequest containing a list of permissions to check. Returns TestIamPermissionsResponse with the subset of requested permissions the caller possesses. Returns empty permissions if the resource doesn't exist (not NOT_FOUND error). Designed for permission-aware UIs and tools, not authorization enforcement. May fail open without warning.",
+      "reasoning": "Missing summary entirely. Description lacks clarity about inputs (TestIamPermissionsRequest) and outputs (TestIamPermissionsResponse). Improved summary provides concise action. Enhanced description specifies request/response schemas, clarifies the empty-set behavior for non-existent resources, and maintains the important caveats about usage and failure modes for AI agent understanding.",
       "batch_index": 1
     }
   },
@@ -5575,7 +5874,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 14 operations analyzed, 3 quality issues found",
+    "message": "Semantic analysis completed: 14 operations analyzed, 11 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -5587,7 +5886,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 14,
-      "total_issues_found": 3,
+      "total_issues_found": 11,
       "batches_processed": 2
     }
   }

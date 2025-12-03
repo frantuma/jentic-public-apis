@@ -7525,7 +7525,45 @@
         "character": 0
       }
     },
-    "message": "Operation 'updateAnApiVersion' has semantic quality issues: vague_description, missing_input_details. The description was vague and lacked details about the request body and authentication.",
+    "message": "Operation 'deleteWorkspace' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects, poor_ai_interpretability. The original summary 'Delete Workspace' is too generic and doesn't indicate the required input parameter. The description lacks critical information about the destructive nature of the operation, what data is affected, and that it's irreversible. For AI agents, it's important to understand: (1) the specific parameter required (workspace_id), (2) the scope of deletion (workspace and associated data), (3) the permanence of the action, and (4) authentication requirements. The improved version provides these details to help agents make informed decisions about when to invoke this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deleteWorkspace",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Delete Workspace",
+      "current_description": "This endpoint allows you to delete an existing workspace.\n\nOn successful deletion of the workspace, the response returns the `id`.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Delete a workspace by ID",
+      "description_suggestion": "Permanently deletes an existing workspace identified by its workspace_id. This operation removes the workspace and all associated data. Returns the deleted workspace's id on successful deletion. Requires authentication via X-Api-Key header or apikey query parameter. This action cannot be undone.",
+      "reasoning": "The original summary 'Delete Workspace' is too generic and doesn't indicate the required input parameter. The description lacks critical information about the destructive nature of the operation, what data is affected, and that it's irreversible. For AI agents, it's important to understand: (1) the specific parameter required (workspace_id), (2) the scope of deletion (workspace and associated data), (3) the permanence of the action, and (4) authentication requirements. The improved version provides these details to help agents make informed decisions about when to invoke this operation.",
+      "batch_index": 8
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'updateAnApiVersion' has semantic quality issues: missing_input_details, vague_description. Description contains unclear phrasing ('created API Version' when updating), and lacks clarity about which fields are updatable. The suggestion clarifies that only `name` can be updated, specifies the exact request structure needed, and corrects the response context. This improves AI agent understanding of input constraints and operation effects.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7539,14 +7577,13 @@
       "operation_id": "updateAnApiVersion",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description",
-        "missing_input_details"
+        "missing_input_details",
+        "vague_description"
       ],
       "current_summary": "Update an API Version",
-      "current_description": "This call updates an existing API Version.\n\nRequest body should contain a `version` object with the fields which need to be updated. Only field which can be updated is `name`.\n\nResponse contains a `version` object with all the details related to the created API Version, namely, `id`, `name`, `api` etc.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
-      "summary_suggestion": "Update an existing API Version",
-      "description_suggestion": "Updates an existing API Version. The request body should contain a `version` object with the `name` field to be updated. The response will contain a `version` object with details including `id`, `name`, and `api`. Requires an API Key for authentication.",
-      "reasoning": "The description was vague and lacked details about the request body and authentication.",
+      "current_description": "This call updates an existing API Version.  \n\nRequest body should contain a `version` object with the fields which need to be updated. Only field which can be updated is `name`.\n\nResponse contains a `version` object with all the details related to the created API Version, namely, `id`, `name`, `api` etc.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "description_suggestion": "Updates the name of an existing API Version. The request body must contain a `version` object with the `name` field to be updated. Only the `name` field can be modified. Returns the updated `version` object containing `id`, `name`, `api`, and other version details. Requires API Key authentication via `X-Api-Key` header or `apikey` query parameter.",
+      "reasoning": "Description contains unclear phrasing ('created API Version' when updating), and lacks clarity about which fields are updatable. The suggestion clarifies that only `name` can be updated, specifies the exact request structure needed, and corrects the response context. This improves AI agent understanding of input constraints and operation effects.",
       "batch_index": 1
     }
   },
@@ -7561,7 +7598,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'deleteAnApiVersion' has semantic quality issues: missing_output_details. The description lacked details about the response content.",
+    "message": "Operation 'deleteAnApiVersion' has semantic quality issues: missing_side_effects, vague_description. Original description lacks information about the permanence and irreversibility of deletion, which is critical for AI agents to understand the severity of this operation. Added explicit warning about permanent deletion and inability to undo, clarifying the side effects and state changes caused by this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7575,12 +7612,13 @@
       "operation_id": "deleteAnApiVersion",
       "has_quality_issues": true,
       "issues_found": [
-        "missing_output_details"
+        "missing_side_effects",
+        "vague_description"
       ],
       "current_summary": "Delete an API Version",
-      "current_description": "This call deletes an existing API Version having the specified id.\n\nResponse contains an `version` object with `id` of the API Version which was deleted.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
-      "description_suggestion": "Deletes an existing API Version with the specified id. The response will contain a `version` object with the `id` of the deleted API Version. Requires an API Key for authentication.",
-      "reasoning": "The description lacked details about the response content.",
+      "current_description": "This call deletes an existing API Version having the specified id.  \n\nResponse contains an `version` object with `id` of the API Version which was deleted.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "description_suggestion": "Permanently deletes the specified API Version. This operation removes the API Version and all associated data from the system. The response returns a `version` object containing the `id` of the deleted API Version for confirmation. This action cannot be undone. Requires API Key authentication via `X-Api-Key` header or `apikey` query parameter.",
+      "reasoning": "Original description lacks information about the permanence and irreversibility of deletion, which is critical for AI agents to understand the severity of this operation. Added explicit warning about permanent deletion and inability to undo, clarifying the side effects and state changes caused by this operation.",
       "batch_index": 1
     }
   },
@@ -7595,7 +7633,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'syncRelationsWithSchema' has semantic quality issues: vague_description, missing_output_details. The original description was vague and lacked details about the output. The suggested description clarifies the purpose and adds information about the response.",
+    "message": "Operation 'getContractTestRelations' has semantic quality issues: vague_description, missing_context, poor_ai_interpretability. Original description uses placeholder syntax `{{relationType}}` which is confusing for AI agents. The summary is too generic. Improved version specifies that this retrieves contract test relations (not generic relations), explains the domain context of what contract tests are, clarifies the response structure with the actual relation type, and makes it clear when an AI agent should use this operation versus other relation endpoints.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7606,17 +7644,956 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "syncRelationsWithSchema",
+      "operation_id": "getContractTestRelations",
       "has_quality_issues": true,
       "issues_found": [
         "vague_description",
+        "missing_context",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Get contract test relations",
+      "current_description": "This call fetches all the relations by type which are linked to the specified API version along with their details.\n\nThe response will contain an array with key `{{relationType}}`. Each of the item will consist of all the details related each of the relation.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Retrieve contract test relations for API version",
+      "description_suggestion": "Retrieves all contract test relations linked to the specified API Version. Contract tests are used to validate API contracts and compatibility. The response contains an array with the key `contracttest` where each item includes the complete details of the related contract test, such as test id, name, and metadata. Requires API Key authentication via `X-Api-Key` header or `apikey` query parameter.",
+      "reasoning": "Original description uses placeholder syntax `{{relationType}}` which is confusing for AI agents. The summary is too generic. Improved version specifies that this retrieves contract test relations (not generic relations), explains the domain context of what contract tests are, clarifies the response structure with the actual relation type, and makes it clear when an AI agent should use this operation versus other relation endpoints.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getDocumentationRelations' has semantic quality issues: vague_summary, vague_description, missing_context, poor_ai_interpretability. Summary has extra space and is too generic. Description uses confusing placeholder syntax and lacks domain context about what documentation relations represent. Improved version clarifies the relation type, explains the purpose of documentation relations in the API context, specifies the actual response key, and helps AI agents understand when to use this endpoint versus other relation types.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getDocumentationRelations",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_context",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Get  documentation relations",
+      "current_description": "This call fetches all the relations by type which are linked to the specified API version along with their details.\n\nThe response will contain an array with key `{{relationType}}`. Each of the item will consist of all the details related each of the relation.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Retrieve documentation relations for API version",
+      "description_suggestion": "Retrieves all documentation relations linked to the specified API Version. Documentation relations connect the API Version to associated documentation resources such as guides, specifications, and reference materials. The response contains an array with the key `documentation` where each item includes the complete details of the related documentation, such as documentation id, name, and metadata. Requires API Key authentication via `X-Api-Key` header or `apikey` query parameter.",
+      "reasoning": "Summary has extra space and is too generic. Description uses confusing placeholder syntax and lacks domain context about what documentation relations represent. Improved version clarifies the relation type, explains the purpose of documentation relations in the API context, specifies the actual response key, and helps AI agents understand when to use this endpoint versus other relation types.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getEnvironmentRelations' has semantic quality issues: vague_description, missing_context, poor_ai_interpretability. Description uses placeholder syntax `{{relationType}}` which is ambiguous for AI agents. Lacks domain context about what environments represent in the Postman API ecosystem. Improved version clarifies the relation type, explains the purpose of environments, specifies the actual response key, and provides better context for AI agents to determine when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getEnvironmentRelations",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Get environment relations",
+      "current_description": "This call fetches all the relations by type which are linked to the specified API version along with their details.\n\nThe response will contain an array with key `{{relationType}}`. Each of the item will consist of all the details related each of the relation.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Retrieve environment relations for API version",
+      "description_suggestion": "Retrieves all environment relations linked to the specified API Version. Environments contain variables and configurations used for testing and running the API. The response contains an array with the key `environment` where each item includes the complete details of the related environment, such as environment id, name, variables, and metadata. Requires API Key authentication via `X-Api-Key` header or `apikey` query parameter.",
+      "reasoning": "Description uses placeholder syntax `{{relationType}}` which is ambiguous for AI agents. Lacks domain context about what environments represent in the Postman API ecosystem. Improved version clarifies the relation type, explains the purpose of environments, specifies the actual response key, and provides better context for AI agents to determine when to use this operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getIntegrationTestRelations' has semantic quality issues: vague_description, missing_context, poor_ai_interpretability. Description uses placeholder syntax `{{relationType}}` which is confusing for AI agents. Lacks domain context about what integration tests represent. Improved version specifies the relation type, explains the purpose of integration tests in API development, clarifies the response structure with the actual key, and helps AI agents understand when to use this endpoint versus other relation endpoints.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getIntegrationTestRelations",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_context",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Get integration test relations",
+      "current_description": "This call fetches all the relations by type which are linked to the specified API version along with their details.\n\nThe response will contain an array with key `{{relationType}}`. Each of the item will consist of all the details related each of the relation.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Retrieve integration test relations for API version",
+      "description_suggestion": "Retrieves all integration test relations linked to the specified API Version. Integration tests validate how the API works with other systems and services. The response contains an array with the key `integrationtest` where each item includes the complete details of the related integration test, such as test id, name, and metadata. Requires API Key authentication via `X-Api-Key` header or `apikey` query parameter.",
+      "reasoning": "Description uses placeholder syntax `{{relationType}}` which is confusing for AI agents. Lacks domain context about what integration tests represent. Improved version specifies the relation type, explains the purpose of integration tests in API development, clarifies the response structure with the actual key, and helps AI agents understand when to use this endpoint versus other relation endpoints.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getAllApIs' has semantic quality issues: vague_summary, missing_input_details. Original summary is too generic. Description lacks clarity about available query parameters (11 parameters listed but not explained) and pagination support. Added context about what fields are returned and clarified parameter usage for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getAllApIs",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "Get all APIs",
+      "current_description": "This call fetches all the APIs present in the specified workspace\n\nResponse contains an array named `apis` which would contain all the details of APIs present in the workspace.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Retrieve all APIs in workspace",
+      "description_suggestion": "Fetches all APIs in the specified workspace. Returns an array of API objects containing details such as id, name, summary, and description for each API. Supports filtering and pagination via query parameters. Requires authentication via API Key.",
+      "reasoning": "Original summary is too generic. Description lacks clarity about available query parameters (11 parameters listed but not explained) and pagination support. Added context about what fields are returned and clarified parameter usage for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'singleApi' has semantic quality issues: vague_summary, missing_input_details. Original summary 'Single API' is too vague and not action-oriented. Description lacks clarity about the required apiId parameter and its format. Improved summary to be action-oriented and added explicit parameter documentation for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "singleApi",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details"
+      ],
+      "current_summary": "Single API",
+      "current_description": "This call fetches a single API having the specified id.\n\nResponse contains an `api` object with all the details related to the queried API, namely, `id`, `name`, `summary`, `description` etc. \n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Retrieve a specific API by ID",
+      "description_suggestion": "Fetches a single API by its unique identifier (apiId). Returns an API object containing id, name, summary, description, and other metadata. The apiId path parameter is required. Requires authentication via API Key.",
+      "reasoning": "Original summary 'Single API' is too vague and not action-oriented. Description lacks clarity about the required apiId parameter and its format. Improved summary to be action-oriented and added explicit parameter documentation for AI agent clarity.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'updateAnApi' has semantic quality issues: missing_input_details, missing_side_effects. Summary is adequate, but description has issues. The phrase 'related to the created API' is incorrect (should be 'updated API'). Missing clarity about partial update support and which fields are editable. Added explicit information about partial update behavior and corrected the response description for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "updateAnApi",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Update an API",
+      "current_description": "This call updates an existing API .  \n\nRequest body should contain an `api` object which should have the fields to be updated. Only `name`, `summary` and `description` fields can be edited for an API.\n\nResponse contains an `api` object with all the details related to the created API, namely, `id`, `name`, `summary`, `description` etc. \n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "description_suggestion": "Updates an existing API identified by apiId. Request body must contain an `api` object with fields to be updated. Only `name`, `summary`, and `description` fields can be modified. Partial updates are supported - only provided fields will be changed. Returns the updated API object with all current details. Requires authentication via API Key.",
+      "reasoning": "Summary is adequate, but description has issues. The phrase 'related to the created API' is incorrect (should be 'updated API'). Missing clarity about partial update support and which fields are editable. Added explicit information about partial update behavior and corrected the response description for better AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deleteAnApi' has semantic quality issues: missing_side_effects, missing_output_details. Summary is clear and action-oriented. Description lacks important side effect information - deletion is permanent and affects all associated versions. Added warning about permanence and cascade effects for better AI agent decision-making about when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deleteAnApi",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_side_effects",
         "missing_output_details"
       ],
-      "current_summary": "Sync relations with schema",
-      "current_description": "This call allows you to keep the relation in sync with the API schema.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
-      "summary_suggestion": "Sync relations with the API schema",
-      "description_suggestion": "This call allows you to keep the relation in sync with the API schema. On successful synchronization, the response will indicate the status of the operation. Requires authentication.",
-      "reasoning": "The original description was vague and lacked details about the output. The suggested description clarifies the purpose and adds information about the response.",
+      "current_summary": "Delete an API",
+      "current_description": "This call deletes an existing API having the specified id.  \n\nResponse contains an `api` object with `id` of the API which was deleted.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "description_suggestion": "Deletes an existing API identified by apiId. This operation permanently removes the API and all associated versions from the workspace. Returns an API object containing the id of the deleted API. This action cannot be undone. Requires authentication via API Key.",
+      "reasoning": "Summary is clear and action-oriented. Description lacks important side effect information - deletion is permanent and affects all associated versions. Added warning about permanence and cascade effects for better AI agent decision-making about when to use this operation.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getAllApiVersions' has semantic quality issues: vague_description, missing_input_details. Summary is clear and action-oriented. Description has grammatical issues ('details about the all the') and lacks clarity about the apiId parameter requirement. Missing information about available query parameters for filtering/pagination. Improved description for better parameter clarity and AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getAllApiVersions",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_description",
+        "missing_input_details"
+      ],
+      "current_summary": "Get All API Versions",
+      "current_description": "This call fetches details about the all the API Versions in the specified API.\n\nThe response will contain an array `versions` object which would be a list of all the API Version along with their details.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "description_suggestion": "Retrieves all API versions for a specified API identified by apiId. Returns an array of version objects containing details such as id, name, and associated metadata for each version. Supports filtering and pagination via query parameters. Requires authentication via API Key.",
+      "reasoning": "Summary is clear and action-oriented. Description has grammatical issues ('details about the all the') and lacks clarity about the apiId parameter requirement. Missing information about available query parameters for filtering/pagination. Improved description for better parameter clarity and AI agent understanding.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'importExportedData' has semantic quality issues: vague_summary, missing_input_details, missing_side_effects. Original summary is too generic. Description lacks clarity about what data types are imported, what the input format should be, and the side effect of restoring resources. Added specificity about input expectations, output structure, and the restoration effect for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "importExportedData",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Import exported data",
+      "current_description": "This endpoint allows you to import your exported Postman data.\nFor more information about how you can export your data, refer <a href=\"https://go.postman.co/me/export\">Export your Postman data.</a>\n\nOn successful imports, the response will be an array with Each element contaning `id`, `name` and `uid` of entities created.\n\n**Note**: Refer to examples for different scenarios.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header.",
+      "summary_suggestion": "Import previously exported Postman workspace data",
+      "description_suggestion": "Imports previously exported Postman data (collections, environments, etc.) into your workspace. Accepts exported data in the request body. On successful import, returns an array of created entities, each containing `id`, `name`, and `uid`. This operation restores your Postman resources from an export file. Requires authentication via API Key.",
+      "reasoning": "Original summary is too generic. Description lacks clarity about what data types are imported, what the input format should be, and the side effect of restoring resources. Added specificity about input expectations, output structure, and the restoration effect for better AI agent understanding.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'importExternalApiSpecification' has semantic quality issues: missing_input_details, missing_side_effects, poor_ai_interpretability. Summary improved for specificity. Description reorganized for clarity: added explicit input format guidance, consolidated the three input types with their usage patterns, clarified the side effect of collection generation, and improved overall flow for AI agent decision-making about when to use this endpoint.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "importExternalApiSpecification",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Import external API specification",
+      "current_description": "This endpoint allows you to import external API specifications into Postman.\n\nCurrently, this endpoint only supports the <a href=\"https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md\">OpenAPI</a> specification, for which the `importType` will be `openapi`.\n\nOn a successful import, the response will be an array with each element contaning `id`, `name` and `uid` of entities created.\n\nSupported `type`s:\n\n- string\n- json\n- file\n\nThe `input` parameter should be defined based on the `type`.\n\n> To import a file, request body must be form-data with `type` param set to `file`.\n\n**Note**: Refer to examples for different scenarios.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header.",
+      "summary_suggestion": "Import OpenAPI specification into Postman",
+      "description_suggestion": "Imports an OpenAPI specification into Postman, creating a collection and related entities. Supports three input types: `string` (raw specification text), `json` (JSON object), or `file` (multipart form-data). Set `importType` to `openapi` and provide the specification via the `input` parameter. For file uploads, use form-data with `type` set to `file`. Returns an array of created entities with `id`, `name`, and `uid`. This operation generates Postman collections from your API specification. Requires authentication via API Key.",
+      "reasoning": "Summary improved for specificity. Description reorganized for clarity: added explicit input format guidance, consolidated the three input types with their usage patterns, clarified the side effect of collection generation, and improved overall flow for AI agent decision-making about when to use this endpoint.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'apiKeyOwner' has semantic quality issues: vague_summary, missing_output_details. Original summary 'API Key Owner' is a noun phrase, not action-oriented. Description lacks clarity about what is returned and the operation's purpose (identifying the API Key owner). Improved summary to action-oriented form and enhanced description with explicit output details and operation purpose for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "apiKeyOwner",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "API Key Owner",
+      "current_description": "the `/me` Postman API endpoint lets you access information about the authenticated user. You can retrieve the authenticated user's username, full name, e-mail address, and any other available information.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Get authenticated user profile information",
+      "description_suggestion": "Retrieves the profile information of the authenticated user associated with the provided API Key. Returns user details including username, full name, email address, and other account information. This is a read-only operation that identifies who owns the API Key being used. Requires authentication via API Key in header or query parameter.",
+      "reasoning": "Original summary 'API Key Owner' is a noun phrase, not action-oriented. Description lacks clarity about what is returned and the operation's purpose (identifying the API Key owner). Improved summary to action-oriented form and enhanced description with explicit output details and operation purpose for better AI agent understanding.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'createMock' has semantic quality issues: missing_input_details, missing_output_details, missing_side_effects. Original summary lacks specificity about what is being created. Description missing critical input requirements (collection UID), output details (mock server URL, mock object structure), and side effects (mock server availability). Enhanced to clarify required vs optional parameters, specify return values, and explain the operational effect for AI agents.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "createMock",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Create Mock",
+      "current_description": "This endpoint allows you to create a mock on a collection. You can also provide an environment UID to resolve any environment variables in the collection.\n\nYou can also specify the context of a workspace to create a mock in directly by passing the `workspace` as a query param.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Create a mock server for a collection",
+      "description_suggestion": "Creates a mock server for a specified collection. Required input: collection UID. Optional inputs: environment UID (to resolve environment variables in the collection) and workspace query parameter (to specify the workspace context). Returns the created mock object with `id`, `name`, `uid`, and mock server URL. The mock server becomes immediately available for testing API requests. Requires authentication via API Key.",
+      "reasoning": "Original summary lacks specificity about what is being created. Description missing critical input requirements (collection UID), output details (mock server URL, mock object structure), and side effects (mock server availability). Enhanced to clarify required vs optional parameters, specify return values, and explain the operational effect for AI agents.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'singleMock' has semantic quality issues: vague_summary, missing_output_details. Original summary 'Single Mock' is too vague and not action-oriented. Description lacks specificity about what information is returned and what fields are included in the response. Improved summary to action-oriented form and added explicit output details for better AI agent understanding of available mock properties.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "singleMock",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "Single Mock",
+      "current_description": "This endpoint fetches you the basic information about a single mock using its `uid`.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Retrieve mock server details by UID",
+      "description_suggestion": "Retrieves detailed information about a specific mock server using its unique identifier (`mock_uid`). Returns the mock object including name, description, collection reference, environment reference, mock server URL, and configuration details. This is a read-only operation for inspecting mock server properties. Requires authentication via API Key.",
+      "reasoning": "Original summary 'Single Mock' is too vague and not action-oriented. Description lacks specificity about what information is returned and what fields are included in the response. Improved summary to action-oriented form and added explicit output details for better AI agent understanding of available mock properties.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'updateMock' has semantic quality issues: missing_output_details, missing_side_effects. Summary is adequate and action-oriented. Description lacks clarity about partial update support, return value structure, and side effects (immediate effect on mock server). Enhanced description to clarify that only provided fields are modified, specify return value, and explain the operational effect for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "updateMock",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Update Mock",
+      "current_description": "This endpoint allows you to update a mock you have created using its `uid`. The endpoint allows you to edit fields,\n* name\n* environment\n* description\n* private\n* versionTag\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "description_suggestion": "Updates an existing mock server configuration using its unique identifier (`mock_uid`). Supports partial updates to the following fields: `name`, `environment`, `description`, `private` (visibility setting), and `versionTag`. Returns the updated mock object with all current properties. Changes take effect immediately on the mock server. Requires authentication via API Key.",
+      "reasoning": "Summary is adequate and action-oriented. Description lacks clarity about partial update support, return value structure, and side effects (immediate effect on mock server). Enhanced description to clarify that only provided fields are modified, specify return value, and explain the operational effect for better AI agent understanding.",
+      "batch_index": 5
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'createWebhook' has semantic quality issues: missing_output_details, missing_side_effects. Description lacks clarity on what is returned (webhook object structure) and side effects (webhook becomes active and callable). Added explicit information about return value structure and the side effect that the webhook becomes immediately available for invocation. This helps AI agents understand the complete operation lifecycle.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "createWebhook",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Create Webhook",
+      "current_description": "Create a webhook that triggers a collection with your custom payload.\n\nYou can specify the webhook name and the collection to trigger by using the following attributes of the `webhook` object on your JSON body:\n\n* `name`: the name of the webhook that you're creating.\n* `collection`: the ID of the collection that you want to trigger once this webhook is called.\n\nOnce created, the webhook URL can be retrieved by accessing the `webhookUrl` attribute of the `webhook` object on the response JSON payload.",
+      "description_suggestion": "Create a webhook that triggers a collection with a custom payload. Specify the webhook name and target collection ID in the request body using the `webhook` object attributes: `name` (webhook name) and `collection` (collection ID to trigger). Returns the created webhook object including the `webhookUrl` attribute, which contains the unique URL to invoke the webhook. The webhook will execute the specified collection when called with the provided payload.",
+      "reasoning": "Description lacks clarity on what is returned (webhook object structure) and side effects (webhook becomes active and callable). Added explicit information about return value structure and the side effect that the webhook becomes immediately available for invocation. This helps AI agents understand the complete operation lifecycle.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'allWorkspaces' has semantic quality issues: vague_summary. Summary 'All workspaces' is too generic and not action-oriented. Changed to 'List all accessible workspaces' to clearly indicate the retrieval action. Description is comprehensive, explaining scope (accessible workspaces), response structure (array with name, id, type), and authentication requirement.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "allWorkspaces",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "All workspaces",
+      "current_description": "The `/workspaces` endpoint returns a list of all [workspaces](https://www.getpostman.com/docs/v6/postman/workspaces/intro_to_workspaces) that is accessible by you. The list includes your own workspaces and the workspaces that you have access to.\n\nThe response contains an array of collection information containing the `name`, `id`, and `type` of each workspace.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "List all accessible workspaces",
+      "reasoning": "Summary 'All workspaces' is too generic and not action-oriented. Changed to 'List all accessible workspaces' to clearly indicate the retrieval action. Description is comprehensive, explaining scope (accessible workspaces), response structure (array with name, id, type), and authentication requirement.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'createWorkspace' has semantic quality issues: missing_output_details, missing_side_effects. Description has a typo ('workspcae') and lacks clarity on input parameters (what fields are required/optional in request body). Missing information about side effects (workspace becomes accessible, entities are linked). Enhanced version clarifies input structure, return value, and side effects for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "createWorkspace",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Create Workspace",
+      "current_description": "This endpoint allows you to create a workspace and populate it with entities like `collections`, `environments`, `mocks` and `monitors` using their `uid`.\n\nOn successful creation of the workspace, the response returns the workspcae `name` and `id`.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "description_suggestion": "Create a new workspace and optionally populate it with entities using their unique identifiers. Accepts a request body specifying the workspace `name` and optional arrays of `collections`, `environments`, `mocks`, and `monitors` (identified by their `uid`). Returns the created workspace object containing `name` and `id`. The workspace becomes immediately accessible and available for collaboration. Associated entities are linked to the workspace upon creation.",
+      "reasoning": "Description has a typo ('workspcae') and lacks clarity on input parameters (what fields are required/optional in request body). Missing information about side effects (workspace becomes accessible, entities are linked). Enhanced version clarifies input structure, return value, and side effects for better AI agent understanding.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'singleWorkspace' has semantic quality issues: vague_summary. Summary 'Single workspace' is too vague and not action-oriented. Changed to 'Retrieve workspace details and contents' to clearly indicate the retrieval action and what is returned. Description adequately explains the operation's purpose, input (workspace id), output (workspace contents including collections, environments, mocks, monitors), and authentication requirement.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "singleWorkspace",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary"
+      ],
+      "current_summary": "Single workspace",
+      "current_description": "Access the contents of a workspace that is accessible to you using its id (`id`). Includes the collections, environments, mocks and monitors of that workspace.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Retrieve workspace details and contents",
+      "reasoning": "Summary 'Single workspace' is too vague and not action-oriented. Changed to 'Retrieve workspace details and contents' to clearly indicate the retrieval action and what is returned. Description adequately explains the operation's purpose, input (workspace id), output (workspace contents including collections, environments, mocks, monitors), and authentication requirement.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'updateWorkspace' has semantic quality issues: missing_input_details, missing_output_details. Description has typo ('workspcae' and 'updation') and lacks clarity on input structure. Missing explicit information about return value and the critical side effect (replace strategy for entity associations). Enhanced version clarifies input parameters, return value, and emphasizes the important behavioral detail about entity replacement to prevent accidental data loss.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "updateWorkspace",
+      "has_quality_issues": true,
+      "issues_found": [
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "Update Workspace",
+      "current_description": "This endpoint allows you to update a workspace and update it's association to entities like `collections`, `environments`, `mocks` and `monitors` using their `uid`.\n\nOn successful updation of the workspace, the response returns the workspcae `name` and `id`.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.\n\n**Note** : The endpoint expects you to send the desired state of the workspace in terms of the associated entities so be careful when trying to update these entities.\n\nFor eg. if your workspace has collections A and B, and in the update call, you send C's uid in the collections array, then A and B would be removed from the workspace and C would be added.",
+      "description_suggestion": "Update workspace properties and entity associations. Accepts a request body with the desired workspace state including `name` and arrays of associated entities (`collections`, `environments`, `mocks`, `monitors`) identified by their `uid`. Returns the updated workspace object containing `name` and `id`. Important: This operation uses a replace strategy for entity associations - the provided entity arrays represent the complete desired state. Any entities not included in the request will be removed from the workspace. For example, if a workspace currently contains collections A and B, sending only collection C's uid will remove A and B and add C.",
+      "reasoning": "Description has typo ('workspcae' and 'updation') and lacks clarity on input structure. Missing explicit information about return value and the critical side effect (replace strategy for entity associations). Enhanced version clarifies input parameters, return value, and emphasizes the important behavioral detail about entity replacement to prevent accidental data loss.",
+      "batch_index": 7
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deleteMock' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Original summary is too generic. Description lacks clarity about permanence of deletion, what is returned, and side effects. Added specificity about the uid parameter, permanent deletion, and response content for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deleteMock",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Delete Mock",
+      "current_description": "This endpoint allows you to delete an existing mock using its `uid`.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Delete a mock by uid",
+      "description_suggestion": "Deletes an existing mock using its `uid`. The mock will be permanently removed and no longer accessible. Requires authentication via API Key. Returns a success response with the deleted mock's metadata.",
+      "reasoning": "Original summary is too generic. Description lacks clarity about permanence of deletion, what is returned, and side effects. Added specificity about the uid parameter, permanent deletion, and response content for better AI agent understanding.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'publishMock' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Original summary lacks specificity. Description missing details about what publishing does (makes it accessible), state change, and return value. Enhanced to clarify the action's effect and what agents should expect in response.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "publishMock",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Publish Mock",
+      "current_description": "This endpoint publishes the mock you have created using its `uid`\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key ` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Publish a mock by uid",
+      "description_suggestion": "Publishes a mock using its `uid`, making it publicly accessible and enabling its mock server URL for use. The mock transitions from draft/unpublished state to active. Requires authentication via API Key. Returns the updated mock object with its public URL and status.",
+      "reasoning": "Original summary lacks specificity. Description missing details about what publishing does (makes it accessible), state change, and return value. Enhanced to clarify the action's effect and what agents should expect in response.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'unpublishMock' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Original summary lacks specificity. Description missing details about what unpublishing does (disables access), state change, and return value. Enhanced to clarify the action's effect and what agents should expect in response.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "unpublishMock",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Unpublish Mock",
+      "current_description": "This endpoint unpublishes the mock you have created using its `uid`\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key ` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Unpublish a mock by uid",
+      "description_suggestion": "Unpublishes a mock using its `uid`, making it no longer publicly accessible and disabling its mock server URL. The mock transitions from published/active state to unpublished. Requires authentication via API Key. Returns the updated mock object with its new unpublished status.",
+      "reasoning": "Original summary lacks specificity. Description missing details about what unpublishing does (disables access), state change, and return value. Enhanced to clarify the action's effect and what agents should expect in response.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'createMonitor' has semantic quality issues: vague_summary, missing_output_details. Original summary is too generic. Description is verbose with cron examples but lacks clarity about required inputs, what the operation returns, and which parameters are mandatory vs optional. Condensed while maintaining essential information about cron patterns and workspace context.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "createMonitor",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "Create Monitor",
+      "current_description": "This endpoint allows you to create a monitor.\n\nSome sample `cron` values are:\n\n| Frequency                  | Cron Pattern   |\n|-----------------------|-------------|\n| Every 5 minutes       | `*/5 * * * *`  |\n| Every 30 minutes     | `*/30 * * * *` |\n| Every Hour         | `0 */1 * * *`  |\n| Every 6 Hours      | `0 */6 * * *`  |\n| Every day at 5pm    | `0 17 * * *`   |\n| Every Monday at 12pm  | `0 12 * * MON` |\n| Every weekday (Monday - Friday) at 6am | `0 6 * * MON-FRI` |\n\nNote: Currently, you can only create monitors at some limited schedules. You can head to [Postman Monitors](https://monitor.getpostman.com) to see the allowed schedules. \n\nFor more information about the format of the `timezone` value, check this [list of time zones.](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)\n\nYou can also specify the context of a workspace to create a monitor in directly by passing the `workspace` as a query param.\n\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Create a new monitor with schedule",
+      "description_suggestion": "Creates a new monitor with a specified schedule using cron syntax. Accepts parameters for monitor name, collection uid, schedule (cron pattern), timezone, and optional workspace context. Only limited schedules are supported - refer to Postman Monitors for allowed options. Requires authentication via API Key. Returns the created monitor object with its uid, name, and schedule details.",
+      "reasoning": "Original summary is too generic. Description is verbose with cron examples but lacks clarity about required inputs, what the operation returns, and which parameters are mandatory vs optional. Condensed while maintaining essential information about cron patterns and workspace context.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'singleMonitor' has semantic quality issues: vague_summary, missing_output_details. Original summary is too vague ('Single Monitor'). Description lacks specificity about what 'basic information' includes. Enhanced to clarify what data is returned (configuration, schedule, collection reference, etc.) for better AI agent understanding of the operation's output.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "singleMonitor",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "Single Monitor",
+      "current_description": "This endpoint fetches you basic information about the monitor using its `uid`.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Retrieve monitor details by uid",
+      "description_suggestion": "Retrieves detailed information about a specific monitor using its `uid`. Returns the monitor's configuration including name, schedule, collection reference, timezone, and execution history summary. Requires authentication via API Key.",
+      "reasoning": "Original summary is too vague ('Single Monitor'). Description lacks specificity about what 'basic information' includes. Enhanced to clarify what data is returned (configuration, schedule, collection reference, etc.) for better AI agent understanding of the operation's output.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'updateMonitor' has semantic quality issues: vague_summary, missing_output_details. Original summary is too generic. Description clearly states what can be updated but lacks information about partial update support and return value. Enhanced to clarify that only name and schedule are updatable, partial updates are supported, and what is returned.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "updateMonitor",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "Update Monitor",
+      "current_description": "This endpoint allows you to update a monitor using its `uid`. Only the monitor name and its schedule can be updated.\n\nSome example `cron` values are:\n\n| Frequency                  | Cron Pattern   |\n|-----------------------|-------------|\n| Every 5 minutes       | `*/5 * * * *`  |\n| Every 30 minutes     | `*/30 * * * *` |\n| Every Hour         | `0 */1 * * *`  |\n| Every 6 Hours      | `0 */6 * * *`  |\n| Every day at 5pm    | `0 17 * * *`   |\n| Every Monday at 12pm  | `0 12 * * MON` |\n| Every weekday (Monday - Friday) at 6am | `0 6 * * MON-FRI` |\n\nNote: Currently, you can only create monitors at some limited schedules. You can head to [Postman Monitors](https://monitor.getpostman.com) to see the allowed schedules. \n\nFor more information about the format of the `timezone` value, check this [list of time zones.](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Update monitor name and schedule",
+      "description_suggestion": "Updates a monitor's name and/or schedule using its `uid`. Supports partial updates - only provided fields will be modified. Schedule uses cron syntax with limited supported patterns (see Postman Monitors for allowed schedules). Timezone can also be updated. Requires authentication via API Key. Returns the updated monitor object with new configuration.",
+      "reasoning": "Original summary is too generic. Description clearly states what can be updated but lacks information about partial update support and return value. Enhanced to clarify that only name and schedule are updatable, partial updates are supported, and what is returned.",
+      "batch_index": 6
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getTestSuiteRelations' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, poor_ai_interpretability. Original summary is too generic. Description lacks clarity about what constitutes 'relations', doesn't specify required path parameters, and uses unclear phrasing ('relations by type'). Improved version clarifies that this retrieves test suite relations specifically, explains the response structure more clearly, and explicitly documents required path parameters for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getTestSuiteRelations",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Get test suite relations",
+      "current_description": "This call fetches all the relations by type which are linked to the specified API version along with their details.\n\nThe response will contain an array with key `{{relationType}}`. Each of the item will consist of all the details related each of the relation.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Retrieve test suite relations for API version",
+      "description_suggestion": "Fetches all test suite relations linked to the specified API version. Returns an array of relation objects organized by relation type, each containing complete relation details including name, id, and metadata. Requires authentication via API Key. Path parameters: apiId (unique API identifier), apiVersionId (unique API version identifier).",
+      "reasoning": "Original summary is too generic. Description lacks clarity about what constitutes 'relations', doesn't specify required path parameters, and uses unclear phrasing ('relations by type'). Improved version clarifies that this retrieves test suite relations specifically, explains the response structure more clearly, and explicitly documents required path parameters for AI agent understanding.",
       "batch_index": 3
     }
   },
@@ -7631,7 +8608,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'importExportedData' has semantic quality issues: vague_description, missing_side_effects. The original description was vague and lacked details about the side effects of the import operation. The suggested description provides more clarity on the import process, including the potential overwriting of existing entities.",
+    "message": "Operation 'syncRelationsWithSchema' has semantic quality issues: vague_summary, vague_description, unclear_purpose, missing_input_details, missing_output_details, missing_side_effects, poor_ai_interpretability. Original description is extremely vague and doesn't explain what 'sync' means in this context or what changes occur. Missing critical information about path parameters (entityType, entityId), what the operation actually modifies, and what the response contains. Improved version clarifies the purpose, documents all path parameters, explains side effects, and provides context about entity types for better AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7642,18 +8619,23 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "importExportedData",
+      "operation_id": "syncRelationsWithSchema",
       "has_quality_issues": true,
       "issues_found": [
+        "vague_summary",
         "vague_description",
-        "missing_side_effects"
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "poor_ai_interpretability"
       ],
-      "current_summary": "Import exported data",
-      "current_description": "This endpoint allows you to import your exported Postman data.\nFor more information about how you can export your data, refer <a href=\"https://go.postman.co/me/export\">Export your Postman data.</a>\n\nOn successful imports, the response will be an array with Each element contaning `id`, `name` and `uid` of entities created.\n\n**Note**: Refer to examples for different scenarios.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header.\n",
-      "summary_suggestion": "Import exported Postman data",
-      "description_suggestion": "This endpoint allows you to import your exported Postman data into your account. It supports importing data exported from Postman. On successful import, the response will be an array with each element containing `id`, `name`, and `uid` of the entities created. Refer to the examples for different scenarios. Requires authentication via API Key as `X-Api-Key` request header. Note: Any existing entities with the same `uid` will be overwritten.",
-      "reasoning": "The original description was vague and lacked details about the side effects of the import operation. The suggested description provides more clarity on the import process, including the potential overwriting of existing entities.",
-      "batch_index": 5
+      "current_summary": "Sync relations with schema",
+      "current_description": "This call allows you to keep the relation in sync with the API schema.\n\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Synchronize entity relations with API schema",
+      "description_suggestion": "Synchronizes the specified entity's relations with the current API schema, ensuring consistency between relation definitions and schema structure. Accepts entityType (e.g., collection, environment, mock) and entityId as path parameters. Returns updated relation objects reflecting schema alignment. Side effects: modifies relation metadata and may update relation references to match schema changes. Requires authentication via API Key.",
+      "reasoning": "Original description is extremely vague and doesn't explain what 'sync' means in this context or what changes occur. Missing critical information about path parameters (entityType, entityId), what the operation actually modifies, and what the response contains. Improved version clarifies the purpose, documents all path parameters, explains side effects, and provides context about entity types for better AI agent decision-making.",
+      "batch_index": 3
     }
   },
   {
@@ -7667,7 +8649,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'importExternalApiSpecification' has semantic quality issues: vague_description, missing_side_effects. The original description was vague and lacked details about the side effects of the import operation. The suggested description provides more clarity on the import process, including the potential overwriting of existing entities.",
+    "message": "Operation 'createAFork' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Original summary 'Create a Fork' is too generic and doesn't clarify what is being forked. Description lacks clarity about what fork information is returned and doesn't explain the side effect of establishing a fork relationship. Improved version clarifies the action (forking a collection), explains the fork relationship, documents the fork metadata returned, and explicitly notes the side effect of creating a new resource with fork linkage.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7678,17 +8660,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "importExternalApiSpecification",
+      "operation_id": "createAFork",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description",
+        "vague_summary",
+        "missing_output_details",
         "missing_side_effects"
       ],
-      "current_summary": "Import external API specification",
-      "current_description": "This endpoint allows you to import external API specifications into Postman.\n\nCurrently, this endpoint only supports the <a href=\"https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md\">OpenAPI</a> specification, for which the `importType` will be `openapi`.\n\nOn a successful import, the response will be an array with each element contaning `id`, `name` and `uid` of entities created.\n\nSupported `type`s:\n\n- string\n- json\n- file\n\nThe `input` parameter should be defined based on the `type`.\n\n> To import a file, request body must be form-data with `type` param set to `file`.\n\n**Note**: Refer to examples for different scenarios.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header.\n",
-      "description_suggestion": "This endpoint allows you to import external API specifications into Postman. Currently, it only supports OpenAPI specifications. On successful import, the response will be an array with each element containing `id`, `name`, and `uid` of the entities created. The `input` parameter should be defined based on the `type`. To import a file, the request body must be form-data with `type` param set to `file`. Requires authentication via API Key as `X-Api-Key` request header. Note: Any existing entities with the same `uid` will be overwritten.",
-      "reasoning": "The original description was vague and lacked details about the side effects of the import operation. The suggested description provides more clarity on the import process, including the potential overwriting of existing entities.",
-      "batch_index": 5
+      "current_summary": "Create a Fork",
+      "current_description": "This endpoint allows you to create a fork from an existing collection.\n\nOn successful creation of the collection, the response returns the collection `name`, `id`, `uid` along with `fork` information.\n\nYou can also specify the context of a workspace to fork a collection in by passing the `workspace` as a query param.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Fork an existing collection",
+      "description_suggestion": "Creates a fork of an existing collection, allowing independent modifications while maintaining a link to the source collection. Requires the source collection UID as a path parameter. Returns the forked collection's `name`, `id`, `uid`, and `fork` metadata including source collection reference. Optionally specify target workspace via `workspace` query parameter. Side effects: creates new collection resource and establishes fork relationship with source collection. Requires authentication via API Key.",
+      "reasoning": "Original summary 'Create a Fork' is too generic and doesn't clarify what is being forked. Description lacks clarity about what fork information is returned and doesn't explain the side effect of establishing a fork relationship. Improved version clarifies the action (forking a collection), explains the fork relationship, documents the fork metadata returned, and explicitly notes the side effect of creating a new resource with fork linkage.",
+      "batch_index": 3
     }
   },
   {
@@ -7702,7 +8686,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'updateAnApi' has semantic quality issues: vague_description, missing_input_details. The original description is vague and missing details about the request body and authentication requirements.",
+    "message": "Operation 'singleCollection' has semantic quality issues: vague_summary, missing_output_details. Original summary 'Single Collection' is too vague and doesn't indicate the action (retrieve/access). Description is minimal and doesn't specify what 'contents' means or what fields are returned in the response. Improved version clarifies the action, documents the path parameter, and specifies the response structure including key collection properties for better AI agent understanding of what data will be available.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -7713,18 +8697,460 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "updateAnApi",
+      "operation_id": "singleCollection",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_description",
-        "missing_input_details"
+        "vague_summary",
+        "missing_output_details"
       ],
-      "current_summary": "Update an API",
-      "current_description": "This call updates an existing API .\n\nRequest body should contain an `api` object which should have the fields to be updated. Only `name`, `summary` and `description` fields can be edited for an API.\n\nResponse contains an `api` object with all the details related to the created API, namely, `id`, `name`, `summary`, `description` etc.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
-      "summary_suggestion": "Update an existing API",
-      "description_suggestion": "This call updates an existing API with the specified API ID. The request body should contain an `api` object with the fields to be updated. Only `name`, `summary`, and `description` fields can be edited for an API. The response contains an `api` object with all the details related to the updated API, including `id`, `name`, `summary`, `description`, etc. Requires authentication via API Key.",
-      "reasoning": "The original description is vague and missing details about the request body and authentication requirements.",
-      "batch_index": 0
+      "current_summary": "Single Collection",
+      "current_description": "Access the contents of a collection that is accessible to you using its unique id (`uid`).\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Retrieve collection contents by UID",
+      "description_suggestion": "Retrieves the complete contents of a collection accessible to you using its unique identifier (uid). Returns the collection object including name, description, items (requests), variables, auth settings, and all other collection metadata. Requires authentication via API Key. Path parameter: collection_uid (unique collection identifier).",
+      "reasoning": "Original summary 'Single Collection' is too vague and doesn't indicate the action (retrieve/access). Description is minimal and doesn't specify what 'contents' means or what fields are returned in the response. Improved version clarifies the action, documents the path parameter, and specifies the response structure including key collection properties for better AI agent understanding of what data will be available.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getMonitorRelations' has semantic quality issues: vague_summary, vague_description, missing_output_details, poor_ai_interpretability. Original summary 'Get monitor relations' is too generic and doesn't specify the scope (API version). Description uses unclear phrasing ('relations by type') and doesn't clearly explain the response structure or what monitor relations represent in the Postman context. Improved version clarifies the operation scope, response structure, and includes authentication requirement for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getMonitorRelations",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "vague_description",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Get monitor relations",
+      "current_description": "This call fetches all the relations by type which are linked to the specified API version along with their details.\n\nThe response will contain an array with key `{{relationType}}`. Each of the item will consist of all the details related each of the relation.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Retrieve all monitor relations for an API version",
+      "description_suggestion": "Fetches all monitor relations linked to the specified API version. Returns a response object containing monitor relation details organized by relation type. Each relation includes metadata such as ID, name, and status. Requires authentication via API Key.",
+      "reasoning": "Original summary 'Get monitor relations' is too generic and doesn't specify the scope (API version). Description uses unclear phrasing ('relations by type') and doesn't clearly explain the response structure or what monitor relations represent in the Postman context. Improved version clarifies the operation scope, response structure, and includes authentication requirement for AI agent clarity.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'getLinkedRelations' has semantic quality issues: vague_summary, missing_context, missing_output_details, poor_ai_interpretability. Summary is too vague ('linked relations' without context). Description lacks clarity about what relation types are available and doesn't explain the practical use case. Improved version specifies the relation types available, clarifies the response structure, and explains the operation's purpose for AI agents to determine when to use it.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "getLinkedRelations",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details",
+        "poor_ai_interpretability"
+      ],
+      "current_summary": "Get linked relations",
+      "current_description": "This call fetches all the relations which are linked to the specified API version along with their details.\n\nThe response will contain a `relations` object which lists all the relation types which are linked to the API version. Each of the relation type will be an object which details the relations of this type. \n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Retrieve all relations linked to an API version",
+      "description_suggestion": "Fetches all relations (contracttest, integrationtest, documentation, testsuite, environment, mock, monitor) linked to the specified API version. Returns a `relations` object where each relation type is a key containing an array of related entities with their details. Useful for understanding all connected resources to an API version. Requires authentication via API Key.",
+      "reasoning": "Summary is too vague ('linked relations' without context). Description lacks clarity about what relation types are available and doesn't explain the practical use case. Improved version specifies the relation types available, clarifies the response structure, and explains the operation's purpose for AI agents to determine when to use it.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'createRelations' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Summary 'Create relations' is too generic. Description lacks clarity on request body structure and doesn't explain what the operation returns or its side effects. Improved version specifies the action (linking entities), clarifies input requirements with relation type mapping, explains the response, and notes the bidirectional linking effect for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "createRelations",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Create relations",
+      "current_description": "This call allows you to add existing Postman entities as new relations to an API. The request body should contain the relations to be created along with an array of entity IDs. \n\n<table>\n  <tr>\n    <th>Relation</th>\n    <th>Entity ID type</th>\n  <tr>\n  <tr>\n    <td>contracttest</td>\n    <td>Collection UIDs</td>\n  </tr>\n  <tr>\n    <td>integrationtest</td>\n    <td>Collection UIDs</td>\n  </tr>\n  <tr>\n    <td>documentation</td>\n    <td>Collection UIDs</td>\n  </tr>\n  <tr>\n    <td>testsuite</td>\n    <td>Collection UIDs</td>\n  </tr>\n  <tr>\n    <td>environment</td>\n    <td>Environment UIDs</td>\n  </tr>\n  <tr>\n    <td>mock</td>\n    <td>Mock IDs</td>\n  </tr>\n  <tr>\n    <td>monitor</td>\n    <td>Monitor IDs</td>\n  </tr>\n</table>\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Link Postman entities as relations to an API version",
+      "description_suggestion": "Creates new relations between an API version and existing Postman entities. Request body must specify the relation type (contracttest, integrationtest, documentation, testsuite, environment, mock, or monitor) and corresponding entity IDs (Collection UIDs for test/documentation relations, Environment UIDs for environment relations, Mock IDs for mock relations, Monitor IDs for monitor relations). Returns the created relation objects with their details. Establishes bidirectional links between the API and specified entities. Requires authentication via API Key.",
+      "reasoning": "Summary 'Create relations' is too generic. Description lacks clarity on request body structure and doesn't explain what the operation returns or its side effects. Improved version specifies the action (linking entities), clarifies input requirements with relation type mapping, explains the response, and notes the bidirectional linking effect for better AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'updateSchema' has semantic quality issues: vague_summary, missing_side_effects. Summary 'Update Schema' is too generic and doesn't indicate scope. Description has a typo ('created schema' should be 'updated schema') and doesn't explain partial update behavior or side effects. Improved version clarifies the action scope, fixes the typo, explains partial update support, and notes that only provided fields are modified for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "updateSchema",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects"
+      ],
+      "current_summary": "Update Schema",
+      "current_description": "This call updates an existing schema.\n\nRequest body should contain a `schema` object which should atleast have these properties with `string` values:\n\n- **`type`**: Allowed types are `openapi3`, `openapi2`, `openapi1`, `raml` and `graphql`.\n- **`language`** : Allowed languages are `json` and `yaml` for OpenAPI and RAML schema types. GraphQL schema type accepts only `graphql` language.\n- **`schema`**: Optional. If passed, must be the content of the schema as a `string`.\n\nResponse contains a `schema` object with all the details related to the created schema, namely, `id`, `language`, `type` etc. \n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Update an existing API schema definition",
+      "description_suggestion": "Updates an existing schema identified by schemaId. Request body should contain a `schema` object with type (openapi3, openapi2, openapi1, raml, or graphql), language (json or yaml for OpenAPI/RAML; graphql for GraphQL), and optional schema content as a string. Supports partial updates - only provided fields will be modified. Returns the updated schema object with all details including id, language, type, and content. Requires authentication via API Key.",
+      "reasoning": "Summary 'Update Schema' is too generic and doesn't indicate scope. Description has a typo ('created schema' should be 'updated schema') and doesn't explain partial update behavior or side effects. Improved version clarifies the action scope, fixes the typo, explains partial update support, and notes that only provided fields are modified for better AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'createCollectionFromSchema' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Summary 'Create collection from schema' is vague about the outcome and doesn't clarify that it generates from schema content. Description lacks clarity on what the collection contains and how it's populated from the schema. Improved version specifies that the collection is generated/populated from schema, clarifies the request structure, explains the response, and notes the automatic linking and population behavior for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "createCollectionFromSchema",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Create collection from schema",
+      "current_description": "This call creates a collection and links it to an API as one or multiple relations. \n\nRequest body requires two keys:\n- `name` - Name of the collection to be created.\n- `relations` - A list of relation(s) to be created.\n\nThe allowed relation types are `contracttest`, `integrationtest`, `testsuite`, and `documentation`.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Generate a Postman collection from an API schema",
+      "description_suggestion": "Creates a new Postman collection from the specified schema and automatically links it to the API version with one or more relation types. Request body requires: `name` (collection name) and `relations` (array of relation types: contracttest, integrationtest, testsuite, or documentation). Returns the created collection object with its ID and details. The collection is automatically populated based on the schema definition and linked to the API version for easy access. Requires authentication via API Key.",
+      "reasoning": "Summary 'Create collection from schema' is vague about the outcome and doesn't clarify that it generates from schema content. Description lacks clarity on what the collection contains and how it's populated from the schema. Improved version specifies that the collection is generated/populated from schema, clarifies the request structure, explains the response, and notes the automatic linking and population behavior for better AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'updateCollection' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Original summary 'Update Collection' is too generic. Description lacks clarity about full replacement behavior and doesn't explicitly state this is a destructive operation. Added warning about complete replacement, clarified v2 format requirement, and emphasized the side effect of data loss for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "updateCollection",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "Update Collection",
+      "current_description": "This endpoint allows you to update an existing collection using the Postman Collection v2 format. For more information about the v2 schema, check the format [here](https://schema.getpostman.com/json/collection/v2.0.0/docs/index.html).\n\nOn successful updation of the collection, the response returns the collection `name`, `id` and `uid`.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.\n\nNote: Please be careful when trying to update the collection, as the existing collection will be replaced by the request body.",
+      "summary_suggestion": "Replace an existing collection with new data",
+      "description_suggestion": "Replaces an existing collection entirely with the provided Postman Collection v2 format data. The request body must conform to the Collection v2 schema. On successful replacement, returns the updated collection's `name`, `id`, and `uid`. WARNING: This operation performs a full replacement - the existing collection will be completely overwritten by the request body. Requires API Key authentication via `X-Api-Key` header or `apikey` query parameter.",
+      "reasoning": "Original summary 'Update Collection' is too generic. Description lacks clarity about full replacement behavior and doesn't explicitly state this is a destructive operation. Added warning about complete replacement, clarified v2 format requirement, and emphasized the side effect of data loss for better AI agent decision-making.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deleteCollection' has semantic quality issues: vague_summary, missing_output_details. Summary lacks action specificity - 'Delete Collection' doesn't convey permanence. Description missing critical context about irreversibility and what the returned values represent. Added 'Permanently' to emphasize destructive nature and clarified that returned values confirm deletion for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deleteCollection",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "Delete Collection",
+      "current_description": "This endpoint allows you to delete an existing collection.\n\nOn successful deletion of the collection, the response returns the `id` and `uid`.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Permanently delete a collection",
+      "description_suggestion": "Permanently deletes an existing collection by its unique identifier (`uid`). On successful deletion, returns the deleted collection's `id` and `uid` for confirmation. This operation is irreversible. Requires API Key authentication via `X-Api-Key` header or `apikey` query parameter.",
+      "reasoning": "Summary lacks action specificity - 'Delete Collection' doesn't convey permanence. Description missing critical context about irreversibility and what the returned values represent. Added 'Permanently' to emphasize destructive nature and clarified that returned values confirm deletion for AI agent understanding.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'allEnvironments' has semantic quality issues: vague_summary, missing_context. Summary 'All Environments' is a noun phrase, not action-oriented. Description lacks context about what environments are used for and when an agent should call this. Added action verb 'Retrieve', clarified scope ('accessible to authenticated user'), and provided use case guidance for AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "allEnvironments",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context"
+      ],
+      "current_summary": "All Environments",
+      "current_description": "The `/environments` endpoint returns a list of all [environments](https://www.getpostman.com/docs/environments) that belong to you..\n\nThe response contains an array of environments' information containing the `name`, `id`, `owner` and `uid` of each environment.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Retrieve all environments in your account",
+      "description_suggestion": "Retrieves a list of all environments accessible to the authenticated user. Returns an array of environment objects, each containing the environment's `name`, `id`, `owner`, and `uid`. Use this to discover available environments or retrieve environment metadata. Requires API Key authentication via `X-Api-Key` header or `apikey` query parameter.",
+      "reasoning": "Summary 'All Environments' is a noun phrase, not action-oriented. Description lacks context about what environments are used for and when an agent should call this. Added action verb 'Retrieve', clarified scope ('accessible to authenticated user'), and provided use case guidance for AI agent interpretability.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'createEnvironment' has semantic quality issues: vague_summary, missing_context, missing_output_details. Summary 'Create Environment' lacks context about what environments contain (variables). Description is schema-heavy but lacks explanation of purpose and practical guidance. Added 'with variables' to summary, reorganized description to explain purpose first, clarified required vs optional fields, and added workspace context for better AI agent understanding of when to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "createEnvironment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "Create Environment",
+      "current_description": "A sample body is added to the request that conforms to the following JSON schema:\n\n```json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"environment\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"name\": {\n              \"type\": \"string\",\n              \"maxLength\": 254,\n              \"minLength\": 1\n            },\n        \"values\": {\n          \"type\": \"array\",\n          \"maxItems\": 100,\n          \"additionalItems\": false,\n          \"items\": {\n              \"type\": \"object\",\n              \"properties\": {\n                \"key\": {\n                  \"type\": \"string\",\n                  \"maxLength\": 254\n                  \"minLength\": 1\n                },\n                \"value\": { \"type\": \"string\" },\n                \"enabled\": { \"type\": \"boolean\" }\n              },\n              \"required\": [\"key\", \"value\"]\n            }\n        }\n      },\n      \"required\": [\"name\"]\n    }\n  },\n  \"required\": [\"environment\"]\n}\n```\n\nOn successful creation of the environment, the API returns the environment name and `id`.\n\nYou can also specify the context of a workspace to create an environment in directly by passing the `workspace` as a query param.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Create a new environment with variables",
+      "description_suggestion": "Creates a new environment containing key-value variable pairs. The request body must include an `environment` object with a required `name` (1-254 characters) and optional `values` array (up to 100 items). Each value object requires `key` and `value` fields, with optional `enabled` boolean flag. Optionally specify a `workspace` query parameter to create the environment in a specific workspace. On success, returns the created environment's `name` and `id`. Requires API Key authentication via `X-Api-Key` header or `apikey` query parameter.",
+      "reasoning": "Summary 'Create Environment' lacks context about what environments contain (variables). Description is schema-heavy but lacks explanation of purpose and practical guidance. Added 'with variables' to summary, reorganized description to explain purpose first, clarified required vs optional fields, and added workspace context for better AI agent understanding of when to use this operation.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'singleEnvironment' has semantic quality issues: vague_summary, missing_output_details. Summary 'Single Environment' is a noun phrase, not action-oriented. Description lacks detail about what is returned and use cases. Added action verb 'Retrieve', specified the parameter name and format, detailed the response structure, and provided use case context for AI agents to understand when to call this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "singleEnvironment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "Single Environment",
+      "current_description": "Access the contents of an environment that is accessible to you using its unique id (`uid`).\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Retrieve a specific environment by ID",
+      "description_suggestion": "Retrieves the complete contents of a specific environment using its unique identifier (`uid`). Returns the environment object including its `name`, `id`, `uid`, and all variable key-value pairs with their enabled status. Use this to fetch environment details for inspection or to retrieve variables for use in requests. Requires API Key authentication via `X-Api-Key` header or `apikey` query parameter.",
+      "reasoning": "Summary 'Single Environment' is a noun phrase, not action-oriented. Description lacks detail about what is returned and use cases. Added action verb 'Retrieve', specified the parameter name and format, detailed the response structure, and provided use case context for AI agents to understand when to call this operation.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'updateEnvironment' has semantic quality issues: vague_summary, missing_side_effects. Summary 'Update Environment' is ambiguous - doesn't clarify if it's partial or full replacement. Description states 'replaces' but lacks warning about destructive nature. Added 'Replace' and 'with new variables' to summary for clarity, added WARNING about full replacement behavior, clarified field constraints, and emphasized side effects for AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "updateEnvironment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects"
+      ],
+      "current_summary": "Update Environment",
+      "current_description": "This endpoint replaces an existing environment.\n\nA sample body is added to the request that conforms to the following JSON schema:\n\n```json\n{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"environment\": {\n\t\t\t\"type\": \"object\",\n\t\t\t\"properties\": {\n\t\t\t\t\"name\": {\n\t\t\t\t\t\"type\": \"string\",\n\t\t\t\t\t\"maxLength\": 254,\n\t\t\t\t\t\"minLength\": 1\n\t\t\t\t},\n\t\t\t\t\"values\": {\n\t\t\t\t\t\"type\": \"array\",\n\t\t\t\t\t\"maxItems\": 100,\n\t\t\t\t\t\"additionalItems\": false,\n\t\t\t\t\t\"items\": {\n\t\t\t\t\t\t\"type\": \"object\",\n\t\t\t\t\t\t\"properties\": {\n\t\t\t\t\t\t\t\"key\": {\n\t\t\t\t\t\t\t\t\"type\": \"string\",\n\t\t\t\t\t\t\t\t\"maxLength\": 254,\n\t\t\t\t\t\t\t\t\"minLength\": 1\n\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\"value\": {\n\t\t\t\t\t\t\t\t\"type\": \"string\",\n\t\t\t\t\t\t\t\t\"maxLength\": 254,\n\t\t\t\t\t\t\t\t\"minLength\": 1\n\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\"type\": {\n\t\t\t\t\t\t\t\t\"type\": \"string\"\n\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\"enabled\": {\n\t\t\t\t\t\t\t\t\"type\": \"boolean\"\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"required\": [\n\t\t\t\t\t\t\t\"key\",\n\t\t\t\t\t\t\t\"value\"\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t},\n\t\"required\": [\n\t\t\"environment\"\n\t]\n}\n```\n\nOn successful updation of the environment, the API returns the environment name and `id`.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Replace an existing environment with new variables",
+      "description_suggestion": "Completely replaces an existing environment with the provided data. The request body must include an `environment` object with optional `name` (1-254 characters) and `values` array (up to 100 items). Each value object requires `key` and `value` fields (1-254 characters each), with optional `type` and `enabled` fields. On successful replacement, returns the updated environment's `name` and `id`. WARNING: This operation performs a full replacement - existing environment variables will be completely overwritten. Requires API Key authentication via `X-Api-Key` header or `apikey` query parameter.",
+      "reasoning": "Summary 'Update Environment' is ambiguous - doesn't clarify if it's partial or full replacement. Description states 'replaces' but lacks warning about destructive nature. Added 'Replace' and 'with new variables' to summary for clarity, added WARNING about full replacement behavior, clarified field constraints, and emphasized side effects for AI agent decision-making.",
+      "batch_index": 4
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deleteEnvironment' has semantic quality issues: vague_summary, missing_output_details. Summary 'Delete Environment' lacks emphasis on permanence. Description missing critical context about irreversibility and side effects (variable loss). Added 'Permanently' to summary, clarified that this is irreversible, explained that associated variables are also removed, and emphasized the destructive nature for AI agent understanding of operation consequences.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deleteEnvironment",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "Delete Environment",
+      "current_description": "This endpoint allows you to delete a single environment based on an environment's unique `uid`.\n\n> Requires <a href=\"#authentication\">API Key</a> as `X-Api-Key` request header or `apikey` URL query parameter.",
+      "summary_suggestion": "Permanently delete an environment",
+      "description_suggestion": "Permanently deletes a single environment by its unique identifier (`uid`). This operation is irreversible and will remove all variables associated with the environment. On successful deletion, the environment is removed from your account. Requires API Key authentication via `X-Api-Key` header or `apikey` query parameter.",
+      "reasoning": "Summary 'Delete Environment' lacks emphasis on permanence. Description missing critical context about irreversibility and side effects (variable loss). Added 'Permanently' to summary, clarified that this is irreversible, explained that associated variables are also removed, and emphasized the destructive nature for AI agent understanding of operation consequences.",
+      "batch_index": 4
     }
   },
   {
@@ -7738,7 +9164,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 50 operations analyzed, 6 quality issues found",
+    "message": "Semantic analysis completed: 57 operations analyzed, 45 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -7749,8 +9175,8 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "total_operations_analyzed": 50,
-      "total_issues_found": 6,
+      "total_operations_analyzed": 57,
+      "total_issues_found": 45,
       "batches_processed": 9
     }
   }

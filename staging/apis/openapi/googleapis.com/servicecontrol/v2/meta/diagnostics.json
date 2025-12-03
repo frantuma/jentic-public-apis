@@ -2562,7 +2562,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicecontrol.services.check' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are too vague. The summary does not exist, and the description lacks a concise action-oriented statement. Added a clear summary and refined the description to include essential details and domain-specific terminology.",
+    "message": "Operation 'servicecontrol.services.check' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description is verbose and mixes implementation details with operational guidance. Improved summary provides clear action-oriented statement. Improved description clarifies inputs (CheckRequest), outputs (CheckResponse), constraints (1 resource limit), and important operational notes while maintaining domain terminology consistency with the Service Infrastructure context.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2577,14 +2577,15 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
       "current_description": "Private Preview. This feature is only available for approved services. This method provides admission control for services that are integrated with [Service Infrastructure](https://cloud.google.com/service-infrastructure). It checks whether an operation should be allowed based on the service configuration and relevant policies. It must be called before the operation is executed. For more information, see [Admission Control](https://cloud.google.com/service-infrastructure/docs/admission-control). NOTE: The admission control has an expected policy propagation delay of 60s. The caller **must** not depend on the most recent policy changes. NOTE: The admission control has a hard limit of 1 referenced resources per call. If an operation refers to more than 1 resources, the caller must call the Check method multiple times. This method requires the `servicemanagement.services.check` permission on the specified service. For more information, see [Service Control API Access Control](https://cloud.google.com/service-infrastructure/docs/service-control/access-control).",
-      "summary_suggestion": "Check if an operation is allowed for a service",
-      "description_suggestion": "Checks if an operation should be allowed based on the service configuration and relevant policies. Must be called before the operation is executed. Requires `servicemanagement.services.check` permission. NOTE: Policy propagation delay of 60s and a limit of 1 referenced resource per call. For more information, see [Admission Control](https://cloud.google.com/service-infrastructure/docs/admission-control).",
-      "reasoning": "The current summary and description are too vague. The summary does not exist, and the description lacks a concise action-oriented statement. Added a clear summary and refined the description to include essential details and domain-specific terminology.",
+      "summary_suggestion": "Check if operation is allowed by service policies",
+      "description_suggestion": "Performs admission control for service operations by evaluating whether an operation should be allowed based on service configuration and policies. Must be called before operation execution. Accepts a CheckRequest containing operation details and returns a CheckResponse indicating approval status. Supports maximum 1 referenced resource per call; multiple calls required for operations referencing more resources. Note: Policy propagation has ~60s delay; do not rely on most recent policy changes. Requires servicemanagement.services.check permission.",
+      "reasoning": "Missing summary entirely. Description is verbose and mixes implementation details with operational guidance. Improved summary provides clear action-oriented statement. Improved description clarifies inputs (CheckRequest), outputs (CheckResponse), constraints (1 resource limit), and important operational notes while maintaining domain terminology consistency with the Service Infrastructure context.",
       "batch_index": 0
     }
   },
@@ -2599,7 +2600,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'servicecontrol.services.report' has semantic quality issues: vague_summary, vague_description, missing_context. The current summary and description are too vague. The summary does not exist, and the description lacks a concise action-oriented statement. Added a clear summary and refined the description to include essential details and domain-specific terminology.",
+    "message": "Operation 'servicecontrol.services.report' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description is verbose with mixed implementation details. Improved summary provides clear action-oriented statement indicating telemetry reporting purpose. Improved description specifies inputs (ReportRequest with operation list), outputs (ReportResponse), operational constraints (1000 ops/1MB hard limit, 100 ops recommended), and required permissions while using consistent Service Infrastructure terminology.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -2614,14 +2615,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Private Preview. This feature is only available for approved services. This method provides telemetry reporting for services that are integrated with [Service Infrastructure](https://cloud.google.com/service-infrastructure). It reports a list of operations that have occurred on a service. It must be called after the operations have been executed. For more information, see [Telemetry Reporting](https://cloud.google.com/service-infrastructure/docs/telemetry-reporting). NOTE: The telemetry reporting has a hard limit of 1000 operations and 1MB per Report call. It is recommended to have no more than 100 operations per call. This method requires the `servicemanagement.services.report` permission on the specified service. For more information, see [Service Control API Access Control](https://cloud.google.com/service-infrastructure/docs/service-control/access-control).",
-      "summary_suggestion": "Report operations for a service",
-      "description_suggestion": "Reports a list of operations that have occurred on a service. Must be called after the operations have been executed. Requires `servicemanagement.services.report` permission. NOTE: Telemetry reporting limit of 1000 operations and 1MB per call. Recommended limit of 100 operations per call. For more information, see [Telemetry Reporting](https://cloud.google.com/service-infrastructure/docs/telemetry-reporting).",
-      "reasoning": "The current summary and description are too vague. The summary does not exist, and the description lacks a concise action-oriented statement. Added a clear summary and refined the description to include essential details and domain-specific terminology.",
+      "summary_suggestion": "Report executed service operations for telemetry",
+      "description_suggestion": "Reports telemetry data for operations executed on a service. Must be called after operations have completed. Accepts a ReportRequest containing a list of operations and returns a ReportResponse. Supports maximum 1000 operations and 1MB per call; recommended limit is 100 operations per call for optimal performance. Enables Service Infrastructure to track and analyze service activity. Requires servicemanagement.services.report permission.",
+      "reasoning": "Missing summary entirely. Description is verbose with mixed implementation details. Improved summary provides clear action-oriented statement indicating telemetry reporting purpose. Improved description specifies inputs (ReportRequest with operation list), outputs (ReportResponse), operational constraints (1000 ops/1MB hard limit, 100 ops recommended), and required permissions while using consistent Service Infrastructure terminology.",
       "batch_index": 0
     }
   },

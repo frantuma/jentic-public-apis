@@ -6319,7 +6319,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudbilling.estimateCostScenario' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details. The original summary was missing, and the description was vague. Added a clear summary and expanded the description to include details about the input and output schemas, enhancing clarity and AI agent interpretability.",
+    "message": "Operation 'cloudbilling.estimateCostScenario' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_context, poor_ai_interpretability. The operation lacks a summary entirely and the description is incomplete. The current description mentions 'CostScenario' and 'billingAccount' but doesn't explain what inputs are expected, what the operation returns, or when an AI agent should use it. The suggestion adds clarity about the operation's purpose (cost estimation for planning), specifies the input type (CostScenario), output type (CostEstimationResult), and use cases. This improves AI agent interpretability by making it clear this is for estimation/forecasting without account binding, helping agents distinguish it from account-specific cost operations.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6334,15 +6334,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description",
         "missing_input_details",
-        "missing_output_details"
+        "missing_output_details",
+        "missing_context",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Estimate list prices using a `CostScenario` without a defined `billingAccount`.",
-      "summary_suggestion": "Estimate costs for a given cost scenario",
-      "description_suggestion": "Estimates the list prices for a given `CostScenario` without a defined `billingAccount`. Accepts a `CostScenario` object as input and returns an estimated cost object. The input object should include details about the resources, usage, and time period for which the cost is being estimated.",
-      "reasoning": "The original summary was missing, and the description was vague. Added a clear summary and expanded the description to include details about the input and output schemas, enhancing clarity and AI agent interpretability.",
+      "summary_suggestion": "Estimate costs for a usage scenario with list prices",
+      "description_suggestion": "Estimates the costs of a specified usage scenario using public list prices, without requiring a billing account association. Accepts a CostScenario object containing Google Cloud usage specifications and returns a CostEstimationResult with detailed cost breakdowns by SKU and time period. This operation is useful for cost planning and what-if analysis before committing to a billing account.",
+      "reasoning": "The operation lacks a summary entirely and the description is incomplete. The current description mentions 'CostScenario' and 'billingAccount' but doesn't explain what inputs are expected, what the operation returns, or when an AI agent should use it. The suggestion adds clarity about the operation's purpose (cost estimation for planning), specifies the input type (CostScenario), output type (CostEstimationResult), and use cases. This improves AI agent interpretability by making it clear this is for estimation/forecasting without account binding, helping agents distinguish it from account-specific cost operations.",
       "batch_index": 1
     }
   },
@@ -6357,7 +6358,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudbilling.skuGroups.list' has semantic quality issues: vague_summary. The current summary is missing. A suggested summary is provided to improve clarity.",
+    "message": "Operation 'cloudbilling.skuGroups.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, poor_ai_interpretability. Missing summary entirely. Description is too minimal and lacks details about pagination support, return structure, and authentication context. AI agents need clarity on pagination parameters and response format to properly use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6371,12 +6372,16 @@
       "operation_id": "cloudbilling.skuGroups.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "poor_ai_interpretability"
       ],
       "current_summary": "",
       "current_description": "Lists all publicly listed SKU groups.",
-      "summary_suggestion": "List all publicly listed SKU groups.",
-      "reasoning": "The current summary is missing. A suggested summary is provided to improve clarity.",
+      "summary_suggestion": "List all publicly available SKU groups",
+      "description_suggestion": "Retrieves a list of all publicly listed SKU groups available in Google Cloud Platform. Supports pagination through optional parameters. Returns a collection of SKU group objects containing group identifiers, display names, and metadata. No authentication required for public SKU group data.",
+      "reasoning": "Missing summary entirely. Description is too minimal and lacks details about pagination support, return structure, and authentication context. AI agents need clarity on pagination parameters and response format to properly use this operation.",
       "batch_index": 0
     }
   },
@@ -6391,7 +6396,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudbilling.billingAccounts.estimateCostScenario' has semantic quality issues: vague_summary, missing_input_details. The current summary is missing and the description lacks details about the input required. Suggestions are provided to improve clarity and completeness.",
+    "message": "Operation 'cloudbilling.billingAccounts.estimateCostScenario' has semantic quality issues: vague_summary, unclear_purpose, missing_input_details, missing_output_details, not_actionable. Missing summary. Current description is unclear about the operation's purpose and doesn't explain inputs/outputs clearly. Phrase 'Use custom pricing in the estimate' is passive and vague. AI agents need to understand this is a cost estimation operation, what inputs are required (CostScenario), what outputs are returned (CostEstimationResult), and the preconditions (custom pricing requirement).",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6406,13 +6411,16 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_input_details"
+        "unclear_purpose",
+        "missing_input_details",
+        "missing_output_details",
+        "not_actionable"
       ],
       "current_summary": "",
       "current_description": "Use custom pricing in the estimate, using a `CostScenario` with a defined `billingAccount`.",
-      "summary_suggestion": "Estimate cost using a custom pricing scenario for a billing account.",
-      "description_suggestion": "Use custom pricing in the estimate, using a `CostScenario` with a defined `billingAccount`. Requires a `CostScenario` object in the request body. Returns the estimated cost for the specified billing account.",
-      "reasoning": "The current summary is missing and the description lacks details about the input required. Suggestions are provided to improve clarity and completeness.",
+      "summary_suggestion": "Estimate costs for a billing account scenario",
+      "description_suggestion": "Estimates the costs of a specified usage scenario for a billing account using custom pricing. Accepts a CostScenario object containing resource specifications and usage details. Returns a CostEstimationResult with detailed cost breakdowns by SKU and time period. Requires the billing account to have custom pricing configured. Useful for cost forecasting and budget planning.",
+      "reasoning": "Missing summary. Current description is unclear about the operation's purpose and doesn't explain inputs/outputs clearly. Phrase 'Use custom pricing in the estimate' is passive and vague. AI agents need to understand this is a cost estimation operation, what inputs are required (CostScenario), what outputs are returned (CostEstimationResult), and the preconditions (custom pricing requirement).",
       "batch_index": 0
     }
   },
@@ -6427,7 +6435,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudbilling.skus.prices.list' has semantic quality issues: vague_summary. The current summary is missing. A suggested summary is provided to improve clarity.",
+    "message": "Operation 'cloudbilling.skuGroups.skus.get' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity on required parameters (name format), return object type, and authentication context. AI agents need to understand the resource naming convention and what specific fields are returned to properly construct requests.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "cloudbilling.skuGroups.skus.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets a publicly listed SKU that is part of a publicly listed SKU group.",
+      "summary_suggestion": "Get a specific SKU from a SKU group",
+      "description_suggestion": "Retrieves detailed information about a specific publicly listed SKU that belongs to a publicly listed SKU group. Requires the SKU name parameter in the format 'skuGroups/{skuGroupId}/skus/{skuId}'. Returns a GoogleCloudBillingSkugroupskusV1betaSkuGroupSku object containing SKU identifiers, display names, pricing information, and service metadata. No authentication required for public SKU data.",
+      "reasoning": "Missing summary. Description lacks clarity on required parameters (name format), return object type, and authentication context. AI agents need to understand the resource naming convention and what specific fields are returned to properly construct requests.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'cloudbilling.skus.prices.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_context. Missing summary. Description is too generic and doesn't explain filtering capabilities, pagination support, or the structure of returned price data. AI agents need to understand what filtering options are available (currency, region) and how to navigate paginated results.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6441,12 +6486,16 @@
       "operation_id": "cloudbilling.skus.prices.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_context"
       ],
       "current_summary": "",
       "current_description": "Lists the latest prices for all SKUs.",
-      "summary_suggestion": "List the latest prices for all SKUs.",
-      "reasoning": "The current summary is missing. A suggested summary is provided to improve clarity.",
+      "summary_suggestion": "List current pricing for all SKUs",
+      "description_suggestion": "Retrieves the latest pricing information for all SKUs, optionally filtered by currency and region. Supports pagination through optional parameters. Returns a list of SKU price objects containing pricing tiers, currency information, and effective dates. Prices reflect the most current rates available. Useful for cost analysis and budget estimation across services.",
+      "reasoning": "Missing summary. Description is too generic and doesn't explain filtering capabilities, pagination support, or the structure of returned price data. AI agents need to understand what filtering options are available (currency, region) and how to navigate paginated results.",
       "batch_index": 0
     }
   },
@@ -6461,7 +6510,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudbilling.billingAccounts.services.list' has semantic quality issues: vague_summary. The current summary is missing. A suggested summary is provided to improve clarity.",
+    "message": "Operation 'cloudbilling.billingAccounts.services.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks details about required parameters (billing account format), pagination support, and the structure of returned service objects. AI agents need clarity on how to construct the request and what information is returned.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6475,12 +6524,15 @@
       "operation_id": "cloudbilling.billingAccounts.services.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists services visible to a billing account.",
-      "summary_suggestion": "List services visible to a billing account.",
-      "reasoning": "The current summary is missing. A suggested summary is provided to improve clarity.",
+      "summary_suggestion": "List services for a billing account",
+      "description_suggestion": "Retrieves a list of Google Cloud services that are visible and available to a specific billing account. Requires the billing account identifier as a path parameter. Supports pagination through optional parameters. Returns a collection of service objects containing service identifiers, display names, and service categories. Useful for understanding which services are accessible for cost tracking and resource management.",
+      "reasoning": "Missing summary. Description lacks details about required parameters (billing account format), pagination support, and the structure of returned service objects. AI agents need clarity on how to construct the request and what information is returned.",
       "batch_index": 0
     }
   },
@@ -6495,7 +6547,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudbilling.billingAccounts.skuGroups.list' has semantic quality issues: vague_summary. The current summary is missing. A suggested summary is provided to improve clarity.",
+    "message": "Operation 'cloudbilling.billingAccounts.skuGroups.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks details about required parameters (billing account format), pagination support, and return object structure. AI agents need to understand the resource hierarchy and how to construct proper requests.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6509,12 +6561,15 @@
       "operation_id": "cloudbilling.billingAccounts.skuGroups.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists SKU groups visible to a billing account.",
-      "summary_suggestion": "List SKU groups visible to a billing account.",
-      "reasoning": "The current summary is missing. A suggested summary is provided to improve clarity.",
+      "summary_suggestion": "List SKU groups for a billing account",
+      "description_suggestion": "Retrieves a list of SKU groups that are visible and accessible to a specific billing account. Requires the billing account identifier as a path parameter. Supports pagination through optional parameters. Returns a collection of SKU group objects containing group identifiers, display names, and metadata. Useful for discovering available SKU groups for cost analysis and resource planning.",
+      "reasoning": "Missing summary. Description lacks details about required parameters (billing account format), pagination support, and return object structure. AI agents need to understand the resource hierarchy and how to construct proper requests.",
       "batch_index": 0
     }
   },
@@ -6529,7 +6584,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'cloudbilling.skuGroups.skus.list' has semantic quality issues: vague_summary. The current summary is missing. A suggested summary is provided to improve clarity.",
+    "message": "Operation 'cloudbilling.skuGroups.skus.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks clarity on required parameters (parent format), pagination support, and specific return object types. AI agents need to understand the resource naming convention and pagination capabilities to properly construct requests and handle responses.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -6543,12 +6598,15 @@
       "operation_id": "cloudbilling.skuGroups.skus.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists all publicly listed SKUs contained by a publicly listed SKU group.",
-      "summary_suggestion": "List all publicly listed SKUs in a SKU group.",
-      "reasoning": "The current summary is missing. A suggested summary is provided to improve clarity.",
+      "summary_suggestion": "List SKUs within a SKU group",
+      "description_suggestion": "Retrieves a list of all publicly listed SKUs that belong to a specific publicly listed SKU group. Requires the SKU group identifier as a path parameter in the format 'skuGroups/{skuGroupId}'. Supports pagination through optional parameters. Returns a collection of GoogleCloudBillingSkugroupskusV1betaSkuGroupSku objects containing SKU identifiers, display names, and pricing information. Useful for exploring available SKUs within a service category.",
+      "reasoning": "Missing summary. Description lacks clarity on required parameters (parent format), pagination support, and specific return object types. AI agents need to understand the resource naming convention and pagination capabilities to properly construct requests and handle responses.",
       "batch_index": 0
     }
   },
@@ -6563,7 +6621,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 8 operations analyzed, 7 quality issues found",
+    "message": "Semantic analysis completed: 8 operations analyzed, 8 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -6575,7 +6633,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 8,
-      "total_issues_found": 7,
+      "total_issues_found": 8,
       "batches_processed": 2
     }
   }

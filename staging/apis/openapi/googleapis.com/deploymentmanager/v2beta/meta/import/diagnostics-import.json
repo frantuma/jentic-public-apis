@@ -9170,7 +9170,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'deploymentmanager.typeProviders.update' has semantic quality issues: vague_summary, vague_description, missing_input_details. The current summary and description are vague. The suggestion provides a clear action, mentions authentication, and specifies the expected input and output.",
+    "message": "Operation 'deploymentmanager.typeProviders.update' has semantic quality issues: vague_summary, vague_description, missing_input_details, missing_output_details, missing_side_effects, not_actionable. Original description is too minimal. Missing summary entirely. Added clarity about what gets updated (configuration), what input is expected (TypeProvider object), what is returned (updated TypeProvider), and important side effect (full replacement behavior). This helps AI agents understand the operation's scope and potential impact.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9186,13 +9186,16 @@
       "issues_found": [
         "vague_summary",
         "vague_description",
-        "missing_input_details"
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects",
+        "not_actionable"
       ],
       "current_summary": "",
       "current_description": "Updates a type provider.",
-      "summary_suggestion": "Update a type provider.",
-      "description_suggestion": "Updates the specified type provider with new configuration details. Requires authentication and the request body must include the updated TypeProvider schema. Returns the updated TypeProvider object.",
-      "reasoning": "The current summary and description are vague. The suggestion provides a clear action, mentions authentication, and specifies the expected input and output.",
+      "summary_suggestion": "Update type provider configuration",
+      "description_suggestion": "Updates an existing type provider with new configuration. Accepts a TypeProvider object containing updated service-backed type definitions, credentials, and descriptors. Returns the updated TypeProvider resource. This operation replaces the entire type provider configuration - provide all required fields to avoid unintended modifications.",
+      "reasoning": "Original description is too minimal. Missing summary entirely. Added clarity about what gets updated (configuration), what input is expected (TypeProvider object), what is returned (updated TypeProvider), and important side effect (full replacement behavior). This helps AI agents understand the operation's scope and potential impact.",
       "batch_index": 4
     }
   },
@@ -9207,7 +9210,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'deploymentmanager.typeProviders.listTypes' has semantic quality issues: vague_summary. The current summary is missing. The suggestion provides a clear action and is concise.",
+    "message": "Operation 'deploymentmanager.typeProviders.listTypes' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks specificity about return format (TypeInfo objects) and pagination support. Added context about what TypeInfo contains and pagination capability to help AI agents understand the response structure and how to handle large result sets.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9221,12 +9224,15 @@
       "operation_id": "deploymentmanager.typeProviders.listTypes",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists all the type info for a TypeProvider.",
-      "summary_suggestion": "List all types for a TypeProvider.",
-      "reasoning": "The current summary is missing. The suggestion provides a clear action and is concise.",
+      "summary_suggestion": "List types provided by type provider",
+      "description_suggestion": "Lists all type information available from a specific TypeProvider. Returns a collection of TypeInfo objects describing each type provided by the service-backed type provider, including type names, descriptions, and collection information. Supports pagination through optional parameters.",
+      "reasoning": "Missing summary. Description lacks specificity about return format (TypeInfo objects) and pagination support. Added context about what TypeInfo contains and pagination capability to help AI agents understand the response structure and how to handle large result sets.",
       "batch_index": 4
     }
   },
@@ -9241,7 +9247,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'deploymentmanager.typeProviders.getType' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggestions provide a clear action and specify authentication and the return value.",
+    "message": "Operation 'deploymentmanager.typeProviders.getType' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description is vague about what TypeInfo contains and the use case. Added clarity about return structure (TypeInfo object with specific fields) and practical context (inspecting before deployment) to improve AI agent understanding of when and why to use this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9256,13 +9262,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets a type info for a type provided by a TypeProvider.",
-      "summary_suggestion": "Get type info for a TypeProvider.",
-      "description_suggestion": "Retrieves the type information for a specific type provided by a TypeProvider. Requires authentication. Returns the type info object.",
-      "reasoning": "The current summary and description are vague. The suggestions provide a clear action and specify authentication and the return value.",
+      "summary_suggestion": "Get type information from type provider",
+      "description_suggestion": "Retrieves detailed type information for a specific type provided by a TypeProvider. Returns a TypeInfo object containing the type's name, description, collection information, and schema details. Use this to inspect individual type definitions before using them in deployments.",
+      "reasoning": "Missing summary. Description is vague about what TypeInfo contains and the use case. Added clarity about return structure (TypeInfo object with specific fields) and practical context (inspecting before deployment) to improve AI agent understanding of when and why to use this operation.",
       "batch_index": 4
     }
   },
@@ -9277,7 +9284,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'deploymentmanager.types.list' has semantic quality issues: vague_summary. The current summary is missing. The suggestion provides a clear action and is concise.",
+    "message": "Operation 'deploymentmanager.types.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks specificity about what types are included (base and composite), return format, and pagination support. Added context distinguishing between type categories and mentioning pagination/filtering capabilities to help AI agents understand the scope of available resources and how to navigate large result sets.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9291,12 +9298,15 @@
       "operation_id": "deploymentmanager.types.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists all resource types for Deployment Manager.",
-      "summary_suggestion": "List all resource types.",
-      "reasoning": "The current summary is missing. The suggestion provides a clear action and is concise.",
+      "summary_suggestion": "List available resource types",
+      "description_suggestion": "Lists all resource types available in Deployment Manager for the specified project. Returns a collection of type definitions including both base types and composite types that can be used in deployment templates. Supports pagination and filtering through optional parameters.",
+      "reasoning": "Missing summary. Description lacks specificity about what types are included (base and composite), return format, and pagination support. Added context distinguishing between type categories and mentioning pagination/filtering capabilities to help AI agents understand the scope of available resources and how to navigate large result sets.",
       "batch_index": 4
     }
   },
@@ -9311,7 +9321,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'deploymentmanager.operations.list' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'deploymentmanager.compositeTypes.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks context about project scope, pagination support, and return value structure. AI agents need to understand filtering/pagination capabilities and what data is returned.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9322,16 +9332,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "deploymentmanager.operations.list",
+      "operation_id": "deploymentmanager.compositeTypes.list",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Lists all operations for a project.",
-      "summary_suggestion": "List all operations for a project",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
-      "batch_index": 3
+      "current_description": "Lists all composite types for Deployment Manager.",
+      "summary_suggestion": "List all composite types in a project",
+      "description_suggestion": "Lists all composite types defined in the specified Google Cloud project. Supports pagination through filter, orderBy, and pageSize parameters. Returns a collection of CompositeType resources with their definitions and metadata.",
+      "reasoning": "Missing summary entirely. Description lacks context about project scope, pagination support, and return value structure. AI agents need to understand filtering/pagination capabilities and what data is returned.",
+      "batch_index": 0
     }
   },
   {
@@ -9345,7 +9358,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'deploymentmanager.operations.get' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'deploymentmanager.compositeTypes.insert' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description is too minimal - doesn't explain what input is required (CompositeType schema), what is returned, or that the type becomes available for deployments. AI agents need clarity on inputs, outputs, and side effects.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9356,16 +9369,20 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "deploymentmanager.operations.get",
+      "operation_id": "deploymentmanager.compositeTypes.insert",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
-      "current_description": "Gets information about a specific operation.",
-      "summary_suggestion": "Get information about a specific operation",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
-      "batch_index": 3
+      "current_description": "Creates a composite type.",
+      "summary_suggestion": "Create a new composite type",
+      "description_suggestion": "Creates a new composite type in the specified project. Accepts a CompositeType resource definition containing the type name, description, and template configuration. Returns the created CompositeType resource with generated metadata. The composite type becomes immediately available for use in deployments.",
+      "reasoning": "Missing summary. Description is too minimal - doesn't explain what input is required (CompositeType schema), what is returned, or that the type becomes available for deployments. AI agents need clarity on inputs, outputs, and side effects.",
+      "batch_index": 0
     }
   },
   {
@@ -9379,7 +9396,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'deploymentmanager.typeProviders.list' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'deploymentmanager.compositeTypes.delete' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description lacks detail about required parameters (compositeType name), return value (Operation), and important side effect that the type becomes unavailable. AI agents need to understand deletion implications.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9390,16 +9407,20 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "deploymentmanager.typeProviders.list",
+      "operation_id": "deploymentmanager.compositeTypes.delete",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
       ],
       "current_summary": "",
-      "current_description": "Lists all resource type providers for Deployment Manager.",
-      "summary_suggestion": "List all resource type providers for Deployment Manager",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
-      "batch_index": 3
+      "current_description": "Deletes a composite type.",
+      "summary_suggestion": "Delete a composite type",
+      "description_suggestion": "Deletes a specified composite type from the project. Requires the composite type name as input. Returns an Operation resource representing the deletion. The composite type will no longer be available for new deployments after deletion.",
+      "reasoning": "Missing summary. Description lacks detail about required parameters (compositeType name), return value (Operation), and important side effect that the type becomes unavailable. AI agents need to understand deletion implications.",
+      "batch_index": 0
     }
   },
   {
@@ -9413,7 +9434,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'deploymentmanager.typeProviders.delete' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'deploymentmanager.compositeTypes.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is vague about what information is returned. AI agents need to know the response structure (CompositeType resource with specific fields) to determine if this operation provides needed data.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9424,16 +9445,18 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "deploymentmanager.typeProviders.delete",
+      "operation_id": "deploymentmanager.compositeTypes.get",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Deletes a type provider.",
-      "summary_suggestion": "Delete a type provider",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
-      "batch_index": 3
+      "current_description": "Gets information about a specific composite type.",
+      "summary_suggestion": "Get composite type details",
+      "description_suggestion": "Retrieves detailed information about a specific composite type by name. Returns the CompositeType resource including its definition, template configuration, and metadata.",
+      "reasoning": "Missing summary. Description is vague about what information is returned. AI agents need to know the response structure (CompositeType resource with specific fields) to determine if this operation provides needed data.",
+      "batch_index": 0
     }
   },
   {
@@ -9447,7 +9470,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'deploymentmanager.typeProviders.get' has semantic quality issues: vague_summary. The current summary is missing. Suggested summary is concise and action-oriented.",
+    "message": "Operation 'deploymentmanager.compositeTypes.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description doesn't clarify PATCH semantics (partial update), what input is expected, or that only specified fields are modified. AI agents need to understand the difference between PATCH and PUT operations.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9458,16 +9481,19 @@
       "fixable": true,
       "path": [],
       "target": "bundled-spec",
-      "operation_id": "deploymentmanager.typeProviders.get",
+      "operation_id": "deploymentmanager.compositeTypes.patch",
       "has_quality_issues": true,
       "issues_found": [
-        "vague_summary"
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
-      "current_description": "Gets information about a specific type provider.",
-      "summary_suggestion": "Get information about a specific type provider",
-      "reasoning": "The current summary is missing. Suggested summary is concise and action-oriented.",
-      "batch_index": 3
+      "current_description": "Patches a composite type.",
+      "summary_suggestion": "Partially update a composite type",
+      "description_suggestion": "Applies a partial update to a composite type using the PATCH method. Accepts a CompositeType resource with only the fields to be modified. Returns the updated CompositeType resource. Only provided fields are updated; omitted fields retain their existing values.",
+      "reasoning": "Missing summary. Description doesn't clarify PATCH semantics (partial update), what input is expected, or that only specified fields are modified. AI agents need to understand the difference between PATCH and PUT operations.",
+      "batch_index": 0
     }
   },
   {
@@ -9481,7 +9507,81 @@
         "character": 0
       }
     },
-    "message": "Operation 'deploymentmanager.manifests.get' has semantic quality issues: vague_summary, vague_description. The current summary and description are vague. The suggested summary and description provide more clarity and detail.",
+    "message": "Operation 'deploymentmanager.compositeTypes.update' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description doesn't distinguish PUT semantics (full replacement) from PATCH, or clarify that all fields must be provided. AI agents need to understand when to use update vs patch.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deploymentmanager.compositeTypes.update",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Updates a composite type.",
+      "summary_suggestion": "Replace a composite type definition",
+      "description_suggestion": "Replaces an entire composite type definition using the PUT method. Requires a complete CompositeType resource as input. Returns the updated CompositeType resource. All fields must be provided; omitted fields will be reset to defaults.",
+      "reasoning": "Missing summary. Description doesn't distinguish PUT semantics (full replacement) from PATCH, or clarify that all fields must be provided. AI agents need to understand when to use update vs patch.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deploymentmanager.deployments.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks detail about pagination support, filtering capabilities, and what the response contains. AI agents need to understand available query parameters and response structure to use this operation effectively.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deploymentmanager.deployments.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all deployments for a given project.",
+      "summary_suggestion": "List all deployments in a project",
+      "description_suggestion": "Lists all deployments in the specified Google Cloud project. Supports pagination and filtering through filter, orderBy, and pageSize parameters. Returns a collection of Deployment resources with their current state, manifest references, and metadata.",
+      "reasoning": "Missing summary. Description lacks detail about pagination support, filtering capabilities, and what the response contains. AI agents need to understand available query parameters and response structure to use this operation effectively.",
+      "batch_index": 0
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deploymentmanager.manifests.get' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary entirely. Description is too generic and lacks context about what a manifest represents in the deployment lifecycle. Added explanation of manifest purpose and clarified return value for better AI agent understanding.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9496,13 +9596,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "vague_description"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets information about a specific manifest.",
-      "summary_suggestion": "Retrieve manifest details",
-      "description_suggestion": "Retrieves detailed information about a specific manifest within a deployment. Requires project, deployment, and manifest identifiers. Returns a manifest object.",
-      "reasoning": "The current summary and description are vague. The suggested summary and description provide more clarity and detail.",
+      "summary_suggestion": "Retrieve manifest information for a deployment",
+      "description_suggestion": "Retrieves detailed information about a specific manifest within a deployment. A manifest represents a snapshot of the deployment configuration and resources at a particular point in time. Returns the Manifest object containing the manifest's configuration, layout, and metadata.",
+      "reasoning": "Missing summary entirely. Description is too generic and lacks context about what a manifest represents in the deployment lifecycle. Added explanation of manifest purpose and clarified return value for better AI agent understanding.",
       "batch_index": 2
     }
   },
@@ -9517,7 +9618,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'deploymentmanager.resources.list' has semantic quality issues: vague_summary, missing_context. The current summary is missing. The suggested summary and description provide more clarity and detail.",
+    "message": "Operation 'deploymentmanager.resources.list' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks detail about return format, pagination support, and what resource information is included. Enhanced to clarify paginated response and filtering capabilities for AI agent decision-making.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9532,13 +9633,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Lists all resources in a given deployment.",
-      "summary_suggestion": "List all resources in deployment",
-      "description_suggestion": "Lists all resources within a specified deployment. Requires project and deployment identifiers. Returns a list of resource objects.",
-      "reasoning": "The current summary is missing. The suggested summary and description provide more clarity and detail.",
+      "summary_suggestion": "List all resources in a deployment",
+      "description_suggestion": "Lists all resources that have been deployed as part of a specific deployment. Returns a paginated collection of Resource objects, each representing a deployed Google Cloud resource with its current state, type, and properties. Supports filtering and pagination parameters.",
+      "reasoning": "Missing summary. Description lacks detail about return format, pagination support, and what resource information is included. Enhanced to clarify paginated response and filtering capabilities for AI agent decision-making.",
       "batch_index": 2
     }
   },
@@ -9553,7 +9655,7 @@
         "character": 0
       }
     },
-    "message": "Operation 'deploymentmanager.resources.get' has semantic quality issues: vague_summary, missing_context. The current summary is missing. The suggested summary and description provide more clarity and detail.",
+    "message": "Operation 'deploymentmanager.resources.get' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description is too vague about what information is returned. Added clarity about resource object contents and use case for AI agents to understand when to call this operation.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9568,13 +9670,14 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_context",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Gets information about a single resource.",
-      "summary_suggestion": "Retrieve resource details",
-      "description_suggestion": "Retrieves detailed information about a specific resource within a specified deployment. Requires project, deployment, and resource identifiers. Returns a resource object.",
-      "reasoning": "The current summary is missing. The suggested summary and description provide more clarity and detail.",
+      "summary_suggestion": "Retrieve details for a specific resource",
+      "description_suggestion": "Retrieves detailed information about a specific resource within a deployment. Returns the Resource object containing the resource's type, properties, current state, and metadata. Use this to inspect individual resource configuration and status.",
+      "reasoning": "Missing summary. Description is too vague about what information is returned. Added clarity about resource object contents and use case for AI agents to understand when to call this operation.",
       "batch_index": 2
     }
   },
@@ -9589,7 +9692,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'deploymentmanager.deployments.getIamPolicy' has semantic quality issues: vague_summary, missing_context. The current summary is missing. The suggested summary and description provide more clarity and detail.",
+    "message": "Operation 'deploymentmanager.deployments.stop' has semantic quality issues: vague_summary, missing_side_effects, missing_output_details. Missing summary. Description explains side effects well but lacks clarity about return value and operation semantics. Added return type and clarified that this is an asynchronous operation for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deploymentmanager.deployments.stop",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Stops an ongoing operation. This does not roll back any work that has already been completed, but prevents any new work from being started.",
+      "summary_suggestion": "Stop an ongoing deployment operation",
+      "description_suggestion": "Stops an ongoing deployment operation without rolling back completed work. Prevents any new work from being started on the deployment. Returns an Operation object representing the stop action. Completed resources remain deployed; only future operations are halted. Use this to pause deployments in progress.",
+      "reasoning": "Missing summary. Description explains side effects well but lacks clarity about return value and operation semantics. Added return type and clarified that this is an asynchronous operation for better AI agent understanding.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deploymentmanager.deployments.getIamPolicy' has semantic quality issues: vague_summary, missing_context. Missing summary. Description is generic and doesn't clarify that this is specifically for IAM policies or what the Policy object contains. Added IAM context and clarified return value structure for AI agent interpretability.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9608,9 +9748,9 @@
       ],
       "current_summary": "",
       "current_description": "Gets the access control policy for a resource. May be empty if no such policy or resource exists.",
-      "summary_suggestion": "Get IAM policy for a deployment",
-      "description_suggestion": "Gets the access control policy for a specified deployment resource. Requires project and deployment identifiers. Returns an IAM policy object or an empty response if no policy exists.",
-      "reasoning": "The current summary is missing. The suggested summary and description provide more clarity and detail.",
+      "summary_suggestion": "Retrieve IAM policy for a deployment",
+      "description_suggestion": "Retrieves the Identity and Access Management (IAM) policy for a deployment resource. Returns a Policy object containing role bindings that define who has what access to the deployment. Returns an empty policy if no policy has been set. Required for auditing and managing deployment access control.",
+      "reasoning": "Missing summary. Description is generic and doesn't clarify that this is specifically for IAM policies or what the Policy object contains. Added IAM context and clarified return value structure for AI agent interpretability.",
       "batch_index": 2
     }
   },
@@ -9625,7 +9765,44 @@
         "character": 0
       }
     },
-    "message": "Operation 'deploymentmanager.deployments.testIamPermissions' has semantic quality issues: vague_summary, missing_context. The current summary is missing. The suggested summary and description provide more clarity and detail.",
+    "message": "Operation 'deploymentmanager.deployments.setIamPolicy' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description lacks detail about input requirements and return value. Added clarity about request schema, return type, and use case for AI agents to understand when and how to use this operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deploymentmanager.deployments.setIamPolicy",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Sets the access control policy on the specified resource. Replaces any existing policy.",
+      "summary_suggestion": "Set IAM policy for a deployment",
+      "description_suggestion": "Sets the Identity and Access Management (IAM) policy for a deployment resource, replacing any existing policy. Accepts a GlobalSetPolicyRequest containing the new Policy with role bindings. Returns the updated Policy object. Use this to grant or revoke deployment access permissions.",
+      "reasoning": "Missing summary. Description lacks detail about input requirements and return value. Added clarity about request schema, return type, and use case for AI agents to understand when and how to use this operation.",
+      "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deploymentmanager.deployments.testIamPermissions' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is vague about input format and return value structure. Added clarity about request/response schemas and practical use case for AI agents to understand permission checking workflows.",
     "severity": 2,
     "code": "POOR_OPERATION_SEMANTICS",
     "code_description": null,
@@ -9640,14 +9817,536 @@
       "has_quality_issues": true,
       "issues_found": [
         "vague_summary",
-        "missing_context"
+        "missing_input_details",
+        "missing_output_details"
       ],
       "current_summary": "",
       "current_description": "Returns permissions that a caller has on the specified resource.",
-      "summary_suggestion": "Test IAM permissions for a deployment",
-      "description_suggestion": "Tests the permissions that a caller has on a specified deployment resource. Requires project and deployment identifiers. Returns a list of permissions.",
-      "reasoning": "The current summary is missing. The suggested summary and description provide more clarity and detail.",
+      "summary_suggestion": "Test IAM permissions on a deployment",
+      "description_suggestion": "Tests which IAM permissions the authenticated caller has on a deployment resource. Accepts a TestPermissionsRequest containing a list of permission strings to check. Returns a TestPermissionsResponse listing only the permissions the caller actually has. Use this to verify access before attempting privileged operations.",
+      "reasoning": "Missing summary. Description is vague about input format and return value structure. Added clarity about request/response schemas and practical use case for AI agents to understand permission checking workflows.",
       "batch_index": 2
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deploymentmanager.operations.list' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary entirely. Description lacks detail about return type, pagination, filtering capabilities, and use cases. Added context about Operation resources, pagination support, and practical use cases for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deploymentmanager.operations.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all operations for a project.",
+      "summary_suggestion": "List all project operations",
+      "description_suggestion": "Lists all operations for a specified project. Returns a paginated collection of Operation resources representing deployment, update, and deletion activities. Supports filtering and sorting via query parameters. Useful for monitoring deployment status and tracking resource changes.",
+      "reasoning": "Missing summary entirely. Description lacks detail about return type, pagination, filtering capabilities, and use cases. Added context about Operation resources, pagination support, and practical use cases for AI agent understanding.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deploymentmanager.operations.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is too generic and doesn't specify what information is returned or practical use cases. Enhanced with Operation resource details, status information, and error handling context for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deploymentmanager.operations.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets information about a specific operation.",
+      "summary_suggestion": "Retrieve operation details",
+      "description_suggestion": "Retrieves detailed information about a specific operation identified by operation name. Returns an Operation resource containing status, progress, errors, and metadata about the deployment or resource management activity. Use this to check operation completion status and retrieve error details if the operation failed.",
+      "reasoning": "Missing summary. Description is too generic and doesn't specify what information is returned or practical use cases. Enhanced with Operation resource details, status information, and error handling context for better AI agent interpretability.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deploymentmanager.typeProviders.list' has semantic quality issues: vague_summary, missing_output_details, missing_context. Missing summary. Description lacks context about what TypeProviders are, their purpose, and return format. Added domain context about service-backed types, pagination, and the role of type providers in enabling custom resource management.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deploymentmanager.typeProviders.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all resource type providers for Deployment Manager.",
+      "summary_suggestion": "List all type providers",
+      "description_suggestion": "Lists all TypeProvider resources configured for a project. Returns a paginated collection of service-backed type providers that define custom resource types available for deployments. Supports filtering and sorting. Type providers enable Deployment Manager to manage resources from external services and APIs.",
+      "reasoning": "Missing summary. Description lacks context about what TypeProviders are, their purpose, and return format. Added domain context about service-backed types, pagination, and the role of type providers in enabling custom resource management.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deploymentmanager.typeProviders.insert' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description lacks input requirements, output details, and side effects. Enhanced with information about required/optional fields, return value, and the immediate availability of the created type provider for deployments.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deploymentmanager.typeProviders.insert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a type provider.",
+      "summary_suggestion": "Create a new type provider",
+      "description_suggestion": "Creates a new TypeProvider resource that defines a service-backed type for use in deployments. Accepts a TypeProvider object specifying the provider name, descriptor URL, and optional credentials. Returns the created TypeProvider resource with generated metadata. The type provider becomes immediately available for use in deployment templates after creation.",
+      "reasoning": "Missing summary. Description lacks input requirements, output details, and side effects. Enhanced with information about required/optional fields, return value, and the immediate availability of the created type provider for deployments.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deploymentmanager.typeProviders.delete' has semantic quality issues: vague_summary, missing_side_effects, missing_output_details. Missing summary. Description lacks side effects information, output details, and asynchronous operation context. Added warnings about impact on existing deployments, Operation return type, and asynchronous nature for better AI agent decision-making.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deploymentmanager.typeProviders.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_side_effects",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes a type provider.",
+      "summary_suggestion": "Delete a type provider",
+      "description_suggestion": "Deletes a specified TypeProvider resource from the project. The type provider will no longer be available for use in new deployments. Existing deployments using this type provider may be affected. Returns an Operation resource tracking the deletion process. Deletion is asynchronous and may take time to complete.",
+      "reasoning": "Missing summary. Description lacks side effects information, output details, and asynchronous operation context. Added warnings about impact on existing deployments, Operation return type, and asynchronous nature for better AI agent decision-making.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deploymentmanager.typeProviders.get' has semantic quality issues: vague_summary, missing_output_details. Missing summary. Description is too generic without specifying what information is returned or practical use cases. Enhanced with TypeProvider resource details and practical use cases for AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deploymentmanager.typeProviders.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets information about a specific type provider.",
+      "summary_suggestion": "Retrieve type provider details",
+      "description_suggestion": "Retrieves detailed information about a specific TypeProvider resource identified by provider name. Returns the TypeProvider object containing configuration, descriptor URL, credentials status, and metadata. Use this to verify type provider configuration or retrieve provider details for deployment template validation.",
+      "reasoning": "Missing summary. Description is too generic without specifying what information is returned or practical use cases. Enhanced with TypeProvider resource details and practical use cases for AI agent understanding.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deploymentmanager.typeProviders.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description lacks input details about partial updates, output information, and side effects on existing deployments. Enhanced with partial update semantics, return value, and impact context for better AI agent interpretability.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deploymentmanager.typeProviders.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Patches a type provider.",
+      "summary_suggestion": "Update type provider configuration",
+      "description_suggestion": "Updates a TypeProvider resource with partial modifications. Accepts a TypeProvider object with fields to be updated; only provided fields are modified. Returns the updated TypeProvider resource. Changes take effect immediately and may affect deployments using this type provider. Supports updating descriptor URL, credentials, and other configuration properties.",
+      "reasoning": "Missing summary. Description lacks input details about partial updates, output information, and side effects on existing deployments. Enhanced with partial update semantics, return value, and impact context for better AI agent interpretability.",
+      "batch_index": 3
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deploymentmanager.deployments.insert' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary entirely. Description lacks detail about input requirements (Deployment object with manifest), output type (Operation resource), and that this is an asynchronous operation. Added context about what gets provisioned and how failures are handled for better AI agent understanding.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deploymentmanager.deployments.insert",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Creates a deployment and all of the resources described by the deployment manifest.",
+      "summary_suggestion": "Create a new deployment with resources",
+      "description_suggestion": "Creates a new deployment and provisions all Google Cloud resources specified in the deployment manifest. Accepts a Deployment object containing the manifest configuration. Returns an Operation resource representing the asynchronous deployment creation process. The operation completes when all resources are successfully provisioned or fails if any resource creation fails.",
+      "reasoning": "Missing summary entirely. Description lacks detail about input requirements (Deployment object with manifest), output type (Operation resource), and that this is an asynchronous operation. Added context about what gets provisioned and how failures are handled for better AI agent understanding.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deploymentmanager.deployments.delete' has semantic quality issues: vague_summary, missing_output_details, missing_side_effects. Missing summary. Description doesn't clarify that this is destructive/irreversible, doesn't specify return type (Operation), and doesn't emphasize the scope of resource deletion. Added warnings and operation details for AI agents to understand the severity and async nature.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deploymentmanager.deployments.delete",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Deletes a deployment and all of the resources in the deployment.",
+      "summary_suggestion": "Delete a deployment and its resources",
+      "description_suggestion": "Deletes a specified deployment and all associated Google Cloud resources. This is a destructive operation that cannot be undone. Returns an Operation resource representing the asynchronous deletion process. All resources provisioned by the deployment will be removed from the project.",
+      "reasoning": "Missing summary. Description doesn't clarify that this is destructive/irreversible, doesn't specify return type (Operation), and doesn't emphasize the scope of resource deletion. Added warnings and operation details for AI agents to understand the severity and async nature.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deploymentmanager.deployments.get' has semantic quality issues: vague_summary, missing_input_details, missing_output_details. Missing summary. Description is too generic and doesn't specify what information is returned (Deployment object with configuration, manifest, resources, state) or that it requires a deployment name parameter. Added return type and operation characteristics for clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deploymentmanager.deployments.get",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Gets information about a specific deployment.",
+      "summary_suggestion": "Retrieve deployment information",
+      "description_suggestion": "Retrieves detailed information about a specific deployment by deployment name. Returns a Deployment object containing the deployment's configuration, manifest, resources, and current state. This is a synchronous read-only operation.",
+      "reasoning": "Missing summary. Description is too generic and doesn't specify what information is returned (Deployment object with configuration, manifest, resources, state) or that it requires a deployment name parameter. Added return type and operation characteristics for clarity.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deploymentmanager.deployments.patch' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description doesn't clarify the difference between PATCH (partial) and PUT (full) updates, doesn't specify return type (Operation), and doesn't explain that only provided fields are modified. Added distinction from full updates and operation details for AI agent clarity.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deploymentmanager.deployments.patch",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Patches a deployment and all of the resources described by the deployment manifest.",
+      "summary_suggestion": "Partially update deployment and resources",
+      "description_suggestion": "Applies a partial update to a deployment and its resources using the provided Deployment manifest. Only specified fields in the manifest are updated; unspecified fields retain their current values. Returns an Operation resource representing the asynchronous update process. Supports incremental changes without replacing the entire deployment configuration.",
+      "reasoning": "Missing summary. Description doesn't clarify the difference between PATCH (partial) and PUT (full) updates, doesn't specify return type (Operation), and doesn't explain that only provided fields are modified. Added distinction from full updates and operation details for AI agent clarity.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deploymentmanager.deployments.update' has semantic quality issues: vague_summary, missing_input_details, missing_output_details, missing_side_effects. Missing summary. Description doesn't clarify that this is a full replacement (not partial), doesn't specify return type (Operation), and doesn't distinguish from PATCH. Added distinction between full and partial updates and operation details for AI agents to choose the correct operation.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deploymentmanager.deployments.update",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_input_details",
+        "missing_output_details",
+        "missing_side_effects"
+      ],
+      "current_summary": "",
+      "current_description": "Updates a deployment and all of the resources described by the deployment manifest.",
+      "summary_suggestion": "Replace deployment with new configuration",
+      "description_suggestion": "Performs a full replacement update of a deployment and all its resources using the provided Deployment manifest. The entire deployment configuration is replaced; any fields not included in the manifest are cleared. Returns an Operation resource representing the asynchronous update process. This differs from PATCH which only updates specified fields.",
+      "reasoning": "Missing summary. Description doesn't clarify that this is a full replacement (not partial), doesn't specify return type (Operation), and doesn't distinguish from PATCH. Added distinction between full and partial updates and operation details for AI agents to choose the correct operation.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deploymentmanager.deployments.cancelPreview' has semantic quality issues: vague_summary, missing_context, missing_output_details. Missing summary. Description lacks context about what a preview is and why you'd cancel it. Doesn't specify return type (Operation) or what happens after cancellation. Added explanation of preview purpose and operation details for AI agents unfamiliar with deployment preview workflows.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deploymentmanager.deployments.cancelPreview",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_context",
+        "missing_output_details"
+      ],
+      "current_summary": "",
+      "current_description": "Cancels and removes the preview currently associated with the deployment.",
+      "summary_suggestion": "Cancel deployment preview",
+      "description_suggestion": "Cancels and removes the preview currently associated with a deployment. A preview allows you to see what resources would be created or modified before committing the deployment. Returns an Operation resource representing the cancellation process. After cancellation, the deployment returns to its previous state.",
+      "reasoning": "Missing summary. Description lacks context about what a preview is and why you'd cancel it. Doesn't specify return type (Operation) or what happens after cancellation. Added explanation of preview purpose and operation details for AI agents unfamiliar with deployment preview workflows.",
+      "batch_index": 1
+    }
+  },
+  {
+    "range": {
+      "start": {
+        "line": 0,
+        "character": 0
+      },
+      "end": {
+        "line": 0,
+        "character": 0
+      }
+    },
+    "message": "Operation 'deploymentmanager.manifests.list' has semantic quality issues: vague_summary, missing_output_details, missing_context. Missing summary. Description doesn't explain what manifests represent (configuration snapshots), doesn't specify return type (list of Manifest objects), and doesn't mention pagination support. Added context about manifest purpose and pagination for better AI agent understanding of list operations.",
+    "severity": 2,
+    "code": "POOR_OPERATION_SEMANTICS",
+    "code_description": null,
+    "source": "semantic_analyzer",
+    "tags": null,
+    "related_information": null,
+    "data": {
+      "fixable": true,
+      "path": [],
+      "target": "bundled-spec",
+      "operation_id": "deploymentmanager.manifests.list",
+      "has_quality_issues": true,
+      "issues_found": [
+        "vague_summary",
+        "missing_output_details",
+        "missing_context"
+      ],
+      "current_summary": "",
+      "current_description": "Lists all manifests for a given deployment.",
+      "summary_suggestion": "List deployment manifests",
+      "description_suggestion": "Lists all manifests associated with a specific deployment. Each manifest represents a snapshot of the deployment configuration at a particular point in time. Returns a list of Manifest objects containing manifest metadata, configuration, and layout information. Supports pagination through optional filter, orderBy, and pageSize parameters.",
+      "reasoning": "Missing summary. Description doesn't explain what manifests represent (configuration snapshots), doesn't specify return type (list of Manifest objects), and doesn't mention pagination support. Added context about manifest purpose and pagination for better AI agent understanding of list operations.",
+      "batch_index": 1
     }
   },
   {
@@ -9661,7 +10360,7 @@
         "character": 12
       }
     },
-    "message": "Semantic analysis completed: 32 operations analyzed, 14 quality issues found",
+    "message": "Semantic analysis completed: 32 operations analyzed, 32 quality issues found",
     "severity": 3,
     "code": "semantic-analysis-summary",
     "code_description": null,
@@ -9673,7 +10372,7 @@
       "path": [],
       "target": "bundled-spec",
       "total_operations_analyzed": 32,
-      "total_issues_found": 14,
+      "total_issues_found": 32,
       "batches_processed": 5
     }
   }
