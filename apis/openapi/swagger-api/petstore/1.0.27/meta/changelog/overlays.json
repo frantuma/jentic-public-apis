@@ -204,5 +204,296 @@
         }
       }
     ]
+  },
+  {
+    "overlay": "1.1.0",
+    "info": {
+      "title": "AI-readiness improvements for Swagger Petstore",
+      "version": "1.0.0"
+    },
+    "extends": "./original-frantuma.json",
+    "actions": [
+      {
+        "target": "$.servers[0]",
+        "update": {
+          "url": "https://petstore3.swagger.io/api/v3"
+        }
+      },
+      {
+        "target": "$.components.schemas.Order.properties.id",
+        "update": {
+          "description": "Unique identifier for the order"
+        }
+      },
+      {
+        "target": "$.components.schemas.Order.properties.petId",
+        "update": {
+          "description": "Identifier of the pet being ordered"
+        }
+      },
+      {
+        "target": "$.components.schemas.Order.properties.quantity",
+        "update": {
+          "description": "Number of pets requested in this order"
+        }
+      },
+      {
+        "target": "$.components.schemas.Order.properties.shipDate",
+        "update": {
+          "description": "Date and time when the order is scheduled to ship",
+          "example": "2023-10-15T12:00:00Z"
+        }
+      },
+      {
+        "target": "$.components.schemas.Order.properties.complete",
+        "update": {
+          "description": "Whether the order has been completed and fulfilled",
+          "example": false
+        }
+      },
+      {
+        "target": "$.components.schemas.Category.properties.id",
+        "update": {
+          "description": "Unique identifier for the pet category"
+        }
+      },
+      {
+        "target": "$.components.schemas.Category.properties.name",
+        "update": {
+          "description": "Human-readable name of the category (e.g., Dogs, Cats)"
+        }
+      },
+      {
+        "target": "$.components.schemas.User.properties.id",
+        "update": {
+          "description": "Unique identifier for the user account"
+        }
+      },
+      {
+        "target": "$.components.schemas.User.properties.username",
+        "update": {
+          "description": "Unique login name for the user account"
+        }
+      },
+      {
+        "target": "$.components.schemas.User.properties.firstName",
+        "update": {
+          "description": "User's given (first) name"
+        }
+      },
+      {
+        "target": "$.components.schemas.User.properties.lastName",
+        "update": {
+          "description": "User's family (last) name"
+        }
+      },
+      {
+        "target": "$.components.schemas.User.properties.email",
+        "update": {
+          "description": "Email address associated with the user account"
+        }
+      },
+      {
+        "target": "$.components.schemas.User.properties.password",
+        "update": {
+          "description": "Password for authenticating into the account"
+        }
+      },
+      {
+        "target": "$.components.schemas.User.properties.phone",
+        "update": {
+          "description": "Contact phone number for the user"
+        }
+      },
+      {
+        "target": "$.components.schemas.User.properties.userStatus",
+        "update": {
+          "description": "Account status code (1 = active, 0 = inactive)"
+        }
+      },
+      {
+        "target": "$.components.schemas.Tag.properties.id",
+        "update": {
+          "description": "Unique identifier for the tag",
+          "example": 1
+        }
+      },
+      {
+        "target": "$.components.schemas.Tag.properties.name",
+        "update": {
+          "description": "Human-readable label applied to a pet (e.g., vaccinated, rescue)",
+          "example": "vaccinated"
+        }
+      },
+      {
+        "target": "$.components.schemas.Pet.properties.id",
+        "update": {
+          "description": "Unique identifier for the pet record"
+        }
+      },
+      {
+        "target": "$.components.schemas.Pet.properties.name",
+        "update": {
+          "description": "Common name of the pet as recorded in the store"
+        }
+      },
+      {
+        "target": "$.components.schemas.Pet.properties.photoUrls",
+        "update": {
+          "description": "List of URLs pointing to photos of this pet",
+          "example": [
+            "https://example.com/photos/doggie.jpg"
+          ]
+        }
+      },
+      {
+        "target": "$.components.schemas.Pet.properties.tags",
+        "update": {
+          "description": "List of descriptive labels associated with this pet"
+        }
+      },
+      {
+        "target": "$.components.schemas.ApiResponse.properties.code",
+        "update": {
+          "description": "HTTP-style status code for the API response",
+          "example": 200
+        }
+      },
+      {
+        "target": "$.components.schemas.ApiResponse.properties.type",
+        "update": {
+          "description": "Response category label (e.g., \"error\", \"unknown\")",
+          "example": "unknown"
+        }
+      },
+      {
+        "target": "$.components.schemas.ApiResponse.properties.message",
+        "update": {
+          "description": "Human-readable message providing context for the response",
+          "example": "Upload successful"
+        }
+      },
+      {
+        "target": "$.paths['/pet/{petId}'].delete.parameters[?(@.name=='api_key')]",
+        "update": {
+          "description": "Optional API key header for authenticated requests"
+        }
+      },
+      {
+        "target": "$.paths['/pet'].put.requestBody.content['application/json']",
+        "update": {
+          "example": {
+            "id": 10,
+            "name": "doggie",
+            "photoUrls": [
+              "https://example.com/photos/doggie.jpg"
+            ],
+            "status": "available"
+          }
+        }
+      },
+      {
+        "target": "$.paths['/store/order'].post.requestBody.content['application/json']",
+        "update": {
+          "example": {
+            "petId": 198772,
+            "quantity": 7,
+            "shipDate": "2023-10-15T12:00:00Z",
+            "status": "placed",
+            "complete": false
+          }
+        }
+      },
+      {
+        "target": "$.paths['/user/createWithList'].post.requestBody.content['application/json']",
+        "update": {
+          "example": [
+            {
+              "id": 10,
+              "username": "theUser",
+              "firstName": "John",
+              "lastName": "James",
+              "email": "john@email.com",
+              "password": "12345",
+              "phone": "12345",
+              "userStatus": 1
+            }
+          ]
+        }
+      },
+      {
+        "target": "$.paths['/user/{username}'].put.requestBody.content['application/json']",
+        "update": {
+          "example": {
+            "username": "theUser",
+            "firstName": "John",
+            "lastName": "James",
+            "email": "john@email.com",
+            "phone": "12345",
+            "userStatus": 1
+          }
+        }
+      },
+      {
+        "target": "$.paths['/store/order'].post",
+        "update": {
+          "security": []
+        }
+      },
+      {
+        "target": "$.paths['/store/order/{orderId}'].get",
+        "update": {
+          "security": []
+        }
+      },
+      {
+        "target": "$.paths['/store/order/{orderId}'].delete",
+        "update": {
+          "security": []
+        }
+      },
+      {
+        "target": "$.paths['/user'].post",
+        "update": {
+          "security": []
+        }
+      },
+      {
+        "target": "$.paths['/user/createWithList'].post",
+        "update": {
+          "security": []
+        }
+      },
+      {
+        "target": "$.paths['/user/login'].get",
+        "update": {
+          "security": []
+        }
+      },
+      {
+        "target": "$.paths['/user/logout'].get",
+        "update": {
+          "security": []
+        }
+      },
+      {
+        "target": "$.paths['/user/{username}'].get",
+        "update": {
+          "security": []
+        }
+      },
+      {
+        "target": "$.paths['/user/{username}'].put",
+        "update": {
+          "security": []
+        }
+      },
+      {
+        "target": "$.paths['/user/{username}'].delete",
+        "update": {
+          "security": []
+        }
+      }
+    ]
   }
 ]
