@@ -16,7 +16,7 @@
   },
   "servers": [
     {
-      "url": "/api/v3"
+      "url": "https://petstore3.swagger.io/api/v3"
     }
   ],
   "paths": {
@@ -34,6 +34,14 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Pet"
+              },
+              "example": {
+                "id": 10,
+                "name": "doggie",
+                "photoUrls": [
+                  "https://example.com/photos/doggie.jpg"
+                ],
+                "status": "available"
               }
             },
             "application/xml": {
@@ -462,11 +470,11 @@
           {
             "name": "api_key",
             "in": "header",
-            "description": "",
             "required": false,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "Optional API key header for authenticated requests"
           },
           {
             "name": "petId",
@@ -617,6 +625,13 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Order"
+              },
+              "example": {
+                "petId": 198772,
+                "quantity": 7,
+                "shipDate": "2023-10-15T12:00:00Z",
+                "status": "placed",
+                "complete": false
               }
             },
             "application/xml": {
@@ -651,7 +666,8 @@
           "default": {
             "description": "Unexpected error"
           }
-        }
+        },
+        "security": []
       }
     },
     "/store/order/{orderId}": {
@@ -699,7 +715,8 @@
           "default": {
             "description": "Unexpected error"
           }
-        }
+        },
+        "security": []
       },
       "delete": {
         "tags": [
@@ -733,7 +750,8 @@
           "default": {
             "description": "Unexpected error"
           }
-        }
+        },
+        "security": []
       }
     },
     "/user": {
@@ -793,7 +811,8 @@
           "default": {
             "description": "Unexpected error"
           }
-        }
+        },
+        "security": []
       }
     },
     "/user/createWithList": {
@@ -812,7 +831,19 @@
                 "items": {
                   "$ref": "#/components/schemas/User"
                 }
-              }
+              },
+              "example": [
+                {
+                  "id": 10,
+                  "username": "theUser",
+                  "firstName": "John",
+                  "lastName": "James",
+                  "email": "john@email.com",
+                  "password": "12345",
+                  "phone": "12345",
+                  "userStatus": 1
+                }
+              ]
             }
           }
         },
@@ -835,7 +866,8 @@
           "default": {
             "description": "Unexpected error"
           }
-        }
+        },
+        "security": []
       }
     },
     "/user/login": {
@@ -904,7 +936,8 @@
           "default": {
             "description": "Unexpected error"
           }
-        }
+        },
+        "security": []
       }
     },
     "/user/logout": {
@@ -923,7 +956,8 @@
           "default": {
             "description": "Unexpected error"
           }
-        }
+        },
+        "security": []
       }
     },
     "/user/{username}": {
@@ -970,7 +1004,8 @@
           "default": {
             "description": "Unexpected error"
           }
-        }
+        },
+        "security": []
       },
       "put": {
         "tags": [
@@ -996,6 +1031,14 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/User"
+              },
+              "example": {
+                "username": "theUser",
+                "firstName": "John",
+                "lastName": "James",
+                "email": "john@email.com",
+                "phone": "12345",
+                "userStatus": 1
               }
             },
             "application/xml": {
@@ -1023,7 +1066,8 @@
           "default": {
             "description": "Unexpected error"
           }
-        }
+        },
+        "security": []
       },
       "delete": {
         "tags": [
@@ -1056,7 +1100,8 @@
           "default": {
             "description": "Unexpected error"
           }
-        }
+        },
+        "security": []
       }
     }
   },
@@ -1068,21 +1113,26 @@
           "id": {
             "type": "integer",
             "format": "int64",
-            "example": 10
+            "example": 10,
+            "description": "Unique identifier for the order"
           },
           "petId": {
             "type": "integer",
             "format": "int64",
-            "example": 198772
+            "example": 198772,
+            "description": "Identifier of the pet being ordered"
           },
           "quantity": {
             "type": "integer",
             "format": "int32",
-            "example": 7
+            "example": 7,
+            "description": "Number of pets requested in this order"
           },
           "shipDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "Date and time when the order is scheduled to ship",
+            "example": "2023-10-15T12:00:00Z"
           },
           "status": {
             "type": "string",
@@ -1095,7 +1145,9 @@
             ]
           },
           "complete": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether the order has been completed and fulfilled",
+            "example": false
           }
         },
         "xml": {
@@ -1108,11 +1160,13 @@
           "id": {
             "type": "integer",
             "format": "int64",
-            "example": 1
+            "example": 1,
+            "description": "Unique identifier for the pet category"
           },
           "name": {
             "type": "string",
-            "example": "Dogs"
+            "example": "Dogs",
+            "description": "Human-readable name of the category (e.g., Dogs, Cats)"
           }
         },
         "xml": {
@@ -1125,37 +1179,44 @@
           "id": {
             "type": "integer",
             "format": "int64",
-            "example": 10
+            "example": 10,
+            "description": "Unique identifier for the user account"
           },
           "username": {
             "type": "string",
-            "example": "theUser"
+            "example": "theUser",
+            "description": "Unique login name for the user account"
           },
           "firstName": {
             "type": "string",
-            "example": "John"
+            "example": "John",
+            "description": "User's given (first) name"
           },
           "lastName": {
             "type": "string",
-            "example": "James"
+            "example": "James",
+            "description": "User's family (last) name"
           },
           "email": {
             "type": "string",
-            "example": "john@email.com"
+            "example": "john@email.com",
+            "description": "Email address associated with the user account"
           },
           "password": {
             "type": "string",
-            "example": "12345"
+            "example": "12345",
+            "description": "Password for authenticating into the account"
           },
           "phone": {
             "type": "string",
-            "example": "12345"
+            "example": "12345",
+            "description": "Contact phone number for the user"
           },
           "userStatus": {
             "type": "integer",
-            "description": "User Status",
             "format": "int32",
-            "example": 1
+            "example": 1,
+            "description": "Account status code (1 = active, 0 = inactive)"
           }
         },
         "xml": {
@@ -1167,10 +1228,14 @@
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "description": "Unique identifier for the tag",
+            "example": 1
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Human-readable label applied to a pet (e.g., vaccinated, rescue)",
+            "example": "vaccinated"
           }
         },
         "xml": {
@@ -1187,11 +1252,13 @@
           "id": {
             "type": "integer",
             "format": "int64",
-            "example": 10
+            "example": 10,
+            "description": "Unique identifier for the pet record"
           },
           "name": {
             "type": "string",
-            "example": "doggie"
+            "example": "doggie",
+            "description": "Common name of the pet as recorded in the store"
           },
           "category": {
             "$ref": "#/components/schemas/Category"
@@ -1206,7 +1273,11 @@
               "xml": {
                 "name": "photoUrl"
               }
-            }
+            },
+            "description": "List of URLs pointing to photos of this pet",
+            "example": [
+              "https://example.com/photos/doggie.jpg"
+            ]
           },
           "tags": {
             "type": "array",
@@ -1215,7 +1286,8 @@
             },
             "items": {
               "$ref": "#/components/schemas/Tag"
-            }
+            },
+            "description": "List of descriptive labels associated with this pet"
           },
           "status": {
             "type": "string",
@@ -1236,13 +1308,19 @@
         "properties": {
           "code": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "description": "HTTP-style status code for the API response",
+            "example": 200
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "description": "Response category label (e.g., \"error\", \"unknown\")",
+            "example": "unknown"
           },
           "message": {
-            "type": "string"
+            "type": "string",
+            "description": "Human-readable message providing context for the response",
+            "example": "Upload successful"
           }
         },
         "xml": {
